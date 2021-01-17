@@ -1212,11 +1212,15 @@ var app = new Vue({
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_LogoutComponent__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_LogoutComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_LogoutComponent__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__store__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vue_sweetalert2__ = __webpack_require__(35);
 
 
 
 
 
+
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_5_vue_sweetalert2__["default"]);
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
 
@@ -1253,6 +1257,8 @@ router.beforeEach(function (to, from, next) {
     if (to.matched.some(function (route) {
         return route.meta.requiresAuth;
     }) && !__WEBPACK_IMPORTED_MODULE_4__store__["a" /* default */].state.isLoggedIn) {
+        //if (true) {
+        __WEBPACK_IMPORTED_MODULE_0_vue___default.a.swal('Hello Vue world!!!');
         // redirect to login page
         next({ name: 'login' });
         return;
