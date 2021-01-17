@@ -26,3 +26,6 @@ Correr laravel
 ```PHP
 php artisan serve
 ```
+Se tomó como referencia esta guía.
+
+https://bluuweb.github.io/tutorial-laravel/vue/#intalaciones
