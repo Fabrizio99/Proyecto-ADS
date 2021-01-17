@@ -16602,7 +16602,7 @@ exports = module.exports = __webpack_require__(22)(false);
 
 
 // module
-exports.push([module.i, "\n.form-wrapper[data-v-8dcb20ea] {\n    min-height: 100%;\n    min-height: 100vh;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n.form-signin[data-v-8dcb20ea] {\n    width: 100%;\n    max-width: 330px;\n    padding: 15px;\n    margin: 0 auto;\n}\n.form-signin .form-control[data-v-8dcb20ea] {\n    position: relative;\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box;\n    height: auto;\n    padding: 10px;\n    font-size: 16px;\n}\n.form-signin .form-control[data-v-8dcb20ea]:focus {\n    z-index: 2;\n}\n.form-signin input[type=\"email\"][data-v-8dcb20ea] {\n    margin-bottom: -1px;\n    border-bottom-right-radius: 0;\n    border-bottom-left-radius: 0;\n}\n.form-signin input[type=\"password\"][data-v-8dcb20ea] {\n    margin-bottom: 10px;\n    border-top-left-radius: 0;\n    border-top-right-radius: 0;\n}\n", ""]);
+exports.push([module.i, "\n.form-wrapper[data-v-8dcb20ea] {\r\n  min-height: 100%;\r\n  min-height: 100vh;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-align: center;\r\n      -ms-flex-align: center;\r\n          align-items: center;\n}\n.form-signin[data-v-8dcb20ea] {\r\n  width: 100%;\r\n  max-width: 330px;\r\n  padding: 15px;\r\n  margin: 0 auto;\n}\n.form-signin .form-control[data-v-8dcb20ea] {\r\n  position: relative;\r\n  -webkit-box-sizing: border-box;\r\n          box-sizing: border-box;\r\n  height: auto;\r\n  padding: 10px;\r\n  font-size: 16px;\n}\n.form-signin .form-control[data-v-8dcb20ea]:focus {\r\n  z-index: 2;\n}\n.form-signin input[type=\"email\"][data-v-8dcb20ea] {\r\n  margin-bottom: -1px;\r\n  border-bottom-right-radius: 0;\r\n  border-bottom-left-radius: 0;\n}\n.form-signin input[type=\"password\"][data-v-8dcb20ea] {\r\n  margin-bottom: 10px;\r\n  border-top-left-radius: 0;\r\n  border-top-right-radius: 0;\n}\r\n", ""]);
 
 // exports
 
@@ -16976,35 +16976,81 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            email: '',
-            password: '',
-            loginError: false
-        };
-    },
+  data: function data() {
+    return {
+      email: "",
+      password: "",
+      loginError: false
+    };
+  },
 
-    methods: {
-        submitLogin: function submitLogin() {
-            var _this = this;
+  methods: {
+    submitLogin: function submitLogin() {
+      var _this = this;
 
-            this.loginError = false;
-            axios.post('/api/auth/login', {
-                email: this.email,
-                password: this.password
-            }).then(function (response) {
-                // login user, store the token and redirect to dashboard
-                __WEBPACK_IMPORTED_MODULE_0__store__["a" /* default */].commit('loginUser');
-                localStorage.setItem('token', response.data.access_token);
-                _this.$router.push({ name: 'dashboard' });
-            }).catch(function (error) {
-                _this.loginError = true;
-            });
-        }
+      this.loginError = false;
+      axios.post("/api/auth/login", {
+        email: this.email,
+        password: this.password
+      }).then(function (response) {
+        // login user, store the token and redirect to dashboard
+        __WEBPACK_IMPORTED_MODULE_0__store__["a" /* default */].commit("loginUser");
+        localStorage.setItem("token", response.data.access_token);
+        _this.$router.push({ name: "dashboard" });
+      }).catch(function (error) {
+        _this.loginError = true;
+      });
     }
+  }
 });
 
 /***/ }),
@@ -18274,111 +18320,97 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "text-center form-wrapper" }, [
-    _c(
-      "form",
-      {
-        staticClass: "form-signin",
-        on: {
-          submit: function($event) {
-            $event.preventDefault()
-            return _vm.submitLogin($event)
-          }
-        }
-      },
-      [
-        _c("img", {
-          staticClass: "mb-4",
-          attrs: {
-            src: "/img/bootstrap-solid.svg",
-            alt: "",
-            width: "72",
-            height: "72"
-          }
-        }),
-        _vm._v(" "),
-        _c("h1", { staticClass: "h3 mb-3 font-weight-normal" }, [
-          _vm._v("Please sign in")
-        ]),
-        _vm._v(" "),
-        _c("label", { staticClass: "sr-only", attrs: { for: "inputEmail" } }, [
-          _vm._v("Email address")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.email,
-              expression: "email"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: {
-            type: "email",
-            id: "inputEmail",
-            placeholder: "Email address",
-            required: "",
-            autofocus: ""
-          },
-          domProps: { value: _vm.email },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.email = $event.target.value
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c(
-          "label",
-          { staticClass: "sr-only", attrs: { for: "inputPassword" } },
-          [_vm._v("Password")]
-        ),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.password,
-              expression: "password"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: {
-            type: "password",
-            id: "inputPassword",
-            placeholder: "Password",
-            required: ""
-          },
-          domProps: { value: _vm.password },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.password = $event.target.value
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-lg btn-primary btn-block",
-            attrs: { type: "submit" }
-          },
-          [_vm._v("Sign in")]
-        )
-      ]
-    )
-  ])
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container-fluid" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "row align-items-center justify-content-md-center login-page"
+        },
+        [
+          _c("div", { staticClass: "col-md-6 align-middle" }, [
+            _c("form", [
+              _c("div", { staticClass: "mb-3" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "form-label",
+                    attrs: { for: "exampleInputEmail1" }
+                  },
+                  [_vm._v("Email address")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "email",
+                    id: "exampleInputEmail1",
+                    "aria-describedby": "emailHelp"
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "form-text", attrs: { id: "emailHelp" } },
+                  [
+                    _vm._v(
+                      "\n        We'll never share your email with anyone else.\n      "
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "mb-3" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "form-label",
+                    attrs: { for: "exampleInputPassword1" }
+                  },
+                  [_vm._v("Password")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: { type: "password", id: "exampleInputPassword1" }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "mb-3 form-check" }, [
+                _c("input", {
+                  staticClass: "form-check-input",
+                  attrs: { type: "checkbox", id: "exampleCheck1" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "form-check-label",
+                    attrs: { for: "exampleCheck1" }
+                  },
+                  [_vm._v("Check me out")]
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "button",
+                { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+                [_vm._v("Submit")]
+              )
+            ])
+          ])
+        ]
+      )
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
