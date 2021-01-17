@@ -19,6 +19,11 @@ https://blog.peterplucinski.com/setting-up-jwt-authentication-with-laravel-and-v
 El proyecto se ha creado con Laravel 5.5.
 
 Correr los cambios hechos en el front-end
+Primero instalar las dependencias que se ubican en el package.json usando el comando
+```JavaScript
+npm i
+```
+Para correr los cambios realizados en el front-end
 ```JavaScript
 npm run watch
 ```
