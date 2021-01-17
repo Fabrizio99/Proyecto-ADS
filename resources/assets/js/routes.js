@@ -34,6 +34,11 @@ const routes = [
         path: '/inicio',
         name: 'main',
         component: require('../js/views/inicio/InicioApp.vue')
+    },
+    {
+        path: '/otravista',
+        name: 'alternate',
+        component: require('../js/views/mantenimiento/MantenimientoApp.vue')
     }
 ]
 
