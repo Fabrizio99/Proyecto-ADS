@@ -19,5 +19,8 @@
         "vue": "^2.5.7",
         "vue-router": "^3.4.9",
         "vuex": "^3.6.0"
+    },
+    "dependencies": {
+        "vue-sweetalert2": "^4.1.1"
     }
 }

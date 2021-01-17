@@ -1,5 +1,8 @@
 import router from './routes.js';
 import AppComponent from './components/AppComponent'
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -10,6 +13,7 @@ import AppComponent from './components/AppComponent'
 require('./bootstrap');
 
 window.Vue = require('vue');
+Vue.use(VueSweetalert2);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

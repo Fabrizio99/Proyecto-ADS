@@ -26,6 +26,11 @@ const routes = [
         path: '/logout',
         name: 'logout',
         component: LogoutComponent
+    },
+    {
+        path: '/inicio',
+        name: 'main',
+        component: require('../js/views/inicio/InicioApp.vue')
     }
 ]
 
@@ -34,7 +39,6 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-
     // check if the route requires authentication and user is not logged in
     if (to.matched.some(route => route.meta.requiresAuth) && !store.state.isLoggedIn) {
         // redirect to login page

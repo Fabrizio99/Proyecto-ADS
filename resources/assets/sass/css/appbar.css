@@ -1,0 +1,15 @@
+.appbar-container{
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.2);
+    padding: 0 20px;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+.appbar-title{
+    margin-bottom: 0 !important;
+}

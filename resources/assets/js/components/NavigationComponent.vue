@@ -1,0 +1,42 @@
+<template>
+    <div class="navigation-component">
+        <p>opciones</p>
+        <p>opciones</p>
+        <p>opciones</p>
+        <p>opciones</p>
+        <p>opciones</p>
+        <p>opciones</p>
+        <p>opciones</p>
+        <p>opciones</p>
+        <p>opciones</p>
+        <p>opciones</p>
+        <p>opciones</p>
+        <p>opciones</p>
+        <p>opciones</p>
+        <p>opciones</p>
+        <p>opciones</p>
+        <p>opciones</p>
+        <p>opciones</p>
+        <p>opciones</p>
+        <p>opciones</p>
+        <p>opciones</p>
+        <p>opciones</p>
+        <p>opciones</p>
+        <p>opciones</p>
+        <p>opciones</p>
+        <p>opciones</p>
+        <p>opciones</p>
+        <p>opciones</p>
+        <p>opciones</p>
+        <p>opciones</p>
+        <p>opciones</p>
+        <p>opciones</p>
+        <p>opciones</p>
+        <p>opciones</p>
+    </div>
+</template>
+<script>
+export default {
+    
+}
+</script>
