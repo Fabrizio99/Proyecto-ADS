@@ -6,6 +6,10 @@ body{
     overflow-y: hidden;
 }
 
+#logo{
+  width: 100%;
+}
+
 /*scroll styles*/
 ::-webkit-scrollbar {
     width: 8px;
@@ -24,3 +28,48 @@ body{
 }
 
 /*end scroll styles*/
+
+/*estructura de la vista principal*/
+.main-container{
+    display: grid;
+    grid-template-columns : 300px auto;
+}
+.option{
+  width: 70px;
+}
+/*fin de estructura de la vista principal*/
+
+table{
+    background-color: white;
+    text-align: left;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0px 15px;
+  }
+  
+  th,td{
+    padding: 20px;
+    border-spacing: 10px;
+  }
+  
+  table tbody tr{
+    border:solid black 1px;
+    border-radius:10px;
+    -moz-border-radius:10px;
+    -webkit-border-radius: 5px; 
+  }
+  
+  thead{
+    background-color: #632432;
+    border-bottom: solid 5px #AF597C;
+    color: white;
+  }
+  
+  tbody:nth-child(even){
+    background: #ddd; 
+  }  
+  
+  tr:hover td{
+    background-color: grey;
+    color: white;
+  }

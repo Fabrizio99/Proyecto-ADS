@@ -42,7 +42,14 @@ export default {
   methods: {
     submitLogin() {
         this.$router.push({name:"main"});
-        //this.$swal('Hello Vue world!!!');
+        /*Ejemplo de un modal*/
+        /*this.$swal({
+  icon: 'error',
+  title: 'Error',
+  text: 'No se registro el usuario',
+});*/
+
+
       /*this.loginError = false;
       axios
         .post("/api/auth/login", {

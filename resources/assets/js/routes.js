@@ -39,6 +39,16 @@ const routes = [
         path: '/otravista',
         name: 'alternate',
         component: require('../js/views/mantenimiento/MantenimientoApp.vue')
+    },
+    {
+        path: '/usuarios',
+        name: 'user',
+        component: require('../js/views/mantenimiento/usuarios/UsuariosApp.vue')
+    },
+    {
+        path: '/formulario-usuario',
+        name: 'formUser',
+        component: require('../js/views/mantenimiento/usuarios/FormUsuario')
     }
 ]
 
