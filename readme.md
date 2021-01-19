@@ -34,3 +34,14 @@ php artisan serve
 Se tomó como referencia esta guía.
 
 https://bluuweb.github.io/tutorial-laravel/vue/#intalaciones
+
+
+git branch -> muestra todas las ramas remotas existentes 
+git branch <nombre de su rama> -> crean una rama 
+git checkout <nombre de la rama destino> -> te ubicas a la rama destino  
+
+
+Crear un cotroller
+
+php artisan make:controller Controller --resource
+
