@@ -34,3 +34,29 @@ php artisan serve
 Se tomó como referencia esta guía.
 
 https://bluuweb.github.io/tutorial-laravel/vue/#intalaciones
+
+
+
+
+
+git pull --> TRAE TODOS LOS CAMBIOD DE UNA RAMA REMOTA
+
+git pull origin <ramaRemota>  
+
+EJEMPLO: 
+git pull origin back_master  
+
+git push --> SUBE TODO LOS CAMBIOS A UNA RAMA REMOTA
+
+PASOS PARA SUBIR TUS CAMBIOS: 
+
+git status -> todos los cambios que realizaste 
+
+<!-- git add readme.md -> un cambio en especifico -->
+
+git add . -> guarda todos los cambios 
+
+git push origin <tuRama>:<ramaRemota>
+
+git push orign angel:back_master
+
