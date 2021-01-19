@@ -54,7 +54,7 @@ PASOS PARA SUBIR TUS CAMBIOS:
 
 <!-- git add readme.md -> un cambio en especifico -->
 
-2.- git add . -> guarda todos los cambios 
+2.- git add . -> añade todos los cambios 
 
 3.- git commit -m "avance nuevas rutas"
 
