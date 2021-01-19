@@ -1,6 +1,9 @@
 <template>
     <div class="appbar-container">
-        <p class="appbar-title">Sistema de Ventas Dulcekat</p>
+        <div class="left-appbar-container">
+            <i class="fas fa-bars appbar-menu"  @click="openNavigation"></i>
+            <p class="appbar-title">Sistema de Ventas Dulcekat</p>
+        </div>
         <div class="dropdown">
             <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Fabrizio Condori
@@ -9,14 +12,37 @@
                 <a class="dropdown-item" style="cursor:pointer" @click="logout">Cerrar Sesión</a>
             </div>
         </div>
-    </div>    
+    </div>
 </template>
 <script>
-    export default {
-        methods : {
-            logout(){
-                this.$router.push({name:"login"});
-            }
+import { TimelineLite } from 'gsap'
+export default {
+    methods : {
+        logout(){
+            this.$router.push({name:"login"});
+        },
+        openNavigation(){
+            //esta función es para mostrar la barra de navegacion, por favor NO TOCAR XD
+            const timeline = new TimelineLite()
+            timeline.fromTo(".navigation-component",
+                {
+                    opacity : 0,
+                    display : 'none'
+                }, {
+                    opacity : 1,
+                    display : 'block',
+                    duration : 0.1
+                }
+            ); 
+            timeline.fromTo(".navigation-menu",{
+                    x :  0,
+                    opacity : 0
+                }, {
+                    x : 300,
+                    opacity : 1,
+                    duration : 0.3
+                })
         }
-    }
+    },
+}
 </script>
