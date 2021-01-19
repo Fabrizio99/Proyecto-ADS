@@ -58,6 +58,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
     console.log('LLEGO ACA????');
+    //random comment to check if clone branch works
     // check if the route requires authentication and user is not logged in
     if (to.matched.some(route => route.meta.requiresAuth) && !store.state.isLoggedIn) {
         Vue.swal('Hello Vue world!!!');
