@@ -75,7 +75,7 @@ include '../app/helper/constanst.php';
             return JSON_ENCODE(
                 (object) [
                     'status' => $_SESSION["STATUS_CONTROL"],
-                    'msj'    => $_SESSION["MSJ_CONTROL"],
+                    'msj'    => 'maritza no se que esta pasando',//$_SESSION["MSJ_CONTROL"],
                     'key'    => $key,
                     'value'  => $msj
                  ]

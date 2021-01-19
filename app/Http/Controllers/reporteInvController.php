@@ -14,7 +14,7 @@ class reporteInvController extends Controller
             return $isValidate;
         }
         
-        return mySQLConsulta("SELECT * FROM producto WHERE fecha<='{$req->fecha}'");
+        return mySQLConsulta("SELECT * FROM producto WHERE fecha='{$req->fecha}'");
         //se valida la fecha para traer de la tabla productos 
    }
 }
