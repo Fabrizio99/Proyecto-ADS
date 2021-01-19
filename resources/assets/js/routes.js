@@ -60,7 +60,6 @@ router.beforeEach((to, from, next) => {
     console.log('LLEGO ACA????');
     // check if the route requires authentication and user is not logged in
     if (to.matched.some(route => route.meta.requiresAuth) && !store.state.isLoggedIn) {
-    //if (true) {
         Vue.swal('Hello Vue world!!!');
         // redirect to login page
         next({ name: 'login' })
