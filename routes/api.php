@@ -11,5 +11,5 @@ Route::get('getLogin'         , 'initialController@getLogin');
 
 
 //reporteInvController
-
+Route::get('getEmitirRI','reporteInvController@getEmitirRI' );
 

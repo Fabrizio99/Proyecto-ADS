@@ -48,6 +48,10 @@ git pull origin back_master
 
 git push --> SUBE TODO LOS CAMBIOS A UNA RAMA REMOTA
 
+CONSULTA PARA VER LAS RAMAS
+
+git branch 
+
 PASOS PARA SUBIR TUS CAMBIOS: 
 
 1.- git status -> todos los cambios que realizaste (OPCIONAL)
@@ -66,7 +70,12 @@ git push origin <tuRAMA>:<ramaRemota>
 
 ## CREAR RAMA 
 
-
-
 Crear un cotroller
 php artisan make:controller <nameController>Controller --resource
+
+
+## Relacion de aracivos
+-Controllers = codigo metodo mysql
+-Api =routes
+-Web = router
+-Untils = codigo

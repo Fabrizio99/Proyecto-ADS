@@ -8,5 +8,13 @@ include '../app/helper/untils.php'; // para cada controller pueda usar las funci
 
 class reporteInvController extends Controller
 {
-
+    function getEmitirRI(Request $req){
+        $isValidate = isNullEmpty($req->fecha);
+        if($isValidate){
+            return $isValidate;
+        }
+        
+        return mySQLConsulta("SELECT * FROM producto WHERE fecha<='{$req->fecha}'");
+        //se valida la fecha para traer de la tabla productos 
+   }
 }
