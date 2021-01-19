@@ -60,7 +60,9 @@ PASOS PARA SUBIR TUS CAMBIOS:
 
 git push origin <tuRama>:<ramaRemota>
 
-git push origin angel:back_master
+git push origin <tuRAMA>
+
+git push origin <tuRAMA>:<ramaRemota>
 
 ## CREAR RAMA 
 
