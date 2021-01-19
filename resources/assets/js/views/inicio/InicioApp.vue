@@ -1,16 +1,16 @@
 <template>
      <div>
          <app-bar/>
-         <div style="margin-top: 80px" class="main-container">
+         <div style="margin-top: 80px">
             <navigation/>
-            <div style=" height : calc(100vh - 80px); overflow-y : scroll" class="pt-4">
+            <div style="height : calc(100vh - 80px);overflow-y : scroll;" class="pt-4">
                 <div class="row mx-4">
                     <h3 class="col">
                         Título del módulo
                     </h3>
                 </div>
                 <div class="row mx-4">
-                    <div class="card col">
+                    <div class="card col bg-light">
                         <div class="card-body">
                             <div class="form-row">
                                 <div class="form-group col-3">
@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="mx-4 mt-4">
-                    <table class="table table-bordered">
+                    <table class="table table-striped table-bordered">
                       <thead>
                         <tr>
                           <th scope="col">#</th>
@@ -45,13 +45,15 @@
                       </thead>
                       <tbody>
                         <tr>
-                          <th scope="row">1</th>
+                          <td scope="row">1</td>
                           <td>Mark</td>
                           <td>Otto</td>
                           <td>@mdo</td>
                           <td class = "option text-center">
                             <div class="dropdown">
-                              <button class="btn btn-secondary dropdown-toggle dropdown-toggle-split" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                              <div class="btn btn-info"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v"></i>
+                              </div>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item">Editar</a>
                                 <a class="dropdown-item">Eliminar</a>
@@ -60,65 +62,256 @@
                           </td>
                         </tr>
                         <tr>
-                          <th scope="row">2</th>
-                          <td>Jacob</td>
-                          <td>Thornton</td>
-                          <td>@fat</td>
-                          <td class = "option text-center">
-                            <div class="dropdown">
-                              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <th scope="row">3</th>
-                          <td>Larry</td>
-                          <td>the Bird</td>
-                          <td>@twitter</td>
-                          <td class = "option text-center">
-                            <div class="dropdown">
-                              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <th scope="row">1</th>
+                          <td scope="row">1</td>
                           <td>Mark</td>
                           <td>Otto</td>
                           <td>@mdo</td>
                           <td class = "option text-center">
                             <div class="dropdown">
-                              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                              <div class="btn btn-info"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v"></i>
+                              </div>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
+                                <a class="dropdown-item">Editar</a>
+                                <a class="dropdown-item">Eliminar</a>
                               </div>
                             </div>
                           </td>
                         </tr>
                         <tr>
-                          <th scope="row">2</th>
-                          <td>Jacob</td>
-                          <td>Thornton</td>
-                          <td>@fat</td>
+                          <td scope="row">1</td>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
                           <td class = "option text-center">
                             <div class="dropdown">
-                              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                              <div class="btn btn-info"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v"></i>
+                              </div>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
+                                <a class="dropdown-item">Editar</a>
+                                <a class="dropdown-item">Eliminar</a>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td scope="row">1</td>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                          <td class = "option text-center">
+                            <div class="dropdown">
+                              <div class="btn btn-info"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v"></i>
+                              </div>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item">Editar</a>
+                                <a class="dropdown-item">Eliminar</a>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td scope="row">1</td>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                          <td class = "option text-center">
+                            <div class="dropdown">
+                              <div class="btn btn-info"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v"></i>
+                              </div>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item">Editar</a>
+                                <a class="dropdown-item">Eliminar</a>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td scope="row">1</td>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                          <td class = "option text-center">
+                            <div class="dropdown">
+                              <div class="btn btn-info"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v"></i>
+                              </div>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item">Editar</a>
+                                <a class="dropdown-item">Eliminar</a>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td scope="row">1</td>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                          <td class = "option text-center">
+                            <div class="dropdown">
+                              <div class="btn btn-info"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v"></i>
+                              </div>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item">Editar</a>
+                                <a class="dropdown-item">Eliminar</a>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td scope="row">1</td>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                          <td class = "option text-center">
+                            <div class="dropdown">
+                              <div class="btn btn-info"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v"></i>
+                              </div>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item">Editar</a>
+                                <a class="dropdown-item">Eliminar</a>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td scope="row">1</td>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                          <td class = "option text-center">
+                            <div class="dropdown">
+                              <div class="btn btn-info"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v"></i>
+                              </div>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item">Editar</a>
+                                <a class="dropdown-item">Eliminar</a>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td scope="row">1</td>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                          <td class = "option text-center">
+                            <div class="dropdown">
+                              <div class="btn btn-info"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v"></i>
+                              </div>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item">Editar</a>
+                                <a class="dropdown-item">Eliminar</a>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td scope="row">1</td>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                          <td class = "option text-center">
+                            <div class="dropdown">
+                              <div class="btn btn-info"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v"></i>
+                              </div>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item">Editar</a>
+                                <a class="dropdown-item">Eliminar</a>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td scope="row">1</td>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                          <td class = "option text-center">
+                            <div class="dropdown">
+                              <div class="btn btn-info"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v"></i>
+                              </div>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item">Editar</a>
+                                <a class="dropdown-item">Eliminar</a>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td scope="row">1</td>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                          <td class = "option text-center">
+                            <div class="dropdown">
+                              <div class="btn btn-info"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v"></i>
+                              </div>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item">Editar</a>
+                                <a class="dropdown-item">Eliminar</a>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td scope="row">1</td>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                          <td class = "option text-center">
+                            <div class="dropdown">
+                              <div class="btn btn-info"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v"></i>
+                              </div>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item">Editar</a>
+                                <a class="dropdown-item">Eliminar</a>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td scope="row">1</td>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                          <td class = "option text-center">
+                            <div class="dropdown">
+                              <div class="btn btn-info"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v"></i>
+                              </div>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item">Editar</a>
+                                <a class="dropdown-item">Eliminar</a>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td scope="row">1</td>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                          <td class = "option text-center">
+                            <div class="dropdown">
+                              <div class="btn btn-info"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v"></i>
+                              </div>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item">Editar</a>
+                                <a class="dropdown-item">Eliminar</a>
                               </div>
                             </div>
                           </td>
@@ -134,20 +327,10 @@
 <script>
 import Appbar from '../../components/AppBar'
 import Navigation from '../../components/NavigationComponent';
-
 export default {
     components : {
         'app-bar'    : Appbar,
         'navigation' : Navigation
-    }
+    },
 }
 </script>
-<style scoped>
-.main-container{
-    display: grid;
-    grid-template-columns : 300px auto;
-}
-.option{
-  width: 70px;
-}
-</style>
