@@ -67,4 +67,4 @@ git push origin angel:back_master
 
 
 Crear un cotroller
-php artisan make:controller Controller --resource
+php artisan make:controller <nameController>Controller --resource
