@@ -37,7 +37,7 @@ https://bluuweb.github.io/tutorial-laravel/vue/#intalaciones
 
 
 
-
+## COMANDOS BASICOS DE GIT
 
 git pull --> TRAE TODOS LOS CAMBIOD DE UNA RAMA REMOTA
 
@@ -50,13 +50,17 @@ git push --> SUBE TODO LOS CAMBIOS A UNA RAMA REMOTA
 
 PASOS PARA SUBIR TUS CAMBIOS: 
 
-git status -> todos los cambios que realizaste 
+1.- git status -> todos los cambios que realizaste (OPCIONAL)
 
 <!-- git add readme.md -> un cambio en especifico -->
 
-git add . -> guarda todos los cambios 
+2.- git add . -> guarda todos los cambios 
+
+3.- git commit -m "avance nuevas rutas"
 
 git push origin <tuRama>:<ramaRemota>
 
-git push orign angel:back_master
+git push origin angel:back_master
+
+## CREAR RAMA 
 
