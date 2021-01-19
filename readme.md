@@ -64,3 +64,7 @@ git push origin angel:back_master
 
 ## CREAR RAMA 
 
+
+
+Crear un cotroller
+php artisan make:controller Controller --resource
