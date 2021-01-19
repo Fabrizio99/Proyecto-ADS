@@ -57,6 +57,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
+    console.log('LLEGO ACA????');
     // check if the route requires authentication and user is not logged in
     if (to.matched.some(route => route.meta.requiresAuth) && !store.state.isLoggedIn) {
     //if (true) {
@@ -71,6 +72,8 @@ router.beforeEach((to, from, next) => {
         next({ name: 'dashboard' })
         return
     }
+
+    if(to.path == from.path)    return;
 
     next()
 })

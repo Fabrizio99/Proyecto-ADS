@@ -39,7 +39,7 @@ body{
 }
 /*fin de estructura de la vista principal*/
 
-table{
+/*table{
     background-color: white;
     text-align: left;
     width: 100%;
@@ -72,4 +72,4 @@ table{
   tr:hover td{
     background-color: grey;
     color: white;
-  }
+  }*/

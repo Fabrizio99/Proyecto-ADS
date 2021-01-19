@@ -1,7 +1,7 @@
 <template>
     <div>
         <app-bar/>
-        <div style="margin-top: 80px" class="main-container">
+        <div style="margin-top: 80px">
             <navigation/>
             <div style=" height : calc(100vh - 80px); overflow-y : scroll" class="pt-4">
                 <div class="row mx-4">
