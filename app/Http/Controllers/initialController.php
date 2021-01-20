@@ -37,12 +37,15 @@ class initialController extends Controller
     }
      
     function getLogin(Request $req){
-         $isValidate = isNullEmpty($req->user) ?: isNullEmpty($req->password);
+        //echo "LLEGO ESTO ".$$req->user ;
+        //echo "LLEGO ESTO ".$$req->password ;
+
+         $isValidate = isNullEmpty($req->user, 'user') ?: isNullEmpty($req->password, 'user');
          if($isValidate){
              return $isValidate;
          }
          
-         return mySQLConsulta("SELECT * FROM usuario WHERE usuario ='{$req->user}' AND contraseña='{$req->password}'");
+         return mySQLConsulta("SELECT * FROM usuarios WHERE usuario ='{$req->user}' AND contraseña='{$req->password}'");
          //debo guardarlo en el storage para consultar sise logeo
     }
     

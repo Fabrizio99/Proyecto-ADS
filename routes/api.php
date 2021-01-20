@@ -9,7 +9,7 @@ Route::get('getLogin'         , 'initialController@getLogin');
 
 //reclamosController
 
-
+Route::post('postRegistrar', 'reclamosController@postRegistrar');
 //reporteInvController
 Route::get('getEmitirRI','reporteInvController@getEmitirRI' );
 
