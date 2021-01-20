@@ -25,7 +25,7 @@ include '../app/helper/constanst.php';
                 if (count($myArray) == 0){
                     $object = (object) [
                         'status' => $_SESSION["STATUS_CONTROL"],
-                        'msj'    => msj ?: "Sin resultados."
+                        'msj'    => $msj ?: "Sin resultados."
                     ];   
                     return json_encode($object);    
                 }
