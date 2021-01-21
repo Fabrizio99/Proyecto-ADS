@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\Types\Null_;
 
 include '../app/helper/untils.php'; // para cada controller pueda usar las funciones de consulta 
 
@@ -11,13 +12,17 @@ class reclamosController extends Controller
 
     function listarReclamos(Request $req){
         
-        // $isValidate = isNullEmpty($req->codBoleta) ?: isNullEmpty($req->nombre) ?: isNullEmpty($req->documento) ?: isNullEmpty($req->fecha);
+        $isValidate = ($req->codBoleta) ;
+        $isValidate2 = isNullEmpty($req->fecha);
         
-        // if($isValidate) {
-        //     return $isValidate;
-        // }
 
-        // return mySQLConsulta("SELECT * FROM usuario WHERE codBoleta = '{$req->codBoleta}'");
+        
+        if($isValidate == null ) {
+            //"SELECT * FROM  boleta WHERE codigoboleta = '{$req->codBoleta}' OR fecha ='{$req->fecha}'"
+           
+        }
+       
     }
 
 }
+

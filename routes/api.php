@@ -9,7 +9,7 @@ Route::get('getLogin'         , 'initialController@getLogin');
 
 //reclamosController
 
-
+Route::get('listarReclamos', 'reclamosController@listarReclamos');
 //reporteInvController
 Route::get('getEmitirRI','reporteInvController@getEmitirRI' );
 
