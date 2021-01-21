@@ -73,3 +73,7 @@ body{
     background-color: grey;
     color: white;
   }*/
+
+  .listo:visited{
+    background-color:red!important;
+}

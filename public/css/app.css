@@ -72,7 +72,11 @@ body{
   tr:hover td{
     background-color: grey;
     color: white;
-  }*/.login-container{
+  }*/
+
+  .listo:visited{
+    background-color:red!important;
+}.login-container{
     height: 100vh;
 }.appbar-container{
     height: 80px;

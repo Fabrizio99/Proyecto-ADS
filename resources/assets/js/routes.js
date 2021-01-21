@@ -9,6 +9,11 @@ Vue.use(VueSweetalert2);
 
 Vue.use(VueRouter)
 
+const originalPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+};
+
 const routes = [
     {
         path: '/',
@@ -51,6 +56,7 @@ const routes = [
         component: require('../js/views/mantenimiento/usuarios/FormUsuario')
     },
     {
+<<<<<<< HEAD
         path: '/gestion-productos',
         name: 'gproductos',
         component: require('../js/views/mantenimiento/productos/ProductoApp.vue')
@@ -64,13 +70,40 @@ const routes = [
         path: '/form-modificar-productos',
         name: 'modificarproductos',
         component: require('../js/views/mantenimiento/productos/formModificarProducto.vue')
+=======
+<<<<<<< HEAD
+        path: '/formulario-boletas-productos',
+        name: 'formBolProd',
+        component: require('../js/views/operaciones/entregarProductos/FrmBoletaProductos.vue')
+    },
+    {
+        path: '/formulario-lista-productos',
+        name: 'formProductos',
+        component: require('../js/views/operaciones/entregarProductos/FrmListaProductos.vue')
+    },
+    {
+        path: '/formulario-notaVenta-boletas',
+        name: 'formNVB',
+        component: require('../js/views/operaciones/emitirBoletaVenta/FrmNotaVentaBoleta.vue')
+    },
+    {
+        path: '/formulario-detalle-notaVenta',
+        name: 'formDetalleNV',
+        component: require('../js/views/operaciones/emitirBoletaVenta/FrmDetalleNV.vue')
+=======
+        path: '/nota-venta',
+        name: 'notaVenta',
+        component: require('../js/views/operaciones/emitirNotaVenta/EmitirNotaVenta')
+>>>>>>> 98b59ea8c8635d443ee10e5ddb7fca0ec1512762
+>>>>>>> 5b9d51927193a98f06e8129c9314da50e6ddf1b1
     }
 ]
+
 
 const router = new VueRouter({
     routes
 })
-
+  
 router.beforeEach((to, from, next) => {
     console.log('LLEGO ACA????');
     //random comment to check if clone branch works

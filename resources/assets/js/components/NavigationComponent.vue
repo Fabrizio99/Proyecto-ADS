@@ -12,8 +12,10 @@
                 </div>
             </div>
             <div id="collapse1" class="collapse show" aria-labelledby="heading1" data-parent="#accordionExample">
-                <div class="navigation-item" @click="changeView">Gestión de Usuarios</div>
+
+                <div class="navigation-item" @click="changeView1">Gestión de Usuarios</div>
                 <div class="navigation-item" @click="changeViewGProd">Gestión de Productos</div>
+
             </div>
         </div>
         <div class="card">
@@ -23,9 +25,12 @@
                 </div>
             </div>
             <div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#accordionExample">
-                <div class="navigation-item">Emitir Nota de Venta</div>
-                <div class="navigation-item">Emitir Boleta de Venta</div>
-                <div class="navigation-item">Entregar Productos</div>
+
+                <div class="navigation-item" @click="changeViewNotaVenta">Emitir Nota de Venta</div>
+                <div class="navigation-item" @click="changeView3">Emitir Boleta de Venta</div>
+                <div class="navigation-item" @click="changeView2">Entregar Productos</div>
+
+
             </div>
         </div>
         <div class="card">
@@ -58,13 +63,28 @@
 import { TimelineLite } from 'gsap'
 export default {
   methods: {
-    changeView() {
+    changeView1() {
       this.closeNavigation();
       this.$router.push({ name: "user" });
     },
+
     changeViewGProd() {
       this.closeNavigation();
       this.$router.push({ name: "gproductos" });
+
+
+    changeView2() {
+      this.closeNavigation();
+      this.$router.push({ name: "formBolProd" }); 
+    },
+    changeView3() {
+      this.closeNavigation();
+      this.$router.push({ name: "formNVB" }); 
+    },
+
+    changeViewNotaVenta() {
+      this.closeNavigation();
+      this.$router.push({ name: "notaVenta" });
     },
     closeNavigation(){
         //esta función es para ocultar la barra de navegacion, por favor NO TOCAR XD
@@ -88,7 +108,7 @@ export default {
                 duration : 0.3
             }
         );
-    }
-  },
+    },
+  }
 };
 </script>
