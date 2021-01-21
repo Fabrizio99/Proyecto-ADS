@@ -41,7 +41,7 @@
             </div>
             <div id="collapse3" class="collapse" aria-labelledby="heading3" data-parent="#accordionExample">
                 <div class="navigation-item">Ventas Finales del Día</div>
-                <div class="navigation-item">Inventario</div>
+                <div class="navigation-item" @click="changeViewInventario">Inventario</div>
                 <div class="navigation-item">Balance de Ventas</div>
             </div>
         </div>
@@ -71,8 +71,7 @@ export default {
     changeViewGProd() {
       this.closeNavigation();
       this.$router.push({ name: "gproductos" });
-
-
+    },
     changeView2() {
       this.closeNavigation();
       this.$router.push({ name: "formBolProd" }); 
@@ -81,10 +80,13 @@ export default {
       this.closeNavigation();
       this.$router.push({ name: "formNVB" }); 
     },
-
     changeViewNotaVenta() {
       this.closeNavigation();
       this.$router.push({ name: "notaVenta" });
+    },
+    changeViewInventario() {
+      this.closeNavigation();
+      this.$router.push({ name: "inventario" });
     },
     closeNavigation(){
         //esta función es para ocultar la barra de navegacion, por favor NO TOCAR XD
