@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#accordionExample">
-                <div class="navigation-item">Emitir Nota de Venta</div>
+                <div class="navigation-item" @click="changeView2">Emitir Nota de Venta</div>
                 <div class="navigation-item">Emitir Boleta de Venta</div>
                 <div class="navigation-item">Entregar Productos</div>
             </div>
@@ -62,6 +62,10 @@ export default {
       this.closeNavigation();
       this.$router.push({ name: "user" });
     },
+    changeView2() {
+      this.closeNavigation();
+      this.$router.push({ name: "notaVenta" });
+    },
     closeNavigation(){
         //esta función es para ocultar la barra de navegacion, por favor NO TOCAR XD
         const timeline = new TimelineLite()
@@ -84,7 +88,7 @@ export default {
                 duration : 0.3
             }
         );
-    }
-  },
+    },
+  }
 };
 </script>

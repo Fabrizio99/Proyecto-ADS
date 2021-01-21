@@ -4,11 +4,11 @@
         <div style="margin-top: 80px">
             <navigation/>
             <div style=" height : calc(100vh - 80px); overflow-y : scroll" class="pt-4">
-                <div class="row mx-4">
+                <div class="row mx-4 mb-1">
                     <h3 class="col">
-                        Usuarios
+                        Gestión de Usuarios
                     </h3>
-                    <button type="button" class="btn btn-info my-1" @click="openFormUser">Crear</button>
+                    <button type="button" class="btn btn-info my-1 col-1" @click="openFormUser">Crear</button>
                 </div>
                 <div class="row mx-4">
                     <div class="card col">
@@ -26,92 +26,30 @@
                     </div>
                 </div>
                 <div class="mx-4 mt-4">
-                    <table class="table">
+                    <table class="table table-striped table-bordered">
                       <thead>
                         <tr>
                           <th scope="col">#</th>
-                          <th scope="col">kdfbksdf</th>
-                          <th scope="col">Last</th>
-                          <th scope="col">Handle</th>
-                          <th scope="col">Opciones</th>
+                          <th scope="col">Nombres</th>
+                          <th scope="col">Apellidos</th>
+                          <th scope="col">Documento</th>
+                          <th scope="col">Rol</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
                           <td scope="row">1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
+                          <td>Ricardo</td>
+                          <td>Chavez Vilcapoma</td>
+                          <td>Cajero</td>
                           <td class = "option text-center">
                             <div class="dropdown">
-                              <button class="btn btn-secondary dropdown-toggle dropdown-toggle-split" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item">Editar</a>
-                                <a class="dropdown-item">Eliminar</a>
+                              <div class="btn btn-info"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v"></i>
                               </div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <th scope="row">2</th>
-                          <td>Jacob</td>
-                          <td>Thornton</td>
-                          <td>@fat</td>
-                          <td class = "option text-center">
-                            <div class="dropdown">
-                              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <th scope="row">3</th>
-                          <td>Larry</td>
-                          <td>the Bird</td>
-                          <td>@twitter</td>
-                          <td class = "option text-center">
-                            <div class="dropdown">
-                              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <th scope="row">1</th>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                          <td class = "option text-center">
-                            <div class="dropdown">
-                              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <th scope="row">2</th>
-                          <td>Jacob</td>
-                          <td>Thornton</td>
-                          <td>@fat</td>
-                          <td class = "option text-center">
-                            <div class="dropdown">
-                              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
+                                <a class="dropdown-item" @click="openFormUser">Editar</a>
+                                <a class="dropdown-item" @click="deleteUser">Eliminar</a>
                               </div>
                             </div>
                           </td>
@@ -125,8 +63,8 @@
 </template>
 <script>
 import Appbar from '../../../components/AppBar'
-import AppBar from '../../../components/AppBar.vue';
 import Navigation from '../../../components/NavigationComponent';
+
 
 export default {
     components : {
@@ -135,7 +73,22 @@ export default {
     },
     methods : {
         openFormUser(){
-            this.$router.push({name:"formUser"});
+          this.$router.push({name:"formUser"});
+        },
+        async deleteUser(){
+          const {isConfirmed} = await this.$swal({
+            title: 'Advertencia',
+            text: "¿Está seguro de eliminar al usuario?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Eliminar'
+          });
+          
+          if(isConfirmed){
+            this.$swal('Eliminado!','','success');
+          }
         }
     }
 }
