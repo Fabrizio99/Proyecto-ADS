@@ -49,8 +49,29 @@ const routes = [
         path: '/formulario-usuario',
         name: 'formUser',
         component: require('../js/views/mantenimiento/usuarios/FormUsuario')
+    },
+    {
+        path: '/formulario-boletas-productos',
+        name: 'formBolProd',
+        component: require('../js/views/operaciones/entregarProductos/FrmBoletaProductos.vue')
+    },
+    {
+        path: '/formulario-lista-productos',
+        name: 'formProductos',
+        component: require('../js/views/operaciones/entregarProductos/FrmListaProductos.vue')
+    },
+    {
+        path: '/formulario-notaVenta-boletas',
+        name: 'formNVB',
+        component: require('../js/views/operaciones/emitirBoletaVenta/FrmNotaVentaBoleta.vue')
+    },
+    {
+        path: '/formulario-detalle-notaVenta',
+        name: 'formDetalleNV',
+        component: require('../js/views/operaciones/emitirBoletaVenta/FrmDetalleNV.vue')
     }
 ]
+
 
 const router = new VueRouter({
     routes
