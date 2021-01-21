@@ -8,8 +8,9 @@ Route::post('registrarUsuario', 'initialController@registrarUsuario');
 Route::get('getLogin'         , 'initialController@getLogin');
 
 //reclamosController
+Route::post('postRegistrar', 'reclamosController@postRegistrar');
+Route::get('getReclamos', 'reclamosController@getReclamos');
 
-Route::get('listarReclamos', 'reclamosController@listarReclamos');
 //reporteInvController
 Route::get('getEmitirRI','reporteInvController@getEmitirRI' );
 
