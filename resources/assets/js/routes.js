@@ -9,6 +9,11 @@ Vue.use(VueSweetalert2);
 
 Vue.use(VueRouter)
 
+const originalPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+};
+
 const routes = [
     {
         path: '/',
@@ -51,6 +56,7 @@ const routes = [
         component: require('../js/views/mantenimiento/usuarios/FormUsuario')
     },
     {
+<<<<<<< HEAD
         path: '/formulario-boletas-productos',
         name: 'formBolProd',
         component: require('../js/views/operaciones/entregarProductos/FrmBoletaProductos.vue')
@@ -69,6 +75,11 @@ const routes = [
         path: '/formulario-detalle-notaVenta',
         name: 'formDetalleNV',
         component: require('../js/views/operaciones/emitirBoletaVenta/FrmDetalleNV.vue')
+=======
+        path: '/nota-venta',
+        name: 'notaVenta',
+        component: require('../js/views/operaciones/emitirNotaVenta/EmitirNotaVenta')
+>>>>>>> 98b59ea8c8635d443ee10e5ddb7fca0ec1512762
     }
 ]
 
@@ -76,7 +87,7 @@ const routes = [
 const router = new VueRouter({
     routes
 })
-
+  
 router.beforeEach((to, from, next) => {
     console.log('LLEGO ACA????');
     //random comment to check if clone branch works
