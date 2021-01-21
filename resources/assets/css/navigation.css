@@ -46,3 +46,66 @@
 .collapse .navigation-item:last-child{
     border-bottom: 0;
 }
+/*GESTIONPRODUCTO*/
+.cardbuscador{
+    background-color: #F4F9F9;
+}
+.btnbuscar{
+    background-color: #18ECD2;
+    border-radius: 40px;
+    box-sizing: content-box;
+    width: 130px;
+    color: black;
+    border: none;
+}
+.btnbuscar:focus{
+    outline: none;
+}
+.btnatras{
+    background-color: #F1D562;
+    border: none;
+    color: black;
+}
+.btncrear{
+    background-color: #E0E0DD;
+    border-radius: 20px;
+    border: none;
+    box-sizing: content-box;
+    width: 150px;	
+    height: 27px;
+    color: black;
+}
+.headtable{
+    background-color: #E0E0DD;
+    color: black;
+}
+.cardcrear{
+    background-color: #E0E0DD;
+    border-radius: 40px;
+    height: 500px;
+}
+.insert{
+    border-radius: 40px;
+    height: 50px;
+}
+.btnsalir{
+    border-radius: 40px;
+    color: black;
+    background-color: burlywood;
+    border: none;
+}
+.btnexaminar{
+    border-radius: 40px;
+    color: black;
+    background-color: #A9CFF8;
+}
+.btnguarda-registro{
+    border-radius: 40px;
+    color: black;
+    background-color: #FEA9A1;
+    border-color: red;
+}
+.label{
+    height: 25px;
+    font-size: large;
+}

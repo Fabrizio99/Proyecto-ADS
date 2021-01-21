@@ -13,7 +13,7 @@
             </div>
             <div id="collapse1" class="collapse show" aria-labelledby="heading1" data-parent="#accordionExample">
                 <div class="navigation-item" @click="changeView">Gestión de Usuarios</div>
-                <div class="navigation-item">Gestión de Productos</div>
+                <div class="navigation-item" @click="changeViewGProd">Gestión de Productos</div>
             </div>
         </div>
         <div class="card">
@@ -61,6 +61,10 @@ export default {
     changeView() {
       this.closeNavigation();
       this.$router.push({ name: "user" });
+    },
+    changeViewGProd() {
+      this.closeNavigation();
+      this.$router.push({ name: "gproductos" });
     },
     closeNavigation(){
         //esta función es para ocultar la barra de navegacion, por favor NO TOCAR XD

@@ -49,6 +49,21 @@ const routes = [
         path: '/formulario-usuario',
         name: 'formUser',
         component: require('../js/views/mantenimiento/usuarios/FormUsuario')
+    },
+    {
+        path: '/gestion-productos',
+        name: 'gproductos',
+        component: require('../js/views/mantenimiento/productos/ProductoApp.vue')
+    },
+    {
+        path: '/form-crear-productos',
+        name: 'crearproductos',
+        component: require('../js/views/mantenimiento/productos/formCrearProducto.vue')
+    },
+    {
+        path: '/form-modificar-productos',
+        name: 'modificarproductos',
+        component: require('../js/views/mantenimiento/productos/formModificarProducto.vue')
     }
 ]
 
