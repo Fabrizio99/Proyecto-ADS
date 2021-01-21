@@ -71,7 +71,7 @@ export default {
     changeViewGProd() {
       this.closeNavigation();
       this.$router.push({ name: "gproductos" });
-
+    },
 
     changeView2() {
       this.closeNavigation();
