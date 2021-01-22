@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\gestionarUsuarioController;
 
 //initialController
 Route::get('getLogin'         , 'initialController@getLogin');
@@ -13,4 +14,7 @@ Route::post('postRegistrar', 'reclamosController@postRegistrar')->middleware('va
 
 //reporteInvController
 Route::get('getEmitirRI','reporteInvController@getEmitirRI' )->middleware('validateAuth');
+
+//gestionarUsuarioController
+Route::get('getListarUsuarios', 'gestionarUsuarioController@getListarUsuarios')->middleware('validarAuth');
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\helper\ValidateAuth;
 use Illuminate\Http\Request;
 
+
 include '../app/helper/untils.php';
 
 class initialController extends Controller
