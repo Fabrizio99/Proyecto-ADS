@@ -262,20 +262,7 @@ export default {
           reverseButtons: true
           }).then((result) => {
           if (result.isConfirmed) {
-            swalWithBootstrapButtons.fire(
-              'Deleted!',
-              'Your file has been deleted.',
-              'success'
-            )
-          }else if (
-            /* Read more about handling dismissals below */
-            result.dismiss === Swal.DismissReason.cancel
-          ) {
-            swalWithBootstrapButtons.fire(
-              'Cancelled',
-              'Your imaginary file is safe :)',
-              'error'
-            )
+            this.$swal('Nota de Venta Anulada', '', 'success')
           }
         });},
 

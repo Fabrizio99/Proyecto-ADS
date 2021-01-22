@@ -187,21 +187,20 @@ export default {
              this.$router.push({name:"formBolProd"});
         },
 
-        async CambiarEstado(){
-          const {isConfirmed} = await this.$swal({
-            title: 'Advertencia',
-            text: "¿Está seguro de cambiar el estado de la boleta?",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Cambiar',
-          });
-          
-          if(isConfirmed){
-            this.$swal('Modificación exitosa!','','success');
+        CambiarEstado(){this.$swal({
+
+          title: 'Estás seguro de cambiar el estado de la boleta?',
+          //text: "No serás capaz de revertirlo!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Si, Anular!',
+          cancelButtonText: 'No, Cancelar!',
+          reverseButtons: true
+          }).then((result) => {
+          if (result.isConfirmed) {
+            this.$swal('Modificación exitosa!', '', 'success')
           }
-        },
+        });},
 
         Listo(){
            
