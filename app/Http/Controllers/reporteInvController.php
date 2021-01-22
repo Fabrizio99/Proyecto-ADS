@@ -8,7 +8,7 @@ include '../app/helper/untils.php'; // para cada controller pueda usar las funci
 
 class reporteInvController extends Controller
 {
-    
+
     function getEmitirRI(Request $req){
         $isValidate = isNullEmpty($req->fecha);
         if($isValidate){
