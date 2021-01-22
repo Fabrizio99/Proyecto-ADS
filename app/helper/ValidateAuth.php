@@ -2,6 +2,7 @@
 namespace App\helper;
 
 use Firebase\JWT\JWT;
+use Exception;
 
 class ValidateAuth
 {
