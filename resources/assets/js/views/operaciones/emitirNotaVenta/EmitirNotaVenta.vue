@@ -26,14 +26,14 @@
                                     <input type="text" class="form-control" id="exampleInputPassword1">
                                 </div>
                                 <div class="form-group col-3 mt-2">
-                                    <input type="button" class="btn btn-primary btn-block mt-4" value="BUSCAR"/>
+                                    <input type="button" class="btn btn-primary btn-block mt-4 btnbuscar" value="BUSCAR"/>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="mx-4 mt-4">
-                    <table class="table table-striped table-bordered">
+                    <table class="table">
                       <thead>
                         <tr>
                           <th scope="col">#</th>
@@ -51,7 +51,7 @@
                           <td>@mdo</td>
                           <td class = "option text-center">
                             <div class="dropdown">
-                              <div class="btn btn-info"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <div class="btn btn-danger"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-ellipsis-v"></i>
                               </div>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -68,7 +68,7 @@
                           <td>@mdo</td>
                           <td class = "option text-center">
                             <div class="dropdown">
-                              <div class="btn btn-info"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <div class="btn btn-danger"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-ellipsis-v"></i>
                               </div>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -85,7 +85,7 @@
                           <td>@mdo</td>
                           <td class = "option text-center">
                             <div class="dropdown">
-                              <div class="btn btn-info"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <div class="btn btn-danger"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-ellipsis-v"></i>
                               </div>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -102,7 +102,7 @@
                           <td>@mdo</td>
                           <td class = "option text-center">
                             <div class="dropdown">
-                              <div class="btn btn-info"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <div class="btn btn-danger"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-ellipsis-v"></i>
                               </div>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -119,7 +119,7 @@
                           <td>@mdo</td>
                           <td class = "option text-center">
                             <div class="dropdown">
-                              <div class="btn btn-info"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <div class="btn btn-danger"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-ellipsis-v"></i>
                               </div>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -136,7 +136,7 @@
                           <td>@mdo</td>
                           <td class = "option text-center">
                             <div class="dropdown">
-                              <div class="btn btn-info"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <div class="btn btn-danger"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-ellipsis-v"></i>
                               </div>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -153,7 +153,7 @@
                           <td>@mdo</td>
                           <td class = "option text-center">
                             <div class="dropdown">
-                              <div class="btn btn-info"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <div class="btn btn-danger"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-ellipsis-v"></i>
                               </div>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -170,7 +170,7 @@
                           <td>@mdo</td>
                           <td class = "option text-center">
                             <div class="dropdown">
-                              <div class="btn btn-info"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <div class="btn btn-danger"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-ellipsis-v"></i>
                               </div>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -187,7 +187,7 @@
                           <td>@mdo</td>
                           <td class = "option text-center">
                             <div class="dropdown">
-                              <div class="btn btn-info"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <div class="btn btn-danger"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-ellipsis-v"></i>
                               </div>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -204,7 +204,7 @@
                           <td>@mdo</td>
                           <td class = "option text-center">
                             <div class="dropdown">
-                              <div class="btn btn-info"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <div class="btn btn-danger"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-ellipsis-v"></i>
                               </div>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -221,7 +221,7 @@
                           <td>@mdo</td>
                           <td class = "option text-center">
                             <div class="dropdown">
-                              <div class="btn btn-info"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <div class="btn btn-danger"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-ellipsis-v"></i>
                               </div>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -238,7 +238,7 @@
                           <td>@mdo</td>
                           <td class = "option text-center">
                             <div class="dropdown">
-                              <div class="btn btn-info"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <div class="btn btn-danger"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-ellipsis-v"></i>
                               </div>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -255,7 +255,7 @@
                           <td>@mdo</td>
                           <td class = "option text-center">
                             <div class="dropdown">
-                              <div class="btn btn-info"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <div class="btn btn-danger"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-ellipsis-v"></i>
                               </div>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -272,7 +272,7 @@
                           <td>@mdo</td>
                           <td class = "option text-center">
                             <div class="dropdown">
-                              <div class="btn btn-info"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <div class="btn btn-danger"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-ellipsis-v"></i>
                               </div>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -289,7 +289,7 @@
                           <td>@mdo</td>
                           <td class = "option text-center">
                             <div class="dropdown">
-                              <div class="btn btn-info"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <div class="btn btn-danger"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-ellipsis-v"></i>
                               </div>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -306,7 +306,7 @@
                           <td>@mdo</td>
                           <td class = "option text-center">
                             <div class="dropdown">
-                              <div class="btn btn-info"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <div class="btn btn-danger"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-ellipsis-v"></i>
                               </div>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">

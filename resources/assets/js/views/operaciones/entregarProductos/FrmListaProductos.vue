@@ -44,8 +44,8 @@
                             </div>  
                             <div class="form-row justify-content-center">
                               <div class="form-group">
-                                <input type="button" class="btn btn-primary btn-block mt-4" value="MODIFICAR" @click="Modificar" data-toggle="modal" data-target="#Modal"/>
-                                <input type="button" class="btn btn-danger btn-block mt-4" value="SALIR" @click="Regresar"/>
+                                <input type="button" class="btn btn-info my-1 form-group col-12 btnguarda-registro" value="MODIFICAR" @click="Modificar" data-toggle="modal" data-target="#Modal"/>
+                                <input type="button" class="btn btn-info my-1 form-group col-12 btnsalir" value="SALIR" @click="Regresar"/>
                               </div>
                             </div>  
                             <div class="form-row justify-content-center">
@@ -59,7 +59,7 @@
                   <div class="col-9">
                       <div class="card-body">
                             <div class="mx-4 mt-4">
-                                <table class="table table-striped table-bordered">
+                                <table class="table">
                                   <thead>
                                     <tr>
                                       <th scope="col">Foto</th>

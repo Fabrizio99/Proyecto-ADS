@@ -58,10 +58,10 @@
                         <img src="https://avatars3.githubusercontent.com/u/499550?s=460&u=de41ec9325e8a92e281b96a1514a0fd1cd81ad4a&v=4" class="card-img-top image-profile" alt="img-profile">
                         <div class="card-body container">
                             <div class="row justify-content-md-center mb-2">
-                                <button type="button" class="btn btn-secondary profile-button">Examinar</button>
+                                <button type="button" class="btn btn-primary mt-4 btnexaminar">Examinar</button>
                             </div>
                             <div class="row justify-content-md-center">
-                                <button type="button" class="btn btn-primary profile-button">Guardar Cambios</button>
+                                <button type="button" class="btn btn-info btnguarda-registro profile-button">Guardar Cambios</button>
                             </div>
                         </div>
                     </div>

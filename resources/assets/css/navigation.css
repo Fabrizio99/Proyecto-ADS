@@ -8,23 +8,24 @@
     top: 0;
     position: absolute;
     display: none;
-
     width: 100vw;
     height: 100vh;
     z-index: 9;
+    color: white;
 }
 .navigation-menu{
     position: absolute;
     left: -300px;
     width: 300px;
     height: 100vh;
-    background-color: white;
+    background-color: rgba(114, 45, 47, 45);
     position: absolute;
     top: 0;
 }
 .navigation-header{
     display: flex;
     align-items: center;
+    background-color: rgba(114, 45, 47, 45);
 }
 .navigation-header div{
     cursor: pointer;
@@ -38,7 +39,7 @@
 }
 .navigation-item{
     padding: 10px 0 10px 50px;
-    border-bottom: 1px solid rgba(0,0,0,0.08);
+    border-bottom: 0px solid rgba(0,0,0,0.08);
     font-size: 15px;
     color: rgba(0,0,0,0.8);
     cursor: pointer;
@@ -46,9 +47,12 @@
 .collapse .navigation-item:last-child{
     border-bottom: 0;
 }
+.card{
+    border: rgba(114, 45, 47, 45);
+}
 /*GESTIONPRODUCTO*/
 .cardbuscador{
-    background-color: #F4F9F9;
+    background-color:white;
 }
 .btnbuscar{
     background-color: #18ECD2;
@@ -91,7 +95,7 @@
 .btnsalir{
     border-radius: 40px;
     color: black;
-    background-color: burlywood;
+    background-color: #F1D562;
     border: none;
 }
 .btnexaminar{
@@ -101,9 +105,9 @@
 }
 .btnguarda-registro{
     border-radius: 40px;
-    color: black;
-    background-color: #FEA9A1;
-    border-color: red;
+    color: white;
+    background-color: green;
+    border-color: green;
 }
 .label{
     height: 25px;
