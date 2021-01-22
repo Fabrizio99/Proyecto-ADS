@@ -106,10 +106,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
     </div>
+    
 </template>
 <script>
 import Appbar from '../../../components/AppBar'

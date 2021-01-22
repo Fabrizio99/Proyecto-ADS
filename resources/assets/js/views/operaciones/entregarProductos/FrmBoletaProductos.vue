@@ -15,7 +15,7 @@
                             <div class="form-row">
                                 <div class="form-group col-3">
                                     <label for="exampleInputPassword1">Código</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1">
+                                    <input type="text" class="form-control" id="exampleInputPassword1" disabled>
                                 </div>
                                 <div class="form-group col-3">
                                     <label for="exampleInputPassword1">Fecha Inicio</label>
