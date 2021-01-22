@@ -28,8 +28,11 @@ include '../app/helper/constanst.php';
                         'msj'    => $msj ?: "Sin resultados."
                     ];   
                     return json_encode($object);    
+                } else if (count($myArray) == 1){
+                    $newObject = json_encode($myArray[0], JSON_FORCE_OBJECT);
+                } else {
+                    $newObject = json_encode($myArray);
                 }
-                $newObject = json_encode($myArray);
                 return $newObject;
             } else {
                 return $_SESSION["OBJ_ERROR"];
