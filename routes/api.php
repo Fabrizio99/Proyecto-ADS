@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 //initialController
 Route::post('registrarUsuario', 'initialController@registrarUsuario');
-Route::get('getLogin'         , 'initialController@getLogin');
+Route::get('getLogin'         , 'initialController@getLogin')->middleware('validateAuth');
 
 //reclamosController
 Route::post('postRegistrar', 'reclamosController@postRegistrar');
