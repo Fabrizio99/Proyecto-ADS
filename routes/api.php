@@ -10,7 +10,7 @@ Route::post('registrarUsuario', 'initialController@registrarUsuario')->middlewar
 
 //reclamosController
 Route::get('getReclamos', 'reclamosController@getReclamos')->middleware('validateAuth');
-Route::post('postRegistrar', 'reclamosController@postRegistrar')->middleware('validateAuth');
+Route::post('postRegistrar', 'reclamosController@postRegistrar');
 
 //reporteInvController
 Route::get('getEmitirRI','reporteInvController@getEmitirRI' )->middleware('validateAuth');
@@ -21,3 +21,6 @@ Route::get('getBuscarUsuario', 'gestionarUsuarioController@getBuscarUsuario');
 Route::get('ValidacionCrearUsuario', 'gestionarUsuarioController@ValidacionCrearUsuario');
 
 
+
+//gProductosController
+Route::get('listProduct','gProductosController@listProduct');
