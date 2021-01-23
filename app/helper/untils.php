@@ -60,6 +60,7 @@ include '../app/helper/constanst.php';
             mysqli_select_db ($conexion, $_SESSION["DATA_BASE"]);
             $consulta = mysqli_query ( $conexion,$sql);
 
+            //mensaje error 
             if(!isNullEmpty($consulta,'resConsulta')){
                 $object = (object) [
                     'status' => $_SESSION["STATUS_SUCCES"],
@@ -141,4 +142,31 @@ include '../app/helper/constanst.php';
             return $_SESSION["OBJ_ERROR"];
         }
   
+    }
+
+    function mySQLDelete($sql, $msj = null) {      
+        // Conectar con el servidor de base de datos
+        try {
+            $conexion = mysqli_connect ($_SESSION["SERVIDOR"], $_SESSION["ROOT"], $_SESSION["PASSWORD"])
+            or die ("No se puede conectar con el servidor");
+        
+            mysqli_select_db ($conexion, $_SESSION["DATA_BASE"]);
+            $consulta = mysqli_query ( $conexion,$sql);
+
+            //mensaje error 
+            if(!isNullEmpty($consulta,'resConsulta')){
+                $object = (object) [
+                    'status' => $_SESSION["STATUS_SUCCES"],
+                    'msj'    => $msj ?: "Se elimino con exito."
+                ];
+                return json_encode($object);
+            } else {
+                return $_SESSION["OBJ_ERROR"];
+            }
+            mysqli_close ($conexion);     
+        }  catch (Exception $e) {
+            echo 'Excepción capturada: ',  $e->getMessage(), "\n";
+            return $_SESSION["OBJ_ERROR"];
+        }
+        
     }

@@ -19,8 +19,8 @@ Route::get('getEmitirRI','reporteInvController@getEmitirRI' )->middleware('valid
 Route::get('listaUsuario', 'gestionarUsuarioController@listaUsuario'); 
 Route::get('getBuscarUsuario', 'gestionarUsuarioController@getBuscarUsuario');
 Route::post('crearUsuario', 'gestionarUsuarioController@crearUsuario');
-
-
+Route::post('deleteUsuario','gestionarUsuarioController@deleteUsuario');
+Route::post('modificarUsuario','gestionarUsuarioController@modificarUsuario');
 
 //gProductosController
 Route::get('listProduct','gProductosController@listProduct');
