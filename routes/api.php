@@ -16,3 +16,6 @@ Route::get('getEmitirRI','reporteInvController@getEmitirRI' )->middleware('valid
 
 //gProductosController
 Route::get('listProduct','gProductosController@listProduct');
+Route::post('deleteP','gProductosController@deleteP');
+Route::post('updateP','gProductosController@updateP');
+Route::post('registrarP','gProductosController@registrarP');
