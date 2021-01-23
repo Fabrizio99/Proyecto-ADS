@@ -24,7 +24,7 @@
                     <i class="fas fa-user-cog fa-lg"></i><span class="navigation-title">Operaciones</span>
                 </div>
             </div>
-            <div id="collapse2" class="collapse cardChange" aria-labelledby="heading2" data-parent="#accordionExample">
+            <div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#accordionExample">
 
                 <div class="navigation-item" @click="changeViewNotaVenta">Emitir Nota de Venta</div>
                 <div class="navigation-item" @click="changeView3">Emitir Boleta de Venta</div>
