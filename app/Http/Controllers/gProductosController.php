@@ -30,7 +30,7 @@ class gProductosController extends Controller
         return mySQLInsert(
             "UPDATE producto set nombre = '{$req->nombre}', marka = '{$req->marka}', precio = '{$req->precio}', stock = '{$req->stock}' , imagen = '{$req->imagen}' 
             WHERE id_producto = '{$req->idP}'",
-             "PRODUCTO MODIFICADO EXITOSAMENTE"
+             "PRODUCTO MODIFICADO DE FORMA EXITOSA"
             );
 
 
