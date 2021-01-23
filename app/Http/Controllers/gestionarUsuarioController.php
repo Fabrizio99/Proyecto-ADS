@@ -29,24 +29,68 @@ class gestionarUsuarioController extends Controller
           
     }
 
-    function ValidacionCrearUsuario (Request $req){
+    function crearUsuario (Request $req){
         //usuario = numero dni
-      $ValidacionCampos = isNullEmpty($req->numdoc) ?: 
-      isNullEmpty($req->rol) ?:
-      isNullEmpty($req->usuario) ?: 
-      isNullEmpty($req->contrasenia) ?:
-      isNullEmpty($req->nombres) ?:
-      isNullEmpty($req->apellido) ?: 
-      isNullEmpty($req->numdoc) ?:  
-      isNullEmpty($req->direccion) ?:  
-      isNullEmpty($req->telefono);
 
-      if($ValidacionCampos){
-          return $ValidacionCampos;
-      }
+        $TIPO_DNI = 1;
+        $TIPO_PASAPORTE = 2;
+
+        $ValidacionCampos = isNullEmpty($req->numDoc,'numDoc') ?: 
+                            isNullEmpty($req->rol,'rol') ?:
+                            isNullEmpty($req->usuario,'usuario') ?: 
+                            isNullEmpty($req->contrasenia,'contrasenia') ?:
+                            isNullEmpty($req->nombres,'nombres') ?:
+                            isNullEmpty($req->apellido,'apellido') ?: 
+                            isNullEmpty($req->tipoDoc,'tipoDoc') ?:  
+                            isNullEmpty($req->direccion,'direccion') ?:  
+                            isNullEmpty($req->telefono,'telefono');
+                            isNullEmpty($req->fechaInicio,'fechaInicio');
+
+        if($ValidacionCampos){
+            return $ValidacionCampos;
+        }
       
-      return mySQLConsulta("SELECT * FROM usuarios WHERE num_documento ='{$req ->numdoc}' AND estado ='A' ");
+        if (count($req->contrasenia) < 5) {
+                return JSON_ENCODE(
+                    (object) [
+                        'status' => $_SESSION["STATUS_CONTROL"],
+                        'msj'    => 'La contraseña debe tener minimo 5 caracteres.'
+                    ]
+                ); 
+        }
 
+        if (count($req->numDoc) < 8 && $req->tipoDoc == $TIPO_DNI ) { // TIPO 
+            return JSON_ENCODE(
+                (object) [
+                    'status' => $_SESSION["STATUS_CONTROL"],
+                    'msj'    => 'La contraseña debe tener minimo 8 caracteres sí es un DNI.'
+                ]
+            ); 
+        } else if (count($req->numDoc) < 16 && $req->tipoDoc == $TIPO_PASAPORTE ) { // CARNET DE PASAPORTE
+            return JSON_ENCODE(
+                (object) [
+                    'status' => $_SESSION["STATUS_CONTROL"],
+                    'msj'    => 'La contraseña debe tener minimo 16 caracteres sí es un PASAPORTE..'
+                ]
+            );
+        }
+
+      $usuario = mySQLConsulta("SELECT * FROM usuarios WHERE num_documento = '{$req->numDoc}' /*AND estado ='A'*/");
+      echo "USUARIO ---> ".$usuario;
+      $usuario = json_decode($usuario);
+
+      if ($usuario->status == $_SESSION["STATUS_SUCCES"]) {
+          return JSON_ENCODE(
+              (object) [
+                  'status' => $_SESSION["STATUS_CONTROL"],
+                  'msj'    => 'El usuario ya se encuentra registrado.'
+               ]
+          ); 
+      }
+
+      return mySQLInsert(
+          "INSERT INTO usuarios (documentos_id_documentos, rol_id_rol, usuario, contrasenia, nombres, apellido, num_documento, direccion, telefono, /*estado*/, fechaInicio) 
+                         VALUES ('{$req->tipoDoc}', '{$req->rol}', '{$req->usuario}', '{$req->contrasenia}','{$req->nombres}', '{$req->apellido}','{$req->numDoc}', '{$req->direccion}', '{$req->telefono}',/*'{$req->estado}',*/ '{$req->fechaInicio}')");
     }
 
     

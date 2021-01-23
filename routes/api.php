@@ -18,7 +18,7 @@ Route::get('getEmitirRI','reporteInvController@getEmitirRI' )->middleware('valid
 //gestionarUsuarioController
 Route::get('listaUsuario', 'gestionarUsuarioController@listaUsuario'); 
 Route::get('getBuscarUsuario', 'gestionarUsuarioController@getBuscarUsuario');
-Route::get('ValidacionCrearUsuario', 'gestionarUsuarioController@ValidacionCrearUsuario');
+Route::post('crearUsuario', 'gestionarUsuarioController@crearUsuario');
 
 
 
