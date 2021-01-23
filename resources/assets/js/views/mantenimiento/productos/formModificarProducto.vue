@@ -11,7 +11,7 @@
                     </div>
                     <div class="row mx-4">
                         <div class="col-7">
-                            <div class="card col-12 cardcrear">
+                            <div class="card col-12">
                                 <div class="card-body">
                                     <div class="form-row">
                                         <div class="col-2">
@@ -19,7 +19,7 @@
                                         </div>
                                         <div class="form-group col-8">
                                             <label for="inputNombre" class="label">Nombre del producto</label>
-                                            <input type="text" class="form-control insert" id="inputNombre">
+                                            <input type="text" class="form-control" id="inputNombre">
                                         </div>
                                         <div class="col-2">
                                             <label></label>
@@ -31,7 +31,7 @@
                                         </div>
                                         <div class="form-group col-8">
                                             <label for="InputMarca" class="label">Marca</label>
-                                            <input type="text" class="form-control insert" id="inputMarca">
+                                            <input type="text" class="form-control " id="inputMarca">
                                         </div>
                                         <div class="col-2">
                                             <label></label>
@@ -43,7 +43,7 @@
                                         </div>
                                         <div class="form-group col-8">
                                             <label for="InputPrecio" class="label">Precio</label>
-                                            <input type="text" class="form-control insert" id="inputPrecio">
+                                            <input type="text" class="form-control " id="inputPrecio">
                                         </div>
                                         <div class="col-2">
                                             <label></label>
@@ -55,18 +55,17 @@
                                         </div>
                                         <div class="form-group col-8">
                                             <label for="InputStock" class="label">Stock</label>
-                                            <input type="text" class="form-control insert" id="inputStock">
+                                            <input type="text" class="form-control " id="inputStock">
                                         </div>
                                         <div class="col-2">
                                             <label></label>
                                         </div>
                                     </div>
-                                    <button type="button" class="btn btn-info my-1 form-group col-3 btnsalir" @click="formListaProducto">Salir</button>
                                 </div>
                             </div>
                         </div>
                         <div class="col-5">
-                            <div class="card col-12 cardcrear">
+                            <div class="card col-12 ">
                                 <div class="card-body">
                                     <div class="form-row">
                                         <div class="col-2">
@@ -109,7 +108,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    
 </template>
 <script>
 import Appbar from '../../../components/AppBar'

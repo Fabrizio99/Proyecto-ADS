@@ -35153,9 +35153,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 
 
@@ -35481,18 +35478,6 @@ var render = function() {
                     ])
                   ])
                 ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group col-6 mt-3" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-info my-1 btnatras",
-                    attrs: { type: "button" },
-                    on: { click: _vm.openMain }
-                  },
-                  [_vm._v("Atrás")]
-                )
               ])
             ]
           )
@@ -35866,40 +35851,17 @@ var render = function() {
               _vm._m(0),
               _vm._v(" "),
               _c("div", { staticClass: "row mx-4" }, [
-                _c("div", { staticClass: "col-7" }, [
-                  _c("div", { staticClass: "card col-12 cardcrear" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-5" }, [
+                  _c("div", { staticClass: "card col-12 " }, [
                     _c("div", { staticClass: "card-body" }, [
-                      _vm._m(1),
-                      _vm._v(" "),
                       _vm._m(2),
                       _vm._v(" "),
                       _vm._m(3),
                       _vm._v(" "),
-                      _vm._m(4),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass:
-                            "btn btn-info my-1 form-group col-3 btnsalir",
-                          attrs: { type: "button" },
-                          on: { click: _vm.formListaProducto }
-                        },
-                        [_vm._v("Salir")]
-                      )
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-5" }, [
-                  _c("div", { staticClass: "card col-12 cardcrear" }, [
-                    _c("div", { staticClass: "card-body" }, [
-                      _vm._m(5),
-                      _vm._v(" "),
-                      _vm._m(6),
-                      _vm._v(" "),
                       _c("div", { staticClass: "form-row" }, [
-                        _vm._m(7),
+                        _vm._m(4),
                         _vm._v(" "),
                         _c("div", { staticClass: "form-group col-10" }, [
                           _c(
@@ -35914,7 +35876,7 @@ var render = function() {
                           )
                         ]),
                         _vm._v(" "),
-                        _vm._m(8)
+                        _vm._m(5)
                       ])
                     ])
                   ])
@@ -35944,84 +35906,86 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-row" }, [
-      _c("div", { staticClass: "col-2" }, [_c("label")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group col-8" }, [
-        _c("label", { staticClass: "label", attrs: { for: "inputNombre" } }, [
-          _vm._v("Nombre del producto")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control insert",
-          attrs: { type: "text", id: "inputNombre" }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-2" }, [_c("label")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-row" }, [
-      _c("div", { staticClass: "col-2" }, [_c("label")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group col-8" }, [
-        _c("label", { staticClass: "label", attrs: { for: "InputMarca" } }, [
-          _vm._v("Marca")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control insert",
-          attrs: { type: "text", id: "inputMarca" }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-2" }, [_c("label")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-row" }, [
-      _c("div", { staticClass: "col-2" }, [_c("label")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group col-8" }, [
-        _c("label", { staticClass: "label", attrs: { for: "InputPrecio" } }, [
-          _vm._v("Precio")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control insert",
-          attrs: { type: "text", id: "inputPrecio" }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-2" }, [_c("label")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-row" }, [
-      _c("div", { staticClass: "col-2" }, [_c("label")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group col-8" }, [
-        _c("label", { staticClass: "label", attrs: { for: "InputStock" } }, [
-          _vm._v("Stock")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control insert",
-          attrs: { type: "text", id: "inputStock" }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-2" }, [_c("label")])
+    return _c("div", { staticClass: "col-7" }, [
+      _c("div", { staticClass: "card col-12" }, [
+        _c("div", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "form-row" }, [
+            _c("div", { staticClass: "col-2" }, [_c("label")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group col-8" }, [
+              _c(
+                "label",
+                { staticClass: "label", attrs: { for: "inputNombre" } },
+                [_vm._v("Nombre del producto")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "form-control ",
+                attrs: { type: "text", id: "inputNombre" }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-2" }, [_c("label")])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-row" }, [
+            _c("div", { staticClass: "col-2" }, [_c("label")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group col-8" }, [
+              _c(
+                "label",
+                { staticClass: "label", attrs: { for: "InputMarca" } },
+                [_vm._v("Marca")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "form-control ",
+                attrs: { type: "text", id: "inputMarca" }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-2" }, [_c("label")])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-row" }, [
+            _c("div", { staticClass: "col-2" }, [_c("label")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group col-8" }, [
+              _c(
+                "label",
+                { staticClass: "label", attrs: { for: "InputPrecio" } },
+                [_vm._v("Precio")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "form-control",
+                attrs: { type: "text", id: "inputPrecio" }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-2" }, [_c("label")])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-row" }, [
+            _c("div", { staticClass: "col-2" }, [_c("label")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group col-8" }, [
+              _c(
+                "label",
+                { staticClass: "label", attrs: { for: "InputStock" } },
+                [_vm._v("Stock")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "form-control",
+                attrs: { type: "text", id: "inputStock" }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-2" }, [_c("label")])
+          ])
+        ])
+      ])
     ])
   },
   function() {
@@ -36256,7 +36220,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -36331,40 +36294,17 @@ var render = function() {
               _vm._m(0),
               _vm._v(" "),
               _c("div", { staticClass: "row mx-4" }, [
-                _c("div", { staticClass: "col-7" }, [
-                  _c("div", { staticClass: "card col-12 cardcrear" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-5" }, [
+                  _c("div", { staticClass: "card col-12 " }, [
                     _c("div", { staticClass: "card-body" }, [
-                      _vm._m(1),
-                      _vm._v(" "),
                       _vm._m(2),
                       _vm._v(" "),
                       _vm._m(3),
                       _vm._v(" "),
-                      _vm._m(4),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass:
-                            "btn btn-info my-1 form-group col-3 btnsalir",
-                          attrs: { type: "button" },
-                          on: { click: _vm.formListaProducto }
-                        },
-                        [_vm._v("Salir")]
-                      )
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-5" }, [
-                  _c("div", { staticClass: "card col-12 cardcrear" }, [
-                    _c("div", { staticClass: "card-body" }, [
-                      _vm._m(5),
-                      _vm._v(" "),
-                      _vm._m(6),
-                      _vm._v(" "),
                       _c("div", { staticClass: "form-row" }, [
-                        _vm._m(7),
+                        _vm._m(4),
                         _vm._v(" "),
                         _c("div", { staticClass: "form-group col-10" }, [
                           _c(
@@ -36379,7 +36319,7 @@ var render = function() {
                           )
                         ]),
                         _vm._v(" "),
-                        _vm._m(8)
+                        _vm._m(5)
                       ])
                     ])
                   ])
@@ -36411,84 +36351,86 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-row" }, [
-      _c("div", { staticClass: "col-2" }, [_c("label")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group col-8" }, [
-        _c("label", { staticClass: "label", attrs: { for: "inputNombre" } }, [
-          _vm._v("Nombre del producto")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control insert",
-          attrs: { type: "text", id: "inputNombre" }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-2" }, [_c("label")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-row" }, [
-      _c("div", { staticClass: "col-2" }, [_c("label")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group col-8" }, [
-        _c("label", { staticClass: "label", attrs: { for: "InputMarca" } }, [
-          _vm._v("Marca")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control insert",
-          attrs: { type: "text", id: "inputMarca" }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-2" }, [_c("label")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-row" }, [
-      _c("div", { staticClass: "col-2" }, [_c("label")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group col-8" }, [
-        _c("label", { staticClass: "label", attrs: { for: "InputPrecio" } }, [
-          _vm._v("Precio")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control insert",
-          attrs: { type: "text", id: "inputPrecio" }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-2" }, [_c("label")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-row" }, [
-      _c("div", { staticClass: "col-2" }, [_c("label")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group col-8" }, [
-        _c("label", { staticClass: "label", attrs: { for: "InputStock" } }, [
-          _vm._v("Stock")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control insert",
-          attrs: { type: "text", id: "inputStock" }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-2" }, [_c("label")])
+    return _c("div", { staticClass: "col-7" }, [
+      _c("div", { staticClass: "card col-12" }, [
+        _c("div", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "form-row" }, [
+            _c("div", { staticClass: "col-2" }, [_c("label")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group col-8" }, [
+              _c(
+                "label",
+                { staticClass: "label", attrs: { for: "inputNombre" } },
+                [_vm._v("Nombre del producto")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "form-control",
+                attrs: { type: "text", id: "inputNombre" }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-2" }, [_c("label")])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-row" }, [
+            _c("div", { staticClass: "col-2" }, [_c("label")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group col-8" }, [
+              _c(
+                "label",
+                { staticClass: "label", attrs: { for: "InputMarca" } },
+                [_vm._v("Marca")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "form-control ",
+                attrs: { type: "text", id: "inputMarca" }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-2" }, [_c("label")])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-row" }, [
+            _c("div", { staticClass: "col-2" }, [_c("label")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group col-8" }, [
+              _c(
+                "label",
+                { staticClass: "label", attrs: { for: "InputPrecio" } },
+                [_vm._v("Precio")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "form-control ",
+                attrs: { type: "text", id: "inputPrecio" }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-2" }, [_c("label")])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-row" }, [
+            _c("div", { staticClass: "col-2" }, [_c("label")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group col-8" }, [
+              _c(
+                "label",
+                { staticClass: "label", attrs: { for: "InputStock" } },
+                [_vm._v("Stock")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "form-control ",
+                attrs: { type: "text", id: "inputStock" }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-2" }, [_c("label")])
+          ])
+        ])
+      ])
     ])
   },
   function() {
@@ -42170,49 +42112,7 @@ var render = function() {
       _c(
         "div",
         { staticStyle: { "margin-top": "80px" } },
-        [
-          _c("navigation"),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "pt-4",
-              staticStyle: {
-                height: "calc(100vh - 80px)",
-                "overflow-y": "scroll"
-              }
-            },
-            [
-              _vm._m(0),
-              _vm._v(" "),
-              _vm._m(1),
-              _vm._v(" "),
-              _vm._m(2),
-              _vm._v(" "),
-              _vm._m(3),
-              _vm._v(" "),
-              _c("div", { staticClass: "row mx-4" }, [
-                _vm._m(4),
-                _vm._v(" "),
-                _vm._m(5),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-3" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-info my-1 form-group col-12",
-                      attrs: { type: "button" },
-                      on: { click: function($event) {} }
-                    },
-                    [_vm._v("Emitir reporte")]
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _vm._m(6)
-            ]
-          )
-        ],
+        [_c("navigation"), _vm._v(" "), _vm._m(0)],
         1
       )
     ],
@@ -42224,398 +42124,403 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row mx-4" }, [
-      _c("h3", { staticClass: "col" }, [
-        _vm._v(
-          "\n                        Emitir reporte de inventario\n                    "
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row mx-4" }, [
-      _c("div", { staticClass: "col-6" }, [_c("label")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row mx-4" }, [
-      _c("div", { staticClass: "col-5" }, [
-        _c("label", { attrs: { for: "fechainventario" } }, [
-          _vm._v("Del día:")
+    return _c(
+      "div",
+      {
+        staticClass: "pt-4",
+        staticStyle: { height: "calc(100vh - 80px)", "overflow-y": "scroll" }
+      },
+      [
+        _c("div", { staticClass: "row mx-4" }, [
+          _c("h3", { staticClass: "col" }, [
+            _vm._v(
+              "\n                        Emitir reporte de inventario\n                    "
+            )
+          ])
         ]),
         _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "text", id: "fechainventario" }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-1" }, [_c("label")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-6" }, [
-        _c("div", { staticClass: "card col-12" }, [
-          _c("div", { staticClass: "card-body" }, [
-            _c("div", { staticClass: "form-row" }, [
-              _c("div", { staticClass: "col-1" }, [_c("label")]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-5" }, [
-                _c("label", [_vm._v("Costo de inventario")])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-1" }, [_c("label")]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-5" }, [
-                _c("label", [_vm._v("Cantidad de productos")])
-              ])
+        _c("div", { staticClass: "row mx-4" }, [
+          _c("div", { staticClass: "col-6" }, [_c("label")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row mx-4" }, [
+          _c("div", { staticClass: "col-5" }, [
+            _c("label", { attrs: { for: "fechainventario" } }, [
+              _vm._v("Del día:")
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "form-row" }, [
-              _c("div", { staticClass: "col-1" }, [_c("label")]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-5" }, [
-                _c("label", [_vm._v("S/.10.890.00")])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-1" }, [_c("label")]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-5" }, [
-                _c("label", [_vm._v("1.506")])
-              ])
-            ])
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row mx-4" }, [
-      _c("div", { staticClass: "col-6" }, [_c("label")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6" }, [_c("label")])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-3" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-info my-1 form-group col-12",
-          attrs: {
-            type: "button",
-            "data-bs-toggle": "modal",
-            "data-bs-target": "#b"
-          }
-        },
-        [_vm._v("Balance")]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "modal fade",
-          attrs: {
-            id: "b",
-            tabindex: "-1",
-            "aria-labelledby": "bl",
-            "aria-hidden": "true"
-          }
-        },
-        [
-          _c("div", { staticClass: "modal-dialog modal-lg" }, [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-header" }, [
-                _c("h5", { staticClass: "modal-title", attrs: { id: "bl" } }, [
-                  _vm._v("Gráfico de Barras de los Productos Vendidos Día")
+            _c("input", {
+              staticClass: "form-control",
+              attrs: { type: "text", id: "fechainventario" }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-1" }, [_c("label")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-6" }, [
+            _c("div", { staticClass: "card col-12" }, [
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "form-row" }, [
+                  _c("div", { staticClass: "col-1" }, [_c("label")]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-5" }, [
+                    _c("label", [_vm._v("Costo de inventario")])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-1" }, [_c("label")]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-5" }, [
+                    _c("label", [_vm._v("Cantidad de productos")])
+                  ])
                 ]),
                 _vm._v(" "),
-                _c("img", {
-                  attrs: {
-                    src: "images/GestionProductos/cerrar.jpg",
-                    "data-bs-dismiss": "modal",
-                    width: "40",
-                    height: "40"
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("div", { staticClass: "mx-4 mt-4" }, [
-                  _c("table", { staticClass: "table table-light" }, [
-                    _c("thead", [
-                      _c("tr", [
-                        _c("th", { attrs: { scope: "col" } }),
-                        _vm._v(" "),
-                        _c("th", { attrs: { scope: "col" } }),
-                        _vm._v(" "),
-                        _c("th", { attrs: { scope: "col" } }),
-                        _vm._v(" "),
-                        _c("th", { attrs: { scope: "col" } }, [
-                          _vm._v("Cantidad consumida")
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("tbody", [
-                      _c("tr", [
-                        _c("td", [_vm._v("1")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("Azucar rubia")]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("img", {
-                            attrs: {
-                              src: "images/GestionProductos/azucar.jpg",
-                              width: "40",
-                              height: "40"
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("div", { staticClass: "progress" }, [
-                            _c("div", {
-                              staticClass: "progress-bar",
-                              staticStyle: { width: "20%" },
-                              attrs: {
-                                role: "progressbar",
-                                "aria-valuenow": "20",
-                                "aria-valuemin": "0",
-                                "aria-valuemax": "100"
-                              }
-                            })
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("20")])
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c("td", [_vm._v("2")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("Harina")]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("img", {
-                            attrs: {
-                              src: "images/GestionProductos/harina.jpg",
-                              width: "40",
-                              height: "40"
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("div", { staticClass: "progress" }, [
-                            _c("div", {
-                              staticClass: "progress-bar",
-                              staticStyle: { width: "15%" },
-                              attrs: {
-                                role: "progressbar",
-                                "aria-valuenow": "15",
-                                "aria-valuemin": "0",
-                                "aria-valuemax": "100"
-                              }
-                            })
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("15")])
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c("td", [_vm._v("3")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("Mantequilla")]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("img", {
-                            attrs: {
-                              src: "images/GestionProductos/mantequilla.jpg",
-                              width: "40",
-                              height: "40"
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("div", { staticClass: "progress" }, [
-                            _c("div", {
-                              staticClass: "progress-bar",
-                              staticStyle: { width: "30%" },
-                              attrs: {
-                                role: "progressbar",
-                                "aria-valuenow": "30",
-                                "aria-valuemin": "0",
-                                "aria-valuemax": "100"
-                              }
-                            })
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("30")])
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c("td", [_vm._v("4")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("Leche Gloria")]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("img", {
-                            attrs: {
-                              src: "images/GestionProductos/leche.jpg",
-                              width: "40",
-                              height: "40"
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("div", { staticClass: "progress" }, [
-                            _c("div", {
-                              staticClass: "progress-bar",
-                              staticStyle: { width: "12%" },
-                              attrs: {
-                                role: "progressbar",
-                                "aria-valuenow": "12",
-                                "aria-valuemin": "0",
-                                "aria-valuemax": "100"
-                              }
-                            })
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("12")])
-                      ])
-                    ])
+                _c("div", { staticClass: "form-row" }, [
+                  _c("div", { staticClass: "col-1" }, [_c("label")]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-5" }, [
+                    _c("label", [_vm._v("S/.10.890.00")])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-1" }, [_c("label")]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-5" }, [
+                    _c("label", [_vm._v("1.506")])
                   ])
                 ])
               ])
             ])
           ])
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row mx-4" }, [
-      _c("div", { staticClass: "col-12" }, [
-        _c("div", { staticClass: "mx-4 mt-4" }, [
-          _c("table", { staticClass: "table table-hover" }, [
-            _c("thead", { staticClass: "headtable" }, [
-              _c("tr", [
-                _c("th", { attrs: { scope: "col" } }, [_vm._v("Código")]),
-                _vm._v(" "),
-                _c("th", { attrs: { scope: "col" } }, [
-                  _vm._v("Descripción del producto")
-                ]),
-                _vm._v(" "),
-                _c("th", { attrs: { scope: "col" } }, [_vm._v("Costo")]),
-                _vm._v(" "),
-                _c("th", { attrs: { scope: "col" } }, [
-                  _vm._v("Precio de venta")
-                ]),
-                _vm._v(" "),
-                _c("th", { attrs: { scope: "col" } }, [_vm._v("Cantidad")]),
-                _vm._v(" "),
-                _c("th", { attrs: { scope: "col" } }, [_vm._v("Estado")])
-              ])
-            ]),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row mx-4" }, [
+          _c("div", { staticClass: "col-6" }, [_c("label")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row mx-4" }, [
+          _c("div", { staticClass: "col-6" }, [_c("label")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-3" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-info my-1 form-group col-12",
+                attrs: {
+                  type: "button",
+                  "data-bs-toggle": "modal",
+                  "data-bs-target": "#b"
+                }
+              },
+              [_vm._v("Balance")]
+            ),
             _vm._v(" "),
-            _c("tbody", [
-              _c("tr", [
-                _c("td", { attrs: { scope: "row" } }, [_vm._v("1950001")]),
+            _c(
+              "div",
+              {
+                staticClass: "modal fade",
+                attrs: {
+                  id: "b",
+                  tabindex: "-1",
+                  "aria-labelledby": "bl",
+                  "aria-hidden": "true"
+                }
+              },
+              [
+                _c("div", { staticClass: "modal-dialog modal-lg" }, [
+                  _c("div", { staticClass: "modal-content" }, [
+                    _c("div", { staticClass: "modal-header" }, [
+                      _c(
+                        "h5",
+                        { staticClass: "modal-title", attrs: { id: "bl" } },
+                        [
+                          _vm._v(
+                            "Gráfico de Barras de los Productos Vendidos Día"
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("img", {
+                        attrs: {
+                          src: "images/GestionProductos/cerrar.jpg",
+                          "data-bs-dismiss": "modal",
+                          width: "40",
+                          height: "40"
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "modal-body" }, [
+                      _c("div", { staticClass: "mx-4 mt-4" }, [
+                        _c("table", { staticClass: "table table-light" }, [
+                          _c("thead", [
+                            _c("tr", [
+                              _c("th", { attrs: { scope: "col" } }),
+                              _vm._v(" "),
+                              _c("th", { attrs: { scope: "col" } }),
+                              _vm._v(" "),
+                              _c("th", { attrs: { scope: "col" } }),
+                              _vm._v(" "),
+                              _c("th", { attrs: { scope: "col" } }, [
+                                _vm._v("Cantidad consumida")
+                              ])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("tbody", [
+                            _c("tr", [
+                              _c("td", [_vm._v("1")]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v("Azucar rubia")]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _c("img", {
+                                  attrs: {
+                                    src: "images/GestionProductos/azucar.jpg",
+                                    width: "40",
+                                    height: "40"
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _c("div", { staticClass: "progress" }, [
+                                  _c("div", {
+                                    staticClass: "progress-bar",
+                                    staticStyle: { width: "20%" },
+                                    attrs: {
+                                      role: "progressbar",
+                                      "aria-valuenow": "20",
+                                      "aria-valuemin": "0",
+                                      "aria-valuemax": "100"
+                                    }
+                                  })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v("20")])
+                            ]),
+                            _vm._v(" "),
+                            _c("tr", [
+                              _c("td", [_vm._v("2")]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v("Harina")]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _c("img", {
+                                  attrs: {
+                                    src: "images/GestionProductos/harina.jpg",
+                                    width: "40",
+                                    height: "40"
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _c("div", { staticClass: "progress" }, [
+                                  _c("div", {
+                                    staticClass: "progress-bar",
+                                    staticStyle: { width: "15%" },
+                                    attrs: {
+                                      role: "progressbar",
+                                      "aria-valuenow": "15",
+                                      "aria-valuemin": "0",
+                                      "aria-valuemax": "100"
+                                    }
+                                  })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v("15")])
+                            ]),
+                            _vm._v(" "),
+                            _c("tr", [
+                              _c("td", [_vm._v("3")]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v("Mantequilla")]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _c("img", {
+                                  attrs: {
+                                    src:
+                                      "images/GestionProductos/mantequilla.jpg",
+                                    width: "40",
+                                    height: "40"
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _c("div", { staticClass: "progress" }, [
+                                  _c("div", {
+                                    staticClass: "progress-bar",
+                                    staticStyle: { width: "30%" },
+                                    attrs: {
+                                      role: "progressbar",
+                                      "aria-valuenow": "30",
+                                      "aria-valuemin": "0",
+                                      "aria-valuemax": "100"
+                                    }
+                                  })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v("30")])
+                            ]),
+                            _vm._v(" "),
+                            _c("tr", [
+                              _c("td", [_vm._v("4")]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v("Leche Gloria")]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _c("img", {
+                                  attrs: {
+                                    src: "images/GestionProductos/leche.jpg",
+                                    width: "40",
+                                    height: "40"
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _c("div", { staticClass: "progress" }, [
+                                  _c("div", {
+                                    staticClass: "progress-bar",
+                                    staticStyle: { width: "12%" },
+                                    attrs: {
+                                      role: "progressbar",
+                                      "aria-valuenow": "12",
+                                      "aria-valuemin": "0",
+                                      "aria-valuemax": "100"
+                                    }
+                                  })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v("12")])
+                            ])
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-3" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-info my-1 form-group col-12",
+                attrs: { type: "button", git: "" }
+              },
+              [_vm._v("Emitir reporte")]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row mx-4" }, [
+          _c("div", { staticClass: "col-12" }, [
+            _c("div", { staticClass: "mx-4 mt-4" }, [
+              _c("table", { staticClass: "table table-hover" }, [
+                _c("thead", { staticClass: "headtable" }, [
+                  _c("tr", [
+                    _c("th", { attrs: { scope: "col" } }, [_vm._v("Código")]),
+                    _vm._v(" "),
+                    _c("th", { attrs: { scope: "col" } }, [
+                      _vm._v("Descripción del producto")
+                    ]),
+                    _vm._v(" "),
+                    _c("th", { attrs: { scope: "col" } }, [_vm._v("Costo")]),
+                    _vm._v(" "),
+                    _c("th", { attrs: { scope: "col" } }, [
+                      _vm._v("Precio de venta")
+                    ]),
+                    _vm._v(" "),
+                    _c("th", { attrs: { scope: "col" } }, [_vm._v("Cantidad")]),
+                    _vm._v(" "),
+                    _c("th", { attrs: { scope: "col" } }, [_vm._v("Estado")])
+                  ])
+                ]),
                 _vm._v(" "),
-                _c("td", [_vm._v("Harina Blanca Flor")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("S/. 3.00")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("S/. 3.50")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("15")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("Bajo")])
-              ]),
-              _vm._v(" "),
-              _c("tr", [
-                _c("td", { attrs: { scope: "row" } }, [_vm._v("1950001")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("Harina Blanca Flor")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("S/. 3.00")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("S/. 3.50")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("15")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("Bajo")])
-              ]),
-              _vm._v(" "),
-              _c("tr", [
-                _c("td", { attrs: { scope: "row" } }, [_vm._v("1950001")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("Harina Blanca Flor")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("S/. 3.00")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("S/. 3.50")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("15")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("Bajo")])
-              ]),
-              _vm._v(" "),
-              _c("tr", [
-                _c("td", { attrs: { scope: "row" } }, [_vm._v("1950001")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("Harina Blanca Flor")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("S/. 3.00")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("S/. 3.50")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("15")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("Bajo")])
-              ]),
-              _vm._v(" "),
-              _c("tr", [
-                _c("td", { attrs: { scope: "row" } }, [_vm._v("1950001")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("Harina Blanca Flor")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("S/. 3.00")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("S/. 3.50")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("15")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("Bajo")])
+                _c("tbody", [
+                  _c("tr", [
+                    _c("td", { attrs: { scope: "row" } }, [_vm._v("1950001")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("Harina Blanca Flor")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("S/. 3.00")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("S/. 3.50")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("15")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("Bajo")])
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", { attrs: { scope: "row" } }, [_vm._v("1950001")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("Harina Blanca Flor")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("S/. 3.00")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("S/. 3.50")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("15")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("Bajo")])
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", { attrs: { scope: "row" } }, [_vm._v("1950001")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("Harina Blanca Flor")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("S/. 3.00")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("S/. 3.50")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("15")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("Bajo")])
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", { attrs: { scope: "row" } }, [_vm._v("1950001")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("Harina Blanca Flor")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("S/. 3.00")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("S/. 3.50")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("15")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("Bajo")])
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", { attrs: { scope: "row" } }, [_vm._v("1950001")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("Harina Blanca Flor")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("S/. 3.00")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("S/. 3.50")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("15")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("Bajo")])
+                  ])
+                ])
               ])
             ])
           ])
         ])
-      ])
-    ])
+      ]
+    )
   }
 ]
 render._withStripped = true

@@ -143,7 +143,7 @@
 
                         </div>
                         <div class="col-3">
-                            <button type="button" class="btn btn-info my-1 form-group col-12" @click="">Emitir reporte</button>
+                            <button type="button" class="btn btn-info my-1 form-group col-12" git>Emitir reporte</button>
                         </div> 
                     </div>
                     <div class="row mx-4">
