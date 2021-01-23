@@ -9,7 +9,7 @@
                         Lista de productos
                     </h3>
                     <button type="button" class="btn btn-info my-1 form-group col-3 btncrear" @click="formCrearProducto">Crear producto</button>
-                    <h3 class="form-group col-6"></h3>
+                    <h3 class="form-group col-6"></h3>                                
                 </div>
                 <div class="row mx-4">
                     <div class="card col cardbuscador">
@@ -27,8 +27,8 @@
                     </div>
                 </div>
                 <div class="mx-4 mt-4">
-                    <table class="table table-hover">
-                      <thead class="headtable">
+                    <table class="table">
+                      <thead>
                         <tr>
                           <th scope="col">Foto</th>
                           <th scope="col">Nombre</th>
@@ -47,7 +47,7 @@
                           <td>15</td>
                           <td class = "option text-center">
                             <div class="dropdown">
-                              <button class="btn btn-secondary dropdown-toggle dropdown-toggle-split" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                              <button class="btn btn-danger dropdown-toggle dropdown-toggle-split" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" @click="formModificarProducto">Modificar</a>
                                 <a class="dropdown-item" @click="formComprobacionEliminar">Eliminar</a>
@@ -63,7 +63,7 @@
                           <td>30</td>
                           <td class = "option text-center">
                             <div class="dropdown">
-                              <button class="btn btn-secondary dropdown-toggle dropdown-toggle-split" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                              <button class="btn btn-danger dropdown-toggle dropdown-toggle-split" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" @click="formModificarProducto">Modificar</a>
                                 <a class="dropdown-item" @click="formComprobacionEliminar">Eliminar</a>
@@ -79,7 +79,7 @@
                           <td>20</td>
                           <td class = "option text-center">
                             <div class="dropdown">
-                              <button class="btn btn-secondary dropdown-toggle dropdown-toggle-split" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                              <button class="btn btn-danger dropdown-toggle dropdown-toggle-split" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" @click="formModificarProducto">Modificar</a>
                                 <a class="dropdown-item" @click="formComprobacionEliminar">Eliminar</a>
@@ -95,7 +95,7 @@
                           <td>18</td>
                           <td class = "option text-center">
                             <div class="dropdown">
-                              <button class="btn btn-secondary dropdown-toggle dropdown-toggle-split" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                              <button class="btn btn-danger dropdown-toggle dropdown-toggle-split" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" @click="formModificarProducto">Modificar</a>
                                 <a class="dropdown-item" @click="formComprobacionEliminar">Eliminar</a>

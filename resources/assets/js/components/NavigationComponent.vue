@@ -5,7 +5,7 @@
     <div class="navigation-menu">
         <img src="images/logo.png" id="logo">
     <div class="accordion" id="accordionExample">
-        <div class="card">
+        <div class="cardChange">
             <div class="card-header navigation-header" id="heading1">
                 <div class="text-left w-100" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
                     <i class="fa fa-house-user fa-lg navigation-icon"></i><span class="navigation-title">Mantenimiento</span>
@@ -13,27 +13,27 @@
             </div>
             <div id="collapse1" class="collapse show" aria-labelledby="heading1" data-parent="#accordionExample">
 
-                <div class="navigation-item" @click="changeView1">Gestión de Usuarios</div>
-                <div class="navigation-item" @click="changeViewGProd">Gestión de Productos</div>
+                <div class="navigation-item" @click="changeRoutePath('user')">Gestión de Usuarios</div>
+                <div class="navigation-item" @click="changeRoutePath('gproductos')">Gestión de Productos</div>
 
             </div>
         </div>
-        <div class="card">
+        <div class="cardChange">
             <div class="card-header navigation-header" id="heading2">
                 <div class="text-left w-100" data-toggle="collapse" data-target="#collapse2" aria-expanded="true" aria-controls="collapse2">
                     <i class="fas fa-user-cog fa-lg"></i><span class="navigation-title">Operaciones</span>
                 </div>
             </div>
-            <div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#accordionExample">
+            <div id="collapse2" class="collapse cardChange" aria-labelledby="heading2" data-parent="#accordionExample">
 
-                <div class="navigation-item" @click="changeViewNotaVenta">Emitir Nota de Venta</div>
-                <div class="navigation-item" @click="changeView3">Emitir Boleta de Venta</div>
-                <div class="navigation-item" @click="changeView2">Entregar Productos</div>
+                <div class="navigation-item" @click="changeRoutePath('notaVenta')">Emitir Nota de Venta</div>
+                <div class="navigation-item" @click="changeRoutePath('formNVB')">Emitir Boleta de Venta</div>
+                <div class="navigation-item" @click="changeRoutePath('formBolProd')">Entregar Productos</div>
 
 
             </div>
         </div>
-        <div class="card">
+        <div class="cardChange">
             <div class="card-header navigation-header" id="heading3">
                 <div class="text-left w-100" data-toggle="collapse" data-target="#collapse3" aria-expanded="true" aria-controls="collapse3">
                     <i class="fa fa-chart-line fa-lg"></i><span class="navigation-title">Reportes</span>
@@ -41,11 +41,10 @@
             </div>
             <div id="collapse3" class="collapse" aria-labelledby="heading3" data-parent="#accordionExample">
                 <div class="navigation-item">Ventas Finales del Día</div>
-                <div class="navigation-item" @click="changeViewInventario">Inventario</div>
-                <div class="navigation-item">Balance de Ventas</div>
+                <div class="navigation-item" @click="changeRoutePath('inventario')">Inventario</div>
             </div>
         </div>
-        <div class="card">
+        <div class="cardChange">
             <div class="card-header navigation-header" id="heading4">
                 <div class="text-left w-100" data-toggle="collapse" data-target="#collapse4" aria-expanded="true" aria-controls="collapse4">
                     <i class="fas fa-exclamation-triangle fa-lg"></i><span class="navigation-title">Reclamos</span>
@@ -63,30 +62,9 @@
 import { TimelineLite } from 'gsap'
 export default {
   methods: {
-    changeView1() {
-      this.closeNavigation();
-      this.$router.push({ name: "user" });
-    },
-
-    changeViewGProd() {
-      this.closeNavigation();
-      this.$router.push({ name: "gproductos" });
-    },
-    changeView2() {
-      this.closeNavigation();
-      this.$router.push({ name: "formBolProd" }); 
-    },
-    changeView3() {
-      this.closeNavigation();
-      this.$router.push({ name: "formNVB" }); 
-    },
-    changeViewNotaVenta() {
-      this.closeNavigation();
-      this.$router.push({ name: "notaVenta" });
-    },
-    changeViewInventario() {
-      this.closeNavigation();
-      this.$router.push({ name: "inventario" });
+    changeRoutePath(namePath){
+        this.closeNavigation();
+        this.$router.push({ name: namePath });
     },
     closeNavigation(){
         //esta función es para ocultar la barra de navegacion, por favor NO TOCAR XD

@@ -39,42 +39,54 @@ body{
 }
 /*fin de estructura de la vista principal*/
 
-/*table{
-    background-color: white;
-    text-align: left;
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0px 15px;
-  }
-  
-  th,td{
-    padding: 20px;
-    border-spacing: 10px;
-  }
-  
-  table tbody tr{
-    border:solid black 1px;
-    border-radius:10px;
-    -moz-border-radius:10px;
-    -webkit-border-radius: 5px; 
-  }
-  
-  thead{
-    background-color: #632432;
-    border-bottom: solid 5px #AF597C;
-    color: white;
-  }
-  
-  tbody:nth-child(even){
-    background: #ddd; 
-  }  
-  
-  tr:hover td{
-    background-color: grey;
-    color: white;
-  }*/
+/*inicio de estructura de la tabla*/
+body{
+  background-color: white;
+  font-family: Arial;
+}
 
-  .listo:visited{
+#main-container{
+  margin: 150px auto;
+  width: 800px;
+}
+
+table{
+  background-color: white;
+  text-align: left;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0px 10px;
+}
+
+th,td{
+  padding: 20px;
+  border-spacing: 15px;
+}
+
+table tbody tr{
+  border:solid black 1px;
+  border-radius:10px;
+  -moz-border-radius:10px;
+  -webkit-border-radius: 5px; 
+}
+
+thead{
+  /*background-color: #632432;
+  border-bottom: solid 5px #AF597C;*/
+  color: black;
+}
+
+tbody:nth-child(even){
+  background: #EEEEEE;
+}  
+
+tr:hover td{
+  background-color:#8F8F8F;
+  color: white;
+}
+/*fin de estructura de la tabla*/
+
+.listo:visited{
     background-color:red!important;
 }.login-container{
     height: 100vh;
@@ -96,10 +108,13 @@ body{
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 2;
+    background-color: rgba(130, 37, 58, 51);
+    color: white;
 }
 .appbar-title{
     margin-bottom: 0 !important;
-    font-size: 20px;
+    font-size: 20px;    
 }
 .left-appbar-container{
     display: -webkit-box;
@@ -107,15 +122,15 @@ body{
     display: flex;
     -webkit-box-align: center;
         -ms-flex-align: center;
-            align-items: center;
+            align-items: center;    
 }
 .appbar-menu{
     font-size: 24px;
     margin-right: 12px;
-    cursor: pointer;
+    cursor: pointer;      
 }
 .appbar-title{
-    padding-bottom: 3px;
+    padding-bottom: 3px;    
 }.navigation-component{
     padding-top: 1px 10px;
     width: 300px;
@@ -126,17 +141,17 @@ body{
     top: 0;
     position: absolute;
     display: none;
-
     width: 100vw;
     height: 100vh;
     z-index: 9;
+    color: white;
 }
 .navigation-menu{
     position: absolute;
     left: -300px;
     width: 300px;
     height: 100vh;
-    background-color: white;
+    background-color: rgba(114, 45, 47, 45);
     position: absolute;
     top: 0;
 }
@@ -147,6 +162,7 @@ body{
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
+    background-color: rgba(114, 45, 47, 45);
 }
 .navigation-header div{
     cursor: pointer;
@@ -160,17 +176,21 @@ body{
 }
 .navigation-item{
     padding: 10px 0 10px 50px;
-    border-bottom: 1px solid rgba(0,0,0,0.08);
+    border-bottom: 0px solid rgba(0,0,0,0.08);
     font-size: 15px;
-    color: rgba(0,0,0,0.8);
     cursor: pointer;
 }
 .collapse .navigation-item:last-child{
     border-bottom: 0;
 }
+.cardChange{
+    border: rgba(114, 45, 47, 45);
+    color: white;
+}
+
 /*GESTIONPRODUCTO*/
 .cardbuscador{
-    background-color: #F4F9F9;
+    background-color:white;
 }
 .btnbuscar{
     background-color: #18ECD2;
@@ -215,7 +235,7 @@ body{
 .btnsalir{
     border-radius: 40px;
     color: black;
-    background-color: burlywood;
+    background-color: #F1D562;
     border: none;
 }
 .btnexaminar{
@@ -225,9 +245,9 @@ body{
 }
 .btnguarda-registro{
     border-radius: 40px;
-    color: black;
-    background-color: #FEA9A1;
-    border-color: red;
+    color: white;
+    background-color: green;
+    border-color: green;
 }
 .label{
     height: 25px;
