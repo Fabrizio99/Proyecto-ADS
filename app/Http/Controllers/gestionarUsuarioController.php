@@ -8,9 +8,13 @@ include '../app/helper/untils.php';
 
 class gestionarUsuarioController extends Controller
 {
-    function getListarUsuarios (){
-       // return mySQLConsulta("SELECT * FROM usuarios WHERE estado='A' LIMIT 0,50");
-    } 
+   
+
+   
+   function listaUsuario (Request $req){
+
+            return mySQLConsulta("SELECT * FROM usuarios WHERE estado='A' LIMIT 0,50");
+    }
 
     function getBuscarUsuario (Request $req){
 
@@ -18,12 +22,26 @@ class gestionarUsuarioController extends Controller
         //$isValidate2= isNullEmpty($req->apellido);
         if($isValidate){
             return $isValidate;
-        }/*else if($isValidate2) {
-            return $isValidate2;
-        }*/
-            return mySQLConsulta("SELECT u.nombres,u.apellido,u.num_documento,r.nombre FROM usuarios u , rol r
-            WHERE u.rol_id_rol = r.id_rol AND (u.nombres LIKE '{$req->nombre}%' OR u.apellido LIKE '{$req->nombre}%') LIMIT 0,50");
-            
-        
+        }
+
+       return mySQLConsulta("SELECT u.nombres,u.apellido,u.num_documento,r.nombre FROM usuarios u , rol r
+        WHERE u.rol_id_rol = r.id_rol AND (u.nombres LIKE '{$req->nombre}%' OR u.apellido LIKE '{$req->nombre}%') LIMIT 0,50");
+          
     }
+
+    function ValidacionCrearUsuario (Request $req){
+        //usuario = numero dni
+      $ValidacionCampos = isNullEmpty($req->numdoc);
+
+      if($ValidacionCampos){
+          return $ValidacionCampos;
+      }
+      
+      return mySQLConsulta("SELECT * FROM usuarios WHERE num_documento ='{$req ->numdoc}' AND estado ='A' ");
+
+    }
+
+    
+
 }
+

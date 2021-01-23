@@ -13,6 +13,7 @@ include '../app/helper/constanst.php';
             
             $consulta = mysqli_query ( $conexion,$sql);
             
+            //
             if(!isNullEmpty($consulta,'resConsulta')){
                 $tempArray = array();
                 $myArray   = array();
@@ -21,7 +22,7 @@ include '../app/helper/constanst.php';
                     $tempArray = $row;
                     array_push($myArray, $tempArray);
                 }
-
+                //contenido de la consulta
                 if (count($myArray) == 0){
                     $object = (object) [
                         'status' => $_SESSION["STATUS_CONTROL"],
