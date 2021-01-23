@@ -10,20 +10,22 @@
     top: 0;
     left: 0;
     z-index: 2;
+    background-color: rgba(130, 37, 58, 51);
+    color: white;
 }
 .appbar-title{
     margin-bottom: 0 !important;
-    font-size: 20px;
+    font-size: 20px;    
 }
 .left-appbar-container{
     display: flex;
-    align-items: center;
+    align-items: center;    
 }
 .appbar-menu{
     font-size: 24px;
     margin-right: 12px;
-    cursor: pointer;
+    cursor: pointer;      
 }
 .appbar-title{
-    padding-bottom: 3px;
+    padding-bottom: 3px;    
 }

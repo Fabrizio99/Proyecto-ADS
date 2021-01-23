@@ -77,7 +77,7 @@
                     </h5>
                 </div>
                 <div class="mx-4">
-                    <table class="table table-striped table-bordered">
+                    <table class="table">
                       <thead>
                         <tr>
                           <th scope="col">Producto</th>
@@ -158,7 +158,7 @@
                           <div class="form-row justify-content-end">
                                           
                                 <div class="form-group col-3 mt-2">
-                                    <input type="button" class="btn btn-primary btn-block mt-4" value="Registrar Pago" @click="RegistarPago" data-toggle="modal" data-target="#Modal"/>
+                                    <input type="button" class="btn btn-info btn-block mt-4 my-1 form-group col-12 btnguarda-registro" value="Registrar Pago" @click="RegistarPago" data-toggle="modal" data-target="#Modal"/>
                                 </div>                       
                           </div>       
                         </div>
@@ -229,7 +229,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" @click="RegistrarEfectivo">Registrar</button>
+                                <button type="button" class="btn btn-info my-1 btnguarda-registro" @click="RegistrarEfectivo">Registrar</button>
                             </div>
                             </div>
                         </div>
@@ -278,7 +278,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" @click="RegistrarYape">Registrar</button>
+                                <button type="button" class="btn btn-info my-1 btnguarda-registro" @click="RegistrarYape">Registrar</button>
                             </div>
                             </div>
                         </div>

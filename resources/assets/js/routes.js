@@ -68,7 +68,8 @@ const routes = [
     {
         path: '/form-modificar-productos',
         name: 'modificarproductos',
-        component: require('../js/views/mantenimiento/productos/formModificarProducto.vue')},
+        component: require('../js/views/mantenimiento/productos/formModificarProducto.vue')
+    },
     {
         path: '/formulario-boletas-productos',
         name: 'formBolProd',
