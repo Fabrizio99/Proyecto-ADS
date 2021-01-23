@@ -74,7 +74,7 @@ body{
     color: white;
   }*/
 
-  .listo:visited{
+.listo:visited{
     background-color:red!important;
 }.login-container{
     height: 100vh;
@@ -96,6 +96,7 @@ body{
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 2;
 }
 .appbar-title{
     margin-bottom: 0 !important;

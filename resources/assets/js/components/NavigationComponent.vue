@@ -26,7 +26,7 @@
             </div>
             <div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#accordionExample">
 
-                <div class="navigation-item" @click="changeViewNotaVenta">Emitir Nota de Venta</div>
+                <div class="navigation-item" @click="changeRoutePath('notaVenta')">Emitir Nota de Venta</div>
                 <div class="navigation-item" @click="changeView3">Emitir Boleta de Venta</div>
                 <div class="navigation-item" @click="changeView2">Entregar Productos</div>
 
@@ -85,6 +85,10 @@ export default {
     changeViewNotaVenta() {
       this.closeNavigation();
       this.$router.push({ name: "notaVenta" });
+    },
+    changeRoutePath(namePath){
+        this.closeNavigation();
+        this.$router.push({ name: namePath });
     },
     closeNavigation(){
         //esta función es para ocultar la barra de navegacion, por favor NO TOCAR XD

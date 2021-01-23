@@ -74,6 +74,6 @@ body{
     color: white;
   }*/
 
-  .listo:visited{
+.listo:visited{
     background-color:red!important;
 }
