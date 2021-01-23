@@ -31,10 +31,15 @@ class gestionarUsuarioController extends Controller
 
     function ValidacionCrearUsuario (Request $req){
         //usuario = numero dni
-      $ValidacionCampos = isNullEmpty($req->tipodoc) ?: 
-      isNullEmpty($req->rol) ?:  isNullEmpty($req->usuario) ?: 
-      isNullEmpty($req->contrasenia) ?:  isNullEmpty($req->nombres) ?:  isNullEmpty($req->apellido) ?: 
-      isNullEmpty($req->numdoc) ?:  isNullEmpty($req->direccion) ?:  isNullEmpty($req->telefono);
+      $ValidacionCampos = isNullEmpty($req->numdoc) ?: 
+      isNullEmpty($req->rol) ?:
+      isNullEmpty($req->usuario) ?: 
+      isNullEmpty($req->contrasenia) ?:
+      isNullEmpty($req->nombres) ?:
+      isNullEmpty($req->apellido) ?: 
+      isNullEmpty($req->numdoc) ?:  
+      isNullEmpty($req->direccion) ?:  
+      isNullEmpty($req->telefono);
 
       if($ValidacionCampos){
           return $ValidacionCampos;
