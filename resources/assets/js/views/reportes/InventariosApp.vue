@@ -78,7 +78,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="mx-4 mt-4">
-                                            <table class="table table-light">
+                                            <table class="table">
                                             <thead>
                                                 <tr>
                                                 <th scope="col"></th>
@@ -149,8 +149,8 @@
                     <div class="row mx-4">
                         <div class="col-12">
                             <div class="mx-4 mt-4">
-                                <table class="table table-hover">
-                                <thead class="headtable">
+                                <table class="table">
+                                <thead>
                                     <tr>
                                     <th scope="col">Código</th>
                                     <th scope="col">Descripción del producto</th>
