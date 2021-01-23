@@ -103,20 +103,20 @@ class gestionarUsuarioController extends Controller
        
         $TIPO_DNI = 1;
 
-        $ValidacionCampos = isNullEmpty($req->nombre,'nombre') ?: 
-                            isNullEmpty($req->apellido,'apellido') ?: 
-                            isNullEmpty($req->telefono,'telefono') ?:
-                            isNullEmpty($req->rol,'rol') ?:
-                            isNullEmpty($req->contrasenia,'contraseñia') ?:
-                            isNullEmpty($req->contrasenia,'numDoc');
+        $ValidacionCampos = isNullEmpty($req->nombre,'digite correctamente el nombre')?: 
+                            isNullEmpty($req->apellido,'digite correctamente el apellido') ?: 
+                            isNullEmpty($req->telefono,'digite correctamente el telefono') ?:
+                            isNullEmpty($req->rol,'digite correctamente el rol') ?:
+                            isNullEmpty($req->contrasenia,'digite correctamente el contraseñia');
                             
                     
         if($ValidacionCampos){
-            return $ValidacionCampos;}
+            return $ValidacionCampos;
+        }
 
-        // validacion de doc = 8
+        // validacion para campos de dni = 8
 
-        if (strlen($req->numDoc) == 8 && $req->tipoDoc == $TIPO_DNI ) { // TIPO 
+       /* if (strlen($req->numDoc) == 8 && $req->tipoDoc == $TIPO_DNI ) { // TIPO 
             return JSON_ENCODE(
                 (object) [
                     'status' => $_SESSION["STATUS_CONTROL"],
@@ -124,11 +124,14 @@ class gestionarUsuarioController extends Controller
                 ]
             ); 
            
-        return mySQLDelete("UPDATE FROM usuarios SET nombres = '{$req->nombre}', apellido = '{$req->apellidos}', 
-        telefono ='{$req->telefono}', rol_id_rol ='{$req->rol}' , contrasenia = '{$req->contrasenia}'
-        WHERE num_documento = '{$req->numDoc}'");
+        }*/
+         
+        return mySQLUpDate("UPDATE usuarios SET nombres ='{$req->nombre}', apellidos ='{$req->apellido}', 
+        telefono ='{$req->telefono}', rol_id_rol ='{$req->rol}',contrasenia = '{$req->contrasenia}'
+        WHERE num_documento = '{$req->numDoc}' ");
+                  
  }
 
 }
-}
+
 
