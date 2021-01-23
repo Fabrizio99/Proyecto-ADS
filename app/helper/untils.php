@@ -29,11 +29,16 @@ include '../app/helper/constanst.php';
                     ];   
                     return json_encode($object);    
                 } else if (count($myArray) == 1){
-                    $newObject = json_encode($myArray[0], JSON_FORCE_OBJECT);
+                    $newObject = $myArray[0];
                 } else {
-                    $newObject = json_encode($myArray);
+                    $newObject = $myArray;
                 }
-                return $newObject;
+                $object = (object) [
+                    'status' => $_SESSION["STATUS_SUCCES"],
+                    'data'   => $newObject
+                ];   
+                
+                return json_encode($object);
             } else {
                 return $_SESSION["OBJ_ERROR"];
             }
