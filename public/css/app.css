@@ -86,7 +86,7 @@ tr:hover td{
 }
 /*fin de estructura de la tabla*/
 
-  .listo:visited{
+.listo:visited{
     background-color:red!important;
 }.login-container{
     height: 100vh;
@@ -108,6 +108,7 @@ tr:hover td{
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 2;
     background-color: rgba(130, 37, 58, 51);
     color: white;
 }
@@ -252,5 +253,6 @@ tr:hover td{
     height: 25px;
     font-size: large;
 }
+
 
 

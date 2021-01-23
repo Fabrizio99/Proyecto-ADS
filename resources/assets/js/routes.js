@@ -56,7 +56,6 @@ const routes = [
         component: require('../js/views/mantenimiento/usuarios/FormUsuario')
     },
     {
-
         path: '/gestion-productos',
         name: 'gproductos',
         component: require('../js/views/mantenimiento/productos/ProductoApp.vue')
@@ -71,7 +70,7 @@ const routes = [
         name: 'modificarproductos',
         component: require('../js/views/mantenimiento/productos/formModificarProducto.vue')
     },
-    {
+    {    
         path: '/formulario-boletas-productos',
         name: 'formBolProd',
         component: require('../js/views/operaciones/entregarProductos/FrmBoletaProductos.vue')
@@ -95,8 +94,14 @@ const routes = [
         path: '/nota-venta',
         name: 'notaVenta',
         component: require('../js/views/operaciones/emitirNotaVenta/EmitirNotaVenta')
+    },
+    {
+        path: '/formulario-inventario',
+        name: 'inventario',
+        component: require('../js/views/reportes/InventariosApp.vue')
+    },
+    
 
-    }
 ]
 
 

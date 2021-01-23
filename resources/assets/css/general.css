@@ -86,6 +86,6 @@ tr:hover td{
 }
 /*fin de estructura de la tabla*/
 
-  .listo:visited{
+.listo:visited{
     background-color:red!important;
 }

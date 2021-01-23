@@ -9,6 +9,7 @@
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 2;
     background-color: rgba(130, 37, 58, 51);
     color: white;
 }

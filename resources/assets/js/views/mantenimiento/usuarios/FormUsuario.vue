@@ -17,10 +17,20 @@
                                     <label for="exampleInputPassword1">Nombre</label>
                                     <input type="text" class="form-control">
                                 </div>
-                                <div class="form-group col-6">
-                                    <label for="exampleInputPassword1">Tipo de documento</label>
-                                    <input type="text" class="form-control">
-                                </div>
+                                <multiselect
+                                    :colSize="6"
+                                    label = "Tipo de Documento"
+                                    :optionList = "[
+                                        {
+                                            id   : 1,
+                                            name : 'DNI'
+                                        },
+                                        {
+                                            id   : 2,
+                                            name : 'CARNET DE EXTRANJERIA'
+                                        },
+                                    ]"
+                                />
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-6">
@@ -72,17 +82,19 @@
 </template>
 <script>
 import Appbar from '../../../components/AppBar'
-import AppBar from '../../../components/AppBar.vue';
 import Navigation from '../../../components/NavigationComponent';
+import Multiselect from '../../../components/Multiselect';
 
 export default {
     components : {
-        'app-bar'    : Appbar,
-        'navigation' : Navigation
+        'app-bar'     : Appbar,
+        'navigation'  : Navigation,
+        'multiselect' : Multiselect
     },
 }
 </script>
-<style scoped>
+<style 
+        Multiselectscoped>
 .user-form-container{
     display: flex;
     justify-content: space-between;

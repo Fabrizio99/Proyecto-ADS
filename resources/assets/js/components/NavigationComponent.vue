@@ -13,8 +13,8 @@
             </div>
             <div id="collapse1" class="collapse show" aria-labelledby="heading1" data-parent="#accordionExample">
 
-                <div class="navigation-item" @click="changeView1">Gestión de Usuarios</div>
-                <div class="navigation-item" @click="changeViewGProd">Gestión de Productos</div>
+                <div class="navigation-item" @click="changeRoutePath('user')">Gestión de Usuarios</div>
+                <div class="navigation-item" @click="changeRoutePath('gproductos')">Gestión de Productos</div>
 
             </div>
         </div>
@@ -26,9 +26,9 @@
             </div>
             <div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#accordionExample">
 
-                <div class="navigation-item" @click="changeViewNotaVenta">Emitir Nota de Venta</div>
-                <div class="navigation-item" @click="changeView3">Emitir Boleta de Venta</div>
-                <div class="navigation-item" @click="changeView2">Entregar Productos</div>
+                <div class="navigation-item" @click="changeRoutePath('notaVenta')">Emitir Nota de Venta</div>
+                <div class="navigation-item" @click="changeRoutePath('formNVB')">Emitir Boleta de Venta</div>
+                <div class="navigation-item" @click="changeRoutePath('formBolProd')">Entregar Productos</div>
 
 
             </div>
@@ -41,8 +41,7 @@
             </div>
             <div id="collapse3" class="collapse" aria-labelledby="heading3" data-parent="#accordionExample">
                 <div class="navigation-item">Ventas Finales del Día</div>
-                <div class="navigation-item">Inventario</div>
-                <div class="navigation-item">Balance de Ventas</div>
+                <div class="navigation-item" @click="changeRoutePath('inventario')">Inventario</div>
             </div>
         </div>
         <div class="cardChange">
@@ -63,28 +62,9 @@
 import { TimelineLite } from 'gsap'
 export default {
   methods: {
-    changeView1() {
-      this.closeNavigation();
-      this.$router.push({ name: "user" });
-    },
-
-    changeViewGProd() {
-      this.closeNavigation();
-      this.$router.push({ name: "gproductos" });
-    },
-
-    changeView2() {
-      this.closeNavigation();
-      this.$router.push({ name: "formBolProd" }); 
-    },
-    changeView3() {
-      this.closeNavigation();
-      this.$router.push({ name: "formNVB" }); 
-    },
-
-    changeViewNotaVenta() {
-      this.closeNavigation();
-      this.$router.push({ name: "notaVenta" });
+    changeRoutePath(namePath){
+        this.closeNavigation();
+        this.$router.push({ name: namePath });
     },
     closeNavigation(){
         //esta función es para ocultar la barra de navegacion, por favor NO TOCAR XD

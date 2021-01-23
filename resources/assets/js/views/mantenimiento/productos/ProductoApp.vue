@@ -106,12 +106,8 @@
                       </tbody>
                     </table>
                 </div>
-                <div class="form-group col-6 mt-3">
-                    <button type="button" class="btn btn-info my-1 btnatras" @click="openMain">Atrás</button>
-                </div>
-                
             </div>
-         </div>
+        </div>
     </div>
 </template>
 <script>
