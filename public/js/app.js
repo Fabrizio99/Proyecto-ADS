@@ -34995,6 +34995,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     this.$emit('input', value);
                 }
             }
+<<<<<<< HEAD
         }
     },
     watch: {
@@ -35003,6 +35004,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.loadData();
         }
     },
+=======
+        }
+    },
+    watch: {
+        optionList: function optionList() {
+            this.options.length = 0;
+            this.loadData();
+        }
+    },
+>>>>>>> 9b5b01348a8a069a49ce7882c21d6aa411305e35
     mounted: function mounted() {
         this.loadData();
     }
@@ -42410,8 +42421,13 @@ var staticRenderFns = [
         _c("div", { staticClass: "row mx-4" }, [
           _c("div", { staticClass: "col-12" }, [
             _c("div", { staticClass: "mx-4 mt-4" }, [
+<<<<<<< HEAD
               _c("table", { staticClass: "table table-hover" }, [
                 _c("thead", { staticClass: "headtable" }, [
+=======
+              _c("table", { staticClass: "table" }, [
+                _c("thead", [
+>>>>>>> 9b5b01348a8a069a49ce7882c21d6aa411305e35
                   _c("tr", [
                     _c("th", { attrs: { scope: "col" } }, [_vm._v("Código")]),
                     _vm._v(" "),
@@ -42522,6 +42538,7 @@ if (false) {
 /***/ }),
 /* 93 */
 /***/ (function(module, exports, __webpack_require__) {
+<<<<<<< HEAD
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
@@ -42603,6 +42620,89 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
+=======
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(94)
+/* template */
+var __vue_template__ = __webpack_require__(95)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/AppComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-34935b93", Component.options)
+  } else {
+    hotAPI.reload("data-v-34935b93", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 94 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    created: function created() {
+        var _this = this;
+
+        if (localStorage.token) {
+            axios.get('/api/user', {
+                headers: {
+                    Authorization: 'Bearer ' + localStorage.getItem('token')
+                }
+            }).then(function (response) {
+                store.commit('loginUser');
+            }).catch(function (error) {
+                if (error.response.status === 401 || error.response.status === 403) {
+                    store.commit('logoutUser');
+                    localStorage.setItem('token', '');
+                    _this.$router.push({ name: 'login' });
+                }
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 95 */
+/***/ (function(module, exports, __webpack_require__) {
+
+>>>>>>> 9b5b01348a8a069a49ce7882c21d6aa411305e35
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
