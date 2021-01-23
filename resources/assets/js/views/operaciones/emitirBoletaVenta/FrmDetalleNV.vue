@@ -46,8 +46,20 @@
                                     <input type="text" class="form-control" id="exampleInputPassword1" disabled>
                                 </div>
                                 <div class="form-group col-3">
-                                    <label for="exampleInputPassword1">Documento...esto es combobox..NO OLVIDAR XD</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1" disabled>
+                                <multiselect
+                                    :colSize="13"
+                                    label = "Tipo de Documento"
+                                    :optionList = "[
+                                        {
+                                            id   : 1,
+                                            name : 'DNI'
+                                        },
+                                        {
+                                            id   : 2,
+                                            name : 'CARNET DE EXTRANJERIA'
+                                        },
+                                    ]"
+                                />
                                 </div>
                                 <div class="form-group col-3">
                                     <label for="exampleInputPassword1">N° Documento</label>
@@ -59,9 +71,21 @@
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="form-group col-3">
-                                    <label for="exampleInputPassword1">Distrito...esto es combobox..NO OLVIDAR XD</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1" disabled>
+                               <div class="form-group col-3">
+                                <multiselect
+                                    :colSize="13"
+                                    label = "Distrito"
+                                    :optionList = "[
+                                        {
+                                            id   : 1,
+                                            name : 'MIRAFLORES'
+                                        },
+                                        {
+                                            id   : 2,
+                                            name : 'SAN ISIDRO'
+                                        },
+                                    ]"
+                                />
                                 </div>
                                 <div class="form-group col-9">
                                     <label for="exampleInputPassword1">Dirección</label>
@@ -181,6 +205,22 @@
                                     <label for="exampleInputPassword1">Esto es combobox(Efectivo / Yape)..NO OLVIDAR XD</label>
                                     <input type="text" class="form-control" id="exampleInputPassword1" disabled>
                                 </div>
+                                <div class="form-group">
+                                <multiselect
+                                    :colSize="13"
+                                    label = "Tipo de Pago"
+                                    :optionList = "[
+                                        {
+                                            id   : 1,
+                                            name : 'EFECTIVO'
+                                        },
+                                        {
+                                            id   : 2,
+                                            name : 'YAPE'
+                                        },
+                                    ]"
+                                />
+                                </div>
 
                             </div>
                             <div class="modal-footer">
@@ -294,10 +334,13 @@
 import Appbar from '../../../components/AppBar'
 import AppBar from '../../../components/AppBar.vue';
 import Navigation from '../../../components/NavigationComponent';
+import Multiselect from '../../../components/Multiselect';
+
 export default {
     components : {
         'app-bar'    : Appbar,
-        'navigation' : Navigation
+        'navigation' : Navigation,
+        'multiselect' : Multiselect
     },
     methods:{
        Buscar(){ this.$swal({
@@ -353,3 +396,24 @@ export default {
     }
 }
 </script>
+<style 
+        Multiselectscoped>
+.user-form-container{
+    display: flex;
+    justify-content: space-between;
+}
+.user-form-container .card:first-child{
+    width: 65vw;
+}
+.user-form-container .card:last-child{
+    width: 30vw;
+}
+.image-profile{
+    max-width: 83%;
+    margin: 10px auto 0;
+}
+.profile-button{
+    height: min-content;
+}
+
+</style>

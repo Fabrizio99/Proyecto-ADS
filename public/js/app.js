@@ -34995,7 +34995,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     this.$emit('input', value);
                 }
             }
-<<<<<<< HEAD
         }
     },
     watch: {
@@ -35004,16 +35003,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.loadData();
         }
     },
-=======
-        }
-    },
-    watch: {
-        optionList: function optionList() {
-            this.options.length = 0;
-            this.loadData();
-        }
-    },
->>>>>>> 9b5b01348a8a069a49ce7882c21d6aa411305e35
     mounted: function mounted() {
         this.loadData();
     }
@@ -37556,7 +37545,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("input", {
         staticClass: "form-control",
-        attrs: { type: "text", id: "exampleInputPassword1" }
+        attrs: { type: "date", id: "exampleInputPassword1" }
       })
     ])
   },
@@ -37571,7 +37560,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("input", {
         staticClass: "form-control",
-        attrs: { type: "text", id: "exampleInputPassword1" }
+        attrs: { type: "date", id: "exampleInputPassword1" }
       })
     ])
   },
@@ -37610,6 +37599,10 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(130)
+}
 var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(77)
@@ -37618,7 +37611,7 @@ var __vue_template__ = __webpack_require__(78)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -37664,6 +37657,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_AppBar_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Multiselect__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Multiselect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_Multiselect__);
 //
 //
 //
@@ -37833,6 +37828,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 
@@ -37840,7 +37853,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
         components: {
                 'app-bar': __WEBPACK_IMPORTED_MODULE_0__components_AppBar___default.a,
-                'navigation': __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent___default.a
+                'navigation': __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent___default.a,
+                'multiselect': __WEBPACK_IMPORTED_MODULE_3__components_Multiselect___default.a
         },
         methods: {
                 Buscar: function Buscar() {
@@ -37907,7 +37921,7 @@ var render = function() {
               _vm._m(0),
               _vm._v(" "),
               _c("div", { staticClass: "row mx-4" }, [
-                _c("div", { staticClass: "col-3 mt-5" }, [
+                _c("div", { staticClass: "px-5 col-3 mt-5" }, [
                   _c("div", { staticClass: "card col bg-light" }, [
                     _c("div", { staticClass: "card-body" }, [
                       _vm._m(1),
@@ -37935,13 +37949,6 @@ var render = function() {
                                 "data-target": "#Modal"
                               },
                               on: { click: _vm.Modificar }
-                            }),
-                            _vm._v(" "),
-                            _c("input", {
-                              staticClass:
-                                "btn btn-info my-1 form-group col-12 btnsalir",
-                              attrs: { type: "button", value: "SALIR" },
-                              on: { click: _vm.Regresar }
                             })
                           ])
                         ]
@@ -38002,7 +38009,35 @@ var render = function() {
                                   _c("div", { staticClass: "modal-content" }, [
                                     _vm._m(18),
                                     _vm._v(" "),
-                                    _vm._m(19),
+                                    _c("div", { staticClass: "modal-body" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "form-group " },
+                                        [
+                                          _c("multiselect", {
+                                            attrs: {
+                                              colSize: 9,
+                                              label: "Estado",
+                                              optionList: [
+                                                {
+                                                  id: 1,
+                                                  name: "ATENDIDO"
+                                                },
+                                                {
+                                                  id: 2,
+                                                  name: "NO ATENDIDO"
+                                                },
+                                                {
+                                                  id: 3,
+                                                  name: "EN ESPERA"
+                                                }
+                                              ]
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ]),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "modal-footer" }, [
                                       _c(
@@ -38302,23 +38337,6 @@ var staticRenderFns = [
         },
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
       )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-body" }, [
-      _c("div", { staticClass: "form-group " }, [
-        _c("label", { attrs: { for: "exampleInputPassword1" } }, [
-          _vm._v("Esto es combobox..NO OLVIDAR XD")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "text", id: "exampleInputPassword1", disabled: "" }
-        })
-      ])
     ])
   }
 ]
@@ -39210,7 +39228,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("input", {
         staticClass: "form-control",
-        attrs: { type: "text", id: "exampleInputPassword1" }
+        attrs: { type: "text", id: "exampleInputPassword1", disabled: "" }
       })
     ])
   },
@@ -39225,7 +39243,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("input", {
         staticClass: "form-control",
-        attrs: { type: "text", id: "exampleInputPassword1" }
+        attrs: { type: "date", id: "exampleInputPassword1" }
       })
     ])
   },
@@ -39240,7 +39258,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("input", {
         staticClass: "form-control",
-        attrs: { type: "text", id: "exampleInputPassword1" }
+        attrs: { type: "date", id: "exampleInputPassword1" }
       })
     ])
   },
@@ -39459,6 +39477,10 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(132)
+}
 var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(83)
@@ -39467,7 +39489,7 @@ var __vue_template__ = __webpack_require__(84)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -39513,6 +39535,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_AppBar_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Multiselect__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Multiselect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_Multiselect__);
 //
 //
 //
@@ -39805,6 +39829,48 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 
@@ -39812,7 +39878,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     'app-bar': __WEBPACK_IMPORTED_MODULE_0__components_AppBar___default.a,
-    'navigation': __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent___default.a
+    'navigation': __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent___default.a,
+    'multiselect': __WEBPACK_IMPORTED_MODULE_3__components_Multiselect___default.a
   },
   methods: {
     Buscar: function Buscar() {
@@ -39899,11 +39966,75 @@ var render = function() {
               _vm._v(" "),
               _vm._m(3),
               _vm._v(" "),
-              _vm._m(4),
+              _c("div", { staticClass: "row mx-4 mt-2" }, [
+                _c("div", { staticClass: "card col bg-light" }, [
+                  _c("div", { staticClass: "card-body" }, [
+                    _c("div", { staticClass: "form-row" }, [
+                      _vm._m(4),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "form-group col-3" },
+                        [
+                          _c("multiselect", {
+                            attrs: {
+                              colSize: 13,
+                              label: "Tipo de Documento",
+                              optionList: [
+                                {
+                                  id: 1,
+                                  name: "DNI"
+                                },
+                                {
+                                  id: 2,
+                                  name: "CARNET DE EXTRANJERIA"
+                                }
+                              ]
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _vm._m(5),
+                      _vm._v(" "),
+                      _vm._m(6)
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-row" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-group col-3" },
+                        [
+                          _c("multiselect", {
+                            attrs: {
+                              colSize: 13,
+                              label: "Distrito",
+                              optionList: [
+                                {
+                                  id: 1,
+                                  name: "MIRAFLORES"
+                                },
+                                {
+                                  id: 2,
+                                  name: "SAN ISIDRO"
+                                }
+                              ]
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _vm._m(7)
+                    ])
+                  ])
+                ])
+              ]),
               _vm._v(" "),
-              _vm._m(5),
+              _vm._m(8),
               _vm._v(" "),
-              _vm._m(6),
+              _vm._m(9),
               _vm._v(" "),
               _c("div", { staticClass: "row mx-4 mt-2" }, [
                 _c(
@@ -39914,7 +40045,7 @@ var render = function() {
                   },
                   [
                     _c("div", { staticClass: "card-body" }, [
-                      _vm._m(7),
+                      _vm._m(10),
                       _vm._v(" "),
                       _c(
                         "div",
@@ -39961,9 +40092,35 @@ var render = function() {
                     },
                     [
                       _c("div", { staticClass: "modal-content" }, [
-                        _vm._m(8),
+                        _vm._m(11),
                         _vm._v(" "),
-                        _vm._m(9),
+                        _c("div", { staticClass: "modal-body" }, [
+                          _vm._m(12),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "form-group" },
+                            [
+                              _c("multiselect", {
+                                attrs: {
+                                  colSize: 13,
+                                  label: "Tipo de Pago",
+                                  optionList: [
+                                    {
+                                      id: 1,
+                                      name: "EFECTIVO"
+                                    },
+                                    {
+                                      id: 2,
+                                      name: "YAPE"
+                                    }
+                                  ]
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "modal-footer" }, [
                           _c(
@@ -40022,9 +40179,9 @@ var render = function() {
                     },
                     [
                       _c("div", { staticClass: "modal-content" }, [
-                        _vm._m(10),
+                        _vm._m(13),
                         _vm._v(" "),
-                        _vm._m(11),
+                        _vm._m(14),
                         _vm._v(" "),
                         _c("div", { staticClass: "modal-footer" }, [
                           _c(
@@ -40066,12 +40223,12 @@ var render = function() {
                     },
                     [
                       _c("div", { staticClass: "modal-content" }, [
-                        _vm._m(12),
+                        _vm._m(15),
                         _vm._v(" "),
                         _c("div", { staticClass: "modal-body" }, [
-                          _vm._m(13),
+                          _vm._m(16),
                           _vm._v(" "),
-                          _vm._m(14),
+                          _vm._m(17),
                           _vm._v(" "),
                           _c("div", { staticClass: "form-row" }, [
                             _c(
@@ -40213,104 +40370,60 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row mx-4 mt-2" }, [
-      _c("div", { staticClass: "card col bg-light" }, [
-        _c("div", { staticClass: "card-body" }, [
-          _c("div", { staticClass: "form-row" }, [
-            _c("div", { staticClass: "form-group col-3" }, [
-              _c("label", { attrs: { for: "exampleInputPassword1" } }, [
-                _vm._v("Cliente")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  id: "exampleInputPassword1",
-                  disabled: ""
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group col-3" }, [
-              _c("label", { attrs: { for: "exampleInputPassword1" } }, [
-                _vm._v("Documento...esto es combobox..NO OLVIDAR XD")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  id: "exampleInputPassword1",
-                  disabled: ""
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group col-3" }, [
-              _c("label", { attrs: { for: "exampleInputPassword1" } }, [
-                _vm._v("N° Documento")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  id: "exampleInputPassword1",
-                  disabled: ""
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group col-3" }, [
-              _c("label", { attrs: { for: "exampleInputPassword1" } }, [
-                _vm._v("Celular")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  id: "exampleInputPassword1",
-                  disabled: ""
-                }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-row" }, [
-            _c("div", { staticClass: "form-group col-3" }, [
-              _c("label", { attrs: { for: "exampleInputPassword1" } }, [
-                _vm._v("Distrito...esto es combobox..NO OLVIDAR XD")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  id: "exampleInputPassword1",
-                  disabled: ""
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group col-9" }, [
-              _c("label", { attrs: { for: "exampleInputPassword1" } }, [
-                _vm._v("Dirección")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  id: "exampleInputPassword1",
-                  disabled: ""
-                }
-              })
-            ])
-          ])
-        ])
-      ])
+    return _c("div", { staticClass: "form-group col-3" }, [
+      _c("label", { attrs: { for: "exampleInputPassword1" } }, [
+        _vm._v("Cliente")
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", id: "exampleInputPassword1", disabled: "" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group col-3" }, [
+      _c("label", { attrs: { for: "exampleInputPassword1" } }, [
+        _vm._v("N° Documento")
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", id: "exampleInputPassword1", disabled: "" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group col-3" }, [
+      _c("label", { attrs: { for: "exampleInputPassword1" } }, [
+        _vm._v("Celular")
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", id: "exampleInputPassword1", disabled: "" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group col-9" }, [
+      _c("label", { attrs: { for: "exampleInputPassword1" } }, [
+        _vm._v("Dirección")
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", id: "exampleInputPassword1", disabled: "" }
+      })
     ])
   },
   function() {
@@ -40486,17 +40599,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-body" }, [
-      _c("div", { staticClass: "form-group " }, [
-        _c("label", { attrs: { for: "exampleInputPassword1" } }, [
-          _vm._v("Esto es combobox(Efectivo / Yape)..NO OLVIDAR XD")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "text", id: "exampleInputPassword1", disabled: "" }
-        })
-      ])
+    return _c("div", { staticClass: "form-group " }, [
+      _c("label", { attrs: { for: "exampleInputPassword1" } }, [
+        _vm._v("Esto es combobox(Efectivo / Yape)..NO OLVIDAR XD")
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", id: "exampleInputPassword1", disabled: "" }
+      })
     ])
   },
   function() {
@@ -42421,13 +42532,8 @@ var staticRenderFns = [
         _c("div", { staticClass: "row mx-4" }, [
           _c("div", { staticClass: "col-12" }, [
             _c("div", { staticClass: "mx-4 mt-4" }, [
-<<<<<<< HEAD
-              _c("table", { staticClass: "table table-hover" }, [
-                _c("thead", { staticClass: "headtable" }, [
-=======
               _c("table", { staticClass: "table" }, [
                 _c("thead", [
->>>>>>> 9b5b01348a8a069a49ce7882c21d6aa411305e35
                   _c("tr", [
                     _c("th", { attrs: { scope: "col" } }, [_vm._v("Código")]),
                     _vm._v(" "),
@@ -42538,7 +42644,6 @@ if (false) {
 /***/ }),
 /* 93 */
 /***/ (function(module, exports, __webpack_require__) {
-<<<<<<< HEAD
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
@@ -42620,89 +42725,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
-=======
-
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(94)
-/* template */
-var __vue_template__ = __webpack_require__(95)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/AppComponent.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-34935b93", Component.options)
-  } else {
-    hotAPI.reload("data-v-34935b93", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 94 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    created: function created() {
-        var _this = this;
-
-        if (localStorage.token) {
-            axios.get('/api/user', {
-                headers: {
-                    Authorization: 'Bearer ' + localStorage.getItem('token')
-                }
-            }).then(function (response) {
-                store.commit('loginUser');
-            }).catch(function (error) {
-                if (error.response.status === 401 || error.response.status === 403) {
-                    store.commit('logoutUser');
-                    localStorage.setItem('token', '');
-                    _this.$router.push({ name: 'login' });
-                }
-            });
-        }
-    }
-});
-
-/***/ }),
-/* 95 */
-/***/ (function(module, exports, __webpack_require__) {
-
->>>>>>> 9b5b01348a8a069a49ce7882c21d6aa411305e35
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -74835,6 +74857,91 @@ module.exports = function spread(callback) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 125 */,
+/* 126 */,
+/* 127 */,
+/* 128 */,
+/* 129 */,
+/* 130 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(131);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(8)("04ede64a", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-ad286122\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./FrmListaProductos.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-ad286122\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./FrmListaProductos.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 131 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(5)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.user-form-container{\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -webkit-box-pack: justify;\r\n        -ms-flex-pack: justify;\r\n            justify-content: space-between;\n}\n.user-form-container .card:first-child{\r\n    width: 65vw;\n}\n.user-form-container .card:last-child{\r\n    width: 30vw;\n}\n.image-profile{\r\n    max-width: 83%;\r\n    margin: 10px auto 0;\n}\n.profile-button{\r\n    height: -webkit-min-content;\r\n    height: -moz-min-content;\r\n    height: min-content;\n}\r\n\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 132 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(133);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(8)("2f45e19e", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-09de486c\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./FrmDetalleNV.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-09de486c\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./FrmDetalleNV.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 133 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(5)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.user-form-container{\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -webkit-box-pack: justify;\r\n        -ms-flex-pack: justify;\r\n            justify-content: space-between;\n}\n.user-form-container .card:first-child{\r\n    width: 65vw;\n}\n.user-form-container .card:last-child{\r\n    width: 30vw;\n}\n.image-profile{\r\n    max-width: 83%;\r\n    margin: 10px auto 0;\n}\n.profile-button{\r\n    height: -webkit-min-content;\r\n    height: -moz-min-content;\r\n    height: min-content;\n}\r\n\r\n", ""]);
+
+// exports
+
 
 /***/ })
 /******/ ]);

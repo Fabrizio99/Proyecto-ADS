@@ -15,15 +15,15 @@
                             <div class="form-row">
                                 <div class="form-group col-3">
                                     <label for="exampleInputPassword1">Código</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1">
+                                    <input type="text" class="form-control" id="exampleInputPassword1" disabled>
                                 </div>
                                 <div class="form-group col-3">
                                     <label for="exampleInputPassword1">Fecha Inicio</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1">
+                                    <input type="date" class="form-control" id="exampleInputPassword1">
                                 </div>
                                 <div class="form-group col-3">
                                     <label for="exampleInputPassword1">Fecha Final</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1">
+                                    <input type="date" class="form-control" id="exampleInputPassword1">
                                 </div>
                                 <div class="form-group col-3 mt-2">
                                     <input type="button" class="btn btn-primary btn-block mt-4 btnbuscar" value="BUSCAR" @click="Buscar"/>
