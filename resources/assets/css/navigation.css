@@ -41,15 +41,16 @@
     padding: 10px 0 10px 50px;
     border-bottom: 0px solid rgba(0,0,0,0.08);
     font-size: 15px;
-    color: rgba(0,0,0,0.8);
     cursor: pointer;
 }
 .collapse .navigation-item:last-child{
     border-bottom: 0;
 }
-.card{
+.cardChange{
     border: rgba(114, 45, 47, 45);
+    color: white;
 }
+
 /*GESTIONPRODUCTO*/
 .cardbuscador{
     background-color:white;

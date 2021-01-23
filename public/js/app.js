@@ -31921,7 +31921,7 @@ var render = function() {
         "div",
         { staticClass: "accordion", attrs: { id: "accordionExample" } },
         [
-          _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "cardChange" }, [
             _vm._m(0),
             _vm._v(" "),
             _c(
@@ -31956,13 +31956,13 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "cardChange" }, [
             _vm._m(1),
             _vm._v(" "),
             _c(
               "div",
               {
-                staticClass: "collapse",
+                staticClass: "collapse cardChange",
                 attrs: {
                   id: "collapse2",
                   "aria-labelledby": "heading2",
@@ -32077,7 +32077,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card" }, [
+    return _c("div", { staticClass: "cardChange" }, [
       _c(
         "div",
         {
@@ -32134,7 +32134,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card" }, [
+    return _c("div", { staticClass: "cardChange" }, [
       _c(
         "div",
         {

@@ -5,7 +5,7 @@
     <div class="navigation-menu">
         <img src="images/logo.png" id="logo">
     <div class="accordion" id="accordionExample">
-        <div class="card">
+        <div class="cardChange">
             <div class="card-header navigation-header" id="heading1">
                 <div class="text-left w-100" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
                     <i class="fa fa-house-user fa-lg navigation-icon"></i><span class="navigation-title">Mantenimiento</span>
@@ -18,13 +18,13 @@
 
             </div>
         </div>
-        <div class="card">
+        <div class="cardChange">
             <div class="card-header navigation-header" id="heading2">
                 <div class="text-left w-100" data-toggle="collapse" data-target="#collapse2" aria-expanded="true" aria-controls="collapse2">
                     <i class="fas fa-user-cog fa-lg"></i><span class="navigation-title">Operaciones</span>
                 </div>
             </div>
-            <div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#accordionExample">
+            <div id="collapse2" class="collapse cardChange" aria-labelledby="heading2" data-parent="#accordionExample">
 
                 <div class="navigation-item" @click="changeViewNotaVenta">Emitir Nota de Venta</div>
                 <div class="navigation-item" @click="changeView3">Emitir Boleta de Venta</div>
@@ -33,7 +33,7 @@
 
             </div>
         </div>
-        <div class="card">
+        <div class="cardChange">
             <div class="card-header navigation-header" id="heading3">
                 <div class="text-left w-100" data-toggle="collapse" data-target="#collapse3" aria-expanded="true" aria-controls="collapse3">
                     <i class="fa fa-chart-line fa-lg"></i><span class="navigation-title">Reportes</span>
@@ -45,7 +45,7 @@
                 <div class="navigation-item">Balance de Ventas</div>
             </div>
         </div>
-        <div class="card">
+        <div class="cardChange">
             <div class="card-header navigation-header" id="heading4">
                 <div class="text-left w-100" data-toggle="collapse" data-target="#collapse4" aria-expanded="true" aria-controls="collapse4">
                     <i class="fas fa-exclamation-triangle fa-lg"></i><span class="navigation-title">Reclamos</span>
