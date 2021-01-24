@@ -100,8 +100,6 @@ const routes = [
         name: 'inventario',
         component: require('../js/views/reportes/InventariosApp.vue')
     },
-    
-
 ]
 
 

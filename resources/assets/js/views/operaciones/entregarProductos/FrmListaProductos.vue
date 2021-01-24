@@ -10,7 +10,7 @@
                     </h3>
                 </div>
                 <div class="row mx-4">
-                  <div class="col-3 mt-5">
+                  <div class="px-5 col-3 mt-5">
                     <div class="card col bg-light">
                           <div class="card-body">
 
@@ -45,7 +45,6 @@
                             <div class="form-row justify-content-center">
                               <div class="form-group">
                                 <input type="button" class="btn btn-info my-1 form-group col-12 btnguarda-registro" value="MODIFICAR" @click="Modificar" data-toggle="modal" data-target="#Modal"/>
-                                <input type="button" class="btn btn-info my-1 form-group col-12 btnsalir" value="SALIR" @click="Regresar"/>
                               </div>
                             </div>  
                             <div class="form-row justify-content-center">
@@ -143,8 +142,25 @@
                                         <div class="modal-body">
                                             
                                             <div class="form-group ">
-                                                <label for="exampleInputPassword1">Esto es combobox..NO OLVIDAR XD</label>
-                                                <input type="text" class="form-control" id="exampleInputPassword1" disabled>
+                                                                                  
+                                                 <multiselect
+                                                      :colSize="9"
+                                                      label = "Estado"
+                                                      :optionList = "[
+                                                          {
+                                                              id   : 1,
+                                                              name : 'ATENDIDO'
+                                                          },
+                                                          {
+                                                              id   : 2,
+                                                              name : 'NO ATENDIDO'
+                                                          },
+                                                          {
+                                                              id   : 3,
+                                                              name : 'EN ESPERA'
+                                                          },
+                                                      ]"
+                                                  />
                                             </div>
 
                                         </div>
@@ -171,10 +187,13 @@
 import Appbar from '../../../components/AppBar'
 import AppBar from '../../../components/AppBar.vue';
 import Navigation from '../../../components/NavigationComponent';
+import Multiselect from '../../../components/Multiselect';
+
 export default {
     components : {
         'app-bar'    : Appbar,
-        'navigation' : Navigation
+        'navigation' : Navigation,
+        'multiselect' : Multiselect
     },
     methods:{
        Buscar(){ this.$swal({
@@ -209,3 +228,24 @@ export default {
     }
 }
 </script>
+<style 
+        Multiselectscoped>
+.user-form-container{
+    display: flex;
+    justify-content: space-between;
+}
+.user-form-container .card:first-child{
+    width: 65vw;
+}
+.user-form-container .card:last-child{
+    width: 30vw;
+}
+.image-profile{
+    max-width: 83%;
+    margin: 10px auto 0;
+}
+.profile-button{
+    height: min-content;
+}
+
+</style>
