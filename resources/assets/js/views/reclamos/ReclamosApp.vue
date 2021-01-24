@@ -355,13 +355,13 @@ export default {
           console.log('dfdfd');
           console.log($('#boletasModal'));
           $('#boletasModal').modal('hide');
-          $( "body" ).removeClass( "modal-open" );
+          /*$( "body" ).removeClass( "modal-open" );
           $('.modal-backdrop').remove();
           $( "#boletasModal" ).removeClass( "show" ).removeClass("in");
           $( "#boletasModal" ).removeAttr('aria-modal');
           $( "#boletasModal" ).removeAttr('role');
           $( "#boletasModal" ).attr("aria-hidden",true);
-          $( "#boletasModal" ).css("display","none");
+          $( "#boletasModal" ).css("display","none");*/
         }
     },
     mounted(){

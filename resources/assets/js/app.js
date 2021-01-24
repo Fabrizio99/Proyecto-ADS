@@ -12,6 +12,10 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 
 //require('./bootstrap');
 
+var $ = require('jquery');
+window.$ = $;
+require('bootstrap');
+
 window.Vue = require('vue');
 Vue.use(VueSweetalert2);
 
