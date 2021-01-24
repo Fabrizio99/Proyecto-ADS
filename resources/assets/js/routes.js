@@ -100,6 +100,11 @@ const routes = [
         name: 'inventario',
         component: require('../js/views/reportes/InventariosApp.vue')
     },
+    {
+        path: '/reclamos',
+        name: 'reclamos',
+        component: require('../js/views/reclamos/ReclamosApp.vue')
+    }
 ]
 
 

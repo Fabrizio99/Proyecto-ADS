@@ -10,7 +10,7 @@ import 'sweetalert2/dist/sweetalert2.min.css';
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+//require('./bootstrap');
 
 window.Vue = require('vue');
 Vue.use(VueSweetalert2);

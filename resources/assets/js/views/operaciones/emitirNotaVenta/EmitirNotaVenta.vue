@@ -218,7 +218,7 @@
                           <td>Ingredientes, reposteria</td>
                           <td>S/. 7.00</td>
                           <td>
-                            <input type="number" name="" id="" class="form-control" value="1">
+                            <input type="number" name="" id="" class="form-control" value="1" min="0">
                           </td>
                           <td class = "option text-center">
                             <input type="text" name="" id="" class="form-control" value="S/. 7.00" disabled>

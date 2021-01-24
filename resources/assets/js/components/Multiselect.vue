@@ -1,7 +1,7 @@
 <template>
     <div :class="'form-group col-md-'+ colSize">
         <label>{{ label }}</label>
-        <multiselect
+        <multiselect 
                 v-model="$attrs.value"
                 :options="options"
                 :label="propertyName"
@@ -151,5 +151,11 @@
             this.loadData();
         }
     }
-
 </script>
+<style scoped>
+.multiselect__tags{
+    height: 36px !important;
+    border: 1px solid #ced4da !important;
+    border-radius: .25rem !important;
+}
+</style>

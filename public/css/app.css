@@ -136,7 +136,7 @@ tr:hover td{
     width: 300px;
     background-color: rgba(0, 0, 0, 0.1);
     height: calc(100vh - 80px);
-    overflow-y: scroll;
+    overflow-y: hidden;
     height: 100vh;
     top: 0;
     position: absolute;
