@@ -2,7 +2,7 @@
 
 include '../app/helper/constanst.php';
 
-    function mySQLConsulta(String $sql) {
+    function mySQLConsulta(String $sql, $msj = null ) {
         
         try {
             $conexion = mysqli_connect ($_SESSION["SERVIDOR"] , $_SESSION["ROOT"], $_SESSION["PASSWORD"])
@@ -25,14 +25,16 @@ include '../app/helper/constanst.php';
                 if (count($myArray) == 0){
                     $object = (object) [
                         'status' => $_SESSION["STATUS_CONTROL"],
-                        'msj'    => "Sin resultados."
+                        'msj'    => $msj ?: "Sin resultados."
                     ];   
                     return json_encode($object);    
+                } else if (count($myArray) == 1){
+                    $newObject = json_encode($myArray[0], JSON_FORCE_OBJECT);
+                } else {
+                    $newObject = json_encode($myArray);
                 }
-                $newObject = json_encode($myArray);
                 return $newObject;
             } else {
-                echo "Fallo en la consulta: REVISA TUS PTAS CONSTANTES ANIMAL DE MRD   ---- servidor>app>helper>constants".$sql."<br>".mysqli_error($conexion);
                 return $_SESSION["OBJ_ERROR"];
             }
             mysqli_close ($conexion);     
@@ -43,7 +45,7 @@ include '../app/helper/constanst.php';
 
     }
 
-   function mySQLInsert($sql) {      
+   function mySQLInsert($sql, $msj = null) {      
         // Conectar con el servidor de base de datos
         try {
             $conexion = mysqli_connect ($_SESSION["SERVIDOR"], $_SESSION["ROOT"], $_SESSION["PASSWORD"])
@@ -55,11 +57,10 @@ include '../app/helper/constanst.php';
             if(!isNullEmpty($consulta,'resConsulta')){
                 $object = (object) [
                     'status' => $_SESSION["STATUS_SUCCES"],
-                    'msj'    => "Se registro con exito."
+                    'msj'    => $msj ?: "Se registro con exito."
                 ];
                 return json_encode($object);
             } else {
-                echo "Fallo en la consulta: REVISA TUS PTAS CONSTANTES ANIMAL DE MRD " . $sql . "<br>" . mysqli_error($conexion)."<br>".$consulta;
                 return $_SESSION["OBJ_ERROR"];
             }
             mysqli_close ($conexion);     
@@ -70,18 +71,16 @@ include '../app/helper/constanst.php';
         
     }
 
-    function isNullEmpty($msj, $key = null){
-        if($msj == null|| $msj === 'null' || $msj === 'undefine' || empty($msj) == 1){            
+    function isNullEmpty($value, $key = null, $msj = null){
+        if($value == null|| $value === 'null' || $value === 'undefine' || empty($value) == 1){            
             return JSON_ENCODE(
                 (object) [
                     'status' => $_SESSION["STATUS_CONTROL"],
-                    'msj'    => $_SESSION["MSJ_CONTROL"],
+                    'msj'    => $msj ?: $_SESSION["MSJ_CONTROL"],
                     'key'    => $key,
-                    'value'  => $msj
+                    'value'  => $value
                  ]
                 );
-
-            // return $_SESSION["OBJ_CONTROL"];
         }
         return null;
     }
@@ -105,18 +104,16 @@ include '../app/helper/constanst.php';
                 }
                 return count($myArray) > 0;
             } else {
-                echo "Fallo en la consulta: REVISA TUS PTAS CONSTANTES ANIMAL DE MRD   ---- servidor>app>helper>constants".$sql."<br>".mysqli_error($conexion);
                 return $_SESSION["OBJ_ERROR"];
             }
             mysqli_close ($conexion);     
         }  catch (Exception $e) {
-            echo 'Excepción capturada: REVISA TUS PTAS CONSTANTES ANIMAL DE MRD ',  $e->getMessage(), "\n";
             return $_SESSION["OBJ_ERROR"];
         }
   
     }
   
-    function mySQLProcedure($sql){
+    function mySQLProcedure($sql, $msj = null){
         try {
             $conexion = mysqli_connect ($_SESSION["SERVIDOR"] , $_SESSION["ROOT"], $_SESSION["PASSWORD"])
                 or die ("No se puede conectar con el servidor");
@@ -127,13 +124,14 @@ include '../app/helper/constanst.php';
             $consulta = mysqli_query ( $conexion,$sql);
             
             if(isNullEmpty($consulta,'resConsulta')){
-                echo "Fallo en la consulta: REVISA TUS PTAS CONSTANTES ANIMAL DE MRD   ---- servidor>app>helper>constants".$sql."<br>".mysqli_error($conexion);
-                return $_SESSION["OBJ_ERROR"];
-
+                $object = (object) [
+                    'status' => $_SESSION["STATUS_CONTROL"],
+                    'msj'    => $msj ?: "Proceso exitoso."
+                ];
+                return $object;
             }
             mysqli_close ($conexion);     
         }catch (Exception $e) {
-            echo 'Excepción capturada: ',  $e->getMessage(), "\n";
             return $_SESSION["OBJ_ERROR"];
         }
   
