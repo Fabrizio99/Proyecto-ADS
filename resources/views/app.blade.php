@@ -14,6 +14,8 @@
     <div id="app">
         <app-component/>
     </div>
+    <!--Script for running the project on Internet Explorer-->
+    <!--<script src='https://cdn.polyfill.io/v2/polyfill.min.js'></script>-->
     <script src="js/app.js"></script>
    </body>
 </html>
