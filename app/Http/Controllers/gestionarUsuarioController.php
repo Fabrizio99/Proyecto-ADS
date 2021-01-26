@@ -136,7 +136,7 @@ class gestionarUsuarioController extends Controller
             ]
         ); 
     }
-
+    // se hizo la consulta 
         return mySQLUpDate("UPDATE usuarios SET nombres ='{$req->nombre}', apellidos ='{$req->apellido}', 
         telefono ='{$req->telefono}', rol_id_rol ='{$req->rol}',contrasenia = '{$req->contrasenia}',direccion = '{$req->dirreccion}'
         WHERE num_documento = '{$req->numDoc}' ");
