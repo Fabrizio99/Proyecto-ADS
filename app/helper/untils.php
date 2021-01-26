@@ -13,6 +13,7 @@ include '../app/helper/constanst.php';
             
             $consulta = mysqli_query ( $conexion,$sql);
             
+            //
             if(!isNullEmpty($consulta,'resConsulta')){
                 $tempArray = array();
                 $myArray   = array();
@@ -21,7 +22,7 @@ include '../app/helper/constanst.php';
                     $tempArray = $row;
                     array_push($myArray, $tempArray);
                 }
-
+                //contenido de la consulta
                 if (count($myArray) == 0){
                     $object = (object) [
                         'status' => $_SESSION["STATUS_CONTROL"],
@@ -29,11 +30,16 @@ include '../app/helper/constanst.php';
                     ];   
                     return json_encode($object);    
                 } else if (count($myArray) == 1){
-                    $newObject = json_encode($myArray[0], JSON_FORCE_OBJECT);
+                    $newObject = $myArray[0];
                 } else {
-                    $newObject = json_encode($myArray);
+                    $newObject = $myArray;
                 }
-                return $newObject;
+                $object = (object) [
+                    'status' => $_SESSION["STATUS_SUCCES"],
+                    'data'   => $newObject
+                ];   
+                
+                return json_encode($object);
             } else {
                 return $_SESSION["OBJ_ERROR"];
             }
@@ -54,6 +60,7 @@ include '../app/helper/constanst.php';
             mysqli_select_db ($conexion, $_SESSION["DATA_BASE"]);
             $consulta = mysqli_query ( $conexion,$sql);
 
+            //mensaje error 
             if(!isNullEmpty($consulta,'resConsulta')){
                 $object = (object) [
                     'status' => $_SESSION["STATUS_SUCCES"],
@@ -135,4 +142,58 @@ include '../app/helper/constanst.php';
             return $_SESSION["OBJ_ERROR"];
         }
   
+    }
+
+    function mySQLDelete($sql, $msj = null) {      
+        // Conectar con el servidor de base de datos
+        try {
+            $conexion = mysqli_connect ($_SESSION["SERVIDOR"], $_SESSION["ROOT"], $_SESSION["PASSWORD"])
+            or die ("No se puede conectar con el servidor");
+        
+            mysqli_select_db ($conexion, $_SESSION["DATA_BASE"]);
+            $consulta = mysqli_query ( $conexion,$sql);
+
+            //mensaje error 
+            if(!isNullEmpty($consulta,'resConsulta')){
+                $object = (object) [
+                    'status' => $_SESSION["STATUS_SUCCES"],
+                    'msj'    => $msj ?: "Se elimino con exito."
+                ];
+                return json_encode($object);
+            } else {
+                return $_SESSION["OBJ_ERROR"];
+            }
+            mysqli_close ($conexion);     
+        }  catch (Exception $e) {
+            echo 'Excepción capturada: ',  $e->getMessage(), "\n";
+            return $_SESSION["OBJ_ERROR"];
+        }
+        
+    }
+
+    function mySQLUpDate($sql, $msj = null) {      
+        // Conectar con el servidor de base de datos
+        try {
+            $conexion = mysqli_connect ($_SESSION["SERVIDOR"], $_SESSION["ROOT"], $_SESSION["PASSWORD"])
+            or die ("No se puede conectar con el servidor");
+        
+            mysqli_select_db ($conexion, $_SESSION["DATA_BASE"]);
+            $consulta = mysqli_query ( $conexion,$sql);
+
+            //mensaje error 
+            if(!isNullEmpty($consulta,'resConsulta')){
+                $object = (object) [
+                    'status' => $_SESSION["STATUS_SUCCES"],
+                    'msj'    => $msj ?: "Se modifico usuario exitosamente."
+                ];
+                return json_encode($object);
+            } else {
+                return $_SESSION["OBJ_ERROR"];
+            }
+            mysqli_close ($conexion);     
+        }  catch (Exception $e) {
+            echo 'Excepción capturada: ',  $e->getMessage(), "\n";
+            return $_SESSION["OBJ_ERROR"];
+        }
+        
     }

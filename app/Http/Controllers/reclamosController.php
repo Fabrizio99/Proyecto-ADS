@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\Types\Null_;
 
 include '../app/helper/untils.php'; // para cada controller pueda usar las funciones de consulta 
 
@@ -77,18 +78,30 @@ class reclamosController extends Controller
     function postRegistrar(Request $req){
 
         $isValidate = isNullEmpty($req->descripcion, 'descripcion', 'El campo descripcion no puede ser vacio.') ?:
-                      isNullEmpty($req->estado     , 'estado'     , 'El campo estado no puede ser vacio.'     ) ?: 
                       isNullEmpty($req->codBoleta  , 'codBoleta'  , 'El campo codigo de la boleta no puede ser vacio.') ?: 
+                      isNullEmpty($req->fecha      , 'fecha'      , 'El campo fecha de la boleta no puede ser vacio.') ?: 
                       isNullEmpty($req->solucion   , 'solucion'   , 'El campo solucion no puede ser vacio.'   );
         
         if ($isValidate){
             return  $isValidate;
         }
         
+        $boleta = mySQLConsulta("SELECT idB_boleta FROM boleta WHERE codigo_boleta = '{$req->codBoleta}'");
+        $boleta = json_decode($boleta);
+
+        if ($boleta->status == $_SESSION["STATUS_CONTROL"]) {
+            return JSON_ENCODE(
+                (object) [
+                    'status' => $_SESSION["STATUS_CONTROL"],
+                    'msj'    => 'La boleta enviada no esta registrada.'
+                 ]
+            ); 
+        }
+
         return mySQLInsert(
-            "INSERT INTO reclamo (descripcion,estado,solucion,boleta_idboleta) 
-                VALUES ('{$req->descripcion}','{$req->estado}','{$req->solucion}', '{$req->codBoleta}')",
-            "Se Registro el reclamo con exito"
+            "INSERT INTO reclamo (descripcion,solucion,BOLETA_idB_boleta) 
+                VALUES ('{$req->descripcion}','{$req->solucion}', '{$boleta->data->idB_boleta}')",
+            "SE REGISTRO EL RECLAMO CON EXITO"
         );
     }
 
