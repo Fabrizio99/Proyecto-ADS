@@ -52803,7 +52803,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 return _context.abrupt('return');
 
               case 8:
-                if (!["1", "2"].includes(data.status)) {
+                if (!(data.status == "1" || data.status == "2")) {
                   _context.next = 11;
                   break;
                 }
