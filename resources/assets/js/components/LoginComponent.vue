@@ -47,8 +47,7 @@ export default {
         Alert.showErrorMessage(this);
         return;
       }
-
-      if(["1","2"].includes(data.status)){
+      if(data.status == "1" || data.status == "2"){
         Alert.showErrorMessage(this,data.msj);
         return;
       }
