@@ -24,7 +24,7 @@
                     <i class="fas fa-user-cog fa-lg"></i><span class="navigation-title">Operaciones</span>
                 </div>
             </div>
-            <div id="collapse2" class="collapse cardChange" aria-labelledby="heading2" data-parent="#accordionExample">
+            <div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#accordionExample">
 
                 <div class="navigation-item" @click="changeRoutePath('notaVenta')">Emitir Nota de Venta</div>
                 <div class="navigation-item" @click="changeRoutePath('formNVB')">Emitir Boleta de Venta</div>
@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div id="collapse3" class="collapse" aria-labelledby="heading3" data-parent="#accordionExample">
-                <div class="navigation-item">Ventas Finales del Día</div>
+                <div class="navigation-item" @click="changeRoutePath('VF')">Ventas Finales del Día</div>
                 <div class="navigation-item" @click="changeRoutePath('inventario')">Inventario</div>
             </div>
         </div>
@@ -51,7 +51,7 @@
                 </div>
             </div>
             <div id="collapse4" class="collapse" aria-labelledby="heading4" data-parent="#accordionExample">
-                <div class="navigation-item">Registrar Reclamos</div>
+                <div class="navigation-item" @click="changeRoutePath('reclamos')">Registrar Reclamos</div>
             </div>
         </div>
     </div>    

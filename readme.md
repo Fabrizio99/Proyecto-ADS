@@ -34,3 +34,48 @@ php artisan serve
 Se tomó como referencia esta guía.
 
 https://bluuweb.github.io/tutorial-laravel/vue/#intalaciones
+
+
+
+## COMANDOS BASICOS DE GIT
+
+git pull --> TRAE TODOS LOS CAMBIOD DE UNA RAMA REMOTA
+
+git pull origin <ramaRemota>  
+
+EJEMPLO: 
+git pull origin back_master  
+
+git push --> SUBE TODO LOS CAMBIOS A UNA RAMA REMOTA
+
+CONSULTA PARA VER LAS RAMAS
+
+git branch 
+
+PASOS PARA SUBIR TUS CAMBIOS: 
+
+1.- git status -> todos los cambios que realizaste (OPCIONAL)
+
+<!-- git add readme.md -> un cambio en especifico -->
+
+2.- git add . -> añade todos los cambios 
+
+3.- git commit -m "avance nuevas rutas"
+
+git push origin <tuRama>:<ramaRemota>
+
+git push origin <tuRAMA>
+
+git push origin <tuRAMA>:<ramaRemota>
+
+## CREAR RAMA 
+
+Crear un cotroller
+php artisan make:controller <nameController>Controller --resource
+
+
+## Relacion de aracivos
+-Controllers = codigo metodo mysql
+-Api =routes
+-Web = router
+-Untils = codigo

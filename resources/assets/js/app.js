@@ -2,6 +2,8 @@ import router from './routes.js';
 import AppComponent from './components/AppComponent'
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
+import Axios from 'axios'
+window.axios = Axios;
 
 
 /**
@@ -10,7 +12,11 @@ import 'sweetalert2/dist/sweetalert2.min.css';
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+//require('./bootstrap');
+
+var $ = require('jquery');
+window.$ = $;
+require('bootstrap');
 
 window.Vue = require('vue');
 Vue.use(VueSweetalert2);
@@ -20,7 +26,8 @@ Vue.use(VueSweetalert2);
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
+import * as Alerts from '../js/alerts';
+window.Alert = Alerts;
 const app = new Vue({
     components: { AppComponent },
     router

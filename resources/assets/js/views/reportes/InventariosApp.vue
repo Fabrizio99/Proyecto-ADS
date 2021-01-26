@@ -17,7 +17,7 @@
                     <div class="row mx-4">
                         <div class="col-5">
                             <label for="fechainventario">Del día:</label>
-                            <input type="text" class="form-control" id="fechainventario">
+                            <input type="date" class="form-control" id="fechainventario" v-model="selectedDate">
                         </div>
                         <div class="col-1">
                             <label></label>
@@ -78,7 +78,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="mx-4 mt-4">
-                                            <table class="table table-light">
+                                            <table class="table">
                                             <thead>
                                                 <tr>
                                                 <th scope="col"></th>
@@ -149,8 +149,8 @@
                     <div class="row mx-4">
                         <div class="col-12">
                             <div class="mx-4 mt-4">
-                                <table class="table table-hover">
-                                <thead class="headtable">
+                                <table class="table">
+                                <thead>
                                     <tr>
                                     <th scope="col">Código</th>
                                     <th scope="col">Descripción del producto</th>
@@ -214,11 +214,17 @@
 import Appbar from '../../components/AppBar'
 import AppBar from '../../components/AppBar.vue';
 import Navigation from '../../components/NavigationComponent';
+import moment from 'moment'
 
 export default {
     components : {
         'app-bar'    : Appbar,
         'navigation' : Navigation
+    },
+    data(){
+        return {
+            selectedDate : moment().format('yyy-MM-DD')
+        }
     },
     methods : {
         msjerrorfecha(){
