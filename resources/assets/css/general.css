@@ -89,3 +89,9 @@ tr:hover td{
 .listo:visited{
     background-color:red!important;
 }
+table tbody tr{
+  border: 0 !important;
+}
+.dropdown-item{
+  cursor : pointer;
+}

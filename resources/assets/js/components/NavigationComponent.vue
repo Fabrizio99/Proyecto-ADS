@@ -51,7 +51,7 @@
                 </div>
             </div>
             <div id="collapse4" class="collapse" aria-labelledby="heading4" data-parent="#accordionExample">
-                <div class="navigation-item">Registrar Reclamos</div>
+                <div class="navigation-item" @click="changeRoutePath('reclamos')">Registrar Reclamos</div>
             </div>
         </div>
     </div>    

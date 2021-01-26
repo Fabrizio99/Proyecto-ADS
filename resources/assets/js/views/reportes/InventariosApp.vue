@@ -17,7 +17,7 @@
                     <div class="row mx-4">
                         <div class="col-5">
                             <label for="fechainventario">Del día:</label>
-                            <input type="text" class="form-control" id="fechainventario">
+                            <input type="date" class="form-control" id="fechainventario" v-model="selectedDate">
                         </div>
                         <div class="col-1">
                             <label></label>
@@ -214,11 +214,17 @@
 import Appbar from '../../components/AppBar'
 import AppBar from '../../components/AppBar.vue';
 import Navigation from '../../components/NavigationComponent';
+import moment from 'moment'
 
 export default {
     components : {
         'app-bar'    : Appbar,
         'navigation' : Navigation
+    },
+    data(){
+        return {
+            selectedDate : moment().format('yyy-MM-DD')
+        }
     },
     methods : {
         msjerrorfecha(){

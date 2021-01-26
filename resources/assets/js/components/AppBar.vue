@@ -9,7 +9,7 @@
                 Fabrizio Condori
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" style="cursor:pointer" @click="logout">Cerrar Sesión</a>
+                <a class="dropdown-item" @click="logout">Cerrar Sesión</a>
             </div>
         </div>
     </div>
