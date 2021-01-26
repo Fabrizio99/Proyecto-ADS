@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div id="collapse3" class="collapse" aria-labelledby="heading3" data-parent="#accordionExample">
-                <div class="navigation-item">Ventas Finales del Día</div>
+                <div class="navigation-item" @click="changeRoutePath('VF')">Ventas Finales del Día</div>
                 <div class="navigation-item" @click="changeRoutePath('inventario')">Inventario</div>
             </div>
         </div>
