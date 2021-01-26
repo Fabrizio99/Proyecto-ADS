@@ -114,7 +114,7 @@ class gestionarUsuarioController extends Controller
                             isNullEmpty($req->contrasenia,'','digite correctamente el contraseñia') ?:
                             isNullEmpty($req->numDoc,'','digite correctamente el contraseñia');
                             
-                    
+         // validaciones de campos            
         if($ValidacionCampos){
             return $ValidacionCampos;
         }
