@@ -11,7 +11,7 @@ class gestionarUsuarioController extends Controller
    
    function listaUsuario (Request $req){
 
-            return mySQLConsulta("SELECT u.nombres,u.apellidos,u.num_documento FROM usuarios u , rol r WHERE u.rol_id_rol = r.id_rol AND estado='A' LIMIT 0 ,50");
+            return mySQLConsulta("SELECT u.nombres,u.apellidos,u.num_documento FROM usuarios u , rol r WHERE u.rol_id_rol = r.id_rol AND estado ='A' LIMIT 0 ,50");
             
     }
      
@@ -101,7 +101,7 @@ class gestionarUsuarioController extends Controller
             return $ValidacionCampos;
         }
 
-           return mySQLDelete("UPDATE usuarios SET estado = 'I' WHERE num_documento = '{$req->numDoc}'");
+        return mySQLDelete("UPDATE usuarios SET estado = 'I' WHERE num_documento = '{$req->numDoc}'");
     }
 
     function modificarUsuario (Request $req){
