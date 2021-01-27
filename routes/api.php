@@ -16,7 +16,7 @@ Route::post('postRegistrar', 'reclamosController@postRegistrar');
 Route::get('getEmitirRI','reporteInvController@getEmitirRI' )->middleware('validateAuth');
 Route::get('totalProdCosto','reporteInvController@totalProdCosto');
 //gestionarUsuarioController
-Route::get('listaUsuario', 'gestionarUsuarioController@listaUsuario')->middleware('validateAuth');
+Route::get('listaUsuario', 'gestionarUsuarioController@listaUsuario');//->middleware('validateAuth');
 Route::get('getBuscarUsuario', 'gestionarUsuarioController@getBuscarUsuario');
 Route::post('crearUsuario', 'gestionarUsuarioController@crearUsuario');
 Route::post('deleteUsuario','gestionarUsuarioController@deleteUsuario');

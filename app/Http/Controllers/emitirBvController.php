@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 class emitirBvController extends Controller
 {
     function lsitaNotaVenta(Request $req){
+       
         return mySQLConsulta(
             "SELECT 
             nv.id_boletaventa,
