@@ -15,6 +15,9 @@ var $ = require('jquery');
 window.$ = $;
 require('bootstrap');
 
+let moment = require('moment');
+window.moment = moment;
+
 window.Vue = require('vue');
 Vue.use(VueSweetalert2);
 

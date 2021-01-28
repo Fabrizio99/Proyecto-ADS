@@ -1,4 +1,4 @@
-function Usuario(){}
+function Usuario(name){}
 Usuario.prototype.getData = function(){
     return JSON.parse(localStorage.getItem('user'));
 }

@@ -30,7 +30,6 @@
 </template>
 
 <script>
-import store from "../store";
 import usuario from "../user.js";
 export default {
   data() {
@@ -38,15 +37,15 @@ export default {
       user       : '',
       password   : '',
       loginError : false,
+      errorMessage : ''
     };
   },
   methods: {
     async submitLogin() {
       let response = await axios.get('api/getLogin?user='+this.user+'&password='+this.password);
-      //let resp2 = await service.get('api/getLogin?user='+this.user+'&password='+this.password);
-      //console.log(resp2);
       if(response.data.status == "1" || response.data.status == "2"){
-        Alert.showErrorMessage(this,response.data.msj);
+        this.errorMessage = response.data.msj;
+        alert('Error: '+response.data.msj);
       }else{
         usuario.setData(response.data.data);
         this.$router.push({ name: 'main'});

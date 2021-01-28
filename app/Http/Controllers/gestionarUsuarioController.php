@@ -11,7 +11,7 @@ class gestionarUsuarioController extends Controller
    
    function listaUsuario (Request $req){
 
-         return mySQLConsulta("SELECT u.nombres,u.apellidos,u.num_documento FROM usuarios u , rol r WHERE u.rol_id_rol = r.id_rol AND estado='A' LIMIT 0 ,50");
+         return mySQLConsulta("SELECT u.nombres,u.apellidos,u.num_documento,r.nombre FROM usuarios u , rol r WHERE u.rol_id_rol = r.id_rol AND estado='A' LIMIT 0 ,50");
             
     }
      
@@ -25,8 +25,8 @@ class gestionarUsuarioController extends Controller
 
         
         if (strlen($req->nombre) < 3) return ;
-        return mySQLConsulta("SELECT u.nombres,u.apellido,u.num_documento,r.nombre FROM usuarios u , rol r
-        WHERE u.rol_id_rol = r.id_rol AND (u.nombres LIKE '{$req->nombre}%' OR u.apellido LIKE '{$req->nombre}%') LIMIT 0,50");
+        return mySQLConsulta("SELECT u.nombres,u.apellidos,u.num_documento,r.nombre FROM usuarios u , rol r
+        WHERE u.rol_id_rol = r.id_rol AND (u.nombres LIKE '{$req->nombre}%' OR u.apellidos LIKE '{$req->nombre}%') LIMIT 0,50");
        
        
     }
@@ -61,7 +61,7 @@ class gestionarUsuarioController extends Controller
                 ); 
         }
             //validación del dni caracteres
-        if (strlen($req->numDoc) == 8 && $req->tipoDoc == $TIPO_DNI ) { // TIPO 
+        if (strlen($req->numDoc) != 8 && $req->tipoDoc == $TIPO_DNI ) { // TIPO 
             return JSON_ENCODE(
                 (object) [
                     'status' => $_SESSION["STATUS_CONTROL"],
