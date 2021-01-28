@@ -12,11 +12,11 @@ Route::post('registrarUsuario', 'initialController@registrarUsuario')->middlewar
 Route::get('getReclamos', 'reclamosController@getReclamos')->middleware('validateAuth');
 Route::post('postRegistrar', 'reclamosController@postRegistrar')->middleware('validateAuth');
 
-//reporteInvController
+//reporteInvController-Listo para probar (Font)
 Route::get('getEmitirRI','reporteInvController@getEmitirRI' )->middleware('validateAuth');
 Route::get('totalProdCosto','reporteInvController@totalProdCosto')->middleware('validateAuth');
 
-//gestionarUsuarioController
+//gestionarUsuarioController-Listo para Probar (Font)
 Route::get('listaUsuario', 'gestionarUsuarioController@listaUsuario')->middleware('validateAuth');
 Route::get('getBuscarUsuario', 'gestionarUsuarioController@getBuscarUsuario')->middleware('validateAuth');
 Route::post('crearUsuario', 'gestionarUsuarioController@crearUsuario')->middleware('validateAuth');
@@ -29,3 +29,10 @@ Route::get('listProduct','gProductosController@listProduct')->middleware('valida
 Route::post('deleteP','gProductosController@deleteP')->middleware('validateAuth');
 Route::post('updateP','gProductosController@updateP')->middleware('validateAuth');
 Route::post('registrarP','gProductosController@registrarP')->middleware('validateAuth');
+
+
+//no probar esta en proceso 
+//emitirBvController
+Route::get('listaNotaV','emitirBvController@listaNotaV');
+Route::get('buscaNotaVByFechas','emitirBvController@buscaNotaVByFechas');
+Route::post('registrarPago','emitirBvController@registrarPago');
