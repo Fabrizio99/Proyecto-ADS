@@ -11,7 +11,7 @@ class gestionarUsuarioController extends Controller
    
    function listaUsuario (Request $req){
 
-            return mySQLConsulta("SELECT u.nombres,u.apellido,u.num_documento,r.nombre FROM usuarios u , rol r WHERE u.rol_id_rol = r.id_rol AND estado='A' LIMIT 0,50");
+            return mySQLConsulta("SELECT u.nombres,u.apellido,u.num_documento,r.nombre FROM usuarios u , rol r WHERE u.rol_id_rol = r.id_rol LIMIT 0,50");
             
     }
 
