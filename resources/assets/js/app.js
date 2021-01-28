@@ -4,9 +4,12 @@ import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import Axios from 'axios'
 window.axios = Axios;
-let usuario = require('./user.js').default;
+import service from './services';
+window.service = service;
+//let usuario = require('./user.js').default;
 
 //window.Usuario = new usuario();
+
 
 var $ = require('jquery');
 window.$ = $;

@@ -43,6 +43,8 @@ export default {
   methods: {
     async submitLogin() {
       let response = await axios.get('api/getLogin?user='+this.user+'&password='+this.password);
+      //let resp2 = await service.get('api/getLogin?user='+this.user+'&password='+this.password);
+      //console.log(resp2);
       if(response.data.status == "1" || response.data.status == "2"){
         Alert.showErrorMessage(this,response.data.msj);
       }else{
