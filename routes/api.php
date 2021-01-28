@@ -22,6 +22,7 @@ Route::get('getBuscarUsuario', 'gestionarUsuarioController@getBuscarUsuario')->m
 Route::post('crearUsuario', 'gestionarUsuarioController@crearUsuario')->middleware('validateAuth');
 Route::post('deleteUsuario','gestionarUsuarioController@deleteUsuario')->middleware('validateAuth');
 Route::post('modificarUsuario','gestionarUsuarioController@modificarUsuario')->middleware('validateAuth');
+Route::get('detalleUsuario','gestionarUsuarioController@detalleUsuario');
 
 
 //gProductosController

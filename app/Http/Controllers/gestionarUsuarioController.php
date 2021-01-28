@@ -26,7 +26,7 @@ class gestionarUsuarioController extends Controller
             
     }
      
-    //-----------BuscarUsuario------
+    //-----Buscar Usuario------
     function getBuscarUsuario (Request $req){
 
         $isValidate = isNullEmpty($req->cmpbusqueda,'cmpbusqueda','el campo buscador no puede estar vacio');
@@ -132,7 +132,7 @@ class gestionarUsuarioController extends Controller
       }    
       
 }
-    //---EliminarUsuario
+    //---Eliminar Usuario
     function deleteUsuario (Request $req){
 
         $ValidacionCampos = isNullEmpty($req->numDoc,'','El campo numero documento no puede estar vacio');
@@ -208,6 +208,24 @@ class gestionarUsuarioController extends Controller
             rol_id_rol ='{$req->rol}',contrasenia = '{$req->contrasenia}'
             WHERE num_documento = '{$req->numDoc}' ");
           
+ }
+    //----Detalle Usuario---------------
+        function detalleUsuario (Request $req){
+
+            // detalle de todos los campos del usuario
+            return mySQLConsulta("SELECT 
+            u.nombres,
+            u.apellidos,
+            u.direccion,
+            u.telefono,
+            r.nombre AS Cargo, 
+            d.nombre AS TipoDocumento,
+            u.usuario AS usuarioDocument,
+            u.contrasenia    
+            FROM usuarios u , rol r, documentos d
+            WHERE u.rol_id_rol = r.id_rol 
+            AND u.documentos_id_documentos = d.id_documentos
+            AND u.usuario='{$req->numDoc}'");
  }
 
 }
