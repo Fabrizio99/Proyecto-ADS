@@ -1,5 +1,4 @@
 /*PLANTILLA DE ALERTAS*/
-import Vue from 'vue'
 
 export const showErrorMessage = (_this,message)=> {
     return _this.$swal({

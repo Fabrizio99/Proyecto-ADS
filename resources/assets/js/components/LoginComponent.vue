@@ -31,6 +31,7 @@
 
 <script>
 import store from "../store";
+import usuario from "../user.js";
 export default {
   data() {
     return {
@@ -42,13 +43,13 @@ export default {
   methods: {
     async submitLogin() {
       let response = await axios.get('api/getLogin?user='+this.user+'&password='+this.password);
-      console.log(response);
       if(response.data.status == "1" || response.data.status == "2"){
         Alert.showErrorMessage(this,response.data.msj);
       }else{
+        usuario.setData(response.data.data);
         this.$router.push({ name: 'main'});
       }
     },
-  },
+  }
 };
 </script>
