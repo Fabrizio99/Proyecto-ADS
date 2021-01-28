@@ -1,5 +1,4 @@
 /*PLANTILLA DE ALERTAS*/
-import Vue from 'vue'
 
 export const showErrorMessage = (_this,message)=> {
     return _this.$swal({
@@ -29,3 +28,16 @@ export const showEditMessage = (_this,message)=> {
         text: message || 'Editado correctamente',
     });
 };
+
+export const showQuestionAlert = (_this,message,confirmButton)=>{
+    return _this.$swal({
+        title: 'Advertencia',
+        text: message,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText : 'Cancelar',
+        confirmButtonText: confirmButton
+      });
+}

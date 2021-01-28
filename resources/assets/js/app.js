@@ -4,15 +4,12 @@ import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import Axios from 'axios'
 window.axios = Axios;
+import service from './services';
+window.service = service;
+//let usuario = require('./user.js').default;
 
+//window.Usuario = new usuario();
 
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
-//require('./bootstrap');
 
 var $ = require('jquery');
 window.$ = $;
