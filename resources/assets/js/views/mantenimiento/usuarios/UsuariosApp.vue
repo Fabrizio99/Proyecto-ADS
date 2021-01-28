@@ -16,10 +16,10 @@
                             <div class="form-row">
                                 <div class="form-group col-9">
                                     <label for="exampleInputPassword1">Nombre del usuario</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1">
+                                    <input type="text" class="form-control" id="exampleInputPassword1" v-model="userInput">
                                 </div>
                                 <div class="form-group col-3 mt-2">
-                                    <input type="button" class="btn btn-primary btn-block mt-4 btnbuscar" value="BUSCAR"/>
+                                    <input type="button" class="btn btn-primary btn-block mt-4 btnbuscar" value="BUSCAR" @click="searchUser"/>
                                 </div>
                             </div>
                         </div>
@@ -37,11 +37,11 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td scope="row">1</td>
-                          <td>Ricardo</td>
-                          <td>Chavez Vilcapoma</td>
-                          <td>Cajero</td>
+                        <tr v-for="(usuario,index) in listaUsuarios" :key="usuario.num_documento">
+                          <td scope="row">{{index+1}}</td>
+                          <td>{{usuario.nombres}}</td>
+                          <td>{{usuario.apellido}}</td>
+                          <td>{{usuario.nombre}}</td>
                           <td class = "option text-center">
                             <div class="dropdown">
                               <div class="btn btn-danger"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -49,7 +49,7 @@
                               </div>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" @click="openFormUser">Editar</a>
-                                <a class="dropdown-item" @click="deleteUser">Eliminar</a>
+                                <a class="dropdown-item" @click="deleteUser(usuario.num_documento)">Eliminar</a>
                               </div>
                             </div>
                           </td>
@@ -71,25 +71,66 @@ export default {
         'app-bar'    : Appbar,
         'navigation' : Navigation
     },
+    data(){
+      return{
+        listaUsuarios : [],
+        userInput     : ''
+      }
+    },
     methods : {
-        openFormUser(){
-          this.$router.push({name:"formUser"});
-        },
-        async deleteUser(){
-          const {isConfirmed} = await this.$swal({
-            title: 'Advertencia',
-            text: "¿Está seguro de eliminar al usuario?",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Eliminar'
-          });
-          
-          if(isConfirmed){
-            this.$swal('Eliminado!','','success');
+      async searchUser(){
+        if(this.userInput.trim() != ''){
+          let response = await axios.get('api/getBuscarUsuario?nombre='+this.userInput.trim());
+          this.userInput = '';
+          if(response.data.status == "0"){
+            if(response.data.data.length == 0){
+              Alert.showErrorMessage(this,'No se encuentra el usuario');
+            }else{
+              this.listaUsuarios = response.data.data;
+            }
+          }else{
+            Alert.showErrorMessage(this,response.data.msj);
           }
         }
+      },
+      openFormUser(){
+        this.$router.push({name:"formUser"});
+      },
+      async deleteUser(documento){
+        const alertaResponse = await Alert.showQuestionAlert(this,'¿Desea eliminar usuario?','Aceptar');
+        if(alertaResponse.isConfirmed){
+          const body = {
+            numDoc : documento
+          }
+          let response = await axios.post('api/deleteUsuario',body);
+
+          if(response.data.status == "0"){
+            console.log('llego aquiiiii');
+            Alert.showSuccessMessage(this,'Usuario eliminado exitosamente');
+            this.getUsers();
+          }else{
+            Alert.showErrorMessage(this,response.data.msj);
+          }
+        }
+        
+        /*if(isConfirmed){
+          this.$swal('Eliminado!','','success');
+        }*/
+      },
+      async getUsers(){
+        console.log('se hizo peticion de usuarios/');
+        let response = await axios.get('api/listaUsuario');
+        if(response.data.status == "0"){
+          //todo bien
+          this.listaUsuarios = response.data.data;
+        }else{
+          Alerts.showErrorMessage(this,response.data.msj)
+        }
+      }
+    },
+    mounted(){
+      console.log('mounted!!!');
+      this.getUsers();
     }
 }
 </script>

@@ -6,7 +6,7 @@
         </div>
         <div class="dropdown">
             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Fabrizio Condori
+                {{user.nombres}} {{user.apellido}}
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <a class="dropdown-item" @click="logout">Cerrar Sesión</a>
@@ -16,13 +16,19 @@
 </template>
 <script>
 import { TimelineLite } from 'gsap'
+import usuario from '../user';
 export default {
+    data(){
+        return{
+            user : {}
+        }
+    },
     methods : {
         logout(){
+            usuario.setData();
             this.$router.push({name:"login"});
         },
         openNavigation(){
-            //esta función es para mostrar la barra de navegacion, por favor NO TOCAR XD
             const timeline = new TimelineLite()
             timeline.fromTo(".navigation-component",
                 {
@@ -44,5 +50,8 @@ export default {
                 })
         }
     },
+    mounted(){
+        this.user = usuario.getData();
+    }
 }
 </script>

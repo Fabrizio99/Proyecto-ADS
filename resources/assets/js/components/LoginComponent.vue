@@ -16,10 +16,10 @@
                                 <label for="exampleInputPassword1" class="form-label">Contraseña</label>
                                 <input type="password" class="form-control" v-model="password"/>
                             </div>
-                            <div class="form-group form-check">
+                            <!--<div class="form-group form-check">
                                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
                                 <label class="form-check-label" for="exampleCheck1">Recordar</label>
-                            </div>
+                            </div>-->
                             <button type="submit" class="btn btn-primary">Ingresar</button>
                         </form>
                     </div>
@@ -31,6 +31,7 @@
 
 <script>
 import store from "../store";
+import usuario from "../user.js";
 export default {
   data() {
     return {
@@ -41,20 +42,16 @@ export default {
   },
   methods: {
     async submitLogin() {
-      let {status,data} = await axios.get(`api/getLogin?user=${this.user}&password=${this.password}`);
-
-      if(status != 200){
-        Alert.showErrorMessage(this);
-        return;
+      let response = await axios.get('api/getLogin?user='+this.user+'&password='+this.password);
+      //let resp2 = await service.get('api/getLogin?user='+this.user+'&password='+this.password);
+      //console.log(resp2);
+      if(response.data.status == "1" || response.data.status == "2"){
+        Alert.showErrorMessage(this,response.data.msj);
+      }else{
+        usuario.setData(response.data.data);
+        this.$router.push({ name: 'main'});
       }
-      if(data.status == "1" || data.status == "2"){
-        Alert.showErrorMessage(this,data.msj);
-        return;
-      }
-
-      //Alert.showSuccessMessage(this,'Ingreso correcto');
-      this.$router.push({ name: 'main' });
     },
-  },
+  }
 };
 </script>
