@@ -209,7 +209,7 @@ class gestionarUsuarioController extends Controller
             WHERE num_documento = '{$req->numDoc}' ");
           
  }
-    //----Detalle Usuario---------------
+    //----Capturando Datos Para Los Campo de Modificación---------------
         function detalleUsuario (Request $req){
 
             // detalle de todos los campos del usuario

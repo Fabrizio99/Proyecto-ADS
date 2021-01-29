@@ -75,7 +75,7 @@ class emitirBvController extends Controller
 
     }
 
-    //////////////////falta probar/////////////////////////////
+    //----Angel va supervisar esta Función (TAREA PARA ANGEL )
 
     function registrarPago(Request $req){
 
@@ -84,24 +84,23 @@ class emitirBvController extends Controller
         //alva = file
         //columna numero de cuenta
 
-        $valDiferentes = isNullEmpty($req->montorecibido)?:
-                       isNullEmpty($req->vuelto)?:
-                       isNullEmpty($req->tipopago)?:
-                       isNullEmpty($req->cuenta,'','cuenta')?:
-                       isNullEmpty($req->imgPrueba,'','');
+        $valYape = isNullEmpty($req->montorecibido,'','El montorecibido no puede estar vacio')?:
+                    isNullEmpty($req->cuenta,'','El cuenta no puede estar vacio')?:
+                    isNullEmpty($req->imgPrueba,'','El imgPrueba no puede estar vacio');
         
-        $valComun = isNullEmpty($req->montoPagar,'','ps montopagar') ?:
-                            isNullEmpty($req->notaIdBv,'','notaventaId') ?: 
-                            isNullEmpty($req->fecha,'','fecha') ?:
-                            isNullEmpty($req->tipopago,'','tipoPago');
-                            //isNullEmpty($req->file,'','file');
-
-        if($valComun){
-            return $valComun;
-        }else if ($valDiferentes){
-            return $valDiferentes;
+        $valEfectivo = isNullEmpty($req->montoPagar,'','El montoPagar no puede estar vacio') ?:
+                        isNullEmpty($req->notaIdBv,'','El notaIdBv no puede estar vacio') ?: 
+                        isNullEmpty($req->fecha,'','fecha','La fecha no puede estar vacia') ?:
+                        isNullEmpty($req->tipopago,'','El montorecibido no puede estar vacio')?:
+                        isNullEmpty($req->vuelto,'','El vuelto no puede estar vacio')?:
+                        isNullEmpty($req->montorecibido,'','El montorecibido no puede estar vacio');
+                            
+        //Validacion de cmp Yape y Efectivo
+        if($valEfectivo){
+            return $valEfectivo;
         }
 
+        //Modificación de Productos (Se reduce los productos al registrar una boleta)
         $modificar= mySQLupDate(
             "UPDATE producto AS p, notadeventas_has_producto AS nhp, notadeventas AS nv 
             SET p.stock=p.stock-nhp.cantidad  
@@ -112,31 +111,38 @@ class emitirBvController extends Controller
           
           $modificar = json_decode($modificar);
 
-          if ($modificar->status == $_SESSION["STATUS_SUCCES"]) {
+          if ($modificar) {
               return JSON_ENCODE(
                   (object) [
-                      'status' => $_SESSION["STATUS_CONTROL"],
                       'msj'    => 'se cambio la cantidad de productos.'
                    ]
               );        
-    }
-      
+    
+    //Tipo pago = 1 // efectivo
     if(($req->tipopago)==1){
-        return("INSERT INTO boleta  
+        return mySQLInsert("INSERT INTO boleta  
           (TIPOPAGO_id_tipopago,
           NOTADEVENTAS_id_boletaventa,
           fecha,
           monto,
-          vuelto) 
-          VALUES('{$req->tipopago}','{$req->notaIdBv}','{$req->fecha}','{$req->monto}',{$req->file}");
+          montoRecibido) 
+          VALUES('{$req->tipopago}','{$req->notaIdBv}','{$req->fecha}','{$req->monto}','{$req->montorecibido}'");
 
        }else if(($req->tipopago)==2){
-        return("INSERT INTO boleta  (TIPOPAGO_id_tipopago,NOTADEVENTAS_id_boletaventa,fecha,monto,evidencia) 
-        VALUES('{$req->tipopago}',
-        '{$req->notaIdBv}','{$req->fecha}'
-        ,{$req->monto},{$req->imgPrueba},'{$req->cuenta}',{$req->file})");
-        }      
+        return mySQLInsert("INSERT INTO boleta  
+        (TIPOPAGO_id_tipopago,
+        NOTADEVENTAS_id_boletaventa,
+        fecha,
+        num_cuenta,
+        monto,
+        evidencia) 
+        VALUES('{$req->tipopago}','{$req->notaIdBv}',
+        '{$req->fecha}',{$req->cuenta},
+        '{$req->montoPagar}','{$req->imgPrueba}')");
+        }  
+          
     } 
+}
 
 }
 
