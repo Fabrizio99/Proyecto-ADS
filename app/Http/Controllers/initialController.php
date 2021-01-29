@@ -12,7 +12,7 @@ class initialController extends Controller
      
     function getLogin(Request $req){
         try {
-            $isValidate = isNullEmpty($req->user, 'user') ?: isNullEmpty($req->password, 'user');
+            $isValidate = isNullEmpty($req->user, 'user') ?: isNullEmpty($req->password, 'password');
             
             if($isValidate){
                 return $isValidate;
