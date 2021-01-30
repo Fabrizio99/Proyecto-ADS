@@ -64766,6 +64766,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
               case 3:
                 response = _context3.sent;
 
+                console.log('respuesta ', response);
                 if (response.data.status == "0") {
                   //todo bien
                   this.listaUsuarios = response.data.data;
@@ -64773,7 +64774,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   alert('Error: ' + response.data.msj);
                 }
 
-              case 5:
+              case 6:
               case 'end':
                 return _context3.stop();
             }
@@ -65412,7 +65413,24 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
             return createUser;
         }(),
-        editUser: function editUser() {},
+        editUser: function editUser() {
+            var body = {
+                nombres: this.user.nombre,
+                apellidos: this.user.apellidos,
+                direccion: this.user.direccion,
+                telefono: this.user.telefono,
+                rol: this.user.rol,
+                numDoc: this.user.documento,
+                contrasenia: this.user.clave
+            };
+
+            var response = axios.post('api/modificarUsuario', body);
+            if (response.data.status == "0") {
+                alert('Mensaje: Usuario modificado exitosamente');
+            } else {
+                alert('Error: ', response.data.msj);
+            }
+        },
         getTipoDocumentos: function () {
             var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
                 var response;
@@ -65471,7 +65489,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             this.user.nombre = _usuario.nombres;
             this.user.apellidos = _usuario.apellidos;
             this.user.documento = _usuario.num_documento;
-            this.user.tipoDocumento = _usuario.documentos_id_documentos;
+            this.user.tipoDocumento = _usuario.tipo_doc;
             this.user.direccion = _usuario.direccion;
             this.user.telefono = _usuario.telefono;
             this.user.rol = _usuario.rol_id_rol;

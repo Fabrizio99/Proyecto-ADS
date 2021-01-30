@@ -153,6 +153,7 @@ export default {
       async getUsers(){
         this.userInput = '';
         let response = await axios.get('api/listaUsuario?token='+usuario.getData().token);
+        console.log('respuesta ',response);
         if(response.data.status == "0"){
           //todo bien
           this.listaUsuarios = response.data.data;

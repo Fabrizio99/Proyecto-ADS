@@ -141,7 +141,22 @@ export default {
             }
         },
         editUser(){
+            const body = {
+                nombres : this.user.nombre,
+                apellidos : this.user.apellidos,
+                direccion : this.user.direccion,
+                telefono : this.user.telefono,
+                rol : this.user.rol,
+                numDoc : this.user.documento,
+                contrasenia : this.user.clave
+            }
 
+            let response = axios.post('api/modificarUsuario',body);
+            if(response.data.status == "0"){
+                alert('Mensaje: Usuario modificado exitosamente')
+            }else{
+                alert('Error: ',response.data.msj);
+            }
         },
         async getTipoDocumentos(){
             let response = await axios.get('api/cmbTipoDoc?token='+usuario.getData().token);
@@ -176,7 +191,7 @@ export default {
             this.user.nombre = usuario.nombres;
             this.user.apellidos = usuario.apellidos;
             this.user.documento = usuario.num_documento;
-            this.user.tipoDocumento = usuario.documentos_id_documentos;
+            this.user.tipoDocumento = usuario.tipo_doc;
             this.user.direccion = usuario.direccion;
             this.user.telefono  = usuario.telefono;
             this.user.rol = usuario.rol_id_rol;
