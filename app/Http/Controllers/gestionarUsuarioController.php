@@ -14,12 +14,10 @@ class gestionarUsuarioController extends Controller
     // en la tbl usuarios en la BD falta foto
 
         return mySQLConsulta(
-            "SELECT /*u.foto,*/
-                    u.nombres,
-                    u.apellidos,
-                    u.num_documento,
-                    r.nombre
-                FROM usuarios u , rol r
+            "SELECT u.*,
+                    r.nombre AS Cargo
+                FROM usuarios AS u,
+                     rol AS r
                 WHERE u.rol_id_rol = r.id_rol
                 AND r.id_rol
                 AND estado ='A' 
@@ -27,6 +25,16 @@ class gestionarUsuarioController extends Controller
         );
     }
      
+
+    function cmbTipoDoc (Request $req){
+    
+        return mySQLConsulta(
+            "SELECT *
+                FROM documentos"
+        );
+    }
+        
+
     //-----Buscar Usuario------
     function getBuscarUsuario (Request $req){
 

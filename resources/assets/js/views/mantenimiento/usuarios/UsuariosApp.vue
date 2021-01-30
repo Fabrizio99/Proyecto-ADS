@@ -94,6 +94,7 @@
 import Appbar from '../../../components/AppBar'
 import Navigation from '../../../components/NavigationComponent';
 import data from '../../../data';
+import usuario from '../../../user';
 
 
 export default {
@@ -111,8 +112,7 @@ export default {
     methods : {
       async searchUser(){
         if(this.userInput.trim() != ''){
-          let response = await axios.get('api/getBuscarUsuario?cmpbusqueda='+this.userInput.trim());
-          console.log('respuesta busqueda',response);
+          let response = await axios.get('api/getBuscarUsuario?cmpbusqueda='+this.userInput.trim()+'&token='+usuario.getData().token);
           this.userInput = '';
           if(response.data.status == "0"){
             this.listaUsuarios = Array.isArray(response.data.data)?response.data.data:[response.data.data];
@@ -138,7 +138,8 @@ export default {
       },
       async deleteUser(){
         const body = {
-          numDoc : this.userSelected
+          numDoc : this.userSelected,
+          token : usuario.getData().token
         }
         let response = await axios.post('api/deleteUsuario',body);
         console.log(response);
@@ -151,15 +152,12 @@ export default {
       },
       async getUsers(){
         this.userInput = '';
-        console.log('se hizo peticion de usuarios/');
-        let response = await axios.get('api/listaUsuario');
-        console.log('respuesta ',response);
+        let response = await axios.get('api/listaUsuario?token='+usuario.getData().token);
         if(response.data.status == "0"){
           //todo bien
           this.listaUsuarios = response.data.data;
         }else{
           alert('Error: '+response.data.msj);
-          //Alert.showErrorMessage(this,response.data.msj)
         }
       }
     },

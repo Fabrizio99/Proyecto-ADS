@@ -6957,17 +6957,15 @@ process.umask = function() { return 0; };
 function Usuario() {}
 Usuario.prototype.getData = function () {
     var result = decodeURIComponent(document.cookie);
+    console.log(result);
     var results = result.split(';').filter(function (data) {
         return data.includes('user');
     });
     return JSON.parse(results[0].split('=')[1]);
-    //return JSON.parse(localStorage.getItem('user'));
 };
 Usuario.prototype.setData = function (data) {
     var cookie = ['user', '=', JSON.stringify(data)].join('');
-    console.log(cookie);
     document.cookie = cookie;
-    //localStorage.setItem('user',JSON.stringify(data));
 };
 var usuario = new Usuario();
 /* harmony default export */ __webpack_exports__["a"] = (usuario);
@@ -52856,6 +52854,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   this.errorMessage = response.data.msj;
                   alert('Error: ' + response.data.msj);
                 } else {
+                  response.data.data.token = response.data.token;
                   __WEBPACK_IMPORTED_MODULE_1__user_js__["a" /* default */].setData(response.data.data);
                   this.$router.push({ name: 'main' });
                 }
@@ -64542,6 +64541,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__user__ = __webpack_require__(13);
 
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
@@ -64643,6 +64643,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     'app-bar': __WEBPACK_IMPORTED_MODULE_1__components_AppBar___default.a,
@@ -64665,31 +64666,28 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             switch (_context.prev = _context.next) {
               case 0:
                 if (!(this.userInput.trim() != '')) {
-                  _context.next = 7;
+                  _context.next = 6;
                   break;
                 }
 
                 _context.next = 3;
-                return axios.get('api/getBuscarUsuario?cmpbusqueda=' + this.userInput.trim());
+                return axios.get('api/getBuscarUsuario?cmpbusqueda=' + this.userInput.trim() + '&token=' + __WEBPACK_IMPORTED_MODULE_4__user__["a" /* default */].getData().token);
 
               case 3:
                 response = _context.sent;
 
-                console.log('respuesta busqueda', response);
                 this.userInput = '';
                 if (response.data.status == "0") {
                   this.listaUsuarios = Array.isArray(response.data.data) ? response.data.data : [response.data.data];
                   if (this.listaUsuarios.length == 0) {
                     alert('Error: No se encuentra el usuario');
-                    //Alert.showErrorMessage(this,'No se encuentra el usuario');
                   }
                 } else {
-                  //Alert.showErrorMessage(this,response.data.msj);
                   this.listaUsuarios = [];
                   alert('Error: ' + response.data.msj);
                 }
 
-              case 7:
+              case 6:
               case 'end':
                 return _context.stop();
             }
@@ -64722,7 +64720,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             switch (_context2.prev = _context2.next) {
               case 0:
                 body = {
-                  numDoc: this.userSelected
+                  numDoc: this.userSelected,
+                  token: __WEBPACK_IMPORTED_MODULE_4__user__["a" /* default */].getData().token
                 };
                 _context2.next = 3;
                 return axios.post('api/deleteUsuario', body);
@@ -64760,23 +64759,20 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             switch (_context3.prev = _context3.next) {
               case 0:
                 this.userInput = '';
-                console.log('se hizo peticion de usuarios/');
-                _context3.next = 4;
-                return axios.get('api/listaUsuario');
+                _context3.next = 3;
+                return axios.get('api/listaUsuario?token=' + __WEBPACK_IMPORTED_MODULE_4__user__["a" /* default */].getData().token);
 
-              case 4:
+              case 3:
                 response = _context3.sent;
 
-                console.log('respuesta ', response);
                 if (response.data.status == "0") {
                   //todo bien
                   this.listaUsuarios = response.data.data;
                 } else {
                   alert('Error: ' + response.data.msj);
-                  //Alert.showErrorMessage(this,response.data.msj)
                 }
 
-              case 7:
+              case 5:
               case 'end':
                 return _context3.stop();
             }

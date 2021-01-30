@@ -47,6 +47,7 @@ export default {
         this.errorMessage = response.data.msj;
         alert('Error: '+response.data.msj);
       }else{
+        response.data.data.token = response.data.token;
         usuario.setData(response.data.data);
         this.$router.push({ name: 'main'});
       }
