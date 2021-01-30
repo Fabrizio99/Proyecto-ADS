@@ -101,7 +101,24 @@ class emitirNotaVController extends Controller
                     LIMIT 1 
                    "
               );
+
+
+              // AQUI HACES TU UPDATE DE CANTIDAD DE STOCK   '{$valor->id_producto}', '{$valor->cantidad}'
+
         }
+
+
+        if (!$req->listProduct || count($req->listProduct) == 0 ) {
+            return JSON_ENCODE(
+                (object) [
+                         'status' => $_SESSION["STATUS_SUCCES"],
+                         'msj'    => 'EXITOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO'
+                       ]
+                 );
+        }  
+
+
+
     }
 }
 
