@@ -119,7 +119,7 @@ class emitirBvController extends Controller
                  NOTADEVENTAS_id_boletaventa,
                  fecha,
                  monto) 
-                 VALUES('{$req->tipopago}','{$req->notaIdBv}','{$req->fecha}','{$req->montorecibido}'",'SE REGISTRO EL PAGO POR EFECTIVO');
+                 VALUES('{$req->tipopago}','{$req->notaIdBv}','{$req->fecha}','{$req->montorecibido}')",'SE REGISTRO EL PAGO POR EFECTIVO');
                  
                 }else if($req->tipopago == 2){
                     return mySQLInsert("INSERT INTO boleta  

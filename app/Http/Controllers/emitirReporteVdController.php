@@ -64,16 +64,13 @@ class emitirReporteVdController extends Controller
     /// SE REQUIERE DE LA TABLA REPORTEVENTA
     function emitirReporteVenta (Request $req){
 
-        $validacionI = isNullEmpty($req->emisor,'','emisor')?:
-                      isNullEmpty($req->receptor,'','receptor')?:
-                      isNullEmpty($req->mensaje,'','FALTA incidencia');
+        $validacionI = isNullEmpty($req->descripcion,'','la descripcion');
 
                       if($validacionI){
                         return $validacionI;
                       }
 
-                      return mySQLInsert("INSERT INTO reporte (incidencia) VALUES ('{$req->mensaje}')");
-
+                      return mySQLInsert("SELECT insert into reporte (incidencia,fecha) values ('YA QUIERO MIMIR',sysdate()");
                     }
 
     }
