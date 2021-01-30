@@ -33,7 +33,7 @@ Route::post('registrarP', 'gProductosController@registrarP' )->middleware('valid
 //emitirNotaVController
 Route::get('usuarioNV' ,'emitirNotaVController@usuarioNV')->middleware('validateAuth');
 Route::get('ProductosL','emitirNotaVController@ProductosL')->middleware('validateAuth');
-Route::post('guardarNV','emitirNotaVController@guardarNV')->middleware('validateAuth');
+Route::post('guardarNV','emitirNotaVController@guardarNV');
 
 //entregarPController
 Route::get('listaB' ,'entregarPController@listaB')->middleware('validateAuth');

@@ -69,26 +69,41 @@ class emitirNotaVController extends Controller
                  ]
            );
         }
-    
-        return mySQLInsert(
+        
+        $req->listProduct = json_decode($req->listProduct);
+
+        if (!$req->listProduct || count($req->listProduct) == 0 ) {
+            return JSON_ENCODE(
+                (object) [
+                         'status' => $_SESSION["STATUS_CONTROL"],
+                         'msj'    => 'Debe tener al menos 1 producto seleccionado.'
+                       ]
+                 );
+        }  
+
+        mySQLInsert(
             "INSERT INTO notadeventas (DOCUMENTOS_id_documentos,USUARIOS_id_usuario,fecha,nombre_cliente,numdocumento_cliente,telefono_cliente,estado,monto) 
             SELECT '{$req->tipoDoc}',id_usuario,'{$req->fecha}','{$req->nombre}', '{$req->numDoc}','{$req->celular}','POR ATENDER','{$req->monto}'
             FROM usuarios 
-            WHERE codigo like  '{$req->codigoU}'"
-            
+            WHERE num_documento = '{$req->numDoc}'"
             );
-        return mySQLInsert(
-          " INSERT INTO notadeventas_has_producto (NOTADEVENTAS_id_boletaventa,PRODUCTO_id_producto,cantidad)
-            SELECT id_boletaventa,id_producto,3
-            FROM notadeventas nv,producto p
-            WHERE nv.numdocumento_cliente= '{$req->numDoc}'
-            AND   p.nombre= '{$req->nombreP}'"
-        );
-        
-    
 
 
+        foreach ($req->listProduct as &$valor) {
+            echo 'id_producto :::: '.($valor->id_producto);
+            echo 'cantidad :::: '.($valor->cantidad);
+
+            mySQLInsert(
+                " INSERT INTO notadeventas_has_producto (NOTADEVENTAS_id_boletaventa,PRODUCTO_id_producto,cantidad)
+                  SELECT id_boletaventa, '{$valor->id_producto}', '{$valor->cantidad}'  
+                    FROM notadeventas nv
+                    ORDER BY 1 DESC
+                    LIMIT 1 
+                   "
+              );
+        }
     }
-
-
 }
+
+
+
