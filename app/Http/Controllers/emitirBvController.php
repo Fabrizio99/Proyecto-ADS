@@ -77,7 +77,7 @@ class emitirBvController extends Controller
 
     }
 
-    //////////////////falta probar/////////////////////////////
+    //----Angel va supervisar esta Función (TAREA PARA ANGEL )
 
     function registrarPago(Request $req){
 
@@ -106,7 +106,8 @@ class emitirBvController extends Controller
         }else if ($valDiferentes){
             return $valDiferentes;
         }
-
+        
+        //Modificación de Productos (Se reduce los productos al registrar una boleta)
         $modificar= mySQLupDate(
             "UPDATE producto AS p,
                     notadeventas_has_producto AS nhp, 
@@ -118,23 +119,45 @@ class emitirBvController extends Controller
                 AND nv.id_boletaventa = '{$req->notaIdBv}'"
         ); 
           
-        $modificar = json_decode($modificar);
-
-        if ($modificar->status == $_SESSION["STATUS_ERROR"]) {
-            return JSON_ENCODE($modificar);        
-        }
-      
-        if(($req->tipopago) == $TIPO_EFECTIVO){
-            return(
-                "INSERT INTO boleta (TIPOPAGO_id_tipopago, NOTADEVENTAS_id_boletaventa, fecha, monto, vuelto) 
-                      VALUES ('{$req->tipopago}','{$req->notaIdBv}','{$req->fecha}','{$req->monto}',{$req->file}"
-            );
-
-        }else {
-            return(
-                "INSERT INTO boleta  (TIPOPAGO_id_tipopago, NOTADEVENTAS_id_boletaventa, fecha, monto, evidencia) 
-                      VALUES ('{$req->tipopago}', '{$req->notaIdBv}', '{$req->fecha}', '{$req->monto}', '{$req->imgPrueba}', '{$req->cuenta}', '{$req->file}')"
-            );
-        }      
+          $modificar = json_decode($modificar);
+          
+          if ($modificar->status <> 0) {
+            return JSON_ENCODE(
+                (object) [
+                    'msj'    => 'No se cambio la cantidad de productos correctamente',
+                    'status' => '0'
+                 ]
+            );  }
+              
+            
+            echo'no funciona';
+            if($req->tipopago == 1){
+                
+                 return mySQLInsert("INSERT INTO boleta  
+                 (TIPOPAGO_id_tipopago,
+                 NOTADEVENTAS_id_boletaventa,
+                 fecha,
+                 monto) 
+                 VALUES('{$req->tipopago}','{$req->notaIdBv}','{$req->fecha}','{$req->montorecibido}'",'SE REGISTRO EL PAGO POR EFECTIVO');
+                 
+                }else if($req->tipopago == 2){
+                    return mySQLInsert("INSERT INTO boleta  
+                    (TIPOPAGO_id_tipopago,
+                    NOTADEVENTAS_id_boletaventa,
+                    fecha,
+                     telefono_yape,
+                      monto) 
+                       VALUES('{$req->tipopago}','{$req->notaIdBv}',
+                       '{$req->fecha}','{$req->telefonoYape}',
+                       '{$req->montorecibido}')",'SE REGISTRO EL PAGO POR YAPE');
+        }  
+    
     } 
 }
+
+
+
+   
+
+
+
