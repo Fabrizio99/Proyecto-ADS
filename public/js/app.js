@@ -65349,7 +65349,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             var validador = true;
             var campos = Object.keys(this.user);
             for (var index = 0; index < campos.length; index++) {
-                if (this.user[campos[index]] == null || this.user[campos[index]] == undefined || this.user[campos[index]] == '') {
+                if (this.user[campos[index]] == null && campos[index] != 'clave' || this.user[campos[index]] == undefined && campos[index] != 'clave' || this.user[campos[index]] == '' && campos[index] != 'clave') {
                     validador = false;
                     break;
                 }
@@ -65370,7 +65370,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                                 body = {
                                     numDoc: this.user.documento,
-                                    rol: this.user.rol.id,
+                                    rol: this.user.rol,
                                     contrasenia: this.user.clave,
                                     nombres: this.user.nombre,
                                     apellido: this.user.apellidos,
@@ -65413,36 +65413,74 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
             return createUser;
         }(),
-        editUser: function editUser() {
-            var body = {
-                nombres: this.user.nombre,
-                apellidos: this.user.apellidos,
-                direccion: this.user.direccion,
-                telefono: this.user.telefono,
-                rol: this.user.rol,
-                numDoc: this.user.documento,
-                contrasenia: this.user.clave
-            };
-
-            var response = axios.post('api/modificarUsuario', body);
-            if (response.data.status == "0") {
-                alert('Mensaje: Usuario modificado exitosamente');
-            } else {
-                alert('Error: ', response.data.msj);
-            }
-        },
-        getTipoDocumentos: function () {
+        editUser: function () {
             var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
-                var response;
+                var body, response;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
                     while (1) {
                         switch (_context2.prev = _context2.next) {
                             case 0:
-                                _context2.next = 2;
+                                if (!this.validarCampos()) {
+                                    _context2.next = 10;
+                                    break;
+                                }
+
+                                console.log('llego aca');
+                                body = {
+                                    nombres: this.user.nombre,
+                                    apellidos: this.user.apellidos,
+                                    direccion: this.user.direccion,
+                                    telefono: this.user.telefono,
+                                    rol: this.user.rol,
+                                    numDoc: this.user.documento,
+                                    contrasenia: this.user.clave,
+                                    token: __WEBPACK_IMPORTED_MODULE_5__user__["a" /* default */].getData().token
+                                };
+                                _context2.next = 5;
+                                return axios.post('api/modificarUsuario', body);
+
+                            case 5:
+                                response = _context2.sent;
+
+                                console.log('RESPONSE ', response);
+                                if (response.data.status == "0") {
+                                    alert('Mensaje: Usuario modificado exitosamente');
+                                    this.$router.push({ name: 'user' });
+                                } else {
+                                    alert('Error: ' + response.data.msj);
+                                }
+                                _context2.next = 11;
+                                break;
+
+                            case 10:
+                                alert('Error: Completar todos los campos');
+
+                            case 11:
+                            case 'end':
+                                return _context2.stop();
+                        }
+                    }
+                }, _callee2, this);
+            }));
+
+            function editUser() {
+                return _ref2.apply(this, arguments);
+            }
+
+            return editUser;
+        }(),
+        getTipoDocumentos: function () {
+            var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
+                var response;
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+                    while (1) {
+                        switch (_context3.prev = _context3.next) {
+                            case 0:
+                                _context3.next = 2;
                                 return axios.get('api/cmbTipoDoc?token=' + __WEBPACK_IMPORTED_MODULE_5__user__["a" /* default */].getData().token);
 
                             case 2:
-                                response = _context2.sent;
+                                response = _context3.sent;
 
                                 console.log('documentos', response);
                                 if (response.data.status == "0") {
@@ -65453,14 +65491,14 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                             case 5:
                             case 'end':
-                                return _context2.stop();
+                                return _context3.stop();
                         }
                     }
-                }, _callee2, this);
+                }, _callee3, this);
             }));
 
             function getTipoDocumentos() {
-                return _ref2.apply(this, arguments);
+                return _ref3.apply(this, arguments);
             }
 
             return getTipoDocumentos;
@@ -65492,7 +65530,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             this.user.tipoDocumento = _usuario.tipo_doc;
             this.user.direccion = _usuario.direccion;
             this.user.telefono = _usuario.telefono;
-            this.user.rol = _usuario.rol_id_rol;
+            this.user.rol = _usuario.id_rol;
         }
     }
 });

@@ -91,7 +91,7 @@ class gestionarUsuarioController extends Controller
         
         $ValidacionCampos = isNullEmpty($req->nombres    ,'nombres'    ,'El campo nombres no puede estar vacio',) ?:
                             isNullEmpty($req->apellidos  ,'apellidos'  ,'El campo apellidos no puede estar vacio',) ?: 
-                            isNullEmpty($req->direccion  ,'direccion'  ,'El campo dirreccion no puede estar vacio',) ?:  
+                            isNullEmpty($req->direccion  ,'direccion'  ,'El campo dirección no puede estar vacio',) ?:  
                             isNullEmpty($req->telefono   ,'telefono'   ,'El campo telefono no puede estar vacio') ?:
                             isNullEmpty($req->rol        ,'rol'        ,'El campo cargo no puede estar vacio',) ?:
                             isNullEmpty($req->tipoDoc    ,'tipoDoc'    ,'El campo tipoDocumento no puede estar vacio',) ?:
@@ -203,7 +203,7 @@ class gestionarUsuarioController extends Controller
                 "UPDATE usuarios 
                     SET nombres     = '{$req->nombres}', 
                         apellidos   = '{$req->apellidos}', 
-                        direccion   = '{$req->dirreccion}',
+                        direccion   = '{$req->direccion}',
                         telefono    = '{$req->telefono}',
                         rol_id_rol  = '{$req->rol}'
                 WHERE num_documento = '{$req->numDoc}' "
@@ -224,7 +224,7 @@ class gestionarUsuarioController extends Controller
                 "UPDATE usuarios 
                     SET nombres     = '{$req->nombres}', 
                         apellidos   = '{$req->apellidos}', 
-                        direccion   = '{$req->dirreccion}',
+                        direccion   = '{$req->direccion}',
                         telefono    = '{$req->telefono}',
                         rol_id_rol  = '{$req->rol}',
                         contrasenia = '{$req->contrasenia}'

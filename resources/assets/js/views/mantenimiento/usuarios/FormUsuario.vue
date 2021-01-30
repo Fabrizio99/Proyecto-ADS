@@ -106,7 +106,7 @@ export default {
             let validador = true;
             let campos = Object.keys(this.user);
             for (let index = 0; index < campos.length; index++) {
-                if(this.user[campos[index]] == null || this.user[campos[index]] == undefined || this.user[campos[index]] == ''){
+                if((this.user[campos[index]] == null && campos[index] != 'clave') || (this.user[campos[index]] == undefined && campos[index] != 'clave') || (this.user[campos[index]] == '' && campos[index] != 'clave')){
                     validador = false;
                     break;
                 }
@@ -117,7 +117,7 @@ export default {
             if(this.validarCampos()){
                 const body = {
                     numDoc : this.user.documento,
-                    rol    : this.user.rol.id,
+                    rol    : this.user.rol,
                     contrasenia : this.user.clave,
                     nombres : this.user.nombre,
                     apellido : this.user.apellidos,
@@ -140,22 +140,30 @@ export default {
                 alert('Error: Complete los campos faltantes o incorrectos');
             }
         },
-        editUser(){
-            const body = {
-                nombres : this.user.nombre,
-                apellidos : this.user.apellidos,
-                direccion : this.user.direccion,
-                telefono : this.user.telefono,
-                rol : this.user.rol,
-                numDoc : this.user.documento,
-                contrasenia : this.user.clave
-            }
+        async editUser(){
 
-            let response = axios.post('api/modificarUsuario',body);
-            if(response.data.status == "0"){
-                alert('Mensaje: Usuario modificado exitosamente')
+            if(this.validarCampos()){
+                console.log('llego aca');
+                const body = {
+                    nombres : this.user.nombre,
+                    apellidos : this.user.apellidos,
+                    direccion : this.user.direccion,
+                    telefono : this.user.telefono,
+                    rol : this.user.rol,
+                    numDoc : this.user.documento,
+                    contrasenia : this.user.clave,
+                    token : usuario.getData().token
+                }
+                let response = await axios.post('api/modificarUsuario',body);
+                console.log('RESPONSE ',response);
+                if(response.data.status == "0"){
+                    alert('Mensaje: Usuario modificado exitosamente')
+                    this.$router.push({name : 'user'});
+                }else{
+                    alert('Error: '+response.data.msj);
+                }
             }else{
-                alert('Error: ',response.data.msj);
+                alert('Error: Completar todos los campos')
             }
         },
         async getTipoDocumentos(){
@@ -194,7 +202,8 @@ export default {
             this.user.tipoDocumento = usuario.tipo_doc;
             this.user.direccion = usuario.direccion;
             this.user.telefono  = usuario.telefono;
-            this.user.rol = usuario.rol_id_rol;
+            this.user.rol = usuario.id_rol;
+
         }
     }
 }
