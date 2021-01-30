@@ -42,6 +42,6 @@ Route::post('registrarPago','emitirBvController@registrarPago');
 Route::get('listaBoletaE','emitirReporteVdController@listaBoletaE');
 Route::get('filtrarBoleta','emitirReporteVdController@filtrarBoleta');
 Route::post('guardarIncidencia','emitirReporteVdController@guardarIncidencia');
-Route::post('guardarIncidencia','emitirReporteVdController@guardarIncidencia');
+
 
 

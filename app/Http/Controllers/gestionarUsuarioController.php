@@ -39,7 +39,7 @@ class gestionarUsuarioController extends Controller
         if (strlen($req->cmpbusqueda) < 3) return ;
         return mySQLConsulta(
             "SELECT 
-            u.nombres,
+             u.nombres,
              u.apellidos,
              u.num_documento,
              r.nombre  

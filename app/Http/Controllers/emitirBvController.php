@@ -79,27 +79,18 @@ class emitirBvController extends Controller
 
     function registrarPago(Request $req){
 
-         // falta de BD boleta
-        ///columna monto , monto recibiso=efectivo
-        //alva = file
-        //columna numero de cuenta
-
-        $valYape = isNullEmpty($req->montorecibido,'','El montorecibido no puede estar vacio')?:
-                    isNullEmpty($req->cuenta,'','El cuenta no puede estar vacio')?:
-                    isNullEmpty($req->imgPrueba,'','El imgPrueba no puede estar vacio');
-        
-        $valEfectivo = isNullEmpty($req->montoPagar,'','El montoPagar no puede estar vacio') ?:
+       
+        $validacion =   isNullEmpty($req->montoPagar,'','El montoPagar no puede estar vacio') ?:
                         isNullEmpty($req->notaIdBv,'','El notaIdBv no puede estar vacio') ?: 
                         isNullEmpty($req->fecha,'','fecha','La fecha no puede estar vacia') ?:
-                        isNullEmpty($req->tipopago,'','El montorecibido no puede estar vacio')?:
-                        isNullEmpty($req->vuelto,'','El vuelto no puede estar vacio')?:
+                        isNullEmpty($req->tipopago,'','El seleccione un tipo de pago')?:
                         isNullEmpty($req->montorecibido,'','El montorecibido no puede estar vacio');
-                            
+                                            
         //Validacion de cmp Yape y Efectivo
-        if($valEfectivo){
-            return $valEfectivo;
+        if($validacion){
+            return $validacion;
         }
-
+        
         //Modificación de Productos (Se reduce los productos al registrar una boleta)
         $modificar= mySQLupDate(
             "UPDATE producto AS p, notadeventas_has_producto AS nhp, notadeventas AS nv 
@@ -110,41 +101,42 @@ class emitirBvController extends Controller
             AND nv.id_boletaventa = '{$req->notaIdBv}'"); 
           
           $modificar = json_decode($modificar);
-
-          if ($modificar) {
-              return JSON_ENCODE(
-                  (object) [
-                      'msj'    => 'se cambio la cantidad de productos.'
-                   ]
-              );        
-    
-    //Tipo pago = 1 // efectivo
-    if(($req->tipopago)==1){
-        return mySQLInsert("INSERT INTO boleta  
-          (TIPOPAGO_id_tipopago,
-          NOTADEVENTAS_id_boletaventa,
-          fecha,
-          monto,
-          montoRecibido) 
-          VALUES('{$req->tipopago}','{$req->notaIdBv}','{$req->fecha}','{$req->monto}','{$req->montorecibido}'");
-
-       }else if(($req->tipopago)==2){
-        return mySQLInsert("INSERT INTO boleta  
-        (TIPOPAGO_id_tipopago,
-        NOTADEVENTAS_id_boletaventa,
-        fecha,
-        num_cuenta,
-        monto,
-        evidencia) 
-        VALUES('{$req->tipopago}','{$req->notaIdBv}',
-        '{$req->fecha}',{$req->cuenta},
-        '{$req->montoPagar}','{$req->imgPrueba}')");
-        }  
           
+          if ($modificar->status <> 0) {
+            return JSON_ENCODE(
+                (object) [
+                    'msj'    => 'No se cambio la cantidad de productos correctamente',
+                    'status' => '0'
+                 ]
+            );  }
+              
+            
+            echo'no funciona';
+            if($req->tipopago == 1){
+                
+                 return mySQLInsert("INSERT INTO boleta  
+                 (TIPOPAGO_id_tipopago,
+                 NOTADEVENTAS_id_boletaventa,
+                 fecha,
+                 monto) 
+                 VALUES('{$req->tipopago}','{$req->notaIdBv}','{$req->fecha}','{$req->montorecibido}'",'SE REGISTRO EL PAGO POR EFECTIVO');
+                 
+                }else if($req->tipopago == 2){
+                    return mySQLInsert("INSERT INTO boleta  
+                    (TIPOPAGO_id_tipopago,
+                    NOTADEVENTAS_id_boletaventa,
+                    fecha,
+                     telefono_yape,
+                      monto) 
+                       VALUES('{$req->tipopago}','{$req->notaIdBv}',
+                       '{$req->fecha}','{$req->telefonoYape}',
+                       '{$req->montorecibido}')",'SE REGISTRO EL PAGO POR YAPE');
+        }  
+    
     } 
 }
 
-}
+
 
    
 
