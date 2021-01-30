@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\helper\ValidateAuth;
+use Exception;
 use Illuminate\Http\Request;
 
 
