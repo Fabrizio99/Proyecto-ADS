@@ -39,7 +39,9 @@ Route::get('buscaNotaVByFechas','emitirBvController@buscaNotaVByFechas');
 Route::post('registrarPago','emitirBvController@registrarPago');
 
 //emitirReporteVentaDiarias
-Route::get('listaBoletaE','emitirBvController@listaNotaV');
-Route::get('filtrarBoletaE','emitirBvController@buscaNotaVByFechas');
-Route::post('emitirBoleta','emitirBvController@registrarPago');
-Route::post('generarNota','emitirBvController@registrarPago');
+Route::get('listaBoletaE','emitirReporteVdController@listaBoletaE');
+Route::get('filtrarBoleta','emitirReporteVdController@filtrarBoleta');
+Route::post('guardarIncidencia','emitirReporteVdController@guardarIncidencia');
+Route::post('guardarIncidencia','emitirReporteVdController@guardarIncidencia');
+
+
