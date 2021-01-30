@@ -124,3 +124,17 @@ class emitirNotaVController extends Controller
 
 
 
+// PRUEBAAAAAAAAAAAAAAAAAAAAAAAS CON ESTA LISTAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+// listProduct  -->   
+// [
+//     {
+//         "id_producto" : "1",
+//         "cantidad" : "5"
+//     },
+    
+//     {
+//         "id_producto" : "2",
+//         "cantidad" : "4"
+//     }
+// ]
