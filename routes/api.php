@@ -30,6 +30,16 @@ Route::post('deleteP'   , 'gProductosController@deleteP'    )->middleware('valid
 Route::post('updateP'   , 'gProductosController@updateP'    )->middleware('validateAuth');
 Route::post('registrarP', 'gProductosController@registrarP' )->middleware('validateAuth');
 
+//emitirNotaVController
+Route::get('usuarioNV' ,'emitirNotaVController@usuarioNV')->middleware('validateAuth');
+Route::get('ProductosL','emitirNotaVController@ProductosL')->middleware('validateAuth');
+Route::post('guardarNV','emitirNotaVController@guardarNV');
+
+//entregarPController
+Route::get('listaB' ,'entregarPController@listaB')->middleware('validateAuth');
+Route::get('buscarBoletaF' ,'entregarPController@buscarBoletaF')->middleware('validateAuth');
+Route::post('modificarEb' ,'entregarPController@modificarEb')->middleware('validateAuth');
+
 //no probar esta en proceso 
 //emitirBvController
 Route::get('listaNotaV'        , 'emitirBvController@listaNotaV'        )->middleware('validateAuth');
@@ -37,6 +47,6 @@ Route::get('buscaNotaVByFechas', 'emitirBvController@buscaNotaVByFechas')->middl
 Route::post('registrarPago'    , 'emitirBvController@registrarPago'     )->middleware('validateAuth');
 
 //emitirReporteVentaDiarias
-Route::get('listaBoletaE','emitirReporteVdController@listaBoletaE');
-Route::get('filtrarBoleta','emitirReporteVdController@filtrarBoleta');
-Route::post('guardarIncidencia','emitirReporteVdController@guardarIncidencia');
+Route::get('listaBoletaE','emitirReporteVdController@listaBoletaE')->middleware('validateAuth');
+Route::get('filtrarBoleta','emitirReporteVdController@filtrarBoleta')->middleware('validateAuth');
+Route::post('guardarIncidencia','emitirReporteVdController@guardarIncidencia')->middleware('validateAuth');
