@@ -55,6 +55,7 @@ class gestionarUsuarioController extends Controller
                FROM usuarios u , rol r
               WHERE u.rol_id_rol = r.id_rol 
                 AND (u.nombres LIKE '{$req->cmpbusqueda}%' OR u.apellidos LIKE '{$req->cmpbusqueda}%') 
+                AND estado ='A' 
               LIMIT 0,50"
         );
        
