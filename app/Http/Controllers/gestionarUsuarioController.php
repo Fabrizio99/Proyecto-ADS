@@ -15,10 +15,10 @@ class gestionarUsuarioController extends Controller
 
         return mySQLConsulta(
             "SELECT /*u.foto,*/
-                    u.nombres AS Nombres,
-                    u.apellidos AS Apellidos,
-                    u.num_documento AS N_Documento,
-                    r.nombre AS Cargo
+                    u.nombres,
+                    u.apellidos,
+                    u.num_documento,
+                    r.nombre
                 FROM usuarios u , rol r
                 WHERE u.rol_id_rol = r.id_rol
                 AND r.id_rol

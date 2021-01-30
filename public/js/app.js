@@ -6960,8 +6960,6 @@ Usuario.prototype.getData = function () {
     var results = result.split(';').filter(function (data) {
         return data.includes('user');
     });
-    console.log(result.split(';'));
-    console.log(JSON.parse(results[0].split('=')[1]));
     return JSON.parse(results[0].split('=')[1]);
     //return JSON.parse(localStorage.getItem('user'));
 };
@@ -64635,6 +64633,11 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -64667,12 +64670,12 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 }
 
                 _context.next = 3;
-                return axios.get('api/getBuscarUsuario?nombre=' + this.userInput.trim());
+                return axios.get('api/getBuscarUsuario?cmpbusqueda=' + this.userInput.trim());
 
               case 3:
                 response = _context.sent;
 
-                console.log(response);
+                console.log('respuesta busqueda', response);
                 this.userInput = '';
                 if (response.data.status == "0") {
                   this.listaUsuarios = Array.isArray(response.data.data) ? response.data.data : [response.data.data];
@@ -64756,11 +64759,12 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
+                this.userInput = '';
                 console.log('se hizo peticion de usuarios/');
-                _context3.next = 3;
+                _context3.next = 4;
                 return axios.get('api/listaUsuario');
 
-              case 3:
+              case 4:
                 response = _context3.sent;
 
                 console.log('respuesta ', response);
@@ -64772,7 +64776,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   //Alert.showErrorMessage(this,response.data.msj)
                 }
 
-              case 6:
+              case 7:
               case 'end':
                 return _context3.stop();
             }
@@ -64873,13 +64877,24 @@ var render = function() {
                         })
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "form-group col-3 mt-2" }, [
-                        _c("input", {
-                          staticClass:
-                            "btn btn-primary btn-block mt-4 btnbuscar",
-                          attrs: { type: "button", value: "BUSCAR" },
-                          on: { click: _vm.searchUser }
-                        })
+                      _c("div", { staticClass: "form-group col-3 mt-2 row" }, [
+                        _c("div", { staticClass: "col-10" }, [
+                          _c("input", {
+                            staticClass:
+                              "btn btn-primary btn-block mt-4 btnbuscar",
+                            attrs: { type: "button", value: "BUSCAR" },
+                            on: { click: _vm.searchUser }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-2" }, [
+                          _c("input", {
+                            staticClass:
+                              "btn btn-danger btn-block mt-4 btnbuscar",
+                            attrs: { type: "button", value: "X" },
+                            on: { click: _vm.getUsers }
+                          })
+                        ])
                       ])
                     ])
                   ])

@@ -18,8 +18,13 @@
                                     <label for="exampleInputPassword1">Nombre del usuario</label>
                                     <input type="text" class="form-control" id="exampleInputPassword1" v-model="userInput">
                                 </div>
-                                <div class="form-group col-3 mt-2">
-                                    <input type="button" class="btn btn-primary btn-block mt-4 btnbuscar" value="BUSCAR" @click="searchUser"/>
+                                <div class="form-group col-3 mt-2 row">
+                                    <div class="col-10">
+                                      <input type="button" class="btn btn-primary btn-block mt-4 btnbuscar" value="BUSCAR" @click="searchUser"/>
+                                    </div>
+                                    <div class="col-2">
+                                      <input type="button" class="btn btn-danger btn-block mt-4 btnbuscar" value="X" @click="getUsers"/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -106,17 +111,15 @@ export default {
     methods : {
       async searchUser(){
         if(this.userInput.trim() != ''){
-          let response = await axios.get('api/getBuscarUsuario?nombre='+this.userInput.trim());
-          console.log(response);
+          let response = await axios.get('api/getBuscarUsuario?cmpbusqueda='+this.userInput.trim());
+          console.log('respuesta busqueda',response);
           this.userInput = '';
           if(response.data.status == "0"){
             this.listaUsuarios = Array.isArray(response.data.data)?response.data.data:[response.data.data];
             if(this.listaUsuarios.length == 0){
               alert('Error: No se encuentra el usuario');
-              //Alert.showErrorMessage(this,'No se encuentra el usuario');
             }
           }else{
-            //Alert.showErrorMessage(this,response.data.msj);
             this.listaUsuarios = [];
             alert('Error: '+response.data.msj);
           }
@@ -147,6 +150,7 @@ export default {
         }
       },
       async getUsers(){
+        this.userInput = '';
         console.log('se hizo peticion de usuarios/');
         let response = await axios.get('api/listaUsuario');
         console.log('respuesta ',response);
