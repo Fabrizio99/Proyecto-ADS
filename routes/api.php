@@ -22,7 +22,7 @@ Route::post('crearUsuario'    , 'gestionarUsuarioController@crearUsuario'    )->
 Route::post('deleteUsuario'   , 'gestionarUsuarioController@deleteUsuario'   )->middleware('validateAuth');
 Route::post('modificarUsuario', 'gestionarUsuarioController@modificarUsuario')->middleware('validateAuth');
 Route::get('detalleUsuario'   , 'gestionarUsuarioController@detalleUsuario'  )->middleware('validateAuth');
-Route::get('detalleUsuario'   , 'gestionarUsuarioController@cmbTipoDoc'      )->middleware('validateAuth'); // trae los combos de tipo dni
+Route::get('cmbTipoDoc'       , 'gestionarUsuarioController@cmbTipoDoc'      )->middleware('validateAuth'); // trae los combos de tipo dni
 
 //gProductosController
 Route::get('listProduct', 'gProductosController@listProduct')->middleware('validateAuth');
