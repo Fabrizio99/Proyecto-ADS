@@ -6,6 +6,15 @@
 
 // Bootstrap
 //@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+//@import 'bootstrap/dist/css/bootstrap.css';
+@import "~vue-multiselect/dist/vue-multiselect.min.css";
+@import "~bootstrap/scss/bootstrap.scss";
+
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/brands';
+
 @import "../css/general.css";
 @import "../css/login.css";
 @import "../css/appbar.css";

@@ -9,17 +9,17 @@
                     <div class="card-body">
                         <form @submit.prevent="submitLogin">
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Correo</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+                                <label for="exampleInputEmail1" class="form-label">Usuario</label>
+                                <input type="text" class="form-control" v-model="user"/>
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1"/>
+                                <input type="password" class="form-control" v-model="password"/>
                             </div>
-                            <div class="form-group form-check">
+                            <!--<div class="form-group form-check">
                                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
                                 <label class="form-check-label" for="exampleCheck1">Recordar</label>
-                            </div>
+                            </div>-->
                             <button type="submit" class="btn btn-primary">Ingresar</button>
                         </form>
                     </div>
@@ -30,42 +30,29 @@
 </template>
 
 <script>
-import store from "../store";
+import usuario from "../user.js";
 export default {
   data() {
     return {
-      email: "",
-      password: "",
-      loginError: false,
+      user       : '',
+      password   : '',
+      loginError : false,
+      errorMessage : ''
     };
   },
   methods: {
-    submitLogin() {
-        this.$router.push({name:"main"});
-        /*Ejemplo de un modal*/
-        /*this.$swal({
-  icon: 'error',
-  title: 'Error',
-  text: 'No se registro el usuario',
-});*/
-
-
-      /*this.loginError = false;
-      axios
-        .post("/api/auth/login", {
-          email: this.email,
-          password: this.password,
-        })
-        .then((response) => {
-          // login user, store the token and redirect to dashboard
-          store.commit("loginUser");
-          localStorage.setItem("token", response.data.access_token);
-          this.$router.push({ name: "dashboard" });
-        })
-        .catch((error) => {
-          this.loginError = true;
-        });*/
+    async submitLogin() {
+      let response = await axios.get('api/getLogin?user='+this.user+'&password='+this.password);
+      console.log('ddsfdsfjdsf',response);
+      if(response.data.status == "1" || response.data.status == "2"){
+        this.errorMessage = response.data.msj;
+        alert('Error: '+response.data.msj);
+      }else{
+        response.data.data.token = response.data.token;
+        usuario.setData(response.data.data);
+        this.$router.push({ name: 'main'});
+      }
     },
-  },
+  }
 };
 </script>

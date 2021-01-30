@@ -1,0 +1,251 @@
+<template>
+     <div>
+         <app-bar/>
+         <div style="margin-top: 80px">
+            <navigation/>
+            <div style="height : calc(100vh - 80px);overflow-y : scroll;" class="pt-4">
+                <div class="row mx-4">
+                    <h3 class="col">
+                        Lista de Productos de la Boleta del Cliente
+                    </h3>
+                </div>
+                <div class="row mx-4">
+                  <div class="px-5 col-3 mt-5">
+                    <div class="card col bg-light">
+                          <div class="card-body">
+
+                            <div class="form-row justify-content-center">
+                              <div class="form-group">
+                                <label></label>
+                              </div>
+                            </div>  
+                            <div class="form-row justify-content-center">
+                              <div class="form-group">
+                                <label for="exampleInputPassword1">Cliente</label>
+                                <input type="text" class="form-control" id="exampleInputPassword1" disabled>
+                              </div>
+                            </div>
+                            <div class="form-row justify-content-center">
+                              <div class="form-group">
+                                <label for="exampleInputPassword1">Código de Boleta</label>
+                                <input type="text" class="form-control" id="exampleInputPassword1" disabled>
+                              </div>
+                            </div>
+                            <div class="form-row justify-content-center">
+                              <div class="form-group">
+                                <label for="exampleInputPassword1">Estado de Boleta</label>
+                                <input type="text" class="form-control" id="exampleInputPassword1" disabled>
+                              </div>
+                            </div>
+                            <div class="form-row justify-content-center">
+                              <div class="form-group">
+                                <label></label>
+                              </div>
+                            </div>  
+                            <div class="form-row justify-content-center">
+                              <div class="form-group">
+                                <input type="button" class="btn btn-info my-1 form-group col-12 btnguarda-registro" value="MODIFICAR" @click="Modificar" data-toggle="modal" data-target="#Modal"/>
+                              </div>
+                            </div>  
+                            <div class="form-row justify-content-center">
+                              <div class="form-group">                                
+                              </div>
+                            </div>                             
+                          </div>
+                    </div>
+                  </div>
+
+                  <div class="col-9">
+                      <div class="card-body">
+                            <div class="mx-4 mt-4">
+                                <table class="table">
+                                  <thead>
+                                    <tr>
+                                      <th scope="col">Foto</th>
+                                      <th scope="col">Código</th>
+                                      <th scope="col">Nombre del Producto</th>
+                                      <th scope="col">Cantidad</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>                         
+                                    <tr>
+                                      <td scope="row">imagen</td>
+                                      <td>Mark</td>
+                                      <td>Otto</td>
+                                      <td>@1</td>
+                                    </tr>
+                                    <tr>
+                                      <td scope="row">imagen</td>
+                                      <td>Mark</td>
+                                      <td>Otto</td>
+                                      <td>@1</td>
+                                    </tr> 
+                                    <tr>
+                                      <td scope="row">imagen</td>
+                                      <td>Mark</td>
+                                      <td>Otto</td>
+                                      <td>@1</td>
+                                    </tr> 
+                                    <tr>
+                                      <td scope="row">imagen</td>
+                                      <td>Mark</td>
+                                      <td>Otto</td>
+                                      <td>@1</td>
+                                    </tr> 
+                                    <tr>
+                                      <td scope="row">imagen</td>
+                                      <td>Mark</td>
+                                      <td>Otto</td>
+                                      <td>@1</td>
+                                    </tr> 
+                                    <tr>
+                                      <td scope="row">imagen</td>
+                                      <td>Mark</td>
+                                      <td>Otto</td>
+                                      <td>@1</td>
+                                    </tr> 
+                                    <tr>
+                                      <td scope="row">imagen</td>
+                                      <td>Mark</td>
+                                      <td>Otto</td>
+                                      <td>@1</td>
+                                    </tr> 
+                                    <tr>
+                                      <td scope="row">imagen</td>
+                                      <td>Mark</td>
+                                      <td>Otto</td>
+                                      <td>@1</td>
+                                    </tr> 
+                                    <tr>
+                                      <td scope="row">imagen</td>
+                                      <td>Mark</td>
+                                      <td>Otto</td>
+                                      <td>@1</td>
+                                    </tr> 
+                                    <tr>
+                                      <td scope="row">imagen</td>
+                                      <td>Mark</td>
+                                      <td>Otto</td>
+                                      <td>@1</td>
+                                    </tr> 
+
+                                    <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Cambiar estado de boleta</h5>
+
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            
+                                            <div class="form-group ">
+                                                                                  
+                                                 <multiselect
+                                                      :colSize="9"
+                                                      label = "Estado"
+                                                      :optionList = "[
+                                                          {
+                                                              id   : 1,
+                                                              name : 'ATENDIDO'
+                                                          },
+                                                          {
+                                                              id   : 2,
+                                                              name : 'NO ATENDIDO'
+                                                          },
+                                                          {
+                                                              id   : 3,
+                                                              name : 'EN ESPERA'
+                                                          },
+                                                      ]"
+                                                  />
+                                            </div>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" @click="CambiarEstado">Cambiar</button>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    </div>                                                                                              
+                                  </tbody>
+                                </table>
+                            </div>
+                      </div>
+                    </div>
+                  
+                </div>
+            </div>
+         </div>
+     </div>
+</template>
+
+
+<script>
+import Appbar from '../../../components/AppBar'
+import AppBar from '../../../components/AppBar.vue';
+import Navigation from '../../../components/NavigationComponent';
+import Multiselect from '../../../components/Multiselect';
+
+export default {
+    components : {
+        'app-bar'    : Appbar,
+        'navigation' : Navigation,
+        'multiselect' : Multiselect
+    },
+    methods:{
+       Buscar(){ this.$swal({
+        icon: 'error',
+        title: 'Error',
+        text: 'No hay resultados',
+        });},
+
+        Regresar(){
+             this.$router.push({name:"formBolProd"});
+        },
+
+        CambiarEstado(){this.$swal({
+
+          title: 'Estás seguro de cambiar el estado de la boleta?',
+          //text: "No serás capaz de revertirlo!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Si, Anular!',
+          cancelButtonText: 'No, Cancelar!',
+          reverseButtons: true
+          }).then((result) => {
+          if (result.isConfirmed) {
+            this.$swal('Modificación exitosa!', '', 'success')
+          }
+        });},
+
+        Listo(){
+           
+        }
+       
+    }
+}
+</script>
+<style 
+        Multiselectscoped>
+.user-form-container{
+    display: flex;
+    justify-content: space-between;
+}
+.user-form-container .card:first-child{
+    width: 65vw;
+}
+.user-form-container .card:last-child{
+    width: 30vw;
+}
+.image-profile{
+    max-width: 83%;
+    margin: 10px auto 0;
+}
+.profile-button{
+    height: min-content;
+}
+
+</style>
