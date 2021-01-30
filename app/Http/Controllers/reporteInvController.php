@@ -14,8 +14,12 @@ class reporteInvController extends Controller
         if($isValidate){
             return $isValidate;
         }
-        
         return mySQLConsulta("SELECT * FROM producto WHERE fecha_mod <='{$req->fecha}'LIMIT 0,50");
-       // se valida la fecha para traer de la tabla productos 
+        
+   }
+
+   function totalProdCosto (Request $req){
+       return  mySQLConsulta("SELECT sum(precio),sum(stock) FROM producto");
+
    }
 }
