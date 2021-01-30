@@ -2,15 +2,21 @@ import router from './routes.js';
 import AppComponent from './components/AppComponent'
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
+import Axios from 'axios'
+window.axios = Axios;
+import service from './services';
+window.service = service;
+//let usuario = require('./user.js').default;
+
+//window.Usuario = new usuario();
 
 
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+var $ = require('jquery');
+window.$ = $;
+require('bootstrap');
 
-require('./bootstrap');
+let moment = require('moment');
+window.moment = moment;
 
 window.Vue = require('vue');
 Vue.use(VueSweetalert2);
@@ -20,7 +26,8 @@ Vue.use(VueSweetalert2);
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
+import * as Alerts from '../js/alerts';
+window.Alert = Alerts;
 const app = new Vue({
     components: { AppComponent },
     router

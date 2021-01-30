@@ -17,7 +17,8 @@ class emitirBvController extends Controller
             estado,
             monto                      
             FROM notadeventas 
-            LIMIT 0,50");
+            LIMIT 0,50"
+        );
 
     }
 
@@ -38,40 +39,41 @@ class emitirBvController extends Controller
         }
 
         return mySQLConsulta(
-            "SELECT  nv.id_boletaventa AS Codigo,
-            u.nombres AS Vendedor,
-            u.fechaInicio AS FechaEmision,
-            nv.nombre_cliente AS Cliente,
-            d.nombre AS tipoDocumento,
-            nv.numdocumento_cliente AS N_Documento,
-            nv.telefono_cliente AS Celular,
-            nv.direccion_cliente AS Direccion,
-            (SELECT CONCAT(
-                        '[', 
-                            GROUP_CONCAT(
-                                JSON_OBJECT(
-                                    'producto', p.nombre,
-                                    'precio'  , p.precio,
-                                    'cantidad', nhp.cantidad, 
-                                    'PrecioTotal'  , (p.precio * nhp.cantidad)
-                                    
-                                )
-                            ),
-                        ']'
-                    )
-               FROM notadeventas AS nv2,
-                    notadeventas_has_producto AS nhp,
-                    producto AS p
-              WHERE nv2.id_boletaventa = nv.id_boletaventa
-                AND nv2.id_boletaventa = nhp.NOTADEVENTAS_id_boletaventa
-                AND p.id_producto = nhp.PRODUCTO_id_producto) AS Productos,
-                nv.monto AS MontoTotal 
-       FROM notadeventas AS nv,
-            documentos   AS d,
-            usuarios     AS u
-      WHERE (nv.id_boletaventa = '{$req->notaVid}' OR nv.fecha '{$req->fechaInicio}' BETWEEN  AND '{$req->fechaFin}' )
-        AND d.id_documentos   = nv.DOCUMENTOS_id_documentos
-        AND u.id_usuario      = nv.USUARIOS_id_usuario");
+            "SELECT nv.id_boletaventa AS Codigo,
+                    u.nombres AS Vendedor,
+                    u.fechaInicio AS FechaEmision,
+                    nv.nombre_cliente AS Cliente,
+                    d.nombre AS tipoDocumento,
+                    nv.numdocumento_cliente AS N_Documento,
+                    nv.telefono_cliente AS Celular,
+                    nv.direccion_cliente AS Direccion,
+                    (SELECT CONCAT(
+                                '[', 
+                                    GROUP_CONCAT(
+                                        JSON_OBJECT(
+                                            'producto', p.nombre,
+                                            'precio'  , p.precio,
+                                            'cantidad', nhp.cantidad, 
+                                            'PrecioTotal'  , (p.precio * nhp.cantidad)
+                                            
+                                        )
+                                    ),
+                                ']'
+                            )
+                    FROM notadeventas AS nv2,
+                            notadeventas_has_producto AS nhp,
+                            producto AS p
+                    WHERE nv2.id_boletaventa = nv.id_boletaventa
+                        AND nv2.id_boletaventa = nhp.NOTADEVENTAS_id_boletaventa
+                        AND p.id_producto = nhp.PRODUCTO_id_producto) AS Productos,
+                        nv.monto AS MontoTotal 
+            FROM notadeventas AS nv,
+                    documentos   AS d,
+                    usuarios     AS u
+            WHERE (nv.id_boletaventa = '{$req->notaVid}' OR nv.fecha '{$req->fechaInicio}' BETWEEN  AND '{$req->fechaFin}' )
+                AND d.id_documentos   = nv.DOCUMENTOS_id_documentos
+                AND u.id_usuario      = nv.USUARIOS_id_usuario"
+        );
 
     }
 
@@ -93,12 +95,15 @@ class emitirBvController extends Controller
         
         //Modificación de Productos (Se reduce los productos al registrar una boleta)
         $modificar= mySQLupDate(
-            "UPDATE producto AS p, notadeventas_has_producto AS nhp, notadeventas AS nv 
-            SET p.stock=p.stock-nhp.cantidad  
-            WHERE p.id_producto = '{$req->idProducto}'
-            AND nhp.PRODUCTO_id_producto 
-            AND nv.id_boletaventa = nhp.NOTADEVENTAS_id_boletaventa
-            AND nv.id_boletaventa = '{$req->notaIdBv}'"); 
+            "UPDATE producto AS p,
+                    notadeventas_has_producto AS nhp, 
+                    notadeventas AS nv 
+                SET p.stock=p.stock-nhp.cantidad  
+              WHERE p.id_producto = '{$req->idProducto}'
+                AND nhp.PRODUCTO_id_producto 
+                AND nv.id_boletaventa = nhp.NOTADEVENTAS_id_boletaventa
+                AND nv.id_boletaventa = '{$req->notaIdBv}'"
+        ); 
           
           $modificar = json_decode($modificar);
           

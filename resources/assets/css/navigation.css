@@ -3,28 +3,29 @@
     width: 300px;
     background-color: rgba(0, 0, 0, 0.1);
     height: calc(100vh - 80px);
-    overflow-y: scroll;
+    overflow-y: hidden;
     height: 100vh;
     top: 0;
     position: absolute;
     display: none;
-
     width: 100vw;
     height: 100vh;
     z-index: 9;
+    color: white;
 }
 .navigation-menu{
     position: absolute;
     left: -300px;
     width: 300px;
     height: 100vh;
-    background-color: white;
+    background-color: rgba(114, 45, 47, 45);
     position: absolute;
     top: 0;
 }
 .navigation-header{
     display: flex;
     align-items: center;
+    background-color: rgba(114, 45, 47, 45);
 }
 .navigation-header div{
     cursor: pointer;
@@ -38,11 +39,79 @@
 }
 .navigation-item{
     padding: 10px 0 10px 50px;
-    border-bottom: 1px solid rgba(0,0,0,0.08);
+    border-bottom: 0px solid rgba(0,0,0,0.08);
     font-size: 15px;
-    color: rgba(0,0,0,0.8);
     cursor: pointer;
 }
 .collapse .navigation-item:last-child{
     border-bottom: 0;
 }
+.cardChange{
+    border: rgba(114, 45, 47, 45);
+    color: white;
+}
+
+/*GESTIONPRODUCTO*/
+.cardbuscador{
+    background-color:white;
+}
+.btnbuscar{
+    background-color: #18ECD2;
+    border-radius: 40px;
+    box-sizing: content-box;
+    width: 130px;
+    color: black;
+    border: none;
+}
+.btnbuscar:focus{
+    outline: none;
+}
+.btnatras{
+    background-color: #F1D562;
+    border: none;
+    color: black;
+}
+.btncrear{
+    background-color: #E0E0DD;
+    border-radius: 20px;
+    border: none;
+    box-sizing: content-box;
+    width: 150px;	
+    height: 27px;
+    color: black;
+}
+.headtable{
+    background-color: #E0E0DD;
+    color: black;
+}
+.cardcrear{
+    background-color: #E0E0DD;
+    border-radius: 40px;
+    height: 500px;
+}
+.insert{
+    border-radius: 40px;
+    height: 50px;
+}
+.btnsalir{
+    border-radius: 40px;
+    color: black;
+    background-color: #F1D562;
+    border: none;
+}
+.btnexaminar{
+    border-radius: 40px;
+    color: black;
+    background-color: #A9CFF8;
+}
+.btnguarda-registro{
+    border-radius: 40px;
+    color: white;
+    background-color: green;
+    border-color: green;
+}
+.label{
+    height: 25px;
+    font-size: large;
+}
+
