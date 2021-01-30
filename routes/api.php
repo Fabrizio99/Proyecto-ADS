@@ -10,20 +10,30 @@ Route::post('registrarUsuario', 'initialController@registrarUsuario')->middlewar
 
 //reclamosController
 Route::get('getReclamos', 'reclamosController@getReclamos')->middleware('validateAuth');
-Route::post('postRegistrar', 'reclamosController@postRegistrar');
+Route::post('postRegistrar', 'reclamosController@postRegistrar')->middleware('validateAuth');
 
-//reporteInvController
+//reporteInvController-Listo para probar (Font)
 Route::get('getEmitirRI','reporteInvController@getEmitirRI' )->middleware('validateAuth');
+Route::get('totalProdCosto','reporteInvController@totalProdCosto')->middleware('validateAuth');
 
-//gestionarUsuarioController
+//gestionarUsuarioController-Listo para Probar (Font)
 Route::get('listaUsuario', 'gestionarUsuarioController@listaUsuario');
 Route::get('getBuscarUsuario', 'gestionarUsuarioController@getBuscarUsuario');
 Route::post('crearUsuario', 'gestionarUsuarioController@crearUsuario');
 Route::post('deleteUsuario','gestionarUsuarioController@deleteUsuario');
 Route::post('modificarUsuario','gestionarUsuarioController@modificarUsuario');
+Route::get('detalleUsuario','gestionarUsuarioController@detalleUsuario');
+
 
 //gProductosController
-Route::get('listProduct','gProductosController@listProduct');
-Route::post('deleteP','gProductosController@deleteP');
-Route::post('updateP','gProductosController@updateP');
-Route::post('registrarP','gProductosController@registrarP');
+Route::get('listProduct','gProductosController@listProduct')->middleware('validateAuth');
+Route::post('deleteP','gProductosController@deleteP')->middleware('validateAuth');
+Route::post('updateP','gProductosController@updateP')->middleware('validateAuth');
+Route::post('registrarP','gProductosController@registrarP')->middleware('validateAuth');
+
+
+//no probar esta en proceso 
+//emitirBvController
+Route::get('listaNotaV','emitirBvController@listaNotaV')->middleware('validateAuth');
+Route::get('buscaNotaVByFechas','emitirBvController@buscaNotaVByFechas')->middleware('validateAuth');
+Route::post('registrarPago','emitirBvController@registrarPago')->middleware('validateAuth');

@@ -17,7 +17,7 @@
                                     <label for="exampleInputPassword1">Nombre</label>
                                     <input type="text" class="form-control" v-model="user.nombre">
                                 </div>
-                                <multiselect
+                                <!--<multiselect
                                     :colSize="6"
                                     label = "Tipo de Documento"
                                     :optionList = "[
@@ -31,7 +31,15 @@
                                         },
                                     ]"
                                     v-model="user.tipoDocumento"
-                                />
+                                />-->
+                                <div class="form-group col-6">
+                                    <label>Tipo documento</label>
+                                    <select name="select" v-model="user.tipoDocumento" class="form-control">
+                                        <option value="value1">Value 1</option>
+                                        <option value="value2">Value 2</option>
+                                        <option value="value3">Value 3</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-6">
@@ -162,7 +170,7 @@ export default {
         return{
             user : {
                 nombre : '',
-                tipoDocumento : '',
+                tipoDocumento : 'value2',
                 apellidos : '',
                 documento : '',
                 direccion : '',
