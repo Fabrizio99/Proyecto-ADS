@@ -16,7 +16,7 @@ class reporteInvController extends Controller
         }
         return mySQLConsulta("SELECT * FROM producto WHERE fecha_mod <='{$req->fecha}'LIMIT 0,50");
         
-   }
+    }
 
    function totalProdCosto (Request $req){
        return  mySQLConsulta("SELECT sum(precio),sum(stock) FROM producto");
