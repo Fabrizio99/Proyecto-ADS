@@ -65364,7 +65364,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                         switch (_context.prev = _context.next) {
                             case 0:
                                 if (!this.validarCampos()) {
-                                    _context.next = 10;
+                                    _context.next = 8;
                                     break;
                                 }
 
@@ -65373,11 +65373,11 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                     rol: this.user.rol,
                                     contrasenia: this.user.clave,
                                     nombres: this.user.nombre,
-                                    apellido: this.user.apellidos,
-                                    tipoDoc: this.user.tipoDocumento.id,
+                                    apellidos: this.user.apellidos,
+                                    tipoDoc: this.user.tipoDocumento,
                                     direccion: this.user.direccion,
                                     telefono: this.user.telefono,
-                                    fechaInicio: moment().format('yyyy-MM-DD')
+                                    token: __WEBPACK_IMPORTED_MODULE_5__user__["a" /* default */].getData().token
                                 };
                                 _context.next = 4;
                                 return axios.post('api/crearUsuario', body);
@@ -65385,21 +65385,19 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                             case 4:
                                 response = _context.sent;
 
-                                console.log(response.data.status);
-                                console.log(response.data.msj);
                                 if (response.data.status == "0") {
                                     alert('Correcto: Usuario registrado exitosamente');
                                     this.$router.push({ name: 'user' });
                                 } else {
                                     alert('Error: ' + response.data.msj);
                                 }
-                                _context.next = 11;
+                                _context.next = 9;
                                 break;
 
-                            case 10:
+                            case 8:
                                 alert('Error: Complete los campos faltantes o incorrectos');
 
-                            case 11:
+                            case 9:
                             case 'end':
                                 return _context.stop();
                         }
@@ -65514,7 +65512,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 direccion: '',
                 clave: '',
                 telefono: '',
-                rol: ''
+                rol: '1'
             },
             documentos: []
         };
@@ -65892,7 +65890,10 @@ var render = function() {
                               }
                             ],
                             staticClass: "form-control",
-                            attrs: { name: "select" },
+                            attrs: {
+                              name: "select",
+                              disabled: _vm.accion == "editar"
+                            },
                             on: {
                               change: function($event) {
                                 var $$selectedVal = Array.prototype.filter
@@ -65980,7 +65981,10 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
-                          attrs: { type: "number" },
+                          attrs: {
+                            type: "number",
+                            disabled: _vm.accion == "editar"
+                          },
                           domProps: { value: _vm.user.documento },
                           on: {
                             input: function($event) {

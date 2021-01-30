@@ -19,7 +19,7 @@
                                 </div>
                                 <div class="form-group col-6">
                                     <label>Tipo documento</label>
-                                    <select name="select" v-model="user.tipoDocumento" class="form-control">
+                                    <select name="select" v-model="user.tipoDocumento" class="form-control" :disabled="accion == 'editar'">
                                         <option v-for="documento in documentos" :key="documento.id" :value="documento.id_documentos">{{documento.nombre}}</option>
                                     </select>
                                 </div>
@@ -31,7 +31,7 @@
                                 </div>
                                 <div class="form-group col-6">
                                     <label for="exampleInputPassword1">Documento</label>
-                                    <input type="number" class="form-control" v-model="user.documento">
+                                    <input type="number" class="form-control" v-model="user.documento" :disabled="accion == 'editar'">
                                 </div>
                             </div>
                             <div class="form-row">
@@ -120,16 +120,13 @@ export default {
                     rol    : this.user.rol,
                     contrasenia : this.user.clave,
                     nombres : this.user.nombre,
-                    apellido : this.user.apellidos,
-                    tipoDoc : this.user.tipoDocumento.id,
+                    apellidos : this.user.apellidos,
+                    tipoDoc : this.user.tipoDocumento,
                     direccion : this.user.direccion,
                     telefono : this.user.telefono,
-                    fechaInicio : moment().format('yyyy-MM-DD')
+                    token : usuario.getData().token
                 }
-
                 let response = await axios.post('api/crearUsuario',body);
-                console.log(response.data.status);
-                console.log(response.data.msj);
                 if(response.data.status == "0"){
                     alert('Correcto: Usuario registrado exitosamente');
                     this.$router.push({name : 'user'});
@@ -186,7 +183,7 @@ export default {
                 direccion : '',
                 clave : '',
                 telefono : '',
-                rol : ''
+                rol : '1'
             },
             documentos : []
         }
