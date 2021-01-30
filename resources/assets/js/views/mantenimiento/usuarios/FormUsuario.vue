@@ -9,7 +9,7 @@
                         Formulario Usuario
                     </h3>
                 </div>
-                <div class="px-4 user-form-container">
+                <div class="px-4">
                     <div class="card">
                         <div class="card-body">
                             <div class="form-row">
@@ -17,27 +17,10 @@
                                     <label for="exampleInputPassword1">Nombre</label>
                                     <input type="text" class="form-control" v-model="user.nombre">
                                 </div>
-                                <!--<multiselect
-                                    :colSize="6"
-                                    label = "Tipo de Documento"
-                                    :optionList = "[
-                                        {
-                                            id   : 1,
-                                            name : 'DNI'
-                                        },
-                                        {
-                                            id   : 2,
-                                            name : 'CARNET DE EXTRANJERIA'
-                                        },
-                                    ]"
-                                    v-model="user.tipoDocumento"
-                                />-->
                                 <div class="form-group col-6">
                                     <label>Tipo documento</label>
                                     <select name="select" v-model="user.tipoDocumento" class="form-control">
-                                        <option value="value1">Value 1</option>
-                                        <option value="value2">Value 2</option>
-                                        <option value="value3">Value 3</option>
+                                        <option v-for="documento in documentos" :key="documento.id" :value="documento.id_documentos">{{documento.nombre}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -66,25 +49,16 @@
                                     <label for="exampleInputPassword1">Teléfono</label>
                                     <input type="number" class="form-control" v-model="user.telefono">
                                 </div>
-                                <multiselect
-                                    :colSize="6"
-                                    label = "Roles"
-                                    :optionList = "[
-                                        {
-                                            id   : 1,
-                                            name : 'Vendedor'
-                                        },
-                                        {
-                                            id   : 2,
-                                            name : 'Cajero'
-                                        },
-                                    ]"
-                                    v-model="user.rol"
-                                />
+                                <div class="form-group col-6">
+                                    <label>Roles</label>
+                                    <select name="select" v-model="user.rol" class="form-control">
+                                        <!--<option v-for="documento in documentos" :key="documento.id" :value="documento.id_documentos">{{documento.nombre}}</option>-->
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="card">
+                    <!--<div class="card">
                         <img src="https://avatars3.githubusercontent.com/u/499550?s=460&u=de41ec9325e8a92e281b96a1514a0fd1cd81ad4a&v=4" class="card-img-top image-profile" alt="img-profile">
                         <div class="card-body container">
                             <div class="row justify-content-md-center mb-2">
@@ -97,7 +71,10 @@
                                 <button type="button" class="btn btn-info btnguarda-registro profile-button" @click="userAction">{{this.accion == 'crear'?'Registrar':'Guardar Cambios'}}</button>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
+                </div>
+                <div class="px-4 mt-3">
+                    <button type="button" class="btn btn-info btnguarda-registro profile-button" @click="userAction">{{this.accion == 'crear'?'Registrar':'Guardar Cambios'}}</button>
                 </div>
             </div>
          </div>
@@ -108,6 +85,7 @@ import Appbar from '../../../components/AppBar'
 import Navigation from '../../../components/NavigationComponent';
 import Multiselect from '../../../components/Multiselect';
 import data from '../../../data';
+import usuario from '../../../user';
 
 export default {
     components : {
@@ -164,24 +142,45 @@ export default {
         },
         editUser(){
 
+        },
+        async getTipoDocumentos(){
+            let response = await axios.get('api/cmbTipoDoc?token='+usuario.getData().token);
+            console.log('documentos',response);
+            if(response.data.status == "0"){
+                this.documentos = response.data.data;
+            }else{
+                alert('Error: ',response.data.msj);
+            }
         }
     },
     data(){
         return{
             user : {
                 nombre : '',
-                tipoDocumento : 'value2',
+                tipoDocumento : '',
                 apellidos : '',
                 documento : '',
                 direccion : '',
                 clave : '',
                 telefono : '',
-                rol : '' 
-            }
+                rol : ''
+            },
+            documentos : []
         }
     },
     mounted(){
-        console.log(data.getSelectedUser())
+        this.getTipoDocumentos();
+        if(this.accion == 'editar'){
+            console.log(data.getSelectedUser());
+            let usuario = data.getSelectedUser();
+            this.user.nombre = usuario.nombres;
+            this.user.apellidos = usuario.apellidos;
+            this.user.documento = usuario.num_documento;
+            this.user.tipoDocumento = usuario.documentos_id_documentos;
+            this.user.direccion = usuario.direccion;
+            this.user.telefono  = usuario.telefono;
+            this.user.rol = usuario.rol_id_rol;
+        }
     }
 }
 </script>
@@ -192,10 +191,10 @@ export default {
     justify-content: space-between;
 }
 .user-form-container .card:first-child{
-    width: 65vw;
+    
 }
 .user-form-container .card:last-child{
-    width: 30vw;
+    
 }
 .image-profile{
     max-width: 83%;

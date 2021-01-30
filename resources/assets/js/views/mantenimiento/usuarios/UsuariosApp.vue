@@ -48,7 +48,7 @@
                           <td>{{usuario.nombres}}</td>
                           <td>{{usuario.apellidos}}</td>
                           <td>{{usuario.num_documento}}</td>
-                          <td>{{usuario.nombre}}</td>
+                          <td>{{usuario.Cargo}}</td>
                           <td class = "option text-center">
                             <div class="dropdown">
                               <div class="btn btn-danger"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
