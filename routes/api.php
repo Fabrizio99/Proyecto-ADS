@@ -35,3 +35,8 @@ Route::post('registrarP', 'gProductosController@registrarP' )->middleware('valid
 Route::get('listaNotaV'        , 'emitirBvController@listaNotaV'        )->middleware('validateAuth');
 Route::get('buscaNotaVByFechas', 'emitirBvController@buscaNotaVByFechas')->middleware('validateAuth');
 Route::post('registrarPago'    , 'emitirBvController@registrarPago'     )->middleware('validateAuth');
+
+//emitirReporteVentaDiarias
+Route::get('listaBoletaE','emitirReporteVdController@listaBoletaE');
+Route::get('filtrarBoleta','emitirReporteVdController@filtrarBoleta');
+Route::post('guardarIncidencia','emitirReporteVdController@guardarIncidencia');
