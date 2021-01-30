@@ -8,50 +8,101 @@ include '../app/helper/untils.php';
 
 class gestionarUsuarioController extends Controller
 {
-   
-   function listaUsuario (Request $req){
+    //--------Lista de Usuarios
+    function listaUsuario (Request $req){
+    //lista de usuarios Activos
+    // en la tbl usuarios en la BD falta foto
 
-            return mySQLConsulta("SELECT u.nombres,u.apellidos,u.num_documento FROM usuarios u , rol r WHERE u.rol_id_rol = r.id_rol AND estado='A' LIMIT 0 ,50");
-            
+        return mySQLConsulta(
+            "SELECT u.id_usuario,
+                    u.documentos_id_documentos AS tipo_doc,
+                    u.usuario,
+                    u.nombres,
+                    u.apellidos,
+                    u.num_documento,
+                    u.correo,
+                    u.fechaInicio,
+                    u.telefono,
+                    u.estado,
+                    u.codigo,
+                    u.direccion,
+                    r.id_rol,
+                    r.nombre AS Cargo
+            FROM usuarios AS u,
+                 rol AS r
+           WHERE u.rol_id_rol = r.id_rol
+             AND r.id_rol
+             AND estado ='A' 
+           LIMIT 0 ,50"
+        );
     }
      
+
+    function cmbTipoDoc (Request $req){
+    
+        return mySQLConsulta(
+            "SELECT *
+                FROM documentos"
+        );
+    }
+        
+
+    //-----Buscar Usuario------
     function getBuscarUsuario (Request $req){
 
-        $isValidate = isNullEmpty($req->nombre);
-        //$isValidate2= isNullEmpty($req->apellido);
+        $isValidate = isNullEmpty($req->cmpbusqueda,'cmpbusqueda','el campo buscador no puede estar vacio');
+
         if($isValidate){
             return $isValidate;
         }
 
+        //validacion de tamaño de letras de nombre o apellido
+        if (strlen($req->cmpbusqueda) < 3) return ;
         
-        if (strlen($req->nombre) < 3) return ;
-        return mySQLConsulta("SELECT u.nombres,u.apellido,u.num_documento,r.nombre FROM usuarios u , rol r
-        WHERE u.rol_id_rol = r.id_rol AND (u.nombres LIKE '{$req->nombre}%' OR u.apellido LIKE '{$req->nombre}%') LIMIT 0,50");
-       
+        return mySQLConsulta(
+            "SELECT u.id_usuario,
+                    u.documentos_id_documentos AS tipo_doc,
+                    u.usuario,
+                    u.nombres,
+                    u.apellidos,
+                    u.num_documento,
+                    u.correo,
+                    u.fechaInicio,
+                    u.telefono,
+                    u.estado,
+                    u.codigo,
+                    u.direccion,
+                    r.id_rol,
+                    r.nombre AS Cargo 
+               FROM usuarios u , rol r
+              WHERE u.rol_id_rol = r.id_rol 
+                AND (u.nombres LIKE '{$req->cmpbusqueda}%' OR u.apellidos LIKE '{$req->cmpbusqueda}%') 
+                AND estado ='A' 
+              LIMIT 0,50"
+        );
        
     }
-
+        
+    //---Insertar Usuario
     function crearUsuario (Request $req){
-        //usuario = numero dni
-        //inicializando variables para la validaciones
+       
         $TIPO_DNI = 1;
         $TIPO_PASAPORTE = 2;
-
-        $ValidacionCampos = isNullEmpty($req->numDoc,'numDoc') ?: 
-                            isNullEmpty($req->rol,'rol') ?:
-                            isNullEmpty($req->contrasenia,'contrasenia') ?:
-                            isNullEmpty($req->nombres,'nombres') ?:
-                            isNullEmpty($req->apellido,'apellido') ?: 
-                            isNullEmpty($req->tipoDoc,'tipoDoc') ?:  
-                            isNullEmpty($req->direccion,'direccion') ?:  
-                            isNullEmpty($req->telefono,'telefono') ?:
-                            isNullEmpty($req->fechaInicio,'fechaInicio');
+        
+        $ValidacionCampos = isNullEmpty($req->nombres    ,'nombres'    ,'El campo nombres no puede estar vacio',) ?:
+                            isNullEmpty($req->apellidos  ,'apellidos'  ,'El campo apellidos no puede estar vacio',) ?: 
+                            isNullEmpty($req->direccion  ,'direccion'  ,'El campo dirreccion no puede estar vacio',) ?:  
+                            isNullEmpty($req->telefono   ,'telefono'   ,'El campo telefono no puede estar vacio') ?:
+                            isNullEmpty($req->rol        ,'rol'        ,'El campo cargo no puede estar vacio',) ?:
+                            isNullEmpty($req->tipoDoc    ,'tipoDoc'    ,'El campo tipoDocumento no puede estar vacio',) ?:
+                            isNullEmpty($req->numDoc     ,'numDoc'     ,'El campo numero DNI no puede estar vacio',) ?: 
+                            isNullEmpty($req->contrasenia,'contrasenia','El campo contrasenia no puede estar vacio',);
 
         if($ValidacionCampos){
             return $ValidacionCampos;
         }
-      
-        //validaciones de campos cantidad 
+
+        //validacion de cmpContraseña <5
         if (strlen($req->contrasenia) < 5) {
                 return JSON_ENCODE(
                     (object) [
@@ -60,88 +111,150 @@ class gestionarUsuarioController extends Controller
                     ]
                 ); 
         }
-            //validación del dni caracteres
-        if (strlen($req->numDoc) == 8 && $req->tipoDoc == $TIPO_DNI ) { // TIPO 
+
+        //validacion de cmpTelefono ==9
+        if(strlen($req->telefono) <> 9){
             return JSON_ENCODE(
                 (object) [
-                    'status' => $_SESSION["STATUS_CONTROL"],
-                    'msj'    => 'La contraseña debe tener minimo 8 caracteres sí es un DNI.'
+                    'status' => $_SESSION["STATUS_CONTROL"], //status del back
+                    'msj'    => 'El telefono debe tener 9 caracteres' //
                 ]
             ); 
-        } else if (strlen($req->numDoc) == 12 && $req->tipoDoc == $TIPO_PASAPORTE ) { // CARNET DE PASAPORTE
+        }
+
+        //validación del dni caracteres
+        if ($req->tipoDoc == $TIPO_DNI && strlen($req->numDoc) <> 8) { // TIPO 
             return JSON_ENCODE(
                 (object) [
                     'status' => $_SESSION["STATUS_CONTROL"],
-                    'msj'    => 'La contraseña debe tener minimo 16 caracteres sí es un PASAPORTE..'
+                    'msj'    => 'El numero de DNI debe tener  8 caracteres '
+                ]
+            ); 
+        }else if ($req->tipoDoc == $TIPO_PASAPORTE && strlen($req->numDoc) <> 12) { // CARNET DE PASAPORTE
+            return JSON_ENCODE(
+                (object) [
+                    'status' => $_SESSION["STATUS_CONTROL"],
+                    'msj'    => 'el pasaporte debe tener minimo 16 caracteres '
                 ]
             );
         }
-
-      $usuario = mySQLConsulta("SELECT * FROM usuarios WHERE num_documento = '{$req->numDoc}' AND estado ='A' ");
-      $usuario = json_decode($usuario);
-
-      if ($usuario->status == $_SESSION["STATUS_SUCCES"]) {
-          return JSON_ENCODE(
-              (object) [
-                  'status' => $_SESSION["STATUS_CONTROL"],
-                  'msj'    => 'El usuario ya se encuentra registrado.'
-               ]
-          ); 
-      }
-
-      return mySQLInsert(
-          "INSERT INTO usuarios (documentos_id_documentos, rol_id_rol, usuario, contrasenia, nombres, apellido, num_documento, direccion, telefono, fechaInicio) 
-                         VALUES ('{$req->tipoDoc}', '{$req->rol}', '{$req->numDoc}', '{$req->contrasenia}','{$req->nombres}', '{$req->apellido}','{$req->numDoc}', '{$req->direccion}', '{$req->telefono}',/*'A',*/ '{$req->fechaInicio}')");
+        
+        //---Verificación de usuario ya registrado por estado
+        $usuario = mySQLConsulta("SELECT * FROM usuarios WHERE num_documento = '{$req->numDoc}' AND estado ='A' ");
+        $usuario = json_decode($usuario);
+        
+        if ($usuario->status == $_SESSION["STATUS_SUCCES"]) {
+            return JSON_ENCODE(
+                (object) [
+                    'status' => $_SESSION["STATUS_CONTROL"],
+                    'msj'    => 'El usuario ya se encuentra registrado.'
+                ]
+            ); 
+            
+        } else {
+            //se esta insertando el la tbl usuarios en la col usuario = numDoc  
+            return mySQLInsert(
+                "INSERT INTO usuarios (usuario, nombres, apellidos, direccion, telefono, rol_id_rol, documentos_id_documentos, num_documento, contrasenia, estado) 
+                    VALUES ('{$req->numDoc}','{$req->nombres}','{$req->apellidos}', '{$req->dirrecion}','{$req->telefono}','{$req->rol}', '{$req->tipoDoc}','{$req->numDoc}','{$req->contrasenia}','A')"
+            );
+        }    
     }
-
+    //---Eliminar Usuario
     function deleteUsuario (Request $req){
-        $ValidacionCampos = isNullEmpty($req->numDoc);
+
+        $ValidacionCampos = isNullEmpty($req->numDoc,'numDoc','El campo numero documento no puede estar vacio');
         
         if($ValidacionCampos){
             return $ValidacionCampos;
         }
 
-           return mySQLDelete("UPDATE usuarios SET estado = 'I' WHERE num_documento = '{$req->numDoc}'");
+        return mySQLDelete("UPDATE usuarios SET estado = 'I' WHERE num_documento = '{$req->numDoc}'");
     }
 
+    //---Modificar usuario---------------
     function modificarUsuario (Request $req){
  
-        $ValidacionCampos = isNullEmpty($req->nombre,'','digite correctamente el nombre')?: 
-                            isNullEmpty($req->apellido,'','digite correctamente el apellido') ?: 
-                            isNullEmpty($req->direccion,'','digite correctamente direccion') ?:
-                            isNullEmpty($req->telefono,'','digite correctamente el telefono') ?:
-                            isNullEmpty($req->rol,'','digite correctamente el rol') ?:
-                            isNullEmpty($req->contrasenia,'','digite correctamente el contraseñia') ?:
-                            isNullEmpty($req->numDoc,'','digite correctamente el contraseñia');
+        $ValidacionCampos = isNullEmpty($req->nombres    , 'nombres'    , 'digite correctamente el nombre')?: 
+                            isNullEmpty($req->apellidos  , 'apellidos'  , 'digite correctamente el apellido') ?: 
+                            isNullEmpty($req->direccion  , 'direccion'  , 'digite correctamente direccion') ?:
+                            isNullEmpty($req->telefono   , 'telefono'   , 'digite correctamente el telefono') ?:
+                            isNullEmpty($req->rol        , 'rol'        , 'digite correctamente el rol') ?:
+                            isNullEmpty($req->numDoc     , 'numDoc'     ,'digite correctamente el contraseñia');
                             
          // validaciones de campos            
         if($ValidacionCampos){
             return $ValidacionCampos;
         }
-        
-        if (strlen($req->contrasenia) < 5) {
+
+        //validación del cmpTelefono
+        if (strlen($req->telefono) <> 9) {
             return JSON_ENCODE(
                 (object) [
                     'status' => $_SESSION["STATUS_CONTROL"], //status del back
-                    'msj'    => 'La contraseña debe tener minimo 5 caracteres.' //
+                    'msj'    => 'El telefono debe tener  9 caracteres.' //
                 ]
             ); 
+        }
+        
+        
+        if (isNullEmpty($req->contrasenia, 'contrasenia', 'digite correctamente el contraseñia')) {
+            // se hizo la consulta 
+            return mySQLUpDate(
+                "UPDATE usuarios 
+                    SET nombres     = '{$req->nombres}', 
+                        apellidos   = '{$req->apellidos}', 
+                        direccion   = '{$req->dirreccion}',
+                        telefono    = '{$req->telefono}',
+                        rol_id_rol  = '{$req->rol}'
+                WHERE num_documento = '{$req->numDoc}' "
+            );      
+
+        } else {
+            //validación de cmpContrasenia
+            if (strlen($req->contrasenia) < 5) {
+                return JSON_ENCODE(
+                    (object) [
+                        'status' => $_SESSION["STATUS_CONTROL"], //status del back
+                        'msj'    => 'La contraseña debe tener minimo 5 caracteres.' //
+                    ]
+                ); 
+            }
+            // se hizo la consulta 
+            return mySQLUpDate(
+                "UPDATE usuarios 
+                    SET nombres     = '{$req->nombres}', 
+                        apellidos   = '{$req->apellidos}', 
+                        direccion   = '{$req->dirreccion}',
+                        telefono    = '{$req->telefono}',
+                        rol_id_rol  = '{$req->rol}',
+                        contrasenia = '{$req->contrasenia}'
+                WHERE num_documento = '{$req->numDoc}' "
+            );      
+
+        }
     }
-    
-    if (strlen($req->telefono) <> 9) {
-        return JSON_ENCODE(
-            (object) [
-                'status' => $_SESSION["STATUS_CONTROL"], //status del back
-                'msj'    => 'el telefono debe tener minimo 9 caracteres.' //
-            ]
-        ); 
+    //----Detalle Usuario---------------
+    function detalleUsuario (Request $req){
+
+        // detalle de todos los campos del usuario
+        return mySQLConsulta(
+            "SELECT u.nombres,
+                    u.apellidos,
+                    u.direccion,
+                    u.telefono,
+                    r.nombre AS Cargo, 
+                    d.nombre AS TipoDocumento,
+                    u.usuario AS usuarioDocument,
+                    u.contrasenia    
+               FROM usuarios AS u,
+                    rol AS r,
+                    documentos AS d
+              WHERE u.rol_id_rol = r.id_rol 
+                AND u.documentos_id_documentos = d.id_documentos
+                AND u.usuario='{$req->numDoc}'"
+        );
     }
-    // se hizo la consulta 
-        return mySQLUpDate("UPDATE usuarios SET nombres ='{$req->nombre}', apellidos ='{$req->apellido}', 
-        telefono ='{$req->telefono}', rol_id_rol ='{$req->rol}',contrasenia = '{$req->contrasenia}',direccion = '{$req->dirreccion}'
-        WHERE num_documento = '{$req->numDoc}' ");
-          
- }
+
 }
 
 
