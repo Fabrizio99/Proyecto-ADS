@@ -14,14 +14,26 @@ class gestionarUsuarioController extends Controller
     // en la tbl usuarios en la BD falta foto
 
         return mySQLConsulta(
-            "SELECT u.*,
+            "SELECT u.id_usuario,
+                    u.documentos_id_documentos AS tipo_doc,
+                    u.usuario,
+                    u.nombres,
+                    u.apellidos,
+                    u.num_documento,
+                    u.correo,
+                    u.fechaInicio,
+                    u.telefono,
+                    u.estado,
+                    u.codigo,
+                    u.direccion,
+                    r.id_rol,
                     r.nombre AS Cargo
-                FROM usuarios AS u,
-                     rol AS r
-                WHERE u.rol_id_rol = r.id_rol
-                AND r.id_rol
-                AND estado ='A' 
-                LIMIT 0 ,50"
+            FROM usuarios AS u,
+                 rol AS r
+           WHERE u.rol_id_rol = r.id_rol
+             AND r.id_rol
+             AND estado ='A' 
+           LIMIT 0 ,50"
         );
     }
      
@@ -48,10 +60,20 @@ class gestionarUsuarioController extends Controller
         if (strlen($req->cmpbusqueda) < 3) return ;
         
         return mySQLConsulta(
-            "SELECT u.nombres,
+            "SELECT u.id_usuario,
+                    u.documentos_id_documentos AS tipo_doc,
+                    u.usuario,
+                    u.nombres,
                     u.apellidos,
                     u.num_documento,
-                    r.nombre  
+                    u.correo,
+                    u.fechaInicio,
+                    u.telefono,
+                    u.estado,
+                    u.codigo,
+                    u.direccion,
+                    r.id_rol,
+                    r.nombre AS Cargo 
                FROM usuarios u , rol r
               WHERE u.rol_id_rol = r.id_rol 
                 AND (u.nombres LIKE '{$req->cmpbusqueda}%' OR u.apellidos LIKE '{$req->cmpbusqueda}%') 
@@ -157,7 +179,6 @@ class gestionarUsuarioController extends Controller
                             isNullEmpty($req->direccion  , 'direccion'  , 'digite correctamente direccion') ?:
                             isNullEmpty($req->telefono   , 'telefono'   , 'digite correctamente el telefono') ?:
                             isNullEmpty($req->rol        , 'rol'        , 'digite correctamente el rol') ?:
-                            isNullEmpty($req->contrasenia, 'contrasenia', 'digite correctamente el contraseñia');
                             isNullEmpty($req->numDoc     , 'numDoc'     ,'digite correctamente el contraseñia');
                             
          // validaciones de campos            
@@ -175,27 +196,42 @@ class gestionarUsuarioController extends Controller
             ); 
         }
         
-        //validación de cmpContrasenia
-        if (strlen($req->contrasenia) < 5) {
-            return JSON_ENCODE(
-                (object) [
-                    'status' => $_SESSION["STATUS_CONTROL"], //status del back
-                    'msj'    => 'La contraseña debe tener minimo 5 caracteres.' //
-                ]
-            ); 
+        
+        if (isNullEmpty($req->contrasenia, 'contrasenia', 'digite correctamente el contraseñia')) {
+            // se hizo la consulta 
+            return mySQLUpDate(
+                "UPDATE usuarios 
+                    SET nombres     = '{$req->nombres}', 
+                        apellidos   = '{$req->apellidos}', 
+                        direccion   = '{$req->dirreccion}',
+                        telefono    = '{$req->telefono}',
+                        rol_id_rol  = '{$req->rol}'
+                WHERE num_documento = '{$req->numDoc}' "
+            );      
+
+        } else {
+            //validación de cmpContrasenia
+            if (strlen($req->contrasenia) < 5) {
+                return JSON_ENCODE(
+                    (object) [
+                        'status' => $_SESSION["STATUS_CONTROL"], //status del back
+                        'msj'    => 'La contraseña debe tener minimo 5 caracteres.' //
+                    ]
+                ); 
+            }
+            // se hizo la consulta 
+            return mySQLUpDate(
+                "UPDATE usuarios 
+                    SET nombres     = '{$req->nombres}', 
+                        apellidos   = '{$req->apellidos}', 
+                        direccion   = '{$req->dirreccion}',
+                        telefono    = '{$req->telefono}',
+                        rol_id_rol  = '{$req->rol}',
+                        contrasenia = '{$req->contrasenia}'
+                WHERE num_documento = '{$req->numDoc}' "
+            );      
+
         }
-    
-        // se hizo la consulta 
-        return mySQLUpDate(
-            "UPDATE usuarios 
-                SET nombres     = '{$req->nombres}', 
-                    apellidos   = '{$req->apellidos}', 
-                    direccion   = '{$req->dirreccion}',
-                    telefono    = '{$req->telefono}',
-                    rol_id_rol  = '{$req->rol}',
-                    contrasenia = '{$req->contrasenia}'
-              WHERE num_documento = '{$req->numDoc}' "
-        );      
     }
     //----Detalle Usuario---------------
     function detalleUsuario (Request $req){
