@@ -14,6 +14,7 @@ class reporteInvController extends Controller
         if($isValidate){
             return $isValidate;
         }
+        //// el estado 1 es alto en productos y el estado 0 es bajo en productos
         return mySQLConsulta("SELECT id_producto,nombre,precio,stock,(CASE  
         WHEN estado = 1 THEN 'ALTO'
         ELSE CASE WHEN estado = 0 THEN 'BAJO'
