@@ -26,6 +26,7 @@ Route::get('cmbTipoDoc'       , 'gestionarUsuarioController@cmbTipoDoc'      )->
 
 //gProductosController
 Route::get('listProduct', 'gProductosController@listProduct')->middleware('validateAuth');
+Route::get('buscarProduct', 'gProductosController@buscarProduct');
 Route::post('deleteP'   , 'gProductosController@deleteP'    )->middleware('validateAuth');
 Route::post('updateP'   , 'gProductosController@updateP'    )->middleware('validateAuth');
 Route::post('registrarP', 'gProductosController@registrarP' )->middleware('validateAuth');
