@@ -39,7 +39,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr v-for="(producto,index) in listaProductos" :key="producto.nombre">
+                        <tr v-for="(producto,index) in listaProductos" :key="producto.id_producto">
                           <td scope="row">{{index+1}}</td>
                           <td>{{producto.nombre}}</td>
                           <td>{{producto.marka}}</td>
@@ -50,7 +50,7 @@
                               <button class="btn btn-danger dropdown-toggle dropdown-toggle-split " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" @click="formModificarProducto">Modificar</a>
-                                <a class="dropdown-item" @click="openDeleteModal(producto.nombre)">Eliminar</a>
+                                <a class="dropdown-item" @click="openDeleteModal(producto.id_producto)">Eliminar</a>
                               </div>
                             </div>
                           </td>
