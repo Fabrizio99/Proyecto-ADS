@@ -4,8 +4,8 @@
         <div style="margin-top: 80px">
             <navigation/>
             <div style=" height : calc(100vh - 80px); overflow-y : scroll" class="pt-4">
-                <div class="row mx-4">
-                    <h3 class="form-group col-3">
+                <div class="row mx-4 mb-1">
+                    <h3 class="col">
                         Lista de productos
                     </h3>
                     <button type="button" class="btn btn-info my-1 form-group col-3 btncrear" @click="formCrearProducto">Crear producto</button>
@@ -17,10 +17,15 @@
                             <div class="form-row">
                                 <div class="form-group col-9">
                                     <label for="exampleInputPassword1">Nombre del producto</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1">
+                                    <input type="text" class="form-control" id="exampleInputPassword1" v-model="nomProduct">
                                 </div>
-                                <div class="form-group col-3 mt-2">
-                                    <input type="button" class="btn btn-primary btn-block mt-4 btnbuscar" value="BUSCAR"/>
+                                <div class="form-group col-3 mt-2 row">
+                                  <div class="col-10">
+                                      <input type="button" class="btn btn-primary btn-block mt-4 btnbuscar" value="BUSCAR" @click="searchProduct"/>
+                                    </div>
+                                    <div class="col-2">
+                                      <input type="button" class="btn btn-danger btn-block mt-4 btnbuscar" value="X" @click="getProductos"/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -96,7 +101,8 @@ export default {
     data(){
       return{
         listaProductos : [],
-        productSelected  : ''
+        productSelected  : '',
+        nomProduct : ''
       }
     }, 
     methods : {
@@ -122,6 +128,7 @@ export default {
           });
         },
         async getProductos(){
+          this.nomProduct = '';
           let response = await axios.get('api/listProduct?token='+usuario.getData().token);
           console.log(response);
           if(response.data.status == "0"){
@@ -142,6 +149,21 @@ export default {
             this.getProductos();
           }else{
             alert('Error: '+response.data.msj);
+          }
+        },
+        async searchProduct(){
+          if(this.nomProduct.trim() != ''){
+            let response = await axios.get('api/buscarProduct?nombreP='+this.nomProduct.trim()+'&token='+usuario.getData().token);
+            this.nomProduct = '';
+            if(response.data.status == "0"){
+              this.listaProductos = Array.isArray(response.data.data)?response.data.data:[response.data.data];
+              if(this.listaProductos.length == 0){
+                alert('Error: No se encuentra el producto');
+              }
+            }else{
+              this.listaProductos = [];
+              alert('Error: '+response.data.msj);
+            }
           }
         }
     },

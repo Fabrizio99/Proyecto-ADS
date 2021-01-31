@@ -66340,6 +66340,11 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -66353,7 +66358,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
   data: function data() {
     return {
       listaProductos: [],
-      productSelected: ''
+      productSelected: '',
+      nomProduct: ''
     };
   },
 
@@ -66386,10 +66392,11 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
+                this.nomProduct = '';
+                _context.next = 3;
                 return axios.get('api/listProduct?token=' + __WEBPACK_IMPORTED_MODULE_3__user__["a" /* default */].getData().token);
 
-              case 2:
+              case 3:
                 response = _context.sent;
 
                 console.log(response);
@@ -66399,7 +66406,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   alert('Error: ' + response.data.msj);
                 }
 
-              case 5:
+              case 6:
               case 'end':
                 return _context.stop();
             }
@@ -66451,6 +66458,49 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       }
 
       return deleteProduct;
+    }(),
+    searchProduct: function () {
+      var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
+        var response;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                if (!(this.nomProduct.trim() != '')) {
+                  _context3.next = 6;
+                  break;
+                }
+
+                _context3.next = 3;
+                return axios.get('api/buscarProduct?nombreP=' + this.nomProduct.trim() + '&token=' + __WEBPACK_IMPORTED_MODULE_3__user__["a" /* default */].getData().token);
+
+              case 3:
+                response = _context3.sent;
+
+                this.nomProduct = '';
+                if (response.data.status == "0") {
+                  this.listaProductos = Array.isArray(response.data.data) ? response.data.data : [response.data.data];
+                  if (this.listaProductos.length == 0) {
+                    alert('Error: No se encuentra el producto');
+                  }
+                } else {
+                  this.listaProductos = [];
+                  alert('Error: ' + response.data.msj);
+                }
+
+              case 6:
+              case 'end':
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function searchProduct() {
+        return _ref3.apply(this, arguments);
+      }
+
+      return searchProduct;
     }()
   },
   mounted: function mounted() {
@@ -66488,8 +66538,8 @@ var render = function() {
               }
             },
             [
-              _c("div", { staticClass: "row mx-4" }, [
-                _c("h3", { staticClass: "form-group col-3" }, [
+              _c("div", { staticClass: "row mx-4 mb-1" }, [
+                _c("h3", { staticClass: "col" }, [
                   _vm._v(
                     "\n                    Lista de productos\n                "
                   )
@@ -66508,11 +66558,67 @@ var render = function() {
                 _c("h3", { staticClass: "form-group col-6" })
               ]),
               _vm._v(" "),
-              _vm._m(0),
+              _c("div", { staticClass: "row mx-4" }, [
+                _c("div", { staticClass: "card col cardbuscador" }, [
+                  _c("div", { staticClass: "card-body" }, [
+                    _c("div", { staticClass: "form-row" }, [
+                      _c("div", { staticClass: "form-group col-9" }, [
+                        _c(
+                          "label",
+                          { attrs: { for: "exampleInputPassword1" } },
+                          [_vm._v("Nombre del producto")]
+                        ),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.nomProduct,
+                              expression: "nomProduct"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "text", id: "exampleInputPassword1" },
+                          domProps: { value: _vm.nomProduct },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.nomProduct = $event.target.value
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group col-3 mt-2 row" }, [
+                        _c("div", { staticClass: "col-10" }, [
+                          _c("input", {
+                            staticClass:
+                              "btn btn-primary btn-block mt-4 btnbuscar",
+                            attrs: { type: "button", value: "BUSCAR" },
+                            on: { click: _vm.searchProduct }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-2" }, [
+                          _c("input", {
+                            staticClass:
+                              "btn btn-danger btn-block mt-4 btnbuscar",
+                            attrs: { type: "button", value: "X" },
+                            on: { click: _vm.getProductos }
+                          })
+                        ])
+                      ])
+                    ])
+                  ])
+                ])
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "mx-4 mt-4" }, [
                 _c("table", { staticClass: "table" }, [
-                  _vm._m(1),
+                  _vm._m(0),
                   _vm._v(" "),
                   _c(
                     "tbody",
@@ -66606,7 +66712,7 @@ var render = function() {
         [
           _c("div", { staticClass: "modal-dialog" }, [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(2),
+              _vm._m(1),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _vm._v("\n            ¿Desea eliminar producto?\n          ")
@@ -66641,36 +66747,6 @@ var render = function() {
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row mx-4" }, [
-      _c("div", { staticClass: "card col cardbuscador" }, [
-        _c("div", { staticClass: "card-body" }, [
-          _c("div", { staticClass: "form-row" }, [
-            _c("div", { staticClass: "form-group col-9" }, [
-              _c("label", { attrs: { for: "exampleInputPassword1" } }, [
-                _vm._v("Nombre del producto")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: { type: "text", id: "exampleInputPassword1" }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group col-3 mt-2" }, [
-              _c("input", {
-                staticClass: "btn btn-primary btn-block mt-4 btnbuscar",
-                attrs: { type: "button", value: "BUSCAR" }
-              })
-            ])
-          ])
-        ])
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
