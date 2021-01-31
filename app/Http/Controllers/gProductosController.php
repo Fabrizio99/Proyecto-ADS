@@ -8,7 +8,8 @@ class gProductosController extends Controller
 {
     function listProduct (Request $req){
 
-        return mySQLConsulta("SELECT nombre,
+        return mySQLConsulta("SELECT id_producto,
+                                     nombre,
                                      marka,
                                      precio,
                                      stock,
