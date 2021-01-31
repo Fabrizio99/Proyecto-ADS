@@ -14,7 +14,12 @@ class reporteInvController extends Controller
         if($isValidate){
             return $isValidate;
         }
-        return mySQLConsulta("SELECT * FROM producto WHERE fecha_mod <='{$req->fecha}'LIMIT 0,50");
+        return mySQLConsulta("SELECT id_producto,nombre,precio,stock,(CASE  
+        WHEN estado = 1 THEN 'bajo'
+        ELSE CASE WHEN estado = 0 THEN 'alto'
+        END 
+        END ) AS estado FROM
+        producto WHERE fecha_mod <= '{$req->fecha}' LIMIT 0,50");
         
     }
 
