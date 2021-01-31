@@ -6339,6 +6339,13 @@ function toComment(sourceMap) {
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__(169);
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
 /*
   MIT License http://www.opensource.org/licenses/mit-license.php
   Author Tobias Koppers @sokra
@@ -6564,7 +6571,7 @@ function applyToTag (styleElement, obj) {
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports) {
 
 var g;
@@ -6588,13 +6595,6 @@ try {
 // easier to handle this case. if(!global) { ...}
 
 module.exports = g;
-
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(169);
 
 
 /***/ }),
@@ -6682,6 +6682,24 @@ if (false) {
 
 /***/ }),
 /* 12 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+function Data() {
+    this.user = undefined;
+}
+Data.prototype.getSelectedUser = function () {
+    return this.user;
+};
+Data.prototype.setSelectedUser = function (user) {
+    this.user = user;
+};
+
+var data = new Data();
+/* harmony default export */ __webpack_exports__["a"] = (data);
+
+/***/ }),
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6778,10 +6796,10 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14)))
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -6971,7 +6989,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6998,7 +7016,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 }));
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7061,14 +7079,14 @@ var VueSweetalert2 = (function () {
 //# sourceMappingURL=index.js.map
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export gsap */
 /* unused harmony export default */
 /* unused harmony export TweenMax */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__gsap_core_js__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__gsap_core_js__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__CSSPlugin_js__ = __webpack_require__(181);
 /* unused harmony reexport CSSPlugin */
 /* unused harmony reexport TweenLite */
@@ -7100,7 +7118,7 @@ TweenMaxWithCSS = gsapWithCSS.core.Tween;
 
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11002,24 +11020,6 @@ var Power0 = _easeMap.Power0,
  //export some internal methods/orojects for use in CSSPlugin so that we can externalize that file and allow custom builds that exclude it.
 
 
-
-/***/ }),
-/* 18 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-function Data() {
-    this.user = undefined;
-}
-Data.prototype.getSelectedUser = function () {
-    return this.user;
-};
-Data.prototype.setSelectedUser = function (user) {
-    this.user = user;
-};
-
-var data = new Data();
-/* harmony default export */ __webpack_exports__["a"] = (data);
 
 /***/ }),
 /* 19 */
@@ -37233,7 +37233,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__routes_js__ = __webpack_require__(162);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppComponent__ = __webpack_require__(246);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_AppComponent__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_sweetalert2__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_sweetalert2__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_sweetalert2_dist_sweetalert2_min_css__ = __webpack_require__(249);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_sweetalert2_dist_sweetalert2_min_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_sweetalert2_dist_sweetalert2_min_css__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_axios__ = __webpack_require__(253);
@@ -37287,8 +37287,8 @@ var app = new Vue({
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_LoginComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_LoginComponent__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_LogoutComponent__ = __webpack_require__(172);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_LogoutComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_LogoutComponent__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__store__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vue_sweetalert2__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__store__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vue_sweetalert2__ = __webpack_require__(16);
 
 
 
@@ -49395,7 +49395,7 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(164).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8), __webpack_require__(164).setImmediate))
 
 /***/ }),
 /* 164 */
@@ -49465,7 +49465,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
                          (typeof global !== "undefined" && global.clearImmediate) ||
                          (this && this.clearImmediate);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ }),
 /* 165 */
@@ -49658,7 +49658,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(13)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8), __webpack_require__(14)))
 
 /***/ }),
 /* 166 */
@@ -52786,7 +52786,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__user_js__ = __webpack_require__(9);
 
@@ -53838,7 +53838,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store__ = __webpack_require__(15);
 //
 //
 //
@@ -55110,7 +55110,7 @@ var index = {
 /* harmony default export */ __webpack_exports__["a"] = (index);
 
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(7)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(8)))
 
 /***/ }),
 /* 175 */
@@ -62483,7 +62483,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gsap__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gsap__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__user__ = __webpack_require__(9);
 //
 //
@@ -62551,7 +62551,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* unused harmony export _getBBox */
 /* unused harmony export _createElement */
 /* unused harmony export checkPrefix */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__gsap_core_js__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__gsap_core_js__ = __webpack_require__(18);
 /*!
  * CSSPlugin 3.6.0
  * https://greensock.com
@@ -64021,7 +64021,7 @@ if (false) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gsap__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gsap__ = __webpack_require__(17);
 //
 //
 //
@@ -64535,13 +64535,13 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_AppBar__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__user__ = __webpack_require__(9);
 
 
@@ -65159,7 +65159,7 @@ var content = __webpack_require__(191);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(6)("0dd35ac1", content, false, {});
+var update = __webpack_require__(7)("0dd35ac1", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -65227,7 +65227,7 @@ module.exports = function listToStyles (parentId, list) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_AppBar__);
@@ -65235,7 +65235,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Multiselect__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Multiselect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_Multiselect__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__data__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__data__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__user__ = __webpack_require__(9);
 
 
@@ -65544,7 +65544,7 @@ var content = __webpack_require__(195);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(6)("742e8dcc", content, false, {});
+var update = __webpack_require__(7)("742e8dcc", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -66244,39 +66244,17 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_AppBar__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_AppBar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_AppBar__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar_vue__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_AppBar_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_AppBar__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__user__ = __webpack_require__(9);
+
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
 //
 //
 //
@@ -66368,46 +66346,117 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    components: {
-        'app-bar': __WEBPACK_IMPORTED_MODULE_0__components_AppBar___default.a,
-        'navigation': __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent___default.a
+  components: {
+    'app-bar': __WEBPACK_IMPORTED_MODULE_1__components_AppBar___default.a,
+    'navigation': __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent___default.a
+  },
+  data: function data() {
+    return {
+      listaProductos: [],
+      productSelected: ''
+    };
+  },
+
+  methods: {
+    openMain: function openMain() {
+      this.$router.push({ name: "main" });
     },
-    methods: {
-        openMain: function openMain() {
-            this.$router.push({ name: "main" });
-        },
-        formCrearProducto: function formCrearProducto() {
-            this.$router.push({ name: "crearproductos" });
-        },
-        formModificarProducto: function formModificarProducto() {
-            this.$router.push({ name: "modificarproductos" });
-        },
-        formComprobacionEliminar: function formComprobacionEliminar() {
-            var _this = this;
+    formCrearProducto: function formCrearProducto() {
+      this.$router.push({ name: "crearproductos" });
+    },
+    formModificarProducto: function formModificarProducto() {
+      this.$router.push({ name: "modificarproductos" });
+    },
+    openDeleteModal: function openDeleteModal(documento) {
+      this.productSelected = documento;
+      $('#deleteModal').modal('show');
+    },
+    msjError: function msjError() {
+      this.$swal({
+        icon: 'error',
+        title: 'Se ha detectado un acceso incorrecto',
+        confirmButtonColor: 'red',
+        confirmButtonText: 'Cerrar'
+      });
+    },
+    getProductos: function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+        var response;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios.get('api/listProduct?token=' + __WEBPACK_IMPORTED_MODULE_3__user__["a" /* default */].getData().token);
 
-            this.$swal({
-                title: '¿Desea eliminar producto?',
-                showDenyButton: true,
-                confirmButtonText: 'Aceptar',
-                confirmButtonColor: '#0AB70A',
-                denyButtonText: 'Cancelar'
+              case 2:
+                response = _context.sent;
 
-            }).then(function (result) {
-
-                if (result.isConfirmed) {
-                    _this.$swal('PRODUCTO ELIMINADO EXITOSAMENTE', '', 'success');
+                console.log(response);
+                if (response.data.status == "0") {
+                  this.listaProductos = response.data.data;
+                } else {
+                  alert('Error: ' + response.data.msj);
                 }
-            });
-        },
-        msjError: function msjError() {
-            this.$swal({
-                icon: 'error',
-                title: 'Se ha detectado un acceso incorrecto',
-                confirmButtonColor: 'red',
-                confirmButtonText: 'Cerrar'
-            });
-        }
-    }
+
+              case 5:
+              case 'end':
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function getProductos() {
+        return _ref.apply(this, arguments);
+      }
+
+      return getProductos;
+    }(),
+    deleteProduct: function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
+        var body, response;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                body = {
+                  idP: this.productSelected,
+                  token: __WEBPACK_IMPORTED_MODULE_3__user__["a" /* default */].getData().token
+                };
+                _context2.next = 3;
+                return axios.post('api/deleteP', body);
+
+              case 3:
+                response = _context2.sent;
+
+                console.log(response);
+                if (response.data.status == "0") {
+                  alert('Mensaje: ' + 'Producto eliminado exitosamente');
+                  this.getProductos();
+                } else {
+                  alert('Error: ' + response.data.msj);
+                }
+
+              case 6:
+              case 'end':
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function deleteProduct() {
+        return _ref2.apply(this, arguments);
+      }
+
+      return deleteProduct;
+    }()
+  },
+  mounted: function mounted() {
+    console.log('mounted!!!');
+    this.getProductos();
+  }
 });
 
 /***/ }),
@@ -66465,233 +66514,127 @@ var render = function() {
                 _c("table", { staticClass: "table" }, [
                   _vm._m(1),
                   _vm._v(" "),
-                  _c("tbody", [
-                    _c("tr", [
-                      _vm._m(2),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("Azucar rubia")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("Bell's")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("S/.14.30")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("15")]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "option text-center" }, [
-                        _c("div", { staticClass: "dropdown" }, [
-                          _c("button", {
-                            staticClass:
-                              "btn btn-danger dropdown-toggle dropdown-toggle-split",
-                            attrs: {
-                              type: "button",
-                              id: "dropdownMenuButton",
-                              "data-toggle": "dropdown",
-                              "aria-haspopup": "true",
-                              "aria-expanded": "false"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass: "dropdown-menu",
-                              attrs: { "aria-labelledby": "dropdownMenuButton" }
-                            },
-                            [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "dropdown-item",
-                                  on: { click: _vm.formModificarProducto }
-                                },
-                                [_vm._v("Modificar")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "dropdown-item",
-                                  on: { click: _vm.formComprobacionEliminar }
-                                },
-                                [_vm._v("Eliminar")]
-                              )
-                            ]
-                          )
+                  _c(
+                    "tbody",
+                    _vm._l(_vm.listaProductos, function(producto, index) {
+                      return _c("tr", { key: producto.nombre }, [
+                        _c("td", { attrs: { scope: "row" } }, [
+                          _vm._v(_vm._s(index + 1))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(producto.nombre))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(producto.marka))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v("S/. " + _vm._s(producto.precio))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(producto.stock))]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "option text-center" }, [
+                          _c("div", { staticClass: "dropdown" }, [
+                            _c("button", {
+                              staticClass:
+                                "btn btn-danger dropdown-toggle dropdown-toggle-split ",
+                              attrs: {
+                                type: "button",
+                                id: "dropdownMenuButton",
+                                "data-toggle": "dropdown",
+                                "aria-haspopup": "true",
+                                "aria-expanded": "false"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "dropdown-menu",
+                                attrs: {
+                                  "aria-labelledby": "dropdownMenuButton"
+                                }
+                              },
+                              [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "dropdown-item",
+                                    on: { click: _vm.formModificarProducto }
+                                  },
+                                  [_vm._v("Modificar")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "dropdown-item",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.openDeleteModal(
+                                          producto.nombre
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Eliminar")]
+                                )
+                              ]
+                            )
+                          ])
                         ])
                       ])
-                    ]),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _vm._m(3),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("Leche")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("Gloria")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("S/.3.50")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("30")]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "option text-center" }, [
-                        _c("div", { staticClass: "dropdown" }, [
-                          _c("button", {
-                            staticClass:
-                              "btn btn-danger dropdown-toggle dropdown-toggle-split",
-                            attrs: {
-                              type: "button",
-                              id: "dropdownMenuButton",
-                              "data-toggle": "dropdown",
-                              "aria-haspopup": "true",
-                              "aria-expanded": "false"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass: "dropdown-menu",
-                              attrs: { "aria-labelledby": "dropdownMenuButton" }
-                            },
-                            [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "dropdown-item",
-                                  on: { click: _vm.formModificarProducto }
-                                },
-                                [_vm._v("Modificar")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "dropdown-item",
-                                  on: { click: _vm.formComprobacionEliminar }
-                                },
-                                [_vm._v("Eliminar")]
-                              )
-                            ]
-                          )
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _vm._m(4),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("Harina")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("Blanca Flor")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("S/.4.90")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("20")]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "option text-center" }, [
-                        _c("div", { staticClass: "dropdown" }, [
-                          _c("button", {
-                            staticClass:
-                              "btn btn-danger dropdown-toggle dropdown-toggle-split",
-                            attrs: {
-                              type: "button",
-                              id: "dropdownMenuButton",
-                              "data-toggle": "dropdown",
-                              "aria-haspopup": "true",
-                              "aria-expanded": "false"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass: "dropdown-menu",
-                              attrs: { "aria-labelledby": "dropdownMenuButton" }
-                            },
-                            [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "dropdown-item",
-                                  on: { click: _vm.formModificarProducto }
-                                },
-                                [_vm._v("Modificar")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "dropdown-item",
-                                  on: { click: _vm.formComprobacionEliminar }
-                                },
-                                [_vm._v("Eliminar")]
-                              )
-                            ]
-                          )
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _vm._m(5),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("Mantequilla")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("Gloria")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("S/.13.00")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("18")]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "option text-center" }, [
-                        _c("div", { staticClass: "dropdown" }, [
-                          _c("button", {
-                            staticClass:
-                              "btn btn-danger dropdown-toggle dropdown-toggle-split",
-                            attrs: {
-                              type: "button",
-                              id: "dropdownMenuButton",
-                              "data-toggle": "dropdown",
-                              "aria-haspopup": "true",
-                              "aria-expanded": "false"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass: "dropdown-menu",
-                              attrs: { "aria-labelledby": "dropdownMenuButton" }
-                            },
-                            [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "dropdown-item",
-                                  on: { click: _vm.formModificarProducto }
-                                },
-                                [_vm._v("Modificar")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "dropdown-item",
-                                  on: { click: _vm.formComprobacionEliminar }
-                                },
-                                [_vm._v("Eliminar")]
-                              )
-                            ]
-                          )
-                        ])
-                      ])
-                    ])
-                  ])
+                    }),
+                    0
+                  )
                 ])
               ])
             ]
           )
         ],
         1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "deleteModal",
+            tabindex: "-1",
+            "aria-labelledby": "exampleModalLabel",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c("div", { staticClass: "modal-dialog" }, [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(2),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _vm._v("\n            ¿Desea eliminar producto?\n          ")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button", "data-dismiss": "modal" },
+                    on: { click: _vm.deleteProduct }
+                  },
+                  [_vm._v("Aceptar")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("Cancelar")]
+                )
+              ])
+            ])
+          ])
+        ]
       )
     ],
     1
@@ -66734,7 +66677,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Foto")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
         _vm._v(" "),
@@ -66752,56 +66695,25 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", { attrs: { scope: "row" } }, [
-      _c("img", {
-        attrs: {
-          src: "images/GestionProductos/azucar.jpg",
-          width: "40",
-          height: "40"
-        }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", { attrs: { scope: "row" } }, [
-      _c("img", {
-        attrs: {
-          src: "images/GestionProductos/leche.jpg",
-          width: "40",
-          height: "40"
-        }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", { attrs: { scope: "row" } }, [
-      _c("img", {
-        attrs: {
-          src: "images/GestionProductos/harina.jpg",
-          width: "40",
-          height: "40"
-        }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", { attrs: { scope: "row" } }, [
-      _c("img", {
-        attrs: {
-          src: "images/GestionProductos/mantequilla.jpg",
-          width: "40",
-          height: "40"
-        }
-      })
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Aviso")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
     ])
   }
 ]
@@ -68551,7 +68463,7 @@ var content = __webpack_require__(214);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(6)("04ede64a", content, false, {});
+var update = __webpack_require__(7)("04ede64a", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -70469,7 +70381,7 @@ var content = __webpack_require__(222);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(6)("2f45e19e", content, false, {});
+var update = __webpack_require__(7)("2f45e19e", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -71850,7 +71762,7 @@ var content = __webpack_require__(227);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(6)("b034a55c", content, false, {});
+var update = __webpack_require__(7)("b034a55c", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -71885,7 +71797,7 @@ exports.push([module.i, "\n.products-dialog[data-v-3f178469]{\r\n  max-width: 90
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_AppBar__);
@@ -75246,7 +75158,7 @@ var content = __webpack_require__(240);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(6)("6dfdcd18", content, false, {});
+var update = __webpack_require__(7)("6dfdcd18", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -77316,7 +77228,7 @@ module.exports = __webpack_require__(254);
 var utils = __webpack_require__(4);
 var bind = __webpack_require__(154);
 var Axios = __webpack_require__(256);
-var defaults = __webpack_require__(12);
+var defaults = __webpack_require__(13);
 
 /**
  * Create an instance of Axios
@@ -77399,7 +77311,7 @@ function isSlowBuffer (obj) {
 "use strict";
 
 
-var defaults = __webpack_require__(12);
+var defaults = __webpack_require__(13);
 var utils = __webpack_require__(4);
 var InterceptorManager = __webpack_require__(265);
 var dispatchRequest = __webpack_require__(266);
@@ -77940,7 +77852,7 @@ module.exports = InterceptorManager;
 var utils = __webpack_require__(4);
 var transformData = __webpack_require__(267);
 var isCancel = __webpack_require__(157);
-var defaults = __webpack_require__(12);
+var defaults = __webpack_require__(13);
 var isAbsoluteURL = __webpack_require__(268);
 var combineURLs = __webpack_require__(269);
 
@@ -78195,7 +78107,7 @@ module.exports = function spread(callback) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 
 
@@ -85302,7 +85214,7 @@ Popper.Defaults = Defaults;
 /* harmony default export */ __webpack_exports__["default"] = (Popper);
 //# sourceMappingURL=popper.js.map
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(7)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(8)))
 
 /***/ }),
 /* 275 */
