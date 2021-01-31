@@ -73144,7 +73144,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     data: function data() {
         return {
             selectedDate: __WEBPACK_IMPORTED_MODULE_4_moment___default()().format('yyy-MM-DD'),
-            listaProductos: []
+            listaProductos: [],
+            costInv: '',
+            cantProd: ''
         };
     },
 
@@ -73191,9 +73193,41 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             }
 
             return ListSearchDate;
-        }()
-    }
+        }(),
+        totalProductCosto: function () {
+            var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
+                var response;
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+                    while (1) {
+                        switch (_context2.prev = _context2.next) {
+                            case 0:
+                                _context2.next = 2;
+                                return axios.get('api/totalProdCosto?token=' + __WEBPACK_IMPORTED_MODULE_5__user__["a" /* default */].getData().token);
 
+                            case 2:
+                                response = _context2.sent;
+
+                                console.log('respuesta ', response);
+
+                            case 4:
+                            case 'end':
+                                return _context2.stop();
+                        }
+                    }
+                }, _callee2, this);
+            }));
+
+            function totalProductCosto() {
+                return _ref2.apply(this, arguments);
+            }
+
+            return totalProductCosto;
+        }()
+    },
+    mounted: function mounted() {
+        console.log('mounted!!!');
+        this.ListSearchDate(this.selectedDate);
+    }
 });
 
 /***/ }),
@@ -73556,11 +73590,26 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.selectedDate,
+                        expression: "selectedDate"
+                      }
+                    ],
                     staticClass: "form-control",
                     attrs: { type: "date", id: "fechainventario" },
+                    domProps: { value: _vm.selectedDate },
                     on: {
                       change: function($event) {
                         return _vm.ListSearchDate(_vm.selectedDate)
+                      },
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.selectedDate = $event.target.value
                       }
                     }
                   })
@@ -73568,18 +73617,36 @@ var render = function() {
                 _vm._v(" "),
                 _vm._m(2),
                 _vm._v(" "),
-                _vm._m(3)
+                _c("div", { staticClass: "col-6" }, [
+                  _c("div", { staticClass: "card col-12" }, [
+                    _c("div", { staticClass: "card-body" }, [
+                      _vm._m(3),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-row" }, [
+                        _c("div", { staticClass: "col-1" }, [
+                          _c("label", { on: { change: _vm.totalProductCosto } })
+                        ]),
+                        _vm._v(" "),
+                        _vm._m(4),
+                        _vm._v(" "),
+                        _vm._m(5),
+                        _vm._v(" "),
+                        _vm._m(6)
+                      ])
+                    ])
+                  ])
+                ])
               ]),
               _vm._v(" "),
-              _vm._m(4),
+              _vm._m(7),
               _vm._v(" "),
-              _vm._m(5),
+              _vm._m(8),
               _vm._v(" "),
               _c("div", { staticClass: "row mx-4" }, [
                 _c("div", { staticClass: "col-12" }, [
                   _c("div", { staticClass: "mx-4 mt-4" }, [
                     _c("table", { staticClass: "table" }, [
-                      _vm._m(6),
+                      _vm._m(9),
                       _vm._v(" "),
                       _c(
                         "tbody",
@@ -73644,39 +73711,37 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6" }, [
-      _c("div", { staticClass: "card col-12" }, [
-        _c("div", { staticClass: "card-body" }, [
-          _c("div", { staticClass: "form-row" }, [
-            _c("div", { staticClass: "col-1" }, [_c("label")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-5" }, [
-              _c("label", [_vm._v("Costo de inventario")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-1" }, [_c("label")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-5" }, [
-              _c("label", [_vm._v("Cantidad de productos")])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-row" }, [
-            _c("div", { staticClass: "col-1" }, [_c("label")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-5" }, [
-              _c("label", [_vm._v("S/.10.890.00")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-1" }, [_c("label")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-5" }, [
-              _c("label", [_vm._v("1.506")])
-            ])
-          ])
-        ])
+    return _c("div", { staticClass: "form-row" }, [
+      _c("div", { staticClass: "col-1" }, [_c("label")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-5" }, [
+        _c("label", [_vm._v("Costo de inventario")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-1" }, [_c("label")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-5" }, [
+        _c("label", [_vm._v("Cantidad de productos")])
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-5" }, [_c("label")])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-1" }, [_c("label")])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-5" }, [_c("label", [_vm._v("1.506")])])
   },
   function() {
     var _vm = this

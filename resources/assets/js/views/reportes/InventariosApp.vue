@@ -17,7 +17,7 @@
                     <div class="row mx-4">
                         <div class="col-5">
                             <label for="fechainventario">Del día:</label>
-                            <input type="date" class="form-control" id="fechainventario"  @change="ListSearchDate(selectedDate)">
+                            <input type="date" class="form-control" id="fechainventario" v-model="selectedDate" @change="ListSearchDate(selectedDate)">
                             
                         </div>
                         <div class="col-1">
@@ -42,10 +42,10 @@
                                         </div>
                                         <div class="form-row">
                                             <div class="col-1">
-                                                <label></label>
+                                                <label @change="totalProductCosto"></label>
                                             </div>
-                                            <div class="col-5">
-                                                <label>S/.10.890.00</label>
+                                            <div class="col-5" >
+                                                <label></label>
                                             </div>
                                             <div class="col-1">
                                                 <label></label>
@@ -194,6 +194,8 @@ export default {
         return {
             selectedDate : moment().format('yyy-MM-DD'),
             listaProductos: [],
+            costInv: '',
+            cantProd: '',
         }
     },
     methods : {
@@ -214,8 +216,17 @@ export default {
             }else{
                 alert('Error: '+response.data.msj);
             }
-        }
+        },
+        async totalProductCosto(){
+          
+          let response = await axios.get('api/totalProdCosto?token='+usuario.getData().token);
+          console.log('respuesta ',response);
+          
+    },
+    },
+    mounted(){
+      console.log('mounted!!!');
+      this.ListSearchDate(this.selectedDate);
     }
-    
 }
 </script>
