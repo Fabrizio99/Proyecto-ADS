@@ -80,31 +80,16 @@ class emitirBvController extends Controller
     //----Angel va supervisar esta Función (TAREA PARA ANGEL )
 
     function registrarPago(Request $req){
-
-        $TIPO_YAPE = 1;
-        $TIPO_EFECTIVO = 2;
-
-         // falta de BD boleta
-        ///columna monto , monto recibiso=efectivo
-        //alva = file
-        //columna numero de cuenta
-
-        $valDiferentes = isNullEmpty($req->montorecibido)?:
-                        isNullEmpty($req->vuelto)?:
-                        isNullEmpty($req->tipopago)?:
-                        isNullEmpty($req->cuenta,'','cuenta')?:
-                        isNullEmpty($req->imgPrueba,'','');
-        
-        $valComun = isNullEmpty($req->montoPagar,'','ps montopagar') ?:
-                    isNullEmpty($req->notaIdBv,'','notaventaId') ?: 
-                    isNullEmpty($req->fecha,'','fecha') ?:
-                    isNullEmpty($req->tipopago,'','tipoPago');
-                    //isNullEmpty($req->file,'','file');
-
-        if($valComun){
-            return $valComun;
-        }else if ($valDiferentes){
-            return $valDiferentes;
+       
+        $validacion =   isNullEmpty($req->montoPagar,'','El montoPagar no puede estar vacio') ?:
+                        isNullEmpty($req->notaIdBv,'','El notaIdBv no puede estar vacio') ?: 
+                        isNullEmpty($req->fecha,'','fecha','La fecha no puede estar vacia') ?:
+                        isNullEmpty($req->tipopago,'','El seleccione un tipo de pago')?:
+                        isNullEmpty($req->montorecibido,'','El montorecibido no puede estar vacio');
+                                            
+        //Validacion de cmp Yape y Efectivo
+        if($validacion){
+            return $validacion;
         }
         
         //Modificación de Productos (Se reduce los productos al registrar una boleta)
@@ -138,7 +123,7 @@ class emitirBvController extends Controller
                  NOTADEVENTAS_id_boletaventa,
                  fecha,
                  monto) 
-                 VALUES('{$req->tipopago}','{$req->notaIdBv}','{$req->fecha}','{$req->montorecibido}'",'SE REGISTRO EL PAGO POR EFECTIVO');
+                 VALUES('{$req->tipopago}','{$req->notaIdBv}','{$req->fecha}','{$req->montorecibido}')",'SE REGISTRO EL PAGO POR EFECTIVO');
                  
                 }else if($req->tipopago == 2){
                     return mySQLInsert("INSERT INTO boleta  

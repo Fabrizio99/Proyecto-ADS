@@ -27,15 +27,14 @@ class gProductosController extends Controller
 
         return mySQLConsulta(
             "SELECT p.id_producto,
-                    p.nombre,
-                    p.stock,
-                    p.marka ,
-                    ct.nombre ,
-                    p.precio 
-                    FROM producto p,
-                         categoria ct 
-                    WHERE (p.nombre LIKE'%{$req->nombreP}%') 
-                    AND p.fk_producto_categoria = ct.id_categoria");
+            P.nombre,
+             p.stock,
+             p.marka ,
+             
+             p.precio 
+             FROM producto p
+                 
+             WHERE (p.nombre LIKE'{$req->nombreP}')" );
         }
 
 
