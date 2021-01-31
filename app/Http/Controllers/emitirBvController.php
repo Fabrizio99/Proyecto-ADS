@@ -80,7 +80,6 @@ class emitirBvController extends Controller
     //----Angel va supervisar esta Función (TAREA PARA ANGEL )
 
     function registrarPago(Request $req){
-
        
         $validacion =   isNullEmpty($req->montoPagar,'','El montoPagar no puede estar vacio') ?:
                         isNullEmpty($req->notaIdBv,'','El notaIdBv no puede estar vacio') ?: 
