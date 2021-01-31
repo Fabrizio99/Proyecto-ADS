@@ -8,7 +8,8 @@ class gProductosController extends Controller
 {
     function listProduct (Request $req){
 
-        return mySQLConsulta("SELECT nombre,
+        return mySQLConsulta("SELECT id_producto,
+                                     nombre,
                                      marka,
                                      precio,
                                      stock,
@@ -17,6 +18,29 @@ class gProductosController extends Controller
                                WHERE estado = 1"
                             );
     }
+    function buscarProduct(Request $req){
+        $isValidate = isNullEmpty($req->nombreP);
+
+        if($isValidate){
+            return $isValidate;
+        }
+
+        return mySQLConsulta(
+            "SELECT p.id_producto,
+                    p.nombre,
+                    p.stock,
+                    p.marka AS marca,
+                    ct.nombre AS categoria,
+                    p.precio 
+                    FROM producto p,
+                         categoria ct 
+                    WHERE (p.nombre LIKE'%{$req->nombreP}%') 
+                    AND p.fk_producto_categoria = ct.id_categoria");
+        }
+
+
+
+    
 
     function deleteP (Request $req){
         $isValidate = isNullEmpty($req->idP);
