@@ -29,8 +29,8 @@ class gProductosController extends Controller
             "SELECT p.id_producto,
                     p.nombre,
                     p.stock,
-                    p.marka AS marca,
-                    ct.nombre AS categoria,
+                    p.marka ,
+                    ct.nombre ,
                     p.precio 
                     FROM producto p,
                          categoria ct 
