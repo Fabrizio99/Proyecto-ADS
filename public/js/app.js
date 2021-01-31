@@ -66517,7 +66517,7 @@ var render = function() {
                   _c(
                     "tbody",
                     _vm._l(_vm.listaProductos, function(producto, index) {
-                      return _c("tr", { key: producto.nombre }, [
+                      return _c("tr", { key: producto.id_producto }, [
                         _c("td", { attrs: { scope: "row" } }, [
                           _vm._v(_vm._s(index + 1))
                         ]),
@@ -66569,7 +66569,7 @@ var render = function() {
                                     on: {
                                       click: function($event) {
                                         return _vm.openDeleteModal(
-                                          producto.nombre
+                                          producto.id_producto
                                         )
                                       }
                                     }
