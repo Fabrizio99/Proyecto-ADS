@@ -73145,7 +73145,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         return {
             selectedDate: __WEBPACK_IMPORTED_MODULE_4_moment___default()().format('yyy-MM-DD'),
             listaProductos: [],
-            costInv: '',
+            costInv: [],
             cantProd: ''
         };
     },

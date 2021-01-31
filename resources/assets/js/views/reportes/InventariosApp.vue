@@ -194,7 +194,7 @@ export default {
         return {
             selectedDate : moment().format('yyy-MM-DD'),
             listaProductos: [],
-            costInv: '',
+            costInv: [],
             cantProd: '',
         }
     },
@@ -222,7 +222,7 @@ export default {
           let response = await axios.get('api/totalProdCosto?token='+usuario.getData().token);
           console.log('respuesta ',response);
           
-    },
+        },
     },
     mounted(){
       console.log('mounted!!!');
