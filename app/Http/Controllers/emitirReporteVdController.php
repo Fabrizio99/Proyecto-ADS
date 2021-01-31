@@ -26,7 +26,7 @@ class emitirReporteVdController extends Controller
 
     ///----cumple para btn filtro x fecha de boleta de venta  
     // cumple para btn emitir boleta de venta 
-    function filtrarBoleta (Request $req){
+    function emitirRBVbyFecha (Request $req){
          
          return mySQLConsulta("SELECT b.idB_boleta AS N,
          b.codigo_boleta AS Codigo,
