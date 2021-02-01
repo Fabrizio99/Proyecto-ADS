@@ -8,13 +8,19 @@ include '../app/helper/untils.php'; // para cada controller pueda usar las funci
 
 class reporteInvController extends Controller
 {
-
+// lista productos
     function getEmitirRI(Request $req){
         $isValidate = isNullEmpty($req->fecha);
         if($isValidate){
             return $isValidate;
         }
-        return mySQLConsulta("SELECT * FROM producto WHERE fecha_mod <='{$req->fecha}'LIMIT 0,50");
+        //// el estado 1 es alto en productos y el estado 0 es bajo en productos
+        return mySQLConsulta("SELECT id_producto,nombre,precio,stock,(CASE  
+        WHEN estado = 1 THEN 'ALTO'
+        ELSE CASE WHEN estado = 0 THEN 'BAJO'
+        END 
+        END ) AS estado FROM
+        producto WHERE fecha_mod <= '{$req->fecha}' LIMIT 0,50");
         
     }
 

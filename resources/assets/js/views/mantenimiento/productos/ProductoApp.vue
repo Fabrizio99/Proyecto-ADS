@@ -4,8 +4,8 @@
         <div style="margin-top: 80px">
             <navigation/>
             <div style=" height : calc(100vh - 80px); overflow-y : scroll" class="pt-4">
-                <div class="row mx-4">
-                    <h3 class="form-group col-3">
+                <div class="row mx-4 mb-1">
+                    <h3 class="col">
                         Lista de productos
                     </h3>
                     <button type="button" class="btn btn-info my-1 form-group col-3 btncrear" @click="formCrearProducto">Crear producto</button>
@@ -17,10 +17,15 @@
                             <div class="form-row">
                                 <div class="form-group col-9">
                                     <label for="exampleInputPassword1">Nombre del producto</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1">
+                                    <input type="text" class="form-control" id="exampleInputPassword1" v-model="nomProduct">
                                 </div>
-                                <div class="form-group col-3 mt-2">
-                                    <input type="button" class="btn btn-primary btn-block mt-4 btnbuscar" value="BUSCAR"/>
+                                <div class="form-group col-3 mt-2 row">
+                                  <div class="col-10">
+                                      <input type="button" class="btn btn-primary btn-block mt-4 btnbuscar" value="BUSCAR" @click="searchProduct"/>
+                                    </div>
+                                    <div class="col-2">
+                                      <input type="button" class="btn btn-danger btn-block mt-4 btnbuscar" value="X" @click="getProductos"/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -30,7 +35,7 @@
                     <table class="table">
                       <thead>
                         <tr>
-                          <th scope="col">Foto</th>
+                          <th scope="col">#</th>
                           <th scope="col">Nombre</th>
                           <th scope="col">Marca</th>
                           <th scope="col">Precio</th>
@@ -39,66 +44,18 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td scope="row"><img src="images/GestionProductos/azucar.jpg"  width="40" height="40"></td>
-                          <td>Azucar rubia</td>
-                          <td>Bell's</td>
-                          <td>S/.14.30</td>
-                          <td>15</td>
+                        <tr v-for="(producto,index) in listaProductos" :key="producto.id_producto">
+                          <td scope="row">{{index+1}}</td>
+                          <td>{{producto.nombre}}</td>
+                          <td>{{producto.marka}}</td>
+                          <td>S/. {{producto.precio}}</td>
+                          <td>{{producto.stock}}</td>
                           <td class = "option text-center">
                             <div class="dropdown">
-                              <button class="btn btn-danger dropdown-toggle dropdown-toggle-split" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                              <button class="btn btn-danger dropdown-toggle dropdown-toggle-split " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" @click="formModificarProducto">Modificar</a>
-                                <a class="dropdown-item" @click="formComprobacionEliminar">Eliminar</a>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td scope="row"><img src="images/GestionProductos/leche.jpg"  width="40" height="40"></td>
-                          <td>Leche</td>
-                          <td>Gloria</td>
-                          <td>S/.3.50</td>
-                          <td>30</td>
-                          <td class = "option text-center">
-                            <div class="dropdown">
-                              <button class="btn btn-danger dropdown-toggle dropdown-toggle-split" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" @click="formModificarProducto">Modificar</a>
-                                <a class="dropdown-item" @click="formComprobacionEliminar">Eliminar</a>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td scope="row"><img src="images/GestionProductos/harina.jpg"  width="40" height="40"></td>
-                          <td>Harina</td>
-                          <td>Blanca Flor</td>
-                          <td>S/.4.90</td>
-                          <td>20</td>
-                          <td class = "option text-center">
-                            <div class="dropdown">
-                              <button class="btn btn-danger dropdown-toggle dropdown-toggle-split" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" @click="formModificarProducto">Modificar</a>
-                                <a class="dropdown-item" @click="formComprobacionEliminar">Eliminar</a>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td scope="row"><img src="images/GestionProductos/mantequilla.jpg"  width="40" height="40"></td>
-                          <td>Mantequilla</td>
-                          <td>Gloria</td>
-                          <td>S/.13.00</td>
-                          <td>18</td>
-                          <td class = "option text-center">
-                            <div class="dropdown">
-                              <button class="btn btn-danger dropdown-toggle dropdown-toggle-split" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" @click="formModificarProducto">Modificar</a>
-                                <a class="dropdown-item" @click="formComprobacionEliminar">Eliminar</a>
+                                <a class="dropdown-item" @click="formEditarProducto(producto)">Editar</a>
+                                <a class="dropdown-item" @click="openDeleteModal(producto.id_producto)">Eliminar</a>
                               </div>
                             </div>
                           </td>
@@ -108,42 +65,61 @@
                 </div>
             </div>
         </div>
+        <!--modal para eliminar producto-->
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Aviso</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                ¿Desea eliminar producto?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" @click="deleteProduct">Aceptar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--fin modal eliminar-->
     </div>
 </template>
 <script>
 import Appbar from '../../../components/AppBar'
-import AppBar from '../../../components/AppBar.vue';
 import Navigation from '../../../components/NavigationComponent';
+import data from '../../../data';
+import usuario from '../../../user';
 
 export default {
     components : {
         'app-bar'    : Appbar,
         'navigation' : Navigation
     },
+    data(){
+      return{
+        listaProductos : [],
+        productSelected  : '',
+        nomProduct : ''
+      }
+    }, 
     methods : {
         openMain(){
             this.$router.push({name:"main"});
         },
         formCrearProducto(){
-            this.$router.push({name:"crearproductos"});
+            this.$router.push({path:'formulario-productos/crear'});
         },
-        formModificarProducto(){
-            this.$router.push({name:"modificarproductos"});
+        formEditarProducto(product){
+            data.setSelectedUser(product);
+            this.$router.push({path:'formulario-productos/editar'});
         },
-        formComprobacionEliminar(){
-            this.$swal({
-            title: '¿Desea eliminar producto?',
-            showDenyButton: true,
-            confirmButtonText: `Aceptar`,
-            confirmButtonColor: '#0AB70A',
-            denyButtonText: `Cancelar`,
-            
-          }).then((result) => {
-  
-          if (result.isConfirmed) {
-          this.$swal('PRODUCTO ELIMINADO EXITOSAMENTE', '', 'success')
-          }
-          });
+        openDeleteModal(documento){
+          this.productSelected = documento;
+          $('#deleteModal').modal('show');
         },
         msjError(){
             this.$swal({
@@ -152,7 +128,50 @@ export default {
             confirmButtonColor: 'red',
             confirmButtonText: 'Cerrar'
           });
+        },
+        async getProductos(){
+          this.nomProduct = '';
+          let response = await axios.get('api/listProduct?token='+usuario.getData().token);
+          console.log('respuesta ',response);
+          if(response.data.status == "0"){
+              this.listaProductos = response.data.data;
+          }else{
+              alert('Error: '+response.data.msj);
+          }
+        },
+        async deleteProduct(){
+          const body = {
+            idP : this.productSelected,
+            token : usuario.getData().token
+          }
+          let response = await axios.post('api/deleteP',body);
+          console.log(response);
+          if(response.data.status == "0"){
+            alert('Mensaje: '+'Producto eliminado exitosamente');
+            this.getProductos();
+          }else{
+            alert('Error: '+response.data.msj);
+          }
+        },
+        async searchProduct(){
+          if(this.nomProduct.trim() != ''){
+            let response = await axios.get('api/buscarProduct?nombreP='+this.nomProduct.trim()+'&token='+usuario.getData().token);
+            this.nomProduct = '';
+            if(response.data.status == "0"){
+              this.listaProductos = Array.isArray(response.data.data)?response.data.data:[response.data.data];
+              if(this.listaProductos.length == 0){
+                alert('Error: No se encuentra el producto');
+              }
+            }else{
+              this.listaProductos = [];
+              alert('Error: '+response.data.msj);
+            }
+          }
         }
-  }
+    },
+    mounted(){
+      console.log('mounted!!!');
+      this.getProductos();
+    }
 }
 </script>

@@ -17,7 +17,8 @@
                     <div class="row mx-4">
                         <div class="col-5">
                             <label for="fechainventario">Del día:</label>
-                            <input type="date" class="form-control" id="fechainventario" v-model="selectedDate">
+                            <input type="date" class="form-control" id="fechainventario" v-model="selectedDate" @change="ListSearchDate(selectedDate)">
+                            
                         </div>
                         <div class="col-1">
                             <label></label>
@@ -31,27 +32,29 @@
                                             </div>
                                             <div class="col-5">
                                                 <label>Costo de inventario</label>
+                                                
                                             </div>
                                             <div class="col-1">
-                                                <label></label>
+                                               <label></label>                                                                                                              
                                             </div>
                                             <div class="col-5">
                                                 <label>Cantidad de productos</label>
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="col-1">
+                                            <div class="col-2">
+                                                <label></label>                                             
+                                            </div>
+                                            <div class="col-4" >
+                                                <label>{{resultSum['sum(precio)']}}</label>
+                                            </div>
+                                            <div class="col-2">
                                                 <label></label>
                                             </div>
-                                            <div class="col-5">
-                                                <label>S/.10.890.00</label>
+                                            <div class="col-4">
+                                                <label>{{resultSum['sum(stock)']}}</label>
                                             </div>
-                                            <div class="col-1">
-                                                <label></label>
-                                            </div>
-                                            <div class="col-5">
-                                                <label>1.506</label>
-                                            </div>
+                                            
                                         </div>
                                     </div>
                             </div>
@@ -143,7 +146,7 @@
 
                         </div>
                         <div class="col-3">
-                            <button type="button" class="btn btn-info my-1 form-group col-12" git>Emitir reporte</button>
+                            <button type="button" class="btn btn-info my-1 form-group col-12" >Emitir reporte</button>
                         </div> 
                     </div>
                     <div class="row mx-4">
@@ -154,53 +157,20 @@
                                     <tr>
                                     <th scope="col">Código</th>
                                     <th scope="col">Descripción del producto</th>
-                                    <th scope="col">Costo</th>
                                     <th scope="col">Precio de venta</th>
                                     <th scope="col">Cantidad</th>
                                     <th scope="col">Estado</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td scope="row">1950001</td>
-                                        <td>Harina Blanca Flor</td>
-                                        <td>S/. 3.00</td>
-                                        <td>S/. 3.50</td>
-                                        <td>15</td>
-                                        <td>Bajo</td>
+                                    <tr v-for="(producto) in listaProductos" :key="producto.id_producto">
+                                        <td scope="row">{{producto.id_producto}}</td>
+                                        <td>{{producto.nombre}}</td>
+                                        <td>{{producto.precio}}</td>
+                                        <td>{{producto.stock}}</td>
+                                        <td>{{producto.estado}}</td>
                                     </tr>
-                                    <tr>
-                                        <td scope="row">1950001</td>
-                                        <td>Harina Blanca Flor</td>
-                                        <td>S/. 3.00</td>
-                                        <td>S/. 3.50</td>
-                                        <td>15</td>
-                                        <td>Bajo</td>
-                                    </tr>
-                                    <tr>
-                                        <td scope="row">1950001</td>
-                                        <td>Harina Blanca Flor</td>
-                                        <td>S/. 3.00</td>
-                                        <td>S/. 3.50</td>
-                                        <td>15</td>
-                                        <td>Bajo</td>
-                                        </tr>
-                                    <tr>
-                                        <td scope="row">1950001</td>
-                                        <td>Harina Blanca Flor</td>
-                                        <td>S/. 3.00</td>
-                                        <td>S/. 3.50</td>
-                                        <td>15</td>
-                                        <td>Bajo</td>
-                                    </tr>
-                                    <tr>
-                                        <td scope="row">1950001</td>
-                                        <td>Harina Blanca Flor</td>
-                                        <td>S/. 3.00</td>
-                                        <td>S/. 3.50</td>
-                                        <td>15</td>
-                                        <td>Bajo</td>
-                                    </tr>
+                                   
                                 </tbody>
                                 </table>
                             </div>
@@ -214,7 +184,8 @@
 import Appbar from '../../components/AppBar'
 import AppBar from '../../components/AppBar.vue';
 import Navigation from '../../components/NavigationComponent';
-import moment from 'moment'
+import moment from 'moment';
+import usuario from '../../user';
 
 export default {
     components : {
@@ -223,7 +194,9 @@ export default {
     },
     data(){
         return {
-            selectedDate : moment().format('yyy-MM-DD')
+            selectedDate : moment().format('yyy-MM-DD'),
+            listaProductos: [],
+            resultSum: ''
         }
     },
     methods : {
@@ -234,7 +207,33 @@ export default {
             confirmButtonColor: '#3085d6',
             confirmButtonText: 'Ok'
             });
-        }
+        },
+        async ListSearchDate(fechaInv){
+          this.selectedDate = fechaInv;
+          let response = await axios.get('api/getEmitirRI?fecha='+this.selectedDate+'&token='+usuario.getData().token);
+          //console.log(response);
+            if(response.data.status == "0"){
+                this.listaProductos = response.data.data;
+            }else{
+                alert('Error: '+response.data.msj);
+            }
+        },
+        async totalProductCosto(){
+          
+          let response = await axios.get('api/totalProdCosto?token='+usuario.getData().token);
+          console.log('resultSum  '+response);
+          if(response.data.status == "0"){
+                this.resultSum = response.data.data;
+            }else{
+                alert('Error: '+response.data.msj);
+            }
+          
+        },
+    },
+    mounted(){
+      console.log('mounted!!!');
+      this.ListSearchDate(this.selectedDate);
+      this.totalProductCosto();
     }
 }
 </script>
