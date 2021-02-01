@@ -70,7 +70,7 @@ class emitirBvController extends Controller
             FROM notadeventas AS nv,
                     documentos   AS d,
                     usuarios     AS u
-            WHERE (nv.id_boletaventa = '{$req->notaVid}' OR nv.fecha '{$req->fechaInicio}' BETWEEN  AND '{$req->fechaFin}' )
+            WHERE (nv.id_boletaventa = '{$req->notaVid}' OR nv.fecha DATE_FORMAT('{$req->fechaInicio}', '%Y-%m-%d')  BETWEEN  AND DATE_FORMAT('{$req->fechaFin}', '%Y-%m-%d')  )
                 AND d.id_documentos   = nv.DOCUMENTOS_id_documentos
                 AND u.id_usuario      = nv.USUARIOS_id_usuario"
         );
@@ -165,7 +165,7 @@ class emitirBvController extends Controller
                  NOTADEVENTAS_id_boletaventa,
                  fecha,
                  monto) 
-                 VALUES('{$req->tipopago}','{$req->notaIdBv}','{$req->fecha}','{$req->montorecibido}')",'SE REGISTRO EL PAGO POR EFECTIVO');
+                 VALUES('{$req->tipopago}','{$req->notaIdBv}',DATE_FORMAT('{$req->fecha}', '%Y-%m-%d') ,'{$req->montorecibido}')",'SE REGISTRO EL PAGO POR EFECTIVO');
                  
                 }else if($req->tipopago == 2){
                     return mySQLInsert("INSERT INTO boleta  
@@ -175,7 +175,7 @@ class emitirBvController extends Controller
                      telefono_yape,
                       monto) 
                        VALUES('{$req->tipopago}','{$req->notaIdBv}',
-                       '{$req->fecha}','{$req->telefonoYape}',
+                       DATE_FORMAT('{$req->fecha}', '%Y-%m-%d'),'{$req->telefonoYape}',
                        '{$req->montorecibido}')",'SE REGISTRO EL PAGO POR YAPE');
         }  
     
