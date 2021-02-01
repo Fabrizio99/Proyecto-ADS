@@ -57,7 +57,7 @@ class gestionarUsuarioController extends Controller
         }
 
         //validacion de tamaño de letras de nombre o apellido
-        if (strlen($req->cmpbusqueda) < 3) return ;
+        // if (strlen($req->cmpbusqueda) < 3) return ;
         
         return mySQLConsulta(
             "SELECT u.id_usuario,
