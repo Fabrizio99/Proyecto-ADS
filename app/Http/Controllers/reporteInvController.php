@@ -40,7 +40,7 @@ class reporteInvController extends Controller
 
    }
 
-   function etadisticaProductos (Request $req){
+   function estadisticaProductos (Request $req){
        return mySQLConsulta("SELECT p.nombre , sum(nhp.cantidad), 
        ROUND((nhp.cantidad/p.stock)*100,2)
        FROM notadeventas_has_producto AS nhp, 

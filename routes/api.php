@@ -14,6 +14,8 @@ Route::post('postRegistrar', 'reclamosController@postRegistrar')->middleware('va
 //reporteInvController-Listo para probar (Font)
 Route::get('getEmitirRI'   , 'reporteInvController@getEmitirRI'   )->middleware('validateAuth');
 Route::get('totalProdCosto', 'reporteInvController@totalProdCosto')->middleware('validateAuth');
+Route::get('estadisticaProductos', 'reporteInvController@estadisticaProductos')->middleware('validateAuth');
+
 
 //gestionarUsuarioController-Listo para Probar (Font)
 Route::get('listaUsuario'     , 'gestionarUsuarioController@listaUsuario'    )->middleware('validateAuth');
