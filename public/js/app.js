@@ -69732,13 +69732,13 @@ var render = function() {
                           _vm._v(_vm._s(index + 1))
                         ]),
                         _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(notaventa.codigo))]),
+                        _c("td", [_vm._v(_vm._s(notaventa.Codigo))]),
                         _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(notaventa.cliente))]),
+                        _c("td", [_vm._v(_vm._s(notaventa.Cliente))]),
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(notaventa.estado))]),
                         _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(notaventa.monto))]),
+                        _c("td", [_vm._v(_vm._s(notaventa.MontoTotal))]),
                         _vm._v(" "),
                         _c("td", { staticClass: "option text-center" }, [
                           _c("div", { staticClass: "dropdown" }, [
@@ -70286,16 +70286,16 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         };
     },
     mounted: function mounted() {
-        //this.getTipoDocumentos();
+        this.getTipoDocumentos();
         console.log(__WEBPACK_IMPORTED_MODULE_4__data__["a" /* default */].getSelectedNV());
-        /*let usuario = data.getSelectedNV();
-        this.nota_venta.fecha = usuario.fecha;
-        this.nota_venta.num_documento = usuario.numdocumento_cliente;
-        this.nota_venta.nombre_cliente = usuario.nombre_cliente;
-        this.nota_venta.tipoDocumento = usuario.id_documentos;
-        this.nota_venta.direccion = usuario.direccion_cliente;
-        this.nota_venta.telefono  = usuario.telefono_cliente;
-        this.nota_venta.nom_vendedor = usuario.id_rol;*/
+        var usuario = __WEBPACK_IMPORTED_MODULE_4__data__["a" /* default */].getSelectedNV();
+        this.nota_venta.fecha = usuario.FechaEmision;
+        this.nota_venta.num_documento = usuario.N_Documento;
+        this.nota_venta.nombre_cliente = usuario.Cliente;
+        this.nota_venta.tipoDocumento = usuario.tipoDocumento;
+        this.nota_venta.direccion = usuario.Direccion;
+        this.nota_venta.telefono = usuario.Celular;
+        this.nota_venta.nom_vendedor = usuario.Vendedor;
     }
 });
 
@@ -84225,11 +84225,128 @@ var render = function() {
               _vm._v(" "),
               _vm._m(4),
               _vm._v(" "),
-              _vm._m(5),
+              _c("div", { staticClass: "mx-4" }, [
+                _c("table", { staticClass: "table" }, [
+                  _vm._m(5),
+                  _vm._v(" "),
+                  _c(
+                    "tbody",
+                    [
+                      _vm._l(_vm.listaProducto, function(usuario) {
+                        return _c("tr", { key: usuario.nomProducto }, [
+                          _c("td", { attrs: { scope: "row" } }, [
+                            _vm._v(_vm._s(usuario.producto))
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(usuario.precio))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(usuario.cantidad))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(usuario.PrecioTotal))])
+                        ])
+                      }),
+                      _vm._v("-    \n                   ")
+                    ],
+                    2
+                  )
+                ])
+              ]),
               _vm._v(" "),
               _vm._m(6),
               _vm._v(" "),
-              _vm._m(7),
+              _c(
+                "div",
+                {
+                  staticClass: "modal fade",
+                  attrs: {
+                    id: "Modal",
+                    tabindex: "-1",
+                    role: "dialog",
+                    "aria-labelledby": "exampleModalLabel",
+                    "aria-hidden": "true"
+                  }
+                },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "modal-dialog",
+                      attrs: { role: "document" }
+                    },
+                    [
+                      _c("div", { staticClass: "modal-content" }, [
+                        _vm._m(7),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "modal-body" }, [
+                          _vm._m(8),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group" }, [
+                            _c("div", { staticClass: "form-group col-6" }, [
+                              _c("label", [_vm._v("Tipo de pago")]),
+                              _vm._v(" "),
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.nota_venta.num_documento,
+                                      expression: "nota_venta.num_documento"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: { name: "select" },
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        _vm.nota_venta,
+                                        "num_documento",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    }
+                                  }
+                                },
+                                [
+                                  _vm._l(_vm.documentos, function(documento) {
+                                    return _c(
+                                      "option",
+                                      {
+                                        key: documento.id,
+                                        domProps: {
+                                          value: documento.id_documentos
+                                        }
+                                      },
+                                      [_vm._v(_vm._s(documento.nombre))]
+                                    )
+                                  }),
+                                  _vm._v("-->\n                               ")
+                                ],
+                                2
+                              )
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _vm._m(9)
+                      ])
+                    ]
+                  )
+                ]
+              ),
               _vm._v(" "),
               _c(
                 "div",
@@ -84253,9 +84370,9 @@ var render = function() {
                     },
                     [
                       _c("div", { staticClass: "modal-content" }, [
-                        _vm._m(8),
+                        _vm._m(10),
                         _vm._v(" "),
-                        _vm._m(9),
+                        _vm._m(11),
                         _vm._v(" "),
                         _c("div", { staticClass: "modal-footer" }, [
                           _c(
@@ -84297,9 +84414,9 @@ var render = function() {
                     },
                     [
                       _c("div", { staticClass: "modal-content" }, [
-                        _vm._m(10),
+                        _vm._m(12),
                         _vm._v(" "),
-                        _vm._m(11),
+                        _vm._m(13),
                         _vm._v(" "),
                         _c("div", { staticClass: "modal-footer" }, [
                           _c(
@@ -84390,21 +84507,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mx-4" }, [
-      _c("table", { staticClass: "table" }, [
-        _c("thead", [
-          _c("tr", [
-            _c("th", { attrs: { scope: "col" } }, [_vm._v("Producto")]),
-            _vm._v(" "),
-            _c("th", { attrs: { scope: "col" } }, [_vm._v("Precio Unitario")]),
-            _vm._v(" "),
-            _c("th", { attrs: { scope: "col" } }, [_vm._v("Cantidad")]),
-            _vm._v(" "),
-            _c("th", { attrs: { scope: "col" } }, [_vm._v("Total")])
-          ])
-        ]),
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Producto")]),
         _vm._v(" "),
-        _c("tbody")
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Precio Unitario")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Cantidad")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Total")])
       ])
     ])
   },
@@ -84462,112 +84573,73 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          id: "Modal",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "exampleModalLabel",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-header" }, [
-                _c(
-                  "h5",
-                  {
-                    staticClass: "modal-title",
-                    attrs: { id: "exampleModalLabel" }
-                  },
-                  [_vm._v("Realizar pago")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "close",
-                    attrs: {
-                      type: "button",
-                      "data-dismiss": "modal",
-                      "aria-label": "Close"
-                    }
-                  },
-                  [
-                    _c("span", { attrs: { "aria-hidden": "true" } }, [
-                      _vm._v("×")
-                    ])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("div", { staticClass: "form-group " }, [
-                  _c("label", { attrs: { for: "exampleInputPassword1" } }, [
-                    _vm._v("Esto es combobox(Efectivo / Yape)..NO OLVIDAR XD")
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "text",
-                      id: "exampleInputPassword1",
-                      disabled: ""
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("div", { staticClass: "form-group col-6" }, [
-                    _c("label", [_vm._v("Tipo de pago")]),
-                    _vm._v(" "),
-                    _c("select", {
-                      staticClass: "form-control",
-                      attrs: { name: "select" }
-                    })
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: {
-                      type: "button",
-                      "data-toggle": "modal",
-                      "data-target": "#ModalEfectivo"
-                    }
-                  },
-                  [_vm._v("Efectivo")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-danger",
-                    attrs: {
-                      type: "button",
-                      "data-toggle": "modal",
-                      "data-target": "#ModalYape"
-                    }
-                  },
-                  [_vm._v("Yape")]
-                )
-              ])
-            ])
-          ]
-        )
-      ]
-    )
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Realizar pago")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group " }, [
+      _c("label", { attrs: { for: "exampleInputPassword1" } }, [
+        _vm._v("Esto es combobox(Efectivo / Yape)..NO OLVIDAR XD")
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", id: "exampleInputPassword1", disabled: "" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          attrs: {
+            type: "button",
+            "data-toggle": "modal",
+            "data-target": "#ModalEfectivo"
+          }
+        },
+        [_vm._v("Efectivo")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger",
+          attrs: {
+            type: "button",
+            "data-toggle": "modal",
+            "data-target": "#ModalYape"
+          }
+        },
+        [_vm._v("Yape")]
+      )
+    ])
   },
   function() {
     var _vm = this

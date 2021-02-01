@@ -83,12 +83,12 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <!--<tr v-for="usuario in listaProducto" :key="nota_venta.nomProducto">
-                          <td scope="row">{{usuario.nomProducto}}</td>
-                          <td>{{usuario.precioU}}</td>
+                        <tr v-for="usuario in listaProducto" :key="usuario.nomProducto">
+                          <td scope="row">{{usuario.producto}}</td>
+                          <td>{{usuario.precio}}</td>
                           <td>{{usuario.cantidad}}</td>
-                          <td>{{usuario.total}}</td>
-                        </tr>-->     
+                          <td>{{usuario.PrecioTotal}}</td>
+                        </tr>-    
                         </tbody>
                     </table>
                     </div>
@@ -132,8 +132,8 @@
                                 <div class="form-group">
                                 <div class="form-group col-6">
                                     <label>Tipo de pago</label>
-                                    <select name="select" class="form-control" >
-                                       <!-- <option v-for="documento in documentos" :key="documento.id" :value="documento.id_documentos">{{documento.nombre}}</option>-->
+                                    <select name="select" class="form-control" v-model="nota_venta.num_documento">
+                                        <option v-for="documento in documentos" :key="documento.id" :value="documento.id_documentos">{{documento.nombre}}</option>-->
                                     </select>
                                 </div>
                                 </div>
@@ -341,16 +341,16 @@ export default {
         }
     },
     mounted(){
-        //this.getTipoDocumentos();
+        this.getTipoDocumentos();
         console.log(data.getSelectedNV());
-        /*let usuario = data.getSelectedNV();
-        this.nota_venta.fecha = usuario.fecha;
-        this.nota_venta.num_documento = usuario.numdocumento_cliente;
-        this.nota_venta.nombre_cliente = usuario.nombre_cliente;
-        this.nota_venta.tipoDocumento = usuario.id_documentos;
-        this.nota_venta.direccion = usuario.direccion_cliente;
-        this.nota_venta.telefono  = usuario.telefono_cliente;
-        this.nota_venta.nom_vendedor = usuario.id_rol;*/
+        let usuario = data.getSelectedNV();
+        this.nota_venta.fecha = usuario.FechaEmision;
+        this.nota_venta.num_documento = usuario.N_Documento;
+        this.nota_venta.nombre_cliente = usuario.Cliente;
+        this.nota_venta.tipoDocumento = usuario.tipoDocumento;
+        this.nota_venta.direccion = usuario.Direccion;
+        this.nota_venta.telefono  = usuario.Celular;
+        this.nota_venta.nom_vendedor = usuario.Vendedor;
 
         
     }

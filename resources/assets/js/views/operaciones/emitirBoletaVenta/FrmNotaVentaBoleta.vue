@@ -47,10 +47,10 @@
                       <tbody>
                         <tr v-for="(notaventa,index) in listanotaventas" :key="notaventa.codigo">
                           <td scope="row">{{index+1}}</td>
-                          <td>{{notaventa.codigo}}</td>
-                          <td>{{notaventa.cliente}}</td>
+                          <td>{{notaventa.Codigo}}</td>
+                          <td>{{notaventa.Cliente}}</td>
                           <td>{{notaventa.estado}}</td>
-                          <td>{{notaventa.monto}}</td>
+                          <td>{{notaventa.MontoTotal}}</td>
                           <td class = "option text-center">
                             <div class="dropdown">
                               <div class="btn btn-danger"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
