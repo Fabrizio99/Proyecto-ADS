@@ -32,11 +32,19 @@ class gProductosController extends Controller
             "SELECT p.id_producto,
              P.nombre,
              p.stock,
+<<<<<<< HEAD
+             p.marka ,
+
+             p.precio 
+             FROM producto p
+                 
+=======
              p.marka , 
              p.precio ,
              c.nombre
              FROM producto p,
                   categoria c
+>>>>>>> c03e659360822612923d2535f37dd972abf332df
              WHERE (p.nombre LIKE '%{$req->nombreP}%')
              AND p.fk_producto_categoria = c.id_categoria
              AND estado =1" );
