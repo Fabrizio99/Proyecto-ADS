@@ -34,7 +34,8 @@ class gProductosController extends Controller
              p.precio 
              FROM producto p
                  
-             WHERE (p.nombre LIKE'{$req->nombreP}')" );
+             WHERE (p.nombre LIKE '%{$req->nombreP}%')
+             AND estado =1" );
         }
 
 
