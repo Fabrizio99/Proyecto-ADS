@@ -344,6 +344,7 @@ export default {
         this.getTipoDocumentos();
         console.log(data.getSelectedNV());
         let usuario = data.getSelectedNV();
+        this.nota_venta.codigo = usuario.Codigo;
         this.nota_venta.fecha = usuario.FechaEmision;
         this.nota_venta.num_documento = usuario.N_Documento;
         this.nota_venta.nombre_cliente = usuario.Cliente;
