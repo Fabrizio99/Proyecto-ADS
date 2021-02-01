@@ -28,6 +28,7 @@ class emitirNotaVController extends Controller
     
     return mySQLConsulta(
         "SELECT p.nombre,
+                p.stock,
                 p.marka AS marca,
                 ct.nombre AS categoria,
                 p.precio 

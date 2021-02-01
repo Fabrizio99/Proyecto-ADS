@@ -5,8 +5,7 @@
 <script>
     export default {
         created() {
-
-            if(localStorage.token) {
+            /*if(localStorage.token) {
                 axios.get('/api/user', {
                     headers: {
                         Authorization: 'Bearer ' + localStorage.getItem('token')
@@ -22,8 +21,7 @@
                     }
 
                 });
-            }
-
+            }*/
         }
     }
 </script>

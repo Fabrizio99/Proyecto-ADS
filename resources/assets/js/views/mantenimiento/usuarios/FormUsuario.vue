@@ -211,12 +211,6 @@ export default {
     display: flex;
     justify-content: space-between;
 }
-.user-form-container .card:first-child{
-    
-}
-.user-form-container .card:last-child{
-    
-}
 .image-profile{
     max-width: 83%;
     margin: 10px auto 0;
