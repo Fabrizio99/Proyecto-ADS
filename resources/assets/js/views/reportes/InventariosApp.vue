@@ -16,12 +16,14 @@
                     </div>
                     <div class="row mx-4">
                         <div class="col-5">
-                            <label for="fechainventario">Del día:</label>
-                            <input type="date" class="form-control" id="fechainventario" v-model="selectedDate" @change="ListSearchDate(selectedDate)">
-                            
+                            <label>Tipo de Stock:</label>
+                            <select name="tipoStock"  class="form-control" @change="ListSearchStatus" v-model="selectedStatus">
+                                <option value="1">Bajo</option>
+                                <option value="0">Alto</option>
+                            </select>
                         </div>
                         <div class="col-1">
-                            <label></label>
+                            <label></label>                            
                         </div>
                         <div class="col-6">
                             <div class="card col-12">
@@ -64,6 +66,9 @@
                         <div class="col-6">
                             <label></label>
                         </div>
+                    </div>
+                    <div class="row mx-5">                                       
+                        <input type="button" class="btn btn-danger mt-1 btnbuscar" value="X" @click="ListProdInv"/>
                     </div>
                     <div class="row mx-4">
                         <div class="col-6">
@@ -148,6 +153,7 @@
                         <div class="col-3">
                             <button type="button" class="btn btn-info my-1 form-group col-12" >Emitir reporte</button>
                         </div> 
+                        
                     </div>
                     <div class="row mx-4">
                         <div class="col-12">
@@ -196,7 +202,8 @@ export default {
         return {
             selectedDate : moment().format('yyy-MM-DD'),
             listaProductos: [],
-            resultSum: ''
+            resultSum: '',
+            selectedStatus: ''
         }
     },
     methods : {
@@ -208,9 +215,19 @@ export default {
             confirmButtonText: 'Ok'
             });
         },
-        async ListSearchDate(fechaInv){
-          this.selectedDate = fechaInv;
-          let response = await axios.get('api/getEmitirRI?fecha='+this.selectedDate+'&token='+usuario.getData().token);
+        async ListSearchStatus(){
+          console.log(this.selectedStatus);
+          let response = await axios.get('api/getEmitirRI?tipoStock='+this.selectedStatus+'&token='+usuario.getData().token);
+          console.log('respuesta ',response);
+            if(response.data.status == "0"){
+                this.listaProductos = Array.isArray(response.data.data)?response.data.data:[response.data.data]
+                
+            }else{
+                alert('Error: '+response.data.msj);
+            }
+        },
+        async ListProdInv(){
+           let response = await axios.get('api/getEmitirRI?token='+usuario.getData().token);
           //console.log(response);
             if(response.data.status == "0"){
                 this.listaProductos = response.data.data;
@@ -232,7 +249,7 @@ export default {
     },
     mounted(){
       console.log('mounted!!!');
-      this.ListSearchDate(this.selectedDate);
+      this.ListProdInv();
       this.totalProductCosto();
     }
 }

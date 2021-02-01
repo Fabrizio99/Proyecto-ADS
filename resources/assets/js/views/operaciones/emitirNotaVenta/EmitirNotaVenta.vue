@@ -185,15 +185,15 @@
                       </thead>
                       <tbody v-if="productoSeleccionado">
                         <tr>
-                          <td>Harina preparada Blanca Flor</td>
-                          <td>Blanca Flor</td>
-                          <td>Ingredientes, reposteria</td>
-                          <td>S/. 7.00</td>
+                          <td>{{productoSeleccionado.nombre}}</td>
+                          <td>{{productoSeleccionado.marca}}</td>
+                          <td>{{productoSeleccionado.categoria}}</td>
+                          <td>S/.{{productoSeleccionado.precio}}</td>
                           <td>
-                            <input type="number" name="" id="" class="form-control" value="1" min="0">
+                            <input type="number" name="" id="" class="form-control" :value="cantidadProductoSeleccionado" min="1" :max="productoSeleccionado.stock">
                           </td>
                           <td class = "option text-center">
-                            <input type="text" name="" id="" class="form-control" value="S/. 7.00" disabled>
+                            <input type="text" name="" id="" class="form-control" value="" disabled>
                           </td>
                         </tr>
                       </tbody>
@@ -233,6 +233,7 @@ export default {
         productoInput : '',
         busquedaProductos : [],
         productoSeleccionado : undefined,
+        cantidadProductoSeleccionado : 1,
         listaProductos  : [],
         usuario    : {
           nombre : '',

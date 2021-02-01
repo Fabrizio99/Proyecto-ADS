@@ -88,7 +88,7 @@ class emitirBvController extends Controller
                                         )
                                     ),
                                 ']'
-                            )
+                            ) 
                     FROM notadeventas AS nv2,
                             notadeventas_has_producto AS nhp,
                             producto AS p

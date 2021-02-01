@@ -149,6 +149,7 @@ const routes = [
         name : '404',
         component : require('../js/components/404page'),
     }
+
 ]
 
 
