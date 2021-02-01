@@ -15,11 +15,11 @@
                                 <div class="form-row">
                                     <div class="form-group col-6">
                                         <label for="exampleInputPassword1">Nombre del producto</label>
-                                        <input type="text" class="form-control" v-model="productos.nombre" >
+                                        <input type="text" class="form-control" v-model="productos.nombres" >
                                     </div>
                                     <div class="form-group col-6">
                                         <label for="exampleInputPassword1">Marca</label>
-                                        <input type="text" class="form-control" v-model="productos.marka">
+                                        <input type="text" class="form-control" v-model="productos.marca">
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -56,16 +56,6 @@ export default {
         'navigation' : Navigation
     },
     props : ['accion'],
-    data(){
-        return{
-            productos: {
-                nombre: '',
-                marka: '',
-                precio: '',
-                stock: ''
-            }
-        }
-    },
     methods : {
         msjError(){
             this.$swal({
@@ -79,7 +69,7 @@ export default {
             if(this.accion == 'crear'){
                 this.createProduct();
             }else{
-                this.editProduct();
+                
             }
         },
         validarCampos(){
@@ -96,8 +86,8 @@ export default {
         async createProduct(){
             if(this.validarCampos()){
                 const body = {
-                    nombre : this.productos.nombre,
-                    marka   : this.productos.marka,
+                    nombre : this.productos.nombres,
+                    marka   : this.productos.marca,
                     precio : this.productos.precio,
                     stock : this.productos.stock,
                     token : usuario.getData().token
@@ -113,32 +103,19 @@ export default {
             }else{
                 alert('Error: Complete los campos faltantes o incorrectos');
             }
-        },
-        async editProduct(){
-
-            if(this.validarCampos()){
-                console.log('llego aca');
-                const body = {
-                    nombre : this.productos.nombre,
-                    marka   : this.productos.marka,
-                    precio : this.productos.precio,
-                    stock : this.productos.stock,
-                    token : usuario.getData().token
-                }
-                let response = await axios.post('api/updateP',body);
-                console.log('RESPONSE ',response);
-                if(response.data.status == "0"){
-                    alert('Mensaje: Producto modificado exitosamente')
-                    this.$router.push({name : 'gproductos'});
-                }else{
-                    alert('Error: '+response.data.msj);
-                }
-            }else{
-                alert('Error: Completar todos los campos')
-            }
         }
         
     }, 
+    data(){
+        return{
+            productos: {
+                nombres: '',
+                marca: '',
+                precio: '',
+                stock: ''
+            }
+        }
+    },
     mounted(){
        
     }
