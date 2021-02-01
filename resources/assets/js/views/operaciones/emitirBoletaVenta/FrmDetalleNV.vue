@@ -23,11 +23,11 @@
                             <div class="form-row">
                                 <div class="form-group col-4">
                                     <label for="exampleInputPassword1">Vendedor</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1" disabled>
+                                    <input type="text" class="form-control" id="exampleInputPassword1" v-model="nota_venta.nom_vendedor" disabled>
                                 </div>
                                 <div class="form-group col-4">
                                     <label for="exampleInputPassword1">Fecha de Emisión</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1" disabled>
+                                    <input type="text" class="form-control" id="exampleInputPassword1"  v-model="nota_venta.fecha" disabled>
                                 </div>
                                 <div class="form-group col-4">
                                     <label for="exampleInputPassword1">IMAGEN RUC</label>
@@ -43,31 +43,22 @@
                             <div class="form-row">
                                 <div class="form-group col-3">
                                     <label for="exampleInputPassword1">Cliente</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1" disabled>
+                                    <input type="text" class="form-control" id="exampleInputPassword1"  v-model="nota_venta.nombre_cliente" disabled>
                                 </div>
                                 <div class="form-group col-3">
-                                <multiselect
-                                    :colSize="13"
-                                    label = "Tipo de Documento"
-                                    :optionList = "[
-                                        {
-                                            id   : 1,
-                                            name : 'DNI'
-                                        },
-                                        {
-                                            id   : 2,
-                                            name : 'CARNET DE EXTRANJERIA'
-                                        },
-                                    ]"
-                                />
+                                    <!--<label>Tipo documento</label>
+                                    <select name="select" v-model="user.tipoDocumento" class="form-control">
+                                        <option v-for="documento in documentos" :key="documento.id" :value="documento.id_documentos">{{documento.nombre}}</option>
+                                    </select>-->
+                                
                                 </div>
                                 <div class="form-group col-3">
                                     <label for="exampleInputPassword1">N° Documento</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1" disabled>
+                                    <input type="text" class="form-control" id="exampleInputPassword1" v-model="nota_venta.num_documento" disabled>
                                 </div>
                                 <div class="form-group col-3">
                                     <label for="exampleInputPassword1">Celular</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1" disabled>
+                                    <input type="text" class="form-control" id="exampleInputPassword1" v-model="nota_venta.telefono" disabled>
                                 </div>
                             </div>
                             <div class="form-row">
@@ -89,7 +80,7 @@
                                 </div>
                                 <div class="form-group col-9">
                                     <label for="exampleInputPassword1">Dirección</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1" disabled>
+                                    <input type="text" class="form-control" id="exampleInputPassword1" v-model="nota_venta.direccion" disabled>
                                 </div>
                             </div>
                         </div>
@@ -182,7 +173,7 @@
                           <div class="form-row justify-content-end">
                                           
                                 <div class="form-group col-3 mt-2">
-                                    <input type="button" class="btn btn-info btn-block mt-4 my-1 form-group col-12 btnguarda-registro" value="Registrar Pago" @click="RegistarPago" data-toggle="modal" data-target="#Modal"/>
+                                    <input type="button" class="btn btn-info btn-block mt-4 my-1 form-group col-12 btnguarda-registro" value="Registrar Pago" data-toggle="modal" data-target="#Modal"/>
                                 </div>                       
                           </div>       
                         </div>
@@ -224,10 +215,10 @@
 
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" @click="Efectivo" data-toggle="modal" data-target="#ModalEfectivo">Efectivo</button>
-                                <button type="button" class="btn btn-danger" @click="Yape" data-toggle="modal" data-target="#ModalYape">Yape</button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalEfectivo">Efectivo</button>
+                                <button type="button" class="btn btn-danger"  data-toggle="modal" data-target="#ModalYape">Yape</button>
                             </div>
-                            </div>
+                            </div> 
                         </div>
                 </div>   
 
@@ -313,7 +304,7 @@
                                 </div>
                                 <div class="form-row">
                                     
-                                        <button type="button" class="btn btn-primary btn-block" @click="Adjuntar">Adjuntar Imagen</button>
+                                        <button type="button" class="btn btn-primary btn-block" >Adjuntar Imagen</button>
                                     
                                 </div>
                             </div>
@@ -334,13 +325,16 @@
 import Appbar from '../../../components/AppBar'
 import AppBar from '../../../components/AppBar.vue';
 import Navigation from '../../../components/NavigationComponent';
-import Multiselect from '../../../components/Multiselect';
+//import Multiselect from '../../../components/Multiselect';
+import data from '../../../data';
+import usuario from '../../../user';
+
 
 export default {
     components : {
         'app-bar'    : Appbar,
         'navigation' : Navigation,
-        'multiselect' : Multiselect
+        //'multiselect' : Multiselect
     },
     methods:{
        Buscar(){ this.$swal({
@@ -391,8 +385,48 @@ export default {
 
         VerDetalle(){
              this.$router.push({name:"formDetalleNV"});
+        },
+
+        async getTipoDocumentos(){
+            let response = await axios.get('api/cmbTipoDoc?token='+usuario.getData().token);
+            console.log('documentos',response);
+            if(response.data.status == "0"){
+                this.documentos = response.data.data;
+            }else{
+                alert('Error: ',response.data.msj);
+            }
         }
        
+    },
+    
+    data(){
+        return{
+            nota_venta : {
+                nom_vendedor: '',
+                fecha : '',
+                nombre_cliente : '',
+                num_documento : '',
+                tipoDocumento : '',
+                telefono : '',
+                direccion : '',
+                telefono : ''    
+            },
+            documentos : []
+        }
+    },
+    mounted(){
+        this.getTipoDocumentos();
+        console.log(data.getSelectedNV());
+        let usuario = data.getSelectedNV();
+        this.nota_venta.fecha = usuario.fecha;
+        this.nota_venta.num_documento = usuario.numdocumento_cliente;
+        this.nota_venta.nombre_cliente = usuario.nombre_cliente;
+        this.nota_venta.tipoDocumento = usuario.id_documentos;
+        this.nota_venta.direccion = usuario.direccion_cliente;
+        this.nota_venta.telefono  = usuario.telefono_cliente;
+        this.nota_venta.nom_vendedor = usuario.id_rol;
+
+        
     }
 }
 </script>
