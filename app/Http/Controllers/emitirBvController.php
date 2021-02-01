@@ -19,6 +19,7 @@ class emitirBvController extends Controller
             nv.numdocumento_cliente AS N_Documento,
             nv.telefono_cliente AS Celular,
             nv.direccion_cliente AS Direccion,
+            nv.estado AS estado,
             (SELECT CONCAT(
                         '[', 
                             GROUP_CONCAT(
@@ -74,6 +75,7 @@ class emitirBvController extends Controller
                     nv.numdocumento_cliente AS N_Documento,
                     nv.telefono_cliente AS Celular,
                     nv.direccion_cliente AS Direccion,
+                    nv.estado AS estado,
                     (SELECT CONCAT(
                                 '[', 
                                     GROUP_CONCAT(
