@@ -200,10 +200,19 @@
 import Appbar from '../../../components/AppBar'
 import AppBar from '../../../components/AppBar.vue';
 import Navigation from '../../../components/NavigationComponent';
+
+
 export default {
     components : {
         'app-bar'    : Appbar,
         'navigation' : Navigation
+    },
+    data(){
+        return {
+            
+            listaBoletas: [],
+            
+        }
     },
     methods:{
        Buscar(){ this.$swal({
@@ -214,8 +223,8 @@ export default {
 
         VerDetalle(){
              this.$router.push({name:"formProductos"});
-        }
-       
+        },
     }
+
 }
 </script>

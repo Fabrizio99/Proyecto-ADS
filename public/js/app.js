@@ -66800,11 +66800,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
     components: {
         'app-bar': __WEBPACK_IMPORTED_MODULE_0__components_AppBar___default.a,
         'navigation': __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent___default.a
     },
+    data: function data() {
+        return {
+
+            listaBoletas: []
+
+        };
+    },
+
     methods: {
         Buscar: function Buscar() {
             this.$swal({
@@ -66817,6 +66826,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.$router.push({ name: "formProductos" });
         }
     }
+
 });
 
 /***/ }),
@@ -72167,6 +72177,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -72735,6 +72749,14 @@ var render = function() {
               ]),
               _vm._v(" "),
               _vm._m(6),
+              _vm._v(" "),
+              _c("div", { staticClass: "row mx-5" }, [
+                _c("input", {
+                  staticClass: "btn btn-danger mt-1 btnbuscar",
+                  attrs: { type: "button", value: "X" },
+                  on: { click: _vm.ListProdInv }
+                })
+              ]),
               _vm._v(" "),
               _vm._m(7),
               _vm._v(" "),

@@ -23,7 +23,7 @@
                             </select>
                         </div>
                         <div class="col-1">
-                            <label></label>
+                            <label></label>                            
                         </div>
                         <div class="col-6">
                             <div class="card col-12">
@@ -66,6 +66,9 @@
                         <div class="col-6">
                             <label></label>
                         </div>
+                    </div>
+                    <div class="row mx-5">                                       
+                        <input type="button" class="btn btn-danger mt-1 btnbuscar" value="X" @click="ListProdInv"/>
                     </div>
                     <div class="row mx-4">
                         <div class="col-6">
@@ -150,6 +153,7 @@
                         <div class="col-3">
                             <button type="button" class="btn btn-info my-1 form-group col-12" >Emitir reporte</button>
                         </div> 
+                        
                     </div>
                     <div class="row mx-4">
                         <div class="col-12">
