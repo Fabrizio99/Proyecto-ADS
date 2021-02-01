@@ -97,6 +97,9 @@ export default {
        async buscarNotaVenta(){
         if(this.inputcodenventa.trim() != '' && this.inputfinicio != '' && this.inputffin != ''){
           let response = await axios.get('api/buscaNotaVByFechas?notaVid='+this.inputcodenventa.trim()+'&fechaInicio='+this.inputfinicio+'&fechaFin='+this.inputffin+'&token='+usuario.getData().token);
+          console.log(this.inputcodenventa);
+          console.log(this.inputfinicio);
+          console.log(this.inputffin);
           console.log(response);
           this.inputcodenventa = '';
           

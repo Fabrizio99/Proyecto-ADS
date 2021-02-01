@@ -21,17 +21,13 @@
                     <div class="card col bg-light">
                         <div class="card-body">
                             <div class="form-row">
-                                <div class="form-group col-4">
+                                <div class="form-group col-6">
                                     <label for="exampleInputPassword1">Vendedor</label>
                                     <input type="text" class="form-control" id="exampleInputPassword1" v-model="nota_venta.nom_vendedor" disabled>
                                 </div>
-                                <div class="form-group col-4">
+                                <div class="form-group col-6">
                                     <label for="exampleInputPassword1">Fecha de Emisión</label>
                                     <input type="text" class="form-control" id="exampleInputPassword1"  v-model="nota_venta.fecha" disabled>
-                                </div>
-                                <div class="form-group col-4">
-                                    <label for="exampleInputPassword1">IMAGEN RUC</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1" value="imagen RUC NOTA DE VENTA" disabled/>
                                 </div>
                             </div>
                         </div>
@@ -46,10 +42,10 @@
                                     <input type="text" class="form-control" id="exampleInputPassword1"  v-model="nota_venta.nombre_cliente" disabled>
                                 </div>
                                 <div class="form-group col-3">
-                                    <!--<label>Tipo documento</label>
-                                    <select name="select" v-model="user.tipoDocumento" class="form-control">
-                                        <option v-for="documento in documentos" :key="documento.id" :value="documento.id_documentos">{{documento.nombre}}</option>
-                                    </select>-->
+                                    <label>Tipo documento</label>
+                                    <select name="select"  class="form-control">
+                                       <!-- <option v-for="documento in documentos" :key="documento.id" :value="documento.id_documentos">{{documento.nombre}}</option>-->
+                                    </select>
                                 
                                 </div>
                                 <div class="form-group col-3">
@@ -62,23 +58,8 @@
                                 </div>
                             </div>
                             <div class="form-row">
-                               <div class="form-group col-3">
-                                <multiselect
-                                    :colSize="13"
-                                    label = "Distrito"
-                                    :optionList = "[
-                                        {
-                                            id   : 1,
-                                            name : 'MIRAFLORES'
-                                        },
-                                        {
-                                            id   : 2,
-                                            name : 'SAN ISIDRO'
-                                        },
-                                    ]"
-                                />
-                                </div>
-                                <div class="form-group col-9">
+                               
+                                <div class="form-group col-12">
                                     <label for="exampleInputPassword1">Dirección</label>
                                     <input type="text" class="form-control" id="exampleInputPassword1" v-model="nota_venta.direccion" disabled>
                                 </div>
@@ -102,60 +83,12 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td scope="row">1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>s/soles</td>
+                        <tr v-for="usuario in listaProducto" :key="nota_venta.nomProducto">
+                          <td scope="row">{{usuario.nomProducto}}</td>
+                          <td>{{usuario.precioU}}</td>
+                          <td>{{usuario.cantidad}}</td>
+                          <td>{{usuario.total}}</td>
                         </tr>     
-                       <tr>
-                          <td scope="row">1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>s/soles</td>
-                        </tr>   
-                        <tr>
-                          <td scope="row">1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>s/soles</td>
-                        </tr>   
-                        <tr>
-                          <td scope="row">1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>s/soles</td>
-                        </tr>   
-                        <tr>
-                          <td scope="row">1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>s/soles</td>
-                        </tr>   
-                        <tr>
-                          <td scope="row">1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>s/soles</td>
-                        </tr>   
-                        <tr>
-                          <td scope="row">1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>s/soles</td>
-                        </tr>   
-                        <tr>
-                          <td scope="row">1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>s/soles</td>
-                        </tr>   
-                        <tr>
-                          <td scope="row">1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>s/soles</td>
-                        </tr> 
                         </tbody>
                     </table>
                     </div>
@@ -197,20 +130,12 @@
                                     <input type="text" class="form-control" id="exampleInputPassword1" disabled>
                                 </div>
                                 <div class="form-group">
-                                <multiselect
-                                    :colSize="13"
-                                    label = "Tipo de Pago"
-                                    :optionList = "[
-                                        {
-                                            id   : 1,
-                                            name : 'EFECTIVO'
-                                        },
-                                        {
-                                            id   : 2,
-                                            name : 'YAPE'
-                                        },
-                                    ]"
-                                />
+                                <div class="form-group col-6">
+                                    <label>Tipo de pago</label>
+                                    <select name="select" class="form-control" >
+                                       <!-- <option v-for="documento in documentos" :key="documento.id" :value="documento.id_documentos">{{documento.nombre}}</option>-->
+                                    </select>
+                                </div>
                                 </div>
 
                             </div>
@@ -411,27 +336,27 @@ export default {
                 direccion : '',
                 telefono : ''    
             },
-            documentos : []
+            documentos : [],
+            listaProducto :[]
         }
     },
     mounted(){
-        this.getTipoDocumentos();
+        //this.getTipoDocumentos();
         console.log(data.getSelectedNV());
-        let usuario = data.getSelectedNV();
+        /*let usuario = data.getSelectedNV();
         this.nota_venta.fecha = usuario.fecha;
         this.nota_venta.num_documento = usuario.numdocumento_cliente;
         this.nota_venta.nombre_cliente = usuario.nombre_cliente;
         this.nota_venta.tipoDocumento = usuario.id_documentos;
         this.nota_venta.direccion = usuario.direccion_cliente;
         this.nota_venta.telefono  = usuario.telefono_cliente;
-        this.nota_venta.nom_vendedor = usuario.id_rol;
+        this.nota_venta.nom_vendedor = usuario.id_rol;*/
 
         
     }
 }
 </script>
-<style 
-        Multiselectscoped>
+<style scoped>
 .user-form-container{
     display: flex;
     justify-content: space-between;
