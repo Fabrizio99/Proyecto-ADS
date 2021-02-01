@@ -83,12 +83,12 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr v-for="usuario in listaProducto" :key="nota_venta.nomProducto">
+                        <!--<tr v-for="usuario in listaProducto" :key="nota_venta.nomProducto">
                           <td scope="row">{{usuario.nomProducto}}</td>
                           <td>{{usuario.precioU}}</td>
                           <td>{{usuario.cantidad}}</td>
                           <td>{{usuario.total}}</td>
-                        </tr>     
+                        </tr>-->     
                         </tbody>
                     </table>
                     </div>
