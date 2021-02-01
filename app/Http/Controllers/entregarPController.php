@@ -74,7 +74,7 @@ class entregarPController extends Controller
                          ) AS productos
                  FROM notadeventas nv ,
                       usuarios   u
-                 WHERE (nv.id_boletaventa = '{$req->cod_boleta}' OR  nv.fecha BETWEEN '{$req->fecha_inicio}' AND '{$req->fecha_fin}' )
+                 WHERE (nv.id_boletaventa = '{$req->cod_boleta}' OR  nv.fecha BETWEEN DATE_FORMAT('{$req->fecha_inicio}', '%Y-%m-%d') AND DATE_FORMAT('{$req->fecha_fin}', '%Y-%m-%d'))
                       AND u.id_usuario    = nv.USUARIOS_id_usuario
                       ORDER BY fecha DESC 
                       LIMIT 50          
