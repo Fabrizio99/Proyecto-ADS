@@ -66922,6 +66922,13 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -66953,7 +66960,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             var validador = true;
             var campos = Object.keys(this.productos);
             for (var index = 0; index < campos.length; index++) {
-                if (this.productos[campos[index]] == null || this.user[campos[index]] == undefined || this.user[campos[index]] == '') {
+                if (this.productos[campos[index]] == null || this.productos[campos[index]] == undefined || this.productos[campos[index]] == '') {
                     validador = false;
                     break;
                 }
@@ -67016,7 +67023,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     data: function data() {
         return {
             productos: {
-                nombre: '',
+                nombres: '',
                 marca: '',
                 precio: '',
                 stock: ''
@@ -67198,7 +67205,9 @@ var render = function() {
                           }
                         })
                       ])
-                    ])
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(1)
                   ])
                 ])
               ]),
@@ -67238,6 +67247,20 @@ var staticRenderFns = [
     return _c("div", { staticClass: "row mx-4" }, [
       _c("h3", { staticClass: "col" }, [
         _vm._v("\n                        Crear producto\n                    ")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-row" }, [
+      _c("div", { staticClass: "form-group col-6" }, [
+        _c("label", { attrs: { for: "exampleInputPassword1" } }, [
+          _vm._v("Categoría")
+        ]),
+        _vm._v(" "),
+        _c("input", { staticClass: "form-control", attrs: { type: "text" } })
       ])
     ])
   }

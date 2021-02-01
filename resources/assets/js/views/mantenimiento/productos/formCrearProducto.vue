@@ -32,6 +32,13 @@
                                         <input type="number" class="form-control" v-model="productos.stock">
                                     </div>
                                 </div>
+                                <div class="form-row">
+                                    <div class="form-group col-6">
+                                        <label for="exampleInputPassword1">Categoría</label>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                   
+                                </div>
                             </div>
                         </div>
                 </div>
@@ -76,7 +83,7 @@ export default {
             let validador = true;
             let campos = Object.keys(this.productos);
             for (let index = 0; index < campos.length; index++) {
-                if((this.productos[campos[index]] == null ) || (this.user[campos[index]] == undefined ) || (this.user[campos[index]] == '' )){
+                if((this.productos[campos[index]] == null ) || (this.productos[campos[index]] == undefined ) || (this.productos[campos[index]] == '' )){
                     validador = false;
                     break;
                 }
@@ -109,7 +116,7 @@ export default {
     data(){
         return{
             productos: {
-                nombre: '',
+                nombres: '',
                 marca: '',
                 precio: '',
                 stock: ''
@@ -117,6 +124,7 @@ export default {
         }
     },
     mounted(){
+        
        
     }
 }
