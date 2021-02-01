@@ -104,11 +104,11 @@
                         </tr>
                       </thead>
                       <tbody  v-if="listaProductos.length>0">
-                        <tr>
-                          <td>Harina Blanca Flor</td>
-                          <td>S/.2.50</td>
-                          <td>1</td>
-                          <td>S/2.50</td>
+                        <tr v-for="(producto,index) in listaProductos" :key="index">
+                          <td>{{producto.nombre}} {{producto.marca}}</td>
+                          <td>S/.{{producto.precio}}</td>
+                          <td>{{producto.cantidad}}</td>
+                          <td>S/.{{producto.precio*producto.cantidad}}</td>
                           <td class = "option text-center">
                             <div class="dropdown">
                               <div class="btn btn-danger"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -190,10 +190,10 @@
                           <td>{{productoSeleccionado.categoria}}</td>
                           <td>S/.{{productoSeleccionado.precio}}</td>
                           <td>
-                            <input type="number" name="" id="" class="form-control" :value="cantidadProductoSeleccionado" min="1" :max="productoSeleccionado.stock">
+                            <input type="number" name="" id="" class="form-control" v-model="cantidadProductoSeleccionado" min="1" :max="productoSeleccionado.stock">
                           </td>
                           <td class = "option text-center">
-                            <input type="text" name="" id="" class="form-control" value="" disabled>
+                            <input type="text" name="" id="" class="form-control" :value="productoSeleccionado.precio*cantidadProductoSeleccionado" disabled>
                           </td>
                         </tr>
                       </tbody>
@@ -202,6 +202,45 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-primary btnguarda-registro" @click="modalAddProduct">Agregar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Aviso</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                ¿Desea agregar el producto?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" @click="saveProduct">Aceptar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" id="eliminarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Aviso</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                ¿Desea eliminar el producto?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" @click="saveProduct">Aceptar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
               </div>
             </div>
           </div>
@@ -242,6 +281,16 @@ export default {
       }
     },
     methods : {
+      saveProduct(){
+        if(this.cantidadProductoSeleccionado<=0 || this.cantidadProductoSeleccionado>this.productoSeleccionado.stock){
+          alert('Error: Seleccione una cantidad válida');
+        }else{
+          $('#detallesModal').modal('hide');
+          $('#productosModal').modal('hide');
+          this.productoSeleccionado.cantidad = this.cantidadProductoSeleccionado;
+          this.listaProductos.push(this.productoSeleccionado)
+        }
+      },
       openDetailsModal(producto){
         this.productoSeleccionado = producto;
         $('#detallesModal').modal();
@@ -259,39 +308,10 @@ export default {
         }
       },
       async deleteProduct(){
-        const {isConfirmed} = await this.$swal({
-            title: 'Advertencia',
-            text: "¿Está seguro de eliminar el producto de la lista?",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Eliminar'
-          });
-          
-          if(isConfirmed){
-            this.$swal('Eliminado!','','success');
-          }
+        $('#eliminarModal').modal('show');
       },
       async modalAddProduct(){
-        const {isConfirmed} = await this.$swal({
-            title: 'Advertencia',
-            text: "¿Desea agregar este producto?",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Agregar'
-          });
-          
-          if(isConfirmed){
-            this.$swal({
-              title : 'Agregado!',
-              icon : 'success',
-              allowOutsideClick : false,
-              allowEscapeKey : false
-            });
-          }
+        $('#confirmModal').modal('show');
       },
       async getTipoDocumentos(){
           let response = await axios.get('api/cmbTipoDoc?token='+usuario.getData().token);

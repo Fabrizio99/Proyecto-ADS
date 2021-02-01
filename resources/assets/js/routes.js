@@ -17,7 +17,8 @@ VueRouter.prototype.push = function push(location) {
 const routes = [
     {
         path: '/',
-        redirect: { name: 'login' }
+        name : 'inicio',
+        redirect: { name: 'main' }
     },
     {
         path: '/login',
@@ -64,7 +65,6 @@ const routes = [
         name: 'crearproductos',
         component: require('../js/views/mantenimiento/productos/formCrearProducto.vue'),
         props: true,
-        //meta: { requiresAuth: true }
     },
     {
         path: '/form-modificar-productos',
@@ -168,7 +168,7 @@ router.beforeEach((to, from, next) => {
     }else{
         if(to.name == 'login'){
             next(false);
-        }else if(to.name == 'main' || to.name == 'error'){
+        }else if(to.name == 'main' || to.name == 'error' || to.name == 'inicio'){
             next();
         }else{
             let {permisos} = usuario.getData();
