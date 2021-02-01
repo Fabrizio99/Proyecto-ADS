@@ -63,14 +63,8 @@ const routes = [
         path: '/formulario-productos/:accion',
         name: 'crearproductos',
         component: require('../js/views/mantenimiento/productos/formCrearProducto.vue'),
-<<<<<<< HEAD
-        meta : {
-            module : 'producto'
-        }
-=======
         props: true,
         //meta: { requiresAuth: true }
->>>>>>> dfb8dc4175a1421ea3f80e1b30a523701f496d58
     },
     {
         path: '/form-modificar-productos',
