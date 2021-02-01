@@ -80,30 +80,16 @@ class emitirBvController extends Controller
     //----Angel va supervisar esta Función (TAREA PARA ANGEL )
 
     function registrarPago(Request $req){
-
-        $TIPO_YAPE = 1;
-        $TIPO_EFECTIVO = 2;
-
-         // falta de BD boleta
-        ///columna monto , monto recibiso=efectivo
-        //alva = file
-        //columna numero de cuenta
-
-        $valDiferentes = isNullEmpty($req->montorecibido)?:
-                        isNullEmpty($req->vuelto)?:
-                        isNullEmpty($req->tipopago)?:
-                        isNullEmpty($req->cuenta,'','cuenta')?:
-                        isNullEmpty($req->imgPrueba,'','');
-        
-        $valComun = isNullEmpty($req->montoPagar,'','ps montopagar') ?:
-                    isNullEmpty($req->notaIdBv,'','notaventaId') ?: 
-                    isNullEmpty($req->fecha,'','fecha') ?:
-                    isNullEmpty($req->tipopago,'','tipoPago');
-
-        if($valComun){
-            return $valComun;
-        }else if ($valDiferentes){
-            return $valDiferentes;
+       
+        $validacion =   isNullEmpty($req->montoPagar,'','El montoPagar no puede estar vacio') ?:
+                        isNullEmpty($req->notaIdBv,'','El notaIdBv no puede estar vacio') ?: 
+                        isNullEmpty($req->fecha,'','fecha','La fecha no puede estar vacia') ?:
+                        isNullEmpty($req->tipopago,'','El seleccione un tipo de pago')?:
+                        isNullEmpty($req->montorecibido,'','El montorecibido no puede estar vacio');
+                                            
+        //Validacion de cmp Yape y Efectivo
+        if($validacion){
+            return $validacion;
         }
         
         //Modificación de Productos (Se reduce los productos al registrar una boleta)
@@ -117,7 +103,22 @@ class emitirBvController extends Controller
                 AND nv.id_boletaventa = nhp.NOTADEVENTAS_id_boletaventa
                 AND nv.id_boletaventa = '{$req->notaIdBv}'"
         ); 
-          
+          /*
+          UPDATE producto AS p,
+                    notadeventas_has_producto AS nhp, 
+                    notadeventas AS nv 
+                SET p.stock=p.stock-nhp.cantidad  
+              WHERE (CASE WHEN p.stock >11 
+                     THEN p.estado = 1
+                     ELSE 
+                     p.estado = 0
+                     END  )
+              AND p.id_producto = nhp.PRODUCTO_id_producto 
+                AND nhp.NOTADEVENTAS_id_boletaventa = nv.id_boletaventa 
+                AND nv.id_boletaventa = 1
+				AND p.id_producto = 1
+                
+          */
           $modificar = json_decode($modificar);
           
           if ($modificar->status <> 0) {

@@ -46,7 +46,8 @@ class emitirNotaVController extends Controller
         $isValidate = isNullEmpty($req->nombre   , 'nombreP'  , 'El campo nombre no puede ser vacio.') ?:
                       isNullEmpty($req->tipoDoc    , 'tipoD'    , 'El campo tipo de documento no puede ser vacio.') ?: 
                       isNullEmpty($req->numDoc  , 'numeroD'  , 'El campo numero de documento no puede ser vacio.') ?: 
-                      //isNullEmpty($req->direccion  , 'direccion'  , 'El campo direccion no puede ser vacio.');
+                      isNullEmpty($req->cantidad    , 'cantidad'    , 'El campo cantidad de documento no puede ser vacio.') ?: 
+                      isNullEmpty($req->direccion  , 'direccion'  , 'El campo direccion no puede ser vacio.');
                       isNullEmpty($req->celular  ,'celular'   , 'El campo celulaar no puede ser vacio.');
                       isNullEmpty($req->fecha    ,'fecha'     , 'El campo celulaar no puede ser vacio.');
         
@@ -65,7 +66,7 @@ class emitirNotaVController extends Controller
           return JSON_ENCODE(
           (object) [
                    'status' => $_SESSION["STATUS_CONTROL"],
-                   'msj'    => 'Debe tener  16 caracteres sí es un PASAPORTE..'
+                   'msj'    => 'Debe tener  12 caracteres sí es un PASAPORTE..'
                  ]
            );
         }
@@ -82,10 +83,9 @@ class emitirNotaVController extends Controller
         }  
 
         mySQLInsert(
-            "INSERT INTO notadeventas (DOCUMENTOS_id_documentos,USUARIOS_id_usuario,fecha,nombre_cliente,numdocumento_cliente,telefono_cliente,estado,monto) 
-            SELECT '{$req->tipoDoc}',id_usuario,'{$req->fecha}','{$req->nombre}', '{$req->numDoc}','{$req->celular}','POR ATENDER','{$req->monto}'
-            FROM usuarios 
-            WHERE num_documento = '{$req->numDoc}'"
+            "INSERT INTO notadeventas (DOCUMENTOS_id_documentos,USUARIOS_id_usuario,fecha,nombre_cliente,numdocumento_cliente,telefono_cliente,estado,monto,direccion_cliente) 
+            VALUES ( '{$req->tipoDoc}','{$req->idU}','{$req->fecha}','{$req->nombre}', '{$req->numDoc}','{$req->celular}','POR ATENDER','{$req->monto}', '{$req->direccion}')
+            "
             );
 
 

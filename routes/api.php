@@ -26,6 +26,7 @@ Route::get('cmbTipoDoc'       , 'gestionarUsuarioController@cmbTipoDoc'      )->
 
 //gProductosController
 Route::get('listProduct', 'gProductosController@listProduct')->middleware('validateAuth');
+Route::get('buscarProduct', 'gProductosController@buscarProduct');
 Route::post('deleteP'   , 'gProductosController@deleteP'    )->middleware('validateAuth');
 Route::post('updateP'   , 'gProductosController@updateP'    )->middleware('validateAuth');
 Route::post('registrarP', 'gProductosController@registrarP' )->middleware('validateAuth');
@@ -33,7 +34,7 @@ Route::post('registrarP', 'gProductosController@registrarP' )->middleware('valid
 //emitirNotaVController
 Route::get('usuarioNV' ,'emitirNotaVController@usuarioNV')->middleware('validateAuth');
 Route::get('ProductosL','emitirNotaVController@ProductosL')->middleware('validateAuth');
-Route::post('guardarNV','emitirNotaVController@guardarNV');
+Route::post('guardarNV','emitirNotaVController@guardarNV')->middleware('validateAuth');
 
 //entregarPController
 Route::get('listaB' ,'entregarPController@listaB')->middleware('validateAuth');
@@ -48,5 +49,7 @@ Route::post('registrarPago'    , 'emitirBvController@registrarPago'     )->middl
 
 //emitirReporteVentaDiarias
 Route::get('listaBoletaE','emitirReporteVdController@listaBoletaE')->middleware('validateAuth');
-Route::get('filtrarBoleta','emitirReporteVdController@filtrarBoleta')->middleware('validateAuth');
+Route::get('emitirRBVbyFecha','emitirReporteVdController@emitirRBVbyFechaa')->middleware('validateAuth');
 Route::post('guardarIncidencia','emitirReporteVdController@guardarIncidencia')->middleware('validateAuth');
+
+///Otra ruta 

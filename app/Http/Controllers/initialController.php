@@ -33,7 +33,7 @@ class initialController extends Controller
                         u.direccion,
                         r.id_rol,
                         r.nombre AS Cargo 
-                   FROM usuarios,
+                   FROM usuarios AS u,
                         rol AS r,
                         documentos AS d
                   WHERE usuario ='{$req->user}' 
