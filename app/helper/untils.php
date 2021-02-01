@@ -41,7 +41,12 @@ include '../app/helper/constanst.php';
                 
                 return json_encode($object);
             } else {
-                return $_SESSION["OBJ_ERROR"];
+                $object = (object) [
+                    'status' => $_SESSION["STATUS_ERROR"],
+                    'msj'    => $_SESSION["MSJ_ERROR"],
+                    'data'   => 'ERROR -> '. mysqli_error($conexion)
+                ];   
+                return json_encode($object);
             }
             mysqli_close ($conexion);     
         }  catch (Exception $e) {

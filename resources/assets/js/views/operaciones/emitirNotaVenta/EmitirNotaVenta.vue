@@ -156,50 +156,6 @@
                     </div>
                     </div>
                   </div>
-                  <!--<div class="col-3">
-                    <div class="card">
-                      <img src="https://wongfood.vteximg.com.br/arquivos/ids/290634-1000-1000/3269-1.jpg?v=636921693341270000" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Harina Blanca Flor 1KG - S/20.0</h5>
-                      <div class="row mx-1">
-                        <button class="btn btn-primary col btnexaminar"  data-toggle="modal" data-target="#detallesModal">Detalles</button>
-                      </div>
-                    </div>
-                    </div>
-                  </div>
-                  <div class="col-3">
-                    <div class="card">
-                      <img src="https://wongfood.vteximg.com.br/arquivos/ids/290634-1000-1000/3269-1.jpg?v=636921693341270000" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Harina Blanca Flor 1KG - S/20.0</h5>
-                      <div class="row mx-1">
-                        <button class="btn btn-primary col btnexaminar"  data-toggle="modal" data-target="#detallesModal">Detalles</button>
-                      </div>
-                    </div>
-                    </div>
-                  </div>
-                  <div class="col-3">
-                    <div class="card">
-                      <img src="https://wongfood.vteximg.com.br/arquivos/ids/290634-1000-1000/3269-1.jpg?v=636921693341270000" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Harina Blanca Flor 1KG - S/20.0</h5>
-                      <div class="row mx-1">
-                        <button class="btn btn-primary col btnexaminar"  data-toggle="modal" data-target="#detallesModal">Detalles</button>
-                      </div>
-                    </div>
-                    </div>
-                  </div>
-                  <div class="col-3">
-                    <div class="card">
-                      <img src="https://wongfood.vteximg.com.br/arquivos/ids/290634-1000-1000/3269-1.jpg?v=636921693341270000" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Harina Blanca Flor 1KG - S/20.0</h5>
-                      <div class="row mx-1">
-                        <button class="btn btn-primary col btnexaminar"  data-toggle="modal" data-target="#detallesModal">Detalles</button>
-                      </div>
-                    </div>
-                    </div>
-                  </div>-->
                 </div>
               </div>
             </div>
@@ -227,7 +183,7 @@
                           <th scope="col" style="width : 130px">TOTAL</th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody v-if="productoSeleccionado">
                         <tr>
                           <td>Harina preparada Blanca Flor</td>
                           <td>Blanca Flor</td>
@@ -287,7 +243,7 @@ export default {
     methods : {
       openDetailsModal(producto){
         this.productoSeleccionado = producto;
-        $('#')
+        $('#detallesModal').modal();
       },
       async buscarProductos(){
         let response = await axios.get('api/ProductosL?nombreP='+this.productoInput+'&token='+usuario.getData().token);
