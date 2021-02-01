@@ -30,7 +30,7 @@ class gProductosController extends Controller
             P.nombre,
              p.stock,
              p.marka ,
-             
+
              p.precio 
              FROM producto p
                  

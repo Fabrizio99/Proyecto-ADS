@@ -54,7 +54,7 @@
                             <div class="dropdown">
                               <button class="btn btn-danger dropdown-toggle dropdown-toggle-split " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" @click="formModificarProducto">Modificar</a>
+                                <a class="dropdown-item" @click="formEditarProducto(producto)">Editar</a>
                                 <a class="dropdown-item" @click="openDeleteModal(producto.id_producto)">Eliminar</a>
                               </div>
                             </div>
@@ -91,6 +91,7 @@
 <script>
 import Appbar from '../../../components/AppBar'
 import Navigation from '../../../components/NavigationComponent';
+import data from '../../../data';
 import usuario from '../../../user';
 
 export default {
@@ -110,10 +111,11 @@ export default {
             this.$router.push({name:"main"});
         },
         formCrearProducto(){
-            this.$router.push({name:"crearproductos"});
+            this.$router.push({path:'formulario-productos/crear'});
         },
-        formModificarProducto(){
-            this.$router.push({name:"modificarproductos"});
+        formEditarProducto(product){
+            data.setSelectedUser(product);
+            this.$router.push({path:'formulario-productos/editar'});
         },
         openDeleteModal(documento){
           this.productSelected = documento;
@@ -130,7 +132,7 @@ export default {
         async getProductos(){
           this.nomProduct = '';
           let response = await axios.get('api/listProduct?token='+usuario.getData().token);
-          console.log(response);
+          console.log('respuesta ',response);
           if(response.data.status == "0"){
               this.listaProductos = response.data.data;
           }else{
