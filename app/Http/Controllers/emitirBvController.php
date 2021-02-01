@@ -103,7 +103,22 @@ class emitirBvController extends Controller
                 AND nv.id_boletaventa = nhp.NOTADEVENTAS_id_boletaventa
                 AND nv.id_boletaventa = '{$req->notaIdBv}'"
         ); 
-          
+          /*
+          UPDATE producto AS p,
+                    notadeventas_has_producto AS nhp, 
+                    notadeventas AS nv 
+                SET p.stock=p.stock-nhp.cantidad  
+              WHERE (CASE WHEN p.stock >11 
+                     THEN p.estado = 1
+                     ELSE 
+                     p.estado = 0
+                     END  )
+              AND p.id_producto = nhp.PRODUCTO_id_producto 
+                AND nhp.NOTADEVENTAS_id_boletaventa = nv.id_boletaventa 
+                AND nv.id_boletaventa = 1
+				AND p.id_producto = 1
+                
+          */
           $modificar = json_decode($modificar);
           
           if ($modificar->status <> 0) {
