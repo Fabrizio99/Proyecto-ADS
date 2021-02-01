@@ -71,7 +71,7 @@ class reclamosController extends Controller
                              END
                          )
                      AND (CASE WHEN '{$req->fecha}' IS NOT NULL AND '{$req->fecha}' <> '' 
-                             THEN b.fecha = '{$req->fecha}'
+                             THEN b.fecha = DATE_FORMAT('{$req->fecha}', '%Y-%m-%d')  
                              ELSE 1 = 1
                              END
                          )

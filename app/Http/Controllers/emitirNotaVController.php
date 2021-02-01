@@ -84,14 +84,12 @@ class emitirNotaVController extends Controller
 
         mySQLInsert(
             "INSERT INTO notadeventas (DOCUMENTOS_id_documentos,USUARIOS_id_usuario,fecha,nombre_cliente,numdocumento_cliente,telefono_cliente,estado,monto,direccion_cliente) 
-            VALUES ( '{$req->tipoDoc}','{$req->idU}','{$req->fecha}','{$req->nombre}', '{$req->numDoc}','{$req->celular}','POR ATENDER','{$req->monto}', '{$req->direccion}')
+            VALUES ( '{$req->tipoDoc}','{$req->idU}', DATE_FORMAT('{$req->fecha}', '%Y-%m-%d') ,'{$req->nombre}', '{$req->numDoc}','{$req->celular}','POR ATENDER','{$req->monto}', '{$req->direccion}')
             "
             );
 
 
         foreach ($req->listProduct as &$valor) {
-            echo 'id_producto :::: '.($valor->id_producto);
-            echo 'cantidad :::: '.($valor->cantidad);
 
             mySQLInsert(
                 " INSERT INTO notadeventas_has_producto (NOTADEVENTAS_id_boletaventa,PRODUCTO_id_producto,cantidad)
