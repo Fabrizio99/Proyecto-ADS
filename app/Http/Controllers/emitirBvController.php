@@ -82,54 +82,27 @@ class emitirBvController extends Controller
     function registrarPago(Request $req){
        
         $validacion =   isNullEmpty($req->montoPagar,'','El montoPagar no puede estar vacio') ?:
-                        isNullEmpty($req->notaIdBv,'','El notaIdBv no puede estar vacio'    ) ?: 
-                        isNullEmpty($req->fecha,'','fecha','La fecha no puede estar vacia'  ) ?:
-                        isNullEmpty($req->tipopago,'','El seleccione un tipo de pago'       ) ?:
+                        isNullEmpty($req->notaIdBv,'','El notaIdBv no puede estar vacio') ?: 
+                        isNullEmpty($req->fecha,'','fecha','La fecha no puede estar vacia') ?:
+                        isNullEmpty($req->tipopago,'','El seleccione un tipo de pago')?:
                         isNullEmpty($req->montorecibido,'','El montorecibido no puede estar vacio');
                                             
         //Validacion de cmp Yape y Efectivo
         if($validacion){
             return $validacion;
         }
-
-        // listProduct  -->   
-        // [
-        //     {
-        //         "id_producto" : "1",
-        //         "cantidad" : "5"
-        //     },
-        //     {
-        //         "id_producto" : "2",
-        //         "cantidad" : "4"
-        //     }
-        // ]
-        // CONVIERTO EL STRING A UNA LISTA DE OBJETOS 
-        $req->listProduct = json_decode($req->listProduct);
-
-        // VALIDAR QUE LA LISTA CONTENGA AL MENOS UN ELEMNTO O QUE EXISTA 
-        if (!$req->listProduct || count($req->listProduct) == 0 ) {
-            return JSON_ENCODE(
-                (object) [
-                         'status' => $_SESSION["STATUS_CONTROL"],
-                         'msj'    => 'Debe tener al menos 1 producto seleccionado.'
-                       ]
-                 );
-        } 
-
-        foreach ($req->listProduct as &$valor) {
-        //     echo 'id_producto :::: '.($valor->id_producto);
-        //     echo 'cantidad :::: '.($valor->cantidad);
-
-            //Modificación de Productos (Se reduce los productos al registrar una boleta)
-
-            $modificar = mySQLupDate(
-                "UPDATE producto AS p
-                    SET p.stock  = p.stock - '{$valor->cantidad}',
-                        p.estado = (CASE WHEN p.stock - '{$valor->cantidad}' > 0 THEN '1' ELSE '0' END)
-                  WHERE p.id_producto = '{$valor->id_producto}';"
-            ); 
-        }
-
+        
+        //Modificación de Productos (Se reduce los productos al registrar una boleta)
+        $modificar= mySQLupDate(
+            "UPDATE producto AS p,
+                    notadeventas_has_producto AS nhp, 
+                    notadeventas AS nv 
+                SET p.stock=p.stock-nhp.cantidad  
+              WHERE p.id_producto = '{$req->idProducto}'
+                AND nhp.PRODUCTO_id_producto 
+                AND nv.id_boletaventa = nhp.NOTADEVENTAS_id_boletaventa
+                AND nv.id_boletaventa = '{$req->notaIdBv}'"
+        ); 
           /*
           UPDATE producto AS p,
                     notadeventas_has_producto AS nhp, 
@@ -165,7 +138,7 @@ class emitirBvController extends Controller
                  NOTADEVENTAS_id_boletaventa,
                  fecha,
                  monto) 
-                 VALUES('{$req->tipopago}','{$req->notaIdBv}','{$req->fecha}','{$req->montorecibido}')",'SE REGISTRO EL PAGO POR EFECTIVO');
+                 VALUES('{$req->tipopago}','{$req->notaIdBv}','{$req->fecha}','{$req->montorecibido}')",'ATENDIDO E');
                  
                 }else if($req->tipopago == 2){
                     return mySQLInsert("INSERT INTO boleta  
@@ -176,7 +149,7 @@ class emitirBvController extends Controller
                       monto) 
                        VALUES('{$req->tipopago}','{$req->notaIdBv}',
                        '{$req->fecha}','{$req->telefonoYape}',
-                       '{$req->montorecibido}')",'SE REGISTRO EL PAGO POR YAPE');
+                       '{$req->montorecibido}')",'ATENDIDO Y');
         }  
     
     } 
