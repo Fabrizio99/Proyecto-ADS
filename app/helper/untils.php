@@ -4,7 +4,7 @@ include '../app/helper/constanst.php';
 
     function mySQLConsulta(String $sql, $msj = null ) {
         
-        echo '\nSQL ::: '.$sql.'\n' ;
+        // echo '\nSQL ::: '.$sql.'\n' ;
 
         try {
             $conexion = mysqli_connect ($_SESSION["SERVIDOR"] , $_SESSION["ROOT"], $_SESSION["PASSWORD"])
