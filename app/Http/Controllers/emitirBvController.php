@@ -11,23 +11,52 @@ class emitirBvController extends Controller
     function listaNotaV(Request $req){
         
         return mySQLConsulta(
-            "SELECT 
-            id_boletaventa AS codigo, 
-            nombre_cliente AS cliente,
-            estado,
-            monto                      
-            FROM notadeventas 
-            LIMIT 0,50"
+            "SELECT nv.id_boletaventa AS Codigo,
+            u.nombres AS Vendedor,
+            u.fechaInicio AS FechaEmision,
+            nv.nombre_cliente AS Cliente,
+            d.nombre AS tipoDocumento,
+            nv.numdocumento_cliente AS N_Documento,
+            nv.telefono_cliente AS Celular,
+            nv.direccion_cliente AS Direccion,
+            (SELECT CONCAT(
+                        '[', 
+                            GROUP_CONCAT(
+                                JSON_OBJECT(
+                                    'producto', p.nombre,
+                                    'precio'  , p.precio,
+                                    'cantidad', nhp.cantidad, 
+                                    'PrecioTotal'  , (p.precio * nhp.cantidad)
+                                    
+                                )
+                            ),
+                        ']'
+                    )
+            FROM notadeventas AS nv2,
+                    notadeventas_has_producto AS nhp,
+                    producto AS p
+            WHERE nv2.id_boletaventa = nv.id_boletaventa
+                AND nv2.id_boletaventa = nhp.NOTADEVENTAS_id_boletaventa
+                AND p.id_producto = nhp.PRODUCTO_id_producto) AS Productos,
+                nv.monto AS MontoTotal 
+    FROM notadeventas AS nv,
+            documentos   AS d,
+            usuarios     AS u
+    WHERE d.id_documentos   = nv.DOCUMENTOS_id_documentos
+      AND u.id_usuario      = nv.USUARIOS_id_usuario"
         );
 
     }
 
     //--Busqueda de Notas por fechas y codigo 
     function buscaNotaVByFechas(Request $req){
+        
+        echo 'ENTRE A LA FUNCION ';
 
         $Validacion = (isNullEmpty($req->notaVid) != null) && (isNullEmpty($req->fechaInicio) != null) && 
                       (isNullEmpty($req->fechaFin) != null);
-        
+        echo 'VALIDACION  '.$Validacion;
+
         //validacion de los cmpsNotaVenta
         if ($Validacion == 1) {
             return JSON_ENCODE(
@@ -38,6 +67,9 @@ class emitirBvController extends Controller
                 );
         }
 
+        echo 'ID ::: '.$req->notaVid;
+        echo 'fechaInicio ::: '.$req->fechaInicio;
+        echo 'fechaFin ::: '.$req->fechaFin;
         return mySQLConsulta(
             "SELECT nv.id_boletaventa AS Codigo,
                     u.nombres AS Vendedor,
