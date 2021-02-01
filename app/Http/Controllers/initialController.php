@@ -32,7 +32,22 @@ class initialController extends Controller
                         u.codigo,
                         u.direccion,
                         r.id_rol,
-                        r.nombre AS Cargo 
+                        r.nombre AS Cargo,
+                        (SELECT CONCAT(
+                                    '[', 
+                                        GROUP_CONCAT(
+                                            JSON_OBJECT(
+                                                'id_permiso'   , p.id_permisos,
+                                                'desc_permiso' , p.nombre               
+                                            )
+                                        ),
+                                    ']'
+                                ) 
+                           FROM tabla_rol_permiso AS trp,
+                                permisos AS p
+                          WHERE trp.tabla_fk_roles   = r.id_rol
+                            AND trp.tabla_fk_permiso = p.id_permisos 
+                        ) AS list_permisos 
                    FROM usuarios AS u,
                         rol AS r,
                         documentos AS d

@@ -24,7 +24,7 @@ class emitirNotaVController extends Controller
         return $isValidate;
     }
 
-    if (strlen($req->nombreP) < 3) return "Ingrese el nombre del producto";
+    // if (strlen($req->nombreP) < 3) return "Ingrese el nombre del producto";
     
     return mySQLConsulta(
         "SELECT p.nombre,
