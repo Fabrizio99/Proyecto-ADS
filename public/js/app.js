@@ -52844,6 +52844,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
               case 2:
                 response = _context.sent;
 
+                console.log(response);
                 if (typeof response.data == 'string') {
                   alert('Mensaje: ' + response.data);
                 } else if (response.data.status == "1" || response.data.status == "2") {
@@ -52855,7 +52856,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   this.$router.push({ name: 'main' });
                 }
 
-              case 4:
+              case 5:
               case 'end':
                 return _context.stop();
             }
