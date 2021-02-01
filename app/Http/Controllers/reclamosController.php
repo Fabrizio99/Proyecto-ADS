@@ -8,7 +8,7 @@ use phpDocumentor\Reflection\Types\Null_;
 include '../app/helper/untils.php'; // para cada controller pueda usar las funciones de consulta 
 
 class reclamosController extends Controller
-{
+{//buscar boleta
     function getReclamos(Request $req){
  
         
@@ -25,52 +25,57 @@ class reclamosController extends Controller
         }
     
         return mySQLConsulta(
-            "SELECT b.codigo_boleta,
-                    nv.id_boletaventa,
-                    nv.nombre_cliente,
-                    d.nombre AS documento,
-                    b.fecha,
-                    (SELECT CONCAT(
-                            '[', 
-                                GROUP_CONCAT(
-                                JSON_OBJECT('cantidad', nvp.cantidad,
-                                            'producto', p.nombre,
-                                            'precio', p.precio
-                                )
-                                ),
-                            ']'
-                            ) 
-                    FROM NOTADEVENTAS_has_PRODUCTO nvp,
-                            PRODUCTO p, 
-                            CATEGORIA c
-                    WHERE nvp.NOTADEVENTAS_id_boletaventa = 1
-                        AND nvp.PRODUCTO_id_producto = p.id_producto
-                        AND p.CATEGORIA_id_categoria = c.id_categoria
-                    ) AS productos
-            FROM BOLETA       AS b,
-                    NOTADEVENTAS AS nv,
-                    DOCUMENTOS d
-            WHERE (CASE WHEN '{$req->codBoleta}' IS NOT NULL AND '{$req->codBoleta}' <> ''
-                        THEN b.codigo_boleta = '{$req->codBoleta}' AND b.NOTADEVENTAS_id_boletaventa = nv.id_boletaventa
-                        ELSE 1 = 1
-                        END
-                    )
-                AND (CASE WHEN '{$req->nombre}' IS NOT NULL AND '{$req->nombre}' <> ''
-                        THEN nv.nombre_cliente = '{$req->nombre}'
-                        ELSE 1 = 1
-                        END
-                    )
-                AND (CASE WHEN '{$req->documento}' IS NOT NULL AND '{$req->documento}' <> '' 
-                        THEN nv.numdocumento_cliente = '{$req->documento}'
-                        ELSE 1 = 1
-                        END
-                    )
-                AND (CASE WHEN '{$req->fecha}' IS NOT NULL AND '{$req->fecha}' <> '' 
-                        THEN b.fecha = '{$req->fecha}'
-                        ELSE 1 = 1
-                        END
-                    )
-                AND nv.DOCUMENTOS_id_documentos = d.id_documentos;  
+            "SELECT b.NOTADEVENTAS_id_boletaventa AS CODIGOB,
+            nv.nombre_cliente,
+            d.nombre,
+            nv.numdocumento_cliente,
+            b.fecha,
+            (SELECT CONCAT(
+                                     '[', 
+                                         GROUP_CONCAT(
+                                             JSON_OBJECT(
+                                                 'producto', p.nombre,
+                                                 'precio'  , p.precio,
+                                                 'cantidad', nhp.cantidad, 
+                                                 'Importe'  , (p.precio * nhp.cantidad)
+                                                 
+                                             )
+                                         ),
+                                     ']'
+                                 )
+                         FROM boleta AS b2,
+                                 notadeventas_has_producto AS nhp,
+                                 notadeventas AS nv1,
+                                 producto AS p
+                         WHERE b2.NOTADEVENTAS_id_boletaventa = b.NOTADEVENTAS_id_boletaventa
+                           AND    b2.NOTADEVENTAS_id_boletaventa = nv1.id_boletaventa
+                             AND b2.NOTADEVENTAS_id_boletaventa = nhp.NOTADEVENTAS_id_boletaventa
+                             AND p.id_producto = nhp.PRODUCTO_id_producto) AS Productos,
+            nv.monto AS MontoTotal
+     FROM boleta b,
+          documentos d,
+          notadeventas nv
+     WHERE (CASE WHEN '{$req->codBoleta}' IS NOT NULL AND '{$req->codBoleta}' <> ''
+                             THEN b.NOTADEVENTAS_id_boletaventa = '{$req->codBoleta}' AND b.NOTADEVENTAS_id_boletaventa = nv.id_boletaventa
+                             ELSE 1 = 1
+                             END
+                         )
+                     AND (CASE WHEN '{$req->nombre}' IS NOT NULL AND '{$req->nombre}' <> ''
+                             THEN nv.nombre_cliente = '{$req->nombre}'
+                             ELSE 1 = 1
+                             END
+                         )
+                     AND (CASE WHEN '{$req->documento}'IS NOT NULL AND '{$req->documento}'<> '' 
+                             THEN nv.numdocumento_cliente = '{$req->documento}'
+                             ELSE 1 = 1
+                             END
+                         )
+                     AND (CASE WHEN '{$req->fecha}' IS NOT NULL AND '{$req->fecha}' <> '' 
+                             THEN b.fecha = DATE_FORMAT('{$req->fecha}', '%Y-%m-%d')  
+                             ELSE 1 = 1
+                             END
+                         )
+                     AND nv.DOCUMENTOS_id_documentos = d.id_documentos;
         "
         );
     }
@@ -86,7 +91,7 @@ class reclamosController extends Controller
             return  $isValidate;
         }
         
-        $boleta = mySQLConsulta("SELECT idB_boleta FROM boleta WHERE codigo_boleta = '{$req->codBoleta}'");
+        $boleta = mySQLConsulta("SELECT idB_boleta FROM boleta WHERE NOTADEVENTAS_id_boletaventa = '{$req->codBoleta}'");
         $boleta = json_decode($boleta);
 
         if ($boleta->status == $_SESSION["STATUS_CONTROL"]) {

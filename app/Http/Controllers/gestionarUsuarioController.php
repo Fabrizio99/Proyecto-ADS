@@ -159,6 +159,7 @@ class gestionarUsuarioController extends Controller
             );
         }    
     }
+    
     //---Eliminar Usuario
     function deleteUsuario (Request $req){
 
