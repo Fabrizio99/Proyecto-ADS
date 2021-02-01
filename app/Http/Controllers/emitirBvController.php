@@ -99,7 +99,6 @@ class emitirBvController extends Controller
                     isNullEmpty($req->notaIdBv,'','notaventaId') ?: 
                     isNullEmpty($req->fecha,'','fecha') ?:
                     isNullEmpty($req->tipopago,'','tipoPago');
-                    //isNullEmpty($req->file,'','file');
 
         if($valComun){
             return $valComun;
@@ -138,7 +137,7 @@ class emitirBvController extends Controller
                  NOTADEVENTAS_id_boletaventa,
                  fecha,
                  monto) 
-                 VALUES('{$req->tipopago}','{$req->notaIdBv}','{$req->fecha}','{$req->montorecibido}'",'SE REGISTRO EL PAGO POR EFECTIVO');
+                 VALUES('{$req->tipopago}','{$req->notaIdBv}','{$req->fecha}','{$req->montorecibido}')",'SE REGISTRO EL PAGO POR EFECTIVO');
                  
                 }else if($req->tipopago == 2){
                     return mySQLInsert("INSERT INTO boleta  
