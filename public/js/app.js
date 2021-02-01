@@ -73129,6 +73129,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
 
 
 
@@ -73145,8 +73147,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         return {
             selectedDate: __WEBPACK_IMPORTED_MODULE_4_moment___default()().format('yyy-MM-DD'),
             listaProductos: [],
-            costInv: [],
-            cantProd: ''
+            resultSum: ''
         };
     },
 
@@ -73173,14 +73174,14 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                             case 3:
                                 response = _context.sent;
 
-                                console.log(response);
+                                //console.log(response);
                                 if (response.data.status == "0") {
                                     this.listaProductos = response.data.data;
                                 } else {
                                     alert('Error: ' + response.data.msj);
                                 }
 
-                            case 6:
+                            case 5:
                             case 'end':
                                 return _context.stop();
                         }
@@ -73207,9 +73208,14 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                             case 2:
                                 response = _context2.sent;
 
-                                console.log('respuesta ', response);
+                                console.log('resultSum  ' + response);
+                                if (response.data.status == "0") {
+                                    this.resultSum = response.data.data;
+                                } else {
+                                    alert('Error: ' + response.data.msj);
+                                }
 
-                            case 4:
+                            case 5:
                             case 'end':
                                 return _context2.stop();
                         }
@@ -73227,6 +73233,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     mounted: function mounted() {
         console.log('mounted!!!');
         this.ListSearchDate(this.selectedDate);
+        this.totalProductCosto();
     }
 });
 
@@ -73623,30 +73630,36 @@ var render = function() {
                       _vm._m(3),
                       _vm._v(" "),
                       _c("div", { staticClass: "form-row" }, [
-                        _c("div", { staticClass: "col-1" }, [
-                          _c("label", { on: { change: _vm.totalProductCosto } })
-                        ]),
-                        _vm._v(" "),
                         _vm._m(4),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-4" }, [
+                          _c("label", [
+                            _vm._v(_vm._s(_vm.resultSum["sum(precio)"]))
+                          ])
+                        ]),
                         _vm._v(" "),
                         _vm._m(5),
                         _vm._v(" "),
-                        _vm._m(6)
+                        _c("div", { staticClass: "col-4" }, [
+                          _c("label", [
+                            _vm._v(_vm._s(_vm.resultSum["sum(stock)"]))
+                          ])
+                        ])
                       ])
                     ])
                   ])
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(7),
+              _vm._m(6),
               _vm._v(" "),
-              _vm._m(8),
+              _vm._m(7),
               _vm._v(" "),
               _c("div", { staticClass: "row mx-4" }, [
                 _c("div", { staticClass: "col-12" }, [
                   _c("div", { staticClass: "mx-4 mt-4" }, [
                     _c("table", { staticClass: "table" }, [
-                      _vm._m(9),
+                      _vm._m(8),
                       _vm._v(" "),
                       _c(
                         "tbody",
@@ -73729,19 +73742,13 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-5" }, [_c("label")])
+    return _c("div", { staticClass: "col-2" }, [_c("label")])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-1" }, [_c("label")])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-5" }, [_c("label", [_vm._v("1.506")])])
+    return _c("div", { staticClass: "col-2" }, [_c("label")])
   },
   function() {
     var _vm = this

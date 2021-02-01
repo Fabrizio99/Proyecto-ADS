@@ -32,27 +32,29 @@
                                             </div>
                                             <div class="col-5">
                                                 <label>Costo de inventario</label>
+                                                
                                             </div>
                                             <div class="col-1">
-                                                <label></label>
+                                               <label></label>                                                                                                              
                                             </div>
                                             <div class="col-5">
                                                 <label>Cantidad de productos</label>
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="col-1">
-                                                <label @change="totalProductCosto"></label>
+                                            <div class="col-2">
+                                                <label></label>                                             
                                             </div>
-                                            <div class="col-5" >
+                                            <div class="col-4" >
+                                                <label>{{resultSum['sum(precio)']}}</label>
+                                            </div>
+                                            <div class="col-2">
                                                 <label></label>
                                             </div>
-                                            <div class="col-1">
-                                                <label></label>
+                                            <div class="col-4">
+                                                <label>{{resultSum['sum(stock)']}}</label>
                                             </div>
-                                            <div class="col-5">
-                                                <label>1.506</label>
-                                            </div>
+                                            
                                         </div>
                                     </div>
                             </div>
@@ -194,8 +196,7 @@ export default {
         return {
             selectedDate : moment().format('yyy-MM-DD'),
             listaProductos: [],
-            costInv: [],
-            cantProd: '',
+            resultSum: ''
         }
     },
     methods : {
@@ -210,7 +211,7 @@ export default {
         async ListSearchDate(fechaInv){
           this.selectedDate = fechaInv;
           let response = await axios.get('api/getEmitirRI?fecha='+this.selectedDate+'&token='+usuario.getData().token);
-          console.log(response);
+          //console.log(response);
             if(response.data.status == "0"){
                 this.listaProductos = response.data.data;
             }else{
@@ -220,13 +221,19 @@ export default {
         async totalProductCosto(){
           
           let response = await axios.get('api/totalProdCosto?token='+usuario.getData().token);
-          console.log('respuesta ',response);
+          console.log('resultSum  '+response);
+          if(response.data.status == "0"){
+                this.resultSum = response.data.data;
+            }else{
+                alert('Error: '+response.data.msj);
+            }
           
         },
     },
     mounted(){
       console.log('mounted!!!');
       this.ListSearchDate(this.selectedDate);
+      this.totalProductCosto();
     }
 }
 </script>
