@@ -12,7 +12,7 @@ class reporteInvController extends Controller
     function getEmitirRI(Request $req){
         $TIPO_ALTO = 0;
         $TIPO_BAJO = 1;
-        
+        //
         //// el estado 1 es alto en productos y el estado 0 es bajo en productos
         return mySQLConsulta(
             "SELECT id_producto,
