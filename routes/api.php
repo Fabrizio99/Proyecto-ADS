@@ -26,12 +26,30 @@ Route::get('cmbTipoDoc'       , 'gestionarUsuarioController@cmbTipoDoc'      )->
 
 //gProductosController
 Route::get('listProduct', 'gProductosController@listProduct')->middleware('validateAuth');
+Route::get('buscarProduct', 'gProductosController@buscarProduct')->middleware('validateAuth');
 Route::post('deleteP'   , 'gProductosController@deleteP'    )->middleware('validateAuth');
 Route::post('updateP'   , 'gProductosController@updateP'    )->middleware('validateAuth');
 Route::post('registrarP', 'gProductosController@registrarP' )->middleware('validateAuth');
 
+//emitirNotaVController
+Route::get('usuarioNV' ,'emitirNotaVController@usuarioNV')->middleware('validateAuth');
+Route::get('ProductosL','emitirNotaVController@ProductosL')->middleware('validateAuth');
+Route::post('guardarNV','emitirNotaVController@guardarNV')->middleware('validateAuth');
+
+//entregarPController
+Route::get('listaB' ,'entregarPController@listaB')->middleware('validateAuth');
+Route::get('buscarBoletaF' ,'entregarPController@buscarBoletaF')->middleware('validateAuth');
+Route::post('modificarEb' ,'entregarPController@modificarEb')->middleware('validateAuth');
+
 //no probar esta en proceso 
 //emitirBvController
 Route::get('listaNotaV'        , 'emitirBvController@listaNotaV'        )->middleware('validateAuth');
-Route::get('buscaNotaVByFechas', 'emitirBvController@buscaNotaVByFechas');//->middleware('validateAuth');
+Route::get('buscaNotaVByFechas', 'emitirBvController@buscaNotaVByFechas')->middleware('validateAuth');
 Route::post('registrarPago'    , 'emitirBvController@registrarPago'     )->middleware('validateAuth');
+
+//emitirReporteVentaDiarias
+Route::get('listaBoletaE','emitirReporteVdController@listaBoletaE')->middleware('validateAuth');
+Route::get('emitirRBVbyFecha','emitirReporteVdController@emitirRBVbyFechaa')->middleware('validateAuth');
+Route::post('guardarIncidencia','emitirReporteVdController@guardarIncidencia')->middleware('validateAuth');
+
+///Otra ruta 

@@ -102,71 +102,121 @@ class emitirBvController extends Controller
             FROM notadeventas AS nv,
                     documentos   AS d,
                     usuarios     AS u
-            WHERE (nv.id_boletaventa = '{$req->notaVid}' OR nv.fecha '{$req->fechaInicio}' BETWEEN  AND '{$req->fechaFin}' )
+            WHERE (nv.id_boletaventa = '{$req->notaVid}' OR nv.fecha DATE_FORMAT('{$req->fechaInicio}', '%Y-%m-%d')  BETWEEN  AND DATE_FORMAT('{$req->fechaFin}', '%Y-%m-%d')  )
                 AND d.id_documentos   = nv.DOCUMENTOS_id_documentos
                 AND u.id_usuario      = nv.USUARIOS_id_usuario"
         );
 
     }
 
-    //////////////////falta probar/////////////////////////////
+    //----Angel va supervisar esta Función (TAREA PARA ANGEL )
 
     function registrarPago(Request $req){
-
-        $TIPO_YAPE = 1;
-        $TIPO_EFECTIVO = 2;
-
-         // falta de BD boleta
-        ///columna monto , monto recibiso=efectivo
-        //alva = file
-        //columna numero de cuenta
-
-        $valDiferentes = isNullEmpty($req->montorecibido)?:
-                        isNullEmpty($req->vuelto)?:
-                        isNullEmpty($req->tipopago)?:
-                        isNullEmpty($req->cuenta,'','cuenta')?:
-                        isNullEmpty($req->imgPrueba,'','');
-        
-        $valComun = isNullEmpty($req->montoPagar,'','ps montopagar') ?:
-                    isNullEmpty($req->notaIdBv,'','notaventaId') ?: 
-                    isNullEmpty($req->fecha,'','fecha') ?:
-                    isNullEmpty($req->tipopago,'','tipoPago');
-                    //isNullEmpty($req->file,'','file');
-
-        if($valComun){
-            return $valComun;
-        }else if ($valDiferentes){
-            return $valDiferentes;
+       
+        $validacion =   isNullEmpty($req->montoPagar,'','El montoPagar no puede estar vacio') ?:
+                        isNullEmpty($req->notaIdBv,'','El notaIdBv no puede estar vacio'    ) ?: 
+                        isNullEmpty($req->fecha,'','fecha','La fecha no puede estar vacia'  ) ?:
+                        isNullEmpty($req->tipopago,'','El seleccione un tipo de pago'       ) ?:
+                        isNullEmpty($req->montorecibido,'','El montorecibido no puede estar vacio');
+                                            
+        //Validacion de cmp Yape y Efectivo
+        if($validacion){
+            return $validacion;
         }
 
-        $modificar= mySQLupDate(
-            "UPDATE producto AS p,
+        // listProduct  -->   
+        // [
+        //     {
+        //         "id_producto" : "1",
+        //         "cantidad" : "5"
+        //     },
+        //     {
+        //         "id_producto" : "2",
+        //         "cantidad" : "4"
+        //     }
+        // ]
+        // CONVIERTO EL STRING A UNA LISTA DE OBJETOS 
+        $req->listProduct = json_decode($req->listProduct);
+
+        // VALIDAR QUE LA LISTA CONTENGA AL MENOS UN ELEMNTO O QUE EXISTA 
+        if (!$req->listProduct || count($req->listProduct) == 0 ) {
+            return JSON_ENCODE(
+                (object) [
+                         'status' => $_SESSION["STATUS_CONTROL"],
+                         'msj'    => 'Debe tener al menos 1 producto seleccionado.'
+                       ]
+                 );
+        } 
+
+        foreach ($req->listProduct as &$valor) {
+        //     echo 'id_producto :::: '.($valor->id_producto);
+        //     echo 'cantidad :::: '.($valor->cantidad);
+
+            //Modificación de Productos (Se reduce los productos al registrar una boleta)
+
+            $modificar = mySQLupDate(
+                "UPDATE producto AS p
+                    SET p.stock  = p.stock - '{$valor->cantidad}',
+                        p.estado = (CASE WHEN p.stock - '{$valor->cantidad}' > 0 THEN '1' ELSE '0' END)
+                  WHERE p.id_producto = '{$valor->id_producto}';"
+            ); 
+        }
+
+          /*
+          UPDATE producto AS p,
                     notadeventas_has_producto AS nhp, 
                     notadeventas AS nv 
                 SET p.stock=p.stock-nhp.cantidad  
-              WHERE p.id_producto = '{$req->idProducto}'
-                AND nhp.PRODUCTO_id_producto 
-                AND nv.id_boletaventa = nhp.NOTADEVENTAS_id_boletaventa
-                AND nv.id_boletaventa = '{$req->notaIdBv}'"
-        ); 
+              WHERE (CASE WHEN p.stock >11 
+                     THEN p.estado = 1
+                     ELSE 
+                     p.estado = 0
+                     END  )
+              AND p.id_producto = nhp.PRODUCTO_id_producto 
+                AND nhp.NOTADEVENTAS_id_boletaventa = nv.id_boletaventa 
+                AND nv.id_boletaventa = 1
+				AND p.id_producto = 1
+                
+          */
+          $modificar = json_decode($modificar);
           
-        $modificar = json_decode($modificar);
-
-        if ($modificar->status == $_SESSION["STATUS_ERROR"]) {
-            return JSON_ENCODE($modificar);        
-        }
-      
-        if(($req->tipopago) == $TIPO_EFECTIVO){
-            return(
-                "INSERT INTO boleta (TIPOPAGO_id_tipopago, NOTADEVENTAS_id_boletaventa, fecha, monto, vuelto) 
-                      VALUES ('{$req->tipopago}','{$req->notaIdBv}','{$req->fecha}','{$req->monto}',{$req->file}"
-            );
-
-        }else {
-            return(
-                "INSERT INTO boleta  (TIPOPAGO_id_tipopago, NOTADEVENTAS_id_boletaventa, fecha, monto, evidencia) 
-                      VALUES ('{$req->tipopago}', '{$req->notaIdBv}', '{$req->fecha}', '{$req->monto}', '{$req->imgPrueba}', '{$req->cuenta}', '{$req->file}')"
-            );
-        }      
+          if ($modificar->status <> 0) {
+            return JSON_ENCODE(
+                (object) [
+                    'msj'    => 'No se cambio la cantidad de productos correctamente',
+                    'status' => '0'
+                 ]
+            );  }
+              
+            
+            echo'no funciona';
+            if($req->tipopago == 1){
+                
+                 return mySQLInsert("INSERT INTO boleta  
+                 (TIPOPAGO_id_tipopago,
+                 NOTADEVENTAS_id_boletaventa,
+                 fecha,
+                 monto) 
+                 VALUES('{$req->tipopago}','{$req->notaIdBv}',DATE_FORMAT('{$req->fecha}', '%Y-%m-%d') ,'{$req->montorecibido}')",'SE REGISTRO EL PAGO POR EFECTIVO');
+                 
+                }else if($req->tipopago == 2){
+                    return mySQLInsert("INSERT INTO boleta  
+                    (TIPOPAGO_id_tipopago,
+                    NOTADEVENTAS_id_boletaventa,
+                    fecha,
+                     telefono_yape,
+                      monto) 
+                       VALUES('{$req->tipopago}','{$req->notaIdBv}',
+                       DATE_FORMAT('{$req->fecha}', '%Y-%m-%d'),'{$req->telefonoYape}',
+                       '{$req->montorecibido}')",'SE REGISTRO EL PAGO POR YAPE');
+        }  
+    
     } 
 }
+
+
+
+   
+
+
+

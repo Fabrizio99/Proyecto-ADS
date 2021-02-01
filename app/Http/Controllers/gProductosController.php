@@ -8,15 +8,43 @@ class gProductosController extends Controller
 {
     function listProduct (Request $req){
 
-        return mySQLConsulta("SELECT nombre,
-                                     marka,
-                                     precio,
-                                     stock,
-                                     imagen 
-                                FROM producto 
-                               WHERE estado = 1"
+        return mySQLConsulta("SELECT p.id_producto,
+                                     p.nombre,
+                                     p.marka,
+                                     p.precio,
+                                     p.stock,
+                                     c.nombre
+                                    
+                               FROM producto p,
+                                    categoria c
+                               WHERE estado = 1
+                               AND p.fk_producto_categoria = c.id_categoria"
                             );
     }
+    function buscarProduct(Request $req){
+        $isValidate = isNullEmpty($req->nombreP);
+
+        if($isValidate){
+            return $isValidate;
+        }
+
+        return mySQLConsulta(
+            "SELECT p.id_producto,
+             P.nombre,
+             p.stock,
+             p.marka , 
+             p.precio ,
+             c.nombre
+             FROM producto p,
+                  categoria c
+             WHERE (p.nombre LIKE '%{$req->nombreP}%')
+             AND p.fk_producto_categoria = c.id_categoria
+             AND estado =1" );
+        }
+
+
+
+    
 
     function deleteP (Request $req){
         $isValidate = isNullEmpty($req->idP);
@@ -37,23 +65,26 @@ class gProductosController extends Controller
     function updateP (Request $req){
         $isValidate = isNullEmpty($req->idP)?:
         isNullEmpty($req->nombre , 'nombreP', 'El campo nombre no puede ser vacio.') ?:
-        isNullEmpty($req->marka  , 'marca'  , 'El campo marca de la boleta no puede ser vacio.') ?: 
-        isNullEmpty($req->precio , 'precio' , 'El campo precio de la boleta no puede ser vacio.') ?: 
+        isNullEmpty($req->marka  , 'marca'  , 'El campo marca  no puede ser vacio.') ?: 
+        isNullEmpty($req->precio , 'precio' , 'El campo precio  no puede ser vacio.') ?:
+        isNullEmpty($req->categoria , 'categoria' , 'El campo categoria  no puede ser vacio.') ?:  
         isNullEmpty($req->stock  , 'stock'  , 'El campo stock no puede ser vacio.');
-        isNullEmpty($req->imagen ,'imagen'  , 'El campo imagen no puede ser vacio.');
+        
 
         if($isValidate){
             return $isValidate;
         }
 
         return mySQLInsert(
-            "UPDATE producto 
-                SET nombre = '{$req->nombre}', 
-                    marka = '{$req->marka}', 
-                    precio = '{$req->precio}', 
-                    stock = '{$req->stock}' , 
-                    imagen = '{$req->imagen}' 
-              WHERE id_producto = '{$req->idP}'",
+            " UPDATE producto p,categoria c
+            SET p.nombre = '{$req->nombre}', 
+                p.marka = '{$req->marka}', 
+                p.precio = '{$req->precio}', 
+                p.stock = '{$req->stock}',
+                p.fk_producto_categoria = id_categoria
+          WHERE id_producto = '{$req->idP}'
+          AND c.nombre='{$req->categoria}'"
+              ,
              "PRODUCTO MODIFICADO DE FORMA EXITOSA"
         );
     }
@@ -62,16 +93,19 @@ class gProductosController extends Controller
         $isValidate = isNullEmpty($req->nombre , 'nombreP', 'El campo nombre no puede ser vacio.') ?:
                       isNullEmpty($req->marka  , 'marca'  , 'El campo marca de la boleta no puede ser vacio.') ?: 
                       isNullEmpty($req->precio , 'precio' , 'El campo precio de la boleta no puede ser vacio.') ?: 
+                      isNullEmpty($req->categoria , 'categoria' , 'El campo categoria de la boleta no puede ser vacio.') ?: 
                       isNullEmpty($req->stock  , 'stock'  , 'El campo stock no puede ser vacio.');
-                      isNullEmpty($req->imagen ,'imagen'  , 'El campo imagen no puede ser vacio.');
+                      
         
         if($isValidate){
             return $isValidate;
         }
 
         return mySQLInsert(
-        "INSERT INTO producto (nombre,marka,precio,stock,imagen) 
-              VALUES ('{$req->nombre}','{$req->marka}', '{$req->precio}','{$req->stock}','{$req->imagen}')",
+        "INSERT INTO producto (nombre,marka,precio,stock,fk_producto_categoria) 
+            SELECT '{$req->nombre}','{$req->marka}','{$req->precio}','{$req->stock}',id_categoria
+            FROM categoria c
+            WHERE c.nombre like '{$req->categoria}'",
          "PRODUCTO REGISTRADO EXITOSAMENTE"
         );
     }    
