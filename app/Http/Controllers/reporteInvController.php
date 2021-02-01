@@ -39,4 +39,15 @@ class reporteInvController extends Controller
        return  mySQLConsulta("SELECT sum(precio),sum(stock) FROM producto");
 
    }
-}
+
+   function estadisticaProductos (Request $req){
+       return mySQLConsulta("SELECT p.nombre , sum(nhp.cantidad), 
+       ROUND((nhp.cantidad/p.stock)*100,2)
+       FROM notadeventas_has_producto AS nhp, 
+       producto AS p 
+       WHERE p.id_producto=nhp.PRODUCTO_id_producto 
+       group by p.id_producto ");
+   }
+
+   }
+
