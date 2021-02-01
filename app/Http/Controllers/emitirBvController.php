@@ -22,6 +22,7 @@ class emitirBvController extends Controller
 
     }
 
+
     //--Busqueda de Notas por fechas y codigo 
     function buscaNotaVByFechas(Request $req){
 
