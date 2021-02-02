@@ -21,8 +21,8 @@ class gProductosController extends Controller
                                      p.marka,
                                      p.precio,
                                      p.stock,
-                                     c.nombre
-                                    
+                                     c.nombre,
+                                     c.id_categoria
                                FROM producto p,
                                     categoria c
                                WHERE estado = 1
@@ -38,12 +38,13 @@ class gProductosController extends Controller
 
         return mySQLConsulta(
             "SELECT p.id_producto,
-             P.nombre,
-             p.stock,
-             p.precio
-             p.marka , 
-             p.precio ,
-             c.nombre
+                    P.nombre,
+                    p.stock,
+                    p.precio
+                    p.marka , 
+                    p.precio ,
+                    c.nombre,
+                    c.id_categoria
              FROM producto p,
                   categoria c
              WHERE (p.nombre LIKE '%{$req->nombreP}%')
