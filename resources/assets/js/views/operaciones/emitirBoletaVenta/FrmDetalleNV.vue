@@ -15,19 +15,19 @@
                     </h5>
                 </div>
                 <div class="row mx-4">
-                  <input type="text" class="form-control" id="exampleInputPassword1" value="NV-004" disabled>
+                  <input type="text" class="form-control" id="exampleInputPassword1" :value="'NV-'+nota_venta.codigo" disabled>
                 </div>
                 <div class="row mx-4 mt-2">
                     <div class="card col bg-light">
                         <div class="card-body">
                             <div class="form-row">
                                 <div class="form-group col-6">
-                                    <label for="exampleInputPassword1">Vendedor</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1" v-model="nota_venta.nom_vendedor" disabled>
+                                    <label >Vendedor</label>
+                                    <input type="text" class="form-control" v-model="nota_venta.nom_vendedor" disabled>
                                 </div>
                                 <div class="form-group col-6">
-                                    <label for="exampleInputPassword1">Fecha de Emisión</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1"  v-model="nota_venta.fecha" disabled>
+                                    <label >Fecha de Emisión</label>
+                                    <input type="text" class="form-control"  v-model="nota_venta.fecha" disabled>
                                 </div>
                             </div>
                         </div>
@@ -38,30 +38,30 @@
                         <div class="card-body">
                             <div class="form-row">
                                 <div class="form-group col-3">
-                                    <label for="exampleInputPassword1">Cliente</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1"  v-model="nota_venta.nombre_cliente" disabled>
+                                    <label >Cliente</label>
+                                    <input type="text" class="form-control"  v-model="nota_venta.nombre_cliente" disabled>
                                 </div>
                                 <div class="form-group col-3">
                                     <label>Tipo documento</label>
-                                    <select name="select"  class="form-control">
-                                       <!-- <option v-for="documento in documentos" :key="documento.id" :value="documento.id_documentos">{{documento.nombre}}</option>-->
+                                    <select name="select"  class="form-control" v-model="nota_venta.tipoDocumento" :disabled="tipo=='ver'">
+                                       <option v-for="documento in documentos" :key="documento.id" :value="documento.id_documentos">{{documento.nombre}}</option>
                                     </select>
                                 
                                 </div>
                                 <div class="form-group col-3">
-                                    <label for="exampleInputPassword1">N° Documento</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1" v-model="nota_venta.num_documento" disabled>
+                                    <label >N° Documento</label>
+                                    <input type="text" class="form-control" v-model="nota_venta.num_documento" disabled>
                                 </div>
                                 <div class="form-group col-3">
-                                    <label for="exampleInputPassword1">Celular</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1" v-model="nota_venta.telefono" disabled>
+                                    <label >Celular</label>
+                                    <input type="text" class="form-control" v-model="nota_venta.telefono" disabled>
                                 </div>
                             </div>
                             <div class="form-row">
                                
                                 <div class="form-group col-12">
-                                    <label for="exampleInputPassword1">Dirección</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1" v-model="nota_venta.direccion" disabled>
+                                    <label >Dirección</label>
+                                    <input type="text" class="form-control" v-model="nota_venta.direccion" disabled>
                                 </div>
                             </div>
                         </div>
@@ -88,7 +88,7 @@
                           <td>{{usuario.precio}}</td>
                           <td>{{usuario.cantidad}}</td>
                           <td>{{usuario.PrecioTotal}}</td>
-                        </tr>-    
+                        </tr>  
                         </tbody>
                     </table>
                     </div>
@@ -334,8 +334,9 @@ export default {
                 tipoDocumento : '',
                 telefono : '',
                 direccion : '',
-                telefono : ''    
+                telefono : ''
             },
+            tipo : '',
             documentos : [],
             listaProducto :[]
         }
@@ -343,7 +344,7 @@ export default {
     mounted(){
         this.getTipoDocumentos();
         console.log(data.getSelectedNV());
-        let usuario = data.getSelectedNV();
+        let usuario = data.getSelectedNV().nota_venta;
         this.nota_venta.codigo = usuario.Codigo;
         this.nota_venta.fecha = usuario.FechaEmision;
         this.nota_venta.num_documento = usuario.N_Documento;
@@ -352,8 +353,8 @@ export default {
         this.nota_venta.direccion = usuario.Direccion;
         this.nota_venta.telefono  = usuario.Celular;
         this.nota_venta.nom_vendedor = usuario.Vendedor;
-
-        
+        this.listaProducto = JSON.parse(usuario.Productos);
+        this.tipo = data.getSelectedNV().tipo;
     }
 }
 </script>

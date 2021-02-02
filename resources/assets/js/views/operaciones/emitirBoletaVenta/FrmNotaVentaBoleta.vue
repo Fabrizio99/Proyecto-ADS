@@ -13,20 +13,25 @@
                     <div class="card col bg-light">
                         <div class="card-body">
                             <div class="form-row">
-                                <div class="form-group col-3">
+                                <div class="form-group col-9">
                                     <label for="exampleInputPassword1">Código</label>
                                     <input type="text" class="form-control" id="exampleInputPassword1" v-model="inputcodenventa">
                                 </div>
-                                <div class="form-group col-3">
+                                <!--<div class="form-group col-3">
                                     <label for="exampleInputPassword1">Fecha Inicio</label>
                                     <input type="date" class="form-control" id="exampleInputPassword1" v-model="inputfinicio">
                                 </div>
                                 <div class="form-group col-3">
                                     <label for="exampleInputPassword1">Fecha Final</label>
                                     <input type="date" class="form-control" id="exampleInputPassword1" v-model="inputffin">
-                                </div>
-                                <div class="form-group col-3 mt-2">
-                                    <input type="button" class="btn btn-primary btn-block mt-4 btnbuscar" value="BUSCAR" @click="buscarNotaVenta"/>
+                                </div>-->
+                                <div class="form-group col-3 mt-2 row">
+                                  <div class="col-10">
+                                      <input type="button" class="btn btn-primary btn-block mt-4 btnbuscar" value="BUSCAR" @click="buscarNotaVenta"/>
+                                    </div>
+                                    <div class="col-2">
+                                      <input type="button" class="btn btn-danger btn-block mt-4 btnbuscar" value="X" @click="getNotasVenta"/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -45,7 +50,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr v-for="(notaventa,index) in listanotaventas" :key="notaventa.codigo">
+                        <tr v-for="(notaventa,index) in listanotaventas" :key="notaventa.Codigo">
                           <td scope="row">{{index+1}}</td>
                           <td>{{notaventa.Codigo}}</td>
                           <td>{{notaventa.Cliente}}</td>
@@ -57,8 +62,10 @@
                                 <i class="fas fa-ellipsis-v" ></i>
                               </div>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" @click="detallenVenta(notaventa)">"Ver detalles</a>
-                                <a class="dropdown-item" @click="anularNV">Anular Nota de Venta</a>
+                                <a class="dropdown-item" @click="detallenVenta(notaventa,'ver')" v-if="notaventa.estado == 'ATENDIDO' || notaventa.estado == 'ELIMINADO'">"Ver detalles</a>
+                                <a class="dropdown-item" v-if="notaventa.estado == 'POR ATENDER'" @click="detallenVenta(notaventa,'editar')">Editar</a>
+                                <a class="dropdown-item" v-if="notaventa.estado == 'POR ATENDER'" @click="anularNV">Anular</a>
+                                <a class="dropdown-item" v-if="notaventa.estado == 'POR ATENDER'" @click="anularNV">Registrar Pago</a>
                               </div>
                           </div>
                           </td>
@@ -74,10 +81,8 @@
 
 <script>
 import Appbar from '../../../components/AppBar'
-import AppBar from '../../../components/AppBar.vue';
 import Navigation from '../../../components/NavigationComponent';
 import data from '../../../data';
-//import Notaventa from '../../../notaventa';
 import usuario from '../../../user';
 export default {
     components : {
@@ -88,21 +93,15 @@ export default {
       return{
         listanotaventas : [],
         inputcodenventa : '',
-        inputfinicio : '',
-        inputffin : ''
       }
     },
     methods:{
 
        async buscarNotaVenta(){
-        if(this.inputcodenventa.trim() != '' && this.inputfinicio != '' && this.inputffin != ''){
-          let response = await axios.get('api/buscaNotaVByFechas?notaVid='+this.inputcodenventa.trim()+'&fechaInicio='+this.inputfinicio+'&fechaFin='+this.inputffin+'&token='+usuario.getData().token);
-          console.log(this.inputcodenventa);
-          console.log(this.inputfinicio);
-          console.log(this.inputffin);
-          console.log(response);
+        if(this.inputcodenventa.trim() != ''){
+          let response = await axios.get('api/buscaNotaVByFechas?notaVid='+this.inputcodenventa.trim()+'&token='+usuario.getData().token);
+          console.log('respuesta nota de ventas ',response);
           this.inputcodenventa = '';
-          
           if(response.data.status == "0"){
             this.listanotaventas = Array.isArray(response.data.data)?response.data.data:[response.data.data];
             if(this.listanotaventas.length == 0){
@@ -115,8 +114,8 @@ export default {
         }
       },
 
-      detallenVenta(nota_venta){
-        data.setSelectedNV(nota_venta);
+      detallenVenta(nota_venta,tipo){
+        data.setSelectedNV({tipo,nota_venta});
         this.$router.push({path:'/formulario-detalle-notaVenta'});
       },
 

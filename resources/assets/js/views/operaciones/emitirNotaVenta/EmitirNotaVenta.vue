@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="form-group col-4">
                                     <label for="exampleInputPassword1">N°Documento</label>
-                                    <input type="number" class="form-control" v-model="usuario.documento" maxlength="8">
+                                    <input type="number" class="form-control" v-model="cliente.documento" maxlength="8">
                                 </div>
                             </div>
                             <div class="form-row">
@@ -115,7 +115,7 @@
                                 <i class="fas fa-ellipsis-v"></i>
                               </div>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" @click="deleteProduct">Eliminar</a>
+                                <a class="dropdown-item" @click="deleteProduct(producto.id_producto)">Eliminar</a>
                               </div>
                             </div>
                           </td>
@@ -128,8 +128,8 @@
                       </tbody>
                     </table>
                 </div>
-                <div class="mx-4 mt-4">
-                  
+                <div class="m-4 mt-4 row justify-content-end">
+                  <button class="btn btn-info" @click="saveNotaVenta">Guardar Nota de Venta Final</button>
                 </div>
             </div>
          </div>
@@ -142,20 +142,35 @@
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body container mx-0">
+              <div class="modal-body container">
                 <div class="row justify-content-start" v-if="busquedaProductos.length>0">
-                  <div class="col-3" v-for="(producto,index) in busquedaProductos" :key="index">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Opción</th>
+                      </tr>
+                    </thead>
+                    <tbody  v-if="busquedaProductos.length>0">
+                        <tr v-for="(producto,index) in busquedaProductos" :key="index">
+                          <td>{{producto.nombre}} {{producto.marca}}</td>
+                          <td>S/.{{producto.precio}}</td>
+                          <td><button class="btn btn-danger" type="button" :disabled="Number(producto.stock)==0" @click="openDetailsModal(producto)">Detalles</button></td>
+                        </tr>
+                    </tbody>
+                  </table>
+                  <!--<div class="col-3" v-for="(producto,index) in busquedaProductos" :key="index">
                     <div class="card">
                       <img src="https://wongfood.vteximg.com.br/arquivos/ids/290634-1000-1000/3269-1.jpg?v=636921693341270000" class="card-img-top" alt="...">
                     <div class="card-body">
                       <h5 class="card-title">{{producto.nombre+' '+producto.marca+' - S/.'+producto.precio}}</h5>
                       <div class="row mx-1">
-                        <!--<button class="btn btn-primary col btnexaminar"  data-toggle="modal" data-target="#detallesModal" :disabled="Number(producto.stock)==0">Detalles</button>-->
                         <button class="btn btn-primary col btnexaminar" :disabled="Number(producto.stock)==0" @click="openDetailsModal(producto)">Detalles</button>
                       </div>
                     </div>
                     </div>
-                  </div>
+                  </div>-->
                 </div>
               </div>
             </div>
@@ -239,7 +254,7 @@
                 ¿Desea eliminar el producto?
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" @click="saveProduct">Aceptar</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" @click="confirmDelete">Aceptar</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
               </div>
             </div>
@@ -252,6 +267,7 @@
 import Appbar from '../../../components/AppBar'
 import Navigation from '../../../components/NavigationComponent';
 import usuario from '../../../user';
+import fechaActual from '../../../fecha';
 
 export default {
     components : {
@@ -277,10 +293,56 @@ export default {
         usuario    : {
           nombre : '',
           codigo : ''
-        }
+        },
+        productoEliminar : undefined
       }
     },
     methods : {
+      confirmDelete(){
+        this.listaProductos = this.listaProductos.filter(p=>p.id_producto!=this.productoEliminar);
+        this.productoEliminar = undefined;
+      },
+      isUncomplete(){
+        let campos = Object.keys(this.cliente);
+        return campos.some(input=>!this.cliente[input]) || this.listaProductos.length == 0;
+      },
+      cleanInputs(){
+        let campos = Object.keys(this.cliente);
+        campos.forEach(p=>this.cliente[p]='');
+        this.listaProductos = [];
+      },
+      async saveNotaVenta(){
+        if(!this.isUncomplete()){
+          const body = {
+            nombre : this.cliente.nombre,
+            tipoDoc : this.cliente.tipoDocumento,
+            numDoc : this.cliente.documento,
+            direccion : this.cliente.direccion,
+            celular : this.cliente.celular,
+            idU     : usuario.getData().id_usuario,
+            fecha   : fechaActual,
+            listProduct : JSON.stringify(this.listaProductos.map(function(producto) {
+              return {id_producto : producto.id_producto,cantidad : producto.cantidad}
+            })),
+            monto   : this.listaProductos.length == 1?(this.listaProductos[0].cantidad * this.listaProductos[0].precio):(this.listaProductos.reduce(function(p1=0, p2){
+              return (p1.cantidad * p1.precio) + (p2.cantidad * p2.precio);
+            })),
+            token : usuario.getData().token
+          }
+          let response = await axios.post('api/guardarNV',body);
+          if(typeof response.data == 'string'){
+            alert('Mensaje: '+response.data);
+          }else if(response.data.status == "0"){
+            alert('Mensaje: '+response.data.msj);
+            this.$router.push({name : 'notaVenta'});
+            this.cleanInputs();
+          }else{
+              alert('Error: '+response.data.msj);
+          }
+        }else{
+          alert('Error: Datos incompletos para Emitir Nota de Venta Final');
+        }
+      },
       saveProduct(){
         if(this.cantidadProductoSeleccionado<=0 || this.cantidadProductoSeleccionado>this.productoSeleccionado.stock){
           alert('Error: Seleccione una cantidad válida');
@@ -297,18 +359,19 @@ export default {
       },
       async buscarProductos(){
         let response = await axios.get('api/ProductosL?nombreP='+this.productoInput+'&token='+usuario.getData().token);
-        console.log('respuesta productos ',response)
+        this.productoInput = '';
         if(typeof response.data == 'string'){
           alert('Mensaje: '+response.data)
         }else if(response.data.status != "0"){
           alert('Error: '+response.data.msj)
         }else{
-          this.busquedaProductos = response.data.data;
+          this.busquedaProductos = Array.isArray(response.data.data)?response.data.data:[response.data.data];
           $('#productosModal').modal('show');
         }
       },
-      async deleteProduct(){
+      async deleteProduct(index){
         $('#eliminarModal').modal('show');
+        this.productoEliminar = index;
       },
       async modalAddProduct(){
         $('#confirmModal').modal('show');
@@ -328,6 +391,11 @@ export default {
       this.getTipoDocumentos();
       this.usuario.nombre = usuario.getData().nombres+' '+usuario.getData().apellidos;
       this.usuario.codigo = usuario.getData().num_documento;
+
+      const _this = this;
+      $('#detallesModal').on('hidden.bs.modal', function () {
+          _this.cantidadProductoSeleccionado = 1;
+      });
     }
 }
 </script>

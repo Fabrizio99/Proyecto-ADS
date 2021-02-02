@@ -15,7 +15,7 @@ class ValidateAuth
         $time = time();
 
         $token = array(
-            'exp' => $time + (60*60),
+            'exp' => $time + (600*600),
             'aud' => self::Aud(),
             'data' => $data
         );
