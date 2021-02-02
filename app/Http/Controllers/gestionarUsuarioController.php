@@ -87,14 +87,14 @@ class gestionarUsuarioController extends Controller
         $TIPO_DNI = 1;
         $TIPO_PASAPORTE = 2;
         
-        $ValidacionCampos = isNullEmpty($req->nombres    ,'nombres'    ,'El campo nombres no puede estar vacio',) ?:
-                            isNullEmpty($req->apellidos  ,'apellidos'  ,'El campo apellidos no puede estar vacio',) ?: 
-                            isNullEmpty($req->direccion  ,'direccion'  ,'El campo dirección no puede estar vacio',) ?:  
+        $ValidacionCampos = isNullEmpty($req->nombres    ,'nombres'    ,'El campo nombres no puede estar vacio') ?:
+                            isNullEmpty($req->apellidos  ,'apellidos'  ,'El campo apellidos no puede estar vacio') ?: 
+                            isNullEmpty($req->direccion  ,'direccion'  ,'El campo dirección no puede estar vacio') ?:  
                             isNullEmpty($req->telefono   ,'telefono'   ,'El campo telefono no puede estar vacio') ?:
-                            isNullEmpty($req->rol        ,'rol'        ,'El campo cargo no puede estar vacio',) ?:
-                            isNullEmpty($req->tipoDoc    ,'tipoDoc'    ,'El campo tipoDocumento no puede estar vacio',) ?:
-                            isNullEmpty($req->numDoc     ,'numDoc'     ,'El campo numero DNI no puede estar vacio',) ?: 
-                            isNullEmpty($req->contrasenia,'contrasenia','El campo contrasenia no puede estar vacio',);
+                            isNullEmpty($req->rol        ,'rol'        ,'El campo cargo no puede estar vacio') ?:
+                            isNullEmpty($req->tipoDoc    ,'tipoDoc'    ,'El campo tipoDocumento no puede estar vacio') ?:
+                            isNullEmpty($req->numDoc     ,'numDoc'     ,'El campo numero DNI no puede estar vacio') ?: 
+                            isNullEmpty($req->contrasenia,'contrasenia','El campo contrasenia no puede estar vacio');
 
         if($ValidacionCampos){
             return $ValidacionCampos;
