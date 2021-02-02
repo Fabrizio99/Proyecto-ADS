@@ -27,8 +27,8 @@ class emitirBvController extends Controller
                                     'producto', p.nombre,
                                     'precio'  , p.precio,
                                     'cantidad', nhp.cantidad, 
-                                    'PrecioTotal'  , (p.precio * nhp.cantidad)
-                                    
+                                    'PrecioTotal'  , (p.precio * nhp.cantidad),
+                                    'strock' ,  p.stock
                                 )
                             ),
                         ']'
@@ -82,8 +82,8 @@ class emitirBvController extends Controller
                                             'producto', p.nombre,
                                             'precio'  , p.precio,
                                             'cantidad', nhp.cantidad, 
-                                            'PrecioTotal'  , (p.precio * nhp.cantidad)
-                                            
+                                            'PrecioTotal'  , (p.precio * nhp.cantidad),
+                                            'strock' ,  p.stock
                                         )
                                     ),
                                 ']'
