@@ -6,6 +6,14 @@ use Illuminate\Http\Request;
 include '../app/helper/untils.php';
 class gProductosController extends Controller
 {
+    
+    function cmbCategoria (Request $req){
+        return mySQLConsulta(
+            "SELECT *
+               FROM categoria"
+        );
+    }
+
     function listProduct (Request $req){
 
         return mySQLConsulta("SELECT p.id_producto,
@@ -42,10 +50,6 @@ class gProductosController extends Controller
              AND p.fk_producto_categoria = c.id_categoria
              AND estado =1" );
         }
-
-
-
-    
 
     function deleteP (Request $req){
         $isValidate = isNullEmpty($req->idP);

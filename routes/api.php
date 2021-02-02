@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 //initialController
 Route::get('getLogin'         , 'initialController@getLogin');
+Route::get('cmbRol'         , 'initialController@cmbRol')->middleware('validateAuth');
 Route::post('registrarUsuario', 'initialController@registrarUsuario')->middleware('validateAuth');
 
 //reclamosController
@@ -32,6 +33,7 @@ Route::get('buscarProduct', 'gProductosController@buscarProduct')->middleware('v
 Route::post('deleteP'   , 'gProductosController@deleteP'    )->middleware('validateAuth');
 Route::post('updateP'   , 'gProductosController@updateP'    )->middleware('validateAuth');
 Route::post('registrarP', 'gProductosController@registrarP' )->middleware('validateAuth');
+Route::post('cmbCategoria', 'gProductosController@cmbCategoria' )->middleware('validateAuth');
 
 //emitirNotaVController
 Route::get('usuarioNV' ,'emitirNotaVController@usuarioNV')->middleware('validateAuth');
