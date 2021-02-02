@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 //initialController
 Route::get('getLogin'         , 'initialController@getLogin');
+Route::get('cmbRol'         , 'initialController@cmbRol')->middleware('validateAuth');
 Route::post('registrarUsuario', 'initialController@registrarUsuario')->middleware('validateAuth');
 
 //reclamosController
