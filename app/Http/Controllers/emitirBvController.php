@@ -24,6 +24,7 @@ class emitirBvController extends Controller
                         '[', 
                             GROUP_CONCAT(
                                 JSON_OBJECT(
+                                    'id_producto', id_producto,
                                     'producto', p.nombre,
                                     'precio'  , p.precio,
                                     'cantidad', nhp.cantidad, 
@@ -79,6 +80,7 @@ class emitirBvController extends Controller
                                 '[', 
                                     GROUP_CONCAT(
                                         JSON_OBJECT(
+                                            'id_producto', id_producto,
                                             'producto', p.nombre,
                                             'precio'  , p.precio,
                                             'cantidad', nhp.cantidad, 
