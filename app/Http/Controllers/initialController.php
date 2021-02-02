@@ -9,7 +9,13 @@ include '../app/helper/untils.php';
 
 class initialController extends Controller
 {
-     
+    function cmbRol (Request $req){
+        return mySQLConsulta(
+            "SELECT *
+               FROM rol"
+        );
+    } 
+
     function getLogin(Request $req){
         try {
             $isValidate = isNullEmpty($req->user, 'user') ?: isNullEmpty($req->password, 'password');

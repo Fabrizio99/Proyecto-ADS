@@ -54,17 +54,6 @@ class ValidateAuth
 
             throw new Exception($error);
         }
-
-        /*if ($time >= $decode->exp) {
-            $object = (object) [
-                'status' => $_SESSION["STATUS_CONTROL"],
-                'msj'    => "El tiempo de la sesion ha expirado, intentelo nuevamente."
-            ];   
-            $error = json_encode($object);   
-
-            throw new Exception($error);
-        }*/   
-
     }
 
     public static function GetData($token)
