@@ -140,8 +140,8 @@ class emitirNotaVController extends Controller
                       isNullEmpty($req->celular   , 'celular'  , 'El campo celulaar no puede ser vacio.')?: 
                       isNullEmpty($req->fecha     , 'fecha'    , 'El campo celulaar no puede ser vacio.');
 
-        if($isValidate){
-            return $isValidate;
+        if($validacion){
+            return $validacion;
         }
         
         //validación del dni caracteres
