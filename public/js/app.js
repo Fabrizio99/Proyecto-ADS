@@ -69145,7 +69145,7 @@ exports = module.exports = __webpack_require__(8)(false);
 
 
 // module
-exports.push([module.i, "\n.user-form-container[data-v-09de486c]{\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -webkit-box-pack: justify;\r\n        -ms-flex-pack: justify;\r\n            justify-content: space-between;\n}\n.user-form-container .card[data-v-09de486c]:first-child{\r\n    width: 65vw;\n}\n.user-form-container .card[data-v-09de486c]:last-child{\r\n    width: 30vw;\n}\n.image-profile[data-v-09de486c]{\r\n    max-width: 83%;\r\n    margin: 10px auto 0;\n}\n.profile-button[data-v-09de486c]{\r\n    height: -webkit-min-content;\r\n    height: -moz-min-content;\r\n    height: min-content;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n.user-form-container[data-v-09de486c] {\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: justify;\r\n      -ms-flex-pack: justify;\r\n          justify-content: space-between;\n}\n.user-form-container .card[data-v-09de486c]:first-child {\r\n  width: 65vw;\n}\n.user-form-container .card[data-v-09de486c]:last-child {\r\n  width: 30vw;\n}\n.image-profile[data-v-09de486c] {\r\n  max-width: 83%;\r\n  margin: 10px auto 0;\n}\n.profile-button[data-v-09de486c] {\r\n  height: -webkit-min-content;\r\n  height: -moz-min-content;\r\n  height: min-content;\n}\r\n", ""]);
 
 // exports
 
@@ -69447,6 +69447,225 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -69456,141 +69675,227 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    components: {
-        'app-bar': __WEBPACK_IMPORTED_MODULE_1__components_AppBar___default.a,
-        'navigation': __WEBPACK_IMPORTED_MODULE_3__components_NavigationComponent___default.a
-        //'multiselect' : Multiselect
+  components: {
+    "app-bar": __WEBPACK_IMPORTED_MODULE_1__components_AppBar___default.a,
+    navigation: __WEBPACK_IMPORTED_MODULE_3__components_NavigationComponent___default.a
+    //'multiselect' : Multiselect
+  },
+  methods: {
+    confirmDelete: function confirmDelete() {
+      var _this = this;
+
+      console.log(this.productoEliminar);
+      this.listaProducto = this.listaProducto.filter(function (p) {
+        return p.id_producto != _this.productoEliminar;
+      });
+      this.productoEliminar = undefined;
     },
-    methods: {
-        confirmDelete: function confirmDelete() {
-            var _this = this;
+    deleteProduct: function deleteProduct(index) {
+      console.log({ index: index });
+      $("#eliminarModal").modal("show");
+      this.productoEliminar = index;
+    },
+    Buscar: function Buscar() {
+      this.$swal({
+        icon: "error",
+        title: "Error",
+        text: "No hay resultados"
+      });
+    },
+    anularNV: function anularNV() {
+      this.$swal({
+        title: "Estás seguro?",
+        text: "No serás capaz de revertirlo!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Si, Anular!",
+        cancelButtonText: "No, Cancelar!",
+        reverseButtons: true
+      }).then(function (result) {
+        if (result.isConfirmed) {
+          swalWithBootstrapButtons.fire("Deleted!", "Your file has been deleted.", "success");
+        } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel) {
+          swalWithBootstrapButtons.fire("Cancelled", "Your imaginary file is safe :)", "error");
+        }
+      });
+    },
+    RegistrarEfectivo: function RegistrarEfectivo() {
+      this.$swal({
+        icon: "error",
+        title: "Error",
+        text: "Ingrese el monto recibido"
+      });
+    },
+    RegistrarYape: function RegistrarYape() {
+      this.$swal({
+        icon: "error",
+        title: "Error",
+        text: "Complete todos los datos"
+      });
+    },
+    VerDetalle: function VerDetalle() {
+      this.$router.push({ name: "formDetalleNV" });
+    },
+    getTipoDocumentos: function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+        var response;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios.get("api/cmbTipoDoc?token=" + __WEBPACK_IMPORTED_MODULE_5__user__["a" /* default */].getData().token);
 
-            console.log(this.productoEliminar);
-            this.listaProducto = this.listaProducto.filter(function (p) {
-                return p.id_producto != _this.productoEliminar;
-            });
-            this.productoEliminar = undefined;
-        },
-        deleteProduct: function deleteProduct(index) {
-            console.log({ index: index });
-            $('#eliminarModal').modal('show');
-            this.productoEliminar = index;
-        },
-        Buscar: function Buscar() {
-            this.$swal({
-                icon: 'error',
-                title: 'Error',
-                text: 'No hay resultados'
-            });
-        },
-        anularNV: function anularNV() {
-            this.$swal({
+              case 2:
+                response = _context.sent;
 
-                title: 'Estás seguro?',
-                text: "No serás capaz de revertirlo!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Si, Anular!',
-                cancelButtonText: 'No, Cancelar!',
-                reverseButtons: true
-            }).then(function (result) {
-                if (result.isConfirmed) {
-                    swalWithBootstrapButtons.fire('Deleted!', 'Your file has been deleted.', 'success');
-                } else if (
-                /* Read more about handling dismissals below */
-                result.dismiss === Swal.DismissReason.cancel) {
-                    swalWithBootstrapButtons.fire('Cancelled', 'Your imaginary file is safe :)', 'error');
+                console.log("documentos", response);
+                if (response.data.status == "0") {
+                  this.documentos = response.data.data;
+                } else {
+                  alert("Error: ", response.data.msj);
                 }
-            });
-        },
-        RegistrarEfectivo: function RegistrarEfectivo() {
-            this.$swal({
-                icon: 'error',
-                title: 'Error',
-                text: 'Ingrese el monto recibido'
-            });
-        },
-        RegistrarYape: function RegistrarYape() {
-            this.$swal({
-                icon: 'error',
-                title: 'Error',
-                text: 'Complete todos los datos'
-            });
-        },
-        VerDetalle: function VerDetalle() {
-            this.$router.push({ name: "formDetalleNV" });
-        },
-        getTipoDocumentos: function () {
-            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
-                var response;
-                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
-                    while (1) {
-                        switch (_context.prev = _context.next) {
-                            case 0:
-                                _context.next = 2;
-                                return axios.get('api/cmbTipoDoc?token=' + __WEBPACK_IMPORTED_MODULE_5__user__["a" /* default */].getData().token);
 
-                            case 2:
-                                response = _context.sent;
-
-                                console.log('documentos', response);
-                                if (response.data.status == "0") {
-                                    this.documentos = response.data.data;
-                                } else {
-                                    alert('Error: ', response.data.msj);
-                                }
-
-                            case 5:
-                            case 'end':
-                                return _context.stop();
-                        }
-                    }
-                }, _callee, this);
-            }));
-
-            function getTipoDocumentos() {
-                return _ref.apply(this, arguments);
+              case 5:
+              case "end":
+                return _context.stop();
             }
+          }
+        }, _callee, this);
+      }));
 
-            return getTipoDocumentos;
-        }()
+      function getTipoDocumentos() {
+        return _ref.apply(this, arguments);
+      }
+
+      return getTipoDocumentos;
+    }(),
+    isUncomplete: function isUncomplete() {
+      var _this2 = this;
+
+      var campos = Object.keys(this.nota_venta);
+      return campos.some(function (input) {
+        return !_this2.nota_venta[input];
+      }) || this.listaProducto.length == 0;
     },
+    saveEditNota: function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
+        var body, response;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                if (this.isUncomplete()) {
+                  _context2.next = 10;
+                  break;
+                }
 
-    data: function data() {
-        var _nota_venta;
+                body = {
+                  nombre: this.nota_venta.nombre_cliente,
+                  tipoDoc: this.nota_venta.tipoDocumento,
+                  numDoc: this.nota_venta.num_documento,
+                  direccion: this.nota_venta.direccion,
+                  celular: this.nota_venta.telefono,
+                  notaIdBv: this.nota_venta.codigo,
+                  listProduct: JSON.stringify(this.listaProducto.map(function (producto) {
+                    return {
+                      id_producto: producto.id_producto,
+                      cantidad: producto.cantidad
+                    };
+                  })),
+                  monto: this.totalNota,
+                  token: __WEBPACK_IMPORTED_MODULE_5__user__["a" /* default */].getData().token
+                };
 
-        return {
-            nota_venta: (_nota_venta = {
-                nom_vendedor: '',
-                fecha: '',
-                nombre_cliente: '',
-                num_documento: '',
-                tipoDocumento: '',
-                telefono: '',
-                direccion: ''
-            }, _defineProperty(_nota_venta, 'telefono', ''), _defineProperty(_nota_venta, 'monto_total', 0), _nota_venta),
-            tipo: '',
-            documentos: [],
-            listaProducto: [],
-            productoEliminar: undefined
-        };
-    },
-    mounted: function mounted() {
-        this.getTipoDocumentos();
-        console.log(__WEBPACK_IMPORTED_MODULE_4__data__["a" /* default */].getSelectedNV());
-        var usuario = __WEBPACK_IMPORTED_MODULE_4__data__["a" /* default */].getSelectedNV().nota_venta;
-        this.nota_venta.codigo = usuario.Codigo;
-        this.nota_venta.fecha = usuario.FechaEmision;
-        this.nota_venta.num_documento = usuario.N_Documento;
-        this.nota_venta.nombre_cliente = usuario.Cliente;
-        this.nota_venta.tipoDocumento = usuario.tipoDocumento;
-        this.nota_venta.direccion = usuario.Direccion;
-        this.nota_venta.telefono = usuario.Celular;
-        this.nota_venta.nom_vendedor = usuario.Vendedor;
-        this.nota_venta.monto_total = Number(usuario.MontoTotal);
-        this.listaProducto = JSON.parse(usuario.Productos);
-        this.tipo = __WEBPACK_IMPORTED_MODULE_4__data__["a" /* default */].getSelectedNV().tipo;
+
+                console.log({ body: body });
+
+                _context2.next = 5;
+                return axios.post("api/updateNV", body);
+
+              case 5:
+                response = _context2.sent;
+
+                console.log('responseeeeeeeeeeee ', response);
+                if (typeof response.data == "string") {
+                  alert("Mensaje: " + response.data);
+                } else if (response.data.status == "0") {
+                  alert("Mensaje: " + response.data.msj);
+                  this.$router.push({ name: "formNVB" });
+                } else {
+                  alert("Error: " + response.data.msj);
+                }
+                _context2.next = 11;
+                break;
+
+              case 10:
+                alert("Mensaje: Complete todos los campos");
+
+              case 11:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function saveEditNota() {
+        return _ref2.apply(this, arguments);
+      }
+
+      return saveEditNota;
+    }()
+  },
+  computed: {
+    totalNota: function totalNota() {
+      var total = 0;
+      if (this.listaProducto.length == 0) {
+        return 0;
+      } else {
+        for (var index = 0; index < this.listaProducto.length; index++) {
+          total += this.listaProducto[index].cantidad * this.listaProducto[index].precio;
+        }
+      }
+      return total;
     }
+  },
+  data: function data() {
+    var _nota_venta;
+
+    return {
+      nota_venta: (_nota_venta = {
+        nom_vendedor: "",
+        fecha: "",
+        nombre_cliente: "",
+        num_documento: "",
+        tipoDocumento: "",
+        telefono: "",
+        direccion: ""
+      }, _defineProperty(_nota_venta, "telefono", ""), _defineProperty(_nota_venta, "monto_total", 0), _nota_venta),
+      tipo: "",
+      documentos: [],
+      listaProducto: [],
+      productoEliminar: undefined
+    };
+  },
+  mounted: function mounted() {
+    this.getTipoDocumentos();
+    console.log(__WEBPACK_IMPORTED_MODULE_4__data__["a" /* default */].getSelectedNV());
+    var usuario = __WEBPACK_IMPORTED_MODULE_4__data__["a" /* default */].getSelectedNV().nota_venta;
+    this.nota_venta.codigo = usuario.Codigo;
+    this.nota_venta.fecha = usuario.FechaEmision;
+    this.nota_venta.num_documento = usuario.N_Documento;
+    this.nota_venta.nombre_cliente = usuario.Cliente;
+    this.nota_venta.tipoDocumento = usuario.tipoDocumento;
+    this.nota_venta.direccion = usuario.Direccion;
+    this.nota_venta.telefono = usuario.Celular;
+    this.nota_venta.nom_vendedor = usuario.Vendedor;
+    this.nota_venta.monto_total = Number(usuario.MontoTotal);
+    this.listaProducto = JSON.parse(usuario.Productos);
+    this.tipo = __WEBPACK_IMPORTED_MODULE_4__data__["a" /* default */].getSelectedNV().tipo;
+  }
 });
 
 /***/ }),
@@ -69786,7 +70091,13 @@ var render = function() {
                                 key: documento.id,
                                 domProps: { value: documento.id_documentos }
                               },
-                              [_vm._v(_vm._s(documento.nombre))]
+                              [
+                                _vm._v(
+                                  "\n                    " +
+                                    _vm._s(documento.nombre) +
+                                    "\n                  "
+                                )
+                              ]
                             )
                           }),
                           0
@@ -69931,11 +70242,61 @@ var render = function() {
                         _vm._v(" "),
                         _vm.tipo == "ver"
                           ? _c("td", [_vm._v(_vm._s(usuario.cantidad))])
-                          : _c("td", [_vm._v("sandfjdsbfksds")]),
+                          : _c("td", [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: usuario.cantidad,
+                                    expression: "usuario.cantidad"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "number",
+                                  name: "",
+                                  id: "",
+                                  min: "1",
+                                  max: usuario.stock
+                                },
+                                domProps: { value: usuario.cantidad },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      usuario,
+                                      "cantidad",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]),
                         _vm._v(" "),
-                        _c("td", [
-                          _vm._v("S/." + _vm._s(usuario.PrecioTotal.toFixed(2)))
-                        ]),
+                        _vm.tipo == "ver"
+                          ? _c("td", [
+                              _vm._v(
+                                "\n                S/." +
+                                  _vm._s(usuario.PrecioTotal.toFixed(2)) +
+                                  "\n              "
+                              )
+                            ])
+                          : _c("td", [
+                              _vm._v(
+                                "\n                S/." +
+                                  _vm._s(
+                                    Number(
+                                      usuario.precio * usuario.cantidad
+                                    ).toFixed(2)
+                                  ) +
+                                  "\n              "
+                              )
+                            ]),
+                        _vm._v(" "),
+                        _c("td"),
                         _vm._v(" "),
                         _vm.tipo != "ver"
                           ? _c("td", { attrs: { scope: "col" } }, [
@@ -69990,10 +70351,7 @@ var render = function() {
                                 id: "exampleInputPassword1",
                                 disabled: ""
                               },
-                              domProps: {
-                                value:
-                                  "S/." + _vm.nota_venta.monto_total.toFixed(2)
-                              }
+                              domProps: { value: "S/." + _vm.totalNota }
                             })
                           ])
                         ]
@@ -70010,10 +70368,9 @@ var render = function() {
                                     "btn btn-info btn-block mt-4 my-1 form-group col-12 btnguarda-registro",
                                   attrs: {
                                     type: "button",
-                                    value: "Guardar cambios",
-                                    "data-toggle": "modal",
-                                    "data-target": "#Modal"
-                                  }
+                                    value: "Guardar cambios"
+                                  },
+                                  on: { click: _vm.saveEditNota }
                                 })
                               : _vm._e()
                           ])
@@ -70053,7 +70410,11 @@ var render = function() {
                                   staticClass: "modal-title",
                                   attrs: { id: "exampleModalLabel" }
                                 },
-                                [_vm._v("Realizar pago")]
+                                [
+                                  _vm._v(
+                                    "\n                Realizar pago\n              "
+                                  )
+                                ]
                               )
                             : _vm._e(),
                           _vm._v(" "),
@@ -70113,10 +70474,18 @@ var render = function() {
                                           value: documento.id_documentos
                                         }
                                       },
-                                      [_vm._v(_vm._s(documento.nombre))]
+                                      [
+                                        _vm._v(
+                                          "\n                      " +
+                                            _vm._s(documento.nombre) +
+                                            "\n                    "
+                                        )
+                                      ]
                                     )
                                   }),
-                                  _vm._v("-->\n                               ")
+                                  _vm._v(
+                                    "\n                    -->\n                  "
+                                  )
                                 ],
                                 2
                               )
@@ -70166,7 +70535,11 @@ var render = function() {
                               attrs: { type: "button" },
                               on: { click: _vm.RegistrarEfectivo }
                             },
-                            [_vm._v("Registrar")]
+                            [
+                              _vm._v(
+                                "\n                Registrar\n              "
+                              )
+                            ]
                           )
                         ])
                       ])
@@ -70210,7 +70583,11 @@ var render = function() {
                               attrs: { type: "button" },
                               on: { click: _vm.RegistrarYape }
                             },
-                            [_vm._v("Registrar")]
+                            [
+                              _vm._v(
+                                "\n                Registrar\n              "
+                              )
+                            ]
                           )
                         ])
                       ])
@@ -70241,7 +70618,7 @@ var render = function() {
               _vm._m(10),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
-                _vm._v("\n           ¿Desea eliminar el producto?\n         ")
+                _vm._v("¿Desea eliminar el producto?")
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-footer" }, [
@@ -70252,7 +70629,7 @@ var render = function() {
                     attrs: { type: "button", "data-dismiss": "modal" },
                     on: { click: _vm.confirmDelete }
                   },
-                  [_vm._v("Aceptar")]
+                  [_vm._v("\n            Aceptar\n          ")]
                 ),
                 _vm._v(" "),
                 _c(
@@ -70261,7 +70638,7 @@ var render = function() {
                     staticClass: "btn btn-secondary",
                     attrs: { type: "button", "data-dismiss": "modal" }
                   },
-                  [_vm._v("Cancelar")]
+                  [_vm._v("\n            Cancelar\n          ")]
                 )
               ])
             ])
@@ -70278,9 +70655,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row mx-4" }, [
-      _c("h3", { staticClass: "col" }, [
-        _vm._v("\n                   Detalle de Nota de Venta\n               ")
-      ])
+      _c("h3", { staticClass: "col" }, [_vm._v("Detalle de Nota de Venta")])
     ])
   },
   function() {
@@ -70289,9 +70664,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row mx-4 mt-4" }, [
       _c("h5", { staticClass: "col" }, [
-        _vm._v(
-          "\n                   Información Personal del Cliente\n               "
-        )
+        _vm._v("Información Personal del Cliente")
       ])
     ])
   },
@@ -70300,9 +70673,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row mx-4 mt-4" }, [
-      _c("h5", { staticClass: "col" }, [
-        _vm._v("\n                   Información de Productos\n               ")
-      ])
+      _c("h5", { staticClass: "col" }, [_vm._v("Información de Productos")])
     ])
   },
   function() {
@@ -70326,7 +70697,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group " }, [
+    return _c("div", { staticClass: "form-group" }, [
       _c("label", { attrs: { for: "exampleInputPassword1" } }, [
         _vm._v("Esto es combobox(Efectivo / Yape)..NO OLVIDAR XD")
       ]),
@@ -70352,7 +70723,7 @@ var staticRenderFns = [
             "data-target": "#ModalEfectivo"
           }
         },
-        [_vm._v("Efectivo")]
+        [_vm._v("\n                Efectivo\n              ")]
       ),
       _vm._v(" "),
       _c(
@@ -70365,7 +70736,7 @@ var staticRenderFns = [
             "data-target": "#ModalYape"
           }
         },
-        [_vm._v("Yape")]
+        [_vm._v("\n                Yape\n              ")]
       )
     ])
   },
@@ -70377,7 +70748,7 @@ var staticRenderFns = [
       _c(
         "h5",
         { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
-        [_vm._v("Realizar pago EFECTIVO")]
+        [_vm._v("\n                Realizar pago EFECTIVO\n              ")]
       ),
       _vm._v(" "),
       _c(
@@ -70475,7 +70846,7 @@ var staticRenderFns = [
       _c(
         "h5",
         { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
-        [_vm._v("Realizar pago YAPE")]
+        [_vm._v("\n                Realizar pago YAPE\n              ")]
       ),
       _vm._v(" "),
       _c(
@@ -70566,7 +70937,7 @@ var staticRenderFns = [
             staticClass: "btn btn-primary btn-block",
             attrs: { type: "button" }
           },
-          [_vm._v("Adjuntar Imagen")]
+          [_vm._v("\n                  Adjuntar Imagen\n                ")]
         )
       ])
     ])
