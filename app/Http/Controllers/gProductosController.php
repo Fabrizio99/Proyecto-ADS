@@ -99,7 +99,7 @@ class gProductosController extends Controller
         $isValidate = isNullEmpty($req->nombre , 'nombreP', 'El campo nombre no puede ser vacio.') ?:
                       isNullEmpty($req->marka  , 'marca'  , 'El campo marca de la boleta no puede ser vacio.') ?: 
                       isNullEmpty($req->precio , 'precio' , 'El campo precio de la boleta no puede ser vacio.') ?: 
-                      isNullEmpty($req->categoria , 'categoria' , 'El campo categoria de la boleta no puede ser vacio.') ?: 
+                      isNullEmpty($req->id_categoria , 'id_categoria' , 'El campo categoria de la boleta no puede ser vacio.') ?: 
                       isNullEmpty($req->stock  , 'stock'  , 'El campo stock no puede ser vacio.');
                       
         
@@ -109,9 +109,7 @@ class gProductosController extends Controller
 
         return mySQLInsert(
         "INSERT INTO producto (nombre,marka,precio,stock,fk_producto_categoria) 
-            SELECT '{$req->nombre}','{$req->marka}','{$req->precio}','{$req->stock}',id_categoria
-            FROM categoria c
-            WHERE c.nombre like '{$req->categoria}'",
+            VALUES ('{$req->nombre}','{$req->marka}','{$req->precio}','{$req->stock}','{$req->id_categoria}')",
          "PRODUCTO REGISTRADO EXITOSAMENTE"
         );
     }    
