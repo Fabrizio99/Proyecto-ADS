@@ -158,8 +158,8 @@ const router = new VueRouter({
 })
   
 router.beforeEach((to, from, next) => {
-    next();
-    /*if(!usuario.getData()){
+    //next();
+    if(!usuario.getData()){
         if(to.name != 'login'){
             next({ name: 'login' });
         }else{
@@ -178,7 +178,7 @@ router.beforeEach((to, from, next) => {
                 next({ name: 'error' });
             }
         }
-    }*/
+    }
 })
 
 export default router

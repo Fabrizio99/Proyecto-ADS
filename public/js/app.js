@@ -37439,27 +37439,29 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
 });
 
 router.beforeEach(function (to, from, next) {
-    next();
-    /*if(!usuario.getData()){
-        if(to.name != 'login'){
+    //next();
+    if (!__WEBPACK_IMPORTED_MODULE_5__user__["a" /* default */].getData()) {
+        if (to.name != 'login') {
             next({ name: 'login' });
-        }else{
+        } else {
             next();
         }
-    }else{
-        if(to.name == 'login'){
+    } else {
+        if (to.name == 'login') {
             next(false);
-        }else if(to.name == 'main' || to.name == 'error' || to.name == 'inicio'){
+        } else if (to.name == 'main' || to.name == 'error' || to.name == 'inicio') {
             next();
-        }else{
-            let {permisos} = usuario.getData();
-            if(permisos && permisos.includes(to.meta.module)){
+        } else {
+            var _usuario$getData = __WEBPACK_IMPORTED_MODULE_5__user__["a" /* default */].getData(),
+                permisos = _usuario$getData.permisos;
+
+            if (permisos && permisos.includes(to.meta.module)) {
                 next();
-            }else{
+            } else {
                 next({ name: 'error' });
             }
         }
-    }*/
+    }
 });
 
 /* harmony default export */ __webpack_exports__["a"] = (router);
@@ -63002,177 +63004,205 @@ var render = function() {
         "div",
         { staticClass: "accordion", attrs: { id: "accordionExample" } },
         [
-          _c("div", { staticClass: "cardChange" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "collapse show",
-                attrs: {
-                  id: "collapse1",
-                  "aria-labelledby": "heading1",
-                  "data-parent": "#accordionExample"
-                }
-              },
-              [
-                _c(
-                  "div",
-                  {
-                    staticClass: "navigation-item",
-                    on: {
-                      click: function($event) {
-                        return _vm.changeRoutePath("user")
-                      }
-                    }
-                  },
-                  [_vm._v("Gestión de Usuarios")]
-                ),
+          _vm.hasModules("usuario", "producto")
+            ? _c("div", { staticClass: "cardChange" }, [
+                _vm._m(0),
                 _vm._v(" "),
                 _c(
                   "div",
                   {
-                    staticClass: "navigation-item",
-                    on: {
-                      click: function($event) {
-                        return _vm.changeRoutePath("gproductos")
-                      }
+                    staticClass: "collapse show",
+                    attrs: {
+                      id: "collapse1",
+                      "aria-labelledby": "heading1",
+                      "data-parent": "#accordionExample"
                     }
                   },
-                  [_vm._v("Gestión de Productos")]
+                  [
+                    _vm.permisos.includes("usuario")
+                      ? _c(
+                          "div",
+                          {
+                            staticClass: "navigation-item",
+                            on: {
+                              click: function($event) {
+                                return _vm.changeRoutePath("user")
+                              }
+                            }
+                          },
+                          [_vm._v("Gestión de Usuarios")]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.permisos.includes("producto")
+                      ? _c(
+                          "div",
+                          {
+                            staticClass: "navigation-item",
+                            on: {
+                              click: function($event) {
+                                return _vm.changeRoutePath("gproductos")
+                              }
+                            }
+                          },
+                          [_vm._v("Gestión de Productos")]
+                        )
+                      : _vm._e()
+                  ]
                 )
-              ]
-            )
-          ]),
+              ])
+            : _vm._e(),
           _vm._v(" "),
-          _c("div", { staticClass: "cardChange" }, [
-            _vm._m(1),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "collapse",
-                attrs: {
-                  id: "collapse2",
-                  "aria-labelledby": "heading2",
-                  "data-parent": "#accordionExample"
-                }
-              },
-              [
-                _c(
-                  "div",
-                  {
-                    staticClass: "navigation-item",
-                    on: {
-                      click: function($event) {
-                        return _vm.changeRoutePath("notaVenta")
-                      }
-                    }
-                  },
-                  [_vm._v("Emitir Nota de Venta")]
-                ),
+          _vm.hasModules(
+            "emitir nota de venta",
+            "emitir boleta de venta",
+            "entregar producto"
+          )
+            ? _c("div", { staticClass: "cardChange" }, [
+                _vm._m(1),
                 _vm._v(" "),
                 _c(
                   "div",
                   {
-                    staticClass: "navigation-item",
-                    on: {
-                      click: function($event) {
-                        return _vm.changeRoutePath("formNVB")
-                      }
+                    staticClass: "collapse",
+                    attrs: {
+                      id: "collapse2",
+                      "aria-labelledby": "heading2",
+                      "data-parent": "#accordionExample"
                     }
                   },
-                  [_vm._v("Emitir Boleta de Venta")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "navigation-item",
-                    on: {
-                      click: function($event) {
-                        return _vm.changeRoutePath("formBolProd")
-                      }
-                    }
-                  },
-                  [_vm._v("Entregar Productos")]
+                  [
+                    _vm.permisos.includes("emitir nota de venta")
+                      ? _c(
+                          "div",
+                          {
+                            staticClass: "navigation-item",
+                            on: {
+                              click: function($event) {
+                                return _vm.changeRoutePath("notaVenta")
+                              }
+                            }
+                          },
+                          [_vm._v("Emitir Nota de Venta")]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.permisos.includes("emitir boleta de venta")
+                      ? _c(
+                          "div",
+                          {
+                            staticClass: "navigation-item",
+                            on: {
+                              click: function($event) {
+                                return _vm.changeRoutePath("formNVB")
+                              }
+                            }
+                          },
+                          [_vm._v("Emitir Boleta de Venta")]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.permisos.includes("entregar producto")
+                      ? _c(
+                          "div",
+                          {
+                            staticClass: "navigation-item",
+                            on: {
+                              click: function($event) {
+                                return _vm.changeRoutePath("formBolProd")
+                              }
+                            }
+                          },
+                          [_vm._v("Entregar Productos")]
+                        )
+                      : _vm._e()
+                  ]
                 )
-              ]
-            )
-          ]),
+              ])
+            : _vm._e(),
           _vm._v(" "),
-          _c("div", { staticClass: "cardChange" }, [
-            _vm._m(2),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "collapse",
-                attrs: {
-                  id: "collapse3",
-                  "aria-labelledby": "heading3",
-                  "data-parent": "#accordionExample"
-                }
-              },
-              [
-                _c(
-                  "div",
-                  {
-                    staticClass: "navigation-item",
-                    on: {
-                      click: function($event) {
-                        return _vm.changeRoutePath("VF")
-                      }
-                    }
-                  },
-                  [_vm._v("Ventas Finales del Día")]
-                ),
+          _vm.hasModules("venta finales del dia", "inventario")
+            ? _c("div", { staticClass: "cardChange" }, [
+                _vm._m(2),
                 _vm._v(" "),
                 _c(
                   "div",
                   {
-                    staticClass: "navigation-item",
-                    on: {
-                      click: function($event) {
-                        return _vm.changeRoutePath("inventario")
-                      }
+                    staticClass: "collapse",
+                    attrs: {
+                      id: "collapse3",
+                      "aria-labelledby": "heading3",
+                      "data-parent": "#accordionExample"
                     }
                   },
-                  [_vm._v("Inventario")]
+                  [
+                    _vm.permisos.includes("venta finales del dia")
+                      ? _c(
+                          "div",
+                          {
+                            staticClass: "navigation-item",
+                            on: {
+                              click: function($event) {
+                                return _vm.changeRoutePath("VF")
+                              }
+                            }
+                          },
+                          [_vm._v("Ventas Finales del Día")]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.permisos.includes("inventario")
+                      ? _c(
+                          "div",
+                          {
+                            staticClass: "navigation-item",
+                            on: {
+                              click: function($event) {
+                                return _vm.changeRoutePath("inventario")
+                              }
+                            }
+                          },
+                          [_vm._v("Inventario")]
+                        )
+                      : _vm._e()
+                  ]
                 )
-              ]
-            )
-          ]),
+              ])
+            : _vm._e(),
           _vm._v(" "),
-          _c("div", { staticClass: "cardChange" }, [
-            _vm._m(3),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "collapse",
-                attrs: {
-                  id: "collapse4",
-                  "aria-labelledby": "heading4",
-                  "data-parent": "#accordionExample"
-                }
-              },
-              [
+          _vm.hasModules("registrar reclamo")
+            ? _c("div", { staticClass: "cardChange" }, [
+                _vm._m(3),
+                _vm._v(" "),
                 _c(
                   "div",
                   {
-                    staticClass: "navigation-item",
-                    on: {
-                      click: function($event) {
-                        return _vm.changeRoutePath("reclamos")
-                      }
+                    staticClass: "collapse",
+                    attrs: {
+                      id: "collapse4",
+                      "aria-labelledby": "heading4",
+                      "data-parent": "#accordionExample"
                     }
                   },
-                  [_vm._v("Registrar Reclamos")]
+                  [
+                    _vm.permisos.includes("registrar reclamo")
+                      ? _c(
+                          "div",
+                          {
+                            staticClass: "navigation-item",
+                            on: {
+                              click: function($event) {
+                                return _vm.changeRoutePath("reclamos")
+                              }
+                            }
+                          },
+                          [_vm._v("Registrar Reclamos")]
+                        )
+                      : _vm._e()
+                  ]
                 )
-              ]
-            )
-          ])
+              ])
+            : _vm._e()
         ]
       )
     ])
@@ -68531,6 +68561,79 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -68545,7 +68648,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     return {
       listanotaventas: [],
       inputcodenventa: '',
-      idNotaEliminar: undefined
+      idNotaEliminar: undefined,
+      tipoPago: undefined
     };
   },
 
@@ -68650,22 +68754,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       });
     },
     anularNV: function anularNV() {
-      var _this = this;
-
-      this.$swal({
-
-        title: 'Estás seguro?',
-        text: "No serás capaz de revertirlo!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Si, Anular!',
-        cancelButtonText: 'No, Cancelar!',
-        reverseButtons: true
-      }).then(function (result) {
-        if (result.isConfirmed) {
-          _this.$swal('Nota de Venta Anulada', '', 'success');
-        }
-      });
+      $('#PagoModal').modal('show');
     },
 
 
@@ -68970,6 +69059,81 @@ var render = function() {
             ])
           ])
         ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "PagoModal",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "exampleModalLabel",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "modal-dialog", attrs: { role: "document" } },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(4),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("div", { staticClass: "form-group col-6" }, [
+                      _c("label", [_vm._v("Tipo de pago")]),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.tipoPago,
+                              expression: "tipoPago"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { name: "select" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.tipoPago = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            }
+                          }
+                        },
+                        [
+                          _c("option", { attrs: { value: "1" } }, [
+                            _vm._v("Efectivo")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "2" } }, [
+                            _vm._v("YAPE")
+                          ])
+                        ]
+                      )
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm._m(5)
+              ])
+            ]
+          )
+        ]
       )
     ],
     1
@@ -69046,6 +69210,63 @@ var staticRenderFns = [
           }
         },
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("\n             Realizar pago\n           ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          attrs: {
+            type: "button",
+            "data-toggle": "modal",
+            "data-target": "#ModalEfectivo"
+          }
+        },
+        [_vm._v("\n             Efectivo\n           ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger",
+          attrs: {
+            type: "button",
+            "data-toggle": "modal",
+            "data-target": "#ModalYape"
+          }
+        },
+        [_vm._v("\n             Yape\n           ")]
       )
     ])
   }

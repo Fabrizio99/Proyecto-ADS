@@ -87,6 +87,79 @@
             </div>
           </div>
         </div>
+
+
+        <div
+          class="modal fade"
+          id="PagoModal"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5
+                  class="modal-title"
+                  id="exampleModalLabel"
+                >
+                  Realizar pago
+                </h5>
+
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <div class="form-group col-6">
+                    <label>Tipo de pago</label>
+                    <select
+                      name="select"
+                      class="form-control"
+                      v-model="tipoPago"
+                    >
+                      <!--<option
+                        v-for="documento in documentos"
+                        :key="documento.id"
+                        :value="documento.id_documentos"
+                      >
+                        {{ documento.nombre }}
+                      </option>
+                      -->
+                      <option value="1">Efectivo</option>
+                      <option value="2">YAPE</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-toggle="modal"
+                  data-target="#ModalEfectivo"
+                >
+                  Efectivo
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  data-toggle="modal"
+                  data-target="#ModalYape"
+                >
+                  Yape
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
      </div>
 </template>
 
@@ -105,7 +178,8 @@ export default {
       return{
         listanotaventas : [],
         inputcodenventa : '',
-        idNotaEliminar : undefined
+        idNotaEliminar : undefined,
+        tipoPago : undefined
       }
     },
     methods:{
@@ -156,20 +230,9 @@ export default {
         text: 'No hay resultados',
         });},
         
-        anularNV(){this.$swal({
-
-          title: 'Estás seguro?',
-          text: "No serás capaz de revertirlo!",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonText: 'Si, Anular!',
-          cancelButtonText: 'No, Cancelar!',
-          reverseButtons: true
-          }).then((result) => {
-          if (result.isConfirmed) {
-            this.$swal('Nota de Venta Anulada', '', 'success')
-          }
-        });},
+        anularNV(){
+          $('#PagoModal').modal('show');
+        },
 
         /*VerDetalle(){
              this.$router.push({name:"formDetalleNV"});

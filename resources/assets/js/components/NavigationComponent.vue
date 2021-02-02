@@ -5,7 +5,7 @@
     <div class="navigation-menu">
         <img src="images/logo.png" id="logo">
     <div class="accordion" id="accordionExample">
-        <!--<div class="cardChange" v-if="hasModules('usuario','producto')">
+        <div class="cardChange" v-if="hasModules('usuario','producto')">
             <div class="card-header navigation-header" id="heading1">
                 <div class="text-left w-100" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
                     <i class="fa fa-house-user fa-lg navigation-icon"></i><span class="navigation-title">Mantenimiento</span>
@@ -50,8 +50,8 @@
             <div id="collapse4" class="collapse" aria-labelledby="heading4" data-parent="#accordionExample">
                 <div class="navigation-item" @click="changeRoutePath('reclamos')" v-if="permisos.includes('registrar reclamo')">Registrar Reclamos</div>
             </div>
-        </div>-->
-        <div class="cardChange">
+        </div>
+        <!--<div class="cardChange">
             <div class="card-header navigation-header" id="heading1">
                 <div class="text-left w-100" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
                     <i class="fa fa-house-user fa-lg navigation-icon"></i><span class="navigation-title">Mantenimiento</span>
@@ -96,7 +96,7 @@
             <div id="collapse4" class="collapse" aria-labelledby="heading4" data-parent="#accordionExample">
                 <div class="navigation-item" @click="changeRoutePath('reclamos')">Registrar Reclamos</div>
             </div>
-        </div>
+        </div>-->
     </div>    
 </div>
   </div>
