@@ -80,6 +80,7 @@
                           <th scope="col">Precio Unitario</th>
                           <th scope="col">Cantidad</th>
                           <th scope="col">Total</th>
+                          <th scope="col" v-if="tipo != 'ver'">Opciones</th>
                         </tr>
                       </thead>
                       <tbody>

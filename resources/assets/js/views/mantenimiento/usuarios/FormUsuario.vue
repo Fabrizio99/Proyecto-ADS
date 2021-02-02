@@ -47,9 +47,13 @@
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="form-group col-12">
+                                <div :class="'form-group col-'+(accion=='editar'?'12':'6')">
                                     <label for="exampleInputPassword1">Dirección</label>
                                     <input type="text" class="form-control" v-model="user.direccion">
+                                </div>
+                                <div class="form-group col-6" v-if="accion != 'editar'">
+                                    <label for="exampleInputPassword1">Clave</label>
+                                    <input type="password" class="form-control" v-model="user.clave">
                                 </div>
                             </div>
                         </div>
@@ -98,7 +102,10 @@ export default {
         },
         isUncomplete(){
             let campos = Object.keys(this.user);
-            return campos.some(input=>!this.user[input]);
+            const _this = this;
+            return campos.some(function (input) {
+                return (!_this.user[input] && input != 'clave');
+            });
         },
         async createUser(){
             if(!this.isUncomplete()){
@@ -111,6 +118,7 @@ export default {
                     tipoDoc : this.user.tipoDocumento,
                     direccion : this.user.direccion,
                     telefono : this.user.telefono,
+                    clave : this.user.clave,
                     token : usuario.getData().token
                 }
                 let response = await axios.post('api/crearUsuario',body);
@@ -125,7 +133,7 @@ export default {
             }
         },
         async editUser(){
-            if(this.isUncomplete()){
+            if(!this.isUncomplete()){
                 const body = {
                     tipoDoc : this.user.tipoDocumento,
                     nombres : this.user.nombre,
@@ -177,7 +185,8 @@ export default {
                 documento : '',
                 direccion : '',
                 telefono : '',
-                rol : ''
+                rol : '',
+                clave : ''
             },
             documentos : [],
             roles : [],

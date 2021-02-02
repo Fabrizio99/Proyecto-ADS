@@ -64185,6 +64185,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -64206,11 +64210,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             }
         },
         isUncomplete: function isUncomplete() {
-            var _this = this;
-
             var campos = Object.keys(this.user);
+            var _this = this;
             return campos.some(function (input) {
-                return !_this.user[input];
+                return !_this.user[input] && input != 'clave';
             });
         },
         createUser: function () {
@@ -64234,6 +64237,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                     tipoDoc: this.user.tipoDocumento,
                                     direccion: this.user.direccion,
                                     telefono: this.user.telefono,
+                                    clave: this.user.clave,
                                     token: __WEBPACK_IMPORTED_MODULE_4__user__["a" /* default */].getData().token
                                 };
                                 _context.next = 4;
@@ -64275,7 +64279,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                     while (1) {
                         switch (_context2.prev = _context2.next) {
                             case 0:
-                                if (!this.isUncomplete()) {
+                                if (this.isUncomplete()) {
                                     _context2.next = 8;
                                     break;
                                 }
@@ -64402,7 +64406,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 documento: '',
                 direccion: '',
                 telefono: '',
-                rol: ''
+                rol: '',
+                clave: ''
             },
             documentos: [],
             roles: []
@@ -64699,39 +64704,83 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "form-row" }, [
-                      _c("div", { staticClass: "form-group col-12" }, [
-                        _c(
-                          "label",
-                          { attrs: { for: "exampleInputPassword1" } },
-                          [_vm._v("Dirección")]
-                        ),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.user.direccion,
-                              expression: "user.direccion"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { type: "text" },
-                          domProps: { value: _vm.user.direccion },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
+                      _c(
+                        "div",
+                        {
+                          class:
+                            "form-group col-" +
+                            (_vm.accion == "editar" ? "12" : "6")
+                        },
+                        [
+                          _c(
+                            "label",
+                            { attrs: { for: "exampleInputPassword1" } },
+                            [_vm._v("Dirección")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.user.direccion,
+                                expression: "user.direccion"
                               }
-                              _vm.$set(
-                                _vm.user,
-                                "direccion",
-                                $event.target.value
-                              )
+                            ],
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.user.direccion },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.user,
+                                  "direccion",
+                                  $event.target.value
+                                )
+                              }
                             }
-                          }
-                        })
-                      ])
+                          })
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _vm.accion != "editar"
+                        ? _c("div", { staticClass: "form-group col-6" }, [
+                            _c(
+                              "label",
+                              { attrs: { for: "exampleInputPassword1" } },
+                              [_vm._v("Clave")]
+                            ),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.user.clave,
+                                  expression: "user.clave"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { type: "password" },
+                              domProps: { value: _vm.user.clave },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.user,
+                                    "clave",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        : _vm._e()
                     ])
                   ])
                 ])
@@ -69370,6 +69419,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
 
 
 
@@ -69801,7 +69851,29 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "mx-4" }, [
                 _c("table", { staticClass: "table" }, [
-                  _vm._m(3),
+                  _c("thead", [
+                    _c("tr", [
+                      _c("th", { attrs: { scope: "col" } }, [
+                        _vm._v("Producto")
+                      ]),
+                      _vm._v(" "),
+                      _c("th", { attrs: { scope: "col" } }, [
+                        _vm._v("Precio Unitario")
+                      ]),
+                      _vm._v(" "),
+                      _c("th", { attrs: { scope: "col" } }, [
+                        _vm._v("Cantidad")
+                      ]),
+                      _vm._v(" "),
+                      _c("th", { attrs: { scope: "col" } }, [_vm._v("Total")]),
+                      _vm._v(" "),
+                      _vm.tipo != "ver"
+                        ? _c("th", { attrs: { scope: "col" } }, [
+                            _vm._v("Opciones")
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
                   _vm._v(" "),
                   _c(
                     "tbody",
@@ -69921,11 +69993,11 @@ var render = function() {
                               )
                             : _vm._e(),
                           _vm._v(" "),
-                          _vm._m(4)
+                          _vm._m(3)
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "modal-body" }, [
-                          _vm._m(5),
+                          _vm._m(4),
                           _vm._v(" "),
                           _c("div", { staticClass: "form-group" }, [
                             _c("div", { staticClass: "form-group col-6" }, [
@@ -69988,7 +70060,7 @@ var render = function() {
                           ])
                         ]),
                         _vm._v(" "),
-                        _vm._m(6)
+                        _vm._m(5)
                       ])
                     ]
                   )
@@ -70017,9 +70089,9 @@ var render = function() {
                     },
                     [
                       _c("div", { staticClass: "modal-content" }, [
-                        _vm._m(7),
+                        _vm._m(6),
                         _vm._v(" "),
-                        _vm._m(8),
+                        _vm._m(7),
                         _vm._v(" "),
                         _c("div", { staticClass: "modal-footer" }, [
                           _c(
@@ -70061,9 +70133,9 @@ var render = function() {
                     },
                     [
                       _c("div", { staticClass: "modal-content" }, [
-                        _vm._m(9),
+                        _vm._m(8),
                         _vm._v(" "),
-                        _vm._m(10),
+                        _vm._m(9),
                         _vm._v(" "),
                         _c("div", { staticClass: "modal-footer" }, [
                           _c(
@@ -70121,22 +70193,6 @@ var staticRenderFns = [
     return _c("div", { staticClass: "row mx-4 mt-4" }, [
       _c("h5", { staticClass: "col" }, [
         _vm._v("\n                   Información de Productos\n               ")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Producto")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Precio Unitario")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Cantidad")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Total")])
       ])
     ])
   },
