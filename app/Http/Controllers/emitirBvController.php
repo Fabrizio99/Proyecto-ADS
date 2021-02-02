@@ -98,7 +98,7 @@ class emitirBvController extends Controller
             FROM notadeventas AS nv,
                     documentos   AS d,
                     usuarios     AS u
-            WHERE (nv.id_boletaventa = '{$req->notaVid}' 
+            WHERE nv.id_boletaventa = '{$req->notaVid}' 
               AND d.id_documentos   = nv.DOCUMENTOS_id_documentos
               AND u.id_usuario      = nv.USUARIOS_id_usuario"
         );
