@@ -46,7 +46,7 @@
                       <tbody>
                         <tr v-for="(producto,index) in listaProductos" :key="producto.id_producto">
                           <td scope="row">{{index+1}}</td>
-                          <td>{{producto.nombre}}</td>
+                          <td>{{producto.nom_prod}}</td>
                           <td>{{producto.marka}}</td>
                           <td>S/. {{producto.precio}}</td>
                           <td>{{producto.stock}}</td>
@@ -114,7 +114,7 @@ export default {
             this.$router.push({path:'formulario-productos/crear'});
         },
         formEditarProducto(product){
-            data.setSelectedUser(product);
+            data.setSelectedProducto(product);
             this.$router.push({path:'formulario-productos/editar'});
         },
         openDeleteModal(documento){
@@ -132,7 +132,6 @@ export default {
         async getProductos(){
           this.nomProduct = '';
           let response = await axios.get('api/listProduct?token='+usuario.getData().token);
-          console.log('respuesta ',response);
           if(response.data.status == "0"){
               this.listaProductos = response.data.data;
           }else{
@@ -145,7 +144,6 @@ export default {
             token : usuario.getData().token
           }
           let response = await axios.post('api/deleteP',body);
-          console.log(response);
           if(response.data.status == "0"){
             alert('Mensaje: '+'Producto eliminado exitosamente');
             this.getProductos();
@@ -170,7 +168,6 @@ export default {
         }
     },
     mounted(){
-      console.log('mounted!!!');
       this.getProductos();
     }
 }

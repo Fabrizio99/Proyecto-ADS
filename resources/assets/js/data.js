@@ -1,6 +1,7 @@
 function Data(){
     this.user = undefined;
     this.nota_venta = undefined;
+    this.producto = undefined;
 }
 Data.prototype.getSelectedUser = function() {
     return this.user;
@@ -14,6 +15,13 @@ Data.prototype.getSelectedNV = function() {
 }
 Data.prototype.setSelectedNV = function(nota_venta) {
     this.nota_venta = nota_venta;
+}
+
+Data.prototype.getSelectedProducto = function() {
+    return this.producto;
+}
+Data.prototype.setSelectedProducto = function(producto) {
+    this.producto = producto;
 }
 
 let data = new Data();

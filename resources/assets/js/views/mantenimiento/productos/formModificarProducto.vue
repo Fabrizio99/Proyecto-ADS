@@ -108,17 +108,28 @@
                 </div>
             </div>
         </div>
-    
 </template>
 <script>
 import Appbar from '../../../components/AppBar'
-import AppBar from '../../../components/AppBar.vue';
 import Navigation from '../../../components/NavigationComponent';
+import data from '../../../data'
 
 export default {
     components : {
         'app-bar'    : Appbar,
         'navigation' : Navigation
+    },
+    data(){
+        return{
+            producto : {
+                nombre    : '',
+                marca     : '',
+                precio    : '',
+                stock     : '',
+                categoria : '',
+                id        : ''
+            }
+        }
     },
     methods : {
         formListaProducto(){
@@ -131,7 +142,6 @@ export default {
             confirmButtonText: `Aceptar`,
             confirmButtonColor: '#0AB70A',
             denyButtonText: `Cancelar`,
-            
           }).then((result) => {
   
           if (result.isConfirmed) {
@@ -147,6 +157,14 @@ export default {
             confirmButtonText: 'Cerrar'
           });
         }
+    },
+    mounted(){
+        let producto = data.getSelectedProducto();
+        this.producto.id = producto.id_producto;
+        this.producto.nombre = producto.nombre;
+        this.producto.marca = producto.marka;
+        this.producto.precio = producto.precio;
+        this.producto.stock = producto.stock;
     }
 }
 </script>

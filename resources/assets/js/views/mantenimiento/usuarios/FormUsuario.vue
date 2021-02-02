@@ -19,7 +19,7 @@
                                 </div>
                                 <div class="form-group col-6">
                                     <label>Tipo documento</label>
-                                    <select name="select" v-model="user.tipoDocumento" class="form-control" :disabled="accion == 'editar'">
+                                    <select name="select" v-model="user.tipoDocumento" class="form-control">
                                         <option v-for="documento in documentos" :key="documento.id" :value="documento.id_documentos">{{documento.nombre}}</option>
                                     </select>
                                 </div>
@@ -31,17 +31,7 @@
                                 </div>
                                 <div class="form-group col-6">
                                     <label for="exampleInputPassword1">Documento</label>
-                                    <input type="number" class="form-control" v-model="user.documento" :disabled="accion == 'editar'">
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-6">
-                                    <label for="exampleInputPassword1">Dirección</label>
-                                    <input type="text" class="form-control" v-model="user.direccion">
-                                </div>
-                                <div class="form-group col-6">
-                                    <label for="exampleInputPassword1">Clave</label>
-                                    <input type="password" class="form-control" v-model="user.clave">
+                                    <input type="number" class="form-control" v-model="user.documento">
                                 </div>
                             </div>
                             <div class="form-row">
@@ -52,8 +42,14 @@
                                 <div class="form-group col-6">
                                     <label>Roles</label>
                                     <select name="select" v-model="user.rol" class="form-control">
-                                        <!--<option v-for="documento in documentos" :key="documento.id" :value="documento.id_documentos">{{documento.nombre}}</option>-->
+                                        <option v-for="rol in roles" :key="rol.id_rol" :value="rol.id_rol">{{rol.nombre}}</option>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="exampleInputPassword1">Dirección</label>
+                                    <input type="text" class="form-control" v-model="user.direccion">
                                 </div>
                             </div>
                         </div>
@@ -83,7 +79,6 @@
 <script>
 import Appbar from '../../../components/AppBar'
 import Navigation from '../../../components/NavigationComponent';
-import Multiselect from '../../../components/Multiselect';
 import data from '../../../data';
 import usuario from '../../../user';
 
@@ -91,7 +86,6 @@ export default {
     components : {
         'app-bar'     : Appbar,
         'navigation'  : Navigation,
-        'multiselect' : Multiselect
     },
     props : ['accion'],
     methods : {
@@ -102,19 +96,12 @@ export default {
                 this.editUser();
             }
         },
-        validarCampos(){
-            let validador = true;
+        isUncomplete(){
             let campos = Object.keys(this.user);
-            for (let index = 0; index < campos.length; index++) {
-                if((this.user[campos[index]] == null && campos[index] != 'clave') || (this.user[campos[index]] == undefined && campos[index] != 'clave') || (this.user[campos[index]] == '' && campos[index] != 'clave')){
-                    validador = false;
-                    break;
-                }
-            }
-            return validador;
+            return campos.some(input=>!this.user[input]);
         },
         async createUser(){
-            if(this.validarCampos()){
+            if(!this.isUncomplete()){
                 const body = {
                     numDoc : this.user.documento,
                     rol    : this.user.rol,
@@ -138,10 +125,9 @@ export default {
             }
         },
         async editUser(){
-
-            if(this.validarCampos()){
-                console.log('llego aca');
+            if(this.isUncomplete()){
                 const body = {
+                    tipoDoc : this.user.tipoDocumento,
                     nombres : this.user.nombre,
                     apellidos : this.user.apellidos,
                     direccion : this.user.direccion,
@@ -152,9 +138,8 @@ export default {
                     token : usuario.getData().token
                 }
                 let response = await axios.post('api/modificarUsuario',body);
-                console.log('RESPONSE ',response);
                 if(response.data.status == "0"){
-                    alert('Mensaje: Usuario modificado exitosamente')
+                    alert('Mensaje: Usuario modificado exitosamente');
                     this.$router.push({name : 'user'});
                 }else{
                     alert('Error: '+response.data.msj);
@@ -165,11 +150,21 @@ export default {
         },
         async getTipoDocumentos(){
             let response = await axios.get('api/cmbTipoDoc?token='+usuario.getData().token);
-            console.log('documentos',response);
             if(response.data.status == "0"){
                 this.documentos = response.data.data;
             }else{
                 alert('Error: ',response.data.msj);
+            }
+        },
+        async getRoles(){
+            let response = await axios.get('api/cmbRol?token='+usuario.getData().token);
+            console.log('roles ',response);
+            if(typeof response.data == 'string'){
+                alert('Mensaje: '+response.data);
+            }else if(response.data.status != '0'){
+                alert('Error: ',response.data.msj);
+            }else{
+                this.roles = response.data.data;
             }
         }
     },
@@ -181,15 +176,17 @@ export default {
                 apellidos : '',
                 documento : '',
                 direccion : '',
-                clave : '',
                 telefono : '',
-                rol : '1'
+                rol : ''
             },
-            documentos : []
+            documentos : [],
+            roles : [],
         }
     },
     mounted(){
         this.getTipoDocumentos();
+        this.getRoles();
+
         if(this.accion == 'editar'){
             console.log(data.getSelectedUser());
             let usuario = data.getSelectedUser();
@@ -200,7 +197,6 @@ export default {
             this.user.direccion = usuario.direccion;
             this.user.telefono  = usuario.telefono;
             this.user.rol = usuario.id_rol;
-
         }
     }
 }
