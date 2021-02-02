@@ -13,8 +13,8 @@ Route::get('getReclamos'   , 'reclamosController@getReclamos'     )->middleware(
 Route::post('postRegistrar', 'reclamosController@postRegistrar')->middleware('validateAuth');
 
 //reporteInvController-Listo para probar (Font)
-Route::get('getEmitirRI'   , 'reporteInvController@getEmitirRI'   )->middleware('validateAuth');
-Route::get('totalProdCosto', 'reporteInvController@totalProdCosto')->middleware('validateAuth');
+Route::get('getEmitirRI'         , 'reporteInvController@getEmitirRI'   )->middleware('validateAuth');
+Route::get('totalProdCosto'      , 'reporteInvController@totalProdCosto')->middleware('validateAuth');
 Route::get('estadisticaProductos', 'reporteInvController@estadisticaProductos')->middleware('validateAuth');
 
 
@@ -28,22 +28,22 @@ Route::get('detalleUsuario'   , 'gestionarUsuarioController@detalleUsuario'  )->
 Route::get('cmbTipoDoc'       , 'gestionarUsuarioController@cmbTipoDoc'      )->middleware('validateAuth'); // trae los combos de tipo dni
 
 //gProductosController
-Route::get('listProduct', 'gProductosController@listProduct')->middleware('validateAuth');
+Route::get('listProduct'  , 'gProductosController@listProduct')->middleware('validateAuth');
 Route::get('buscarProduct', 'gProductosController@buscarProduct')->middleware('validateAuth');
-Route::post('deleteP'   , 'gProductosController@deleteP'    )->middleware('validateAuth');
-Route::post('updateP'   , 'gProductosController@updateP'    )->middleware('validateAuth');
-Route::post('registrarP', 'gProductosController@registrarP' )->middleware('validateAuth');
+Route::post('deleteP'     , 'gProductosController@deleteP'    )->middleware('validateAuth');
+Route::post('updateP'     , 'gProductosController@updateP'    )->middleware('validateAuth');
+Route::post('registrarP'  , 'gProductosController@registrarP' )->middleware('validateAuth');
 Route::post('cmbCategoria', 'gProductosController@cmbCategoria' )->middleware('validateAuth');
 
 //emitirNotaVController
-Route::get('usuarioNV' ,'emitirNotaVController@usuarioNV')->middleware('validateAuth');
-Route::get('ProductosL','emitirNotaVController@ProductosL')->middleware('validateAuth');
-Route::post('guardarNV','emitirNotaVController@guardarNV')->middleware('validateAuth');
+Route::get('usuarioNV' , 'emitirNotaVController@usuarioNV')->middleware('validateAuth');
+Route::get('ProductosL', 'emitirNotaVController@ProductosL')->middleware('validateAuth');
+Route::post('guardarNV', 'emitirNotaVController@guardarNV')->middleware('validateAuth');
 
 //entregarPController
-Route::get('listaB' ,'entregarPController@listaB')->middleware('validateAuth');
+Route::get('listaB'        ,'entregarPController@listaB')->middleware('validateAuth');
 Route::get('buscarBoletaF' ,'entregarPController@buscarBoletaF')->middleware('validateAuth');
-Route::post('modificarEb' ,'entregarPController@modificarEb')->middleware('validateAuth');
+Route::post('modificarEb'  ,'entregarPController@modificarEb')->middleware('validateAuth');
 
 //no probar esta en proceso 
 //emitirBvController
@@ -52,8 +52,8 @@ Route::get('buscaNotaVByFechas', 'emitirBvController@buscaNotaVByFechas')->middl
 Route::post('registrarPago'    , 'emitirBvController@registrarPago'     )->middleware('validateAuth');
 
 //emitirReporteVentaDiarias
-Route::get('listaBoletaE','emitirReporteVdController@listaBoletaE')->middleware('validateAuth');
-Route::get('emitirRBVbyFecha','emitirReporteVdController@emitirRBVbyFechaa')->middleware('validateAuth');
+Route::get('listaBoletaE'      ,'emitirReporteVdController@listaBoletaE')->middleware('validateAuth');
+Route::get('emitirRBVbyFecha'  ,'emitirReporteVdController@emitirRBVbyFechaa')->middleware('validateAuth');
 Route::post('guardarIncidencia','emitirReporteVdController@guardarIncidencia')->middleware('validateAuth');
 
 ///Otra ruta 

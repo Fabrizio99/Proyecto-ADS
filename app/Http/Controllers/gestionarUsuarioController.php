@@ -174,15 +174,17 @@ class gestionarUsuarioController extends Controller
 
     //---Modificar usuario---------------
     function modificarUsuario (Request $req){
- 
-        $ValidacionCampos = isNullEmpty($req->nombres    , 'nombres'    , 'digite correctamente el nombre')?: 
-                            isNullEmpty($req->apellidos  , 'apellidos'  , 'digite correctamente el apellido') ?: 
-                            isNullEmpty($req->direccion  , 'direccion'  , 'digite correctamente direccion') ?:
-                            isNullEmpty($req->telefono   , 'telefono'   , 'digite correctamente el telefono') ?:
-                            isNullEmpty($req->rol        , 'rol'        , 'digite correctamente el rol') ?:
-                            isNullEmpty($req->numDoc     , 'numDoc'     ,'digite correctamente el contraseñia');
+        $TIPO_DNI = 1;
+        $TIPO_PASAPORTE = 2;
+        $ValidacionCampos = isNullEmpty($req->nombres    , 'nombres'    , 'Digite correctamente el nombre')?: 
+                            isNullEmpty($req->apellidos  , 'apellidos'  , 'Digite correctamente el apellido') ?: 
+                            isNullEmpty($req->direccion  , 'direccion'  , 'Digite correctamente direccion') ?:
+                            isNullEmpty($req->telefono   , 'telefono'   , 'Digite correctamente el telefono') ?:
+                            isNullEmpty($req->rol        , 'rol'        , 'Digite correctamente el rol') ?:
+                            isNullEmpty($req->numDoc     , 'numDoc'     , 'Digite correctamente el documento') ?: 
+                            isNullEmpty($req->tipoDoc    , 'tipoDoc'    , 'Digite correctamente el tipo documento');
                             
-         // validaciones de campos            
+        // validaciones de campos            
         if($ValidacionCampos){
             return $ValidacionCampos;
         }
@@ -196,43 +198,36 @@ class gestionarUsuarioController extends Controller
                 ]
             ); 
         }
-        
-        
-        if (isNullEmpty($req->contrasenia, 'contrasenia', 'digite correctamente el contraseñia')) {
-            // se hizo la consulta 
-            return mySQLUpDate(
-                "UPDATE usuarios 
-                    SET nombres     = '{$req->nombres}', 
-                        apellidos   = '{$req->apellidos}', 
-                        direccion   = '{$req->direccion}',
-                        telefono    = '{$req->telefono}',
-                        rol_id_rol  = '{$req->rol}'
-                WHERE num_documento = '{$req->numDoc}' "
-            );      
 
-        } else {
-            //validación de cmpContrasenia
-            if (strlen($req->contrasenia) < 5) {
-                return JSON_ENCODE(
-                    (object) [
-                        'status' => $_SESSION["STATUS_CONTROL"], //status del back
-                        'msj'    => 'La contraseña debe tener minimo 5 caracteres.' //
-                    ]
-                ); 
-            }
-            // se hizo la consulta 
-            return mySQLUpDate(
-                "UPDATE usuarios 
-                    SET nombres     = '{$req->nombres}', 
-                        apellidos   = '{$req->apellidos}', 
-                        direccion   = '{$req->direccion}',
-                        telefono    = '{$req->telefono}',
-                        rol_id_rol  = '{$req->rol}',
-                        contrasenia = '{$req->contrasenia}'
-                WHERE num_documento = '{$req->numDoc}' "
-            );      
-
+        //validación del dni caracteres
+        if ($req->tipoDoc == $TIPO_DNI && strlen($req->numDoc) <> 8) { // TIPO 
+            return JSON_ENCODE(
+                (object) [
+                    'status' => $_SESSION["STATUS_CONTROL"],
+                    'msj'    => 'El numero de DNI debe tener  8 caracteres '
+                ]
+            ); 
+        }else if ($req->tipoDoc == $TIPO_PASAPORTE && strlen($req->numDoc) <> 12) { // CARNET DE PASAPORTE
+            return JSON_ENCODE(
+                (object) [
+                    'status' => $_SESSION["STATUS_CONTROL"],
+                    'msj'    => 'el pasaporte debe tener minimo 16 caracteres '
+                ]
+            );
         }
+        
+        return mySQLUpDate(
+            "UPDATE usuarios 
+                SET nombres       = '{$req->nombres}', 
+                    apellidos     = '{$req->apellidos}', 
+                    direccion     = '{$req->direccion}',
+                    telefono      = '{$req->telefono}',
+                    rol_id_rol    = '{$req->rol}',
+                    usuario       = '{$req->numDoc}',
+                    num_documento = '{$req->numDoc}',
+                    documentos_id_documentos = '{$req->tipoDoc}'
+            WHERE num_documento   = '{$req->numDoc}'"
+        );      
     }
     //----Detalle Usuario---------------
     function detalleUsuario (Request $req){
