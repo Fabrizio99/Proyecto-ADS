@@ -17,7 +17,7 @@ class gProductosController extends Controller
     function listProduct (Request $req){
 
         return mySQLConsulta("SELECT p.id_producto,
-                                     p.nombre,
+                                     p.nombre AS nom_prod,
                                      p.marka,
                                      p.precio,
                                      p.stock,
@@ -38,7 +38,7 @@ class gProductosController extends Controller
 
         return mySQLConsulta(
             "SELECT p.id_producto,
-                    P.nombre,
+                    P.nombre AS nom_prod,
                     p.stock,
                     p.precio,
                     p.marka , 
