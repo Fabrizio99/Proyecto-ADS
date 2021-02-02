@@ -153,7 +153,7 @@ class gestionarUsuarioController extends Controller
             //se esta insertando el la tbl usuarios en la col usuario = numDoc  
             return mySQLInsert(
                 "INSERT INTO usuarios (usuario, nombres, apellidos, direccion, telefono, rol_id_rol, documentos_id_documentos, num_documento, contrasenia, estado) 
-                    VALUES ('{$req->numDoc}','{$req->nombres}','{$req->apellidos}', '{$req->dirrecion}','{$req->telefono}','{$req->rol}', '{$req->tipoDoc}','{$req->numDoc}','{$req->contrasenia}','A')"
+                    VALUES ('{$req->numDoc}','{$req->nombres}','{$req->apellidos}', '{$req->direccion}','{$req->telefono}','{$req->rol}', '{$req->tipoDoc}','{$req->numDoc}','{$req->contrasenia}','A')"
             );
         }    
     }
