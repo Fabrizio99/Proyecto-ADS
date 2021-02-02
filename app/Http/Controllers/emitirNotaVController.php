@@ -183,9 +183,10 @@ class emitirNotaVController extends Controller
               WHERE id_boletaventa = '{$req->notaIdBv}'"
         ); 
 
+        mySQLDelete("DELETE FROM notadeventas_has_producto WHERE NOTADEVENTAS_id_boletaventa = '{$req->notaIdBv}'");
+
         foreach ($req->listProduct as &$valor) {
 
-            mySQLDelete("DELETE FROM notadeventas_has_producto WHERE NOTADEVENTAS_id_boletaventa = '{$req->notaIdBv}'");
 
             mySQLInsert(
                 " INSERT INTO notadeventas_has_producto (NOTADEVENTAS_id_boletaventa,PRODUCTO_id_producto,cantidad)
