@@ -6,14 +6,14 @@ import Axios from 'axios'
 window.axios = Axios;
 import service from './services';
 window.service = service;
-//let usuario = require('./user.js').default;
 
-//window.Usuario = new usuario();
-
+require('bootstrap');
 
 var $ = require('jquery');
 window.$ = $;
-require('bootstrap');
+
+import fechaActual from './fecha'
+window.fecha = fechaActual;
 
 let moment = require('moment');
 window.moment = moment;
@@ -21,13 +21,12 @@ window.moment = moment;
 window.Vue = require('vue');
 Vue.use(VueSweetalert2);
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-import * as Alerts from '../js/alerts';
-window.Alert = Alerts;
+if(Array.prototype.includes == undefined) {
+    console.log('entra aca');
+    Array.prototype.includes = function() {
+        return Array.prototype.indexOf.apply(this, arguments) !== -1;
+    };
+}
 const app = new Vue({
     components: { AppComponent },
     router

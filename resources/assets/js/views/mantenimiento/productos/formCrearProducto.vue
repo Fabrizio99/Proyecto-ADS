@@ -9,137 +9,61 @@
                             Crear producto
                         </h3>
                     </div>
-                    <div class="row mx-4">
-                        <div class="col-7">
-                            <div class="card col-12">
-                                <div class="card-body">
-                                    <div class="form-row">
-                                        <div class="col-2">
-                                            <label></label>
-                                        </div>
-                                        <div class="form-group col-8">
-                                            <label for="inputNombre" class="label">Nombre del producto</label>
-                                            <input type="text" class="form-control " id="inputNombre">
-                                        </div>
-                                        <div class="col-2">
-                                            <label></label>
-                                        </div>
+                    <div class="px-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-row">
+                                    <div class="form-group col-6">
+                                        <label for="exampleInputPassword1">Nombre del producto</label>
+                                        <input type="text" class="form-control" v-model="productos.nombres" >
                                     </div>
-                                    <div class="form-row">
-                                        <div class="col-2">
-                                            <label></label>
-                                        </div>
-                                        <div class="form-group col-8">
-                                            <label for="InputMarca" class="label">Marca</label>
-                                            <input type="text" class="form-control " id="inputMarca">
-                                        </div>
-                                        <div class="col-2">
-                                            <label></label>
-                                        </div>
+                                    <div class="form-group col-6">
+                                        <label for="exampleInputPassword1">Marca</label>
+                                        <input type="text" class="form-control" v-model="productos.marca">
                                     </div>
-                                    <div class="form-row">
-                                        <div class="col-2">
-                                            <label></label>
-                                        </div>
-                                        <div class="form-group col-8">
-                                            <label for="InputPrecio" class="label">Precio</label>
-                                            <input type="text" class="form-control" id="inputPrecio">
-                                        </div>
-                                        <div class="col-2">
-                                            <label></label>
-                                        </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-6">
+                                        <label for="exampleInputPassword1">Precio</label>
+                                        <input type="number" class="form-control" v-model="productos.precio">
                                     </div>
-                                    <div class="form-row">
-                                        <div class="col-2">
-                                            <label></label>
-                                        </div>
-                                        <div class="form-group col-8">
-                                            <label for="InputStock" class="label">Stock</label>
-                                            <input type="text" class="form-control" id="inputStock">
-                                        </div>
-                                        <div class="col-2">
-                                            <label></label>
-                                        </div>
+                                    <div class="form-group col-6">
+                                        <label for="exampleInputPassword1">Stock</label>
+                                        <input type="number" class="form-control" v-model="productos.stock">
                                     </div>
-                                    
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-6">
+                                        <label for="exampleInputPassword1">Categoría</label>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                   
                                 </div>
                             </div>
                         </div>
-                        <div class="col-5">
-                            <div class="card col-12 ">
-                                <div class="card-body">
-                                    <div class="form-row">
-                                        <div class="col-2">
-                                            <label></label>
-                                        </div>
-                                        <div class="form-group col-6 img">
-                                            <img src="images/GestionProductos/leche.jpg"  width="275" height="275">
-                                        </div>
-                                        <div class="col-1">
-                                            <label></label>
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="col-3">
-                                            <label></label>
-                                        </div>
-                                        <div class="form-group col-6">
-                                            <h5>Seleccione otra foto</h5>
-                                            <input type="button" class="btn btn-primary btn-block mt-4 btnexaminar" value="EXAMINAR"/>
-                                        </div>
-                                        <div class="col-3">
-                                            <label></label>
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="col-1">
-                                            <label></label>
-                                        </div>
-                                        <div class="form-group col-10">
-                                            <button type="button" class="btn btn-info my-1 form-group col-12 btnguarda-registro" @click="formComprobacionCrear">Registrar</button>
-                                        </div>
-                                        <div class="col-1">
-                                            <label></label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
+                <div class="px-4 mt-3">
+                    <button type="button" class="btn btn-info btnguarda-registro profile-button" @click="productAction">{{this.accion == 'crear'?'Registrar':'Guardar Cambios'}}</button>
+                </div>
+
             </div>
+        </div>
     </div>
-    
 </template>
 <script>
 import Appbar from '../../../components/AppBar'
 import AppBar from '../../../components/AppBar.vue';
 import Navigation from '../../../components/NavigationComponent';
+import data from '../../../data';
+import usuario from '../../../user';
 
 export default {
     components : {
         'app-bar'    : Appbar,
         'navigation' : Navigation
     },
+    props : ['accion'],
     methods : {
-        formListaProducto(){
-            this.$router.push({name:"gproductos"});
-        },
-        formComprobacionCrear(){
-            this.$swal({
-            title: '¿Desea insertar producto?',
-            showDenyButton: true,
-            confirmButtonText: `Aceptar`,
-            confirmButtonColor: '#0AB70A',
-            denyButtonText: `Cancelar`,
-            
-          }).then((result) => {
-  
-          if (result.isConfirmed) {
-          this.$swal('PRODUCTO REGISTRADO EXITOSAMENTE', '', 'success')
-          }
-          });
-        },
         msjError(){
             this.$swal({
             icon: 'error',
@@ -147,7 +71,61 @@ export default {
             confirmButtonColor: 'red',
             confirmButtonText: 'Cerrar'
           });
+        },
+        productAction(){
+            if(this.accion == 'crear'){
+                this.createProduct();
+            }else{
+                
+            }
+        },
+        validarCampos(){
+            let validador = true;
+            let campos = Object.keys(this.productos);
+            for (let index = 0; index < campos.length; index++) {
+                if((this.productos[campos[index]] == null ) || (this.productos[campos[index]] == undefined ) || (this.productos[campos[index]] == '' )){
+                    validador = false;
+                    break;
+                }
+            }
+            return validador;
+        },
+        async createProduct(){
+            if(this.validarCampos()){
+                const body = {
+                    nombre : this.productos.nombres,
+                    marka   : this.productos.marca,
+                    precio : this.productos.precio,
+                    stock : this.productos.stock,
+                    token : usuario.getData().token
+                }
+                let response = await axios.post('api/registrarP',body);
+                console.log('RESPONSE ',response);
+                if(response.data.status == "0"){
+                    alert('Correcto: Producto registrado exitosamente');
+                    this.$router.push({name : 'gproductos'});
+                }else{
+                    alert('Error: '+response.data.msj);
+                }
+            }else{
+                alert('Error: Complete los campos faltantes o incorrectos');
+            }
         }
+        
+    }, 
+    data(){
+        return{
+            productos: {
+                nombres: '',
+                marca: '',
+                precio: '',
+                stock: ''
+            }
+        }
+    },
+    mounted(){
+        
+       
     }
 }
 </script>

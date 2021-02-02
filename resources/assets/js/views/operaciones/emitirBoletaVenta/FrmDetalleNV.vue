@@ -21,17 +21,13 @@
                     <div class="card col bg-light">
                         <div class="card-body">
                             <div class="form-row">
-                                <div class="form-group col-4">
+                                <div class="form-group col-6">
                                     <label for="exampleInputPassword1">Vendedor</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1" disabled>
+                                    <input type="text" class="form-control" id="exampleInputPassword1" v-model="nota_venta.nom_vendedor" disabled>
                                 </div>
-                                <div class="form-group col-4">
+                                <div class="form-group col-6">
                                     <label for="exampleInputPassword1">Fecha de Emisión</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1" disabled>
-                                </div>
-                                <div class="form-group col-4">
-                                    <label for="exampleInputPassword1">IMAGEN RUC</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1" value="imagen RUC NOTA DE VENTA" disabled/>
+                                    <input type="text" class="form-control" id="exampleInputPassword1"  v-model="nota_venta.fecha" disabled>
                                 </div>
                             </div>
                         </div>
@@ -43,53 +39,29 @@
                             <div class="form-row">
                                 <div class="form-group col-3">
                                     <label for="exampleInputPassword1">Cliente</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1" disabled>
+                                    <input type="text" class="form-control" id="exampleInputPassword1"  v-model="nota_venta.nombre_cliente" disabled>
                                 </div>
                                 <div class="form-group col-3">
-                                <multiselect
-                                    :colSize="13"
-                                    label = "Tipo de Documento"
-                                    :optionList = "[
-                                        {
-                                            id   : 1,
-                                            name : 'DNI'
-                                        },
-                                        {
-                                            id   : 2,
-                                            name : 'CARNET DE EXTRANJERIA'
-                                        },
-                                    ]"
-                                />
+                                    <label>Tipo documento</label>
+                                    <select name="select"  class="form-control">
+                                       <!-- <option v-for="documento in documentos" :key="documento.id" :value="documento.id_documentos">{{documento.nombre}}</option>-->
+                                    </select>
+                                
                                 </div>
                                 <div class="form-group col-3">
                                     <label for="exampleInputPassword1">N° Documento</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1" disabled>
+                                    <input type="text" class="form-control" id="exampleInputPassword1" v-model="nota_venta.num_documento" disabled>
                                 </div>
                                 <div class="form-group col-3">
                                     <label for="exampleInputPassword1">Celular</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1" disabled>
+                                    <input type="text" class="form-control" id="exampleInputPassword1" v-model="nota_venta.telefono" disabled>
                                 </div>
                             </div>
                             <div class="form-row">
-                               <div class="form-group col-3">
-                                <multiselect
-                                    :colSize="13"
-                                    label = "Distrito"
-                                    :optionList = "[
-                                        {
-                                            id   : 1,
-                                            name : 'MIRAFLORES'
-                                        },
-                                        {
-                                            id   : 2,
-                                            name : 'SAN ISIDRO'
-                                        },
-                                    ]"
-                                />
-                                </div>
-                                <div class="form-group col-9">
+                               
+                                <div class="form-group col-12">
                                     <label for="exampleInputPassword1">Dirección</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1" disabled>
+                                    <input type="text" class="form-control" id="exampleInputPassword1" v-model="nota_venta.direccion" disabled>
                                 </div>
                             </div>
                         </div>
@@ -111,60 +83,12 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td scope="row">1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>s/soles</td>
-                        </tr>     
-                       <tr>
-                          <td scope="row">1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>s/soles</td>
-                        </tr>   
-                        <tr>
-                          <td scope="row">1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>s/soles</td>
-                        </tr>   
-                        <tr>
-                          <td scope="row">1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>s/soles</td>
-                        </tr>   
-                        <tr>
-                          <td scope="row">1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>s/soles</td>
-                        </tr>   
-                        <tr>
-                          <td scope="row">1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>s/soles</td>
-                        </tr>   
-                        <tr>
-                          <td scope="row">1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>s/soles</td>
-                        </tr>   
-                        <tr>
-                          <td scope="row">1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>s/soles</td>
-                        </tr>   
-                        <tr>
-                          <td scope="row">1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>s/soles</td>
-                        </tr> 
+                        <tr v-for="usuario in listaProducto" :key="usuario.nomProducto">
+                          <td scope="row">{{usuario.producto}}</td>
+                          <td>{{usuario.precio}}</td>
+                          <td>{{usuario.cantidad}}</td>
+                          <td>{{usuario.PrecioTotal}}</td>
+                        </tr>-    
                         </tbody>
                     </table>
                     </div>
@@ -182,7 +106,7 @@
                           <div class="form-row justify-content-end">
                                           
                                 <div class="form-group col-3 mt-2">
-                                    <input type="button" class="btn btn-info btn-block mt-4 my-1 form-group col-12 btnguarda-registro" value="Registrar Pago" @click="RegistarPago" data-toggle="modal" data-target="#Modal"/>
+                                    <input type="button" class="btn btn-info btn-block mt-4 my-1 form-group col-12 btnguarda-registro" value="Registrar Pago" data-toggle="modal" data-target="#Modal"/>
                                 </div>                       
                           </div>       
                         </div>
@@ -206,28 +130,20 @@
                                     <input type="text" class="form-control" id="exampleInputPassword1" disabled>
                                 </div>
                                 <div class="form-group">
-                                <multiselect
-                                    :colSize="13"
-                                    label = "Tipo de Pago"
-                                    :optionList = "[
-                                        {
-                                            id   : 1,
-                                            name : 'EFECTIVO'
-                                        },
-                                        {
-                                            id   : 2,
-                                            name : 'YAPE'
-                                        },
-                                    ]"
-                                />
+                                <div class="form-group col-6">
+                                    <label>Tipo de pago</label>
+                                    <select name="select" class="form-control" v-model="nota_venta.num_documento">
+                                        <option v-for="documento in documentos" :key="documento.id" :value="documento.id_documentos">{{documento.nombre}}</option>-->
+                                    </select>
+                                </div>
                                 </div>
 
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" @click="Efectivo" data-toggle="modal" data-target="#ModalEfectivo">Efectivo</button>
-                                <button type="button" class="btn btn-danger" @click="Yape" data-toggle="modal" data-target="#ModalYape">Yape</button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalEfectivo">Efectivo</button>
+                                <button type="button" class="btn btn-danger"  data-toggle="modal" data-target="#ModalYape">Yape</button>
                             </div>
-                            </div>
+                            </div> 
                         </div>
                 </div>   
 
@@ -313,7 +229,7 @@
                                 </div>
                                 <div class="form-row">
                                     
-                                        <button type="button" class="btn btn-primary btn-block" @click="Adjuntar">Adjuntar Imagen</button>
+                                        <button type="button" class="btn btn-primary btn-block" >Adjuntar Imagen</button>
                                     
                                 </div>
                             </div>
@@ -334,13 +250,16 @@
 import Appbar from '../../../components/AppBar'
 import AppBar from '../../../components/AppBar.vue';
 import Navigation from '../../../components/NavigationComponent';
-import Multiselect from '../../../components/Multiselect';
+//import Multiselect from '../../../components/Multiselect';
+import data from '../../../data';
+import usuario from '../../../user';
+
 
 export default {
     components : {
         'app-bar'    : Appbar,
         'navigation' : Navigation,
-        'multiselect' : Multiselect
+        //'multiselect' : Multiselect
     },
     methods:{
        Buscar(){ this.$swal({
@@ -391,13 +310,54 @@ export default {
 
         VerDetalle(){
              this.$router.push({name:"formDetalleNV"});
+        },
+
+        async getTipoDocumentos(){
+            let response = await axios.get('api/cmbTipoDoc?token='+usuario.getData().token);
+            console.log('documentos',response);
+            if(response.data.status == "0"){
+                this.documentos = response.data.data;
+            }else{
+                alert('Error: ',response.data.msj);
+            }
         }
        
+    },
+    
+    data(){
+        return{
+            nota_venta : {
+                nom_vendedor: '',
+                fecha : '',
+                nombre_cliente : '',
+                num_documento : '',
+                tipoDocumento : '',
+                telefono : '',
+                direccion : '',
+                telefono : ''    
+            },
+            documentos : [],
+            listaProducto :[]
+        }
+    },
+    mounted(){
+        this.getTipoDocumentos();
+        console.log(data.getSelectedNV());
+        let usuario = data.getSelectedNV();
+        this.nota_venta.codigo = usuario.Codigo;
+        this.nota_venta.fecha = usuario.FechaEmision;
+        this.nota_venta.num_documento = usuario.N_Documento;
+        this.nota_venta.nombre_cliente = usuario.Cliente;
+        this.nota_venta.tipoDocumento = usuario.tipoDocumento;
+        this.nota_venta.direccion = usuario.Direccion;
+        this.nota_venta.telefono  = usuario.Celular;
+        this.nota_venta.nom_vendedor = usuario.Vendedor;
+
+        
     }
 }
 </script>
-<style 
-        Multiselectscoped>
+<style scoped>
 .user-form-container{
     display: flex;
     justify-content: space-between;

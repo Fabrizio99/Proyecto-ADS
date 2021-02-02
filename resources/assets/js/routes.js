@@ -2,8 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import LoginComponent from './components/LoginComponent'
 import LogoutComponent from './components/LogoutComponent'
-import store from './store'
 import VueSweetalert2 from 'vue-sweetalert2';
+import usuario from "./user";
 
 Vue.use(VueSweetalert2);
 
@@ -17,14 +17,9 @@ VueRouter.prototype.push = function push(location) {
 const routes = [
     {
         path: '/',
-        redirect: { name: 'login' }
+        name : 'inicio',
+        redirect: { name: 'main' }
     },
-    /*{
-        path: '/dashboard',
-        name: 'dashboard',
-        component: DashboardComponent,
-        meta: { requiresAuth: true }
-    },*/
     {
         path: '/login',
         name: 'login',
@@ -44,88 +39,117 @@ const routes = [
         path: '/usuarios',
         name: 'user',
         component: require('../js/views/mantenimiento/usuarios/UsuariosApp.vue'),
-        //meta: { requiresAuth: true }
+        meta : {
+            module : 'usuario'
+        }
     },
     {
         path: '/formulario-usuario/:accion',
         name: 'formUser',
         component: require('../js/views/mantenimiento/usuarios/FormUsuario'),
         props: true,
-        //meta: { requiresAuth: true }
+        meta : {
+            module : 'usuario'
+        }
     },
     {
         path: '/gestion-productos',
         name: 'gproductos',
         component: require('../js/views/mantenimiento/productos/ProductoApp.vue'),
-        //meta: { requiresAuth: true }
+        meta : {
+            module : 'producto'
+        }
     },
     {
-        path: '/form-crear-productos',
+        path: '/formulario-productos/:accion',
         name: 'crearproductos',
         component: require('../js/views/mantenimiento/productos/formCrearProducto.vue'),
-        //meta: { requiresAuth: true }
+        props: true,
     },
     {
         path: '/form-modificar-productos',
         name: 'modificarproductos',
         component: require('../js/views/mantenimiento/productos/formModificarProducto.vue'),
-        //meta: { requiresAuth: true }
+        meta : {
+            module : 'producto'
+        }
     },
     {    
         path: '/formulario-boletas-productos',
         name: 'formBolProd',
         component: require('../js/views/operaciones/entregarProductos/FrmBoletaProductos.vue'),
-        //meta: { requiresAuth: true }
+        meta : {
+            module : 'entregar producto'
+        }
     },
     {
         path: '/formulario-lista-productos',
         name: 'formProductos',
         component: require('../js/views/operaciones/entregarProductos/FrmListaProductos.vue'),
-        //meta: { requiresAuth: true }
+        meta : {
+            module : 'entregar producto'
+        }
     },
     {
         path: '/formulario-notaVenta-boletas',
         name: 'formNVB',
         component: require('../js/views/operaciones/emitirBoletaVenta/FrmNotaVentaBoleta.vue'),
-        //meta: { requiresAuth: true }
+        meta : {
+            module : 'emitir boleta de venta'
+        }
     },
     {
         path: '/formulario-detalle-notaVenta',
         name: 'formDetalleNV',
         component: require('../js/views/operaciones/emitirBoletaVenta/FrmDetalleNV.vue'),
-        //meta: { requiresAuth: true }
+        meta : {
+            module : 'emitir nota de venta'
+        }
     },
     {
         path: '/nota-venta',
         name: 'notaVenta',
         component: require('../js/views/operaciones/emitirNotaVenta/EmitirNotaVenta'),
-        //meta: { requiresAuth: true }
+        meta : {
+            module : 'emitir nota de venta'
+        }
     },
     {
         path: '/formulario-inventario',
         name: 'inventario',
         component: require('../js/views/reportes/InventariosApp.vue'),
-        //meta: { requiresAuth: true }
+        meta : {
+            module : 'inventario'
+        }
     },
     {
         path: '/formulario-ventafinal',
         name: 'VF',
         component: require('../js/views/reportes/ventafinal/VentasFinales.vue'),
-        //meta: { requiresAuth: true }
+        meta : {
+            module : 'venta finales del dia'
+        }
     },
     
     {
         path: '/reclamos',
         name: 'reclamos',
         component: require('../js/views/reclamos/ReclamosApp.vue'),
-        //meta: { requiresAuth: true }
+        meta : {
+            module : 'registrar reclamo'
+        }
+    },
+    {
+        path : '/error',
+        name : 'error',
+        component : require('../js/components/ErrorPage'),
     },
     {
         path : '*',
         name : '404',
         component : require('../js/components/404page'),
-        //meta: { requiresAuth: true }
     }
+
 ]
 
 
@@ -134,23 +158,27 @@ const router = new VueRouter({
 })
   
 router.beforeEach((to, from, next) => {
-    //random comment to check if clone branch works
-    // check if the route requires authentication and user is not logged in
-    if (to.matched.some(route => route.meta.requiresAuth) && !store.state.isLoggedIn) {
-        // redirect to login page
-        next({ name: 'login' })
-        return
-    }
-
-    // if logged in redirect to dashboard
-    if(to.path === '/login' && store.state.isLoggedIn) {
-        next({ name: 'dashboard' })
-        return
-    }
-
-    if(to.path == from.path)    return;
-
-    next()
+    next();
+    /*if(!usuario.getData()){
+        if(to.name != 'login'){
+            next({ name: 'login' });
+        }else{
+            next();
+        }
+    }else{
+        if(to.name == 'login'){
+            next(false);
+        }else if(to.name == 'main' || to.name == 'error' || to.name == 'inicio'){
+            next();
+        }else{
+            let {permisos} = usuario.getData();
+            if(permisos && permisos.includes(to.meta.module)){
+                next();
+            }else{
+                next({ name: 'error' });
+            }
+        }
+    }*/
 })
 
 export default router
