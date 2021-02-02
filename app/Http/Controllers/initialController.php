@@ -33,7 +33,6 @@ class initialController extends Controller
                         u.apellidos,
                         u.num_documento,
                         u.correo,
-                        u.fechaInicio,
                         u.telefono,
                         u.estado,
                         u.codigo,
