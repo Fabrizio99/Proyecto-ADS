@@ -39,7 +39,7 @@ Route::get('cmbCategoria', 'gProductosController@cmbCategoria' )->middleware('va
 Route::get('usuarioNV'  , 'emitirNotaVController@usuarioNV')->middleware('validateAuth');
 Route::get('ProductosL' , 'emitirNotaVController@ProductosL')->middleware('validateAuth');
 Route::post('guardarNV' , 'emitirNotaVController@guardarNV')->middleware('validateAuth');
-Route::post('eliminarNV', 'emitirNotaVController@geliminarNV')->middleware('validateAuth');
+Route::post('eliminarNV', 'emitirNotaVController@eliminarNV')->middleware('validateAuth');
 Route::post('updateNV'  , 'emitirNotaVController@updateNV')->middleware('validateAuth');
 
 //entregarPController

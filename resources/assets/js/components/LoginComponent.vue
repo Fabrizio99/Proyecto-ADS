@@ -10,7 +10,7 @@
                         <form @submit.prevent="submitLogin">
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Usuario</label>
-                                <input type="text" class="form-control" v-model="user"/>
+                                <input type="number" class="form-control" v-model="user"/>
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputPassword1" class="form-label">Contraseña</label>

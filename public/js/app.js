@@ -53745,7 +53745,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { type: "text" },
+                      attrs: { type: "number" },
                       domProps: { value: _vm.user },
                       on: {
                         input: function($event) {
@@ -68470,6 +68470,18 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -68483,28 +68495,73 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
   data: function data() {
     return {
       listanotaventas: [],
-      inputcodenventa: ''
+      inputcodenventa: '',
+      idNotaEliminar: undefined
     };
   },
 
   methods: {
-    buscarNotaVenta: function () {
+    confirmDeleteNotaVenta: function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
-        var response;
+        var body, response;
         return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (!(this.inputcodenventa.trim() != '')) {
-                  _context.next = 7;
-                  break;
-                }
-
+                body = {
+                  notaIdBv: this.idNotaEliminar,
+                  token: __WEBPACK_IMPORTED_MODULE_4__user__["a" /* default */].getData().token
+                };
                 _context.next = 3;
-                return axios.get('api/buscaNotaVByFechas?notaVid=' + this.inputcodenventa.trim() + '&token=' + __WEBPACK_IMPORTED_MODULE_4__user__["a" /* default */].getData().token);
+                return axios.post('api/eliminarNV', body);
 
               case 3:
                 response = _context.sent;
+
+                if (typeof response.data == "string") {
+                  alert('Error: ' + response.data);
+                }if (response.data.status == "0") {
+                  alert('Mensaje: Anulado correctamente');
+                  this.getNotasVenta();
+                } else {
+                  alert('Error: ' + response.data.msj);
+                }
+
+              case 6:
+              case 'end':
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function confirmDeleteNotaVenta() {
+        return _ref.apply(this, arguments);
+      }
+
+      return confirmDeleteNotaVenta;
+    }(),
+    openDeleteModal: function openDeleteModal(id) {
+      this.idNotaEliminar = id;
+      $('#deleteModal').modal('show');
+    },
+    buscarNotaVenta: function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
+        var response;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                if (!(this.inputcodenventa.trim() != '')) {
+                  _context2.next = 7;
+                  break;
+                }
+
+                _context2.next = 3;
+                return axios.get('api/buscaNotaVByFechas?notaVid=' + this.inputcodenventa.trim() + '&token=' + __WEBPACK_IMPORTED_MODULE_4__user__["a" /* default */].getData().token);
+
+              case 3:
+                response = _context2.sent;
 
                 console.log('respuesta nota de ventas ', response);
                 this.inputcodenventa = '';
@@ -68520,14 +68577,14 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
               case 7:
               case 'end':
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee, this);
+        }, _callee2, this);
       }));
 
       function buscarNotaVenta() {
-        return _ref.apply(this, arguments);
+        return _ref2.apply(this, arguments);
       }
 
       return buscarNotaVenta;
@@ -68568,18 +68625,18 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     },*/
 
     getNotasVenta: function () {
-      var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
+      var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
         var response;
-        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
                 this.Inputcodigo = '';
-                _context2.next = 3;
+                _context3.next = 3;
                 return axios.get('api/listaNotaV?token=' + __WEBPACK_IMPORTED_MODULE_4__user__["a" /* default */].getData().token);
 
               case 3:
-                response = _context2.sent;
+                response = _context3.sent;
 
                 console.log('respuesta ', response);
                 if (response.data.status == "0") {
@@ -68591,14 +68648,14 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
               case 6:
               case 'end':
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2, this);
+        }, _callee3, this);
       }));
 
       function getNotasVenta() {
-        return _ref2.apply(this, arguments);
+        return _ref3.apply(this, arguments);
       }
 
       return getNotasVenta;
@@ -68717,7 +68774,12 @@ var render = function() {
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(notaventa.estado))]),
                         _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(notaventa.MontoTotal))]),
+                        _c("td", [
+                          _vm._v(
+                            "S/." +
+                              _vm._s(Number(notaventa.MontoTotal).toFixed(2))
+                          )
+                        ]),
                         _vm._v(" "),
                         _c("td", { staticClass: "option text-center" }, [
                           _c("div", { staticClass: "dropdown" }, [
@@ -68747,7 +68809,7 @@ var render = function() {
                                           }
                                         }
                                       },
-                                      [_vm._v('"Ver detalles')]
+                                      [_vm._v("Ver detalles")]
                                     )
                                   : _vm._e(),
                                 _vm._v(" "),
@@ -68774,7 +68836,13 @@ var render = function() {
                                       "a",
                                       {
                                         staticClass: "dropdown-item",
-                                        on: { click: _vm.anularNV }
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.openDeleteModal(
+                                              notaventa.Codigo
+                                            )
+                                          }
+                                        }
                                       },
                                       [_vm._v("Anular")]
                                     )
@@ -68804,6 +68872,55 @@ var render = function() {
           )
         ],
         1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "deleteModal",
+            tabindex: "-1",
+            "aria-labelledby": "exampleModalLabel",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c("div", { staticClass: "modal-dialog" }, [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(3),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _vm._v(
+                  "\n           ¿Desea anular nota de venta NV-" +
+                    _vm._s(_vm.idNotaEliminar) +
+                    "?\n         "
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button", "data-dismiss": "modal" },
+                    on: { click: _vm.confirmDeleteNotaVenta }
+                  },
+                  [_vm._v("Aceptar")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("Cancelar")]
+                )
+              ])
+            ])
+          ])
+        ]
       )
     ],
     1
@@ -68857,6 +68974,31 @@ var staticRenderFns = [
       },
       [_c("i", { staticClass: "fas fa-ellipsis-v" })]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Aviso")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -69228,7 +69370,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
-//
 
 
 
@@ -69325,8 +69466,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     },
 
     data: function data() {
+        var _nota_venta;
+
         return {
-            nota_venta: _defineProperty({
+            nota_venta: (_nota_venta = {
                 nom_vendedor: '',
                 fecha: '',
                 nombre_cliente: '',
@@ -69334,7 +69477,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 tipoDocumento: '',
                 telefono: '',
                 direccion: ''
-            }, 'telefono', ''),
+            }, _defineProperty(_nota_venta, 'telefono', ''), _defineProperty(_nota_venta, 'monto_total', 0), _nota_venta),
             tipo: '',
             documentos: [],
             listaProducto: []
@@ -69352,6 +69495,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         this.nota_venta.direccion = usuario.Direccion;
         this.nota_venta.telefono = usuario.Celular;
         this.nota_venta.nom_vendedor = usuario.Vendedor;
+        this.nota_venta.monto_total = Number(usuario.MontoTotal);
         this.listaProducto = JSON.parse(usuario.Productos);
         this.tipo = __WEBPACK_IMPORTED_MODULE_4__data__["a" /* default */].getSelectedNV().tipo;
     }
@@ -69487,7 +69631,7 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
-                          attrs: { type: "text", disabled: "" },
+                          attrs: { type: "text", disabled: _vm.tipo == "ver" },
                           domProps: { value: _vm.nota_venta.nombre_cliente },
                           on: {
                             input: function($event) {
@@ -69570,7 +69714,7 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
-                          attrs: { type: "text", disabled: "" },
+                          attrs: { type: "text", disabled: _vm.tipo == "ver" },
                           domProps: { value: _vm.nota_venta.num_documento },
                           on: {
                             input: function($event) {
@@ -69600,7 +69744,7 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
-                          attrs: { type: "text", disabled: "" },
+                          attrs: { type: "text", disabled: _vm.tipo == "ver" },
                           domProps: { value: _vm.nota_venta.telefono },
                           on: {
                             input: function($event) {
@@ -69632,7 +69776,7 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
-                          attrs: { type: "text", disabled: "" },
+                          attrs: { type: "text", disabled: _vm.tipo == "ver" },
                           domProps: { value: _vm.nota_venta.direccion },
                           on: {
                             input: function($event) {
@@ -69667,11 +69811,15 @@ var render = function() {
                           _vm._v(_vm._s(usuario.producto))
                         ]),
                         _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(usuario.precio))]),
+                        _c("td", [
+                          _vm._v("S/." + _vm._s(usuario.precio.toFixed(2)))
+                        ]),
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(usuario.cantidad))]),
                         _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(usuario.PrecioTotal))])
+                        _c("td", [
+                          _vm._v("S/." + _vm._s(usuario.PrecioTotal.toFixed(2)))
+                        ])
                       ])
                     }),
                     0
@@ -69679,7 +69827,66 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(4),
+              _c("div", { staticClass: "row mx-4 mt-2" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "card col bg-light pt-4",
+                    staticStyle: { width: "18rem" }
+                  },
+                  [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-row justify-content-end" },
+                        [
+                          _c("div", { staticClass: "form-group col-3" }, [
+                            _c(
+                              "label",
+                              { attrs: { for: "exampleInputPassword1" } },
+                              [_vm._v("TOTAL")]
+                            ),
+                            _vm._v(" "),
+                            _c("input", {
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "text",
+                                id: "exampleInputPassword1",
+                                disabled: ""
+                              },
+                              domProps: {
+                                value:
+                                  "S/." + _vm.nota_venta.monto_total.toFixed(2)
+                              }
+                            })
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "form-row justify-content-end" },
+                        [
+                          _c("div", { staticClass: "form-group col-3 mt-2" }, [
+                            _vm.tipo != "ver"
+                              ? _c("input", {
+                                  staticClass:
+                                    "btn btn-info btn-block mt-4 my-1 form-group col-12 btnguarda-registro",
+                                  attrs: {
+                                    type: "button",
+                                    value: "Registrar Pago",
+                                    "data-toggle": "modal",
+                                    "data-target": "#Modal"
+                                  }
+                                })
+                              : _vm._e()
+                          ])
+                        ]
+                      )
+                    ])
+                  ]
+                )
+              ]),
               _vm._v(" "),
               _c(
                 "div",
@@ -69702,10 +69909,23 @@ var render = function() {
                     },
                     [
                       _c("div", { staticClass: "modal-content" }, [
-                        _vm._m(5),
+                        _c("div", { staticClass: "modal-header" }, [
+                          _vm.tipo == "ver"
+                            ? _c(
+                                "h5",
+                                {
+                                  staticClass: "modal-title",
+                                  attrs: { id: "exampleModalLabel" }
+                                },
+                                [_vm._v("Realizar pago")]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm._m(4)
+                        ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "modal-body" }, [
-                          _vm._m(6),
+                          _vm._m(5),
                           _vm._v(" "),
                           _c("div", { staticClass: "form-group" }, [
                             _c("div", { staticClass: "form-group col-6" }, [
@@ -69768,7 +69988,7 @@ var render = function() {
                           ])
                         ]),
                         _vm._v(" "),
-                        _vm._m(7)
+                        _vm._m(6)
                       ])
                     ]
                   )
@@ -69797,9 +70017,9 @@ var render = function() {
                     },
                     [
                       _c("div", { staticClass: "modal-content" }, [
-                        _vm._m(8),
+                        _vm._m(7),
                         _vm._v(" "),
-                        _vm._m(9),
+                        _vm._m(8),
                         _vm._v(" "),
                         _c("div", { staticClass: "modal-footer" }, [
                           _c(
@@ -69841,9 +70061,9 @@ var render = function() {
                     },
                     [
                       _c("div", { staticClass: "modal-content" }, [
-                        _vm._m(10),
+                        _vm._m(9),
                         _vm._v(" "),
-                        _vm._m(11),
+                        _vm._m(10),
                         _vm._v(" "),
                         _c("div", { staticClass: "modal-footer" }, [
                           _c(
@@ -69924,76 +70144,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row mx-4 mt-2" }, [
-      _c(
-        "div",
-        {
-          staticClass: "card col bg-light pt-4",
-          staticStyle: { width: "18rem" }
-        },
-        [
-          _c("div", { staticClass: "card-body" }, [
-            _c("div", { staticClass: "form-row justify-content-end" }, [
-              _c("div", { staticClass: "form-group col-3" }, [
-                _c("label", { attrs: { for: "exampleInputPassword1" } }, [
-                  _vm._v("TOTAL")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    id: "exampleInputPassword1",
-                    value: "S/.14.00",
-                    disabled: ""
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-row justify-content-end" }, [
-              _c("div", { staticClass: "form-group col-3 mt-2" }, [
-                _c("input", {
-                  staticClass:
-                    "btn btn-info btn-block mt-4 my-1 form-group col-12 btnguarda-registro",
-                  attrs: {
-                    type: "button",
-                    value: "Registrar Pago",
-                    "data-toggle": "modal",
-                    "data-target": "#Modal"
-                  }
-                })
-              ])
-            ])
-          ])
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "h5",
-        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
-        [_vm._v("Realizar pago")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
   },
   function() {
     var _vm = this

@@ -39,7 +39,7 @@
                             <div class="form-row">
                                 <div class="form-group col-3">
                                     <label >Cliente</label>
-                                    <input type="text" class="form-control"  v-model="nota_venta.nombre_cliente" disabled>
+                                    <input type="text" class="form-control"  v-model="nota_venta.nombre_cliente" :disabled="tipo == 'ver'">
                                 </div>
                                 <div class="form-group col-3">
                                     <label>Tipo documento</label>
@@ -50,18 +50,18 @@
                                 </div>
                                 <div class="form-group col-3">
                                     <label >N° Documento</label>
-                                    <input type="text" class="form-control" v-model="nota_venta.num_documento" disabled>
+                                    <input type="text" class="form-control" v-model="nota_venta.num_documento" :disabled="tipo == 'ver'">
                                 </div>
                                 <div class="form-group col-3">
                                     <label >Celular</label>
-                                    <input type="text" class="form-control" v-model="nota_venta.telefono" disabled>
+                                    <input type="text" class="form-control" v-model="nota_venta.telefono" :disabled="tipo == 'ver'">
                                 </div>
                             </div>
                             <div class="form-row">
                                
                                 <div class="form-group col-12">
                                     <label >Dirección</label>
-                                    <input type="text" class="form-control" v-model="nota_venta.direccion" disabled>
+                                    <input type="text" class="form-control" v-model="nota_venta.direccion" :disabled="tipo == 'ver'">
                                 </div>
                             </div>
                         </div>
@@ -85,10 +85,10 @@
                       <tbody>
                         <tr v-for="usuario in listaProducto" :key="usuario.nomProducto">
                           <td scope="row">{{usuario.producto}}</td>
-                          <td>{{usuario.precio}}</td>
+                          <td>S/.{{usuario.precio.toFixed(2)}}</td>
                           <td>{{usuario.cantidad}}</td>
-                          <td>{{usuario.PrecioTotal}}</td>
-                        </tr>  
+                          <td>S/.{{usuario.PrecioTotal.toFixed(2)}}</td>
+                        </tr>
                         </tbody>
                     </table>
                     </div>
@@ -99,14 +99,13 @@
                             <div class="form-row justify-content-end">
                                 <div class="form-group col-3">
                                     <label for="exampleInputPassword1">TOTAL</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1" value="S/.14.00" disabled>
-                                </div>
-                                      
-                          </div>    
+                                    <input type="text" class="form-control" id="exampleInputPassword1" :value="'S/.'+nota_venta.monto_total.toFixed(2)" disabled>
+                                </div>        
+                          </div>
                           <div class="form-row justify-content-end">
                                           
                                 <div class="form-group col-3 mt-2">
-                                    <input type="button" class="btn btn-info btn-block mt-4 my-1 form-group col-12 btnguarda-registro" value="Registrar Pago" data-toggle="modal" data-target="#Modal"/>
+                                    <input type="button" class="btn btn-info btn-block mt-4 my-1 form-group col-12 btnguarda-registro" value="Registrar Pago" data-toggle="modal" data-target="#Modal" v-if="tipo != 'ver'"/>
                                 </div>                       
                           </div>       
                         </div>
@@ -117,7 +116,7 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Realizar pago</h5>
+                                <h5 class="modal-title" id="exampleModalLabel" v-if="tipo == 'ver'">Realizar pago</h5>
 
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
@@ -334,7 +333,8 @@ export default {
                 tipoDocumento : '',
                 telefono : '',
                 direccion : '',
-                telefono : ''
+                telefono : '',
+                monto_total : 0
             },
             tipo : '',
             documentos : [],
@@ -353,6 +353,7 @@ export default {
         this.nota_venta.direccion = usuario.Direccion;
         this.nota_venta.telefono  = usuario.Celular;
         this.nota_venta.nom_vendedor = usuario.Vendedor;
+        this.nota_venta.monto_total = Number(usuario.MontoTotal);
         this.listaProducto = JSON.parse(usuario.Productos);
         this.tipo = data.getSelectedNV().tipo;
     }
