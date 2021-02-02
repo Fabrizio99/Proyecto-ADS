@@ -40,7 +40,7 @@ class gProductosController extends Controller
             "SELECT p.id_producto,
                     P.nombre,
                     p.stock,
-                    p.precio
+                    p.precio,
                     p.marka , 
                     p.precio ,
                     c.nombre,
