@@ -13,7 +13,7 @@ class emitirBvController extends Controller
         return mySQLConsulta(
             "SELECT nv.id_boletaventa AS Codigo,
             u.nombres AS Vendedor,
-            u.fechaInicio AS FechaEmision,
+            nv.fecha AS FechaEmision,
             nv.nombre_cliente AS Cliente,
             d.id_documentos AS tipoDocumento,
             nv.numdocumento_cliente AS N_Documento,
@@ -68,7 +68,7 @@ class emitirBvController extends Controller
         return mySQLConsulta(
             "SELECT nv.id_boletaventa AS Codigo,
                     u.nombres AS Vendedor,
-                    u.fechaInicio AS FechaEmision,
+                    nv.fecha AS FechaEmision,
                     nv.nombre_cliente AS Cliente,
                     d.id_documentos AS tipoDocumento,
                     nv.numdocumento_cliente AS N_Documento,
