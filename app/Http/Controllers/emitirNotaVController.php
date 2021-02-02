@@ -7,35 +7,35 @@ include '../app/helper/untils.php';
 class emitirNotaVController extends Controller
 {
     function usuarioNV (Request $req){
-    $isValidate = isNullEmpty($req->usuario);
+        $isValidate = isNullEmpty($req->usuario);
 
-    if($isValidate){
-        return $isValidate;
-    }
+        if($isValidate){
+            return $isValidate;
+        }
 
-    return mySQLConsulta("SELECT nombres, apellidos,codigo FROM  usuarios WHERE usuario='{$req->usuario}'");
+        return mySQLConsulta("SELECT nombres, apellidos,codigo FROM  usuarios WHERE usuario='{$req->usuario}'");
     }
     
     //BUSCAR PRODUCTOS
     function ProductosL (Request $req){
-    $isValidate = isNullEmpty($req->nombreP);
-    
-    if($isValidate){
-        return $isValidate;
-    }
+        $isValidate = isNullEmpty($req->nombreP);
+        
+        if($isValidate){
+            return $isValidate;
+        }
 
-    // if (strlen($req->nombreP) < 3) return "Ingrese el nombre del producto";
-    
-    return mySQLConsulta(
-        "SELECT p.nombre,
-                p.stock,
-                p.marka AS marca,
-                ct.nombre AS categoria,
-                p.precio 
-                FROM producto p,
-                     categoria ct 
-                WHERE (p.nombre LIKE'%{$req->nombreP}%') 
-                AND p.fk_producto_categoria = ct.id_categoria");
+        // if (strlen($req->nombreP) < 3) return "Ingrese el nombre del producto";
+        
+        return mySQLConsulta(
+            "SELECT p.nombre,
+                    p.stock,
+                    p.marka AS marca,
+                    ct.nombre AS categoria,
+                    p.precio 
+                    FROM producto p,
+                        categoria ct 
+                    WHERE (p.nombre LIKE'%{$req->nombreP}%') 
+                    AND p.fk_producto_categoria = ct.id_categoria");
     }
     
     //GUARDAR NOTA DE VENTA FINAL
