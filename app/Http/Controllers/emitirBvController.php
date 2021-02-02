@@ -53,8 +53,7 @@ class emitirBvController extends Controller
     //--Busqueda de Notas por fechas y codigo 
     function buscaNotaVByFechas(Request $req){
         
-        $Validacion = (isNullEmpty($req->notaVid) != null) && (isNullEmpty($req->fechaInicio) != null) && 
-                      (isNullEmpty($req->fechaFin) != null);
+        $Validacion = (isNullEmpty($req->notaVid) != null);
         
         //validacion de los cmpsNotaVenta
         if ($Validacion == 1) {
@@ -99,9 +98,9 @@ class emitirBvController extends Controller
             FROM notadeventas AS nv,
                     documentos   AS d,
                     usuarios     AS u
-            WHERE (nv.id_boletaventa = '{$req->notaVid}' OR nv.fecha BETWEEN DATE_FORMAT('{$req->fechaInicio}', '%Y-%m-%d')  AND DATE_FORMAT('{$req->fechaFin}', '%Y-%m-%d') )
-                AND d.id_documentos   = nv.DOCUMENTOS_id_documentos
-                AND u.id_usuario      = nv.USUARIOS_id_usuario"
+            WHERE (nv.id_boletaventa = '{$req->notaVid}' 
+              AND d.id_documentos   = nv.DOCUMENTOS_id_documentos
+              AND u.id_usuario      = nv.USUARIOS_id_usuario"
         );
 
     }
