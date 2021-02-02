@@ -73,7 +73,7 @@ class gProductosController extends Controller
         isNullEmpty($req->nombre , 'nombreP', 'El campo nombre no puede ser vacio.') ?:
         isNullEmpty($req->marka  , 'marca'  , 'El campo marca  no puede ser vacio.') ?: 
         isNullEmpty($req->precio , 'precio' , 'El campo precio  no puede ser vacio.') ?:
-        isNullEmpty($req->categoria , 'categoria' , 'El campo categoria  no puede ser vacio.') ?:  
+        isNullEmpty($req->id_categoria , 'id_categoria' , 'El campo categoria  no puede ser vacio.') ?:  
         isNullEmpty($req->stock  , 'stock'  , 'El campo stock no puede ser vacio.');
         
 
@@ -83,13 +83,13 @@ class gProductosController extends Controller
 
         return mySQLInsert(
             " UPDATE producto p,categoria c
-            SET p.nombre = '{$req->nombre}', 
-                p.marka = '{$req->marka}', 
-                p.precio = '{$req->precio}', 
-                p.stock = '{$req->stock}',
-                p.fk_producto_categoria = id_categoria
-          WHERE id_producto = '{$req->idP}'
-          AND c.nombre='{$req->categoria}'"
+                 SET p.nombre = '{$req->nombre}', 
+                     p.marka = '{$req->marka}', 
+                     p.precio = '{$req->precio}', 
+                     p.stock = '{$req->stock}',
+                     p.fk_producto_categoria = id_categoria
+               WHERE id_producto = '{$req->idP}'
+                 AND c.id_categoria ='{$req->id_categoria}'"
               ,
              "PRODUCTO MODIFICADO DE FORMA EXITOSA"
         );
