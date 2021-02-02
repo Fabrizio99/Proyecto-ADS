@@ -47,7 +47,6 @@ class emitirNotaVController extends Controller
         $isValidate = isNullEmpty($req->nombre   , 'nombreP'  , 'El campo nombre no puede ser vacio.') ?:
                       isNullEmpty($req->tipoDoc    , 'tipoD'    , 'El campo tipo de documento no puede ser vacio.') ?: 
                       isNullEmpty($req->numDoc  , 'numeroD'  , 'El campo numero de documento no puede ser vacio.') ?: 
-                      isNullEmpty($req->cantidad    , 'cantidad'    , 'El campo cantidad de documento no puede ser vacio.') ?: 
                       isNullEmpty($req->direccion  , 'direccion'  , 'El campo direccion no puede ser vacio.');
                       isNullEmpty($req->celular  ,'celular'   , 'El campo celulaar no puede ser vacio.');
                       isNullEmpty($req->fecha    ,'fecha'     , 'El campo celulaar no puede ser vacio.');
