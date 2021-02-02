@@ -45,12 +45,12 @@ class emitirNotaVController extends Controller
         $TIPO_DNI = 1;
         $TIPO_PASAPORTE = 2;
 
-        $isValidate = isNullEmpty($req->nombre   , 'nombreP'  , 'El campo nombre no puede ser vacio.') ?:
-                      isNullEmpty($req->tipoDoc    , 'tipoD'    , 'El campo tipo de documento no puede ser vacio.') ?: 
-                      isNullEmpty($req->numDoc  , 'numeroD'  , 'El campo numero de documento no puede ser vacio.') ?: 
-                      isNullEmpty($req->direccion  , 'direccion'  , 'El campo direccion no puede ser vacio.');
-                      isNullEmpty($req->celular  ,'celular'   , 'El campo celulaar no puede ser vacio.');
-                      isNullEmpty($req->fecha    ,'fecha'     , 'El campo celulaar no puede ser vacio.');
+        $isValidate = isNullEmpty($req->nombre    , 'nombreP'   , 'El campo nombre no puede ser vacio.') ?:
+                      isNullEmpty($req->tipoDoc   , 'tipoD'     , 'El campo tipo de documento no puede ser vacio.') ?: 
+                      isNullEmpty($req->numDoc    , 'numeroD'   , 'El campo numero de documento no puede ser vacio.') ?: 
+                      isNullEmpty($req->direccion , 'direccion' , 'El campo direccion no puede ser vacio.');
+                      isNullEmpty($req->celular   , 'celular'   , 'El campo celulaar no puede ser vacio.');
+                      isNullEmpty($req->fecha     , 'fecha'     , 'El campo celulaar no puede ser vacio.');
         
          if($isValidate){
            return $isValidate;
@@ -112,6 +112,101 @@ class emitirNotaVController extends Controller
                    ]
              );
     }
+
+    function eliminarNV(Request $req) {
+        $validacion = isNullEmpty($req->notaIdBv,'','El notaIdBv no puede estar vacio') ;
+
+        if($validacion){
+            return $validacion;
+        }
+
+        return $modificar= mySQLupDate(
+            "UPDATE notadeventas AS nv 
+                SET nv.estado = 'ELIMINADO'
+              WHERE nv.id_boletaventa = '{$req->notaIdBv}'",
+            "Se elimino la nota de ventas correctamente."
+        ); 
+    }
+
+    function updateNV(Request $req) {
+        
+        $TIPO_DNI = 1;
+        $TIPO_PASAPORTE = 2;
+        
+        $validacion = isNullEmpty($req->nombre    , 'nombreP'  , 'El campo nombre no puede ser vacio.') ?:
+                      isNullEmpty($req->tipoDoc   , 'tipoD'    , 'El campo tipo de documento no puede ser vacio.') ?: 
+                      isNullEmpty($req->numDoc    , 'numeroD'  , 'El campo numero de documento no puede ser vacio.') ?: 
+                      isNullEmpty($req->direccion , 'direccion', 'El campo direccion no puede ser vacio.');
+                      isNullEmpty($req->celular   , 'celular'  , 'El campo celulaar no puede ser vacio.');
+                      isNullEmpty($req->fecha     , 'fecha'    , 'El campo celulaar no puede ser vacio.');;
+
+        if($isValidate){
+            return $isValidate;
+        }
+        
+        //validación del dni caracteres
+        if (strlen($req->numDoc) != 8 && $req->tipoDoc == $TIPO_DNI ) { // TIPO     
+            return JSON_ENCODE(
+                (object) [
+                        'status' => $_SESSION["STATUS_CONTROL"],
+                        'msj'    => 'Debe tener 8 caracteres sí es un DNI.'
+                        ] 
+                    ); 
+        } else if (strlen($req->numDoc) != 12 && $req->tipoDoc == $TIPO_PASAPORTE ) { // CARNET DE PASAPORTE
+            return JSON_ENCODE(
+                (object) [
+                        'status' => $_SESSION["STATUS_CONTROL"],
+                        'msj'    => 'Debe tener  12 caracteres sí es un PASAPORTE..'
+                        ]
+                );
+        }
+        
+        $req->listProduct = json_decode($req->listProduct);
+
+        if (!$req->listProduct || count($req->listProduct) == 0 ) {
+            return JSON_ENCODE(
+                (object) [
+                        'status' => $_SESSION["STATUS_CONTROL"],
+                        'msj'    => 'Debe tener al menos 1 producto seleccionado.'
+                    ]
+                );
+        }  
+
+        mySQLupDate(
+            "UPDATE notadeventas 
+                SET DOCUMENTOS_id_documentos = '{$req->tipoDoc}',
+                    USUARIOS_id_usuario = '{$req->idU}',
+                    fecha = DATE_FORMAT('{$req->fecha}', '%Y-%m-%d') ,
+                    nombre_cliente = '{$req->nombre}',
+                    numdocumento_cliente = '{$req->numDoc}',
+                    telefono_cliente = '{$req->celular}',
+                    estado = 'POR ATENDER',
+                    monto  = '{$req->monto}' ,
+                    direccion_cliente = '{$req->direccion}'
+              WHERE id_boletaventa = '{$req->notaIdBv}'"
+        ); 
+
+        foreach ($req->listProduct as &$valor) {
+
+            mySQLDelete("DELETE FROM notadeventas_has_producto WHERE NOTADEVENTAS_id_boletaventa = '{$req->notaIdBv}'");
+
+            mySQLInsert(
+                " INSERT INTO notadeventas_has_producto (NOTADEVENTAS_id_boletaventa,PRODUCTO_id_producto,cantidad)
+                    VALUES ('{$req->notaIdBv}','{$valor->id_producto}', '{$valor->cantidad}');
+                "
+            );
+
+            // AQUI HACES TU UPDATE DE CANTIDAD DE STOCK   '{$valor->id_producto}', '{$valor->cantidad}'
+
+        }
+        return JSON_ENCODE(
+            (object) [
+                    'status' => $_SESSION["STATUS_SUCCES"],
+                    'msj'    => 'SE MODIFICO LOS ELEMENTOS CON EXITO.'
+                ]
+            );
+    }
+
 }
 
 

@@ -36,9 +36,11 @@ Route::post('registrarP'  , 'gProductosController@registrarP' )->middleware('val
 Route::get('cmbCategoria', 'gProductosController@cmbCategoria' )->middleware('validateAuth');
 
 //emitirNotaVController
-Route::get('usuarioNV' , 'emitirNotaVController@usuarioNV')->middleware('validateAuth');
-Route::get('ProductosL', 'emitirNotaVController@ProductosL')->middleware('validateAuth');
-Route::post('guardarNV', 'emitirNotaVController@guardarNV')->middleware('validateAuth');
+Route::get('usuarioNV'  , 'emitirNotaVController@usuarioNV')->middleware('validateAuth');
+Route::get('ProductosL' , 'emitirNotaVController@ProductosL')->middleware('validateAuth');
+Route::post('guardarNV' , 'emitirNotaVController@guardarNV')->middleware('validateAuth');
+Route::post('eliminarNV', 'emitirNotaVController@geliminarNV')->middleware('validateAuth');
+Route::post('updateNV'  , 'emitirNotaVController@updateNV')->middleware('validateAuth');
 
 //entregarPController
 Route::get('listaB'        ,'entregarPController@listaB')->middleware('validateAuth');
