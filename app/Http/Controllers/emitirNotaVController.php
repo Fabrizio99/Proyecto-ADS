@@ -137,8 +137,7 @@ class emitirNotaVController extends Controller
                       isNullEmpty($req->tipoDoc   , 'tipoD'    , 'El campo tipo de documento no puede ser vacio.') ?: 
                       isNullEmpty($req->numDoc    , 'numeroD'  , 'El campo numero de documento no puede ser vacio.') ?: 
                       isNullEmpty($req->direccion , 'direccion', 'El campo direccion no puede ser vacio.')?: 
-                      isNullEmpty($req->celular   , 'celular'  , 'El campo celulaar no puede ser vacio.')?: 
-                      isNullEmpty($req->fecha     , 'fecha'    , 'El campo celulaar no puede ser vacio.');
+                      isNullEmpty($req->celular   , 'celular'  , 'El campo celulaar no puede ser vacio.');
 
         if($validacion){
             return $validacion;
@@ -175,8 +174,6 @@ class emitirNotaVController extends Controller
         mySQLupDate(
             "UPDATE notadeventas 
                 SET DOCUMENTOS_id_documentos = '{$req->tipoDoc}',
-                    USUARIOS_id_usuario = '{$req->idU}',
-                    fecha = DATE_FORMAT('{$req->fecha}', '%Y-%m-%d') ,
                     nombre_cliente = '{$req->nombre}',
                     numdocumento_cliente = '{$req->numDoc}',
                     telefono_cliente = '{$req->celular}',
