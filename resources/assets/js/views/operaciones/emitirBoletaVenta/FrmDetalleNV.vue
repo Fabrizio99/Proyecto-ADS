@@ -87,8 +87,14 @@
                         <tr v-for="usuario in listaProducto" :key="usuario.nomProducto">
                           <td scope="row">{{usuario.producto}}</td>
                           <td>S/.{{usuario.precio.toFixed(2)}}</td>
-                          <td>{{usuario.cantidad}}</td>
+                          <td v-if="tipo == 'ver'">{{usuario.cantidad}}</td>
+                          <td v-else>sandfjdsbfksds</td>
                           <td>S/.{{usuario.PrecioTotal.toFixed(2)}}</td>
+                        <td scope="col" v-if="tipo != 'ver'">
+                            <div class="btn btn-danger"  id="dropdownMenuButton" @click="deleteProduct(usuario.id_producto)">
+                                <i class="fas fa-trash"></i>
+                            </div>
+                        </td>
                         </tr>
                         </tbody>
                     </table>
@@ -104,10 +110,9 @@
                                 </div>        
                           </div>
                           <div class="form-row justify-content-end">
-                                          
                                 <div class="form-group col-3 mt-2">
-                                    <input type="button" class="btn btn-info btn-block mt-4 my-1 form-group col-12 btnguarda-registro" value="Registrar Pago" data-toggle="modal" data-target="#Modal" v-if="tipo != 'ver'"/>
-                                </div>                       
+                                    <input type="button" class="btn btn-info btn-block mt-4 my-1 form-group col-12 btnguarda-registro" value="Guardar cambios" data-toggle="modal" data-target="#Modal" v-if="tipo != 'ver'"/>
+                                </div>
                           </div>       
                         </div>
                     </div>
@@ -242,6 +247,28 @@
                 
             </div>
          </div>
+
+
+         <div class="modal fade" id="eliminarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Aviso</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                ¿Desea eliminar el producto?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" @click="confirmDelete">Aceptar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
      </div>
 </template>
 
@@ -262,6 +289,16 @@ export default {
         //'multiselect' : Multiselect
     },
     methods:{
+        confirmDelete(){
+            console.log(this.productoEliminar);
+        this.listaProducto = this.listaProducto.filter(p=>p.id_producto!=this.productoEliminar);
+        this.productoEliminar = undefined;
+      },
+        deleteProduct(index){
+            console.log({index});
+        $('#eliminarModal').modal('show');
+        this.productoEliminar = index;
+      },
        Buscar(){ this.$swal({
         icon: 'error',
         title: 'Error',
@@ -339,7 +376,8 @@ export default {
             },
             tipo : '',
             documentos : [],
-            listaProducto :[]
+            listaProducto :[],
+            productoEliminar : undefined
         }
     },
     mounted(){

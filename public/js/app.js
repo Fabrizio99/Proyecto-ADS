@@ -69420,6 +69420,33 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -69435,6 +69462,20 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         //'multiselect' : Multiselect
     },
     methods: {
+        confirmDelete: function confirmDelete() {
+            var _this = this;
+
+            console.log(this.productoEliminar);
+            this.listaProducto = this.listaProducto.filter(function (p) {
+                return p.id_producto != _this.productoEliminar;
+            });
+            this.productoEliminar = undefined;
+        },
+        deleteProduct: function deleteProduct(index) {
+            console.log({ index: index });
+            $('#eliminarModal').modal('show');
+            this.productoEliminar = index;
+        },
         Buscar: function Buscar() {
             this.$swal({
                 icon: 'error',
@@ -69530,7 +69571,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             }, _defineProperty(_nota_venta, 'telefono', ''), _defineProperty(_nota_venta, 'monto_total', 0), _nota_venta),
             tipo: '',
             documentos: [],
-            listaProducto: []
+            listaProducto: [],
+            productoEliminar: undefined
         };
     },
     mounted: function mounted() {
@@ -69887,11 +69929,33 @@ var render = function() {
                           _vm._v("S/." + _vm._s(usuario.precio.toFixed(2)))
                         ]),
                         _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(usuario.cantidad))]),
+                        _vm.tipo == "ver"
+                          ? _c("td", [_vm._v(_vm._s(usuario.cantidad))])
+                          : _c("td", [_vm._v("sandfjdsbfksds")]),
                         _vm._v(" "),
                         _c("td", [
                           _vm._v("S/." + _vm._s(usuario.PrecioTotal.toFixed(2)))
-                        ])
+                        ]),
+                        _vm._v(" "),
+                        _vm.tipo != "ver"
+                          ? _c("td", { attrs: { scope: "col" } }, [
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "btn btn-danger",
+                                  attrs: { id: "dropdownMenuButton" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.deleteProduct(
+                                        usuario.id_producto
+                                      )
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "fas fa-trash" })]
+                              )
+                            ])
+                          : _vm._e()
                       ])
                     }),
                     0
@@ -69946,7 +70010,7 @@ var render = function() {
                                     "btn btn-info btn-block mt-4 my-1 form-group col-12 btnguarda-registro",
                                   attrs: {
                                     type: "button",
-                                    value: "Registrar Pago",
+                                    value: "Guardar cambios",
                                     "data-toggle": "modal",
                                     "data-target": "#Modal"
                                   }
@@ -70158,6 +70222,51 @@ var render = function() {
           )
         ],
         1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "eliminarModal",
+            tabindex: "-1",
+            "aria-labelledby": "exampleModalLabel",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c("div", { staticClass: "modal-dialog" }, [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(10),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _vm._v("\n           ¿Desea eliminar el producto?\n         ")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button", "data-dismiss": "modal" },
+                    on: { click: _vm.confirmDelete }
+                  },
+                  [_vm._v("Aceptar")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("Cancelar")]
+                )
+              ])
+            ])
+          ])
+        ]
       )
     ],
     1
@@ -70460,6 +70569,31 @@ var staticRenderFns = [
           [_vm._v("Adjuntar Imagen")]
         )
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Aviso")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
     ])
   }
 ]
