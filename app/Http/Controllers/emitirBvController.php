@@ -184,7 +184,7 @@ function registrarPago(Request $req){
         ); 
     }
 
-    $resultBoleta = mySQLConsulta("SELECT b.idB_boleta AS N,
+    $resultBoleta = mySQLConsulta("SELECT idB_boleta AS N,
     b.codigo_boleta AS Codigo FROM boleta ORDER BY 1 DESC LIMIT 1");
 
     return JSON_ENCODE(
