@@ -91,7 +91,6 @@ class emitirNotaVController extends Controller
 
 
         foreach ($req->listProduct as &$valor) {
-
             mySQLInsert(
                 " INSERT INTO notadeventas_has_producto (NOTADEVENTAS_id_boletaventa,PRODUCTO_id_producto,cantidad)
                   SELECT id_boletaventa, '{$valor->id_producto}', '{$valor->cantidad}'  
@@ -100,11 +99,8 @@ class emitirNotaVController extends Controller
                     LIMIT 1 
                    "
               );
-
-
-              // AQUI HACES TU UPDATE DE CANTIDAD DE STOCK   '{$valor->id_producto}', '{$valor->cantidad}'
-
         }
+
         return JSON_ENCODE(
             (object) [
                      'status' => $_SESSION["STATUS_SUCCES"],

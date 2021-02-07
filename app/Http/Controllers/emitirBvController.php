@@ -111,17 +111,38 @@ class emitirBvController extends Controller
 
     function registrarPago(Request $req){
        
-        $validacion =   isNullEmpty($req->montoPagar,'','El montoPagar no puede estar vacio') ?:
-                        isNullEmpty($req->notaIdBv,'','El notaIdBv no puede estar vacio') ?: 
-                        isNullEmpty($req->fecha,'','fecha','La fecha no puede estar vacia') ?:
-                        isNullEmpty($req->tipopago,'','El seleccione un tipo de pago')?:
-                        isNullEmpty($req->montorecibido,'','El montorecibido no puede estar vacio');
+        $validacion = isNullEmpty($req->montoPagar,'','El montoPagar no puede estar vacio') ?:
+                      isNullEmpty($req->notaIdBv,'','El notaIdBv no puede estar vacio') ?: 
+                      isNullEmpty($req->tipopago,'','El seleccione un tipo de pago');
                                             
         //Validacion de cmp Yape y Efectivo
         if($validacion){
             return $validacion;
         }
         
+                
+        $req->listProduct = json_decode($req->listProduct);
+
+        if (!$req->listProduct || count($req->listProduct) == 0 ) {
+            return JSON_ENCODE(
+                (object) [
+                         'status' => $_SESSION["STATUS_CONTROL"],
+                         'msj'    => 'Debe tener al menos 1 producto seleccionado.'
+                       ]
+                 );
+        }  
+
+        foreach ($req->listProduct as &$valor) {
+            mySQLInsert(
+                " INSERT INTO notadeventas_has_producto (NOTADEVENTAS_id_boletaventa,PRODUCTO_id_producto,cantidad)
+                  SELECT id_boletaventa, '{$valor->id_producto}', '{$valor->cantidad}'  
+                    FROM notadeventas nv
+                    ORDER BY 1 DESC
+                    LIMIT 1 
+                   "
+              );
+        }
+
         //Modificación de Productos (Se reduce los productos al registrar una boleta)
         $modificar= mySQLupDate(
             "UPDATE producto AS p,
