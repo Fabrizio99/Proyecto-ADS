@@ -136,7 +136,7 @@ function registrarPago(Request $req){
     } 
      
     if($req->tipopago == $TIPO_EFECTIVO){
-        return mySQLInsert(
+        mySQLInsert(
             "INSERT INTO boleta (TIPOPAGO_id_tipopago, NOTADEVENTAS_id_boletaventa, fecha, monto) 
                   VALUES ('{$req->tipopago}','{$req->notaIdBv}',DATE_FORMAT('{$req->fecha}', '%Y-%m-%d') ,'{$req->montorecibido}')",'SE REGISTRO EL PAGO POR EFECTIVO');
     } else {
@@ -146,7 +146,7 @@ function registrarPago(Request $req){
         }
     
 
-        return mySQLInsert(
+        mySQLInsert(
             "INSERT INTO boleta (TIPOPAGO_id_tipopago, NOTADEVENTAS_id_boletaventa, fecha, telefono_yape, monto) 
                   VALUES ('{$req->tipopago}','{$req->notaIdBv}', DATE_FORMAT(NOW(), '%Y-%m-%d'),'{$req->telefonoYape}', '{$req->montorecibido}')",'SE REGISTRO EL PAGO POR YAPE');
     }  
@@ -181,6 +181,13 @@ function registrarPago(Request $req){
                 ]
         ); 
     }
+
+    return JSON_ENCODE(
+        (object) [
+            'msj'    => 'Se pago correctamente la boleta',
+            'status' => 0
+            ]
+    ); 
 } 
 }
 
