@@ -165,6 +165,13 @@ function registrarPago(Request $req){
     }
 
     $modificar = json_decode($modificar);
+
+    mySQLupDate( // CAMBIAR EL ESTADO 
+        "UPDATE notadeventas AS nv 
+            SET nv.estado = 'ATENDIDO'
+        WHERE nv.id_boletaventa = '{$req->notaIdBv}'",
+        "Se elimino la nota de ventas correctamente."
+    ); 
       
     if ($modificar->status <> 0) {
         return JSON_ENCODE(
