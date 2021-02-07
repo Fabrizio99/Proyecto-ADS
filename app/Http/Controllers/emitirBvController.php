@@ -45,7 +45,8 @@ class emitirBvController extends Controller
             documentos   AS d,
             usuarios     AS u
     WHERE d.id_documentos   = nv.DOCUMENTOS_id_documentos
-      AND u.id_usuario      = nv.USUARIOS_id_usuario"
+      AND u.id_usuario      = nv.USUARIOS_id_usuario
+      AND nv.estado = 'POR ATENDER'"
         );
 
     }
@@ -102,7 +103,8 @@ class emitirBvController extends Controller
                     usuarios     AS u
             WHERE nv.id_boletaventa = '{$req->notaVid}' 
               AND d.id_documentos   = nv.DOCUMENTOS_id_documentos
-              AND u.id_usuario      = nv.USUARIOS_id_usuario"
+              AND u.id_usuario      = nv.USUARIOS_id_usuario
+              AND nv.estado = 'POR ATENDER'"
         );
 
     }
