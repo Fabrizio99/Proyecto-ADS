@@ -107,108 +107,74 @@ class emitirBvController extends Controller
 
     }
 
-    //----Angel va supervisar esta Función (TAREA PARA ANGEL )
+//----Angel va supervisar esta Función (TAREA PARA ANGEL )
 
-    function registrarPago(Request $req){
-       
-        $validacion = isNullEmpty($req->montoPagar,'','El montoPagar no puede estar vacio') ?:
-                      isNullEmpty($req->notaIdBv,'','El notaIdBv no puede estar vacio') ?: 
-                      isNullEmpty($req->tipopago,'','El seleccione un tipo de pago');
-                                            
-        //Validacion de cmp Yape y Efectivo
-        if($validacion){
+function registrarPago(Request $req){
+    $TIPO_EFECTIVO = 1;
+    $TIPO_YAPE = 2;
+
+    $validacion =   isNullEmpty($req->montoPagar, 'montoPagar', 'El montoPagar no puede estar vacio') ?:
+                    isNullEmpty($req->notaIdBv  , 'notaIdBv'  , 'El notaIdBv no puede estar vacio'  ) ?: 
+                    isNullEmpty($req->tipopago  , 'tipopago'  , 'El seleccione un tipo de pago'     );
+                                        
+    //Validacion de cmp Yape y Efectivo
+    if($validacion){
+        return $validacion;
+    }
+
+    // CONVIERTO EL STRING A UNA LISTA DE OBJETOS 
+    $req->listProduct = json_decode($req->listProduct);
+
+    // VALIDAR QUE LA LISTA CONTENGA AL MENOS UN ELEMNTO O QUE EXISTA 
+    if (!$req->listProduct || count($req->listProduct) == 0 ) {
+        return JSON_ENCODE(
+            (object) [
+                     'status' => $_SESSION["STATUS_CONTROL"],
+                     'msj'    => 'Debe tener al menos 1 producto seleccionado.'
+                   ]
+             );
+    } 
+     
+    if($req->tipopago == $TIPO_EFECTIVO){
+        return mySQLInsert(
+            "INSERT INTO boleta (TIPOPAGO_id_tipopago, NOTADEVENTAS_id_boletaventa, fecha, monto) 
+                  VALUES ('{$req->tipopago}','{$req->notaIdBv}',DATE_FORMAT('{$req->fecha}', '%Y-%m-%d') ,'{$req->montorecibido}')",'SE REGISTRO EL PAGO POR EFECTIVO');
+    } else {
+        $validacion = isNullEmpty($req->telefonoYape,'telefonoYape','El telefonoYape no puede estar vacio');
+        if($validacion) {
             return $validacion;
         }
-        
-                
-        $req->listProduct = json_decode($req->listProduct);
+    
 
-        if (!$req->listProduct || count($req->listProduct) == 0 ) {
-            return JSON_ENCODE(
-                (object) [
-                         'status' => $_SESSION["STATUS_CONTROL"],
-                         'msj'    => 'Debe tener al menos 1 producto seleccionado.'
-                       ]
-                 );
-        }  
+        return mySQLInsert(
+            "INSERT INTO boleta (TIPOPAGO_id_tipopago, NOTADEVENTAS_id_boletaventa, fecha, telefono_yape, monto) 
+                  VALUES ('{$req->tipopago}','{$req->notaIdBv}', DATE_FORMAT(NOW(), '%Y-%m-%d'),'{$req->telefonoYape}', '{$req->montorecibido}')",'SE REGISTRO EL PAGO POR YAPE');
+    }  
 
-        foreach ($req->listProduct as &$valor) {
-            mySQLInsert(
-                " INSERT INTO notadeventas_has_producto (NOTADEVENTAS_id_boletaventa,PRODUCTO_id_producto,cantidad)
-                  SELECT id_boletaventa, '{$valor->id_producto}', '{$valor->cantidad}'  
-                    FROM notadeventas nv
-                    ORDER BY 1 DESC
-                    LIMIT 1 
-                   "
-              );
-        }
+
+    foreach ($req->listProduct as &$valor) {
 
         //Modificación de Productos (Se reduce los productos al registrar una boleta)
-        $modificar= mySQLupDate(
-            "UPDATE producto AS p,
-                    notadeventas_has_producto AS nhp, 
-                    notadeventas AS nv 
-                SET p.stock=p.stock-nhp.cantidad  
-              WHERE p.id_producto = '{$req->idProducto}'
-                AND nhp.PRODUCTO_id_producto 
-                AND nv.id_boletaventa = nhp.NOTADEVENTAS_id_boletaventa
-                AND nv.id_boletaventa = '{$req->notaIdBv}'"
+
+        $modificar = mySQLupDate(
+            "UPDATE producto AS p
+                SET p.stock  = p.stock - '{$valor->cantidad}',
+                    p.estado = (CASE WHEN p.stock - '{$valor->cantidad}' > 0 THEN '1' ELSE '0' END)
+              WHERE p.id_producto = '{$valor->id_producto}';"
         ); 
-          /*
-          UPDATE producto AS p,
-                    notadeventas_has_producto AS nhp, 
-                    notadeventas AS nv 
-                SET p.stock=p.stock-nhp.cantidad  
-              WHERE (CASE WHEN p.stock >11 
-                     THEN p.estado = 1
-                     ELSE 
-                     p.estado = 0
-                     END  )
-              AND p.id_producto = nhp.PRODUCTO_id_producto 
-                AND nhp.NOTADEVENTAS_id_boletaventa = nv.id_boletaventa 
-                AND nv.id_boletaventa = 1
-				AND p.id_producto = 1
-                
-          */
-          $modificar = json_decode($modificar);
-          
-          if ($modificar->status <> 0) {
-            return JSON_ENCODE(
-                (object) [
-                    'msj'    => 'No se cambio la cantidad de productos correctamente',
-                    'status' => '0'
-                 ]
-            );  }
-              
-            
-            echo'no funciona';
-            if($req->tipopago == 1){
-                
-                 return mySQLInsert("INSERT INTO boleta  
-                 (TIPOPAGO_id_tipopago,
-                 NOTADEVENTAS_id_boletaventa,
-                 fecha,
-                 monto) 
-                 VALUES('{$req->tipopago}','{$req->notaIdBv}','{$req->fecha}','{$req->montorecibido}')",'ATENDIDO');
-                 
-                }else if($req->tipopago == 2){
-                    return mySQLInsert("INSERT INTO boleta  
-                    (TIPOPAGO_id_tipopago,
-                    NOTADEVENTAS_id_boletaventa,
-                    fecha,
-                     telefono_yape,
-                      monto) 
-                       VALUES('{$req->tipopago}','{$req->notaIdBv}',
-                       '{$req->fecha}','{$req->telefonoYape}',
-                       '{$req->montorecibido}')",'ATENDIDO Y');
-        }  
-    
-    } 
+    }
+
+    $modificar = json_decode($modificar);
+      
+    if ($modificar->status <> 0) {
+        return JSON_ENCODE(
+            (object) [
+                'msj'    => 'No se cambio la cantidad de productos correctamente',
+                'status' => $modificar->status
+                ]
+        ); 
+    }
+} 
 }
-
-
-
-   
-
 
 
