@@ -170,7 +170,7 @@ function registrarPago(Request $req){
         "UPDATE notadeventas AS nv 
             SET nv.estado = 'ATENDIDO'
         WHERE nv.id_boletaventa = '{$req->notaIdBv}'",
-        "Se elimino la nota de ventas correctamente."
+        "Se pago la nota de ventas correctamente."
     ); 
       
     if ($modificar->status <> 0) {

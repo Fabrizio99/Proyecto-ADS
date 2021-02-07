@@ -119,7 +119,7 @@ class emitirNotaVController extends Controller
         return $modificar= mySQLupDate(
             "UPDATE notadeventas AS nv 
                 SET nv.estado = 'ELIMINADO'
-              WHERE nv.id_boletaventa = '{$req->notaIdBv}'",
+                WHERE nv.id_boletaventa = '{$req->notaIdBv}'",
             "Se elimino la nota de ventas correctamente."
         ); 
     }
