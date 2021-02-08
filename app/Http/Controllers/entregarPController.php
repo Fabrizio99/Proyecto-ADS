@@ -23,7 +23,8 @@ class entregarPController extends Controller
                                         JSON_OBJECT(
                                             'codigoP' , p.id_producto,
                                             'nom_prod', p.nombre,
-                                            'cantidad', nhp.cantidad
+                                            'cantidad', nhp.cantidad,
+                                            'monto_x_cantidad', (p.precio*nhp.cantidad)
                                         )
                                     ),
                                 ']'
@@ -69,7 +70,9 @@ class entregarPController extends Controller
                                         JSON_OBJECT(
                                             'codigoP' , p.id_producto,
                                             'nom_prod', p.nombre,
-                                            'cantidad', nhp.cantidad
+                                            'cantidad', nhp.cantidad,
+                                            'precio'  , p.precio,
+                                            'monto_x_cantidad', (p.precio*nhp.cantidad) 
                                     )
                                     ),
                                 ']'
