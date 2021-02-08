@@ -43,7 +43,6 @@
           </div>
         </div>
         <div class="mx-4 mt-4">
-          <button class="btn btn-info" @click="pdf">Generar PDF</button>
           <table class="table">
             <thead>
               <tr>
@@ -423,7 +422,7 @@ export default {
       doc.text("Producto            | P.U. | Cantidad | Total",1,++row);
       let productos = JSON.parse(this.notaSeleccionada.Productos);
       productos.forEach(p => {
-        doc.text(p.producto.padEnd(20)+'| '+p.cantidad+' | S/. '+p.precio+' | S/.'+p.PrecioTotal,1,++row);
+        doc.text(p.producto.padEnd(20)+'| '+p.precio+' | S/. '+p.cantidad+' | S/.'+p.PrecioTotal,1,++row);
       });
       doc.text('Total: S/.'+Number(this.notaSeleccionada.MontoTotal).toFixed(2),1,++row);
       doc.text('Monto recibido: '+(!this.monto?Number(this.notaSeleccionada.MontoTotal).toFixed(2):Number(this.monto).toFixed(2)),1,++row);

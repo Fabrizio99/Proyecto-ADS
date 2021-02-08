@@ -1,7 +1,8 @@
 function Data(){
-    this.user = undefined;
+    this.user       = undefined;
     this.nota_venta = undefined;
-    this.producto = undefined;
+    this.producto   = undefined;
+    this.boleta     = undefined;
 }
 Data.prototype.getSelectedUser = function() {
     return this.user;
@@ -22,6 +23,13 @@ Data.prototype.getSelectedProducto = function() {
 }
 Data.prototype.setSelectedProducto = function(producto) {
     this.producto = producto;
+}
+
+Data.prototype.getSelectedBV = function() {
+    return this.boleta;
+}
+Data.prototype.setSelectedBV = function(boleta) {
+    this.boleta = boleta;
 }
 
 let data = new Data();
