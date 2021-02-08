@@ -22,7 +22,8 @@ class reporteInvController extends Controller
                     (CASE WHEN stock > 10 
                           THEN 'ALTO'
                      ELSE 'BAJO' 
-                    END) AS estado 
+                     END
+                    ) AS estado 
                FROM producto 
               WHERE (CASE WHEN '{$req->tipoStock}' = '{$TIPO_ALTO}'  
                           THEN stock > 10
@@ -30,6 +31,7 @@ class reporteInvController extends Controller
                           THEN stock <= 10  
                           ELSE 1 = 1 
                     END)
+              ORDER BY stock DESC
               LIMIT 0,50"
         );
         
