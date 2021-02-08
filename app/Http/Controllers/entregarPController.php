@@ -86,7 +86,7 @@ class entregarPController extends Controller
                     boleta AS b
               WHERE nv.id_boletaventa = b.NOTADEVENTAS_id_boletaventa
                 AND u.id_usuario    = nv.USUARIOS_id_usuario 
-                AND (nv.id_boletaventa = '{$req->cod_boleta}'
+                AND b.codigo_boleta = '{$req->cod_boleta}'
                 AND b.estado = 'NOATENDIDO' 
               ORDER BY b.fecha DESC 
               LIMIT 50          
