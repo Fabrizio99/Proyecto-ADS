@@ -10,74 +10,87 @@ class entregarPController extends Controller
     function listaB (Request $req){
     
         return mySQLConsulta(
-            "SELECT nv.id_boletaventa,
+            "SELECT b.idB_boleta,
                     nv.nombre_cliente,
-                    nv.fecha,
-                    nv.estado,
-         
-                         (SELECT CONCAT(
-                                     '[', 
-                                         GROUP_CONCAT(
-                                             JSON_OBJECT(
-                                                 'imagen', p.imagen,
-                                                 'codigoP', p.id_producto,
-                                                 'nom_prod', p.nombre,
-                                                 'cantidad', nhp.cantidad
-                                         )
-                                         ),
-                                     ']'
-                                 ) 
-                            FROM notadeventas AS nv2,
-                                 notadeventas_has_producto AS nhp,
-                                 producto AS p
-                           WHERE nv2.id_boletaventa = nv.id_boletaventa
-                             AND nv2.id_boletaventa = nhp.NOTADEVENTAS_id_boletaventa
-                             AND p.id_producto      = nhp.PRODUCTO_id_producto
-                         ) AS productos
-                 FROM notadeventas nv ,
-                      usuarios   u
-                 WHERE   u.id_usuario    = nv.USUARIOS_id_usuario
-                      ORDER BY fecha DESC 
-                      LIMIT 50          
+                    b.fecha,
+                    b.estado,
+                    b.monto,
+                    b.codigo_boleta,
+                    b.telefono_yape,
+                    (SELECT CONCAT(
+                                '[', 
+                                    GROUP_CONCAT(
+                                        JSON_OBJECT(
+                                            'codigoP' , p.id_producto,
+                                            'nom_prod', p.nombre,
+                                            'cantidad', nhp.cantidad
+                                        )
+                                    ),
+                                ']'
+                            ) 
+                       FROM notadeventas AS nv2,
+                            notadeventas_has_producto AS nhp,
+                            producto AS p
+                      WHERE nv2.id_boletaventa = nv.id_boletaventa
+                        AND nv2.id_boletaventa = nhp.NOTADEVENTAS_id_boletaventa
+                        AND p.id_producto      = nhp.PRODUCTO_id_producto
+                    ) AS productos
+                 FROM notadeventas AS nv ,
+                      usuarios AS u,
+                      boleta b
+                WHERE u.id_usuario = nv.USUARIOS_id_usuario
+                  AND nv.id_boletaventa = b.NOTADEVENTAS_id_boletaventa
+                  AND b.estado = 'NOATENDIDO'
+                ORDER BY fecha DESC 
+                LIMIT 50          
             "
-                
         );
-        
-       
     }
 
     function buscarBoletaF(Request $req){
+
+        $isValidate = isNullEmpty($req ->cod_boleta ,'cod_boleta', 'El CODIGO BOLETA estado no puede ser vacio.');
+
+        if($isValidate){
+            return $isValidate;
+        }
+
         return mySQLConsulta(
-            "SELECT nv.id_boletaventa,
+            "SELECT b.idB_boleta,
                     nv.nombre_cliente,
-                    nv.fecha,
-                    nv.estado,
-         
-                         (SELECT CONCAT(
-                                     '[', 
-                                         GROUP_CONCAT(
-                                             JSON_OBJECT(
-                                                 'imagen', p.imagen,
-                                                 'codigoP', p.id_producto,
-                                                 'nom_prod', p.nombre,
-                                                 'cantidad', nhp.cantidad
-                                         )
-                                         ),
-                                     ']'
-                                 ) 
-                            FROM notadeventas AS nv2,
-                                 notadeventas_has_producto AS nhp,
-                                 producto AS p
-                           WHERE nv2.id_boletaventa = nv.id_boletaventa
-                             AND nv2.id_boletaventa = nhp.NOTADEVENTAS_id_boletaventa
-                             AND p.id_producto     = nhp.PRODUCTO_id_producto
-                         ) AS productos
-                 FROM notadeventas nv ,
-                      usuarios   u
-                 WHERE (nv.id_boletaventa = '{$req->cod_boleta}' OR  nv.fecha BETWEEN DATE_FORMAT('{$req->fecha_inicio}', '%Y-%m-%d') AND DATE_FORMAT('{$req->fecha_fin}', '%Y-%m-%d'))
-                      AND u.id_usuario    = nv.USUARIOS_id_usuario
-                      ORDER BY fecha DESC 
-                      LIMIT 50          
+                    b.fecha,
+                    b.estado,
+                    b.monto,
+                    b.codigo_boleta,
+                    b.telefono_yape,
+                    (SELECT CONCAT(
+                                '[', 
+                                    GROUP_CONCAT(
+                                        JSON_OBJECT(
+                                            'codigoP' , p.id_producto,
+                                            'nom_prod', p.nombre,
+                                            'cantidad', nhp.cantidad
+                                    )
+                                    ),
+                                ']'
+                            ) 
+                       FROM notadeventas AS nv2,
+                            notadeventas_has_producto AS nhp,
+                            producto AS p
+                      WHERE nv2.id_boletaventa = nv.id_boletaventa
+                        AND nv2.id_boletaventa = nhp.NOTADEVENTAS_id_boletaventa
+                        AND p.id_producto     = nhp.PRODUCTO_id_producto
+                    ) AS productos
+               FROM notadeventas AS nv,
+                    usuarios AS u,
+                    boleta AS b
+              WHERE nv.id_boletaventa = b.NOTADEVENTAS_id_boletaventa
+                AND u.id_usuario    = nv.USUARIOS_id_usuario 
+                AND (nv.id_boletaventa = '{$req->cod_boleta}'
+                AND b.estado = 'NOATENDIDO' 
+            --    AND  nv.fecha BETWEEN DATE_FORMAT('{$req->fecha_inicio}', '%Y-%m-%d') AND DATE_FORMAT('{$req->fecha_fin}', '%Y-%m-%d'))
+              ORDER BY fecha DESC 
+              LIMIT 50          
             "
                 
         );
@@ -85,14 +98,13 @@ class entregarPController extends Controller
     }
     //MODIFICAR ESTADO DE BOLETA
     function modificarEb(Request $req){
-        $isValidate = IsNullEmpty($req ->id_bv)?:
-                      IsNullEmpty($req ->estado ,'estado', 'El campo estado no puede ser vacio.');
+        $isValidate = isNullEmpty($req ->id_bv)?:
+                      isNullEmpty($req ->estado ,'estado', 'El campo estado no puede ser vacio.');
 
+        if($isValidate){
+            return $isValidate;
+        }
 
-
-if($isValidate){
-return $isValidate;
-}
         return mySQLInsert(
             "UPDATE
             notadeventas
