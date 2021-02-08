@@ -15,50 +15,16 @@
                         </div>
                     </div>
                     <div class="row mx-4">
-                        <div class="col-5">
+                        <div class="col-10">
                             <label>Tipo de Stock:</label>
                             <select name="tipoStock"  class="form-control" @change="ListSearchStatus" v-model="selectedStatus">
                                 <option value="1">Bajo</option>
                                 <option value="0">Alto</option>
                             </select>
                         </div>
-                        <div class="col-1">
-                            <label></label>                            
-                        </div>
-                        <div class="col-6">
-                            <div class="card col-12">
-                                    <div class="card-body">
-                                        <div class="form-row">
-                                            <div class="col-1">
-                                                <label></label>
-                                            </div>
-                                            <div class="col-5">
-                                                <label>Costo de inventario</label>
-                                                
-                                            </div>
-                                            <div class="col-1">
-                                               <label></label>                                                                                                              
-                                            </div>
-                                            <div class="col-5">
-                                                <label>Cantidad de productos</label>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="col-2">
-                                                <label></label>                                             
-                                            </div>
-                                            <div class="col-4" >
-                                                <label>{{resultSum['sum(precio)']}}</label>
-                                            </div>
-                                            <div class="col-2">
-                                                <label></label>
-                                            </div>
-                                            <div class="col-4">
-                                                <label>{{resultSum['sum(stock)']}}</label>
-                                            </div>
-                                            
-                                        </div>
-                                    </div>
+                        <div class="col-2 row mt-1">
+                            <div class="col-12 row mt-4">
+                                <input type="button" class="btn btn-danger mt-1 btnbuscar" value="X" @click="ListProdInv"/>
                             </div>
                         </div>
                     </div>
@@ -66,18 +32,10 @@
                         <div class="col-6">
                             <label></label>
                         </div>
-                    </div>
-                    <div class="row mx-5">                                       
-                        <input type="button" class="btn btn-danger mt-1 btnbuscar" value="X" @click="ListProdInv"/>
-                    </div>
-                    <div class="row mx-4">
-                        <div class="col-6">
-                            <label></label>
-                        </div>
                         <div class="col-3">
-                            <button type="button" class="btn btn-info my-1 form-group col-12" data-bs-toggle="modal" data-bs-target="#b">Balance</button>
+                            <!--<button type="button" class="btn btn-info my-1 form-group col-12" data-bs-toggle="modal" data-bs-target="#b">Balance</button>-->
                             <!-- Modal -->
-                            <div class="modal fade" id="b" tabindex="-1" aria-labelledby="bl" aria-hidden="true">
+                            <!--<div class="modal fade" id="b" tabindex="-1" aria-labelledby="bl" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -146,14 +104,11 @@
                                     </div>
                                 </div>
                             </div>
-                            </div>
-
-
+                            </div>-->
                         </div>
                         <div class="col-3">
-                            <button type="button" class="btn btn-info my-1 form-group col-12" >Emitir reporte</button>
+                            <button type="button" class="btn btn-info my-1 form-group col-12" @click="generatePDF">Emitir reporte</button>
                         </div> 
-                        
                     </div>
                     <div class="row mx-4">
                         <div class="col-12">
@@ -161,22 +116,23 @@
                                 <table class="table">
                                 <thead>
                                     <tr>
-                                    <th scope="col">Código</th>
-                                    <th scope="col">Descripción del producto</th>
-                                    <th scope="col">Precio de venta</th>
-                                    <th scope="col">Cantidad</th>
-                                    <th scope="col">Estado</th>
+                                        <th>N°</th>
+                                        <th scope="col">Código</th>
+                                        <th scope="col">Descripción del producto</th>
+                                        <th scope="col">Precio de venta</th>
+                                        <th scope="col">Cantidad</th>
+                                        <th scope="col">Estado</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="(producto) in listaProductos" :key="producto.id_producto">
-                                        <td scope="row">{{producto.id_producto}}</td>
+                                    <tr v-for="(producto,index) in listaProductos" :key="producto.id_producto">
+                                        <td scope="row">{{index+1}}</td>
+                                        <td>{{producto.id_producto}}</td>
                                         <td>{{producto.nombre}}</td>
-                                        <td>{{producto.precio}}</td>
+                                        <td>S/.{{Number(producto.precio).toFixed(2)}}</td>
                                         <td>{{producto.stock}}</td>
                                         <td>{{producto.estado}}</td>
-                                    </tr>
-                                   
+                                    </tr> 
                                 </tbody>
                                 </table>
                             </div>
@@ -187,11 +143,12 @@
     </div>
 </template>
 <script>
-import Appbar from '../../components/AppBar'
-import AppBar from '../../components/AppBar.vue';
-import Navigation from '../../components/NavigationComponent';
+import Appbar from '../../../components/AppBar'
+import Navigation from '../../../components/NavigationComponent';
 import moment from 'moment';
-import usuario from '../../user';
+import usuario from '../../../user';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 export default {
     components : {
@@ -207,6 +164,23 @@ export default {
         }
     },
     methods : {
+        async generatePDF(){
+            let response = await axios.get('api/getEmitirRI?token='+usuario.getData().token);
+            let {data} = response.data;
+            data = Array.isArray(data)?data:[data];
+            console.log(data);
+            let rows = data.map((p,i)=>[i+1,p.id_producto,p.nombre,`S/.${Number(p.precio).toFixed(2)}`,p.stock,p.estado]);
+            const doc = new jsPDF()
+            doc.setFontSize(12);
+            doc.text("DULCEKAT", 90, 9);
+            doc.text("REPORTE DE INVENTARIO", 80, 18);
+            doc.autoTable({
+                startY : 30,
+                head: [['N°','Código', 'Nombre', 'Precio','Cantidad','Estado']],
+                body: rows,
+            })
+            doc.save('ReporteInventario.pdf');
+        },
         msjerrorfecha(){
             this.$swal({
             title: 'Colocar la fecha actual',
@@ -218,17 +192,15 @@ export default {
         async ListSearchStatus(){
           console.log(this.selectedStatus);
           let response = await axios.get('api/getEmitirRI?tipoStock='+this.selectedStatus+'&token='+usuario.getData().token);
-          console.log('respuesta ',response);
             if(response.data.status == "0"){
                 this.listaProductos = Array.isArray(response.data.data)?response.data.data:[response.data.data]
-                
             }else{
                 alert('Error: '+response.data.msj);
             }
         },
         async ListProdInv(){
+            this.selectedStatus = '';
            let response = await axios.get('api/getEmitirRI?token='+usuario.getData().token);
-          //console.log(response);
             if(response.data.status == "0"){
                 this.listaProductos = response.data.data;
             }else{

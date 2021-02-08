@@ -117,7 +117,7 @@ const routes = [
     {
         path: '/formulario-inventario',
         name: 'inventario',
-        component: require('../js/views/reportes/InventariosApp.vue'),
+        component: require('../js/views/reportes/inventario/InventariosApp.vue'),
         meta : {
             module : 'inventario'
         }
