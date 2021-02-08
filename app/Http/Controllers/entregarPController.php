@@ -40,6 +40,7 @@ class entregarPController extends Controller
                       boleta b
                 WHERE u.id_usuario = nv.USUARIOS_id_usuario
                   AND nv.id_boletaventa = b.NOTADEVENTAS_id_boletaventa
+                  AND b.estado = 'NOATENDIDO'
                 ORDER BY fecha DESC 
                 LIMIT 50          
             "
@@ -85,7 +86,8 @@ class entregarPController extends Controller
                     boleta AS b
               WHERE nv.id_boletaventa = b.NOTADEVENTAS_id_boletaventa
                 AND u.id_usuario    = nv.USUARIOS_id_usuario 
-                AND (nv.id_boletaventa = '{$req->cod_boleta}' 
+                AND (nv.id_boletaventa = '{$req->cod_boleta}'
+                AND b.estado = 'NOATENDIDO' 
             --    AND  nv.fecha BETWEEN DATE_FORMAT('{$req->fecha_inicio}', '%Y-%m-%d') AND DATE_FORMAT('{$req->fecha_fin}', '%Y-%m-%d'))
               ORDER BY fecha DESC 
               LIMIT 50          
