@@ -100,24 +100,16 @@ class entregarPController extends Controller
     }
     //MODIFICAR ESTADO DE BOLETA
     function modificarEb(Request $req){
-        $isValidate = isNullEmpty($req ->id_bv)?:
-                      isNullEmpty($req ->estado ,'estado', 'El campo estado no puede ser vacio.');
+        $isValidate = isNullEmpty($req ->id_bv);
 
         if($isValidate){
             return $isValidate;
         }
 
         return mySQLInsert(
-            "UPDATE
-            notadeventas
-            INNER JOIN
-            boleta
-            ON
-            notadeventas.id_boletaventa  = boleta.NOTADEVENTAS_id_boletaventa
-            SET
-            boleta.estado = '{$req->estado}', notadeventas.estado = '{$req->estado}'
-            WHERE
-            notadeventas.id_boletaventa ='{$req->id_bv}'",
+            "UPDATE boleta
+                SET boleta.estado = 'ATENDIDO'
+              WHERE b.idB_boleta ='{$req->id_bv}'",
              "MODIFICACION EXITOSA"
             );
     }
