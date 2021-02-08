@@ -109,8 +109,8 @@ class entregarPController extends Controller
 
         return mySQLInsert(
             "UPDATE boleta
-                SET boleta.estado = 'ATENDIDO'
-              WHERE b.idB_boleta ='{$req->id_bv}'",
+                SET estado = 'ATENDIDO'
+              WHERE idB_boleta ='{$req->id_bv}'",
              "MODIFICACION EXITOSA"
             );
     }
