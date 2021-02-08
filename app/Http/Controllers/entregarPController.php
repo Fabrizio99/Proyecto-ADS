@@ -24,6 +24,7 @@ class entregarPController extends Controller
                                             'codigoP' , p.id_producto,
                                             'nom_prod', p.nombre,
                                             'cantidad', nhp.cantidad,
+                                            'precio'  , p.precio,
                                             'monto_x_cantidad', (p.precio*nhp.cantidad)
                                         )
                                     ),
