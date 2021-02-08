@@ -31,7 +31,7 @@ class reporteInvController extends Controller
                           THEN stock <= 10  
                           ELSE 1 = 1 
                     END)
-              ORDER BY stock DESC
+              ORDER BY stock ASC
               LIMIT 0,50"
         );
         
