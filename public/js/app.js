@@ -66311,7 +66311,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             switch (_context.prev = _context.next) {
               case 0:
                 if (!(this.userInput.trim() != '')) {
-                  _context.next = 6;
+                  _context.next = 8;
                   break;
                 }
 
@@ -66331,8 +66331,13 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   this.listaUsuarios = [];
                   alert('Error: ' + response.data.msj);
                 }
+                _context.next = 9;
+                break;
 
-              case 6:
+              case 8:
+                alert('Mensaje: Verificar campos');
+
+              case 9:
               case 'end':
                 return _context.stop();
             }
@@ -67034,7 +67039,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 break;
 
                             case 8:
-                                alert('Error: Complete los campos faltantes o incorrectos');
+                                alert('Error: Verificar campos');
 
                             case 9:
                             case 'end':
@@ -67089,7 +67094,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 break;
 
                             case 8:
-                                alert('Error: Completar todos los campos');
+                                alert('Error: Verificar campos');
 
                             case 9:
                             case 'end':
@@ -67876,7 +67881,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             switch (_context3.prev = _context3.next) {
               case 0:
                 if (!(this.nomProduct.trim() != '')) {
-                  _context3.next = 6;
+                  _context3.next = 8;
                   break;
                 }
 
@@ -67896,8 +67901,13 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   this.listaProductos = [];
                   alert('Error: ' + response.data.msj);
                 }
+                _context3.next = 9;
+                break;
 
-              case 6:
+              case 8:
+                alert('Mensaje: Verificar campos');
+
+              case 9:
               case 'end':
                 return _context3.stop();
             }
@@ -68398,7 +68408,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 break;
 
                             case 8:
-                                alert('Error: Complete los campos faltantes o incorrectos');
+                                alert('Error: Verificar campos');
 
                             case 9:
                             case 'end':
@@ -68450,7 +68460,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 break;
 
                             case 8:
-                                alert('Error: Complete los campos faltantes o incorrectos');
+                                alert('Error: Verificar campos');
 
                             case 9:
                             case 'end':
@@ -70943,7 +70953,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
-                this.Inputcodigo = "";
+                this.inputcodenventa = "";
                 _context5.next = 3;
                 return axios.get("api/listaNotaV?token=" + __WEBPACK_IMPORTED_MODULE_4__user__["a" /* default */].getData().token);
 

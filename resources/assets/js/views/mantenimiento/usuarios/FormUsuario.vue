@@ -131,7 +131,7 @@ export default {
                     alert('Error: '+response.data.msj);
                 }
             }else{
-                alert('Error: Complete los campos faltantes o incorrectos');
+                alert('Error: Verificar campos');
             }
         },
         async editUser(){
@@ -155,7 +155,7 @@ export default {
                     alert('Error: '+response.data.msj);
                 }
             }else{
-                alert('Error: Completar todos los campos')
+                alert('Error: Verificar campos');
             }
         },
         async getTipoDocumentos(){
