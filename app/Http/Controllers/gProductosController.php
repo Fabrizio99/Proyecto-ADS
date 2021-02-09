@@ -70,11 +70,11 @@ class gProductosController extends Controller
 
     function updateP (Request $req){
         $isValidate = isNullEmpty($req->idP)?:
-        isNullEmpty($req->nombre , 'nombreP', 'Verificar campo vacio.') ?:
-        isNullEmpty($req->marka  , 'marca'  , 'Verificar campo vacio.') ?: 
-        isNullEmpty($req->precio , 'precio' , 'Verificar campo vacio.') ?:
-        isNullEmpty($req->id_categoria , 'id_categoria' , 'Verificar campo vacio.') ?:  
-        isNullEmpty($req->stock  , 'stock'  , 'Verificar campo vacio.');
+        isNullEmpty($req->nombre , 'nombreP', 'Verificar campos.') ?:
+        isNullEmpty($req->marka  , 'marca'  , 'Verificar campos.') ?: 
+        isNullEmpty($req->precio , 'precio' , 'Verificar campos.') ?:
+        isNullEmpty($req->id_categoria , 'id_categoria' , 'Verificar campos.') ?:  
+        isNullEmpty($req->stock  , 'stock'  , 'Verificar campos.');
         
 
         if($isValidate){
@@ -96,11 +96,11 @@ class gProductosController extends Controller
     }
 
     function registrarP (Request $req){
-        $isValidate = isNullEmpty($req->nombre , 'nombreP', 'Verificar campo vacio. ') ?:
-                      isNullEmpty($req->marka  , 'marca'  , 'Verificar campo vacio. ') ?: 
-                      isNullEmpty($req->precio , 'precio' , 'Verificar campo vacio. ') ?: 
-                      isNullEmpty($req->id_categoria , 'id_categoria' , 'Verificar campo vacio. ') ?: 
-                      isNullEmpty($req->stock  , 'stock'  , 'Verificar campo vacio. ');
+        $isValidate = isNullEmpty($req->nombre , 'nombreP', 'Verificar campos. ') ?:
+                      isNullEmpty($req->marka  , 'marca'  , 'Verificar campos. ') ?: 
+                      isNullEmpty($req->precio , 'precio' , 'Verificar campos. ') ?: 
+                      isNullEmpty($req->id_categoria , 'id_categoria' , 'Verificar campos. ') ?: 
+                      isNullEmpty($req->stock  , 'stock'  , 'Verificar campos. ');
                       
         
         if($isValidate){

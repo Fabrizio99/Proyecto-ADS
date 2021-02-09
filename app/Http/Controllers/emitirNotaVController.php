@@ -45,13 +45,13 @@ class emitirNotaVController extends Controller
         $TIPO_DNI = 1;
         $TIPO_PASAPORTE = 2;
 
-        $isValidate = isNullEmpty($req->nombre    , 'nombreP'   , 'Verificar campo vacio.') ?:
-                      isNullEmpty($req->tipoDoc   , 'tipoD'     , 'Verificar campo vacio.') ?: 
-                      isNullEmpty($req->numDoc    , 'numeroD'   , 'Verificar campo vacio.') ?: 
-                      isNullEmpty($req->direccion , 'direccion' , 'Verificar campo vacio.') ?: 
-                      isNullEmpty($req->celular   , 'celular'   , 'Verificar campo vacio.') ?: 
-                      isNullEmpty($req->monto     , 'monto'     , 'Verificar campo vacio.') ?: 
-                      isNullEmpty($req->fecha     , 'fecha'     , 'Verificar campo vacio.');
+        $isValidate = isNullEmpty($req->nombre    , 'nombreP'   , 'Verificar campos.') ?:
+                      isNullEmpty($req->tipoDoc   , 'tipoD'     , 'Verificar campos.') ?: 
+                      isNullEmpty($req->numDoc    , 'numeroD'   , 'Verificar campos.') ?: 
+                      isNullEmpty($req->direccion , 'direccion' , 'Verificar campos.') ?: 
+                      isNullEmpty($req->celular   , 'celular'   , 'Verificar campos.') ?: 
+                      isNullEmpty($req->monto     , 'monto'     , 'Verificar campos.') ?: 
+                      isNullEmpty($req->fecha     , 'fecha'     , 'Verificar campos.');
         
          if($isValidate){
            return $isValidate;
@@ -61,14 +61,14 @@ class emitirNotaVController extends Controller
          return JSON_ENCODE(
          (object) [
                    'status' => $_SESSION["STATUS_CONTROL"],
-                   'msj'    => 'Verificar campo vacio.'
+                   'msj'    => 'Verificar campos.'
                  ] 
             ); 
         } else if (strlen($req->numDoc) != 12 && $req->tipoDoc == $TIPO_PASAPORTE ) { // CARNET DE PASAPORTE
           return JSON_ENCODE(
           (object) [
                    'status' => $_SESSION["STATUS_CONTROL"],
-                   'msj'    => 'Verificar campo vacio.'
+                   'msj'    => 'Verificar campos.'
                  ]
            );
         }
@@ -79,7 +79,7 @@ class emitirNotaVController extends Controller
             return JSON_ENCODE(
                 (object) [
                          'status' => $_SESSION["STATUS_CONTROL"],
-                         'msj'    => 'Verificar campo vacio.'
+                         'msj'    => 'Verificar campos.'
                        ]
                  );
         }  
@@ -120,7 +120,7 @@ class emitirNotaVController extends Controller
     }
 
     function eliminarNV(Request $req) {
-        $validacion = isNullEmpty($req->notaIdBv,'','Verificar campo vacio.') ;
+        $validacion = isNullEmpty($req->notaIdBv,'','Verificar campos.') ;
 
         if($validacion){
             return $validacion;
@@ -139,11 +139,11 @@ class emitirNotaVController extends Controller
         $TIPO_DNI = 1;
         $TIPO_PASAPORTE = 2;
         
-        $validacion = isNullEmpty($req->nombre    , 'nombreP'  , 'Verificar campo vacio.') ?:
-                      isNullEmpty($req->tipoDoc   , 'tipoD'    , 'Verificar campo vacio.') ?: 
-                      isNullEmpty($req->numDoc    , 'numeroD'  , 'Verificar campo vacio.') ?: 
-                      isNullEmpty($req->direccion , 'direccion', 'Verificar campo vacio.')?: 
-                      isNullEmpty($req->celular   , 'celular'  , 'Verificar campo vacio.');
+        $validacion = isNullEmpty($req->nombre    , 'nombreP'  , 'Verificar campos.') ?:
+                      isNullEmpty($req->tipoDoc   , 'tipoD'    , 'Verificar campos.') ?: 
+                      isNullEmpty($req->numDoc    , 'numeroD'  , 'Verificar campos.') ?: 
+                      isNullEmpty($req->direccion , 'direccion', 'Verificar campos.')?: 
+                      isNullEmpty($req->celular   , 'celular'  , 'Verificar campos.');
 
         if($validacion){
             return $validacion;
@@ -154,14 +154,14 @@ class emitirNotaVController extends Controller
             return JSON_ENCODE(
                 (object) [
                         'status' => $_SESSION["STATUS_CONTROL"],
-                        'msj'    => 'Verificar campo vacio.'
+                        'msj'    => 'Verificar campos.'
                         ] 
                     ); 
         } else if (strlen($req->numDoc) != 12 && $req->tipoDoc == $TIPO_PASAPORTE ) { // CARNET DE PASAPORTE
             return JSON_ENCODE(
                 (object) [
                         'status' => $_SESSION["STATUS_CONTROL"],
-                        'msj'    => 'Verificar campo vacio.'
+                        'msj'    => 'Verificar campos.'
                         ]
                 );
         }
@@ -172,7 +172,7 @@ class emitirNotaVController extends Controller
             return JSON_ENCODE(
                 (object) [
                         'status' => $_SESSION["STATUS_CONTROL"],
-                        'msj'    => 'Verificar campo vacio.'
+                        'msj'    => 'Verificar campos.'
                     ]
                 );
         }  

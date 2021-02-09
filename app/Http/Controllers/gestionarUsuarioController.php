@@ -50,7 +50,7 @@ class gestionarUsuarioController extends Controller
     //-----Buscar Usuario------
     function getBuscarUsuario (Request $req){
 
-        $isValidate = isNullEmpty($req->cmpbusqueda,'cmpbusqueda','Verificar campo vacio.');
+        $isValidate = isNullEmpty($req->cmpbusqueda,'cmpbusqueda','Verificar campos.');
 
         if($isValidate){
             return $isValidate;
@@ -89,14 +89,14 @@ class gestionarUsuarioController extends Controller
         $TIPO_DNI = 1;
         $TIPO_PASAPORTE = 2;
         
-        $ValidacionCampos = isNullEmpty($req->nombres    ,'nombres'    ,'Verificar campo vacio.') ?:
-                            isNullEmpty($req->apellidos  ,'apellidos'  ,'Verificar campo vacio.') ?: 
-                            isNullEmpty($req->direccion  ,'direccion'  ,'Verificar campo vacio.') ?:  
-                            isNullEmpty($req->telefono   ,'telefono'   ,'Verificar campo vacio.') ?:
-                            isNullEmpty($req->rol        ,'rol'        ,'Verificar campo vacio.') ?:
-                            isNullEmpty($req->tipoDoc    ,'tipoDoc'    ,'Verificar campo vacio.') ?:
-                            isNullEmpty($req->numDoc     ,'numDoc'     ,'Verificar campo vacio.') ?: 
-                            isNullEmpty($req->contrasenia,'contrasenia','Verificar campo vacio.');
+        $ValidacionCampos = isNullEmpty($req->nombres    ,'nombres'    ,'Verificar campos.') ?:
+                            isNullEmpty($req->apellidos  ,'apellidos'  ,'Verificar campos.') ?: 
+                            isNullEmpty($req->direccion  ,'direccion'  ,'Verificar campos.') ?:  
+                            isNullEmpty($req->telefono   ,'telefono'   ,'Verificar campos.') ?:
+                            isNullEmpty($req->rol        ,'rol'        ,'Verificar campos.') ?:
+                            isNullEmpty($req->tipoDoc    ,'tipoDoc'    ,'Verificar campos.') ?:
+                            isNullEmpty($req->numDoc     ,'numDoc'     ,'Verificar campos.') ?: 
+                            isNullEmpty($req->contrasenia,'contrasenia','Verificar campos.');
 
         if($ValidacionCampos){
             return $ValidacionCampos;
@@ -107,7 +107,7 @@ class gestionarUsuarioController extends Controller
                 return JSON_ENCODE(
                     (object) [
                         'status' => $_SESSION["STATUS_CONTROL"], //status del back
-                        'msj'    => 'Verificar campo vacio.' //
+                        'msj'    => 'Verificar campos.' //
                     ]
                 ); 
         }
@@ -117,7 +117,7 @@ class gestionarUsuarioController extends Controller
             return JSON_ENCODE(
                 (object) [
                     'status' => $_SESSION["STATUS_CONTROL"], //status del back
-                    'msj'    => 'Verificar campo vacio.' //
+                    'msj'    => 'Verificar campos.' //
                 ]
             ); 
         }
@@ -127,14 +127,14 @@ class gestionarUsuarioController extends Controller
             return JSON_ENCODE(
                 (object) [
                     'status' => $_SESSION["STATUS_CONTROL"],
-                    'msj'    => 'Verificar campo vacio.'
+                    'msj'    => 'Verificar campos.'
                 ]
             ); 
         }else if ($req->tipoDoc == $TIPO_PASAPORTE && strlen($req->numDoc) <> 12) { // CARNET DE PASAPORTE
             return JSON_ENCODE(
                 (object) [
                     'status' => $_SESSION["STATUS_CONTROL"],
-                    'msj'    => 'Verificar campo vacio.'
+                    'msj'    => 'Verificar campos.'
                 ]
             );
         }
@@ -163,7 +163,7 @@ class gestionarUsuarioController extends Controller
     //---Eliminar Usuario
     function deleteUsuario (Request $req){
 
-        $ValidacionCampos = isNullEmpty($req->numDoc,'numDoc','Verificar campo vacio.');
+        $ValidacionCampos = isNullEmpty($req->numDoc,'numDoc','Verificar campos.');
         
         if($ValidacionCampos){
             return $ValidacionCampos;
@@ -176,14 +176,14 @@ class gestionarUsuarioController extends Controller
     function modificarUsuario (Request $req){
         $TIPO_DNI = 1;
         $TIPO_PASAPORTE = 2;
-        $ValidacionCampos = isNullEmpty($req->nombres    , 'nombres'    , 'Verificar campo vacio. ')?: 
-                            isNullEmpty($req->apellidos  , 'apellidos'  , 'Verificar campo vacio. ') ?: 
-                            isNullEmpty($req->direccion  , 'direccion'  , 'Verificar campo vacio. ') ?:
-                            isNullEmpty($req->telefono   , 'telefono'   , 'Verificar campo vacio. ') ?:
-                            isNullEmpty($req->rol        , 'rol'        , 'Verificar campo vacio. ') ?:
-                            isNullEmpty($req->clave      , 'clave'      , 'Verificar campo vacio. ') ?:
-                            isNullEmpty($req->numDoc     , 'numDoc'     , 'Verificar campo vacio. ') ?: 
-                            isNullEmpty($req->tipoDoc    , 'tipoDoc'    , 'Verificar campo vacio. ');
+        $ValidacionCampos = isNullEmpty($req->nombres    , 'nombres'    , 'Verificar campos. ')?: 
+                            isNullEmpty($req->apellidos  , 'apellidos'  , 'Verificar campos. ') ?: 
+                            isNullEmpty($req->direccion  , 'direccion'  , 'Verificar campos. ') ?:
+                            isNullEmpty($req->telefono   , 'telefono'   , 'Verificar campos. ') ?:
+                            isNullEmpty($req->rol        , 'rol'        , 'Verificar campos. ') ?:
+                            isNullEmpty($req->clave      , 'clave'      , 'Verificar campos. ') ?:
+                            isNullEmpty($req->numDoc     , 'numDoc'     , 'Verificar campos. ') ?: 
+                            isNullEmpty($req->tipoDoc    , 'tipoDoc'    , 'Verificar campos. ');
                             
         // validaciones de campos            
         if($ValidacionCampos){
@@ -195,7 +195,7 @@ class gestionarUsuarioController extends Controller
             return JSON_ENCODE(
                 (object) [
                     'status' => $_SESSION["STATUS_CONTROL"], //status del back
-                    'msj'    => 'Verificar campo vacio.' //
+                    'msj'    => 'Verificar campos.' //
                 ]
             ); 
         }
@@ -205,14 +205,14 @@ class gestionarUsuarioController extends Controller
             return JSON_ENCODE(
                 (object) [
                     'status' => $_SESSION["STATUS_CONTROL"],
-                    'msj'    => 'Verificar campo vacio.'
+                    'msj'    => 'Verificar campos.'
                 ]
             ); 
         }else if ($req->tipoDoc == $TIPO_PASAPORTE && strlen($req->numDoc) <> 12) { // CARNET DE PASAPORTE
             return JSON_ENCODE(
                 (object) [
                     'status' => $_SESSION["STATUS_CONTROL"],
-                    'msj'    => 'Verificar campo vacio.'
+                    'msj'    => 'Verificar campos.'
                 ]
             );
         }
