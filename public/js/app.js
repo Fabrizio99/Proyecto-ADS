@@ -142,7 +142,7 @@
 /******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 160);
+/******/ 	return __webpack_require__(__webpack_require__.s = 161);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -2240,7 +2240,7 @@
             try {
                 oldLocale = globalLocale._abbr;
                 aliasedRequire = require;
-                __webpack_require__(229)("./" + name);
+                __webpack_require__(230)("./" + name);
                 getSetGlobalLocale(oldLocale);
             } catch (e) {
                 // mark as not found to avoid repeating expensive file require call causing high CPU
@@ -5820,7 +5820,7 @@
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(228)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(229)(module)))
 
 /***/ }),
 /* 1 */
@@ -5933,14 +5933,38 @@ module.exports = function normalizeComponent (
 
 /***/ }),
 /* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+function Usuario() {}
+Usuario.prototype.getData = function () {
+    var result = decodeURIComponent(document.cookie);
+    var results = result.split(';').filter(function (data) {
+        return data.includes('user');
+    });
+    if (results.length == 0) {
+        return undefined;
+    }
+    var data = results[0].split('=')[1];
+    return data == '' ? undefined : JSON.parse(results[0].split('=')[1]);
+};
+Usuario.prototype.setData = function (data) {
+    var cookie = ['user', '=', JSON.stringify(data)].join('');
+    document.cookie = cookie;
+};
+var usuario = new Usuario();
+/* harmony default export */ __webpack_exports__["a"] = (usuario);
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(180)
+var __vue_script__ = __webpack_require__(181)
 /* template */
-var __vue_template__ = __webpack_require__(182)
+var __vue_template__ = __webpack_require__(183)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -5979,39 +6003,22 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 3 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-function Usuario() {}
-Usuario.prototype.getData = function () {
-    var result = decodeURIComponent(document.cookie);
-    var results = result.split(';').filter(function (data) {
-        return data.includes('user');
-    });
-    if (results.length == 0) {
-        return undefined;
-    }
-    var data = results[0].split('=')[1];
-    return data == '' ? undefined : JSON.parse(results[0].split('=')[1]);
-};
-Usuario.prototype.setData = function (data) {
-    var cookie = ['user', '=', JSON.stringify(data)].join('');
-    document.cookie = cookie;
-};
-var usuario = new Usuario();
-/* harmony default export */ __webpack_exports__["a"] = (usuario);
+module.exports = __webpack_require__(170);
+
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(183)
+var __vue_script__ = __webpack_require__(184)
 /* template */
-var __vue_template__ = __webpack_require__(184)
+var __vue_template__ = __webpack_require__(185)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -6050,20 +6057,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(169);
-
-
-/***/ }),
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var bind = __webpack_require__(154);
+var bind = __webpack_require__(155);
 var isBuffer = __webpack_require__(261);
 
 /*global toString:true*/
@@ -6510,7 +6510,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(192)
+var listToStyles = __webpack_require__(193)
 
 /*
 type StyleObject = {
@@ -6787,7 +6787,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ShadingPattern", function() { return C; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TilingPattern", function() { return j; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "jsPDF", function() { return O; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_fflate__ = __webpack_require__(214);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_fflate__ = __webpack_require__(215);
 /** @license
  *
  * jsPDF - PDF Document creation from JavaScript
@@ -7281,10 +7281,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(155);
+    adapter = __webpack_require__(156);
   } else if (typeof process !== 'undefined') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(155);
+    adapter = __webpack_require__(156);
   }
   return adapter;
 }
@@ -7554,7 +7554,7 @@ process.umask = function() { return 0; };
 if (false) {
   module.exports = require('./vue.common.prod.js')
 } else {
-  module.exports = __webpack_require__(163)
+  module.exports = __webpack_require__(164)
 }
 
 
@@ -7563,9 +7563,9 @@ if (false) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert2_dist_sweetalert2_js__ = __webpack_require__(176);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert2_dist_sweetalert2_js__ = __webpack_require__(177);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert2_dist_sweetalert2_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_sweetalert2_dist_sweetalert2_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_sweetalert2__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_sweetalert2__ = __webpack_require__(178);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_sweetalert2__);
 /* unused harmony namespace reexport */
 var __spreadArrays = (this && this.__spreadArrays) || function () {
@@ -7630,7 +7630,7 @@ var VueSweetalert2 = (function () {
 /* unused harmony export default */
 /* unused harmony export TweenMax */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__gsap_core_js__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__CSSPlugin_js__ = __webpack_require__(181);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__CSSPlugin_js__ = __webpack_require__(182);
 /* unused harmony reexport CSSPlugin */
 /* unused harmony reexport TweenLite */
 /* unused harmony reexport TimelineMax */
@@ -26616,6 +26616,2218 @@ var Power0 = _easeMap.Power0,
 /* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
+/*!
+ * 
+ *             jsPDF AutoTable plugin v3.5.13
+ *             
+ *             Copyright (c) 2020 Simon Bengtsson, https://github.com/simonbengtsson/jsPDF-AutoTable
+ *             Licensed under the MIT License.
+ *             http://opensource.org/licenses/mit-license
+ *         
+ */
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(true)
+		module.exports = factory((function webpackLoadOptionalExternalModule() { try { return __webpack_require__(12); } catch(e) {} }()));
+	else if(typeof define === 'function' && define.amd)
+		define(["jspdf"], factory);
+	else {
+		var a = typeof exports === 'object' ? factory((function webpackLoadOptionalExternalModule() { try { return require("jspdf"); } catch(e) {} }())) : factory(root["jspdf"]);
+		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
+	}
+})(typeof this !== 'undefined' ? this : window, function(__WEBPACK_EXTERNAL_MODULE__16__) {
+return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 10);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.parseSpacing = exports.getFillStyle = exports.addTableBorder = exports.getStringWidth = void 0;
+function getStringWidth(text, styles, doc) {
+    doc.applyStyles(styles, true);
+    var textArr = Array.isArray(text) ? text : [text];
+    var widestLineWidth = textArr
+        .map(function (text) { return doc.getTextWidth(text); })
+        .reduce(function (a, b) { return Math.max(a, b); }, 0);
+    return widestLineWidth;
+}
+exports.getStringWidth = getStringWidth;
+function addTableBorder(doc, table, startPos, cursor) {
+    var lineWidth = table.settings.tableLineWidth;
+    var lineColor = table.settings.tableLineColor;
+    doc.applyStyles({ lineWidth: lineWidth, lineColor: lineColor });
+    var fillStyle = getFillStyle(lineWidth, false);
+    if (fillStyle) {
+        doc.rect(startPos.x, startPos.y, table.getWidth(doc.pageSize().width), cursor.y - startPos.y, fillStyle);
+    }
+}
+exports.addTableBorder = addTableBorder;
+function getFillStyle(lineWidth, fillColor) {
+    var drawLine = lineWidth > 0;
+    var drawBackground = fillColor || fillColor === 0;
+    if (drawLine && drawBackground) {
+        return 'DF'; // Fill then stroke
+    }
+    else if (drawLine) {
+        return 'S'; // Only stroke (transparent background)
+    }
+    else if (drawBackground) {
+        return 'F'; // Only fill, no stroke
+    }
+    else {
+        return null;
+    }
+}
+exports.getFillStyle = getFillStyle;
+function parseSpacing(value, defaultValue) {
+    var _a, _b, _c, _d;
+    value = value || defaultValue;
+    if (Array.isArray(value)) {
+        if (value.length >= 4) {
+            return {
+                top: value[0],
+                right: value[1],
+                bottom: value[2],
+                left: value[3],
+            };
+        }
+        else if (value.length === 3) {
+            return {
+                top: value[0],
+                right: value[1],
+                bottom: value[2],
+                left: value[1],
+            };
+        }
+        else if (value.length === 2) {
+            return {
+                top: value[0],
+                right: value[1],
+                bottom: value[0],
+                left: value[1],
+            };
+        }
+        else if (value.length === 1) {
+            value = value[0];
+        }
+        else {
+            value = defaultValue;
+        }
+    }
+    if (typeof value === 'object') {
+        if (typeof value.vertical === 'number') {
+            value.top = value.vertical;
+            value.bottom = value.vertical;
+        }
+        if (typeof value.horizontal === 'number') {
+            value.right = value.horizontal;
+            value.left = value.horizontal;
+        }
+        return {
+            left: (_a = value.left) !== null && _a !== void 0 ? _a : defaultValue,
+            top: (_b = value.top) !== null && _b !== void 0 ? _b : defaultValue,
+            right: (_c = value.right) !== null && _c !== void 0 ? _c : defaultValue,
+            bottom: (_d = value.bottom) !== null && _d !== void 0 ? _d : defaultValue,
+        };
+    }
+    if (typeof value !== 'number') {
+        value = defaultValue;
+    }
+    return { top: value, right: value, bottom: value, left: value };
+}
+exports.parseSpacing = parseSpacing;
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getTheme = exports.defaultStyles = exports.HtmlRowInput = exports.FONT_ROW_RATIO = void 0;
+/**
+ * Ratio between font size and font height. The number comes from jspdf's source code
+ */
+exports.FONT_ROW_RATIO = 1.15;
+var HtmlRowInput = /** @class */ (function (_super) {
+    __extends(HtmlRowInput, _super);
+    function HtmlRowInput(element) {
+        var _this = _super.call(this) || this;
+        _this._element = element;
+        return _this;
+    }
+    return HtmlRowInput;
+}(Array));
+exports.HtmlRowInput = HtmlRowInput;
+// Base style for all themes
+function defaultStyles(scaleFactor) {
+    return {
+        font: 'helvetica',
+        fontStyle: 'normal',
+        overflow: 'linebreak',
+        fillColor: false,
+        textColor: 20,
+        halign: 'left',
+        valign: 'top',
+        fontSize: 10,
+        cellPadding: 5 / scaleFactor,
+        lineColor: 200,
+        lineWidth: 0,
+        cellWidth: 'auto',
+        minCellHeight: 0,
+        minCellWidth: 0,
+    };
+}
+exports.defaultStyles = defaultStyles;
+function getTheme(name) {
+    var themes = {
+        striped: {
+            table: { fillColor: 255, textColor: 80, fontStyle: 'normal' },
+            head: { textColor: 255, fillColor: [41, 128, 185], fontStyle: 'bold' },
+            body: {},
+            foot: { textColor: 255, fillColor: [41, 128, 185], fontStyle: 'bold' },
+            alternateRow: { fillColor: 245 },
+        },
+        grid: {
+            table: {
+                fillColor: 255,
+                textColor: 80,
+                fontStyle: 'normal',
+                lineWidth: 0.1,
+            },
+            head: {
+                textColor: 255,
+                fillColor: [26, 188, 156],
+                fontStyle: 'bold',
+                lineWidth: 0,
+            },
+            body: {},
+            foot: {
+                textColor: 255,
+                fillColor: [26, 188, 156],
+                fontStyle: 'bold',
+                lineWidth: 0,
+            },
+            alternateRow: {},
+        },
+        plain: {
+            head: { fontStyle: 'bold' },
+            foot: { fontStyle: 'bold' },
+        },
+    };
+    return themes[name];
+}
+exports.getTheme = getTheme;
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DocHandler = void 0;
+var globalDefaults = {};
+var DocHandler = /** @class */ (function () {
+    function DocHandler(jsPDFDocument) {
+        this.jsPDFDocument = jsPDFDocument;
+        this.userStyles = {
+            // Black for versions of jspdf without getTextColor
+            textColor: jsPDFDocument.getTextColor
+                ? this.jsPDFDocument.getTextColor()
+                : 0,
+            fontSize: jsPDFDocument.internal.getFontSize(),
+            fontStyle: jsPDFDocument.internal.getFont().fontStyle,
+            font: jsPDFDocument.internal.getFont().fontName,
+        };
+    }
+    DocHandler.setDefaults = function (defaults, doc) {
+        if (doc === void 0) { doc = null; }
+        if (doc) {
+            doc.__autoTableDocumentDefaults = defaults;
+        }
+        else {
+            globalDefaults = defaults;
+        }
+    };
+    DocHandler.unifyColor = function (c) {
+        if (Array.isArray(c)) {
+            return c;
+        }
+        else if (typeof c === 'number') {
+            return [c, c, c];
+        }
+        else if (typeof c === 'string') {
+            return [c];
+        }
+        else {
+            return null;
+        }
+    };
+    DocHandler.prototype.applyStyles = function (styles, fontOnly) {
+        // Font style needs to be applied before font
+        // https://github.com/simonbengtsson/jsPDF-AutoTable/issues/632
+        var _a, _b, _c;
+        if (fontOnly === void 0) { fontOnly = false; }
+        if (styles.fontStyle)
+            this.jsPDFDocument.setFontStyle && this.jsPDFDocument.setFontStyle(styles.fontStyle);
+        var _d = this.jsPDFDocument.internal.getFont(), fontStyle = _d.fontStyle, fontName = _d.fontName;
+        if (styles.font)
+            fontName = styles.font;
+        if (styles.fontStyle) {
+            fontStyle = styles.fontStyle;
+            var availableFontStyles = this.getFontList()[fontName];
+            if (availableFontStyles && availableFontStyles.indexOf(fontStyle) === -1) {
+                // Common issue was that the default bold in headers
+                // made custom fonts not work. For example:
+                // https://github.com/simonbengtsson/jsPDF-AutoTable/issues/653
+                this.jsPDFDocument.setFontStyle && this.jsPDFDocument.setFontStyle(availableFontStyles[0]);
+                fontStyle = availableFontStyles[0];
+            }
+        }
+        this.jsPDFDocument.setFont(fontName, fontStyle);
+        if (styles.fontSize)
+            this.jsPDFDocument.setFontSize(styles.fontSize);
+        if (fontOnly) {
+            return; // Performance improvement
+        }
+        var color = DocHandler.unifyColor(styles.fillColor);
+        if (color)
+            (_a = this.jsPDFDocument).setFillColor.apply(_a, color);
+        color = DocHandler.unifyColor(styles.textColor);
+        if (color)
+            (_b = this.jsPDFDocument).setTextColor.apply(_b, color);
+        color = DocHandler.unifyColor(styles.lineColor);
+        if (color)
+            (_c = this.jsPDFDocument).setDrawColor.apply(_c, color);
+        if (typeof styles.lineWidth === 'number') {
+            this.jsPDFDocument.setLineWidth(styles.lineWidth);
+        }
+    };
+    DocHandler.prototype.splitTextToSize = function (text, size, opts) {
+        return this.jsPDFDocument.splitTextToSize(text, size, opts);
+    };
+    DocHandler.prototype.rect = function (x, y, width, height, fillStyle) {
+        return this.jsPDFDocument.rect(x, y, width, height, fillStyle);
+    };
+    DocHandler.prototype.getLastAutoTable = function () {
+        return this.jsPDFDocument.lastAutoTable || null;
+    };
+    DocHandler.prototype.getTextWidth = function (text) {
+        return this.jsPDFDocument.getTextWidth(text);
+    };
+    DocHandler.prototype.getDocument = function () {
+        return this.jsPDFDocument;
+    };
+    DocHandler.prototype.setPage = function (page) {
+        this.jsPDFDocument.setPage(page);
+    };
+    DocHandler.prototype.addPage = function () {
+        return this.jsPDFDocument.addPage();
+    };
+    DocHandler.prototype.getFontList = function () {
+        return this.jsPDFDocument.getFontList();
+    };
+    DocHandler.prototype.getGlobalOptions = function () {
+        return globalDefaults || {};
+    };
+    DocHandler.prototype.getDocumentOptions = function () {
+        return this.jsPDFDocument.__autoTableDocumentDefaults || {};
+    };
+    DocHandler.prototype.pageSize = function () {
+        var pageSize = this.jsPDFDocument.internal.pageSize;
+        // JSPDF 1.4 uses get functions instead of properties on pageSize
+        if (pageSize.width == null) {
+            pageSize = {
+                width: pageSize.getWidth(),
+                height: pageSize.getHeight(),
+            };
+        }
+        return pageSize;
+    };
+    DocHandler.prototype.scaleFactor = function () {
+        return this.jsPDFDocument.internal.scaleFactor;
+    };
+    DocHandler.prototype.pageNumber = function () {
+        var pageInfo = this.jsPDFDocument.internal.getCurrentPageInfo();
+        if (!pageInfo) {
+            // Only recent versions of jspdf has pageInfo
+            return this.jsPDFDocument.internal.getNumberOfPages();
+        }
+        return pageInfo.pageNumber;
+    };
+    return DocHandler;
+}());
+exports.DocHandler = DocHandler;
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/* eslint-disable @typescript-eslint/no-unused-vars */
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.assign = void 0;
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
+function assign(target, s, s1, s2, s3) {
+    if (target == null) {
+        throw new TypeError('Cannot convert undefined or null to object');
+    }
+    var to = Object(target);
+    for (var index = 1; index < arguments.length; index++) {
+        // eslint-disable-next-line prefer-rest-params
+        var nextSource = arguments[index];
+        if (nextSource != null) {
+            // Skip over if undefined or null
+            for (var nextKey in nextSource) {
+                // Avoid bugs when hasOwnProperty is shadowed
+                if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
+                    to[nextKey] = nextSource[nextKey];
+                }
+            }
+        }
+    }
+    return to;
+}
+exports.assign = assign;
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.parseHtml = void 0;
+var cssParser_1 = __webpack_require__(12);
+var config_1 = __webpack_require__(1);
+function parseHtml(doc, input, window, includeHiddenHtml, useCss) {
+    var _a, _b;
+    if (includeHiddenHtml === void 0) { includeHiddenHtml = false; }
+    if (useCss === void 0) { useCss = false; }
+    var tableElement;
+    if (typeof input === 'string') {
+        tableElement = window.document.querySelector(input);
+    }
+    else {
+        tableElement = input;
+    }
+    var supportedFonts = Object.keys(doc.getFontList());
+    var scaleFactor = doc.scaleFactor();
+    var head = [], body = [], foot = [];
+    if (!tableElement) {
+        console.error('Html table could not be found with input: ', input);
+        return { head: head, body: body, foot: foot };
+    }
+    for (var i = 0; i < tableElement.rows.length; i++) {
+        var element = tableElement.rows[i];
+        var tagName = (_b = (_a = element === null || element === void 0 ? void 0 : element.parentElement) === null || _a === void 0 ? void 0 : _a.tagName) === null || _b === void 0 ? void 0 : _b.toLowerCase();
+        var row = parseRowContent(supportedFonts, scaleFactor, window, element, includeHiddenHtml, useCss);
+        if (!row)
+            continue;
+        if (tagName === 'thead') {
+            head.push(row);
+        }
+        else if (tagName === 'tfoot') {
+            foot.push(row);
+        }
+        else {
+            // Add to body both if parent is tbody or table
+            body.push(row);
+        }
+    }
+    return { head: head, body: body, foot: foot };
+}
+exports.parseHtml = parseHtml;
+function parseRowContent(supportedFonts, scaleFactor, window, row, includeHidden, useCss) {
+    var resultRow = new config_1.HtmlRowInput(row);
+    for (var i = 0; i < row.cells.length; i++) {
+        var cell = row.cells[i];
+        var style_1 = window.getComputedStyle(cell);
+        if (includeHidden || style_1.display !== 'none') {
+            var cellStyles = void 0;
+            if (useCss) {
+                cellStyles = cssParser_1.parseCss(supportedFonts, cell, scaleFactor, style_1, window);
+            }
+            resultRow.push({
+                rowSpan: cell.rowSpan,
+                colSpan: cell.colSpan,
+                styles: cellStyles,
+                _element: cell,
+                content: parseCellContent(cell),
+            });
+        }
+    }
+    var style = window.getComputedStyle(row);
+    if (resultRow.length > 0 && (includeHidden || style.display !== 'none')) {
+        return resultRow;
+    }
+}
+function parseCellContent(orgCell) {
+    // Work on cloned node to make sure no changes are applied to html table
+    var cell = orgCell.cloneNode(true);
+    // Remove extra space and line breaks in markup to make it more similar to
+    // what would be shown in html
+    cell.innerHTML = cell.innerHTML.replace(/\n/g, '').replace(/ +/g, ' ');
+    // Preserve <br> tags as line breaks in the pdf
+    cell.innerHTML = cell.innerHTML
+        .split('<br>')
+        .map(function (part) { return part.trim(); })
+        .join('\n');
+    // innerText for ie
+    return cell.innerText || cell.textContent || '';
+}
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Improved text function with halign and valign support
+ * Inspiration from: http://stackoverflow.com/questions/28327510/align-text-right-using-jspdf/28433113#28433113
+ */
+function default_1(text, x, y, styles, doc) {
+    styles = styles || {};
+    var FONT_ROW_RATIO = 1.15;
+    var k = doc.internal.scaleFactor;
+    var fontSize = doc.internal.getFontSize() / k;
+    var splitRegex = /\r\n|\r|\n/g;
+    var splitText = '';
+    var lineCount = 1;
+    if (styles.valign === 'middle' ||
+        styles.valign === 'bottom' ||
+        styles.halign === 'center' ||
+        styles.halign === 'right') {
+        splitText = typeof text === 'string' ? text.split(splitRegex) : text;
+        lineCount = splitText.length || 1;
+    }
+    // Align the top
+    y += fontSize * (2 - FONT_ROW_RATIO);
+    if (styles.valign === 'middle')
+        y -= (lineCount / 2) * fontSize * FONT_ROW_RATIO;
+    else if (styles.valign === 'bottom')
+        y -= lineCount * fontSize * FONT_ROW_RATIO;
+    if (styles.halign === 'center' || styles.halign === 'right') {
+        var alignSize = fontSize;
+        if (styles.halign === 'center')
+            alignSize *= 0.5;
+        if (splitText && lineCount >= 1) {
+            for (var iLine = 0; iLine < splitText.length; iLine++) {
+                doc.text(splitText[iLine], x - doc.getStringUnitWidth(splitText[iLine]) * alignSize, y);
+                y += fontSize * FONT_ROW_RATIO;
+            }
+            return doc;
+        }
+        x -= doc.getStringUnitWidth(text) * alignSize;
+    }
+    if (styles.halign === 'justify') {
+        doc.text(text, x, y, {
+            maxWidth: styles.maxWidth || 100,
+            align: 'justify',
+        });
+    }
+    else {
+        doc.text(text, x, y);
+    }
+    return doc;
+}
+exports.default = default_1;
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.parseInput = void 0;
+var htmlParser_1 = __webpack_require__(4);
+var polyfills_1 = __webpack_require__(3);
+var common_1 = __webpack_require__(0);
+var documentHandler_1 = __webpack_require__(2);
+var inputValidator_1 = __webpack_require__(13);
+function parseInput(d, current) {
+    var doc = new documentHandler_1.DocHandler(d);
+    var document = doc.getDocumentOptions();
+    var global = doc.getGlobalOptions();
+    inputValidator_1.default(doc, global, document, current);
+    var options = polyfills_1.assign({}, global, document, current);
+    var win;
+    if (typeof window !== 'undefined') {
+        win = window;
+    }
+    var styles = parseStyles(global, document, current);
+    var hooks = parseHooks(global, document, current);
+    var settings = parseSettings(doc, options);
+    var content = parseContent(doc, options, win);
+    return {
+        id: current.tableId,
+        content: content,
+        hooks: hooks,
+        styles: styles,
+        settings: settings,
+    };
+}
+exports.parseInput = parseInput;
+function parseStyles(gInput, dInput, cInput) {
+    var styleOptions = {
+        styles: {},
+        headStyles: {},
+        bodyStyles: {},
+        footStyles: {},
+        alternateRowStyles: {},
+        columnStyles: {},
+    };
+    var _loop_1 = function (prop) {
+        if (prop === 'columnStyles') {
+            var global_1 = gInput[prop];
+            var document_1 = dInput[prop];
+            var current = cInput[prop];
+            styleOptions.columnStyles = polyfills_1.assign({}, global_1, document_1, current);
+        }
+        else {
+            var allOptions = [gInput, dInput, cInput];
+            var styles = allOptions.map(function (opts) { return opts[prop] || {}; });
+            styleOptions[prop] = polyfills_1.assign({}, styles[0], styles[1], styles[2]);
+        }
+    };
+    for (var _i = 0, _a = Object.keys(styleOptions); _i < _a.length; _i++) {
+        var prop = _a[_i];
+        _loop_1(prop);
+    }
+    return styleOptions;
+}
+function parseHooks(global, document, current) {
+    var allOptions = [global, document, current];
+    var result = {
+        didParseCell: [],
+        willDrawCell: [],
+        didDrawCell: [],
+        didDrawPage: [],
+    };
+    for (var _i = 0, allOptions_1 = allOptions; _i < allOptions_1.length; _i++) {
+        var options = allOptions_1[_i];
+        if (options.didParseCell)
+            result.didParseCell.push(options.didParseCell);
+        if (options.willDrawCell)
+            result.willDrawCell.push(options.willDrawCell);
+        if (options.didDrawCell)
+            result.didDrawCell.push(options.didDrawCell);
+        if (options.didDrawPage)
+            result.didDrawPage.push(options.didDrawPage);
+    }
+    return result;
+}
+function parseSettings(doc, options) {
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
+    var margin = common_1.parseSpacing(options.margin, 40 / doc.scaleFactor());
+    var startY = (_a = getStartY(doc, options.startY)) !== null && _a !== void 0 ? _a : margin.top;
+    var showFoot;
+    if (options.showFoot === true) {
+        showFoot = 'everyPage';
+    }
+    else if (options.showFoot === false) {
+        showFoot = 'never';
+    }
+    else {
+        showFoot = (_b = options.showFoot) !== null && _b !== void 0 ? _b : 'everyPage';
+    }
+    var showHead;
+    if (options.showHead === true) {
+        showHead = 'everyPage';
+    }
+    else if (options.showHead === false) {
+        showHead = 'never';
+    }
+    else {
+        showHead = (_c = options.showHead) !== null && _c !== void 0 ? _c : 'everyPage';
+    }
+    var useCss = (_d = options.useCss) !== null && _d !== void 0 ? _d : false;
+    var theme = options.theme || (useCss ? 'plain' : 'striped');
+    return {
+        includeHiddenHtml: (_e = options.includeHiddenHtml) !== null && _e !== void 0 ? _e : false,
+        useCss: useCss,
+        theme: theme,
+        startY: startY,
+        margin: margin,
+        pageBreak: (_f = options.pageBreak) !== null && _f !== void 0 ? _f : 'auto',
+        rowPageBreak: (_g = options.rowPageBreak) !== null && _g !== void 0 ? _g : 'auto',
+        tableWidth: (_h = options.tableWidth) !== null && _h !== void 0 ? _h : 'auto',
+        showHead: showHead,
+        showFoot: showFoot,
+        tableLineWidth: (_j = options.tableLineWidth) !== null && _j !== void 0 ? _j : 0,
+        tableLineColor: (_k = options.tableLineColor) !== null && _k !== void 0 ? _k : 200,
+    };
+}
+function getStartY(doc, userStartY) {
+    var previous = doc.getLastAutoTable();
+    var sf = doc.scaleFactor();
+    var currentPage = doc.pageNumber();
+    var isSamePageAsPreviousTable = false;
+    if (previous && previous.startPageNumber) {
+        var endingPage = previous.startPageNumber + previous.pageNumber - 1;
+        isSamePageAsPreviousTable = endingPage === currentPage;
+    }
+    if (typeof userStartY === 'number') {
+        return userStartY;
+    }
+    else if (userStartY == null || userStartY === false) {
+        if (isSamePageAsPreviousTable && (previous === null || previous === void 0 ? void 0 : previous.finalY) != null) {
+            // Some users had issues with overlapping tables when they used multiple
+            // tables without setting startY so setting it here to a sensible default.
+            return previous.finalY + 20 / sf;
+        }
+    }
+    return null;
+}
+function parseContent(doc, options, window) {
+    var head = options.head || [];
+    var body = options.body || [];
+    var foot = options.foot || [];
+    if (options.html) {
+        var hidden = options.includeHiddenHtml;
+        if (window) {
+            var htmlContent = htmlParser_1.parseHtml(doc, options.html, window, hidden, options.useCss) || {};
+            head = htmlContent.head || head;
+            body = htmlContent.body || head;
+            foot = htmlContent.foot || head;
+        }
+        else {
+            console.error('Cannot parse html in non browser environment');
+        }
+    }
+    var columns = options.columns || parseColumns(head, body, foot);
+    return {
+        columns: columns,
+        head: head,
+        body: body,
+        foot: foot,
+    };
+}
+function parseColumns(head, body, foot) {
+    var firstRow = head[0] || body[0] || foot[0] || [];
+    var result = [];
+    Object.keys(firstRow)
+        .filter(function (key) { return key !== '_element'; })
+        .forEach(function (key) {
+        var colSpan = 1;
+        var input;
+        if (Array.isArray(firstRow)) {
+            input = firstRow[parseInt(key)];
+        }
+        else {
+            input = firstRow[key];
+        }
+        if (typeof input === 'object' && !Array.isArray(input)) {
+            colSpan = (input === null || input === void 0 ? void 0 : input.colSpan) || 1;
+        }
+        for (var i = 0; i < colSpan; i++) {
+            var id = void 0;
+            if (Array.isArray(firstRow)) {
+                id = result.length;
+            }
+            else {
+                id = key + (i > 0 ? "_" + i : '');
+            }
+            var rowResult = { dataKey: id };
+            result.push(rowResult);
+        }
+    });
+    return result;
+}
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addPage = exports.drawTable = void 0;
+var config_1 = __webpack_require__(1);
+var common_1 = __webpack_require__(0);
+var models_1 = __webpack_require__(8);
+var documentHandler_1 = __webpack_require__(2);
+var polyfills_1 = __webpack_require__(3);
+var autoTableText_1 = __webpack_require__(5);
+function drawTable(jsPDFDoc, table) {
+    var settings = table.settings;
+    var startY = settings.startY;
+    var margin = settings.margin;
+    var cursor = {
+        x: margin.left,
+        y: startY,
+    };
+    var sectionsHeight = table.getHeadHeight(table.columns) + table.getFootHeight(table.columns);
+    var minTableBottomPos = startY + margin.bottom + sectionsHeight;
+    if (settings.pageBreak === 'avoid') {
+        var rows = table.allRows();
+        var tableHeight = rows.reduce(function (acc, row) { return acc + row.height; }, 0);
+        minTableBottomPos += tableHeight;
+    }
+    var doc = new documentHandler_1.DocHandler(jsPDFDoc);
+    if (settings.pageBreak === 'always' ||
+        (settings.startY != null && minTableBottomPos > doc.pageSize().height)) {
+        nextPage(doc);
+        cursor.y = margin.top;
+    }
+    var startPos = polyfills_1.assign({}, cursor);
+    table.startPageNumber = doc.pageNumber();
+    doc.applyStyles(doc.userStyles);
+    if (settings.showHead === 'firstPage' || settings.showHead === 'everyPage') {
+        table.head.forEach(function (row) { return printRow(doc, table, row, cursor); });
+    }
+    doc.applyStyles(doc.userStyles);
+    table.body.forEach(function (row, index) {
+        var isLastRow = index === table.body.length - 1;
+        printFullRow(doc, table, row, isLastRow, startPos, cursor);
+    });
+    doc.applyStyles(doc.userStyles);
+    if (settings.showFoot === 'lastPage' || settings.showFoot === 'everyPage') {
+        table.foot.forEach(function (row) { return printRow(doc, table, row, cursor); });
+    }
+    common_1.addTableBorder(doc, table, startPos, cursor);
+    table.callEndPageHooks(doc, cursor);
+    table.finalY = cursor.y;
+    jsPDFDoc.lastAutoTable = table;
+    jsPDFDoc.previousAutoTable = table; // Deprecated
+    if (jsPDFDoc.autoTable)
+        jsPDFDoc.autoTable.previous = table; // Deprecated
+    doc.applyStyles(doc.userStyles);
+}
+exports.drawTable = drawTable;
+function getRemainingLineCount(cell, remainingPageSpace, doc) {
+    var fontHeight = (cell.styles.fontSize / doc.scaleFactor()) * config_1.FONT_ROW_RATIO;
+    var vPadding = cell.padding('vertical');
+    var remainingLines = Math.floor((remainingPageSpace - vPadding) / fontHeight);
+    return Math.max(0, remainingLines);
+}
+function modifyRowToFit(row, remainingPageSpace, table, doc) {
+    var cells = {};
+    row.spansMultiplePages = true;
+    var rowHeight = 0;
+    for (var _i = 0, _a = table.columns; _i < _a.length; _i++) {
+        var column = _a[_i];
+        var cell = row.cells[column.index];
+        if (!cell)
+            continue;
+        if (!Array.isArray(cell.text)) {
+            cell.text = [cell.text];
+        }
+        var remainderCell = new models_1.Cell(cell.raw, cell.styles, cell.section);
+        remainderCell = polyfills_1.assign(remainderCell, cell);
+        remainderCell.text = [];
+        var remainingLineCount = getRemainingLineCount(cell, remainingPageSpace, doc);
+        if (cell.text.length > remainingLineCount) {
+            remainderCell.text = cell.text.splice(remainingLineCount, cell.text.length);
+        }
+        var scaleFactor = doc.scaleFactor();
+        cell.contentHeight = cell.getContentHeight(scaleFactor);
+        if (cell.contentHeight >= remainingPageSpace) {
+            cell.contentHeight = remainingPageSpace;
+            remainderCell.styles.minCellHeight -= remainingPageSpace;
+        }
+        if (cell.contentHeight > row.height) {
+            row.height = cell.contentHeight;
+        }
+        remainderCell.contentHeight = remainderCell.getContentHeight(scaleFactor);
+        if (remainderCell.contentHeight > rowHeight) {
+            rowHeight = remainderCell.contentHeight;
+        }
+        cells[column.index] = remainderCell;
+    }
+    var remainderRow = new models_1.Row(row.raw, -1, row.section, cells, true);
+    remainderRow.height = rowHeight;
+    for (var _b = 0, _c = table.columns; _b < _c.length; _b++) {
+        var column = _c[_b];
+        var remainderCell = remainderRow.cells[column.index];
+        if (remainderCell) {
+            remainderCell.height = remainderRow.height;
+        }
+        var cell = row.cells[column.index];
+        if (cell) {
+            cell.height = row.height;
+        }
+    }
+    return remainderRow;
+}
+function shouldPrintOnCurrentPage(doc, row, remainingPageSpace, table) {
+    var pageHeight = doc.pageSize().height;
+    var margin = table.settings.margin;
+    var marginHeight = margin.top + margin.bottom;
+    var maxRowHeight = pageHeight - marginHeight;
+    if (row.section === 'body') {
+        // Should also take into account that head and foot is not
+        // on every page with some settings
+        maxRowHeight -=
+            table.getHeadHeight(table.columns) + table.getFootHeight(table.columns);
+    }
+    var minRowHeight = row.getMinimumRowHeight(table.columns, doc);
+    var minRowFits = minRowHeight < remainingPageSpace;
+    if (minRowHeight > maxRowHeight) {
+        console.error("Will not be able to print row " + row.index + " correctly since it's minimum height is larger than page height");
+        return true;
+    }
+    if (!minRowFits) {
+        return false;
+    }
+    var rowHasRowSpanCell = row.hasRowSpan(table.columns);
+    var rowHigherThanPage = row.getMaxCellHeight(table.columns) > maxRowHeight;
+    if (rowHigherThanPage) {
+        if (rowHasRowSpanCell) {
+            console.error("The content of row " + row.index + " will not be drawn correctly since drawing rows with a height larger than the page height and has cells with rowspans is not supported.");
+        }
+        return true;
+    }
+    if (rowHasRowSpanCell) {
+        // Currently a new page is required whenever a rowspan row don't fit a page.
+        return false;
+    }
+    if (table.settings.rowPageBreak === 'avoid') {
+        return false;
+    }
+    // In all other cases print the row on current page
+    return true;
+}
+function printFullRow(doc, table, row, isLastRow, startPos, cursor) {
+    var remainingSpace = getRemainingPageSpace(doc, table, isLastRow, cursor);
+    if (row.canEntireRowFit(remainingSpace, table.columns)) {
+        printRow(doc, table, row, cursor);
+    }
+    else {
+        if (shouldPrintOnCurrentPage(doc, row, remainingSpace, table)) {
+            var remainderRow = modifyRowToFit(row, remainingSpace, table, doc);
+            printRow(doc, table, row, cursor);
+            addPage(doc, table, startPos, cursor);
+            printFullRow(doc, table, remainderRow, isLastRow, startPos, cursor);
+        }
+        else {
+            addPage(doc, table, startPos, cursor);
+            printFullRow(doc, table, row, isLastRow, startPos, cursor);
+        }
+    }
+}
+function printRow(doc, table, row, cursor) {
+    cursor.x = table.settings.margin.left;
+    for (var _i = 0, _a = table.columns; _i < _a.length; _i++) {
+        var column = _a[_i];
+        var cell = row.cells[column.index];
+        if (!cell) {
+            cursor.x += column.width;
+            continue;
+        }
+        doc.applyStyles(cell.styles);
+        cell.x = cursor.x;
+        cell.y = cursor.y;
+        var result = table.callCellHooks(doc, table.hooks.willDrawCell, cell, row, column, cursor);
+        if (result === false) {
+            cursor.x += column.width;
+            continue;
+        }
+        var cellStyles = cell.styles;
+        var fillStyle = common_1.getFillStyle(cellStyles.lineWidth, cellStyles.fillColor);
+        if (fillStyle) {
+            doc.rect(cell.x, cursor.y, cell.width, cell.height, fillStyle);
+        }
+        var textPos = cell.getTextPos();
+        autoTableText_1.default(cell.text, textPos.x, textPos.y, {
+            halign: cell.styles.halign,
+            valign: cell.styles.valign,
+            maxWidth: Math.ceil(cell.width - cell.padding('left') - cell.padding('right')),
+        }, doc.getDocument());
+        table.callCellHooks(doc, table.hooks.didDrawCell, cell, row, column, cursor);
+        cursor.x += column.width;
+    }
+    cursor.y += row.height;
+}
+function getRemainingPageSpace(doc, table, isLastRow, cursor) {
+    var bottomContentHeight = table.settings.margin.bottom;
+    var showFoot = table.settings.showFoot;
+    if (showFoot === 'everyPage' || (showFoot === 'lastPage' && isLastRow)) {
+        bottomContentHeight += table.getFootHeight(table.columns);
+    }
+    return doc.pageSize().height - cursor.y - bottomContentHeight;
+}
+function addPage(doc, table, startPos, cursor) {
+    doc.applyStyles(doc.userStyles);
+    if (table.settings.showFoot === 'everyPage') {
+        table.foot.forEach(function (row) { return printRow(doc, table, row, cursor); });
+    }
+    // Add user content just before adding new page ensure it will
+    // be drawn above other things on the page
+    table.callEndPageHooks(doc, cursor);
+    var margin = table.settings.margin;
+    common_1.addTableBorder(doc, table, startPos, cursor);
+    nextPage(doc);
+    table.pageNumber++;
+    table.pageCount++;
+    cursor.x = margin.left;
+    cursor.y = margin.top;
+    if (table.settings.showHead === 'everyPage') {
+        table.head.forEach(function (row) { return printRow(doc, table, row, cursor); });
+    }
+}
+exports.addPage = addPage;
+function nextPage(doc) {
+    var current = doc.pageNumber();
+    doc.setPage(current + 1);
+    var newCurrent = doc.pageNumber();
+    if (newCurrent === current) {
+        doc.addPage();
+    }
+}
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Column = exports.Cell = exports.Row = exports.Table = void 0;
+var config_1 = __webpack_require__(1);
+var HookData_1 = __webpack_require__(14);
+var common_1 = __webpack_require__(0);
+var Table = /** @class */ (function () {
+    function Table(input, content) {
+        this.pageNumber = 1;
+        // Deprecated, use pageNumber instead
+        // Not using getter since:
+        // https://github.com/simonbengtsson/jsPDF-AutoTable/issues/596
+        this.pageCount = 1;
+        this.id = input.id;
+        this.settings = input.settings;
+        this.styles = input.styles;
+        this.hooks = input.hooks;
+        this.columns = content.columns;
+        this.head = content.head;
+        this.body = content.body;
+        this.foot = content.foot;
+    }
+    Table.prototype.getHeadHeight = function (columns) {
+        return this.head.reduce(function (acc, row) { return acc + row.getMaxCellHeight(columns); }, 0);
+    };
+    Table.prototype.getFootHeight = function (columns) {
+        return this.foot.reduce(function (acc, row) { return acc + row.getMaxCellHeight(columns); }, 0);
+    };
+    Table.prototype.allRows = function () {
+        return this.head.concat(this.body).concat(this.foot);
+    };
+    Table.prototype.callCellHooks = function (doc, handlers, cell, row, column, cursor) {
+        for (var _i = 0, handlers_1 = handlers; _i < handlers_1.length; _i++) {
+            var handler = handlers_1[_i];
+            var data = new HookData_1.CellHookData(doc, this, cell, row, column, cursor);
+            var result = handler(data) === false;
+            // Make sure text is always string[] since user can assign string
+            cell.text = Array.isArray(cell.text) ? cell.text : [cell.text];
+            if (result) {
+                return false;
+            }
+        }
+        return true;
+    };
+    Table.prototype.callEndPageHooks = function (doc, cursor) {
+        doc.applyStyles(doc.userStyles);
+        for (var _i = 0, _a = this.hooks.didDrawPage; _i < _a.length; _i++) {
+            var handler = _a[_i];
+            handler(new HookData_1.HookData(doc, this, cursor));
+        }
+    };
+    Table.prototype.getWidth = function (pageWidth) {
+        if (typeof this.settings.tableWidth === 'number') {
+            return this.settings.tableWidth;
+        }
+        else if (this.settings.tableWidth === 'wrap') {
+            var wrappedWidth = this.columns.reduce(function (total, col) { return total + col.wrappedWidth; }, 0);
+            return wrappedWidth;
+        }
+        else {
+            var margin = this.settings.margin;
+            return pageWidth - margin.left - margin.right;
+        }
+    };
+    return Table;
+}());
+exports.Table = Table;
+var Row = /** @class */ (function () {
+    function Row(raw, index, section, cells, spansMultiplePages) {
+        if (spansMultiplePages === void 0) { spansMultiplePages = false; }
+        this.height = 0;
+        this.raw = raw;
+        if (raw instanceof config_1.HtmlRowInput) {
+            this.raw = raw._element;
+            this.element = raw._element;
+        }
+        this.index = index;
+        this.section = section;
+        this.cells = cells;
+        this.spansMultiplePages = spansMultiplePages;
+    }
+    Row.prototype.getMaxCellHeight = function (columns) {
+        var _this = this;
+        return columns.reduce(function (acc, column) { var _a; return Math.max(acc, ((_a = _this.cells[column.index]) === null || _a === void 0 ? void 0 : _a.height) || 0); }, 0);
+    };
+    Row.prototype.hasRowSpan = function (columns) {
+        var _this = this;
+        return (columns.filter(function (column) {
+            var cell = _this.cells[column.index];
+            if (!cell)
+                return false;
+            return cell.rowSpan > 1;
+        }).length > 0);
+    };
+    Row.prototype.canEntireRowFit = function (height, columns) {
+        return this.getMaxCellHeight(columns) <= height;
+    };
+    Row.prototype.getMinimumRowHeight = function (columns, doc) {
+        var _this = this;
+        return columns.reduce(function (acc, column) {
+            var cell = _this.cells[column.index];
+            if (!cell)
+                return 0;
+            var fontHeight = (cell.styles.fontSize / doc.scaleFactor()) * config_1.FONT_ROW_RATIO;
+            var vPadding = cell.padding('vertical');
+            var oneRowHeight = vPadding + fontHeight;
+            return oneRowHeight > acc ? oneRowHeight : acc;
+        }, 0);
+    };
+    return Row;
+}());
+exports.Row = Row;
+var Cell = /** @class */ (function () {
+    function Cell(raw, styles, section) {
+        var _a, _b;
+        this.contentHeight = 0;
+        this.contentWidth = 0;
+        this.wrappedWidth = 0;
+        this.minReadableWidth = 0;
+        this.minWidth = 0;
+        this.width = 0;
+        this.height = 0;
+        this.x = 0;
+        this.y = 0;
+        this.styles = styles;
+        this.section = section;
+        this.raw = raw;
+        var content = raw;
+        if (raw != null && typeof raw === 'object' && !Array.isArray(raw)) {
+            this.rowSpan = raw.rowSpan || 1;
+            this.colSpan = raw.colSpan || 1;
+            content = (_b = (_a = raw.content) !== null && _a !== void 0 ? _a : raw.title) !== null && _b !== void 0 ? _b : raw;
+            if (raw._element) {
+                this.raw = raw._element;
+            }
+        }
+        else {
+            this.rowSpan = 1;
+            this.colSpan = 1;
+        }
+        // Stringify 0 and false, but not undefined or null
+        var text = content != null ? '' + content : '';
+        var splitRegex = /\r\n|\r|\n/g;
+        this.text = text.split(splitRegex);
+    }
+    Cell.prototype.getTextPos = function () {
+        var y;
+        if (this.styles.valign === 'top') {
+            y = this.y + this.padding('top');
+        }
+        else if (this.styles.valign === 'bottom') {
+            y = this.y + this.height - this.padding('bottom');
+        }
+        else {
+            var netHeight = this.height - this.padding('vertical');
+            y = this.y + netHeight / 2 + this.padding('top');
+        }
+        var x;
+        if (this.styles.halign === 'right') {
+            x = this.x + this.width - this.padding('right');
+        }
+        else if (this.styles.halign === 'center') {
+            var netWidth = this.width - this.padding('horizontal');
+            x = this.x + netWidth / 2 + this.padding('left');
+        }
+        else {
+            x = this.x + this.padding('left');
+        }
+        return { x: x, y: y };
+    };
+    Cell.prototype.getContentHeight = function (scaleFactor) {
+        var lineCount = Array.isArray(this.text) ? this.text.length : 1;
+        var fontHeight = (this.styles.fontSize / scaleFactor) * config_1.FONT_ROW_RATIO;
+        var height = lineCount * fontHeight + this.padding('vertical');
+        return Math.max(height, this.styles.minCellHeight);
+    };
+    Cell.prototype.padding = function (name) {
+        var padding = common_1.parseSpacing(this.styles.cellPadding, 0);
+        if (name === 'vertical') {
+            return padding.top + padding.bottom;
+        }
+        else if (name === 'horizontal') {
+            return padding.left + padding.right;
+        }
+        else {
+            return padding[name];
+        }
+    };
+    return Cell;
+}());
+exports.Cell = Cell;
+var Column = /** @class */ (function () {
+    function Column(dataKey, raw, index) {
+        this.wrappedWidth = 0;
+        this.minReadableWidth = 0;
+        this.minWidth = 0;
+        this.width = 0;
+        this.dataKey = dataKey;
+        this.raw = raw;
+        this.index = index;
+    }
+    Column.prototype.getMaxCustomCellWidth = function (table) {
+        var max = 0;
+        for (var _i = 0, _a = table.allRows(); _i < _a.length; _i++) {
+            var row = _a[_i];
+            var cell = row.cells[this.index];
+            if (cell && typeof cell.styles.cellWidth === 'number') {
+                max = Math.max(max, cell.styles.cellWidth);
+            }
+        }
+        return max;
+    };
+    return Column;
+}());
+exports.Column = Column;
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.createTable = void 0;
+var documentHandler_1 = __webpack_require__(2);
+var models_1 = __webpack_require__(8);
+var widthCalculator_1 = __webpack_require__(15);
+var config_1 = __webpack_require__(1);
+var polyfills_1 = __webpack_require__(3);
+function createTable(jsPDFDoc, input) {
+    var doc = new documentHandler_1.DocHandler(jsPDFDoc);
+    var content = parseContent(input, doc.scaleFactor());
+    var table = new models_1.Table(input, content);
+    widthCalculator_1.calculateWidths(doc, table);
+    doc.applyStyles(doc.userStyles);
+    return table;
+}
+exports.createTable = createTable;
+function parseContent(input, sf) {
+    var content = input.content;
+    var columns = createColumns(content.columns);
+    // If no head or foot is set, try generating it with content from columns
+    if (content.head.length === 0) {
+        var sectionRow = generateSectionRow(columns, 'head');
+        if (sectionRow)
+            content.head.push(sectionRow);
+    }
+    if (content.foot.length === 0) {
+        var sectionRow = generateSectionRow(columns, 'foot');
+        if (sectionRow)
+            content.foot.push(sectionRow);
+    }
+    var theme = input.settings.theme;
+    var styles = input.styles;
+    return {
+        columns: columns,
+        head: parseSection('head', content.head, columns, styles, theme, sf),
+        body: parseSection('body', content.body, columns, styles, theme, sf),
+        foot: parseSection('foot', content.foot, columns, styles, theme, sf),
+    };
+}
+function parseSection(sectionName, sectionRows, columns, styleProps, theme, scaleFactor) {
+    var rowSpansLeftForColumn = {};
+    var result = sectionRows.map(function (rawRow, rowIndex) {
+        var skippedRowForRowSpans = 0;
+        var cells = {};
+        var colSpansAdded = 0;
+        var columnSpansLeft = 0;
+        for (var _i = 0, columns_1 = columns; _i < columns_1.length; _i++) {
+            var column = columns_1[_i];
+            if (rowSpansLeftForColumn[column.index] == null ||
+                rowSpansLeftForColumn[column.index].left === 0) {
+                if (columnSpansLeft === 0) {
+                    var rawCell = void 0;
+                    if (Array.isArray(rawRow)) {
+                        rawCell =
+                            rawRow[column.index - colSpansAdded - skippedRowForRowSpans];
+                    }
+                    else {
+                        rawCell = rawRow[column.dataKey];
+                    }
+                    var cellInputStyles = {};
+                    if (typeof rawCell === 'object' && !Array.isArray(rawCell)) {
+                        cellInputStyles = (rawCell === null || rawCell === void 0 ? void 0 : rawCell.styles) || {};
+                    }
+                    var styles = cellStyles(sectionName, column, rowIndex, theme, styleProps, scaleFactor, cellInputStyles);
+                    var cell = new models_1.Cell(rawCell, styles, sectionName);
+                    // dataKey is not used internally no more but keep for
+                    // backwards compat in hooks
+                    cells[column.dataKey] = cell;
+                    cells[column.index] = cell;
+                    columnSpansLeft = cell.colSpan - 1;
+                    rowSpansLeftForColumn[column.index] = {
+                        left: cell.rowSpan - 1,
+                        times: columnSpansLeft,
+                    };
+                }
+                else {
+                    columnSpansLeft--;
+                    colSpansAdded++;
+                }
+            }
+            else {
+                rowSpansLeftForColumn[column.index].left--;
+                columnSpansLeft = rowSpansLeftForColumn[column.index].times;
+                skippedRowForRowSpans++;
+            }
+        }
+        return new models_1.Row(rawRow, rowIndex, sectionName, cells);
+    });
+    return result;
+}
+function generateSectionRow(columns, section) {
+    var sectionRow = {};
+    columns.forEach(function (col) {
+        if (col.raw != null) {
+            var title = getSectionTitle(section, col.raw);
+            if (title != null)
+                sectionRow[col.dataKey] = title;
+        }
+    });
+    return Object.keys(sectionRow).length > 0 ? sectionRow : null;
+}
+function getSectionTitle(section, column) {
+    if (section === 'head') {
+        if (typeof column === 'object') {
+            return column.header || column.title || null;
+        }
+        else if (typeof column === 'string' || typeof column === 'number') {
+            return column;
+        }
+    }
+    else if (section === 'foot' && typeof column === 'object') {
+        return column.footer;
+    }
+    return null;
+}
+function createColumns(columns) {
+    return columns.map(function (input, index) {
+        var _a, _b;
+        var key;
+        if (typeof input === 'object') {
+            key = (_b = (_a = input.dataKey) !== null && _a !== void 0 ? _a : input.key) !== null && _b !== void 0 ? _b : index;
+        }
+        else {
+            key = index;
+        }
+        return new models_1.Column(key, input, index);
+    });
+}
+function cellStyles(sectionName, column, rowIndex, themeName, styles, scaleFactor, cellInputStyles) {
+    var theme = config_1.getTheme(themeName);
+    var sectionStyles;
+    if (sectionName === 'head') {
+        sectionStyles = styles.headStyles;
+    }
+    else if (sectionName === 'body') {
+        sectionStyles = styles.bodyStyles;
+    }
+    else if (sectionName === 'foot') {
+        sectionStyles = styles.footStyles;
+    }
+    var otherStyles = polyfills_1.assign({}, theme.table, theme[sectionName], styles.styles, sectionStyles);
+    var columnStyles = styles.columnStyles[column.dataKey] ||
+        styles.columnStyles[column.index] ||
+        {};
+    var colStyles = sectionName === 'body' ? columnStyles : {};
+    var rowStyles = sectionName === 'body' && rowIndex % 2 === 0
+        ? polyfills_1.assign({}, theme.alternateRow, styles.alternateRowStyles)
+        : {};
+    var defaultStyle = config_1.defaultStyles(scaleFactor);
+    var themeStyles = polyfills_1.assign({}, defaultStyle, otherStyles, rowStyles, colStyles);
+    return polyfills_1.assign(themeStyles, cellInputStyles);
+}
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.__drawTable = exports.__createTable = exports.applyPlugin = void 0;
+var applyPlugin_1 = __webpack_require__(11);
+var inputParser_1 = __webpack_require__(6);
+var tableDrawer_1 = __webpack_require__(7);
+var tableCalculator_1 = __webpack_require__(9);
+// export { applyPlugin } didn't export applyPlugin
+// to index.d.ts for some reason
+function applyPlugin(jsPDF) {
+    applyPlugin_1.default(jsPDF);
+}
+exports.applyPlugin = applyPlugin;
+function autoTable(d, options) {
+    var input = inputParser_1.parseInput(d, options);
+    var table = tableCalculator_1.createTable(d, input);
+    tableDrawer_1.drawTable(d, table);
+}
+exports.default = autoTable;
+// Experimental export
+function __createTable(d, options) {
+    var input = inputParser_1.parseInput(d, options);
+    return tableCalculator_1.createTable(d, input);
+}
+exports.__createTable = __createTable;
+function __drawTable(d, table) {
+    tableDrawer_1.drawTable(d, table);
+}
+exports.__drawTable = __drawTable;
+try {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    var jsPDF = __webpack_require__(16);
+    // Webpack imported jspdf instead of jsPDF for some reason 
+    // while it seemed to work everywhere else.
+    if (jsPDF.jsPDF)
+        jsPDF = jsPDF.jsPDF;
+    applyPlugin(jsPDF);
+}
+catch (error) {
+    // Importing jspdf in nodejs environments does not work as of jspdf
+    // 1.5.3 so we need to silence potential errors to support using for example
+    // the nodejs jspdf dist files with the exported applyPlugin
+}
+
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var htmlParser_1 = __webpack_require__(4);
+var autoTableText_1 = __webpack_require__(5);
+var documentHandler_1 = __webpack_require__(2);
+var inputParser_1 = __webpack_require__(6);
+var tableDrawer_1 = __webpack_require__(7);
+var tableCalculator_1 = __webpack_require__(9);
+function default_1(jsPDF) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    jsPDF.API.autoTable = function () {
+        var args = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            args[_i] = arguments[_i];
+        }
+        var options;
+        if (args.length === 1) {
+            options = args[0];
+        }
+        else {
+            console.error('Use of deprecated autoTable initiation');
+            options = args[2] || {};
+            options.columns = args[0];
+            options.body = args[1];
+        }
+        var input = inputParser_1.parseInput(this, options);
+        var table = tableCalculator_1.createTable(this, input);
+        tableDrawer_1.drawTable(this, table);
+        return this;
+    };
+    // Assign false to enable `doc.lastAutoTable.finalY || 40` sugar
+    jsPDF.API.lastAutoTable = false;
+    jsPDF.API.previousAutoTable = false; // deprecated in v3
+    jsPDF.API.autoTable.previous = false; // deprecated in v3
+    jsPDF.API.autoTableText = function (text, x, y, styles) {
+        autoTableText_1.default(text, x, y, styles, this);
+    };
+    jsPDF.API.autoTableSetDefaults = function (defaults) {
+        documentHandler_1.DocHandler.setDefaults(defaults, this);
+        return this;
+    };
+    jsPDF.autoTableSetDefaults = function (defaults, doc) {
+        documentHandler_1.DocHandler.setDefaults(defaults, doc);
+    };
+    jsPDF.API.autoTableHtmlToJson = function (tableElem, includeHiddenElements) {
+        if (includeHiddenElements === void 0) { includeHiddenElements = false; }
+        if (typeof window === 'undefined') {
+            console.error('Cannot run autoTableHtmlToJson in non browser environment');
+            return null;
+        }
+        var doc = new documentHandler_1.DocHandler(this);
+        var _a = htmlParser_1.parseHtml(doc, tableElem, window, includeHiddenElements, false), head = _a.head, body = _a.body;
+        var columns = head[0].map(function (c) { return c.content; });
+        return { columns: columns, rows: body, data: body };
+    };
+    /**
+     * @deprecated
+     */
+    jsPDF.API.autoTableEndPosY = function () {
+        console.error('Use of deprecated function: autoTableEndPosY. Use doc.lastAutoTable.finalY instead.');
+        var prev = this.lastAutoTable;
+        if (prev && prev.finalY) {
+            return prev.finalY;
+        }
+        else {
+            return 0;
+        }
+    };
+    /**
+     * @deprecated
+     */
+    jsPDF.API.autoTableAddPageContent = function (hook) {
+        console.error('Use of deprecated function: autoTableAddPageContent. Use jsPDF.autoTableSetDefaults({didDrawPage: () => {}}) instead.');
+        if (!jsPDF.API.autoTable.globalDefaults) {
+            jsPDF.API.autoTable.globalDefaults = {};
+        }
+        jsPDF.API.autoTable.globalDefaults.addPageContent = hook;
+        return this;
+    };
+    /**
+     * @deprecated
+     */
+    jsPDF.API.autoTableAddPage = function () {
+        console.error('Use of deprecated function: autoTableAddPage. Use doc.addPage()');
+        this.addPage();
+        return this;
+    };
+}
+exports.default = default_1;
+
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.parseCss = void 0;
+// Limitations
+// - No support for border spacing
+// - No support for transparency
+var common_1 = __webpack_require__(0);
+function parseCss(supportedFonts, element, scaleFactor, style, window) {
+    var result = {};
+    var pxScaleFactor = 96 / 72;
+    var color = parseColor(element, function (elem) {
+        return window.getComputedStyle(elem)['backgroundColor'];
+    });
+    if (color != null)
+        result.fillColor = color;
+    color = parseColor(element, function (elem) {
+        return window.getComputedStyle(elem)['color'];
+    });
+    if (color != null)
+        result.textColor = color;
+    color = parseColor(element, function (elem) {
+        return window.getComputedStyle(elem)['borderTopColor'];
+    });
+    if (color != null)
+        result.lineColor = color;
+    var padding = parsePadding(style, scaleFactor);
+    if (padding)
+        result.cellPadding = padding;
+    // style.borderWidth only works in chrome (borderTopWidth etc works in firefox and ie as well)
+    var bw = parseInt(style.borderTopWidth || '');
+    bw = bw / pxScaleFactor / scaleFactor;
+    if (bw)
+        result.lineWidth = bw;
+    var accepted = ['left', 'right', 'center', 'justify'];
+    if (accepted.indexOf(style.textAlign) !== -1) {
+        result.halign = style.textAlign;
+    }
+    accepted = ['middle', 'bottom', 'top'];
+    if (accepted.indexOf(style.verticalAlign) !== -1) {
+        result.valign = style.verticalAlign;
+    }
+    var res = parseInt(style.fontSize || '');
+    if (!isNaN(res))
+        result.fontSize = res / pxScaleFactor;
+    var fontStyle = parseFontStyle(style);
+    if (fontStyle)
+        result.fontStyle = fontStyle;
+    var font = (style.fontFamily || '').toLowerCase();
+    if (supportedFonts.indexOf(font) !== -1) {
+        result.font = font;
+    }
+    return result;
+}
+exports.parseCss = parseCss;
+function parseFontStyle(style) {
+    var res = '';
+    if (style.fontWeight === 'bold' ||
+        style.fontWeight === 'bolder' ||
+        parseInt(style.fontWeight) >= 700) {
+        res = 'bold';
+    }
+    if (style.fontStyle === 'italic' || style.fontStyle === 'oblique') {
+        res += 'italic';
+    }
+    return res;
+}
+function parseColor(element, styleGetter) {
+    var cssColor = realColor(element, styleGetter);
+    if (!cssColor)
+        return null;
+    var rgba = cssColor.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d*\.?\d*))?\)$/);
+    if (!rgba || !Array.isArray(rgba)) {
+        return null;
+    }
+    var color = [
+        parseInt(rgba[1]),
+        parseInt(rgba[2]),
+        parseInt(rgba[3]),
+    ];
+    var alpha = parseInt(rgba[4]);
+    if (alpha === 0 || isNaN(color[0]) || isNaN(color[1]) || isNaN(color[2])) {
+        return null;
+    }
+    return color;
+}
+function realColor(elem, styleGetter) {
+    var bg = styleGetter(elem);
+    if (bg === 'rgba(0, 0, 0, 0)' ||
+        bg === 'transparent' ||
+        bg === 'initial' ||
+        bg === 'inherit') {
+        if (elem.parentElement == null) {
+            return null;
+        }
+        return realColor(elem.parentElement, styleGetter);
+    }
+    else {
+        return bg;
+    }
+}
+function parsePadding(style, scaleFactor) {
+    var val = [
+        style.paddingTop,
+        style.paddingRight,
+        style.paddingBottom,
+        style.paddingLeft,
+    ];
+    var pxScaleFactor = 96 / (72 / scaleFactor);
+    var linePadding = (parseInt(style.lineHeight) - parseInt(style.fontSize)) / scaleFactor / 2;
+    var inputPadding = val.map(function (n) {
+        return parseInt(n) / pxScaleFactor;
+    });
+    var padding = common_1.parseSpacing(inputPadding, 0);
+    if (linePadding > padding.top) {
+        padding.top = linePadding;
+    }
+    if (linePadding > padding.bottom) {
+        padding.bottom = linePadding;
+    }
+    return padding;
+}
+
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+function default_1(doc, global, document, current) {
+    var _loop_1 = function (options) {
+        if (options && typeof options !== 'object') {
+            console.error('The options parameter should be of type object, is: ' + typeof options);
+        }
+        if (typeof options.extendWidth !== 'undefined') {
+            options.tableWidth = options.extendWidth ? 'auto' : 'wrap';
+            console.error('Use of deprecated option: extendWidth, use tableWidth instead.');
+        }
+        if (typeof options.margins !== 'undefined') {
+            if (typeof options.margin === 'undefined')
+                options.margin = options.margins;
+            console.error('Use of deprecated option: margins, use margin instead.');
+        }
+        if (options.startY && typeof options.startY !== 'number') {
+            console.error('Invalid value for startY option', options.startY);
+            delete options.startY;
+        }
+        if (!options.didDrawPage &&
+            (options.afterPageContent ||
+                options.beforePageContent ||
+                options.afterPageAdd)) {
+            console.error('The afterPageContent, beforePageContent and afterPageAdd hooks are deprecated. Use didDrawPage instead');
+            options.didDrawPage = function (data) {
+                doc.applyStyles(doc.userStyles);
+                if (options.beforePageContent)
+                    options.beforePageContent(data);
+                doc.applyStyles(doc.userStyles);
+                if (options.afterPageContent)
+                    options.afterPageContent(data);
+                doc.applyStyles(doc.userStyles);
+                if (options.afterPageAdd && data.pageNumber > 1) {
+                    ;
+                    data.afterPageAdd(data);
+                }
+                doc.applyStyles(doc.userStyles);
+            };
+        }
+        ;
+        [
+            'createdHeaderCell',
+            'drawHeaderRow',
+            'drawRow',
+            'drawHeaderCell',
+        ].forEach(function (name) {
+            if (options[name]) {
+                console.error("The \"" + name + "\" hook has changed in version 3.0, check the changelog for how to migrate.");
+            }
+        });
+        [
+            ['showFoot', 'showFooter'],
+            ['showHead', 'showHeader'],
+            ['didDrawPage', 'addPageContent'],
+            ['didParseCell', 'createdCell'],
+            ['headStyles', 'headerStyles'],
+        ].forEach(function (_a) {
+            var current = _a[0], deprecated = _a[1];
+            if (options[deprecated]) {
+                console.error("Use of deprecated option " + deprecated + ". Use " + current + " instead");
+                options[current] = options[deprecated];
+            }
+        });
+        [
+            ['padding', 'cellPadding'],
+            ['lineHeight', 'rowHeight'],
+            'fontSize',
+            'overflow',
+        ].forEach(function (o) {
+            var deprecatedOption = typeof o === 'string' ? o : o[0];
+            var style = typeof o === 'string' ? o : o[1];
+            if (typeof options[deprecatedOption] !== 'undefined') {
+                if (typeof options.styles[style] === 'undefined') {
+                    options.styles[style] = options[deprecatedOption];
+                }
+                console.error('Use of deprecated option: ' +
+                    deprecatedOption +
+                    ', use the style ' +
+                    style +
+                    ' instead.');
+            }
+        });
+        for (var _i = 0, _a = [
+            'styles',
+            'bodyStyles',
+            'headStyles',
+            'footStyles',
+        ]; _i < _a.length; _i++) {
+            var styleProp = _a[_i];
+            checkStyles(options[styleProp] || {});
+        }
+        var columnStyles = options['columnStyles'] || {};
+        for (var _b = 0, _c = Object.keys(columnStyles); _b < _c.length; _b++) {
+            var key = _c[_b];
+            checkStyles(columnStyles[key] || {});
+        }
+    };
+    for (var _i = 0, _a = [global, document, current]; _i < _a.length; _i++) {
+        var options = _a[_i];
+        _loop_1(options);
+    }
+}
+exports.default = default_1;
+function checkStyles(styles) {
+    if (styles.rowHeight) {
+        console.error('Use of deprecated style rowHeight. It is renamed to minCellHeight.');
+        if (!styles.minCellHeight) {
+            styles.minCellHeight = styles.rowHeight;
+        }
+    }
+    else if (styles.columnWidth) {
+        console.error('Use of deprecated style columnWidth. It is renamed to cellWidth.');
+        if (!styles.cellWidth) {
+            styles.cellWidth = styles.columnWidth;
+        }
+    }
+}
+
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CellHookData = exports.HookData = void 0;
+var HookData = /** @class */ (function () {
+    function HookData(doc, table, cursor) {
+        this.table = table;
+        this.pageNumber = table.pageNumber;
+        this.pageCount = this.pageNumber;
+        this.settings = table.settings;
+        this.cursor = cursor;
+        this.doc = doc.getDocument();
+    }
+    return HookData;
+}());
+exports.HookData = HookData;
+var CellHookData = /** @class */ (function (_super) {
+    __extends(CellHookData, _super);
+    function CellHookData(doc, table, cell, row, column, cursor) {
+        var _this = _super.call(this, doc, table, cursor) || this;
+        _this.cell = cell;
+        _this.row = row;
+        _this.column = column;
+        _this.section = row.section;
+        return _this;
+    }
+    return CellHookData;
+}(HookData));
+exports.CellHookData = CellHookData;
+
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ellipsize = exports.resizeColumns = exports.calculateWidths = void 0;
+var common_1 = __webpack_require__(0);
+/**
+ * Calculate the column widths
+ */
+function calculateWidths(doc, table) {
+    calculate(doc, table);
+    var resizableColumns = [];
+    var initialTableWidth = 0;
+    table.columns.forEach(function (column) {
+        var customWidth = column.getMaxCustomCellWidth(table);
+        if (customWidth) {
+            // final column width
+            column.width = customWidth;
+        }
+        else {
+            // initial column width (will be resized)
+            column.width = column.wrappedWidth;
+            resizableColumns.push(column);
+        }
+        initialTableWidth += column.width;
+    });
+    // width difference that needs to be distributed
+    var resizeWidth = table.getWidth(doc.pageSize().width) - initialTableWidth;
+    // first resize attempt: with respect to minReadableWidth and minWidth
+    if (resizeWidth) {
+        resizeWidth = resizeColumns(resizableColumns, resizeWidth, function (column) {
+            return Math.max(column.minReadableWidth, column.minWidth);
+        });
+    }
+    // second resize attempt: ignore minReadableWidth but respect minWidth
+    if (resizeWidth) {
+        resizeWidth = resizeColumns(resizableColumns, resizeWidth, function (column) { return column.minWidth; });
+    }
+    resizeWidth = Math.abs(resizeWidth);
+    if (resizeWidth > 0.1 / doc.scaleFactor()) {
+        // Table can't get smaller due to custom-width or minWidth restrictions
+        // We can't really do much here. Up to user to for example
+        // reduce font size, increase page size or remove custom cell widths
+        // to allow more columns to be reduced in size
+        resizeWidth = resizeWidth < 1 ? resizeWidth : Math.round(resizeWidth);
+        console.error("Of the table content, " + resizeWidth + " units width could not fit page");
+    }
+    applyColSpans(table);
+    fitContent(table, doc);
+    applyRowSpans(table);
+}
+exports.calculateWidths = calculateWidths;
+function calculate(doc, table) {
+    var sf = doc.scaleFactor();
+    table.allRows().forEach(function (row) {
+        for (var _i = 0, _a = table.columns; _i < _a.length; _i++) {
+            var column = _a[_i];
+            var cell = row.cells[column.index];
+            if (!cell)
+                continue;
+            var hooks = table.hooks.didParseCell;
+            table.callCellHooks(doc, hooks, cell, row, column, null);
+            var padding = cell.padding('horizontal');
+            cell.contentWidth = common_1.getStringWidth(cell.text, cell.styles, doc) + padding;
+            var longestWordWidth = common_1.getStringWidth(cell.text.join(' ').split(/\s+/), cell.styles, doc);
+            cell.minReadableWidth = longestWordWidth + cell.padding('horizontal');
+            if (typeof cell.styles.cellWidth === 'number') {
+                cell.minWidth = cell.styles.cellWidth;
+                cell.wrappedWidth = cell.styles.cellWidth;
+            }
+            else if (cell.styles.cellWidth === 'wrap') {
+                cell.minWidth = cell.contentWidth;
+                cell.wrappedWidth = cell.contentWidth;
+            }
+            else {
+                // auto
+                var defaultMinWidth = 10 / sf;
+                cell.minWidth = cell.styles.minCellWidth || defaultMinWidth;
+                cell.wrappedWidth = cell.contentWidth;
+                if (cell.minWidth > cell.wrappedWidth) {
+                    cell.wrappedWidth = cell.minWidth;
+                }
+            }
+        }
+    });
+    table.allRows().forEach(function (row) {
+        for (var _i = 0, _a = table.columns; _i < _a.length; _i++) {
+            var column = _a[_i];
+            var cell = row.cells[column.index];
+            // For now we ignore the minWidth and wrappedWidth of colspan cells when calculating colspan widths.
+            // Could probably be improved upon however.
+            if (cell && cell.colSpan === 1) {
+                column.wrappedWidth = Math.max(column.wrappedWidth, cell.wrappedWidth);
+                column.minWidth = Math.max(column.minWidth, cell.minWidth);
+                column.minReadableWidth = Math.max(column.minReadableWidth, cell.minReadableWidth);
+            }
+            else {
+                // Respect cellWidth set in columnStyles even if there is no cells for this column
+                // or if the column only have colspan cells. Since the width of colspan cells
+                // does not affect the width of columns, setting columnStyles cellWidth enables the
+                // user to at least do it manually.
+                // Note that this is not perfect for now since for example row and table styles are
+                // not accounted for
+                var columnStyles = table.styles.columnStyles[column.dataKey] ||
+                    table.styles.columnStyles[column.index] ||
+                    {};
+                var cellWidth = columnStyles.cellWidth || columnStyles.minCellWidth;
+                if (cellWidth && typeof cellWidth === 'number') {
+                    column.minWidth = cellWidth;
+                    column.wrappedWidth = cellWidth;
+                }
+            }
+            if (cell) {
+                // Make sure all columns get at least min width even though width calculations are not based on them
+                if (cell.colSpan > 1 && !column.minWidth) {
+                    column.minWidth = cell.minWidth;
+                }
+                if (cell.colSpan > 1 && !column.wrappedWidth) {
+                    column.wrappedWidth = cell.minWidth;
+                }
+            }
+        }
+    });
+}
+/**
+ * Distribute resizeWidth on passed resizable columns
+ */
+function resizeColumns(columns, resizeWidth, getMinWidth) {
+    var initialResizeWidth = resizeWidth;
+    var sumWrappedWidth = columns.reduce(function (acc, column) { return acc + column.wrappedWidth; }, 0);
+    for (var i = 0; i < columns.length; i++) {
+        var column = columns[i];
+        var ratio = column.wrappedWidth / sumWrappedWidth;
+        var suggestedChange = initialResizeWidth * ratio;
+        var suggestedWidth = column.width + suggestedChange;
+        var minWidth = getMinWidth(column);
+        var newWidth = suggestedWidth < minWidth ? minWidth : suggestedWidth;
+        resizeWidth -= newWidth - column.width;
+        column.width = newWidth;
+    }
+    resizeWidth = Math.round(resizeWidth * 1e10) / 1e10;
+    // Run the resizer again if there's remaining width needs
+    // to be distributed and there're columns that can be resized
+    if (resizeWidth) {
+        var resizableColumns = columns.filter(function (column) {
+            return resizeWidth < 0
+                ? column.width > getMinWidth(column) // check if column can shrink
+                : true; // check if column can grow
+        });
+        if (resizableColumns.length) {
+            resizeWidth = resizeColumns(resizableColumns, resizeWidth, getMinWidth);
+        }
+    }
+    return resizeWidth;
+}
+exports.resizeColumns = resizeColumns;
+function applyRowSpans(table) {
+    var rowSpanCells = {};
+    var colRowSpansLeft = 1;
+    var all = table.allRows();
+    for (var rowIndex = 0; rowIndex < all.length; rowIndex++) {
+        var row = all[rowIndex];
+        for (var _i = 0, _a = table.columns; _i < _a.length; _i++) {
+            var column = _a[_i];
+            var data = rowSpanCells[column.index];
+            if (colRowSpansLeft > 1) {
+                colRowSpansLeft--;
+                delete row.cells[column.index];
+            }
+            else if (data) {
+                data.cell.height += row.height;
+                colRowSpansLeft = data.cell.colSpan;
+                delete row.cells[column.index];
+                data.left--;
+                if (data.left <= 1) {
+                    delete rowSpanCells[column.index];
+                }
+            }
+            else {
+                var cell = row.cells[column.index];
+                if (!cell) {
+                    continue;
+                }
+                cell.height = row.height;
+                if (cell.rowSpan > 1) {
+                    var remaining = all.length - rowIndex;
+                    var left = cell.rowSpan > remaining ? remaining : cell.rowSpan;
+                    rowSpanCells[column.index] = { cell: cell, left: left, row: row };
+                }
+            }
+        }
+    }
+}
+function applyColSpans(table) {
+    var all = table.allRows();
+    for (var rowIndex = 0; rowIndex < all.length; rowIndex++) {
+        var row = all[rowIndex];
+        var colSpanCell = null;
+        var combinedColSpanWidth = 0;
+        var colSpansLeft = 0;
+        for (var columnIndex = 0; columnIndex < table.columns.length; columnIndex++) {
+            var column = table.columns[columnIndex];
+            // Width and colspan
+            colSpansLeft -= 1;
+            if (colSpansLeft > 1 && table.columns[columnIndex + 1]) {
+                combinedColSpanWidth += column.width;
+                delete row.cells[column.index];
+            }
+            else if (colSpanCell) {
+                var cell = colSpanCell;
+                delete row.cells[column.index];
+                colSpanCell = null;
+                cell.width = column.width + combinedColSpanWidth;
+            }
+            else {
+                var cell = row.cells[column.index];
+                if (!cell)
+                    continue;
+                colSpansLeft = cell.colSpan;
+                combinedColSpanWidth = 0;
+                if (cell.colSpan > 1) {
+                    colSpanCell = cell;
+                    combinedColSpanWidth += column.width;
+                    continue;
+                }
+                cell.width = column.width + combinedColSpanWidth;
+            }
+        }
+    }
+}
+function fitContent(table, doc) {
+    var rowSpanHeight = { count: 0, height: 0 };
+    for (var _i = 0, _a = table.allRows(); _i < _a.length; _i++) {
+        var row = _a[_i];
+        for (var _b = 0, _c = table.columns; _b < _c.length; _b++) {
+            var column = _c[_b];
+            var cell = row.cells[column.index];
+            if (!cell)
+                continue;
+            doc.applyStyles(cell.styles, true);
+            var textSpace = cell.width - cell.padding('horizontal');
+            if (cell.styles.overflow === 'linebreak') {
+                // Add one pt to textSpace to fix rounding error
+                cell.text = doc.splitTextToSize(cell.text, textSpace + 1 / doc.scaleFactor(), { fontSize: cell.styles.fontSize });
+            }
+            else if (cell.styles.overflow === 'ellipsize') {
+                cell.text = ellipsize(cell.text, textSpace, cell.styles, doc, '...');
+            }
+            else if (cell.styles.overflow === 'hidden') {
+                cell.text = ellipsize(cell.text, textSpace, cell.styles, doc, '');
+            }
+            else if (typeof cell.styles.overflow === 'function') {
+                cell.text = cell.styles.overflow(cell.text, textSpace);
+            }
+            cell.contentHeight = cell.getContentHeight(doc.scaleFactor());
+            var realContentHeight = cell.contentHeight / cell.rowSpan;
+            if (cell.rowSpan > 1 &&
+                rowSpanHeight.count * rowSpanHeight.height <
+                    realContentHeight * cell.rowSpan) {
+                rowSpanHeight = { height: realContentHeight, count: cell.rowSpan };
+            }
+            else if (rowSpanHeight && rowSpanHeight.count > 0) {
+                if (rowSpanHeight.height > realContentHeight) {
+                    realContentHeight = rowSpanHeight.height;
+                }
+            }
+            if (realContentHeight > row.height) {
+                row.height = realContentHeight;
+            }
+        }
+        rowSpanHeight.count--;
+    }
+}
+function ellipsize(text, width, styles, doc, overflow) {
+    return text.map(function (str) { return ellipsizeStr(str, width, styles, doc, overflow); });
+}
+exports.ellipsize = ellipsize;
+function ellipsizeStr(text, width, styles, doc, overflow) {
+    var precision = 10000 * doc.scaleFactor();
+    width = Math.ceil(width * precision) / precision;
+    if (width >= common_1.getStringWidth(text, styles, doc)) {
+        return text;
+    }
+    while (width < common_1.getStringWidth(text + overflow, styles, doc)) {
+        if (text.length <= 1) {
+            break;
+        }
+        text = text.substring(0, text.length - 1);
+    }
+    return text.trim() + overflow;
+}
+
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports) {
+
+if(typeof __WEBPACK_EXTERNAL_MODULE__16__ === 'undefined') {var e = new Error("Cannot find module 'undefined'"); e.code = 'MODULE_NOT_FOUND'; throw e;}
+module.exports = __WEBPACK_EXTERNAL_MODULE__16__;
+
+/***/ })
+/******/ ]);
+});
+
+/***/ }),
+/* 155 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 
 
@@ -26631,7 +28843,7 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
-/* 155 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26642,7 +28854,7 @@ var settle = __webpack_require__(264);
 var buildURL = __webpack_require__(266);
 var parseHeaders = __webpack_require__(267);
 var isURLSameOrigin = __webpack_require__(268);
-var createError = __webpack_require__(156);
+var createError = __webpack_require__(157);
 var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(269);
 
 module.exports = function xhrAdapter(config) {
@@ -26818,7 +29030,7 @@ module.exports = function xhrAdapter(config) {
 
 
 /***/ }),
-/* 156 */
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26843,7 +29055,7 @@ module.exports = function createError(message, config, code, request, response) 
 
 
 /***/ }),
-/* 157 */
+/* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26855,7 +29067,7 @@ module.exports = function isCancel(value) {
 
 
 /***/ }),
-/* 158 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26881,7 +29093,7 @@ module.exports = Cancel;
 
 
 /***/ }),
-/* 159 */
+/* 160 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -37760,20 +39972,20 @@ return jQuery;
 
 
 /***/ }),
-/* 160 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(161);
+__webpack_require__(162);
 module.exports = __webpack_require__(281);
 
 
 /***/ }),
-/* 161 */
+/* 162 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__routes_js__ = __webpack_require__(162);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__routes_js__ = __webpack_require__(163);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppComponent__ = __webpack_require__(252);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_AppComponent__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_sweetalert2__ = __webpack_require__(16);
@@ -37794,7 +40006,7 @@ window.service = __WEBPACK_IMPORTED_MODULE_5__services__["a" /* default */];
 
 __webpack_require__(279);
 
-var $ = __webpack_require__(159);
+var $ = __webpack_require__(160);
 window.$ = $;
 
 
@@ -37818,19 +40030,19 @@ var app = new Vue({
 }).$mount('#app');
 
 /***/ }),
-/* 162 */
+/* 163 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(166);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_LoginComponent__ = __webpack_require__(167);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(167);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_LoginComponent__ = __webpack_require__(168);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_LoginComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_LoginComponent__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_LogoutComponent__ = __webpack_require__(172);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_LogoutComponent__ = __webpack_require__(173);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_LogoutComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_LogoutComponent__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vue_sweetalert2__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__user__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__user__ = __webpack_require__(2);
 
 
 
@@ -37864,18 +40076,18 @@ var routes = [{
 }, {
     path: '/inicio',
     name: 'main',
-    component: __webpack_require__(178)
+    component: __webpack_require__(179)
 }, {
     path: '/usuarios',
     name: 'user',
-    component: __webpack_require__(186),
+    component: __webpack_require__(187),
     meta: {
         module: 'usuario'
     }
 }, {
     path: '/formulario-usuario/:accion',
     name: 'formUser',
-    component: __webpack_require__(189),
+    component: __webpack_require__(190),
     props: true,
     meta: {
         module: 'usuario'
@@ -37883,14 +40095,14 @@ var routes = [{
 }, {
     path: '/gestion-productos',
     name: 'gproductos',
-    component: __webpack_require__(195),
+    component: __webpack_require__(196),
     meta: {
         module: 'producto'
     }
 }, {
     path: '/formulario-productos/:accion',
     name: 'crearproductos',
-    component: __webpack_require__(198),
+    component: __webpack_require__(199),
     props: true,
     meta: {
         module: 'producto'
@@ -37898,49 +40110,49 @@ var routes = [{
 }, {
     path: '/form-modificar-productos',
     name: 'modificarproductos',
-    component: __webpack_require__(201),
+    component: __webpack_require__(202),
     meta: {
         module: 'producto'
     }
 }, {
     path: '/formulario-boletas-productos',
     name: 'formBolProd',
-    component: __webpack_require__(204),
+    component: __webpack_require__(205),
     meta: {
         module: 'entregar producto'
     }
 }, {
     path: '/formulario-lista-productos',
     name: 'formProductos',
-    component: __webpack_require__(207),
+    component: __webpack_require__(208),
     meta: {
         module: 'entregar producto'
     }
 }, {
     path: '/formulario-notaVenta-boletas',
     name: 'formNVB',
-    component: __webpack_require__(212),
+    component: __webpack_require__(213),
     meta: {
         module: 'emitir boleta de venta'
     }
 }, {
     path: '/formulario-detalle-notaVenta',
     name: 'formDetalleNV',
-    component: __webpack_require__(216),
+    component: __webpack_require__(217),
     meta: {
         module: 'emitir nota de venta'
     }
 }, {
     path: '/nota-venta',
     name: 'notaVenta',
-    component: __webpack_require__(221),
+    component: __webpack_require__(222),
     meta: {
         module: 'emitir nota de venta'
     }
 }, {
     path: '/formulario-inventario',
     name: 'inventario',
-    component: __webpack_require__(226),
+    component: __webpack_require__(227),
     meta: {
         module: 'inventario'
     }
@@ -38001,7 +40213,7 @@ router.beforeEach(function (to, from, next) {
 /* harmony default export */ __webpack_exports__["a"] = (router);
 
 /***/ }),
-/* 163 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49965,10 +52177,10 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10), __webpack_require__(164).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10), __webpack_require__(165).setImmediate))
 
 /***/ }),
-/* 164 */
+/* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !== "undefined" && global) ||
@@ -50024,7 +52236,7 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(165);
+__webpack_require__(166);
 // On some exotic environments, it's not clear which object `setimmediate` was
 // able to install onto.  Search each possibility in the same order as the
 // `setimmediate` library.
@@ -50038,7 +52250,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
 
 /***/ }),
-/* 165 */
+/* 166 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -50231,7 +52443,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10), __webpack_require__(14)))
 
 /***/ }),
-/* 166 */
+/* 167 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -53304,15 +55516,15 @@ if (inBrowser && window.Vue) {
 
 
 /***/ }),
-/* 167 */
+/* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(168)
+var __vue_script__ = __webpack_require__(169)
 /* template */
-var __vue_template__ = __webpack_require__(171)
+var __vue_template__ = __webpack_require__(172)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -53351,14 +55563,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 168 */
+/* 169 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__user_js__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__user_js__ = __webpack_require__(2);
 
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
@@ -53456,7 +55668,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 });
 
 /***/ }),
-/* 169 */
+/* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -53481,7 +55693,7 @@ var oldRuntime = hadRuntime && g.regeneratorRuntime;
 // Force reevalutation of runtime.js.
 g.regeneratorRuntime = undefined;
 
-module.exports = __webpack_require__(170);
+module.exports = __webpack_require__(171);
 
 if (hadRuntime) {
   // Restore the original runtime.
@@ -53497,7 +55709,7 @@ if (hadRuntime) {
 
 
 /***/ }),
-/* 170 */
+/* 171 */
 /***/ (function(module, exports) {
 
 /**
@@ -54230,7 +56442,7 @@ if (hadRuntime) {
 
 
 /***/ }),
-/* 171 */
+/* 172 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -54364,15 +56576,15 @@ if (false) {
 }
 
 /***/ }),
-/* 172 */
+/* 173 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(173)
+var __vue_script__ = __webpack_require__(174)
 /* template */
-var __vue_template__ = __webpack_require__(175)
+var __vue_template__ = __webpack_require__(176)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -54411,12 +56623,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 173 */
+/* 174 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store__ = __webpack_require__(174);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store__ = __webpack_require__(175);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__store__);
 //
 //
@@ -54433,7 +56645,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 174 */
+/* 175 */
 /***/ (function(module, exports) {
 
 /*import Vue from 'vue'
@@ -54456,7 +56668,7 @@ export default new Vuex.Store({
 })*/
 
 /***/ }),
-/* 175 */
+/* 176 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -54474,3640 +56686,6 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-031f4c2c", module.exports)
   }
 }
-
-/***/ }),
-/* 176 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/*!
-* sweetalert2 v10.13.0
-* Released under the MIT License.
-*/
-(function (global, factory) {
-   true ? module.exports = factory() :
-  typeof define === 'function' && define.amd ? define(factory) :
-  (global = global || self, global.Sweetalert2 = factory());
-}(this, function () { 'use strict';
-
-  function _typeof(obj) {
-    "@babel/helpers - typeof";
-
-    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof = function (obj) {
-        return typeof obj;
-      };
-    } else {
-      _typeof = function (obj) {
-        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-      };
-    }
-
-    return _typeof(obj);
-  }
-
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
-
-  function _defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }
-
-  function _createClass(Constructor, protoProps, staticProps) {
-    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) _defineProperties(Constructor, staticProps);
-    return Constructor;
-  }
-
-  function _extends() {
-    _extends = Object.assign || function (target) {
-      for (var i = 1; i < arguments.length; i++) {
-        var source = arguments[i];
-
-        for (var key in source) {
-          if (Object.prototype.hasOwnProperty.call(source, key)) {
-            target[key] = source[key];
-          }
-        }
-      }
-
-      return target;
-    };
-
-    return _extends.apply(this, arguments);
-  }
-
-  function _inherits(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) {
-      throw new TypeError("Super expression must either be null or a function");
-    }
-
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        writable: true,
-        configurable: true
-      }
-    });
-    if (superClass) _setPrototypeOf(subClass, superClass);
-  }
-
-  function _getPrototypeOf(o) {
-    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
-      return o.__proto__ || Object.getPrototypeOf(o);
-    };
-    return _getPrototypeOf(o);
-  }
-
-  function _setPrototypeOf(o, p) {
-    _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
-      o.__proto__ = p;
-      return o;
-    };
-
-    return _setPrototypeOf(o, p);
-  }
-
-  function _isNativeReflectConstruct() {
-    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-    if (Reflect.construct.sham) return false;
-    if (typeof Proxy === "function") return true;
-
-    try {
-      Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  function _construct(Parent, args, Class) {
-    if (_isNativeReflectConstruct()) {
-      _construct = Reflect.construct;
-    } else {
-      _construct = function _construct(Parent, args, Class) {
-        var a = [null];
-        a.push.apply(a, args);
-        var Constructor = Function.bind.apply(Parent, a);
-        var instance = new Constructor();
-        if (Class) _setPrototypeOf(instance, Class.prototype);
-        return instance;
-      };
-    }
-
-    return _construct.apply(null, arguments);
-  }
-
-  function _assertThisInitialized(self) {
-    if (self === void 0) {
-      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    }
-
-    return self;
-  }
-
-  function _possibleConstructorReturn(self, call) {
-    if (call && (typeof call === "object" || typeof call === "function")) {
-      return call;
-    }
-
-    return _assertThisInitialized(self);
-  }
-
-  function _createSuper(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf(Derived),
-          result;
-
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf(this).constructor;
-
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-
-      return _possibleConstructorReturn(this, result);
-    };
-  }
-
-  function _superPropBase(object, property) {
-    while (!Object.prototype.hasOwnProperty.call(object, property)) {
-      object = _getPrototypeOf(object);
-      if (object === null) break;
-    }
-
-    return object;
-  }
-
-  function _get(target, property, receiver) {
-    if (typeof Reflect !== "undefined" && Reflect.get) {
-      _get = Reflect.get;
-    } else {
-      _get = function _get(target, property, receiver) {
-        var base = _superPropBase(target, property);
-
-        if (!base) return;
-        var desc = Object.getOwnPropertyDescriptor(base, property);
-
-        if (desc.get) {
-          return desc.get.call(receiver);
-        }
-
-        return desc.value;
-      };
-    }
-
-    return _get(target, property, receiver || target);
-  }
-
-  var consolePrefix = 'SweetAlert2:';
-  /**
-   * Filter the unique values into a new array
-   * @param arr
-   */
-
-  var uniqueArray = function uniqueArray(arr) {
-    var result = [];
-
-    for (var i = 0; i < arr.length; i++) {
-      if (result.indexOf(arr[i]) === -1) {
-        result.push(arr[i]);
-      }
-    }
-
-    return result;
-  };
-  /**
-   * Capitalize the first letter of a string
-   * @param str
-   */
-
-  var capitalizeFirstLetter = function capitalizeFirstLetter(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  };
-  /**
-   * Returns the array of object values (Object.values isn't supported in IE11)
-   * @param obj
-   */
-
-  var objectValues = function objectValues(obj) {
-    return Object.keys(obj).map(function (key) {
-      return obj[key];
-    });
-  };
-  /**
-   * Convert NodeList to Array
-   * @param nodeList
-   */
-
-  var toArray = function toArray(nodeList) {
-    return Array.prototype.slice.call(nodeList);
-  };
-  /**
-   * Standardise console warnings
-   * @param message
-   */
-
-  var warn = function warn(message) {
-    console.warn("".concat(consolePrefix, " ").concat(_typeof(message) === 'object' ? message.join(' ') : message));
-  };
-  /**
-   * Standardise console errors
-   * @param message
-   */
-
-  var error = function error(message) {
-    console.error("".concat(consolePrefix, " ").concat(message));
-  };
-  /**
-   * Private global state for `warnOnce`
-   * @type {Array}
-   * @private
-   */
-
-  var previousWarnOnceMessages = [];
-  /**
-   * Show a console warning, but only if it hasn't already been shown
-   * @param message
-   */
-
-  var warnOnce = function warnOnce(message) {
-    if (!(previousWarnOnceMessages.indexOf(message) !== -1)) {
-      previousWarnOnceMessages.push(message);
-      warn(message);
-    }
-  };
-  /**
-   * Show a one-time console warning about deprecated params/methods
-   */
-
-  var warnAboutDeprecation = function warnAboutDeprecation(deprecatedParam, useInstead) {
-    warnOnce("\"".concat(deprecatedParam, "\" is deprecated and will be removed in the next major release. Please use \"").concat(useInstead, "\" instead."));
-  };
-  /**
-   * If `arg` is a function, call it (with no arguments or context) and return the result.
-   * Otherwise, just pass the value through
-   * @param arg
-   */
-
-  var callIfFunction = function callIfFunction(arg) {
-    return typeof arg === 'function' ? arg() : arg;
-  };
-  var hasToPromiseFn = function hasToPromiseFn(arg) {
-    return arg && typeof arg.toPromise === 'function';
-  };
-  var asPromise = function asPromise(arg) {
-    return hasToPromiseFn(arg) ? arg.toPromise() : Promise.resolve(arg);
-  };
-  var isPromise = function isPromise(arg) {
-    return arg && Promise.resolve(arg) === arg;
-  };
-
-  var DismissReason = Object.freeze({
-    cancel: 'cancel',
-    backdrop: 'backdrop',
-    close: 'close',
-    esc: 'esc',
-    timer: 'timer'
-  });
-
-  var isJqueryElement = function isJqueryElement(elem) {
-    return _typeof(elem) === 'object' && elem.jquery;
-  };
-
-  var isElement = function isElement(elem) {
-    return elem instanceof Element || isJqueryElement(elem);
-  };
-
-  var argsToParams = function argsToParams(args) {
-    var params = {};
-
-    if (_typeof(args[0]) === 'object' && !isElement(args[0])) {
-      _extends(params, args[0]);
-    } else {
-      ['title', 'html', 'icon'].forEach(function (name, index) {
-        var arg = args[index];
-
-        if (typeof arg === 'string' || isElement(arg)) {
-          params[name] = arg;
-        } else if (arg !== undefined) {
-          error("Unexpected type of ".concat(name, "! Expected \"string\" or \"Element\", got ").concat(_typeof(arg)));
-        }
-      });
-    }
-
-    return params;
-  };
-
-  var swalPrefix = 'swal2-';
-  var prefix = function prefix(items) {
-    var result = {};
-
-    for (var i in items) {
-      result[items[i]] = swalPrefix + items[i];
-    }
-
-    return result;
-  };
-  var swalClasses = prefix(['container', 'shown', 'height-auto', 'iosfix', 'popup', 'modal', 'no-backdrop', 'no-transition', 'toast', 'toast-shown', 'toast-column', 'show', 'hide', 'close', 'title', 'header', 'content', 'html-container', 'actions', 'confirm', 'deny', 'cancel', 'footer', 'icon', 'icon-content', 'image', 'input', 'file', 'range', 'select', 'radio', 'checkbox', 'label', 'textarea', 'inputerror', 'input-label', 'validation-message', 'progress-steps', 'active-progress-step', 'progress-step', 'progress-step-line', 'loader', 'loading', 'styled', 'top', 'top-start', 'top-end', 'top-left', 'top-right', 'center', 'center-start', 'center-end', 'center-left', 'center-right', 'bottom', 'bottom-start', 'bottom-end', 'bottom-left', 'bottom-right', 'grow-row', 'grow-column', 'grow-fullscreen', 'rtl', 'timer-progress-bar', 'timer-progress-bar-container', 'scrollbar-measure', 'icon-success', 'icon-warning', 'icon-info', 'icon-question', 'icon-error']);
-  var iconTypes = prefix(['success', 'warning', 'info', 'question', 'error']);
-
-  var getContainer = function getContainer() {
-    return document.body.querySelector(".".concat(swalClasses.container));
-  };
-  var elementBySelector = function elementBySelector(selectorString) {
-    var container = getContainer();
-    return container ? container.querySelector(selectorString) : null;
-  };
-
-  var elementByClass = function elementByClass(className) {
-    return elementBySelector(".".concat(className));
-  };
-
-  var getPopup = function getPopup() {
-    return elementByClass(swalClasses.popup);
-  };
-  var getIcons = function getIcons() {
-    var popup = getPopup();
-    return toArray(popup.querySelectorAll(".".concat(swalClasses.icon)));
-  };
-  var getIcon = function getIcon() {
-    var visibleIcon = getIcons().filter(function (icon) {
-      return isVisible(icon);
-    });
-    return visibleIcon.length ? visibleIcon[0] : null;
-  };
-  var getTitle = function getTitle() {
-    return elementByClass(swalClasses.title);
-  };
-  var getContent = function getContent() {
-    return elementByClass(swalClasses.content);
-  };
-  var getHtmlContainer = function getHtmlContainer() {
-    return elementByClass(swalClasses['html-container']);
-  };
-  var getImage = function getImage() {
-    return elementByClass(swalClasses.image);
-  };
-  var getProgressSteps = function getProgressSteps() {
-    return elementByClass(swalClasses['progress-steps']);
-  };
-  var getValidationMessage = function getValidationMessage() {
-    return elementByClass(swalClasses['validation-message']);
-  };
-  var getConfirmButton = function getConfirmButton() {
-    return elementBySelector(".".concat(swalClasses.actions, " .").concat(swalClasses.confirm));
-  };
-  var getDenyButton = function getDenyButton() {
-    return elementBySelector(".".concat(swalClasses.actions, " .").concat(swalClasses.deny));
-  };
-  var getInputLabel = function getInputLabel() {
-    return elementByClass(swalClasses['input-label']);
-  };
-  var getLoader = function getLoader() {
-    return elementBySelector(".".concat(swalClasses.loader));
-  };
-  var getCancelButton = function getCancelButton() {
-    return elementBySelector(".".concat(swalClasses.actions, " .").concat(swalClasses.cancel));
-  };
-  var getActions = function getActions() {
-    return elementByClass(swalClasses.actions);
-  };
-  var getHeader = function getHeader() {
-    return elementByClass(swalClasses.header);
-  };
-  var getFooter = function getFooter() {
-    return elementByClass(swalClasses.footer);
-  };
-  var getTimerProgressBar = function getTimerProgressBar() {
-    return elementByClass(swalClasses['timer-progress-bar']);
-  };
-  var getCloseButton = function getCloseButton() {
-    return elementByClass(swalClasses.close);
-  }; // https://github.com/jkup/focusable/blob/master/index.js
-
-  var focusable = "\n  a[href],\n  area[href],\n  input:not([disabled]),\n  select:not([disabled]),\n  textarea:not([disabled]),\n  button:not([disabled]),\n  iframe,\n  object,\n  embed,\n  [tabindex=\"0\"],\n  [contenteditable],\n  audio[controls],\n  video[controls],\n  summary\n";
-  var getFocusableElements = function getFocusableElements() {
-    var focusableElementsWithTabindex = toArray(getPopup().querySelectorAll('[tabindex]:not([tabindex="-1"]):not([tabindex="0"])')) // sort according to tabindex
-    .sort(function (a, b) {
-      a = parseInt(a.getAttribute('tabindex'));
-      b = parseInt(b.getAttribute('tabindex'));
-
-      if (a > b) {
-        return 1;
-      } else if (a < b) {
-        return -1;
-      }
-
-      return 0;
-    });
-    var otherFocusableElements = toArray(getPopup().querySelectorAll(focusable)).filter(function (el) {
-      return el.getAttribute('tabindex') !== '-1';
-    });
-    return uniqueArray(focusableElementsWithTabindex.concat(otherFocusableElements)).filter(function (el) {
-      return isVisible(el);
-    });
-  };
-  var isModal = function isModal() {
-    return !isToast() && !document.body.classList.contains(swalClasses['no-backdrop']);
-  };
-  var isToast = function isToast() {
-    return document.body.classList.contains(swalClasses['toast-shown']);
-  };
-  var isLoading = function isLoading() {
-    return getPopup().hasAttribute('data-loading');
-  };
-
-  var states = {
-    previousBodyPadding: null
-  };
-  var setInnerHtml = function setInnerHtml(elem, html) {
-    // #1926
-    elem.textContent = '';
-
-    if (html) {
-      var parser = new DOMParser();
-      var parsed = parser.parseFromString(html, "text/html");
-      toArray(parsed.querySelector('head').childNodes).forEach(function (child) {
-        elem.appendChild(child);
-      });
-      toArray(parsed.querySelector('body').childNodes).forEach(function (child) {
-        elem.appendChild(child);
-      });
-    }
-  };
-  var hasClass = function hasClass(elem, className) {
-    if (!className) {
-      return false;
-    }
-
-    var classList = className.split(/\s+/);
-
-    for (var i = 0; i < classList.length; i++) {
-      if (!elem.classList.contains(classList[i])) {
-        return false;
-      }
-    }
-
-    return true;
-  };
-
-  var removeCustomClasses = function removeCustomClasses(elem, params) {
-    toArray(elem.classList).forEach(function (className) {
-      if (!(objectValues(swalClasses).indexOf(className) !== -1) && !(objectValues(iconTypes).indexOf(className) !== -1) && !(objectValues(params.showClass).indexOf(className) !== -1)) {
-        elem.classList.remove(className);
-      }
-    });
-  };
-
-  var applyCustomClass = function applyCustomClass(elem, params, className) {
-    removeCustomClasses(elem, params);
-
-    if (params.customClass && params.customClass[className]) {
-      if (typeof params.customClass[className] !== 'string' && !params.customClass[className].forEach) {
-        return warn("Invalid type of customClass.".concat(className, "! Expected string or iterable object, got \"").concat(_typeof(params.customClass[className]), "\""));
-      }
-
-      addClass(elem, params.customClass[className]);
-    }
-  };
-  function getInput(content, inputType) {
-    if (!inputType) {
-      return null;
-    }
-
-    switch (inputType) {
-      case 'select':
-      case 'textarea':
-      case 'file':
-        return getChildByClass(content, swalClasses[inputType]);
-
-      case 'checkbox':
-        return content.querySelector(".".concat(swalClasses.checkbox, " input"));
-
-      case 'radio':
-        return content.querySelector(".".concat(swalClasses.radio, " input:checked")) || content.querySelector(".".concat(swalClasses.radio, " input:first-child"));
-
-      case 'range':
-        return content.querySelector(".".concat(swalClasses.range, " input"));
-
-      default:
-        return getChildByClass(content, swalClasses.input);
-    }
-  }
-  var focusInput = function focusInput(input) {
-    input.focus(); // place cursor at end of text in text input
-
-    if (input.type !== 'file') {
-      // http://stackoverflow.com/a/2345915
-      var val = input.value;
-      input.value = '';
-      input.value = val;
-    }
-  };
-  var toggleClass = function toggleClass(target, classList, condition) {
-    if (!target || !classList) {
-      return;
-    }
-
-    if (typeof classList === 'string') {
-      classList = classList.split(/\s+/).filter(Boolean);
-    }
-
-    classList.forEach(function (className) {
-      if (target.forEach) {
-        target.forEach(function (elem) {
-          condition ? elem.classList.add(className) : elem.classList.remove(className);
-        });
-      } else {
-        condition ? target.classList.add(className) : target.classList.remove(className);
-      }
-    });
-  };
-  var addClass = function addClass(target, classList) {
-    toggleClass(target, classList, true);
-  };
-  var removeClass = function removeClass(target, classList) {
-    toggleClass(target, classList, false);
-  };
-  var getChildByClass = function getChildByClass(elem, className) {
-    for (var i = 0; i < elem.childNodes.length; i++) {
-      if (hasClass(elem.childNodes[i], className)) {
-        return elem.childNodes[i];
-      }
-    }
-  };
-  var applyNumericalStyle = function applyNumericalStyle(elem, property, value) {
-    if (value === "".concat(parseInt(value))) {
-      value = parseInt(value);
-    }
-
-    if (value || parseInt(value) === 0) {
-      elem.style[property] = typeof value === 'number' ? "".concat(value, "px") : value;
-    } else {
-      elem.style.removeProperty(property);
-    }
-  };
-  var show = function show(elem) {
-    var display = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'flex';
-    elem.style.display = display;
-  };
-  var hide = function hide(elem) {
-    elem.style.display = 'none';
-  };
-  var setStyle = function setStyle(parent, selector, property, value) {
-    var el = parent.querySelector(selector);
-
-    if (el) {
-      el.style[property] = value;
-    }
-  };
-  var toggle = function toggle(elem, condition, display) {
-    condition ? show(elem, display) : hide(elem);
-  }; // borrowed from jquery $(elem).is(':visible') implementation
-
-  var isVisible = function isVisible(elem) {
-    return !!(elem && (elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length));
-  };
-  var allButtonsAreHidden = function allButtonsAreHidden() {
-    return !isVisible(getConfirmButton()) && !isVisible(getDenyButton()) && !isVisible(getCancelButton());
-  };
-  var isScrollable = function isScrollable(elem) {
-    return !!(elem.scrollHeight > elem.clientHeight);
-  }; // borrowed from https://stackoverflow.com/a/46352119
-
-  var hasCssAnimation = function hasCssAnimation(elem) {
-    var style = window.getComputedStyle(elem);
-    var animDuration = parseFloat(style.getPropertyValue('animation-duration') || '0');
-    var transDuration = parseFloat(style.getPropertyValue('transition-duration') || '0');
-    return animDuration > 0 || transDuration > 0;
-  };
-  var contains = function contains(haystack, needle) {
-    if (typeof haystack.contains === 'function') {
-      return haystack.contains(needle);
-    }
-  };
-  var animateTimerProgressBar = function animateTimerProgressBar(timer) {
-    var reset = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    var timerProgressBar = getTimerProgressBar();
-
-    if (isVisible(timerProgressBar)) {
-      if (reset) {
-        timerProgressBar.style.transition = 'none';
-        timerProgressBar.style.width = '100%';
-      }
-
-      setTimeout(function () {
-        timerProgressBar.style.transition = "width ".concat(timer / 1000, "s linear");
-        timerProgressBar.style.width = '0%';
-      }, 10);
-    }
-  };
-  var stopTimerProgressBar = function stopTimerProgressBar() {
-    var timerProgressBar = getTimerProgressBar();
-    var timerProgressBarWidth = parseInt(window.getComputedStyle(timerProgressBar).width);
-    timerProgressBar.style.removeProperty('transition');
-    timerProgressBar.style.width = '100%';
-    var timerProgressBarFullWidth = parseInt(window.getComputedStyle(timerProgressBar).width);
-    var timerProgressBarPercent = parseInt(timerProgressBarWidth / timerProgressBarFullWidth * 100);
-    timerProgressBar.style.removeProperty('transition');
-    timerProgressBar.style.width = "".concat(timerProgressBarPercent, "%");
-  };
-
-  // Detect Node env
-  var isNodeEnv = function isNodeEnv() {
-    return typeof window === 'undefined' || typeof document === 'undefined';
-  };
-
-  var sweetHTML = "\n <div aria-labelledby=\"".concat(swalClasses.title, "\" aria-describedby=\"").concat(swalClasses.content, "\" class=\"").concat(swalClasses.popup, "\" tabindex=\"-1\">\n   <div class=\"").concat(swalClasses.header, "\">\n     <ul class=\"").concat(swalClasses['progress-steps'], "\"></ul>\n     <div class=\"").concat(swalClasses.icon, " ").concat(iconTypes.error, "\"></div>\n     <div class=\"").concat(swalClasses.icon, " ").concat(iconTypes.question, "\"></div>\n     <div class=\"").concat(swalClasses.icon, " ").concat(iconTypes.warning, "\"></div>\n     <div class=\"").concat(swalClasses.icon, " ").concat(iconTypes.info, "\"></div>\n     <div class=\"").concat(swalClasses.icon, " ").concat(iconTypes.success, "\"></div>\n     <img class=\"").concat(swalClasses.image, "\" />\n     <h2 class=\"").concat(swalClasses.title, "\" id=\"").concat(swalClasses.title, "\"></h2>\n     <button type=\"button\" class=\"").concat(swalClasses.close, "\"></button>\n   </div>\n   <div class=\"").concat(swalClasses.content, "\">\n     <div id=\"").concat(swalClasses.content, "\" class=\"").concat(swalClasses['html-container'], "\"></div>\n     <input class=\"").concat(swalClasses.input, "\" />\n     <input type=\"file\" class=\"").concat(swalClasses.file, "\" />\n     <div class=\"").concat(swalClasses.range, "\">\n       <input type=\"range\" />\n       <output></output>\n     </div>\n     <select class=\"").concat(swalClasses.select, "\"></select>\n     <div class=\"").concat(swalClasses.radio, "\"></div>\n     <label for=\"").concat(swalClasses.checkbox, "\" class=\"").concat(swalClasses.checkbox, "\">\n       <input type=\"checkbox\" />\n       <span class=\"").concat(swalClasses.label, "\"></span>\n     </label>\n     <textarea class=\"").concat(swalClasses.textarea, "\"></textarea>\n     <div class=\"").concat(swalClasses['validation-message'], "\" id=\"").concat(swalClasses['validation-message'], "\"></div>\n   </div>\n   <div class=\"").concat(swalClasses.actions, "\">\n     <div class=\"").concat(swalClasses.loader, "\"></div>\n     <button type=\"button\" class=\"").concat(swalClasses.confirm, "\"></button>\n     <button type=\"button\" class=\"").concat(swalClasses.deny, "\"></button>\n     <button type=\"button\" class=\"").concat(swalClasses.cancel, "\"></button>\n   </div>\n   <div class=\"").concat(swalClasses.footer, "\"></div>\n   <div class=\"").concat(swalClasses['timer-progress-bar-container'], "\">\n     <div class=\"").concat(swalClasses['timer-progress-bar'], "\"></div>\n   </div>\n </div>\n").replace(/(^|\n)\s*/g, '');
-
-  var resetOldContainer = function resetOldContainer() {
-    var oldContainer = getContainer();
-
-    if (!oldContainer) {
-      return false;
-    }
-
-    oldContainer.parentNode.removeChild(oldContainer);
-    removeClass([document.documentElement, document.body], [swalClasses['no-backdrop'], swalClasses['toast-shown'], swalClasses['has-column']]);
-    return true;
-  };
-
-  var oldInputVal; // IE11 workaround, see #1109 for details
-
-  var resetValidationMessage = function resetValidationMessage(e) {
-    if (Swal.isVisible() && oldInputVal !== e.target.value) {
-      Swal.resetValidationMessage();
-    }
-
-    oldInputVal = e.target.value;
-  };
-
-  var addInputChangeListeners = function addInputChangeListeners() {
-    var content = getContent();
-    var input = getChildByClass(content, swalClasses.input);
-    var file = getChildByClass(content, swalClasses.file);
-    var range = content.querySelector(".".concat(swalClasses.range, " input"));
-    var rangeOutput = content.querySelector(".".concat(swalClasses.range, " output"));
-    var select = getChildByClass(content, swalClasses.select);
-    var checkbox = content.querySelector(".".concat(swalClasses.checkbox, " input"));
-    var textarea = getChildByClass(content, swalClasses.textarea);
-    input.oninput = resetValidationMessage;
-    file.onchange = resetValidationMessage;
-    select.onchange = resetValidationMessage;
-    checkbox.onchange = resetValidationMessage;
-    textarea.oninput = resetValidationMessage;
-
-    range.oninput = function (e) {
-      resetValidationMessage(e);
-      rangeOutput.value = range.value;
-    };
-
-    range.onchange = function (e) {
-      resetValidationMessage(e);
-      range.nextSibling.value = range.value;
-    };
-  };
-
-  var getTarget = function getTarget(target) {
-    return typeof target === 'string' ? document.querySelector(target) : target;
-  };
-
-  var setupAccessibility = function setupAccessibility(params) {
-    var popup = getPopup();
-    popup.setAttribute('role', params.toast ? 'alert' : 'dialog');
-    popup.setAttribute('aria-live', params.toast ? 'polite' : 'assertive');
-
-    if (!params.toast) {
-      popup.setAttribute('aria-modal', 'true');
-    }
-  };
-
-  var setupRTL = function setupRTL(targetElement) {
-    if (window.getComputedStyle(targetElement).direction === 'rtl') {
-      addClass(getContainer(), swalClasses.rtl);
-    }
-  };
-  /*
-   * Add modal + backdrop to DOM
-   */
-
-
-  var init = function init(params) {
-    // Clean up the old popup container if it exists
-    var oldContainerExisted = resetOldContainer();
-    /* istanbul ignore if */
-
-    if (isNodeEnv()) {
-      error('SweetAlert2 requires document to initialize');
-      return;
-    }
-
-    var container = document.createElement('div');
-    container.className = swalClasses.container;
-
-    if (oldContainerExisted) {
-      addClass(container, swalClasses['no-transition']);
-    }
-
-    setInnerHtml(container, sweetHTML);
-    var targetElement = getTarget(params.target);
-    targetElement.appendChild(container);
-    setupAccessibility(params);
-    setupRTL(targetElement);
-    addInputChangeListeners();
-  };
-
-  var parseHtmlToContainer = function parseHtmlToContainer(param, target) {
-    // DOM element
-    if (param instanceof HTMLElement) {
-      target.appendChild(param); // Object
-    } else if (_typeof(param) === 'object') {
-      handleObject(param, target); // Plain string
-    } else if (param) {
-      setInnerHtml(target, param);
-    }
-  };
-
-  var handleObject = function handleObject(param, target) {
-    // JQuery element(s)
-    if (param.jquery) {
-      handleJqueryElem(target, param); // For other objects use their string representation
-    } else {
-      setInnerHtml(target, param.toString());
-    }
-  };
-
-  var handleJqueryElem = function handleJqueryElem(target, elem) {
-    target.textContent = '';
-
-    if (0 in elem) {
-      for (var i = 0; (i in elem); i++) {
-        target.appendChild(elem[i].cloneNode(true));
-      }
-    } else {
-      target.appendChild(elem.cloneNode(true));
-    }
-  };
-
-  var animationEndEvent = function () {
-    // Prevent run in Node env
-
-    /* istanbul ignore if */
-    if (isNodeEnv()) {
-      return false;
-    }
-
-    var testEl = document.createElement('div');
-    var transEndEventNames = {
-      WebkitAnimation: 'webkitAnimationEnd',
-      OAnimation: 'oAnimationEnd oanimationend',
-      animation: 'animationend'
-    };
-
-    for (var i in transEndEventNames) {
-      if (Object.prototype.hasOwnProperty.call(transEndEventNames, i) && typeof testEl.style[i] !== 'undefined') {
-        return transEndEventNames[i];
-      }
-    }
-
-    return false;
-  }();
-
-  // https://github.com/twbs/bootstrap/blob/master/js/src/modal.js
-
-  var measureScrollbar = function measureScrollbar() {
-    var scrollDiv = document.createElement('div');
-    scrollDiv.className = swalClasses['scrollbar-measure'];
-    document.body.appendChild(scrollDiv);
-    var scrollbarWidth = scrollDiv.getBoundingClientRect().width - scrollDiv.clientWidth;
-    document.body.removeChild(scrollDiv);
-    return scrollbarWidth;
-  };
-
-  var renderActions = function renderActions(instance, params) {
-    var actions = getActions();
-    var loader = getLoader();
-    var confirmButton = getConfirmButton();
-    var denyButton = getDenyButton();
-    var cancelButton = getCancelButton(); // Actions (buttons) wrapper
-
-    if (!params.showConfirmButton && !params.showDenyButton && !params.showCancelButton) {
-      hide(actions);
-    } // Custom class
-
-
-    applyCustomClass(actions, params, 'actions'); // Render buttons
-
-    renderButton(confirmButton, 'confirm', params);
-    renderButton(denyButton, 'deny', params);
-    renderButton(cancelButton, 'cancel', params);
-    handleButtonsStyling(confirmButton, denyButton, cancelButton, params);
-
-    if (params.reverseButtons) {
-      actions.insertBefore(cancelButton, loader);
-      actions.insertBefore(denyButton, loader);
-      actions.insertBefore(confirmButton, loader);
-    } // Loader
-
-
-    setInnerHtml(loader, params.loaderHtml);
-    applyCustomClass(loader, params, 'loader');
-  };
-
-  function handleButtonsStyling(confirmButton, denyButton, cancelButton, params) {
-    if (!params.buttonsStyling) {
-      return removeClass([confirmButton, denyButton, cancelButton], swalClasses.styled);
-    }
-
-    addClass([confirmButton, denyButton, cancelButton], swalClasses.styled); // Buttons background colors
-
-    if (params.confirmButtonColor) {
-      confirmButton.style.backgroundColor = params.confirmButtonColor;
-    }
-
-    if (params.denyButtonColor) {
-      denyButton.style.backgroundColor = params.denyButtonColor;
-    }
-
-    if (params.cancelButtonColor) {
-      cancelButton.style.backgroundColor = params.cancelButtonColor;
-    }
-  }
-
-  function renderButton(button, buttonType, params) {
-    toggle(button, params["show".concat(capitalizeFirstLetter(buttonType), "Button")], 'inline-block');
-    setInnerHtml(button, params["".concat(buttonType, "ButtonText")]); // Set caption text
-
-    button.setAttribute('aria-label', params["".concat(buttonType, "ButtonAriaLabel")]); // ARIA label
-    // Add buttons custom classes
-
-    button.className = swalClasses[buttonType];
-    applyCustomClass(button, params, "".concat(buttonType, "Button"));
-    addClass(button, params["".concat(buttonType, "ButtonClass")]);
-  }
-
-  function handleBackdropParam(container, backdrop) {
-    if (typeof backdrop === 'string') {
-      container.style.background = backdrop;
-    } else if (!backdrop) {
-      addClass([document.documentElement, document.body], swalClasses['no-backdrop']);
-    }
-  }
-
-  function handlePositionParam(container, position) {
-    if (position in swalClasses) {
-      addClass(container, swalClasses[position]);
-    } else {
-      warn('The "position" parameter is not valid, defaulting to "center"');
-      addClass(container, swalClasses.center);
-    }
-  }
-
-  function handleGrowParam(container, grow) {
-    if (grow && typeof grow === 'string') {
-      var growClass = "grow-".concat(grow);
-
-      if (growClass in swalClasses) {
-        addClass(container, swalClasses[growClass]);
-      }
-    }
-  }
-
-  var renderContainer = function renderContainer(instance, params) {
-    var container = getContainer();
-
-    if (!container) {
-      return;
-    }
-
-    handleBackdropParam(container, params.backdrop);
-
-    if (!params.backdrop && params.allowOutsideClick) {
-      warn('"allowOutsideClick" parameter requires `backdrop` parameter to be set to `true`');
-    }
-
-    handlePositionParam(container, params.position);
-    handleGrowParam(container, params.grow); // Custom class
-
-    applyCustomClass(container, params, 'container'); // Set queue step attribute for getQueueStep() method
-
-    var queueStep = document.body.getAttribute('data-swal2-queue-step');
-
-    if (queueStep) {
-      container.setAttribute('data-queue-step', queueStep);
-      document.body.removeAttribute('data-swal2-queue-step');
-    }
-  };
-
-  /**
-   * This module containts `WeakMap`s for each effectively-"private  property" that a `Swal` has.
-   * For example, to set the private property "foo" of `this` to "bar", you can `privateProps.foo.set(this, 'bar')`
-   * This is the approach that Babel will probably take to implement private methods/fields
-   *   https://github.com/tc39/proposal-private-methods
-   *   https://github.com/babel/babel/pull/7555
-   * Once we have the changes from that PR in Babel, and our core class fits reasonable in *one module*
-   *   then we can use that language feature.
-   */
-  var privateProps = {
-    promise: new WeakMap(),
-    innerParams: new WeakMap(),
-    domCache: new WeakMap()
-  };
-
-  var inputTypes = ['input', 'file', 'range', 'select', 'radio', 'checkbox', 'textarea'];
-  var renderInput = function renderInput(instance, params) {
-    var content = getContent();
-    var innerParams = privateProps.innerParams.get(instance);
-    var rerender = !innerParams || params.input !== innerParams.input;
-    inputTypes.forEach(function (inputType) {
-      var inputClass = swalClasses[inputType];
-      var inputContainer = getChildByClass(content, inputClass); // set attributes
-
-      setAttributes(inputType, params.inputAttributes); // set class
-
-      inputContainer.className = inputClass;
-
-      if (rerender) {
-        hide(inputContainer);
-      }
-    });
-
-    if (params.input) {
-      if (rerender) {
-        showInput(params);
-      } // set custom class
-
-
-      setCustomClass(params);
-    }
-  };
-
-  var showInput = function showInput(params) {
-    if (!renderInputType[params.input]) {
-      return error("Unexpected type of input! Expected \"text\", \"email\", \"password\", \"number\", \"tel\", \"select\", \"radio\", \"checkbox\", \"textarea\", \"file\" or \"url\", got \"".concat(params.input, "\""));
-    }
-
-    var inputContainer = getInputContainer(params.input);
-    var input = renderInputType[params.input](inputContainer, params);
-    show(input); // input autofocus
-
-    setTimeout(function () {
-      focusInput(input);
-    });
-  };
-
-  var removeAttributes = function removeAttributes(input) {
-    for (var i = 0; i < input.attributes.length; i++) {
-      var attrName = input.attributes[i].name;
-
-      if (!(['type', 'value', 'style'].indexOf(attrName) !== -1)) {
-        input.removeAttribute(attrName);
-      }
-    }
-  };
-
-  var setAttributes = function setAttributes(inputType, inputAttributes) {
-    var input = getInput(getContent(), inputType);
-
-    if (!input) {
-      return;
-    }
-
-    removeAttributes(input);
-
-    for (var attr in inputAttributes) {
-      // Do not set a placeholder for <input type="range">
-      // it'll crash Edge, #1298
-      if (inputType === 'range' && attr === 'placeholder') {
-        continue;
-      }
-
-      input.setAttribute(attr, inputAttributes[attr]);
-    }
-  };
-
-  var setCustomClass = function setCustomClass(params) {
-    var inputContainer = getInputContainer(params.input);
-
-    if (params.customClass) {
-      addClass(inputContainer, params.customClass.input);
-    }
-  };
-
-  var setInputPlaceholder = function setInputPlaceholder(input, params) {
-    if (!input.placeholder || params.inputPlaceholder) {
-      input.placeholder = params.inputPlaceholder;
-    }
-  };
-
-  var setInputLabel = function setInputLabel(input, prependTo, params) {
-    if (params.inputLabel) {
-      input.id = swalClasses.input;
-      var label = document.createElement('label');
-      var labelClass = swalClasses['input-label'];
-      label.setAttribute('for', input.id);
-      label.className = labelClass;
-      addClass(label, params.customClass.inputLabel);
-      label.innerText = params.inputLabel;
-      prependTo.insertAdjacentElement('beforebegin', label);
-    }
-  };
-
-  var getInputContainer = function getInputContainer(inputType) {
-    var inputClass = swalClasses[inputType] ? swalClasses[inputType] : swalClasses.input;
-    return getChildByClass(getContent(), inputClass);
-  };
-
-  var renderInputType = {};
-
-  renderInputType.text = renderInputType.email = renderInputType.password = renderInputType.number = renderInputType.tel = renderInputType.url = function (input, params) {
-    if (typeof params.inputValue === 'string' || typeof params.inputValue === 'number') {
-      input.value = params.inputValue;
-    } else if (!isPromise(params.inputValue)) {
-      warn("Unexpected type of inputValue! Expected \"string\", \"number\" or \"Promise\", got \"".concat(_typeof(params.inputValue), "\""));
-    }
-
-    setInputLabel(input, input, params);
-    setInputPlaceholder(input, params);
-    input.type = params.input;
-    return input;
-  };
-
-  renderInputType.file = function (input, params) {
-    setInputLabel(input, input, params);
-    setInputPlaceholder(input, params);
-    return input;
-  };
-
-  renderInputType.range = function (range, params) {
-    var rangeInput = range.querySelector('input');
-    var rangeOutput = range.querySelector('output');
-    rangeInput.value = params.inputValue;
-    rangeInput.type = params.input;
-    rangeOutput.value = params.inputValue;
-    setInputLabel(rangeInput, range, params);
-    return range;
-  };
-
-  renderInputType.select = function (select, params) {
-    select.textContent = '';
-
-    if (params.inputPlaceholder) {
-      var placeholder = document.createElement('option');
-      setInnerHtml(placeholder, params.inputPlaceholder);
-      placeholder.value = '';
-      placeholder.disabled = true;
-      placeholder.selected = true;
-      select.appendChild(placeholder);
-    }
-
-    setInputLabel(select, select, params);
-    return select;
-  };
-
-  renderInputType.radio = function (radio) {
-    radio.textContent = '';
-    return radio;
-  };
-
-  renderInputType.checkbox = function (checkboxContainer, params) {
-    var checkbox = getInput(getContent(), 'checkbox');
-    checkbox.value = 1;
-    checkbox.id = swalClasses.checkbox;
-    checkbox.checked = Boolean(params.inputValue);
-    var label = checkboxContainer.querySelector('span');
-    setInnerHtml(label, params.inputPlaceholder);
-    return checkboxContainer;
-  };
-
-  renderInputType.textarea = function (textarea, params) {
-    textarea.value = params.inputValue;
-    setInputPlaceholder(textarea, params);
-    setInputLabel(textarea, textarea, params);
-
-    var getPadding = function getPadding(el) {
-      return parseInt(window.getComputedStyle(el).paddingLeft) + parseInt(window.getComputedStyle(el).paddingRight);
-    };
-
-    if ('MutationObserver' in window) {
-      // #1699
-      var initialPopupWidth = parseInt(window.getComputedStyle(getPopup()).width);
-
-      var outputsize = function outputsize() {
-        var contentWidth = textarea.offsetWidth + getPadding(getPopup()) + getPadding(getContent());
-
-        if (contentWidth > initialPopupWidth) {
-          getPopup().style.width = "".concat(contentWidth, "px");
-        } else {
-          getPopup().style.width = null;
-        }
-      };
-
-      new MutationObserver(outputsize).observe(textarea, {
-        attributes: true,
-        attributeFilter: ['style']
-      });
-    }
-
-    return textarea;
-  };
-
-  var renderContent = function renderContent(instance, params) {
-    var content = getContent().querySelector("#".concat(swalClasses.content)); // Content as HTML
-
-    if (params.html) {
-      parseHtmlToContainer(params.html, content);
-      show(content, 'block'); // Content as plain text
-    } else if (params.text) {
-      content.textContent = params.text;
-      show(content, 'block'); // No content
-    } else {
-      hide(content);
-    }
-
-    renderInput(instance, params); // Custom class
-
-    applyCustomClass(getContent(), params, 'content');
-  };
-
-  var renderFooter = function renderFooter(instance, params) {
-    var footer = getFooter();
-    toggle(footer, params.footer);
-
-    if (params.footer) {
-      parseHtmlToContainer(params.footer, footer);
-    } // Custom class
-
-
-    applyCustomClass(footer, params, 'footer');
-  };
-
-  var renderCloseButton = function renderCloseButton(instance, params) {
-    var closeButton = getCloseButton();
-    setInnerHtml(closeButton, params.closeButtonHtml); // Custom class
-
-    applyCustomClass(closeButton, params, 'closeButton');
-    toggle(closeButton, params.showCloseButton);
-    closeButton.setAttribute('aria-label', params.closeButtonAriaLabel);
-  };
-
-  var renderIcon = function renderIcon(instance, params) {
-    var innerParams = privateProps.innerParams.get(instance); // if the given icon already rendered, apply the styling without re-rendering the icon
-
-    if (innerParams && params.icon === innerParams.icon && getIcon()) {
-      applyStyles(getIcon(), params);
-      return;
-    }
-
-    hideAllIcons();
-
-    if (!params.icon) {
-      return;
-    }
-
-    if (Object.keys(iconTypes).indexOf(params.icon) !== -1) {
-      var icon = elementBySelector(".".concat(swalClasses.icon, ".").concat(iconTypes[params.icon]));
-      show(icon); // Custom or default content
-
-      setContent(icon, params);
-      applyStyles(icon, params); // Animate icon
-
-      addClass(icon, params.showClass.icon);
-    } else {
-      error("Unknown icon! Expected \"success\", \"error\", \"warning\", \"info\" or \"question\", got \"".concat(params.icon, "\""));
-    }
-  };
-
-  var hideAllIcons = function hideAllIcons() {
-    var icons = getIcons();
-
-    for (var i = 0; i < icons.length; i++) {
-      hide(icons[i]);
-    }
-  };
-
-  var applyStyles = function applyStyles(icon, params) {
-    // Icon color
-    setColor(icon, params); // Success icon background color
-
-    adjustSuccessIconBackgoundColor(); // Custom class
-
-    applyCustomClass(icon, params, 'icon');
-  }; // Adjust success icon background color to match the popup background color
-
-
-  var adjustSuccessIconBackgoundColor = function adjustSuccessIconBackgoundColor() {
-    var popup = getPopup();
-    var popupBackgroundColor = window.getComputedStyle(popup).getPropertyValue('background-color');
-    var successIconParts = popup.querySelectorAll('[class^=swal2-success-circular-line], .swal2-success-fix');
-
-    for (var i = 0; i < successIconParts.length; i++) {
-      successIconParts[i].style.backgroundColor = popupBackgroundColor;
-    }
-  };
-
-  var setContent = function setContent(icon, params) {
-    icon.textContent = '';
-
-    if (params.iconHtml) {
-      setInnerHtml(icon, iconContent(params.iconHtml));
-    } else if (params.icon === 'success') {
-      setInnerHtml(icon, "\n      <div class=\"swal2-success-circular-line-left\"></div>\n      <span class=\"swal2-success-line-tip\"></span> <span class=\"swal2-success-line-long\"></span>\n      <div class=\"swal2-success-ring\"></div> <div class=\"swal2-success-fix\"></div>\n      <div class=\"swal2-success-circular-line-right\"></div>\n    ");
-    } else if (params.icon === 'error') {
-      setInnerHtml(icon, "\n      <span class=\"swal2-x-mark\">\n        <span class=\"swal2-x-mark-line-left\"></span>\n        <span class=\"swal2-x-mark-line-right\"></span>\n      </span>\n    ");
-    } else {
-      var defaultIconHtml = {
-        question: '?',
-        warning: '!',
-        info: 'i'
-      };
-      setInnerHtml(icon, iconContent(defaultIconHtml[params.icon]));
-    }
-  };
-
-  var setColor = function setColor(icon, params) {
-    if (!params.iconColor) {
-      return;
-    }
-
-    icon.style.color = params.iconColor;
-    icon.style.borderColor = params.iconColor;
-
-    for (var _i = 0, _arr = ['.swal2-success-line-tip', '.swal2-success-line-long', '.swal2-x-mark-line-left', '.swal2-x-mark-line-right']; _i < _arr.length; _i++) {
-      var sel = _arr[_i];
-      setStyle(icon, sel, 'backgroundColor', params.iconColor);
-    }
-
-    setStyle(icon, '.swal2-success-ring', 'borderColor', params.iconColor);
-  };
-
-  var iconContent = function iconContent(content) {
-    return "<div class=\"".concat(swalClasses['icon-content'], "\">").concat(content, "</div>");
-  };
-
-  var renderImage = function renderImage(instance, params) {
-    var image = getImage();
-
-    if (!params.imageUrl) {
-      return hide(image);
-    }
-
-    show(image, ''); // Src, alt
-
-    image.setAttribute('src', params.imageUrl);
-    image.setAttribute('alt', params.imageAlt); // Width, height
-
-    applyNumericalStyle(image, 'width', params.imageWidth);
-    applyNumericalStyle(image, 'height', params.imageHeight); // Class
-
-    image.className = swalClasses.image;
-    applyCustomClass(image, params, 'image');
-  };
-
-  var currentSteps = [];
-  /*
-   * Global function for chaining sweetAlert popups
-   */
-
-  var queue = function queue(steps) {
-    var Swal = this;
-    currentSteps = steps;
-
-    var resetAndResolve = function resetAndResolve(resolve, value) {
-      currentSteps = [];
-      resolve(value);
-    };
-
-    var queueResult = [];
-    return new Promise(function (resolve) {
-      (function step(i, callback) {
-        if (i < currentSteps.length) {
-          document.body.setAttribute('data-swal2-queue-step', i);
-          Swal.fire(currentSteps[i]).then(function (result) {
-            if (typeof result.value !== 'undefined') {
-              queueResult.push(result.value);
-              step(i + 1, callback);
-            } else {
-              resetAndResolve(resolve, {
-                dismiss: result.dismiss
-              });
-            }
-          });
-        } else {
-          resetAndResolve(resolve, {
-            value: queueResult
-          });
-        }
-      })(0);
-    });
-  };
-  /*
-   * Global function for getting the index of current popup in queue
-   */
-
-  var getQueueStep = function getQueueStep() {
-    return getContainer() && getContainer().getAttribute('data-queue-step');
-  };
-  /*
-   * Global function for inserting a popup to the queue
-   */
-
-  var insertQueueStep = function insertQueueStep(step, index) {
-    if (index && index < currentSteps.length) {
-      return currentSteps.splice(index, 0, step);
-    }
-
-    return currentSteps.push(step);
-  };
-  /*
-   * Global function for deleting a popup from the queue
-   */
-
-  var deleteQueueStep = function deleteQueueStep(index) {
-    if (typeof currentSteps[index] !== 'undefined') {
-      currentSteps.splice(index, 1);
-    }
-  };
-
-  var createStepElement = function createStepElement(step) {
-    var stepEl = document.createElement('li');
-    addClass(stepEl, swalClasses['progress-step']);
-    setInnerHtml(stepEl, step);
-    return stepEl;
-  };
-
-  var createLineElement = function createLineElement(params) {
-    var lineEl = document.createElement('li');
-    addClass(lineEl, swalClasses['progress-step-line']);
-
-    if (params.progressStepsDistance) {
-      lineEl.style.width = params.progressStepsDistance;
-    }
-
-    return lineEl;
-  };
-
-  var renderProgressSteps = function renderProgressSteps(instance, params) {
-    var progressStepsContainer = getProgressSteps();
-
-    if (!params.progressSteps || params.progressSteps.length === 0) {
-      return hide(progressStepsContainer);
-    }
-
-    show(progressStepsContainer);
-    progressStepsContainer.textContent = '';
-    var currentProgressStep = parseInt(params.currentProgressStep === undefined ? getQueueStep() : params.currentProgressStep);
-
-    if (currentProgressStep >= params.progressSteps.length) {
-      warn('Invalid currentProgressStep parameter, it should be less than progressSteps.length ' + '(currentProgressStep like JS arrays starts from 0)');
-    }
-
-    params.progressSteps.forEach(function (step, index) {
-      var stepEl = createStepElement(step);
-      progressStepsContainer.appendChild(stepEl);
-
-      if (index === currentProgressStep) {
-        addClass(stepEl, swalClasses['active-progress-step']);
-      }
-
-      if (index !== params.progressSteps.length - 1) {
-        var lineEl = createLineElement(params);
-        progressStepsContainer.appendChild(lineEl);
-      }
-    });
-  };
-
-  var renderTitle = function renderTitle(instance, params) {
-    var title = getTitle();
-    toggle(title, params.title || params.titleText);
-
-    if (params.title) {
-      parseHtmlToContainer(params.title, title);
-    }
-
-    if (params.titleText) {
-      title.innerText = params.titleText;
-    } // Custom class
-
-
-    applyCustomClass(title, params, 'title');
-  };
-
-  var renderHeader = function renderHeader(instance, params) {
-    var header = getHeader(); // Custom class
-
-    applyCustomClass(header, params, 'header'); // Progress steps
-
-    renderProgressSteps(instance, params); // Icon
-
-    renderIcon(instance, params); // Image
-
-    renderImage(instance, params); // Title
-
-    renderTitle(instance, params); // Close button
-
-    renderCloseButton(instance, params);
-  };
-
-  var renderPopup = function renderPopup(instance, params) {
-    var popup = getPopup(); // Width
-
-    applyNumericalStyle(popup, 'width', params.width); // Padding
-
-    applyNumericalStyle(popup, 'padding', params.padding); // Background
-
-    if (params.background) {
-      popup.style.background = params.background;
-    } // Classes
-
-
-    addClasses(popup, params);
-  };
-
-  var addClasses = function addClasses(popup, params) {
-    // Default Class + showClass when updating Swal.update({})
-    popup.className = "".concat(swalClasses.popup, " ").concat(isVisible(popup) ? params.showClass.popup : '');
-
-    if (params.toast) {
-      addClass([document.documentElement, document.body], swalClasses['toast-shown']);
-      addClass(popup, swalClasses.toast);
-    } else {
-      addClass(popup, swalClasses.modal);
-    } // Custom class
-
-
-    applyCustomClass(popup, params, 'popup');
-
-    if (typeof params.customClass === 'string') {
-      addClass(popup, params.customClass);
-    } // Icon class (#1842)
-
-
-    if (params.icon) {
-      addClass(popup, swalClasses["icon-".concat(params.icon)]);
-    }
-  };
-
-  var render = function render(instance, params) {
-    renderPopup(instance, params);
-    renderContainer(instance, params);
-    renderHeader(instance, params);
-    renderContent(instance, params);
-    renderActions(instance, params);
-    renderFooter(instance, params);
-
-    if (typeof params.didRender === 'function') {
-      params.didRender(getPopup());
-    } else if (typeof params.onRender === 'function') {
-      params.onRender(getPopup()); // @deprecated
-    }
-  };
-
-  /*
-   * Global function to determine if SweetAlert2 popup is shown
-   */
-
-  var isVisible$1 = function isVisible$$1() {
-    return isVisible(getPopup());
-  };
-  /*
-   * Global function to click 'Confirm' button
-   */
-
-  var clickConfirm = function clickConfirm() {
-    return getConfirmButton() && getConfirmButton().click();
-  };
-  /*
-   * Global function to click 'Deny' button
-   */
-
-  var clickDeny = function clickDeny() {
-    return getDenyButton() && getDenyButton().click();
-  };
-  /*
-   * Global function to click 'Cancel' button
-   */
-
-  var clickCancel = function clickCancel() {
-    return getCancelButton() && getCancelButton().click();
-  };
-
-  function fire() {
-    var Swal = this;
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return _construct(Swal, args);
-  }
-
-  /**
-   * Returns an extended version of `Swal` containing `params` as defaults.
-   * Useful for reusing Swal configuration.
-   *
-   * For example:
-   *
-   * Before:
-   * const textPromptOptions = { input: 'text', showCancelButton: true }
-   * const {value: firstName} = await Swal.fire({ ...textPromptOptions, title: 'What is your first name?' })
-   * const {value: lastName} = await Swal.fire({ ...textPromptOptions, title: 'What is your last name?' })
-   *
-   * After:
-   * const TextPrompt = Swal.mixin({ input: 'text', showCancelButton: true })
-   * const {value: firstName} = await TextPrompt('What is your first name?')
-   * const {value: lastName} = await TextPrompt('What is your last name?')
-   *
-   * @param mixinParams
-   */
-  function mixin(mixinParams) {
-    var MixinSwal = /*#__PURE__*/function (_this) {
-      _inherits(MixinSwal, _this);
-
-      var _super = _createSuper(MixinSwal);
-
-      function MixinSwal() {
-        _classCallCheck(this, MixinSwal);
-
-        return _super.apply(this, arguments);
-      }
-
-      _createClass(MixinSwal, [{
-        key: "_main",
-        value: function _main(params, prevMixinParams) {
-          return _get(_getPrototypeOf(MixinSwal.prototype), "_main", this).call(this, params, _extends({}, prevMixinParams, mixinParams));
-        }
-      }]);
-
-      return MixinSwal;
-    }(this);
-
-    return MixinSwal;
-  }
-
-  /**
-   * Shows loader (spinner), this is useful with AJAX requests.
-   * By default the loader be shown instead of the "Confirm" button.
-   */
-
-  var showLoading = function showLoading(buttonToReplace) {
-    var popup = getPopup();
-
-    if (!popup) {
-      Swal.fire();
-    }
-
-    popup = getPopup();
-    var actions = getActions();
-    var loader = getLoader();
-
-    if (!buttonToReplace && isVisible(getConfirmButton())) {
-      buttonToReplace = getConfirmButton();
-    }
-
-    show(actions);
-
-    if (buttonToReplace) {
-      hide(buttonToReplace);
-      loader.setAttribute('data-button-to-replace', buttonToReplace.className);
-    }
-
-    loader.parentNode.insertBefore(loader, buttonToReplace);
-    addClass([popup, actions], swalClasses.loading);
-    show(loader);
-    popup.setAttribute('data-loading', true);
-    popup.setAttribute('aria-busy', true);
-    popup.focus();
-  };
-
-  var RESTORE_FOCUS_TIMEOUT = 100;
-
-  var globalState = {};
-
-  var focusPreviousActiveElement = function focusPreviousActiveElement() {
-    if (globalState.previousActiveElement && globalState.previousActiveElement.focus) {
-      globalState.previousActiveElement.focus();
-      globalState.previousActiveElement = null;
-    } else if (document.body) {
-      document.body.focus();
-    }
-  }; // Restore previous active (focused) element
-
-
-  var restoreActiveElement = function restoreActiveElement() {
-    return new Promise(function (resolve) {
-      var x = window.scrollX;
-      var y = window.scrollY;
-      globalState.restoreFocusTimeout = setTimeout(function () {
-        focusPreviousActiveElement();
-        resolve();
-      }, RESTORE_FOCUS_TIMEOUT); // issues/900
-
-      /* istanbul ignore if */
-
-      if (typeof x !== 'undefined' && typeof y !== 'undefined') {
-        // IE doesn't have scrollX/scrollY support
-        window.scrollTo(x, y);
-      }
-    });
-  };
-
-  /**
-   * If `timer` parameter is set, returns number of milliseconds of timer remained.
-   * Otherwise, returns undefined.
-   */
-
-  var getTimerLeft = function getTimerLeft() {
-    return globalState.timeout && globalState.timeout.getTimerLeft();
-  };
-  /**
-   * Stop timer. Returns number of milliseconds of timer remained.
-   * If `timer` parameter isn't set, returns undefined.
-   */
-
-  var stopTimer = function stopTimer() {
-    if (globalState.timeout) {
-      stopTimerProgressBar();
-      return globalState.timeout.stop();
-    }
-  };
-  /**
-   * Resume timer. Returns number of milliseconds of timer remained.
-   * If `timer` parameter isn't set, returns undefined.
-   */
-
-  var resumeTimer = function resumeTimer() {
-    if (globalState.timeout) {
-      var remaining = globalState.timeout.start();
-      animateTimerProgressBar(remaining);
-      return remaining;
-    }
-  };
-  /**
-   * Resume timer. Returns number of milliseconds of timer remained.
-   * If `timer` parameter isn't set, returns undefined.
-   */
-
-  var toggleTimer = function toggleTimer() {
-    var timer = globalState.timeout;
-    return timer && (timer.running ? stopTimer() : resumeTimer());
-  };
-  /**
-   * Increase timer. Returns number of milliseconds of an updated timer.
-   * If `timer` parameter isn't set, returns undefined.
-   */
-
-  var increaseTimer = function increaseTimer(n) {
-    if (globalState.timeout) {
-      var remaining = globalState.timeout.increase(n);
-      animateTimerProgressBar(remaining, true);
-      return remaining;
-    }
-  };
-  /**
-   * Check if timer is running. Returns true if timer is running
-   * or false if timer is paused or stopped.
-   * If `timer` parameter isn't set, returns undefined
-   */
-
-  var isTimerRunning = function isTimerRunning() {
-    return globalState.timeout && globalState.timeout.isRunning();
-  };
-
-  var bodyClickListenerAdded = false;
-  var clickHandlers = {};
-  function bindClickHandler() {
-    var attr = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'data-swal-template';
-    clickHandlers[attr] = this;
-
-    if (!bodyClickListenerAdded) {
-      document.body.addEventListener('click', bodyClickListener);
-      bodyClickListenerAdded = true;
-    }
-  }
-
-  var bodyClickListener = function bodyClickListener(event) {
-    // 1. using .parentNode instead of event.path because of better support by old browsers https://stackoverflow.com/a/39245638
-    // 2. using .parentNode instead of .parentElement because of IE11 + SVG https://stackoverflow.com/a/36270354
-    for (var el = event.target; el && el !== document; el = el.parentNode) {
-      for (var attr in clickHandlers) {
-        var template = el.getAttribute(attr);
-
-        if (template) {
-          clickHandlers[attr].fire({
-            template: template
-          });
-          return;
-        }
-      }
-    }
-  };
-
-  var defaultParams = {
-    title: '',
-    titleText: '',
-    text: '',
-    html: '',
-    footer: '',
-    icon: undefined,
-    iconColor: undefined,
-    iconHtml: undefined,
-    template: undefined,
-    toast: false,
-    animation: true,
-    showClass: {
-      popup: 'swal2-show',
-      backdrop: 'swal2-backdrop-show',
-      icon: 'swal2-icon-show'
-    },
-    hideClass: {
-      popup: 'swal2-hide',
-      backdrop: 'swal2-backdrop-hide',
-      icon: 'swal2-icon-hide'
-    },
-    customClass: {},
-    target: 'body',
-    backdrop: true,
-    heightAuto: true,
-    allowOutsideClick: true,
-    allowEscapeKey: true,
-    allowEnterKey: true,
-    stopKeydownPropagation: true,
-    keydownListenerCapture: false,
-    showConfirmButton: true,
-    showDenyButton: false,
-    showCancelButton: false,
-    preConfirm: undefined,
-    preDeny: undefined,
-    confirmButtonText: 'OK',
-    confirmButtonAriaLabel: '',
-    confirmButtonColor: undefined,
-    denyButtonText: 'No',
-    denyButtonAriaLabel: '',
-    denyButtonColor: undefined,
-    cancelButtonText: 'Cancel',
-    cancelButtonAriaLabel: '',
-    cancelButtonColor: undefined,
-    buttonsStyling: true,
-    reverseButtons: false,
-    focusConfirm: true,
-    focusDeny: false,
-    focusCancel: false,
-    showCloseButton: false,
-    closeButtonHtml: '&times;',
-    closeButtonAriaLabel: 'Close this dialog',
-    loaderHtml: '',
-    showLoaderOnConfirm: false,
-    imageUrl: undefined,
-    imageWidth: undefined,
-    imageHeight: undefined,
-    imageAlt: '',
-    timer: undefined,
-    timerProgressBar: false,
-    width: undefined,
-    padding: undefined,
-    background: undefined,
-    input: undefined,
-    inputPlaceholder: '',
-    inputLabel: '',
-    inputValue: '',
-    inputOptions: {},
-    inputAutoTrim: true,
-    inputAttributes: {},
-    inputValidator: undefined,
-    returnInputValueOnDeny: false,
-    validationMessage: undefined,
-    grow: false,
-    position: 'center',
-    progressSteps: [],
-    currentProgressStep: undefined,
-    progressStepsDistance: undefined,
-    onBeforeOpen: undefined,
-    onOpen: undefined,
-    willOpen: undefined,
-    didOpen: undefined,
-    onRender: undefined,
-    didRender: undefined,
-    onClose: undefined,
-    onAfterClose: undefined,
-    willClose: undefined,
-    didClose: undefined,
-    onDestroy: undefined,
-    didDestroy: undefined,
-    scrollbarPadding: true
-  };
-  var updatableParams = ['allowEscapeKey', 'allowOutsideClick', 'background', 'buttonsStyling', 'cancelButtonAriaLabel', 'cancelButtonColor', 'cancelButtonText', 'closeButtonAriaLabel', 'closeButtonHtml', 'confirmButtonAriaLabel', 'confirmButtonColor', 'confirmButtonText', 'currentProgressStep', 'customClass', 'denyButtonAriaLabel', 'denyButtonColor', 'denyButtonText', 'didClose', 'didDestroy', 'footer', 'hideClass', 'html', 'icon', 'iconColor', 'imageAlt', 'imageHeight', 'imageUrl', 'imageWidth', 'onAfterClose', 'onClose', 'onDestroy', 'progressSteps', 'reverseButtons', 'showCancelButton', 'showCloseButton', 'showConfirmButton', 'showDenyButton', 'text', 'title', 'titleText', 'willClose'];
-  var deprecatedParams = {
-    animation: 'showClass" and "hideClass',
-    onBeforeOpen: 'willOpen',
-    onOpen: 'didOpen',
-    onRender: 'didRender',
-    onClose: 'willClose',
-    onAfterClose: 'didClose',
-    onDestroy: 'didDestroy'
-  };
-  var toastIncompatibleParams = ['allowOutsideClick', 'allowEnterKey', 'backdrop', 'focusConfirm', 'focusDeny', 'focusCancel', 'heightAuto', 'keydownListenerCapture'];
-  /**
-   * Is valid parameter
-   * @param {String} paramName
-   */
-
-  var isValidParameter = function isValidParameter(paramName) {
-    return Object.prototype.hasOwnProperty.call(defaultParams, paramName);
-  };
-  /**
-   * Is valid parameter for Swal.update() method
-   * @param {String} paramName
-   */
-
-  var isUpdatableParameter = function isUpdatableParameter(paramName) {
-    return updatableParams.indexOf(paramName) !== -1;
-  };
-  /**
-   * Is deprecated parameter
-   * @param {String} paramName
-   */
-
-  var isDeprecatedParameter = function isDeprecatedParameter(paramName) {
-    return deprecatedParams[paramName];
-  };
-
-  var checkIfParamIsValid = function checkIfParamIsValid(param) {
-    if (!isValidParameter(param)) {
-      warn("Unknown parameter \"".concat(param, "\""));
-    }
-  };
-
-  var checkIfToastParamIsValid = function checkIfToastParamIsValid(param) {
-    if (toastIncompatibleParams.indexOf(param) !== -1) {
-      warn("The parameter \"".concat(param, "\" is incompatible with toasts"));
-    }
-  };
-
-  var checkIfParamIsDeprecated = function checkIfParamIsDeprecated(param) {
-    if (isDeprecatedParameter(param)) {
-      warnAboutDeprecation(param, isDeprecatedParameter(param));
-    }
-  };
-  /**
-   * Show relevant warnings for given params
-   *
-   * @param params
-   */
-
-
-  var showWarningsForParams = function showWarningsForParams(params) {
-    for (var param in params) {
-      checkIfParamIsValid(param);
-
-      if (params.toast) {
-        checkIfToastParamIsValid(param);
-      }
-
-      checkIfParamIsDeprecated(param);
-    }
-  };
-
-
-
-  var staticMethods = /*#__PURE__*/Object.freeze({
-    isValidParameter: isValidParameter,
-    isUpdatableParameter: isUpdatableParameter,
-    isDeprecatedParameter: isDeprecatedParameter,
-    argsToParams: argsToParams,
-    isVisible: isVisible$1,
-    clickConfirm: clickConfirm,
-    clickDeny: clickDeny,
-    clickCancel: clickCancel,
-    getContainer: getContainer,
-    getPopup: getPopup,
-    getTitle: getTitle,
-    getContent: getContent,
-    getHtmlContainer: getHtmlContainer,
-    getImage: getImage,
-    getIcon: getIcon,
-    getIcons: getIcons,
-    getInputLabel: getInputLabel,
-    getCloseButton: getCloseButton,
-    getActions: getActions,
-    getConfirmButton: getConfirmButton,
-    getDenyButton: getDenyButton,
-    getCancelButton: getCancelButton,
-    getLoader: getLoader,
-    getHeader: getHeader,
-    getFooter: getFooter,
-    getTimerProgressBar: getTimerProgressBar,
-    getFocusableElements: getFocusableElements,
-    getValidationMessage: getValidationMessage,
-    isLoading: isLoading,
-    fire: fire,
-    mixin: mixin,
-    queue: queue,
-    getQueueStep: getQueueStep,
-    insertQueueStep: insertQueueStep,
-    deleteQueueStep: deleteQueueStep,
-    showLoading: showLoading,
-    enableLoading: showLoading,
-    getTimerLeft: getTimerLeft,
-    stopTimer: stopTimer,
-    resumeTimer: resumeTimer,
-    toggleTimer: toggleTimer,
-    increaseTimer: increaseTimer,
-    isTimerRunning: isTimerRunning,
-    bindClickHandler: bindClickHandler
-  });
-
-  /**
-   * Hides loader and shows back the button which was hidden by .showLoading()
-   */
-
-  function hideLoading() {
-    // do nothing if popup is closed
-    var innerParams = privateProps.innerParams.get(this);
-
-    if (!innerParams) {
-      return;
-    }
-
-    var domCache = privateProps.domCache.get(this);
-    hide(domCache.loader);
-    var buttonToReplace = domCache.popup.getElementsByClassName(domCache.loader.getAttribute('data-button-to-replace'));
-
-    if (buttonToReplace.length) {
-      show(buttonToReplace[0], 'inline-block');
-    } else if (allButtonsAreHidden()) {
-      hide(domCache.actions);
-    }
-
-    removeClass([domCache.popup, domCache.actions], swalClasses.loading);
-    domCache.popup.removeAttribute('aria-busy');
-    domCache.popup.removeAttribute('data-loading');
-    domCache.confirmButton.disabled = false;
-    domCache.denyButton.disabled = false;
-    domCache.cancelButton.disabled = false;
-  }
-
-  function getInput$1(instance) {
-    var innerParams = privateProps.innerParams.get(instance || this);
-    var domCache = privateProps.domCache.get(instance || this);
-
-    if (!domCache) {
-      return null;
-    }
-
-    return getInput(domCache.content, innerParams.input);
-  }
-
-  var fixScrollbar = function fixScrollbar() {
-    // for queues, do not do this more than once
-    if (states.previousBodyPadding !== null) {
-      return;
-    } // if the body has overflow
-
-
-    if (document.body.scrollHeight > window.innerHeight) {
-      // add padding so the content doesn't shift after removal of scrollbar
-      states.previousBodyPadding = parseInt(window.getComputedStyle(document.body).getPropertyValue('padding-right'));
-      document.body.style.paddingRight = "".concat(states.previousBodyPadding + measureScrollbar(), "px");
-    }
-  };
-  var undoScrollbar = function undoScrollbar() {
-    if (states.previousBodyPadding !== null) {
-      document.body.style.paddingRight = "".concat(states.previousBodyPadding, "px");
-      states.previousBodyPadding = null;
-    }
-  };
-
-  /* istanbul ignore file */
-
-  var iOSfix = function iOSfix() {
-    var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream || navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
-
-    if (iOS && !hasClass(document.body, swalClasses.iosfix)) {
-      var offset = document.body.scrollTop;
-      document.body.style.top = "".concat(offset * -1, "px");
-      addClass(document.body, swalClasses.iosfix);
-      lockBodyScroll();
-      addBottomPaddingForTallPopups(); // #1948
-    }
-  };
-
-  var addBottomPaddingForTallPopups = function addBottomPaddingForTallPopups() {
-    var safari = !navigator.userAgent.match(/(CriOS|FxiOS|EdgiOS|YaBrowser|UCBrowser)/i);
-
-    if (safari) {
-      var bottomPanelHeight = 44;
-
-      if (getPopup().scrollHeight > window.innerHeight - bottomPanelHeight) {
-        getContainer().style.paddingBottom = "".concat(bottomPanelHeight, "px");
-      }
-    }
-  };
-
-  var lockBodyScroll = function lockBodyScroll() {
-    // #1246
-    var container = getContainer();
-    var preventTouchMove;
-
-    container.ontouchstart = function (e) {
-      preventTouchMove = shouldPreventTouchMove(e);
-    };
-
-    container.ontouchmove = function (e) {
-      if (preventTouchMove) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
-    };
-  };
-
-  var shouldPreventTouchMove = function shouldPreventTouchMove(event) {
-    var target = event.target;
-    var container = getContainer();
-
-    if (isStylys(event) || isZoom(event)) {
-      return false;
-    }
-
-    if (target === container) {
-      return true;
-    }
-
-    if (!isScrollable(container) && target.tagName !== 'INPUT' && // #1603
-    !(isScrollable(getContent()) && // #1944
-    getContent().contains(target))) {
-      return true;
-    }
-
-    return false;
-  };
-
-  var isStylys = function isStylys(event) {
-    // #1786
-    return event.touches && event.touches.length && event.touches[0].touchType === 'stylus';
-  };
-
-  var isZoom = function isZoom(event) {
-    // #1891
-    return event.touches && event.touches.length > 1;
-  };
-
-  var undoIOSfix = function undoIOSfix() {
-    if (hasClass(document.body, swalClasses.iosfix)) {
-      var offset = parseInt(document.body.style.top, 10);
-      removeClass(document.body, swalClasses.iosfix);
-      document.body.style.top = '';
-      document.body.scrollTop = offset * -1;
-    }
-  };
-
-  /* istanbul ignore file */
-
-  var isIE11 = function isIE11() {
-    return !!window.MSInputMethodContext && !!document.documentMode;
-  }; // Fix IE11 centering sweetalert2/issues/933
-
-
-  var fixVerticalPositionIE = function fixVerticalPositionIE() {
-    var container = getContainer();
-    var popup = getPopup();
-    container.style.removeProperty('align-items');
-
-    if (popup.offsetTop < 0) {
-      container.style.alignItems = 'flex-start';
-    }
-  };
-
-  var IEfix = function IEfix() {
-    if (typeof window !== 'undefined' && isIE11()) {
-      fixVerticalPositionIE();
-      window.addEventListener('resize', fixVerticalPositionIE);
-    }
-  };
-  var undoIEfix = function undoIEfix() {
-    if (typeof window !== 'undefined' && isIE11()) {
-      window.removeEventListener('resize', fixVerticalPositionIE);
-    }
-  };
-
-  // Adding aria-hidden="true" to elements outside of the active modal dialog ensures that
-  // elements not within the active modal dialog will not be surfaced if a user opens a screen
-  // reader’s list of elements (headings, form controls, landmarks, etc.) in the document.
-
-  var setAriaHidden = function setAriaHidden() {
-    var bodyChildren = toArray(document.body.children);
-    bodyChildren.forEach(function (el) {
-      if (el === getContainer() || contains(el, getContainer())) {
-        return;
-      }
-
-      if (el.hasAttribute('aria-hidden')) {
-        el.setAttribute('data-previous-aria-hidden', el.getAttribute('aria-hidden'));
-      }
-
-      el.setAttribute('aria-hidden', 'true');
-    });
-  };
-  var unsetAriaHidden = function unsetAriaHidden() {
-    var bodyChildren = toArray(document.body.children);
-    bodyChildren.forEach(function (el) {
-      if (el.hasAttribute('data-previous-aria-hidden')) {
-        el.setAttribute('aria-hidden', el.getAttribute('data-previous-aria-hidden'));
-        el.removeAttribute('data-previous-aria-hidden');
-      } else {
-        el.removeAttribute('aria-hidden');
-      }
-    });
-  };
-
-  /**
-   * This module containts `WeakMap`s for each effectively-"private  property" that a `Swal` has.
-   * For example, to set the private property "foo" of `this` to "bar", you can `privateProps.foo.set(this, 'bar')`
-   * This is the approach that Babel will probably take to implement private methods/fields
-   *   https://github.com/tc39/proposal-private-methods
-   *   https://github.com/babel/babel/pull/7555
-   * Once we have the changes from that PR in Babel, and our core class fits reasonable in *one module*
-   *   then we can use that language feature.
-   */
-  var privateMethods = {
-    swalPromiseResolve: new WeakMap()
-  };
-
-  /*
-   * Instance method to close sweetAlert
-   */
-
-  function removePopupAndResetState(instance, container, isToast$$1, didClose) {
-    if (isToast$$1) {
-      triggerDidCloseAndDispose(instance, didClose);
-    } else {
-      restoreActiveElement().then(function () {
-        return triggerDidCloseAndDispose(instance, didClose);
-      });
-      globalState.keydownTarget.removeEventListener('keydown', globalState.keydownHandler, {
-        capture: globalState.keydownListenerCapture
-      });
-      globalState.keydownHandlerAdded = false;
-    }
-
-    if (container.parentNode && !document.body.getAttribute('data-swal2-queue-step')) {
-      container.parentNode.removeChild(container);
-    }
-
-    if (isModal()) {
-      undoScrollbar();
-      undoIOSfix();
-      undoIEfix();
-      unsetAriaHidden();
-    }
-
-    removeBodyClasses();
-  }
-
-  function removeBodyClasses() {
-    removeClass([document.documentElement, document.body], [swalClasses.shown, swalClasses['height-auto'], swalClasses['no-backdrop'], swalClasses['toast-shown'], swalClasses['toast-column']]);
-  }
-
-  function close(resolveValue) {
-    var popup = getPopup();
-
-    if (!popup) {
-      return;
-    }
-
-    resolveValue = prepareResolveValue(resolveValue);
-    var innerParams = privateProps.innerParams.get(this);
-
-    if (!innerParams || hasClass(popup, innerParams.hideClass.popup)) {
-      return;
-    }
-
-    var swalPromiseResolve = privateMethods.swalPromiseResolve.get(this);
-    removeClass(popup, innerParams.showClass.popup);
-    addClass(popup, innerParams.hideClass.popup);
-    var backdrop = getContainer();
-    removeClass(backdrop, innerParams.showClass.backdrop);
-    addClass(backdrop, innerParams.hideClass.backdrop);
-    handlePopupAnimation(this, popup, innerParams); // Resolve Swal promise
-
-    swalPromiseResolve(resolveValue);
-  }
-
-  var prepareResolveValue = function prepareResolveValue(resolveValue) {
-    // When user calls Swal.close()
-    if (typeof resolveValue === 'undefined') {
-      return {
-        isConfirmed: false,
-        isDenied: false,
-        isDismissed: true
-      };
-    }
-
-    return _extends({
-      isConfirmed: false,
-      isDenied: false,
-      isDismissed: false
-    }, resolveValue);
-  };
-
-  var handlePopupAnimation = function handlePopupAnimation(instance, popup, innerParams) {
-    var container = getContainer(); // If animation is supported, animate
-
-    var animationIsSupported = animationEndEvent && hasCssAnimation(popup);
-    var onClose = innerParams.onClose,
-        onAfterClose = innerParams.onAfterClose,
-        willClose = innerParams.willClose,
-        didClose = innerParams.didClose;
-    runDidClose(popup, willClose, onClose);
-
-    if (animationIsSupported) {
-      animatePopup(instance, popup, container, didClose || onAfterClose);
-    } else {
-      // Otherwise, remove immediately
-      removePopupAndResetState(instance, container, isToast(), didClose || onAfterClose);
-    }
-  };
-
-  var runDidClose = function runDidClose(popup, willClose, onClose) {
-    if (willClose !== null && typeof willClose === 'function') {
-      willClose(popup);
-    } else if (onClose !== null && typeof onClose === 'function') {
-      onClose(popup); // @deprecated
-    }
-  };
-
-  var animatePopup = function animatePopup(instance, popup, container, didClose) {
-    globalState.swalCloseEventFinishedCallback = removePopupAndResetState.bind(null, instance, container, isToast(), didClose);
-    popup.addEventListener(animationEndEvent, function (e) {
-      if (e.target === popup) {
-        globalState.swalCloseEventFinishedCallback();
-        delete globalState.swalCloseEventFinishedCallback;
-      }
-    });
-  };
-
-  var triggerDidCloseAndDispose = function triggerDidCloseAndDispose(instance, didClose) {
-    setTimeout(function () {
-      if (typeof didClose === 'function') {
-        didClose();
-      }
-
-      instance._destroy();
-    });
-  };
-
-  function setButtonsDisabled(instance, buttons, disabled) {
-    var domCache = privateProps.domCache.get(instance);
-    buttons.forEach(function (button) {
-      domCache[button].disabled = disabled;
-    });
-  }
-
-  function setInputDisabled(input, disabled) {
-    if (!input) {
-      return false;
-    }
-
-    if (input.type === 'radio') {
-      var radiosContainer = input.parentNode.parentNode;
-      var radios = radiosContainer.querySelectorAll('input');
-
-      for (var i = 0; i < radios.length; i++) {
-        radios[i].disabled = disabled;
-      }
-    } else {
-      input.disabled = disabled;
-    }
-  }
-
-  function enableButtons() {
-    setButtonsDisabled(this, ['confirmButton', 'denyButton', 'cancelButton'], false);
-  }
-  function disableButtons() {
-    setButtonsDisabled(this, ['confirmButton', 'denyButton', 'cancelButton'], true);
-  }
-  function enableInput() {
-    return setInputDisabled(this.getInput(), false);
-  }
-  function disableInput() {
-    return setInputDisabled(this.getInput(), true);
-  }
-
-  function showValidationMessage(error) {
-    var domCache = privateProps.domCache.get(this);
-    var params = privateProps.innerParams.get(this);
-    setInnerHtml(domCache.validationMessage, error);
-    domCache.validationMessage.className = swalClasses['validation-message'];
-
-    if (params.customClass && params.customClass.validationMessage) {
-      addClass(domCache.validationMessage, params.customClass.validationMessage);
-    }
-
-    show(domCache.validationMessage);
-    var input = this.getInput();
-
-    if (input) {
-      input.setAttribute('aria-invalid', true);
-      input.setAttribute('aria-describedBy', swalClasses['validation-message']);
-      focusInput(input);
-      addClass(input, swalClasses.inputerror);
-    }
-  } // Hide block with validation message
-
-  function resetValidationMessage$1() {
-    var domCache = privateProps.domCache.get(this);
-
-    if (domCache.validationMessage) {
-      hide(domCache.validationMessage);
-    }
-
-    var input = this.getInput();
-
-    if (input) {
-      input.removeAttribute('aria-invalid');
-      input.removeAttribute('aria-describedBy');
-      removeClass(input, swalClasses.inputerror);
-    }
-  }
-
-  function getProgressSteps$1() {
-    var domCache = privateProps.domCache.get(this);
-    return domCache.progressSteps;
-  }
-
-  var Timer = /*#__PURE__*/function () {
-    function Timer(callback, delay) {
-      _classCallCheck(this, Timer);
-
-      this.callback = callback;
-      this.remaining = delay;
-      this.running = false;
-      this.start();
-    }
-
-    _createClass(Timer, [{
-      key: "start",
-      value: function start() {
-        if (!this.running) {
-          this.running = true;
-          this.started = new Date();
-          this.id = setTimeout(this.callback, this.remaining);
-        }
-
-        return this.remaining;
-      }
-    }, {
-      key: "stop",
-      value: function stop() {
-        if (this.running) {
-          this.running = false;
-          clearTimeout(this.id);
-          this.remaining -= new Date() - this.started;
-        }
-
-        return this.remaining;
-      }
-    }, {
-      key: "increase",
-      value: function increase(n) {
-        var running = this.running;
-
-        if (running) {
-          this.stop();
-        }
-
-        this.remaining += n;
-
-        if (running) {
-          this.start();
-        }
-
-        return this.remaining;
-      }
-    }, {
-      key: "getTimerLeft",
-      value: function getTimerLeft() {
-        if (this.running) {
-          this.stop();
-          this.start();
-        }
-
-        return this.remaining;
-      }
-    }, {
-      key: "isRunning",
-      value: function isRunning() {
-        return this.running;
-      }
-    }]);
-
-    return Timer;
-  }();
-
-  var defaultInputValidators = {
-    email: function email(string, validationMessage) {
-      return /^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9-]{2,24}$/.test(string) ? Promise.resolve() : Promise.resolve(validationMessage || 'Invalid email address');
-    },
-    url: function url(string, validationMessage) {
-      // taken from https://stackoverflow.com/a/3809435 with a small change from #1306 and #2013
-      return /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-z]{2,63}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/.test(string) ? Promise.resolve() : Promise.resolve(validationMessage || 'Invalid URL');
-    }
-  };
-
-  function setDefaultInputValidators(params) {
-    // Use default `inputValidator` for supported input types if not provided
-    if (!params.inputValidator) {
-      Object.keys(defaultInputValidators).forEach(function (key) {
-        if (params.input === key) {
-          params.inputValidator = defaultInputValidators[key];
-        }
-      });
-    }
-  }
-
-  function validateCustomTargetElement(params) {
-    // Determine if the custom target element is valid
-    if (!params.target || typeof params.target === 'string' && !document.querySelector(params.target) || typeof params.target !== 'string' && !params.target.appendChild) {
-      warn('Target parameter is not valid, defaulting to "body"');
-      params.target = 'body';
-    }
-  }
-  /**
-   * Set type, text and actions on popup
-   *
-   * @param params
-   * @returns {boolean}
-   */
-
-
-  function setParameters(params) {
-    setDefaultInputValidators(params); // showLoaderOnConfirm && preConfirm
-
-    if (params.showLoaderOnConfirm && !params.preConfirm) {
-      warn('showLoaderOnConfirm is set to true, but preConfirm is not defined.\n' + 'showLoaderOnConfirm should be used together with preConfirm, see usage example:\n' + 'https://sweetalert2.github.io/#ajax-request');
-    } // params.animation will be actually used in renderPopup.js
-    // but in case when params.animation is a function, we need to call that function
-    // before popup (re)initialization, so it'll be possible to check Swal.isVisible()
-    // inside the params.animation function
-
-
-    params.animation = callIfFunction(params.animation);
-    validateCustomTargetElement(params); // Replace newlines with <br> in title
-
-    if (typeof params.title === 'string') {
-      params.title = params.title.split('\n').join('<br />');
-    }
-
-    init(params);
-  }
-
-  var swalStringParams = ['swal-title', 'swal-html', 'swal-footer'];
-  var getTemplateParams = function getTemplateParams(params) {
-    var template = typeof params.template === 'string' ? document.querySelector(params.template) : params.template;
-
-    if (!template) {
-      return {};
-    }
-
-    var templateContent = template.content || template; // IE11
-
-    showWarningsForElements(templateContent);
-
-    var result = _extends(getSwalParams(templateContent), getSwalButtons(templateContent), getSwalImage(templateContent), getSwalIcon(templateContent), getSwalInput(templateContent), getSwalStringParams(templateContent, swalStringParams));
-
-    return result;
-  };
-
-  var getSwalParams = function getSwalParams(templateContent) {
-    var result = {};
-    toArray(templateContent.querySelectorAll('swal-param')).forEach(function (param) {
-      showWarningsForAttributes(param, ['name', 'value']);
-      var paramName = param.getAttribute('name');
-      var value = param.getAttribute('value');
-
-      if (typeof defaultParams[paramName] === 'boolean' && value === 'false') {
-        value = false;
-      }
-
-      if (_typeof(defaultParams[paramName]) === 'object') {
-        value = JSON.parse(value);
-      }
-
-      result[paramName] = value;
-    });
-    return result;
-  };
-
-  var getSwalButtons = function getSwalButtons(templateContent) {
-    var result = {};
-    toArray(templateContent.querySelectorAll('swal-button')).forEach(function (button) {
-      showWarningsForAttributes(button, ['type', 'color', 'aria-label']);
-      var type = button.getAttribute('type');
-      result["".concat(type, "ButtonText")] = button.innerHTML;
-      result["show".concat(capitalizeFirstLetter(type), "Button")] = true;
-
-      if (button.hasAttribute('color')) {
-        result["".concat(type, "ButtonColor")] = button.getAttribute('color');
-      }
-
-      if (button.hasAttribute('aria-label')) {
-        result["".concat(type, "ButtonAriaLabel")] = button.getAttribute('aria-label');
-      }
-    });
-    return result;
-  };
-
-  var getSwalImage = function getSwalImage(templateContent) {
-    var result = {};
-    var image = templateContent.querySelector('swal-image');
-
-    if (image) {
-      showWarningsForAttributes(image, ['src', 'width', 'height', 'alt']);
-
-      if (image.hasAttribute('src')) {
-        result.imageUrl = image.getAttribute('src');
-      }
-
-      if (image.hasAttribute('width')) {
-        result.imageWidth = image.getAttribute('width');
-      }
-
-      if (image.hasAttribute('height')) {
-        result.imageHeight = image.getAttribute('height');
-      }
-
-      if (image.hasAttribute('alt')) {
-        result.imageAlt = image.getAttribute('alt');
-      }
-    }
-
-    return result;
-  };
-
-  var getSwalIcon = function getSwalIcon(templateContent) {
-    var result = {};
-    var icon = templateContent.querySelector('swal-icon');
-
-    if (icon) {
-      showWarningsForAttributes(icon, ['type', 'color']);
-
-      if (icon.hasAttribute('type')) {
-        result.icon = icon.getAttribute('type');
-      }
-
-      if (icon.hasAttribute('color')) {
-        result.iconColor = icon.getAttribute('color');
-      }
-
-      result.iconHtml = icon.innerHTML;
-    }
-
-    return result;
-  };
-
-  var getSwalInput = function getSwalInput(templateContent) {
-    var result = {};
-    var input = templateContent.querySelector('swal-input');
-
-    if (input) {
-      showWarningsForAttributes(input, ['type', 'label', 'placeholder', 'value']);
-      result.input = input.getAttribute('type') || 'text';
-
-      if (input.hasAttribute('label')) {
-        result.inputLabel = input.getAttribute('label');
-      }
-
-      if (input.hasAttribute('placeholder')) {
-        result.inputPlaceholder = input.getAttribute('placeholder');
-      }
-
-      if (input.hasAttribute('value')) {
-        result.inputValue = input.getAttribute('value');
-      }
-    }
-
-    var inputOptions = templateContent.querySelectorAll('swal-input-option');
-
-    if (inputOptions.length) {
-      result.inputOptions = {};
-      toArray(inputOptions).forEach(function (option) {
-        showWarningsForAttributes(option, ['value']);
-        var optionValue = option.getAttribute('value');
-        var optionName = option.innerHTML;
-        result.inputOptions[optionValue] = optionName;
-      });
-    }
-
-    return result;
-  };
-
-  var getSwalStringParams = function getSwalStringParams(templateContent, paramNames) {
-    var result = {};
-
-    for (var i in paramNames) {
-      var paramName = paramNames[i];
-      var tag = templateContent.querySelector(paramName);
-
-      if (tag) {
-        showWarningsForAttributes(tag, []);
-        result[paramName.replace(/^swal-/, '')] = tag.innerHTML;
-      }
-    }
-
-    return result;
-  };
-
-  var showWarningsForElements = function showWarningsForElements(template) {
-    var allowedElements = swalStringParams.concat(['swal-param', 'swal-button', 'swal-image', 'swal-icon', 'swal-input', 'swal-input-option']);
-    toArray(template.querySelectorAll('*')).forEach(function (el) {
-      var tagName = el.tagName.toLowerCase();
-
-      if (allowedElements.indexOf(tagName) === -1) {
-        warn("Unrecognized element <".concat(tagName, ">"));
-      }
-    });
-  };
-
-  var showWarningsForAttributes = function showWarningsForAttributes(el, allowedAttributes) {
-    toArray(el.attributes).forEach(function (attribute) {
-      if (allowedAttributes.indexOf(attribute.name) === -1) {
-        warn(["Unrecognized attribute \"".concat(attribute.name, "\" on <").concat(el.tagName.toLowerCase(), ">."), "".concat(allowedAttributes.length ? "Allowed attributes are: ".concat(allowedAttributes.join(', ')) : 'To set the value, use HTML within the element.')]);
-      }
-    });
-  };
-
-  var SHOW_CLASS_TIMEOUT = 10;
-  /**
-   * Open popup, add necessary classes and styles, fix scrollbar
-   *
-   * @param params
-   */
-
-  var openPopup = function openPopup(params) {
-    var container = getContainer();
-    var popup = getPopup();
-
-    if (typeof params.willOpen === 'function') {
-      params.willOpen(popup);
-    } else if (typeof params.onBeforeOpen === 'function') {
-      params.onBeforeOpen(popup); // @deprecated
-    }
-
-    var bodyStyles = window.getComputedStyle(document.body);
-    var initialBodyOverflow = bodyStyles.overflowY;
-    addClasses$1(container, popup, params); // scrolling is 'hidden' until animation is done, after that 'auto'
-
-    setTimeout(function () {
-      setScrollingVisibility(container, popup);
-    }, SHOW_CLASS_TIMEOUT);
-
-    if (isModal()) {
-      fixScrollContainer(container, params.scrollbarPadding, initialBodyOverflow);
-      setAriaHidden();
-    }
-
-    if (!isToast() && !globalState.previousActiveElement) {
-      globalState.previousActiveElement = document.activeElement;
-    }
-
-    runDidOpen(popup, params);
-    removeClass(container, swalClasses['no-transition']);
-  };
-
-  var runDidOpen = function runDidOpen(popup, params) {
-    if (typeof params.didOpen === 'function') {
-      setTimeout(function () {
-        return params.didOpen(popup);
-      });
-    } else if (typeof params.onOpen === 'function') {
-      setTimeout(function () {
-        return params.onOpen(popup);
-      }); // @deprecated
-    }
-  };
-
-  var swalOpenAnimationFinished = function swalOpenAnimationFinished(event) {
-    var popup = getPopup();
-
-    if (event.target !== popup) {
-      return;
-    }
-
-    var container = getContainer();
-    popup.removeEventListener(animationEndEvent, swalOpenAnimationFinished);
-    container.style.overflowY = 'auto';
-  };
-
-  var setScrollingVisibility = function setScrollingVisibility(container, popup) {
-    if (animationEndEvent && hasCssAnimation(popup)) {
-      container.style.overflowY = 'hidden';
-      popup.addEventListener(animationEndEvent, swalOpenAnimationFinished);
-    } else {
-      container.style.overflowY = 'auto';
-    }
-  };
-
-  var fixScrollContainer = function fixScrollContainer(container, scrollbarPadding, initialBodyOverflow) {
-    iOSfix();
-    IEfix();
-
-    if (scrollbarPadding && initialBodyOverflow !== 'hidden') {
-      fixScrollbar();
-    } // sweetalert2/issues/1247
-
-
-    setTimeout(function () {
-      container.scrollTop = 0;
-    });
-  };
-
-  var addClasses$1 = function addClasses(container, popup, params) {
-    addClass(container, params.showClass.backdrop); // the workaround with setting/unsetting opacity is needed for #2019 and 2059
-
-    popup.style.setProperty('opacity', '0', 'important');
-    show(popup);
-    setTimeout(function () {
-      // Animate popup right after showing it
-      addClass(popup, params.showClass.popup); // and remove the opacity workaround
-
-      popup.style.removeProperty('opacity');
-    }, SHOW_CLASS_TIMEOUT); // 10ms in order to fix #2062
-
-    addClass([document.documentElement, document.body], swalClasses.shown);
-
-    if (params.heightAuto && params.backdrop && !params.toast) {
-      addClass([document.documentElement, document.body], swalClasses['height-auto']);
-    }
-  };
-
-  var handleInputOptionsAndValue = function handleInputOptionsAndValue(instance, params) {
-    if (params.input === 'select' || params.input === 'radio') {
-      handleInputOptions(instance, params);
-    } else if (['text', 'email', 'number', 'tel', 'textarea'].indexOf(params.input) !== -1 && (hasToPromiseFn(params.inputValue) || isPromise(params.inputValue))) {
-      handleInputValue(instance, params);
-    }
-  };
-  var getInputValue = function getInputValue(instance, innerParams) {
-    var input = instance.getInput();
-
-    if (!input) {
-      return null;
-    }
-
-    switch (innerParams.input) {
-      case 'checkbox':
-        return getCheckboxValue(input);
-
-      case 'radio':
-        return getRadioValue(input);
-
-      case 'file':
-        return getFileValue(input);
-
-      default:
-        return innerParams.inputAutoTrim ? input.value.trim() : input.value;
-    }
-  };
-
-  var getCheckboxValue = function getCheckboxValue(input) {
-    return input.checked ? 1 : 0;
-  };
-
-  var getRadioValue = function getRadioValue(input) {
-    return input.checked ? input.value : null;
-  };
-
-  var getFileValue = function getFileValue(input) {
-    return input.files.length ? input.getAttribute('multiple') !== null ? input.files : input.files[0] : null;
-  };
-
-  var handleInputOptions = function handleInputOptions(instance, params) {
-    var content = getContent();
-
-    var processInputOptions = function processInputOptions(inputOptions) {
-      return populateInputOptions[params.input](content, formatInputOptions(inputOptions), params);
-    };
-
-    if (hasToPromiseFn(params.inputOptions) || isPromise(params.inputOptions)) {
-      showLoading();
-      asPromise(params.inputOptions).then(function (inputOptions) {
-        instance.hideLoading();
-        processInputOptions(inputOptions);
-      });
-    } else if (_typeof(params.inputOptions) === 'object') {
-      processInputOptions(params.inputOptions);
-    } else {
-      error("Unexpected type of inputOptions! Expected object, Map or Promise, got ".concat(_typeof(params.inputOptions)));
-    }
-  };
-
-  var handleInputValue = function handleInputValue(instance, params) {
-    var input = instance.getInput();
-    hide(input);
-    asPromise(params.inputValue).then(function (inputValue) {
-      input.value = params.input === 'number' ? parseFloat(inputValue) || 0 : "".concat(inputValue);
-      show(input);
-      input.focus();
-      instance.hideLoading();
-    })["catch"](function (err) {
-      error("Error in inputValue promise: ".concat(err));
-      input.value = '';
-      show(input);
-      input.focus();
-      instance.hideLoading();
-    });
-  };
-
-  var populateInputOptions = {
-    select: function select(content, inputOptions, params) {
-      var select = getChildByClass(content, swalClasses.select);
-
-      var renderOption = function renderOption(parent, optionLabel, optionValue) {
-        var option = document.createElement('option');
-        option.value = optionValue;
-        setInnerHtml(option, optionLabel);
-        option.selected = isSelected(optionValue, params.inputValue);
-        parent.appendChild(option);
-      };
-
-      inputOptions.forEach(function (inputOption) {
-        var optionValue = inputOption[0];
-        var optionLabel = inputOption[1]; // <optgroup> spec:
-        // https://www.w3.org/TR/html401/interact/forms.html#h-17.6
-        // "...all OPTGROUP elements must be specified directly within a SELECT element (i.e., groups may not be nested)..."
-        // check whether this is a <optgroup>
-
-        if (Array.isArray(optionLabel)) {
-          // if it is an array, then it is an <optgroup>
-          var optgroup = document.createElement('optgroup');
-          optgroup.label = optionValue;
-          optgroup.disabled = false; // not configurable for now
-
-          select.appendChild(optgroup);
-          optionLabel.forEach(function (o) {
-            return renderOption(optgroup, o[1], o[0]);
-          });
-        } else {
-          // case of <option>
-          renderOption(select, optionLabel, optionValue);
-        }
-      });
-      select.focus();
-    },
-    radio: function radio(content, inputOptions, params) {
-      var radio = getChildByClass(content, swalClasses.radio);
-      inputOptions.forEach(function (inputOption) {
-        var radioValue = inputOption[0];
-        var radioLabel = inputOption[1];
-        var radioInput = document.createElement('input');
-        var radioLabelElement = document.createElement('label');
-        radioInput.type = 'radio';
-        radioInput.name = swalClasses.radio;
-        radioInput.value = radioValue;
-
-        if (isSelected(radioValue, params.inputValue)) {
-          radioInput.checked = true;
-        }
-
-        var label = document.createElement('span');
-        setInnerHtml(label, radioLabel);
-        label.className = swalClasses.label;
-        radioLabelElement.appendChild(radioInput);
-        radioLabelElement.appendChild(label);
-        radio.appendChild(radioLabelElement);
-      });
-      var radios = radio.querySelectorAll('input');
-
-      if (radios.length) {
-        radios[0].focus();
-      }
-    }
-  };
-  /**
-   * Converts `inputOptions` into an array of `[value, label]`s
-   * @param inputOptions
-   */
-
-  var formatInputOptions = function formatInputOptions(inputOptions) {
-    var result = [];
-
-    if (typeof Map !== 'undefined' && inputOptions instanceof Map) {
-      inputOptions.forEach(function (value, key) {
-        var valueFormatted = value;
-
-        if (_typeof(valueFormatted) === 'object') {
-          // case of <optgroup>
-          valueFormatted = formatInputOptions(valueFormatted);
-        }
-
-        result.push([key, valueFormatted]);
-      });
-    } else {
-      Object.keys(inputOptions).forEach(function (key) {
-        var valueFormatted = inputOptions[key];
-
-        if (_typeof(valueFormatted) === 'object') {
-          // case of <optgroup>
-          valueFormatted = formatInputOptions(valueFormatted);
-        }
-
-        result.push([key, valueFormatted]);
-      });
-    }
-
-    return result;
-  };
-
-  var isSelected = function isSelected(optionValue, inputValue) {
-    return inputValue && inputValue.toString() === optionValue.toString();
-  };
-
-  var handleConfirmButtonClick = function handleConfirmButtonClick(instance, innerParams) {
-    instance.disableButtons();
-
-    if (innerParams.input) {
-      handleConfirmOrDenyWithInput(instance, innerParams, 'confirm');
-    } else {
-      confirm(instance, innerParams, true);
-    }
-  };
-  var handleDenyButtonClick = function handleDenyButtonClick(instance, innerParams) {
-    instance.disableButtons();
-
-    if (innerParams.returnInputValueOnDeny) {
-      handleConfirmOrDenyWithInput(instance, innerParams, 'deny');
-    } else {
-      deny(instance, innerParams, false);
-    }
-  };
-  var handleCancelButtonClick = function handleCancelButtonClick(instance, dismissWith) {
-    instance.disableButtons();
-    dismissWith(DismissReason.cancel);
-  };
-
-  var handleConfirmOrDenyWithInput = function handleConfirmOrDenyWithInput(instance, innerParams, type
-  /* type is either 'confirm' or 'deny' */
-  ) {
-    var inputValue = getInputValue(instance, innerParams);
-
-    if (innerParams.inputValidator) {
-      handleInputValidator(instance, innerParams, inputValue);
-    } else if (!instance.getInput().checkValidity()) {
-      instance.enableButtons();
-      instance.showValidationMessage(innerParams.validationMessage);
-    } else if (type === 'deny') {
-      deny(instance, innerParams, inputValue);
-    } else {
-      confirm(instance, innerParams, inputValue);
-    }
-  };
-
-  var handleInputValidator = function handleInputValidator(instance, innerParams, inputValue) {
-    instance.disableInput();
-    var validationPromise = Promise.resolve().then(function () {
-      return asPromise(innerParams.inputValidator(inputValue, innerParams.validationMessage));
-    });
-    validationPromise.then(function (validationMessage) {
-      instance.enableButtons();
-      instance.enableInput();
-
-      if (validationMessage) {
-        instance.showValidationMessage(validationMessage);
-      } else {
-        confirm(instance, innerParams, inputValue);
-      }
-    });
-  };
-
-  var deny = function deny(instance, innerParams, value) {
-    if (innerParams.preDeny) {
-      var preDenyPromise = Promise.resolve().then(function () {
-        return asPromise(innerParams.preDeny(value, innerParams.validationMessage));
-      });
-      preDenyPromise.then(function (preDenyValue) {
-        if (preDenyValue === false) {
-          instance.hideLoading();
-        } else {
-          instance.closePopup({
-            isDenied: true,
-            value: typeof preDenyValue === 'undefined' ? value : preDenyValue
-          });
-        }
-      });
-    } else {
-      instance.closePopup({
-        isDenied: true,
-        value: value
-      });
-    }
-  };
-
-  var succeedWith = function succeedWith(instance, value) {
-    instance.closePopup({
-      isConfirmed: true,
-      value: value
-    });
-  };
-
-  var confirm = function confirm(instance, innerParams, value) {
-    if (innerParams.showLoaderOnConfirm) {
-      showLoading(); // TODO: make showLoading an *instance* method
-    }
-
-    if (innerParams.preConfirm) {
-      instance.resetValidationMessage();
-      var preConfirmPromise = Promise.resolve().then(function () {
-        return asPromise(innerParams.preConfirm(value, innerParams.validationMessage));
-      });
-      preConfirmPromise.then(function (preConfirmValue) {
-        if (isVisible(getValidationMessage()) || preConfirmValue === false) {
-          instance.hideLoading();
-        } else {
-          succeedWith(instance, typeof preConfirmValue === 'undefined' ? value : preConfirmValue);
-        }
-      });
-    } else {
-      succeedWith(instance, value);
-    }
-  };
-
-  var addKeydownHandler = function addKeydownHandler(instance, globalState, innerParams, dismissWith) {
-    if (globalState.keydownTarget && globalState.keydownHandlerAdded) {
-      globalState.keydownTarget.removeEventListener('keydown', globalState.keydownHandler, {
-        capture: globalState.keydownListenerCapture
-      });
-      globalState.keydownHandlerAdded = false;
-    }
-
-    if (!innerParams.toast) {
-      globalState.keydownHandler = function (e) {
-        return keydownHandler(instance, e, dismissWith);
-      };
-
-      globalState.keydownTarget = innerParams.keydownListenerCapture ? window : getPopup();
-      globalState.keydownListenerCapture = innerParams.keydownListenerCapture;
-      globalState.keydownTarget.addEventListener('keydown', globalState.keydownHandler, {
-        capture: globalState.keydownListenerCapture
-      });
-      globalState.keydownHandlerAdded = true;
-    }
-  }; // Focus handling
-
-  var setFocus = function setFocus(innerParams, index, increment) {
-    var focusableElements = getFocusableElements(); // search for visible elements and select the next possible match
-
-    if (focusableElements.length) {
-      index = index + increment; // rollover to first item
-
-      if (index === focusableElements.length) {
-        index = 0; // go to last item
-      } else if (index === -1) {
-        index = focusableElements.length - 1;
-      }
-
-      return focusableElements[index].focus();
-    } // no visible focusable elements, focus the popup
-
-
-    getPopup().focus();
-  };
-  var arrowKeysNextButton = ['ArrowRight', 'ArrowDown', 'Right', 'Down' // IE11
-  ];
-  var arrowKeysPreviousButton = ['ArrowLeft', 'ArrowUp', 'Left', 'Up' // IE11
-  ];
-  var escKeys = ['Escape', 'Esc' // IE11
-  ];
-
-  var keydownHandler = function keydownHandler(instance, e, dismissWith) {
-    var innerParams = privateProps.innerParams.get(instance);
-
-    if (innerParams.stopKeydownPropagation) {
-      e.stopPropagation();
-    } // ENTER
-
-
-    if (e.key === 'Enter') {
-      handleEnter(instance, e, innerParams); // TAB
-    } else if (e.key === 'Tab') {
-      handleTab(e, innerParams); // ARROWS - switch focus between buttons
-    } else if ([].concat(arrowKeysNextButton, arrowKeysPreviousButton).indexOf(e.key) !== -1) {
-      handleArrows(e.key); // ESC
-    } else if (escKeys.indexOf(e.key) !== -1) {
-      handleEsc(e, innerParams, dismissWith);
-    }
-  };
-
-  var handleEnter = function handleEnter(instance, e, innerParams) {
-    // #720 #721
-    if (e.isComposing) {
-      return;
-    }
-
-    if (e.target && instance.getInput() && e.target.outerHTML === instance.getInput().outerHTML) {
-      if (['textarea', 'file'].indexOf(innerParams.input) !== -1) {
-        return; // do not submit
-      }
-
-      clickConfirm();
-      e.preventDefault();
-    }
-  };
-
-  var handleTab = function handleTab(e, innerParams) {
-    var targetElement = e.target;
-    var focusableElements = getFocusableElements();
-    var btnIndex = -1;
-
-    for (var i = 0; i < focusableElements.length; i++) {
-      if (targetElement === focusableElements[i]) {
-        btnIndex = i;
-        break;
-      }
-    }
-
-    if (!e.shiftKey) {
-      // Cycle to the next button
-      setFocus(innerParams, btnIndex, 1);
-    } else {
-      // Cycle to the prev button
-      setFocus(innerParams, btnIndex, -1);
-    }
-
-    e.stopPropagation();
-    e.preventDefault();
-  };
-
-  var handleArrows = function handleArrows(key) {
-    var confirmButton = getConfirmButton();
-    var denyButton = getDenyButton();
-    var cancelButton = getCancelButton();
-
-    if (!([confirmButton, denyButton, cancelButton].indexOf(document.activeElement) !== -1)) {
-      return;
-    }
-
-    var sibling = arrowKeysNextButton.indexOf(key) !== -1 ? 'nextElementSibling' : 'previousElementSibling';
-    var buttonToFocus = document.activeElement[sibling];
-
-    if (buttonToFocus) {
-      buttonToFocus.focus();
-    }
-  };
-
-  var handleEsc = function handleEsc(e, innerParams, dismissWith) {
-    if (callIfFunction(innerParams.allowEscapeKey)) {
-      e.preventDefault();
-      dismissWith(DismissReason.esc);
-    }
-  };
-
-  var handlePopupClick = function handlePopupClick(instance, domCache, dismissWith) {
-    var innerParams = privateProps.innerParams.get(instance);
-
-    if (innerParams.toast) {
-      handleToastClick(instance, domCache, dismissWith);
-    } else {
-      // Ignore click events that had mousedown on the popup but mouseup on the container
-      // This can happen when the user drags a slider
-      handleModalMousedown(domCache); // Ignore click events that had mousedown on the container but mouseup on the popup
-
-      handleContainerMousedown(domCache);
-      handleModalClick(instance, domCache, dismissWith);
-    }
-  };
-
-  var handleToastClick = function handleToastClick(instance, domCache, dismissWith) {
-    // Closing toast by internal click
-    domCache.popup.onclick = function () {
-      var innerParams = privateProps.innerParams.get(instance);
-
-      if (innerParams.showConfirmButton || innerParams.showDenyButton || innerParams.showCancelButton || innerParams.showCloseButton || innerParams.timer || innerParams.input) {
-        return;
-      }
-
-      dismissWith(DismissReason.close);
-    };
-  };
-
-  var ignoreOutsideClick = false;
-
-  var handleModalMousedown = function handleModalMousedown(domCache) {
-    domCache.popup.onmousedown = function () {
-      domCache.container.onmouseup = function (e) {
-        domCache.container.onmouseup = undefined; // We only check if the mouseup target is the container because usually it doesn't
-        // have any other direct children aside of the popup
-
-        if (e.target === domCache.container) {
-          ignoreOutsideClick = true;
-        }
-      };
-    };
-  };
-
-  var handleContainerMousedown = function handleContainerMousedown(domCache) {
-    domCache.container.onmousedown = function () {
-      domCache.popup.onmouseup = function (e) {
-        domCache.popup.onmouseup = undefined; // We also need to check if the mouseup target is a child of the popup
-
-        if (e.target === domCache.popup || domCache.popup.contains(e.target)) {
-          ignoreOutsideClick = true;
-        }
-      };
-    };
-  };
-
-  var handleModalClick = function handleModalClick(instance, domCache, dismissWith) {
-    domCache.container.onclick = function (e) {
-      var innerParams = privateProps.innerParams.get(instance);
-
-      if (ignoreOutsideClick) {
-        ignoreOutsideClick = false;
-        return;
-      }
-
-      if (e.target === domCache.container && callIfFunction(innerParams.allowOutsideClick)) {
-        dismissWith(DismissReason.backdrop);
-      }
-    };
-  };
-
-  function _main(userParams) {
-    var mixinParams = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-    showWarningsForParams(_extends({}, mixinParams, userParams));
-
-    if (globalState.currentInstance) {
-      globalState.currentInstance._destroy();
-    }
-
-    globalState.currentInstance = this;
-    var innerParams = prepareParams(userParams, mixinParams);
-    setParameters(innerParams);
-    Object.freeze(innerParams); // clear the previous timer
-
-    if (globalState.timeout) {
-      globalState.timeout.stop();
-      delete globalState.timeout;
-    } // clear the restore focus timeout
-
-
-    clearTimeout(globalState.restoreFocusTimeout);
-    var domCache = populateDomCache(this);
-    render(this, innerParams);
-    privateProps.innerParams.set(this, innerParams);
-    return swalPromise(this, domCache, innerParams);
-  }
-
-  var prepareParams = function prepareParams(userParams, mixinParams) {
-    var templateParams = getTemplateParams(userParams);
-
-    var showClass = _extends({}, defaultParams.showClass, mixinParams.showClass, templateParams.showClass, userParams.showClass);
-
-    var hideClass = _extends({}, defaultParams.hideClass, mixinParams.hideClass, templateParams.hideClass, userParams.hideClass);
-
-    var params = _extends({}, defaultParams, mixinParams, templateParams, userParams); // precedence is described in #2131
-
-
-    params.showClass = showClass;
-    params.hideClass = hideClass; // @deprecated
-
-    if (userParams.animation === false) {
-      params.showClass = {
-        popup: 'swal2-noanimation',
-        backdrop: 'swal2-noanimation'
-      };
-      params.hideClass = {};
-    }
-
-    return params;
-  };
-
-  var swalPromise = function swalPromise(instance, domCache, innerParams) {
-    return new Promise(function (resolve) {
-      // functions to handle all closings/dismissals
-      var dismissWith = function dismissWith(dismiss) {
-        instance.closePopup({
-          isDismissed: true,
-          dismiss: dismiss
-        });
-      };
-
-      privateMethods.swalPromiseResolve.set(instance, resolve);
-
-      domCache.confirmButton.onclick = function () {
-        return handleConfirmButtonClick(instance, innerParams);
-      };
-
-      domCache.denyButton.onclick = function () {
-        return handleDenyButtonClick(instance, innerParams);
-      };
-
-      domCache.cancelButton.onclick = function () {
-        return handleCancelButtonClick(instance, dismissWith);
-      };
-
-      domCache.closeButton.onclick = function () {
-        return dismissWith(DismissReason.close);
-      };
-
-      handlePopupClick(instance, domCache, dismissWith);
-      addKeydownHandler(instance, globalState, innerParams, dismissWith);
-
-      if (innerParams.toast && (innerParams.input || innerParams.footer || innerParams.showCloseButton)) {
-        addClass(document.body, swalClasses['toast-column']);
-      } else {
-        removeClass(document.body, swalClasses['toast-column']);
-      }
-
-      handleInputOptionsAndValue(instance, innerParams);
-      openPopup(innerParams);
-      setupTimer(globalState, innerParams, dismissWith);
-      initFocus(domCache, innerParams); // Scroll container to top on open (#1247, #1946)
-
-      setTimeout(function () {
-        domCache.container.scrollTop = 0;
-      });
-    });
-  };
-
-  var populateDomCache = function populateDomCache(instance) {
-    var domCache = {
-      popup: getPopup(),
-      container: getContainer(),
-      content: getContent(),
-      actions: getActions(),
-      confirmButton: getConfirmButton(),
-      denyButton: getDenyButton(),
-      cancelButton: getCancelButton(),
-      loader: getLoader(),
-      closeButton: getCloseButton(),
-      validationMessage: getValidationMessage(),
-      progressSteps: getProgressSteps()
-    };
-    privateProps.domCache.set(instance, domCache);
-    return domCache;
-  };
-
-  var setupTimer = function setupTimer(globalState$$1, innerParams, dismissWith) {
-    var timerProgressBar = getTimerProgressBar();
-    hide(timerProgressBar);
-
-    if (innerParams.timer) {
-      globalState$$1.timeout = new Timer(function () {
-        dismissWith('timer');
-        delete globalState$$1.timeout;
-      }, innerParams.timer);
-
-      if (innerParams.timerProgressBar) {
-        show(timerProgressBar);
-        setTimeout(function () {
-          if (globalState$$1.timeout && globalState$$1.timeout.running) {
-            // timer can be already stopped or unset at this point
-            animateTimerProgressBar(innerParams.timer);
-          }
-        });
-      }
-    }
-  };
-
-  var initFocus = function initFocus(domCache, innerParams) {
-    if (innerParams.toast) {
-      return;
-    }
-
-    if (!callIfFunction(innerParams.allowEnterKey)) {
-      return blurActiveElement();
-    }
-
-    if (!focusButton(domCache, innerParams)) {
-      setFocus(innerParams, -1, 1);
-    }
-  };
-
-  var focusButton = function focusButton(domCache, innerParams) {
-    if (innerParams.focusDeny && isVisible(domCache.denyButton)) {
-      domCache.denyButton.focus();
-      return true;
-    }
-
-    if (innerParams.focusCancel && isVisible(domCache.cancelButton)) {
-      domCache.cancelButton.focus();
-      return true;
-    }
-
-    if (innerParams.focusConfirm && isVisible(domCache.confirmButton)) {
-      domCache.confirmButton.focus();
-      return true;
-    }
-
-    return false;
-  };
-
-  var blurActiveElement = function blurActiveElement() {
-    if (document.activeElement && typeof document.activeElement.blur === 'function') {
-      document.activeElement.blur();
-    }
-  };
-
-  /**
-   * Updates popup parameters.
-   */
-
-  function update(params) {
-    var popup = getPopup();
-    var innerParams = privateProps.innerParams.get(this);
-
-    if (!popup || hasClass(popup, innerParams.hideClass.popup)) {
-      return warn("You're trying to update the closed or closing popup, that won't work. Use the update() method in preConfirm parameter or show a new popup.");
-    }
-
-    var validUpdatableParams = {}; // assign valid params from `params` to `defaults`
-
-    Object.keys(params).forEach(function (param) {
-      if (Swal.isUpdatableParameter(param)) {
-        validUpdatableParams[param] = params[param];
-      } else {
-        warn("Invalid parameter to update: \"".concat(param, "\". Updatable params are listed here: https://github.com/sweetalert2/sweetalert2/blob/master/src/utils/params.js\n\nIf you think this parameter should be updatable, request it here: https://github.com/sweetalert2/sweetalert2/issues/new?template=02_feature_request.md"));
-      }
-    });
-
-    var updatedParams = _extends({}, innerParams, validUpdatableParams);
-
-    render(this, updatedParams);
-    privateProps.innerParams.set(this, updatedParams);
-    Object.defineProperties(this, {
-      params: {
-        value: _extends({}, this.params, params),
-        writable: false,
-        enumerable: true
-      }
-    });
-  }
-
-  function _destroy() {
-    var domCache = privateProps.domCache.get(this);
-    var innerParams = privateProps.innerParams.get(this);
-
-    if (!innerParams) {
-      return; // This instance has already been destroyed
-    } // Check if there is another Swal closing
-
-
-    if (domCache.popup && globalState.swalCloseEventFinishedCallback) {
-      globalState.swalCloseEventFinishedCallback();
-      delete globalState.swalCloseEventFinishedCallback;
-    } // Check if there is a swal disposal defer timer
-
-
-    if (globalState.deferDisposalTimer) {
-      clearTimeout(globalState.deferDisposalTimer);
-      delete globalState.deferDisposalTimer;
-    }
-
-    runDidDestroy(innerParams);
-    disposeSwal(this);
-  }
-
-  var runDidDestroy = function runDidDestroy(innerParams) {
-    if (typeof innerParams.didDestroy === 'function') {
-      innerParams.didDestroy();
-    } else if (typeof innerParams.onDestroy === 'function') {
-      innerParams.onDestroy(); // @deprecated
-    }
-  };
-
-  var disposeSwal = function disposeSwal(instance) {
-    // Unset this.params so GC will dispose it (#1569)
-    delete instance.params; // Unset globalState props so GC will dispose globalState (#1569)
-
-    delete globalState.keydownHandler;
-    delete globalState.keydownTarget; // Unset WeakMaps so GC will be able to dispose them (#1569)
-
-    unsetWeakMaps(privateProps);
-    unsetWeakMaps(privateMethods);
-  };
-
-  var unsetWeakMaps = function unsetWeakMaps(obj) {
-    for (var i in obj) {
-      obj[i] = new WeakMap();
-    }
-  };
-
-
-
-  var instanceMethods = /*#__PURE__*/Object.freeze({
-    hideLoading: hideLoading,
-    disableLoading: hideLoading,
-    getInput: getInput$1,
-    close: close,
-    closePopup: close,
-    closeModal: close,
-    closeToast: close,
-    enableButtons: enableButtons,
-    disableButtons: disableButtons,
-    enableInput: enableInput,
-    disableInput: disableInput,
-    showValidationMessage: showValidationMessage,
-    resetValidationMessage: resetValidationMessage$1,
-    getProgressSteps: getProgressSteps$1,
-    _main: _main,
-    update: update,
-    _destroy: _destroy
-  });
-
-  var currentInstance;
-
-  var SweetAlert = /*#__PURE__*/function () {
-    function SweetAlert() {
-      _classCallCheck(this, SweetAlert);
-
-      // Prevent run in Node env
-      if (typeof window === 'undefined') {
-        return;
-      } // Check for the existence of Promise
-
-
-      if (typeof Promise === 'undefined') {
-        error('This package requires a Promise library, please include a shim to enable it in this browser (See: https://github.com/sweetalert2/sweetalert2/wiki/Migration-from-SweetAlert-to-SweetAlert2#1-ie-support)');
-      }
-
-      currentInstance = this;
-
-      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-        args[_key] = arguments[_key];
-      }
-
-      var outerParams = Object.freeze(this.constructor.argsToParams(args));
-      Object.defineProperties(this, {
-        params: {
-          value: outerParams,
-          writable: false,
-          enumerable: true,
-          configurable: true
-        }
-      });
-
-      var promise = this._main(this.params);
-
-      privateProps.promise.set(this, promise);
-    } // `catch` cannot be the name of a module export, so we define our thenable methods here instead
-
-
-    _createClass(SweetAlert, [{
-      key: "then",
-      value: function then(onFulfilled) {
-        var promise = privateProps.promise.get(this);
-        return promise.then(onFulfilled);
-      }
-    }, {
-      key: "finally",
-      value: function _finally(onFinally) {
-        var promise = privateProps.promise.get(this);
-        return promise["finally"](onFinally);
-      }
-    }]);
-
-    return SweetAlert;
-  }(); // Assign instance methods from src/instanceMethods/*.js to prototype
-
-
-  _extends(SweetAlert.prototype, instanceMethods); // Assign static methods from src/staticMethods/*.js to constructor
-
-
-  _extends(SweetAlert, staticMethods); // Proxy to instance methods to constructor, for now, for backwards compatibility
-
-
-  Object.keys(instanceMethods).forEach(function (key) {
-    SweetAlert[key] = function () {
-      if (currentInstance) {
-        var _currentInstance;
-
-        return (_currentInstance = currentInstance)[key].apply(_currentInstance, arguments);
-      }
-    };
-  });
-  SweetAlert.DismissReason = DismissReason;
-  SweetAlert.version = '10.13.0';
-
-  var Swal = SweetAlert;
-  Swal["default"] = Swal;
-
-  return Swal;
-
-}));
-if (typeof this !== 'undefined' && this.Sweetalert2){  this.swal = this.sweetAlert = this.Swal = this.SweetAlert = this.Sweetalert2}
-
 
 /***/ }),
 /* 177 */
@@ -61742,18 +60320,3652 @@ if (typeof this !== 'undefined' && this.Sweetalert2){  this.swal = this.sweetAle
 }));
 if (typeof this !== 'undefined' && this.Sweetalert2){  this.swal = this.sweetAlert = this.Swal = this.SweetAlert = this.Sweetalert2}
 
-"undefined"!=typeof document&&function(e,t){var n=e.createElement("style");if(e.getElementsByTagName("head")[0].appendChild(n),n.styleSheet)n.styleSheet.disabled||(n.styleSheet.cssText=t);else try{n.innerHTML=t}catch(e){n.innerText=t}}(document,".swal2-popup.swal2-toast{flex-direction:row;align-items:center;width:auto;padding:.625em;overflow-y:hidden;background:#fff;box-shadow:0 0 .625em #d9d9d9}.swal2-popup.swal2-toast .swal2-header{flex-direction:row;padding:0}.swal2-popup.swal2-toast .swal2-title{flex-grow:1;justify-content:flex-start;margin:0 .6em;font-size:1em}.swal2-popup.swal2-toast .swal2-footer{margin:.5em 0 0;padding:.5em 0 0;font-size:.8em}.swal2-popup.swal2-toast .swal2-close{position:static;width:.8em;height:.8em;line-height:.8}.swal2-popup.swal2-toast .swal2-content{justify-content:flex-start;padding:0;font-size:1em}.swal2-popup.swal2-toast .swal2-icon{width:2em;min-width:2em;height:2em;margin:0}.swal2-popup.swal2-toast .swal2-icon .swal2-icon-content{display:flex;align-items:center;font-size:1.8em;font-weight:700}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){.swal2-popup.swal2-toast .swal2-icon .swal2-icon-content{font-size:.25em}}.swal2-popup.swal2-toast .swal2-icon.swal2-success .swal2-success-ring{width:2em;height:2em}.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line]{top:.875em;width:1.375em}.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=left]{left:.3125em}.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=right]{right:.3125em}.swal2-popup.swal2-toast .swal2-actions{flex-basis:auto!important;width:auto;height:auto;margin:0 .3125em;padding:0}.swal2-popup.swal2-toast .swal2-styled{margin:.125em .3125em;padding:.3125em .625em;font-size:1em}.swal2-popup.swal2-toast .swal2-styled:focus{box-shadow:0 0 0 1px #fff,0 0 0 3px rgba(100,150,200,.5)}.swal2-popup.swal2-toast .swal2-success{border-color:#a5dc86}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line]{position:absolute;width:1.6em;height:3em;transform:rotate(45deg);border-radius:50%}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line][class$=left]{top:-.8em;left:-.5em;transform:rotate(-45deg);transform-origin:2em 2em;border-radius:4em 0 0 4em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line][class$=right]{top:-.25em;left:.9375em;transform-origin:0 1.5em;border-radius:0 4em 4em 0}.swal2-popup.swal2-toast .swal2-success .swal2-success-ring{width:2em;height:2em}.swal2-popup.swal2-toast .swal2-success .swal2-success-fix{top:0;left:.4375em;width:.4375em;height:2.6875em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line]{height:.3125em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line][class$=tip]{top:1.125em;left:.1875em;width:.75em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line][class$=long]{top:.9375em;right:.1875em;width:1.375em}.swal2-popup.swal2-toast .swal2-success.swal2-icon-show .swal2-success-line-tip{-webkit-animation:swal2-toast-animate-success-line-tip .75s;animation:swal2-toast-animate-success-line-tip .75s}.swal2-popup.swal2-toast .swal2-success.swal2-icon-show .swal2-success-line-long{-webkit-animation:swal2-toast-animate-success-line-long .75s;animation:swal2-toast-animate-success-line-long .75s}.swal2-popup.swal2-toast.swal2-show{-webkit-animation:swal2-toast-show .5s;animation:swal2-toast-show .5s}.swal2-popup.swal2-toast.swal2-hide{-webkit-animation:swal2-toast-hide .1s forwards;animation:swal2-toast-hide .1s forwards}.swal2-container{display:flex;position:fixed;z-index:1060;top:0;right:0;bottom:0;left:0;flex-direction:row;align-items:center;justify-content:center;padding:.625em;overflow-x:hidden;transition:background-color .1s;-webkit-overflow-scrolling:touch}.swal2-container.swal2-backdrop-show,.swal2-container.swal2-noanimation{background:rgba(0,0,0,.4)}.swal2-container.swal2-backdrop-hide{background:0 0!important}.swal2-container.swal2-top{align-items:flex-start}.swal2-container.swal2-top-left,.swal2-container.swal2-top-start{align-items:flex-start;justify-content:flex-start}.swal2-container.swal2-top-end,.swal2-container.swal2-top-right{align-items:flex-start;justify-content:flex-end}.swal2-container.swal2-center{align-items:center}.swal2-container.swal2-center-left,.swal2-container.swal2-center-start{align-items:center;justify-content:flex-start}.swal2-container.swal2-center-end,.swal2-container.swal2-center-right{align-items:center;justify-content:flex-end}.swal2-container.swal2-bottom{align-items:flex-end}.swal2-container.swal2-bottom-left,.swal2-container.swal2-bottom-start{align-items:flex-end;justify-content:flex-start}.swal2-container.swal2-bottom-end,.swal2-container.swal2-bottom-right{align-items:flex-end;justify-content:flex-end}.swal2-container.swal2-bottom-end>:first-child,.swal2-container.swal2-bottom-left>:first-child,.swal2-container.swal2-bottom-right>:first-child,.swal2-container.swal2-bottom-start>:first-child,.swal2-container.swal2-bottom>:first-child{margin-top:auto}.swal2-container.swal2-grow-fullscreen>.swal2-modal{display:flex!important;flex:1;align-self:stretch;justify-content:center}.swal2-container.swal2-grow-row>.swal2-modal{display:flex!important;flex:1;align-content:center;justify-content:center}.swal2-container.swal2-grow-column{flex:1;flex-direction:column}.swal2-container.swal2-grow-column.swal2-bottom,.swal2-container.swal2-grow-column.swal2-center,.swal2-container.swal2-grow-column.swal2-top{align-items:center}.swal2-container.swal2-grow-column.swal2-bottom-left,.swal2-container.swal2-grow-column.swal2-bottom-start,.swal2-container.swal2-grow-column.swal2-center-left,.swal2-container.swal2-grow-column.swal2-center-start,.swal2-container.swal2-grow-column.swal2-top-left,.swal2-container.swal2-grow-column.swal2-top-start{align-items:flex-start}.swal2-container.swal2-grow-column.swal2-bottom-end,.swal2-container.swal2-grow-column.swal2-bottom-right,.swal2-container.swal2-grow-column.swal2-center-end,.swal2-container.swal2-grow-column.swal2-center-right,.swal2-container.swal2-grow-column.swal2-top-end,.swal2-container.swal2-grow-column.swal2-top-right{align-items:flex-end}.swal2-container.swal2-grow-column>.swal2-modal{display:flex!important;flex:1;align-content:center;justify-content:center}.swal2-container.swal2-no-transition{transition:none!important}.swal2-container:not(.swal2-top):not(.swal2-top-start):not(.swal2-top-end):not(.swal2-top-left):not(.swal2-top-right):not(.swal2-center-start):not(.swal2-center-end):not(.swal2-center-left):not(.swal2-center-right):not(.swal2-bottom):not(.swal2-bottom-start):not(.swal2-bottom-end):not(.swal2-bottom-left):not(.swal2-bottom-right):not(.swal2-grow-fullscreen)>.swal2-modal{margin:auto}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){.swal2-container .swal2-modal{margin:0!important}}.swal2-popup{display:none;position:relative;box-sizing:border-box;flex-direction:column;justify-content:center;width:32em;max-width:100%;padding:1.25em;border:none;border-radius:5px;background:#fff;font-family:inherit;font-size:1rem}.swal2-popup:focus{outline:0}.swal2-popup.swal2-loading{overflow-y:hidden}.swal2-header{display:flex;flex-direction:column;align-items:center;padding:0 1.8em}.swal2-title{position:relative;max-width:100%;margin:0 0 .4em;padding:0;color:#595959;font-size:1.875em;font-weight:600;text-align:center;text-transform:none;word-wrap:break-word}.swal2-actions{display:flex;z-index:1;box-sizing:border-box;flex-wrap:wrap;align-items:center;justify-content:center;width:100%;margin:1.25em auto 0;padding:0 1.6em}.swal2-actions:not(.swal2-loading) .swal2-styled[disabled]{opacity:.4}.swal2-actions:not(.swal2-loading) .swal2-styled:hover{background-image:linear-gradient(rgba(0,0,0,.1),rgba(0,0,0,.1))}.swal2-actions:not(.swal2-loading) .swal2-styled:active{background-image:linear-gradient(rgba(0,0,0,.2),rgba(0,0,0,.2))}.swal2-loader{display:none;align-items:center;justify-content:center;width:2.2em;height:2.2em;margin:0 1.875em;-webkit-animation:swal2-rotate-loading 1.5s linear 0s infinite normal;animation:swal2-rotate-loading 1.5s linear 0s infinite normal;border-width:.25em;border-style:solid;border-radius:100%;border-color:#2778c4 transparent #2778c4 transparent}.swal2-styled{margin:.3125em;padding:.625em 1.1em;box-shadow:none;font-weight:500}.swal2-styled:not([disabled]){cursor:pointer}.swal2-styled.swal2-confirm{border:0;border-radius:.25em;background:initial;background-color:#2778c4;color:#fff;font-size:1.0625em}.swal2-styled.swal2-deny{border:0;border-radius:.25em;background:initial;background-color:#d14529;color:#fff;font-size:1.0625em}.swal2-styled.swal2-cancel{border:0;border-radius:.25em;background:initial;background-color:#757575;color:#fff;font-size:1.0625em}.swal2-styled:focus{outline:0;box-shadow:0 0 0 3px rgba(100,150,200,.5)}.swal2-styled::-moz-focus-inner{border:0}.swal2-footer{justify-content:center;margin:1.25em 0 0;padding:1em 0 0;border-top:1px solid #eee;color:#545454;font-size:1em}.swal2-timer-progress-bar-container{position:absolute;right:0;bottom:0;left:0;height:.25em;overflow:hidden;border-bottom-right-radius:5px;border-bottom-left-radius:5px}.swal2-timer-progress-bar{width:100%;height:.25em;background:rgba(0,0,0,.2)}.swal2-image{max-width:100%;margin:1.25em auto}.swal2-close{position:absolute;z-index:2;top:0;right:0;align-items:center;justify-content:center;width:1.2em;height:1.2em;padding:0;overflow:hidden;transition:color .1s ease-out;border:none;border-radius:5px;background:0 0;color:#ccc;font-family:serif;font-size:2.5em;line-height:1.2;cursor:pointer}.swal2-close:hover{transform:none;background:0 0;color:#f27474}.swal2-close:focus{outline:0;box-shadow:inset 0 0 0 3px rgba(100,150,200,.5)}.swal2-close::-moz-focus-inner{border:0}.swal2-content{z-index:1;justify-content:center;margin:0;padding:0 1.6em;color:#545454;font-size:1.125em;font-weight:400;line-height:normal;text-align:center;word-wrap:break-word}.swal2-checkbox,.swal2-file,.swal2-input,.swal2-radio,.swal2-select,.swal2-textarea{margin:1em auto}.swal2-file,.swal2-input,.swal2-textarea{box-sizing:border-box;width:100%;transition:border-color .3s,box-shadow .3s;border:1px solid #d9d9d9;border-radius:.1875em;background:inherit;box-shadow:inset 0 1px 1px rgba(0,0,0,.06);color:inherit;font-size:1.125em}.swal2-file.swal2-inputerror,.swal2-input.swal2-inputerror,.swal2-textarea.swal2-inputerror{border-color:#f27474!important;box-shadow:0 0 2px #f27474!important}.swal2-file:focus,.swal2-input:focus,.swal2-textarea:focus{border:1px solid #b4dbed;outline:0;box-shadow:0 0 0 3px rgba(100,150,200,.5)}.swal2-file::-moz-placeholder,.swal2-input::-moz-placeholder,.swal2-textarea::-moz-placeholder{color:#ccc}.swal2-file:-ms-input-placeholder,.swal2-input:-ms-input-placeholder,.swal2-textarea:-ms-input-placeholder{color:#ccc}.swal2-file::placeholder,.swal2-input::placeholder,.swal2-textarea::placeholder{color:#ccc}.swal2-range{margin:1em auto;background:#fff}.swal2-range input{width:80%}.swal2-range output{width:20%;color:inherit;font-weight:600;text-align:center}.swal2-range input,.swal2-range output{height:2.625em;padding:0;font-size:1.125em;line-height:2.625em}.swal2-input{height:2.625em;padding:0 .75em}.swal2-input[type=number]{max-width:10em}.swal2-file{background:inherit;font-size:1.125em}.swal2-textarea{height:6.75em;padding:.75em}.swal2-select{min-width:50%;max-width:100%;padding:.375em .625em;background:inherit;color:inherit;font-size:1.125em}.swal2-checkbox,.swal2-radio{align-items:center;justify-content:center;background:#fff;color:inherit}.swal2-checkbox label,.swal2-radio label{margin:0 .6em;font-size:1.125em}.swal2-checkbox input,.swal2-radio input{margin:0 .4em}.swal2-input-label{display:flex;justify-content:center;margin:1em auto}.swal2-validation-message{display:none;align-items:center;justify-content:center;margin:0 -2.7em;padding:.625em;overflow:hidden;background:#f0f0f0;color:#666;font-size:1em;font-weight:300}.swal2-validation-message::before{content:\"!\";display:inline-block;width:1.5em;min-width:1.5em;height:1.5em;margin:0 .625em;border-radius:50%;background-color:#f27474;color:#fff;font-weight:600;line-height:1.5em;text-align:center}.swal2-icon{position:relative;box-sizing:content-box;justify-content:center;width:5em;height:5em;margin:1.25em auto 1.875em;border:.25em solid transparent;border-radius:50%;font-family:inherit;line-height:5em;cursor:default;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.swal2-icon .swal2-icon-content{display:flex;align-items:center;font-size:3.75em}.swal2-icon.swal2-error{border-color:#f27474;color:#f27474}.swal2-icon.swal2-error .swal2-x-mark{position:relative;flex-grow:1}.swal2-icon.swal2-error [class^=swal2-x-mark-line]{display:block;position:absolute;top:2.3125em;width:2.9375em;height:.3125em;border-radius:.125em;background-color:#f27474}.swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=left]{left:1.0625em;transform:rotate(45deg)}.swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=right]{right:1em;transform:rotate(-45deg)}.swal2-icon.swal2-error.swal2-icon-show{-webkit-animation:swal2-animate-error-icon .5s;animation:swal2-animate-error-icon .5s}.swal2-icon.swal2-error.swal2-icon-show .swal2-x-mark{-webkit-animation:swal2-animate-error-x-mark .5s;animation:swal2-animate-error-x-mark .5s}.swal2-icon.swal2-warning{border-color:#facea8;color:#f8bb86}.swal2-icon.swal2-info{border-color:#9de0f6;color:#3fc3ee}.swal2-icon.swal2-question{border-color:#c9dae1;color:#87adbd}.swal2-icon.swal2-success{border-color:#a5dc86;color:#a5dc86}.swal2-icon.swal2-success [class^=swal2-success-circular-line]{position:absolute;width:3.75em;height:7.5em;transform:rotate(45deg);border-radius:50%}.swal2-icon.swal2-success [class^=swal2-success-circular-line][class$=left]{top:-.4375em;left:-2.0635em;transform:rotate(-45deg);transform-origin:3.75em 3.75em;border-radius:7.5em 0 0 7.5em}.swal2-icon.swal2-success [class^=swal2-success-circular-line][class$=right]{top:-.6875em;left:1.875em;transform:rotate(-45deg);transform-origin:0 3.75em;border-radius:0 7.5em 7.5em 0}.swal2-icon.swal2-success .swal2-success-ring{position:absolute;z-index:2;top:-.25em;left:-.25em;box-sizing:content-box;width:100%;height:100%;border:.25em solid rgba(165,220,134,.3);border-radius:50%}.swal2-icon.swal2-success .swal2-success-fix{position:absolute;z-index:1;top:.5em;left:1.625em;width:.4375em;height:5.625em;transform:rotate(-45deg)}.swal2-icon.swal2-success [class^=swal2-success-line]{display:block;position:absolute;z-index:2;height:.3125em;border-radius:.125em;background-color:#a5dc86}.swal2-icon.swal2-success [class^=swal2-success-line][class$=tip]{top:2.875em;left:.8125em;width:1.5625em;transform:rotate(45deg)}.swal2-icon.swal2-success [class^=swal2-success-line][class$=long]{top:2.375em;right:.5em;width:2.9375em;transform:rotate(-45deg)}.swal2-icon.swal2-success.swal2-icon-show .swal2-success-line-tip{-webkit-animation:swal2-animate-success-line-tip .75s;animation:swal2-animate-success-line-tip .75s}.swal2-icon.swal2-success.swal2-icon-show .swal2-success-line-long{-webkit-animation:swal2-animate-success-line-long .75s;animation:swal2-animate-success-line-long .75s}.swal2-icon.swal2-success.swal2-icon-show .swal2-success-circular-line-right{-webkit-animation:swal2-rotate-success-circular-line 4.25s ease-in;animation:swal2-rotate-success-circular-line 4.25s ease-in}.swal2-progress-steps{flex-wrap:wrap;align-items:center;max-width:100%;margin:0 0 1.25em;padding:0;background:inherit;font-weight:600}.swal2-progress-steps li{display:inline-block;position:relative}.swal2-progress-steps .swal2-progress-step{z-index:20;flex-shrink:0;width:2em;height:2em;border-radius:2em;background:#2778c4;color:#fff;line-height:2em;text-align:center}.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step{background:#2778c4}.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step~.swal2-progress-step{background:#add8e6;color:#fff}.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step~.swal2-progress-step-line{background:#add8e6}.swal2-progress-steps .swal2-progress-step-line{z-index:10;flex-shrink:0;width:2.5em;height:.4em;margin:0 -1px;background:#2778c4}[class^=swal2]{-webkit-tap-highlight-color:transparent}.swal2-show{-webkit-animation:swal2-show .3s;animation:swal2-show .3s}.swal2-hide{-webkit-animation:swal2-hide .15s forwards;animation:swal2-hide .15s forwards}.swal2-noanimation{transition:none}.swal2-scrollbar-measure{position:absolute;top:-9999px;width:50px;height:50px;overflow:scroll}.swal2-rtl .swal2-close{right:auto;left:0}.swal2-rtl .swal2-timer-progress-bar{right:0;left:auto}@supports (-ms-accelerator:true){.swal2-range input{width:100%!important}.swal2-range output{display:none}}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){.swal2-range input{width:100%!important}.swal2-range output{display:none}}@-webkit-keyframes swal2-toast-show{0%{transform:translateY(-.625em) rotateZ(2deg)}33%{transform:translateY(0) rotateZ(-2deg)}66%{transform:translateY(.3125em) rotateZ(2deg)}100%{transform:translateY(0) rotateZ(0)}}@keyframes swal2-toast-show{0%{transform:translateY(-.625em) rotateZ(2deg)}33%{transform:translateY(0) rotateZ(-2deg)}66%{transform:translateY(.3125em) rotateZ(2deg)}100%{transform:translateY(0) rotateZ(0)}}@-webkit-keyframes swal2-toast-hide{100%{transform:rotateZ(1deg);opacity:0}}@keyframes swal2-toast-hide{100%{transform:rotateZ(1deg);opacity:0}}@-webkit-keyframes swal2-toast-animate-success-line-tip{0%{top:.5625em;left:.0625em;width:0}54%{top:.125em;left:.125em;width:0}70%{top:.625em;left:-.25em;width:1.625em}84%{top:1.0625em;left:.75em;width:.5em}100%{top:1.125em;left:.1875em;width:.75em}}@keyframes swal2-toast-animate-success-line-tip{0%{top:.5625em;left:.0625em;width:0}54%{top:.125em;left:.125em;width:0}70%{top:.625em;left:-.25em;width:1.625em}84%{top:1.0625em;left:.75em;width:.5em}100%{top:1.125em;left:.1875em;width:.75em}}@-webkit-keyframes swal2-toast-animate-success-line-long{0%{top:1.625em;right:1.375em;width:0}65%{top:1.25em;right:.9375em;width:0}84%{top:.9375em;right:0;width:1.125em}100%{top:.9375em;right:.1875em;width:1.375em}}@keyframes swal2-toast-animate-success-line-long{0%{top:1.625em;right:1.375em;width:0}65%{top:1.25em;right:.9375em;width:0}84%{top:.9375em;right:0;width:1.125em}100%{top:.9375em;right:.1875em;width:1.375em}}@-webkit-keyframes swal2-show{0%{transform:scale(.7)}45%{transform:scale(1.05)}80%{transform:scale(.95)}100%{transform:scale(1)}}@keyframes swal2-show{0%{transform:scale(.7)}45%{transform:scale(1.05)}80%{transform:scale(.95)}100%{transform:scale(1)}}@-webkit-keyframes swal2-hide{0%{transform:scale(1);opacity:1}100%{transform:scale(.5);opacity:0}}@keyframes swal2-hide{0%{transform:scale(1);opacity:1}100%{transform:scale(.5);opacity:0}}@-webkit-keyframes swal2-animate-success-line-tip{0%{top:1.1875em;left:.0625em;width:0}54%{top:1.0625em;left:.125em;width:0}70%{top:2.1875em;left:-.375em;width:3.125em}84%{top:3em;left:1.3125em;width:1.0625em}100%{top:2.8125em;left:.8125em;width:1.5625em}}@keyframes swal2-animate-success-line-tip{0%{top:1.1875em;left:.0625em;width:0}54%{top:1.0625em;left:.125em;width:0}70%{top:2.1875em;left:-.375em;width:3.125em}84%{top:3em;left:1.3125em;width:1.0625em}100%{top:2.8125em;left:.8125em;width:1.5625em}}@-webkit-keyframes swal2-animate-success-line-long{0%{top:3.375em;right:2.875em;width:0}65%{top:3.375em;right:2.875em;width:0}84%{top:2.1875em;right:0;width:3.4375em}100%{top:2.375em;right:.5em;width:2.9375em}}@keyframes swal2-animate-success-line-long{0%{top:3.375em;right:2.875em;width:0}65%{top:3.375em;right:2.875em;width:0}84%{top:2.1875em;right:0;width:3.4375em}100%{top:2.375em;right:.5em;width:2.9375em}}@-webkit-keyframes swal2-rotate-success-circular-line{0%{transform:rotate(-45deg)}5%{transform:rotate(-45deg)}12%{transform:rotate(-405deg)}100%{transform:rotate(-405deg)}}@keyframes swal2-rotate-success-circular-line{0%{transform:rotate(-45deg)}5%{transform:rotate(-45deg)}12%{transform:rotate(-405deg)}100%{transform:rotate(-405deg)}}@-webkit-keyframes swal2-animate-error-x-mark{0%{margin-top:1.625em;transform:scale(.4);opacity:0}50%{margin-top:1.625em;transform:scale(.4);opacity:0}80%{margin-top:-.375em;transform:scale(1.15)}100%{margin-top:0;transform:scale(1);opacity:1}}@keyframes swal2-animate-error-x-mark{0%{margin-top:1.625em;transform:scale(.4);opacity:0}50%{margin-top:1.625em;transform:scale(.4);opacity:0}80%{margin-top:-.375em;transform:scale(1.15)}100%{margin-top:0;transform:scale(1);opacity:1}}@-webkit-keyframes swal2-animate-error-icon{0%{transform:rotateX(100deg);opacity:0}100%{transform:rotateX(0);opacity:1}}@keyframes swal2-animate-error-icon{0%{transform:rotateX(100deg);opacity:0}100%{transform:rotateX(0);opacity:1}}@-webkit-keyframes swal2-rotate-loading{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}@keyframes swal2-rotate-loading{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown){overflow:hidden}body.swal2-height-auto{height:auto!important}body.swal2-no-backdrop .swal2-container{top:auto;right:auto;bottom:auto;left:auto;max-width:calc(100% - .625em * 2);background-color:transparent!important}body.swal2-no-backdrop .swal2-container>.swal2-modal{box-shadow:0 0 10px rgba(0,0,0,.4)}body.swal2-no-backdrop .swal2-container.swal2-top{top:0;left:50%;transform:translateX(-50%)}body.swal2-no-backdrop .swal2-container.swal2-top-left,body.swal2-no-backdrop .swal2-container.swal2-top-start{top:0;left:0}body.swal2-no-backdrop .swal2-container.swal2-top-end,body.swal2-no-backdrop .swal2-container.swal2-top-right{top:0;right:0}body.swal2-no-backdrop .swal2-container.swal2-center{top:50%;left:50%;transform:translate(-50%,-50%)}body.swal2-no-backdrop .swal2-container.swal2-center-left,body.swal2-no-backdrop .swal2-container.swal2-center-start{top:50%;left:0;transform:translateY(-50%)}body.swal2-no-backdrop .swal2-container.swal2-center-end,body.swal2-no-backdrop .swal2-container.swal2-center-right{top:50%;right:0;transform:translateY(-50%)}body.swal2-no-backdrop .swal2-container.swal2-bottom{bottom:0;left:50%;transform:translateX(-50%)}body.swal2-no-backdrop .swal2-container.swal2-bottom-left,body.swal2-no-backdrop .swal2-container.swal2-bottom-start{bottom:0;left:0}body.swal2-no-backdrop .swal2-container.swal2-bottom-end,body.swal2-no-backdrop .swal2-container.swal2-bottom-right{right:0;bottom:0}@media print{body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown){overflow-y:scroll!important}body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown)>[aria-hidden=true]{display:none}body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) .swal2-container{position:static!important}}body.swal2-toast-shown .swal2-container{background-color:transparent}body.swal2-toast-shown .swal2-container.swal2-top{top:0;right:auto;bottom:auto;left:50%;transform:translateX(-50%)}body.swal2-toast-shown .swal2-container.swal2-top-end,body.swal2-toast-shown .swal2-container.swal2-top-right{top:0;right:0;bottom:auto;left:auto}body.swal2-toast-shown .swal2-container.swal2-top-left,body.swal2-toast-shown .swal2-container.swal2-top-start{top:0;right:auto;bottom:auto;left:0}body.swal2-toast-shown .swal2-container.swal2-center-left,body.swal2-toast-shown .swal2-container.swal2-center-start{top:50%;right:auto;bottom:auto;left:0;transform:translateY(-50%)}body.swal2-toast-shown .swal2-container.swal2-center{top:50%;right:auto;bottom:auto;left:50%;transform:translate(-50%,-50%)}body.swal2-toast-shown .swal2-container.swal2-center-end,body.swal2-toast-shown .swal2-container.swal2-center-right{top:50%;right:0;bottom:auto;left:auto;transform:translateY(-50%)}body.swal2-toast-shown .swal2-container.swal2-bottom-left,body.swal2-toast-shown .swal2-container.swal2-bottom-start{top:auto;right:auto;bottom:0;left:0}body.swal2-toast-shown .swal2-container.swal2-bottom{top:auto;right:auto;bottom:0;left:50%;transform:translateX(-50%)}body.swal2-toast-shown .swal2-container.swal2-bottom-end,body.swal2-toast-shown .swal2-container.swal2-bottom-right{top:auto;right:0;bottom:0;left:auto}body.swal2-toast-column .swal2-toast{flex-direction:column;align-items:stretch}body.swal2-toast-column .swal2-toast .swal2-actions{flex:1;align-self:stretch;height:2.2em;margin-top:.3125em}body.swal2-toast-column .swal2-toast .swal2-loading{justify-content:center}body.swal2-toast-column .swal2-toast .swal2-input{height:2em;margin:.3125em auto;font-size:1em}body.swal2-toast-column .swal2-toast .swal2-validation-message{font-size:1em}");
 
 /***/ }),
 /* 178 */
 /***/ (function(module, exports, __webpack_require__) {
 
+/*!
+* sweetalert2 v10.13.0
+* Released under the MIT License.
+*/
+(function (global, factory) {
+   true ? module.exports = factory() :
+  typeof define === 'function' && define.amd ? define(factory) :
+  (global = global || self, global.Sweetalert2 = factory());
+}(this, function () { 'use strict';
+
+  function _typeof(obj) {
+    "@babel/helpers - typeof";
+
+    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+      _typeof = function (obj) {
+        return typeof obj;
+      };
+    } else {
+      _typeof = function (obj) {
+        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+      };
+    }
+
+    return _typeof(obj);
+  }
+
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+
+  function _defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+
+  function _createClass(Constructor, protoProps, staticProps) {
+    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) _defineProperties(Constructor, staticProps);
+    return Constructor;
+  }
+
+  function _extends() {
+    _extends = Object.assign || function (target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+
+      return target;
+    };
+
+    return _extends.apply(this, arguments);
+  }
+
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function");
+    }
+
+    subClass.prototype = Object.create(superClass && superClass.prototype, {
+      constructor: {
+        value: subClass,
+        writable: true,
+        configurable: true
+      }
+    });
+    if (superClass) _setPrototypeOf(subClass, superClass);
+  }
+
+  function _getPrototypeOf(o) {
+    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+      return o.__proto__ || Object.getPrototypeOf(o);
+    };
+    return _getPrototypeOf(o);
+  }
+
+  function _setPrototypeOf(o, p) {
+    _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+      o.__proto__ = p;
+      return o;
+    };
+
+    return _setPrototypeOf(o, p);
+  }
+
+  function _isNativeReflectConstruct() {
+    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+    if (Reflect.construct.sham) return false;
+    if (typeof Proxy === "function") return true;
+
+    try {
+      Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function _construct(Parent, args, Class) {
+    if (_isNativeReflectConstruct()) {
+      _construct = Reflect.construct;
+    } else {
+      _construct = function _construct(Parent, args, Class) {
+        var a = [null];
+        a.push.apply(a, args);
+        var Constructor = Function.bind.apply(Parent, a);
+        var instance = new Constructor();
+        if (Class) _setPrototypeOf(instance, Class.prototype);
+        return instance;
+      };
+    }
+
+    return _construct.apply(null, arguments);
+  }
+
+  function _assertThisInitialized(self) {
+    if (self === void 0) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+
+    return self;
+  }
+
+  function _possibleConstructorReturn(self, call) {
+    if (call && (typeof call === "object" || typeof call === "function")) {
+      return call;
+    }
+
+    return _assertThisInitialized(self);
+  }
+
+  function _createSuper(Derived) {
+    var hasNativeReflectConstruct = _isNativeReflectConstruct();
+
+    return function _createSuperInternal() {
+      var Super = _getPrototypeOf(Derived),
+          result;
+
+      if (hasNativeReflectConstruct) {
+        var NewTarget = _getPrototypeOf(this).constructor;
+
+        result = Reflect.construct(Super, arguments, NewTarget);
+      } else {
+        result = Super.apply(this, arguments);
+      }
+
+      return _possibleConstructorReturn(this, result);
+    };
+  }
+
+  function _superPropBase(object, property) {
+    while (!Object.prototype.hasOwnProperty.call(object, property)) {
+      object = _getPrototypeOf(object);
+      if (object === null) break;
+    }
+
+    return object;
+  }
+
+  function _get(target, property, receiver) {
+    if (typeof Reflect !== "undefined" && Reflect.get) {
+      _get = Reflect.get;
+    } else {
+      _get = function _get(target, property, receiver) {
+        var base = _superPropBase(target, property);
+
+        if (!base) return;
+        var desc = Object.getOwnPropertyDescriptor(base, property);
+
+        if (desc.get) {
+          return desc.get.call(receiver);
+        }
+
+        return desc.value;
+      };
+    }
+
+    return _get(target, property, receiver || target);
+  }
+
+  var consolePrefix = 'SweetAlert2:';
+  /**
+   * Filter the unique values into a new array
+   * @param arr
+   */
+
+  var uniqueArray = function uniqueArray(arr) {
+    var result = [];
+
+    for (var i = 0; i < arr.length; i++) {
+      if (result.indexOf(arr[i]) === -1) {
+        result.push(arr[i]);
+      }
+    }
+
+    return result;
+  };
+  /**
+   * Capitalize the first letter of a string
+   * @param str
+   */
+
+  var capitalizeFirstLetter = function capitalizeFirstLetter(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+  /**
+   * Returns the array of object values (Object.values isn't supported in IE11)
+   * @param obj
+   */
+
+  var objectValues = function objectValues(obj) {
+    return Object.keys(obj).map(function (key) {
+      return obj[key];
+    });
+  };
+  /**
+   * Convert NodeList to Array
+   * @param nodeList
+   */
+
+  var toArray = function toArray(nodeList) {
+    return Array.prototype.slice.call(nodeList);
+  };
+  /**
+   * Standardise console warnings
+   * @param message
+   */
+
+  var warn = function warn(message) {
+    console.warn("".concat(consolePrefix, " ").concat(_typeof(message) === 'object' ? message.join(' ') : message));
+  };
+  /**
+   * Standardise console errors
+   * @param message
+   */
+
+  var error = function error(message) {
+    console.error("".concat(consolePrefix, " ").concat(message));
+  };
+  /**
+   * Private global state for `warnOnce`
+   * @type {Array}
+   * @private
+   */
+
+  var previousWarnOnceMessages = [];
+  /**
+   * Show a console warning, but only if it hasn't already been shown
+   * @param message
+   */
+
+  var warnOnce = function warnOnce(message) {
+    if (!(previousWarnOnceMessages.indexOf(message) !== -1)) {
+      previousWarnOnceMessages.push(message);
+      warn(message);
+    }
+  };
+  /**
+   * Show a one-time console warning about deprecated params/methods
+   */
+
+  var warnAboutDeprecation = function warnAboutDeprecation(deprecatedParam, useInstead) {
+    warnOnce("\"".concat(deprecatedParam, "\" is deprecated and will be removed in the next major release. Please use \"").concat(useInstead, "\" instead."));
+  };
+  /**
+   * If `arg` is a function, call it (with no arguments or context) and return the result.
+   * Otherwise, just pass the value through
+   * @param arg
+   */
+
+  var callIfFunction = function callIfFunction(arg) {
+    return typeof arg === 'function' ? arg() : arg;
+  };
+  var hasToPromiseFn = function hasToPromiseFn(arg) {
+    return arg && typeof arg.toPromise === 'function';
+  };
+  var asPromise = function asPromise(arg) {
+    return hasToPromiseFn(arg) ? arg.toPromise() : Promise.resolve(arg);
+  };
+  var isPromise = function isPromise(arg) {
+    return arg && Promise.resolve(arg) === arg;
+  };
+
+  var DismissReason = Object.freeze({
+    cancel: 'cancel',
+    backdrop: 'backdrop',
+    close: 'close',
+    esc: 'esc',
+    timer: 'timer'
+  });
+
+  var isJqueryElement = function isJqueryElement(elem) {
+    return _typeof(elem) === 'object' && elem.jquery;
+  };
+
+  var isElement = function isElement(elem) {
+    return elem instanceof Element || isJqueryElement(elem);
+  };
+
+  var argsToParams = function argsToParams(args) {
+    var params = {};
+
+    if (_typeof(args[0]) === 'object' && !isElement(args[0])) {
+      _extends(params, args[0]);
+    } else {
+      ['title', 'html', 'icon'].forEach(function (name, index) {
+        var arg = args[index];
+
+        if (typeof arg === 'string' || isElement(arg)) {
+          params[name] = arg;
+        } else if (arg !== undefined) {
+          error("Unexpected type of ".concat(name, "! Expected \"string\" or \"Element\", got ").concat(_typeof(arg)));
+        }
+      });
+    }
+
+    return params;
+  };
+
+  var swalPrefix = 'swal2-';
+  var prefix = function prefix(items) {
+    var result = {};
+
+    for (var i in items) {
+      result[items[i]] = swalPrefix + items[i];
+    }
+
+    return result;
+  };
+  var swalClasses = prefix(['container', 'shown', 'height-auto', 'iosfix', 'popup', 'modal', 'no-backdrop', 'no-transition', 'toast', 'toast-shown', 'toast-column', 'show', 'hide', 'close', 'title', 'header', 'content', 'html-container', 'actions', 'confirm', 'deny', 'cancel', 'footer', 'icon', 'icon-content', 'image', 'input', 'file', 'range', 'select', 'radio', 'checkbox', 'label', 'textarea', 'inputerror', 'input-label', 'validation-message', 'progress-steps', 'active-progress-step', 'progress-step', 'progress-step-line', 'loader', 'loading', 'styled', 'top', 'top-start', 'top-end', 'top-left', 'top-right', 'center', 'center-start', 'center-end', 'center-left', 'center-right', 'bottom', 'bottom-start', 'bottom-end', 'bottom-left', 'bottom-right', 'grow-row', 'grow-column', 'grow-fullscreen', 'rtl', 'timer-progress-bar', 'timer-progress-bar-container', 'scrollbar-measure', 'icon-success', 'icon-warning', 'icon-info', 'icon-question', 'icon-error']);
+  var iconTypes = prefix(['success', 'warning', 'info', 'question', 'error']);
+
+  var getContainer = function getContainer() {
+    return document.body.querySelector(".".concat(swalClasses.container));
+  };
+  var elementBySelector = function elementBySelector(selectorString) {
+    var container = getContainer();
+    return container ? container.querySelector(selectorString) : null;
+  };
+
+  var elementByClass = function elementByClass(className) {
+    return elementBySelector(".".concat(className));
+  };
+
+  var getPopup = function getPopup() {
+    return elementByClass(swalClasses.popup);
+  };
+  var getIcons = function getIcons() {
+    var popup = getPopup();
+    return toArray(popup.querySelectorAll(".".concat(swalClasses.icon)));
+  };
+  var getIcon = function getIcon() {
+    var visibleIcon = getIcons().filter(function (icon) {
+      return isVisible(icon);
+    });
+    return visibleIcon.length ? visibleIcon[0] : null;
+  };
+  var getTitle = function getTitle() {
+    return elementByClass(swalClasses.title);
+  };
+  var getContent = function getContent() {
+    return elementByClass(swalClasses.content);
+  };
+  var getHtmlContainer = function getHtmlContainer() {
+    return elementByClass(swalClasses['html-container']);
+  };
+  var getImage = function getImage() {
+    return elementByClass(swalClasses.image);
+  };
+  var getProgressSteps = function getProgressSteps() {
+    return elementByClass(swalClasses['progress-steps']);
+  };
+  var getValidationMessage = function getValidationMessage() {
+    return elementByClass(swalClasses['validation-message']);
+  };
+  var getConfirmButton = function getConfirmButton() {
+    return elementBySelector(".".concat(swalClasses.actions, " .").concat(swalClasses.confirm));
+  };
+  var getDenyButton = function getDenyButton() {
+    return elementBySelector(".".concat(swalClasses.actions, " .").concat(swalClasses.deny));
+  };
+  var getInputLabel = function getInputLabel() {
+    return elementByClass(swalClasses['input-label']);
+  };
+  var getLoader = function getLoader() {
+    return elementBySelector(".".concat(swalClasses.loader));
+  };
+  var getCancelButton = function getCancelButton() {
+    return elementBySelector(".".concat(swalClasses.actions, " .").concat(swalClasses.cancel));
+  };
+  var getActions = function getActions() {
+    return elementByClass(swalClasses.actions);
+  };
+  var getHeader = function getHeader() {
+    return elementByClass(swalClasses.header);
+  };
+  var getFooter = function getFooter() {
+    return elementByClass(swalClasses.footer);
+  };
+  var getTimerProgressBar = function getTimerProgressBar() {
+    return elementByClass(swalClasses['timer-progress-bar']);
+  };
+  var getCloseButton = function getCloseButton() {
+    return elementByClass(swalClasses.close);
+  }; // https://github.com/jkup/focusable/blob/master/index.js
+
+  var focusable = "\n  a[href],\n  area[href],\n  input:not([disabled]),\n  select:not([disabled]),\n  textarea:not([disabled]),\n  button:not([disabled]),\n  iframe,\n  object,\n  embed,\n  [tabindex=\"0\"],\n  [contenteditable],\n  audio[controls],\n  video[controls],\n  summary\n";
+  var getFocusableElements = function getFocusableElements() {
+    var focusableElementsWithTabindex = toArray(getPopup().querySelectorAll('[tabindex]:not([tabindex="-1"]):not([tabindex="0"])')) // sort according to tabindex
+    .sort(function (a, b) {
+      a = parseInt(a.getAttribute('tabindex'));
+      b = parseInt(b.getAttribute('tabindex'));
+
+      if (a > b) {
+        return 1;
+      } else if (a < b) {
+        return -1;
+      }
+
+      return 0;
+    });
+    var otherFocusableElements = toArray(getPopup().querySelectorAll(focusable)).filter(function (el) {
+      return el.getAttribute('tabindex') !== '-1';
+    });
+    return uniqueArray(focusableElementsWithTabindex.concat(otherFocusableElements)).filter(function (el) {
+      return isVisible(el);
+    });
+  };
+  var isModal = function isModal() {
+    return !isToast() && !document.body.classList.contains(swalClasses['no-backdrop']);
+  };
+  var isToast = function isToast() {
+    return document.body.classList.contains(swalClasses['toast-shown']);
+  };
+  var isLoading = function isLoading() {
+    return getPopup().hasAttribute('data-loading');
+  };
+
+  var states = {
+    previousBodyPadding: null
+  };
+  var setInnerHtml = function setInnerHtml(elem, html) {
+    // #1926
+    elem.textContent = '';
+
+    if (html) {
+      var parser = new DOMParser();
+      var parsed = parser.parseFromString(html, "text/html");
+      toArray(parsed.querySelector('head').childNodes).forEach(function (child) {
+        elem.appendChild(child);
+      });
+      toArray(parsed.querySelector('body').childNodes).forEach(function (child) {
+        elem.appendChild(child);
+      });
+    }
+  };
+  var hasClass = function hasClass(elem, className) {
+    if (!className) {
+      return false;
+    }
+
+    var classList = className.split(/\s+/);
+
+    for (var i = 0; i < classList.length; i++) {
+      if (!elem.classList.contains(classList[i])) {
+        return false;
+      }
+    }
+
+    return true;
+  };
+
+  var removeCustomClasses = function removeCustomClasses(elem, params) {
+    toArray(elem.classList).forEach(function (className) {
+      if (!(objectValues(swalClasses).indexOf(className) !== -1) && !(objectValues(iconTypes).indexOf(className) !== -1) && !(objectValues(params.showClass).indexOf(className) !== -1)) {
+        elem.classList.remove(className);
+      }
+    });
+  };
+
+  var applyCustomClass = function applyCustomClass(elem, params, className) {
+    removeCustomClasses(elem, params);
+
+    if (params.customClass && params.customClass[className]) {
+      if (typeof params.customClass[className] !== 'string' && !params.customClass[className].forEach) {
+        return warn("Invalid type of customClass.".concat(className, "! Expected string or iterable object, got \"").concat(_typeof(params.customClass[className]), "\""));
+      }
+
+      addClass(elem, params.customClass[className]);
+    }
+  };
+  function getInput(content, inputType) {
+    if (!inputType) {
+      return null;
+    }
+
+    switch (inputType) {
+      case 'select':
+      case 'textarea':
+      case 'file':
+        return getChildByClass(content, swalClasses[inputType]);
+
+      case 'checkbox':
+        return content.querySelector(".".concat(swalClasses.checkbox, " input"));
+
+      case 'radio':
+        return content.querySelector(".".concat(swalClasses.radio, " input:checked")) || content.querySelector(".".concat(swalClasses.radio, " input:first-child"));
+
+      case 'range':
+        return content.querySelector(".".concat(swalClasses.range, " input"));
+
+      default:
+        return getChildByClass(content, swalClasses.input);
+    }
+  }
+  var focusInput = function focusInput(input) {
+    input.focus(); // place cursor at end of text in text input
+
+    if (input.type !== 'file') {
+      // http://stackoverflow.com/a/2345915
+      var val = input.value;
+      input.value = '';
+      input.value = val;
+    }
+  };
+  var toggleClass = function toggleClass(target, classList, condition) {
+    if (!target || !classList) {
+      return;
+    }
+
+    if (typeof classList === 'string') {
+      classList = classList.split(/\s+/).filter(Boolean);
+    }
+
+    classList.forEach(function (className) {
+      if (target.forEach) {
+        target.forEach(function (elem) {
+          condition ? elem.classList.add(className) : elem.classList.remove(className);
+        });
+      } else {
+        condition ? target.classList.add(className) : target.classList.remove(className);
+      }
+    });
+  };
+  var addClass = function addClass(target, classList) {
+    toggleClass(target, classList, true);
+  };
+  var removeClass = function removeClass(target, classList) {
+    toggleClass(target, classList, false);
+  };
+  var getChildByClass = function getChildByClass(elem, className) {
+    for (var i = 0; i < elem.childNodes.length; i++) {
+      if (hasClass(elem.childNodes[i], className)) {
+        return elem.childNodes[i];
+      }
+    }
+  };
+  var applyNumericalStyle = function applyNumericalStyle(elem, property, value) {
+    if (value === "".concat(parseInt(value))) {
+      value = parseInt(value);
+    }
+
+    if (value || parseInt(value) === 0) {
+      elem.style[property] = typeof value === 'number' ? "".concat(value, "px") : value;
+    } else {
+      elem.style.removeProperty(property);
+    }
+  };
+  var show = function show(elem) {
+    var display = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'flex';
+    elem.style.display = display;
+  };
+  var hide = function hide(elem) {
+    elem.style.display = 'none';
+  };
+  var setStyle = function setStyle(parent, selector, property, value) {
+    var el = parent.querySelector(selector);
+
+    if (el) {
+      el.style[property] = value;
+    }
+  };
+  var toggle = function toggle(elem, condition, display) {
+    condition ? show(elem, display) : hide(elem);
+  }; // borrowed from jquery $(elem).is(':visible') implementation
+
+  var isVisible = function isVisible(elem) {
+    return !!(elem && (elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length));
+  };
+  var allButtonsAreHidden = function allButtonsAreHidden() {
+    return !isVisible(getConfirmButton()) && !isVisible(getDenyButton()) && !isVisible(getCancelButton());
+  };
+  var isScrollable = function isScrollable(elem) {
+    return !!(elem.scrollHeight > elem.clientHeight);
+  }; // borrowed from https://stackoverflow.com/a/46352119
+
+  var hasCssAnimation = function hasCssAnimation(elem) {
+    var style = window.getComputedStyle(elem);
+    var animDuration = parseFloat(style.getPropertyValue('animation-duration') || '0');
+    var transDuration = parseFloat(style.getPropertyValue('transition-duration') || '0');
+    return animDuration > 0 || transDuration > 0;
+  };
+  var contains = function contains(haystack, needle) {
+    if (typeof haystack.contains === 'function') {
+      return haystack.contains(needle);
+    }
+  };
+  var animateTimerProgressBar = function animateTimerProgressBar(timer) {
+    var reset = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    var timerProgressBar = getTimerProgressBar();
+
+    if (isVisible(timerProgressBar)) {
+      if (reset) {
+        timerProgressBar.style.transition = 'none';
+        timerProgressBar.style.width = '100%';
+      }
+
+      setTimeout(function () {
+        timerProgressBar.style.transition = "width ".concat(timer / 1000, "s linear");
+        timerProgressBar.style.width = '0%';
+      }, 10);
+    }
+  };
+  var stopTimerProgressBar = function stopTimerProgressBar() {
+    var timerProgressBar = getTimerProgressBar();
+    var timerProgressBarWidth = parseInt(window.getComputedStyle(timerProgressBar).width);
+    timerProgressBar.style.removeProperty('transition');
+    timerProgressBar.style.width = '100%';
+    var timerProgressBarFullWidth = parseInt(window.getComputedStyle(timerProgressBar).width);
+    var timerProgressBarPercent = parseInt(timerProgressBarWidth / timerProgressBarFullWidth * 100);
+    timerProgressBar.style.removeProperty('transition');
+    timerProgressBar.style.width = "".concat(timerProgressBarPercent, "%");
+  };
+
+  // Detect Node env
+  var isNodeEnv = function isNodeEnv() {
+    return typeof window === 'undefined' || typeof document === 'undefined';
+  };
+
+  var sweetHTML = "\n <div aria-labelledby=\"".concat(swalClasses.title, "\" aria-describedby=\"").concat(swalClasses.content, "\" class=\"").concat(swalClasses.popup, "\" tabindex=\"-1\">\n   <div class=\"").concat(swalClasses.header, "\">\n     <ul class=\"").concat(swalClasses['progress-steps'], "\"></ul>\n     <div class=\"").concat(swalClasses.icon, " ").concat(iconTypes.error, "\"></div>\n     <div class=\"").concat(swalClasses.icon, " ").concat(iconTypes.question, "\"></div>\n     <div class=\"").concat(swalClasses.icon, " ").concat(iconTypes.warning, "\"></div>\n     <div class=\"").concat(swalClasses.icon, " ").concat(iconTypes.info, "\"></div>\n     <div class=\"").concat(swalClasses.icon, " ").concat(iconTypes.success, "\"></div>\n     <img class=\"").concat(swalClasses.image, "\" />\n     <h2 class=\"").concat(swalClasses.title, "\" id=\"").concat(swalClasses.title, "\"></h2>\n     <button type=\"button\" class=\"").concat(swalClasses.close, "\"></button>\n   </div>\n   <div class=\"").concat(swalClasses.content, "\">\n     <div id=\"").concat(swalClasses.content, "\" class=\"").concat(swalClasses['html-container'], "\"></div>\n     <input class=\"").concat(swalClasses.input, "\" />\n     <input type=\"file\" class=\"").concat(swalClasses.file, "\" />\n     <div class=\"").concat(swalClasses.range, "\">\n       <input type=\"range\" />\n       <output></output>\n     </div>\n     <select class=\"").concat(swalClasses.select, "\"></select>\n     <div class=\"").concat(swalClasses.radio, "\"></div>\n     <label for=\"").concat(swalClasses.checkbox, "\" class=\"").concat(swalClasses.checkbox, "\">\n       <input type=\"checkbox\" />\n       <span class=\"").concat(swalClasses.label, "\"></span>\n     </label>\n     <textarea class=\"").concat(swalClasses.textarea, "\"></textarea>\n     <div class=\"").concat(swalClasses['validation-message'], "\" id=\"").concat(swalClasses['validation-message'], "\"></div>\n   </div>\n   <div class=\"").concat(swalClasses.actions, "\">\n     <div class=\"").concat(swalClasses.loader, "\"></div>\n     <button type=\"button\" class=\"").concat(swalClasses.confirm, "\"></button>\n     <button type=\"button\" class=\"").concat(swalClasses.deny, "\"></button>\n     <button type=\"button\" class=\"").concat(swalClasses.cancel, "\"></button>\n   </div>\n   <div class=\"").concat(swalClasses.footer, "\"></div>\n   <div class=\"").concat(swalClasses['timer-progress-bar-container'], "\">\n     <div class=\"").concat(swalClasses['timer-progress-bar'], "\"></div>\n   </div>\n </div>\n").replace(/(^|\n)\s*/g, '');
+
+  var resetOldContainer = function resetOldContainer() {
+    var oldContainer = getContainer();
+
+    if (!oldContainer) {
+      return false;
+    }
+
+    oldContainer.parentNode.removeChild(oldContainer);
+    removeClass([document.documentElement, document.body], [swalClasses['no-backdrop'], swalClasses['toast-shown'], swalClasses['has-column']]);
+    return true;
+  };
+
+  var oldInputVal; // IE11 workaround, see #1109 for details
+
+  var resetValidationMessage = function resetValidationMessage(e) {
+    if (Swal.isVisible() && oldInputVal !== e.target.value) {
+      Swal.resetValidationMessage();
+    }
+
+    oldInputVal = e.target.value;
+  };
+
+  var addInputChangeListeners = function addInputChangeListeners() {
+    var content = getContent();
+    var input = getChildByClass(content, swalClasses.input);
+    var file = getChildByClass(content, swalClasses.file);
+    var range = content.querySelector(".".concat(swalClasses.range, " input"));
+    var rangeOutput = content.querySelector(".".concat(swalClasses.range, " output"));
+    var select = getChildByClass(content, swalClasses.select);
+    var checkbox = content.querySelector(".".concat(swalClasses.checkbox, " input"));
+    var textarea = getChildByClass(content, swalClasses.textarea);
+    input.oninput = resetValidationMessage;
+    file.onchange = resetValidationMessage;
+    select.onchange = resetValidationMessage;
+    checkbox.onchange = resetValidationMessage;
+    textarea.oninput = resetValidationMessage;
+
+    range.oninput = function (e) {
+      resetValidationMessage(e);
+      rangeOutput.value = range.value;
+    };
+
+    range.onchange = function (e) {
+      resetValidationMessage(e);
+      range.nextSibling.value = range.value;
+    };
+  };
+
+  var getTarget = function getTarget(target) {
+    return typeof target === 'string' ? document.querySelector(target) : target;
+  };
+
+  var setupAccessibility = function setupAccessibility(params) {
+    var popup = getPopup();
+    popup.setAttribute('role', params.toast ? 'alert' : 'dialog');
+    popup.setAttribute('aria-live', params.toast ? 'polite' : 'assertive');
+
+    if (!params.toast) {
+      popup.setAttribute('aria-modal', 'true');
+    }
+  };
+
+  var setupRTL = function setupRTL(targetElement) {
+    if (window.getComputedStyle(targetElement).direction === 'rtl') {
+      addClass(getContainer(), swalClasses.rtl);
+    }
+  };
+  /*
+   * Add modal + backdrop to DOM
+   */
+
+
+  var init = function init(params) {
+    // Clean up the old popup container if it exists
+    var oldContainerExisted = resetOldContainer();
+    /* istanbul ignore if */
+
+    if (isNodeEnv()) {
+      error('SweetAlert2 requires document to initialize');
+      return;
+    }
+
+    var container = document.createElement('div');
+    container.className = swalClasses.container;
+
+    if (oldContainerExisted) {
+      addClass(container, swalClasses['no-transition']);
+    }
+
+    setInnerHtml(container, sweetHTML);
+    var targetElement = getTarget(params.target);
+    targetElement.appendChild(container);
+    setupAccessibility(params);
+    setupRTL(targetElement);
+    addInputChangeListeners();
+  };
+
+  var parseHtmlToContainer = function parseHtmlToContainer(param, target) {
+    // DOM element
+    if (param instanceof HTMLElement) {
+      target.appendChild(param); // Object
+    } else if (_typeof(param) === 'object') {
+      handleObject(param, target); // Plain string
+    } else if (param) {
+      setInnerHtml(target, param);
+    }
+  };
+
+  var handleObject = function handleObject(param, target) {
+    // JQuery element(s)
+    if (param.jquery) {
+      handleJqueryElem(target, param); // For other objects use their string representation
+    } else {
+      setInnerHtml(target, param.toString());
+    }
+  };
+
+  var handleJqueryElem = function handleJqueryElem(target, elem) {
+    target.textContent = '';
+
+    if (0 in elem) {
+      for (var i = 0; (i in elem); i++) {
+        target.appendChild(elem[i].cloneNode(true));
+      }
+    } else {
+      target.appendChild(elem.cloneNode(true));
+    }
+  };
+
+  var animationEndEvent = function () {
+    // Prevent run in Node env
+
+    /* istanbul ignore if */
+    if (isNodeEnv()) {
+      return false;
+    }
+
+    var testEl = document.createElement('div');
+    var transEndEventNames = {
+      WebkitAnimation: 'webkitAnimationEnd',
+      OAnimation: 'oAnimationEnd oanimationend',
+      animation: 'animationend'
+    };
+
+    for (var i in transEndEventNames) {
+      if (Object.prototype.hasOwnProperty.call(transEndEventNames, i) && typeof testEl.style[i] !== 'undefined') {
+        return transEndEventNames[i];
+      }
+    }
+
+    return false;
+  }();
+
+  // https://github.com/twbs/bootstrap/blob/master/js/src/modal.js
+
+  var measureScrollbar = function measureScrollbar() {
+    var scrollDiv = document.createElement('div');
+    scrollDiv.className = swalClasses['scrollbar-measure'];
+    document.body.appendChild(scrollDiv);
+    var scrollbarWidth = scrollDiv.getBoundingClientRect().width - scrollDiv.clientWidth;
+    document.body.removeChild(scrollDiv);
+    return scrollbarWidth;
+  };
+
+  var renderActions = function renderActions(instance, params) {
+    var actions = getActions();
+    var loader = getLoader();
+    var confirmButton = getConfirmButton();
+    var denyButton = getDenyButton();
+    var cancelButton = getCancelButton(); // Actions (buttons) wrapper
+
+    if (!params.showConfirmButton && !params.showDenyButton && !params.showCancelButton) {
+      hide(actions);
+    } // Custom class
+
+
+    applyCustomClass(actions, params, 'actions'); // Render buttons
+
+    renderButton(confirmButton, 'confirm', params);
+    renderButton(denyButton, 'deny', params);
+    renderButton(cancelButton, 'cancel', params);
+    handleButtonsStyling(confirmButton, denyButton, cancelButton, params);
+
+    if (params.reverseButtons) {
+      actions.insertBefore(cancelButton, loader);
+      actions.insertBefore(denyButton, loader);
+      actions.insertBefore(confirmButton, loader);
+    } // Loader
+
+
+    setInnerHtml(loader, params.loaderHtml);
+    applyCustomClass(loader, params, 'loader');
+  };
+
+  function handleButtonsStyling(confirmButton, denyButton, cancelButton, params) {
+    if (!params.buttonsStyling) {
+      return removeClass([confirmButton, denyButton, cancelButton], swalClasses.styled);
+    }
+
+    addClass([confirmButton, denyButton, cancelButton], swalClasses.styled); // Buttons background colors
+
+    if (params.confirmButtonColor) {
+      confirmButton.style.backgroundColor = params.confirmButtonColor;
+    }
+
+    if (params.denyButtonColor) {
+      denyButton.style.backgroundColor = params.denyButtonColor;
+    }
+
+    if (params.cancelButtonColor) {
+      cancelButton.style.backgroundColor = params.cancelButtonColor;
+    }
+  }
+
+  function renderButton(button, buttonType, params) {
+    toggle(button, params["show".concat(capitalizeFirstLetter(buttonType), "Button")], 'inline-block');
+    setInnerHtml(button, params["".concat(buttonType, "ButtonText")]); // Set caption text
+
+    button.setAttribute('aria-label', params["".concat(buttonType, "ButtonAriaLabel")]); // ARIA label
+    // Add buttons custom classes
+
+    button.className = swalClasses[buttonType];
+    applyCustomClass(button, params, "".concat(buttonType, "Button"));
+    addClass(button, params["".concat(buttonType, "ButtonClass")]);
+  }
+
+  function handleBackdropParam(container, backdrop) {
+    if (typeof backdrop === 'string') {
+      container.style.background = backdrop;
+    } else if (!backdrop) {
+      addClass([document.documentElement, document.body], swalClasses['no-backdrop']);
+    }
+  }
+
+  function handlePositionParam(container, position) {
+    if (position in swalClasses) {
+      addClass(container, swalClasses[position]);
+    } else {
+      warn('The "position" parameter is not valid, defaulting to "center"');
+      addClass(container, swalClasses.center);
+    }
+  }
+
+  function handleGrowParam(container, grow) {
+    if (grow && typeof grow === 'string') {
+      var growClass = "grow-".concat(grow);
+
+      if (growClass in swalClasses) {
+        addClass(container, swalClasses[growClass]);
+      }
+    }
+  }
+
+  var renderContainer = function renderContainer(instance, params) {
+    var container = getContainer();
+
+    if (!container) {
+      return;
+    }
+
+    handleBackdropParam(container, params.backdrop);
+
+    if (!params.backdrop && params.allowOutsideClick) {
+      warn('"allowOutsideClick" parameter requires `backdrop` parameter to be set to `true`');
+    }
+
+    handlePositionParam(container, params.position);
+    handleGrowParam(container, params.grow); // Custom class
+
+    applyCustomClass(container, params, 'container'); // Set queue step attribute for getQueueStep() method
+
+    var queueStep = document.body.getAttribute('data-swal2-queue-step');
+
+    if (queueStep) {
+      container.setAttribute('data-queue-step', queueStep);
+      document.body.removeAttribute('data-swal2-queue-step');
+    }
+  };
+
+  /**
+   * This module containts `WeakMap`s for each effectively-"private  property" that a `Swal` has.
+   * For example, to set the private property "foo" of `this` to "bar", you can `privateProps.foo.set(this, 'bar')`
+   * This is the approach that Babel will probably take to implement private methods/fields
+   *   https://github.com/tc39/proposal-private-methods
+   *   https://github.com/babel/babel/pull/7555
+   * Once we have the changes from that PR in Babel, and our core class fits reasonable in *one module*
+   *   then we can use that language feature.
+   */
+  var privateProps = {
+    promise: new WeakMap(),
+    innerParams: new WeakMap(),
+    domCache: new WeakMap()
+  };
+
+  var inputTypes = ['input', 'file', 'range', 'select', 'radio', 'checkbox', 'textarea'];
+  var renderInput = function renderInput(instance, params) {
+    var content = getContent();
+    var innerParams = privateProps.innerParams.get(instance);
+    var rerender = !innerParams || params.input !== innerParams.input;
+    inputTypes.forEach(function (inputType) {
+      var inputClass = swalClasses[inputType];
+      var inputContainer = getChildByClass(content, inputClass); // set attributes
+
+      setAttributes(inputType, params.inputAttributes); // set class
+
+      inputContainer.className = inputClass;
+
+      if (rerender) {
+        hide(inputContainer);
+      }
+    });
+
+    if (params.input) {
+      if (rerender) {
+        showInput(params);
+      } // set custom class
+
+
+      setCustomClass(params);
+    }
+  };
+
+  var showInput = function showInput(params) {
+    if (!renderInputType[params.input]) {
+      return error("Unexpected type of input! Expected \"text\", \"email\", \"password\", \"number\", \"tel\", \"select\", \"radio\", \"checkbox\", \"textarea\", \"file\" or \"url\", got \"".concat(params.input, "\""));
+    }
+
+    var inputContainer = getInputContainer(params.input);
+    var input = renderInputType[params.input](inputContainer, params);
+    show(input); // input autofocus
+
+    setTimeout(function () {
+      focusInput(input);
+    });
+  };
+
+  var removeAttributes = function removeAttributes(input) {
+    for (var i = 0; i < input.attributes.length; i++) {
+      var attrName = input.attributes[i].name;
+
+      if (!(['type', 'value', 'style'].indexOf(attrName) !== -1)) {
+        input.removeAttribute(attrName);
+      }
+    }
+  };
+
+  var setAttributes = function setAttributes(inputType, inputAttributes) {
+    var input = getInput(getContent(), inputType);
+
+    if (!input) {
+      return;
+    }
+
+    removeAttributes(input);
+
+    for (var attr in inputAttributes) {
+      // Do not set a placeholder for <input type="range">
+      // it'll crash Edge, #1298
+      if (inputType === 'range' && attr === 'placeholder') {
+        continue;
+      }
+
+      input.setAttribute(attr, inputAttributes[attr]);
+    }
+  };
+
+  var setCustomClass = function setCustomClass(params) {
+    var inputContainer = getInputContainer(params.input);
+
+    if (params.customClass) {
+      addClass(inputContainer, params.customClass.input);
+    }
+  };
+
+  var setInputPlaceholder = function setInputPlaceholder(input, params) {
+    if (!input.placeholder || params.inputPlaceholder) {
+      input.placeholder = params.inputPlaceholder;
+    }
+  };
+
+  var setInputLabel = function setInputLabel(input, prependTo, params) {
+    if (params.inputLabel) {
+      input.id = swalClasses.input;
+      var label = document.createElement('label');
+      var labelClass = swalClasses['input-label'];
+      label.setAttribute('for', input.id);
+      label.className = labelClass;
+      addClass(label, params.customClass.inputLabel);
+      label.innerText = params.inputLabel;
+      prependTo.insertAdjacentElement('beforebegin', label);
+    }
+  };
+
+  var getInputContainer = function getInputContainer(inputType) {
+    var inputClass = swalClasses[inputType] ? swalClasses[inputType] : swalClasses.input;
+    return getChildByClass(getContent(), inputClass);
+  };
+
+  var renderInputType = {};
+
+  renderInputType.text = renderInputType.email = renderInputType.password = renderInputType.number = renderInputType.tel = renderInputType.url = function (input, params) {
+    if (typeof params.inputValue === 'string' || typeof params.inputValue === 'number') {
+      input.value = params.inputValue;
+    } else if (!isPromise(params.inputValue)) {
+      warn("Unexpected type of inputValue! Expected \"string\", \"number\" or \"Promise\", got \"".concat(_typeof(params.inputValue), "\""));
+    }
+
+    setInputLabel(input, input, params);
+    setInputPlaceholder(input, params);
+    input.type = params.input;
+    return input;
+  };
+
+  renderInputType.file = function (input, params) {
+    setInputLabel(input, input, params);
+    setInputPlaceholder(input, params);
+    return input;
+  };
+
+  renderInputType.range = function (range, params) {
+    var rangeInput = range.querySelector('input');
+    var rangeOutput = range.querySelector('output');
+    rangeInput.value = params.inputValue;
+    rangeInput.type = params.input;
+    rangeOutput.value = params.inputValue;
+    setInputLabel(rangeInput, range, params);
+    return range;
+  };
+
+  renderInputType.select = function (select, params) {
+    select.textContent = '';
+
+    if (params.inputPlaceholder) {
+      var placeholder = document.createElement('option');
+      setInnerHtml(placeholder, params.inputPlaceholder);
+      placeholder.value = '';
+      placeholder.disabled = true;
+      placeholder.selected = true;
+      select.appendChild(placeholder);
+    }
+
+    setInputLabel(select, select, params);
+    return select;
+  };
+
+  renderInputType.radio = function (radio) {
+    radio.textContent = '';
+    return radio;
+  };
+
+  renderInputType.checkbox = function (checkboxContainer, params) {
+    var checkbox = getInput(getContent(), 'checkbox');
+    checkbox.value = 1;
+    checkbox.id = swalClasses.checkbox;
+    checkbox.checked = Boolean(params.inputValue);
+    var label = checkboxContainer.querySelector('span');
+    setInnerHtml(label, params.inputPlaceholder);
+    return checkboxContainer;
+  };
+
+  renderInputType.textarea = function (textarea, params) {
+    textarea.value = params.inputValue;
+    setInputPlaceholder(textarea, params);
+    setInputLabel(textarea, textarea, params);
+
+    var getPadding = function getPadding(el) {
+      return parseInt(window.getComputedStyle(el).paddingLeft) + parseInt(window.getComputedStyle(el).paddingRight);
+    };
+
+    if ('MutationObserver' in window) {
+      // #1699
+      var initialPopupWidth = parseInt(window.getComputedStyle(getPopup()).width);
+
+      var outputsize = function outputsize() {
+        var contentWidth = textarea.offsetWidth + getPadding(getPopup()) + getPadding(getContent());
+
+        if (contentWidth > initialPopupWidth) {
+          getPopup().style.width = "".concat(contentWidth, "px");
+        } else {
+          getPopup().style.width = null;
+        }
+      };
+
+      new MutationObserver(outputsize).observe(textarea, {
+        attributes: true,
+        attributeFilter: ['style']
+      });
+    }
+
+    return textarea;
+  };
+
+  var renderContent = function renderContent(instance, params) {
+    var content = getContent().querySelector("#".concat(swalClasses.content)); // Content as HTML
+
+    if (params.html) {
+      parseHtmlToContainer(params.html, content);
+      show(content, 'block'); // Content as plain text
+    } else if (params.text) {
+      content.textContent = params.text;
+      show(content, 'block'); // No content
+    } else {
+      hide(content);
+    }
+
+    renderInput(instance, params); // Custom class
+
+    applyCustomClass(getContent(), params, 'content');
+  };
+
+  var renderFooter = function renderFooter(instance, params) {
+    var footer = getFooter();
+    toggle(footer, params.footer);
+
+    if (params.footer) {
+      parseHtmlToContainer(params.footer, footer);
+    } // Custom class
+
+
+    applyCustomClass(footer, params, 'footer');
+  };
+
+  var renderCloseButton = function renderCloseButton(instance, params) {
+    var closeButton = getCloseButton();
+    setInnerHtml(closeButton, params.closeButtonHtml); // Custom class
+
+    applyCustomClass(closeButton, params, 'closeButton');
+    toggle(closeButton, params.showCloseButton);
+    closeButton.setAttribute('aria-label', params.closeButtonAriaLabel);
+  };
+
+  var renderIcon = function renderIcon(instance, params) {
+    var innerParams = privateProps.innerParams.get(instance); // if the given icon already rendered, apply the styling without re-rendering the icon
+
+    if (innerParams && params.icon === innerParams.icon && getIcon()) {
+      applyStyles(getIcon(), params);
+      return;
+    }
+
+    hideAllIcons();
+
+    if (!params.icon) {
+      return;
+    }
+
+    if (Object.keys(iconTypes).indexOf(params.icon) !== -1) {
+      var icon = elementBySelector(".".concat(swalClasses.icon, ".").concat(iconTypes[params.icon]));
+      show(icon); // Custom or default content
+
+      setContent(icon, params);
+      applyStyles(icon, params); // Animate icon
+
+      addClass(icon, params.showClass.icon);
+    } else {
+      error("Unknown icon! Expected \"success\", \"error\", \"warning\", \"info\" or \"question\", got \"".concat(params.icon, "\""));
+    }
+  };
+
+  var hideAllIcons = function hideAllIcons() {
+    var icons = getIcons();
+
+    for (var i = 0; i < icons.length; i++) {
+      hide(icons[i]);
+    }
+  };
+
+  var applyStyles = function applyStyles(icon, params) {
+    // Icon color
+    setColor(icon, params); // Success icon background color
+
+    adjustSuccessIconBackgoundColor(); // Custom class
+
+    applyCustomClass(icon, params, 'icon');
+  }; // Adjust success icon background color to match the popup background color
+
+
+  var adjustSuccessIconBackgoundColor = function adjustSuccessIconBackgoundColor() {
+    var popup = getPopup();
+    var popupBackgroundColor = window.getComputedStyle(popup).getPropertyValue('background-color');
+    var successIconParts = popup.querySelectorAll('[class^=swal2-success-circular-line], .swal2-success-fix');
+
+    for (var i = 0; i < successIconParts.length; i++) {
+      successIconParts[i].style.backgroundColor = popupBackgroundColor;
+    }
+  };
+
+  var setContent = function setContent(icon, params) {
+    icon.textContent = '';
+
+    if (params.iconHtml) {
+      setInnerHtml(icon, iconContent(params.iconHtml));
+    } else if (params.icon === 'success') {
+      setInnerHtml(icon, "\n      <div class=\"swal2-success-circular-line-left\"></div>\n      <span class=\"swal2-success-line-tip\"></span> <span class=\"swal2-success-line-long\"></span>\n      <div class=\"swal2-success-ring\"></div> <div class=\"swal2-success-fix\"></div>\n      <div class=\"swal2-success-circular-line-right\"></div>\n    ");
+    } else if (params.icon === 'error') {
+      setInnerHtml(icon, "\n      <span class=\"swal2-x-mark\">\n        <span class=\"swal2-x-mark-line-left\"></span>\n        <span class=\"swal2-x-mark-line-right\"></span>\n      </span>\n    ");
+    } else {
+      var defaultIconHtml = {
+        question: '?',
+        warning: '!',
+        info: 'i'
+      };
+      setInnerHtml(icon, iconContent(defaultIconHtml[params.icon]));
+    }
+  };
+
+  var setColor = function setColor(icon, params) {
+    if (!params.iconColor) {
+      return;
+    }
+
+    icon.style.color = params.iconColor;
+    icon.style.borderColor = params.iconColor;
+
+    for (var _i = 0, _arr = ['.swal2-success-line-tip', '.swal2-success-line-long', '.swal2-x-mark-line-left', '.swal2-x-mark-line-right']; _i < _arr.length; _i++) {
+      var sel = _arr[_i];
+      setStyle(icon, sel, 'backgroundColor', params.iconColor);
+    }
+
+    setStyle(icon, '.swal2-success-ring', 'borderColor', params.iconColor);
+  };
+
+  var iconContent = function iconContent(content) {
+    return "<div class=\"".concat(swalClasses['icon-content'], "\">").concat(content, "</div>");
+  };
+
+  var renderImage = function renderImage(instance, params) {
+    var image = getImage();
+
+    if (!params.imageUrl) {
+      return hide(image);
+    }
+
+    show(image, ''); // Src, alt
+
+    image.setAttribute('src', params.imageUrl);
+    image.setAttribute('alt', params.imageAlt); // Width, height
+
+    applyNumericalStyle(image, 'width', params.imageWidth);
+    applyNumericalStyle(image, 'height', params.imageHeight); // Class
+
+    image.className = swalClasses.image;
+    applyCustomClass(image, params, 'image');
+  };
+
+  var currentSteps = [];
+  /*
+   * Global function for chaining sweetAlert popups
+   */
+
+  var queue = function queue(steps) {
+    var Swal = this;
+    currentSteps = steps;
+
+    var resetAndResolve = function resetAndResolve(resolve, value) {
+      currentSteps = [];
+      resolve(value);
+    };
+
+    var queueResult = [];
+    return new Promise(function (resolve) {
+      (function step(i, callback) {
+        if (i < currentSteps.length) {
+          document.body.setAttribute('data-swal2-queue-step', i);
+          Swal.fire(currentSteps[i]).then(function (result) {
+            if (typeof result.value !== 'undefined') {
+              queueResult.push(result.value);
+              step(i + 1, callback);
+            } else {
+              resetAndResolve(resolve, {
+                dismiss: result.dismiss
+              });
+            }
+          });
+        } else {
+          resetAndResolve(resolve, {
+            value: queueResult
+          });
+        }
+      })(0);
+    });
+  };
+  /*
+   * Global function for getting the index of current popup in queue
+   */
+
+  var getQueueStep = function getQueueStep() {
+    return getContainer() && getContainer().getAttribute('data-queue-step');
+  };
+  /*
+   * Global function for inserting a popup to the queue
+   */
+
+  var insertQueueStep = function insertQueueStep(step, index) {
+    if (index && index < currentSteps.length) {
+      return currentSteps.splice(index, 0, step);
+    }
+
+    return currentSteps.push(step);
+  };
+  /*
+   * Global function for deleting a popup from the queue
+   */
+
+  var deleteQueueStep = function deleteQueueStep(index) {
+    if (typeof currentSteps[index] !== 'undefined') {
+      currentSteps.splice(index, 1);
+    }
+  };
+
+  var createStepElement = function createStepElement(step) {
+    var stepEl = document.createElement('li');
+    addClass(stepEl, swalClasses['progress-step']);
+    setInnerHtml(stepEl, step);
+    return stepEl;
+  };
+
+  var createLineElement = function createLineElement(params) {
+    var lineEl = document.createElement('li');
+    addClass(lineEl, swalClasses['progress-step-line']);
+
+    if (params.progressStepsDistance) {
+      lineEl.style.width = params.progressStepsDistance;
+    }
+
+    return lineEl;
+  };
+
+  var renderProgressSteps = function renderProgressSteps(instance, params) {
+    var progressStepsContainer = getProgressSteps();
+
+    if (!params.progressSteps || params.progressSteps.length === 0) {
+      return hide(progressStepsContainer);
+    }
+
+    show(progressStepsContainer);
+    progressStepsContainer.textContent = '';
+    var currentProgressStep = parseInt(params.currentProgressStep === undefined ? getQueueStep() : params.currentProgressStep);
+
+    if (currentProgressStep >= params.progressSteps.length) {
+      warn('Invalid currentProgressStep parameter, it should be less than progressSteps.length ' + '(currentProgressStep like JS arrays starts from 0)');
+    }
+
+    params.progressSteps.forEach(function (step, index) {
+      var stepEl = createStepElement(step);
+      progressStepsContainer.appendChild(stepEl);
+
+      if (index === currentProgressStep) {
+        addClass(stepEl, swalClasses['active-progress-step']);
+      }
+
+      if (index !== params.progressSteps.length - 1) {
+        var lineEl = createLineElement(params);
+        progressStepsContainer.appendChild(lineEl);
+      }
+    });
+  };
+
+  var renderTitle = function renderTitle(instance, params) {
+    var title = getTitle();
+    toggle(title, params.title || params.titleText);
+
+    if (params.title) {
+      parseHtmlToContainer(params.title, title);
+    }
+
+    if (params.titleText) {
+      title.innerText = params.titleText;
+    } // Custom class
+
+
+    applyCustomClass(title, params, 'title');
+  };
+
+  var renderHeader = function renderHeader(instance, params) {
+    var header = getHeader(); // Custom class
+
+    applyCustomClass(header, params, 'header'); // Progress steps
+
+    renderProgressSteps(instance, params); // Icon
+
+    renderIcon(instance, params); // Image
+
+    renderImage(instance, params); // Title
+
+    renderTitle(instance, params); // Close button
+
+    renderCloseButton(instance, params);
+  };
+
+  var renderPopup = function renderPopup(instance, params) {
+    var popup = getPopup(); // Width
+
+    applyNumericalStyle(popup, 'width', params.width); // Padding
+
+    applyNumericalStyle(popup, 'padding', params.padding); // Background
+
+    if (params.background) {
+      popup.style.background = params.background;
+    } // Classes
+
+
+    addClasses(popup, params);
+  };
+
+  var addClasses = function addClasses(popup, params) {
+    // Default Class + showClass when updating Swal.update({})
+    popup.className = "".concat(swalClasses.popup, " ").concat(isVisible(popup) ? params.showClass.popup : '');
+
+    if (params.toast) {
+      addClass([document.documentElement, document.body], swalClasses['toast-shown']);
+      addClass(popup, swalClasses.toast);
+    } else {
+      addClass(popup, swalClasses.modal);
+    } // Custom class
+
+
+    applyCustomClass(popup, params, 'popup');
+
+    if (typeof params.customClass === 'string') {
+      addClass(popup, params.customClass);
+    } // Icon class (#1842)
+
+
+    if (params.icon) {
+      addClass(popup, swalClasses["icon-".concat(params.icon)]);
+    }
+  };
+
+  var render = function render(instance, params) {
+    renderPopup(instance, params);
+    renderContainer(instance, params);
+    renderHeader(instance, params);
+    renderContent(instance, params);
+    renderActions(instance, params);
+    renderFooter(instance, params);
+
+    if (typeof params.didRender === 'function') {
+      params.didRender(getPopup());
+    } else if (typeof params.onRender === 'function') {
+      params.onRender(getPopup()); // @deprecated
+    }
+  };
+
+  /*
+   * Global function to determine if SweetAlert2 popup is shown
+   */
+
+  var isVisible$1 = function isVisible$$1() {
+    return isVisible(getPopup());
+  };
+  /*
+   * Global function to click 'Confirm' button
+   */
+
+  var clickConfirm = function clickConfirm() {
+    return getConfirmButton() && getConfirmButton().click();
+  };
+  /*
+   * Global function to click 'Deny' button
+   */
+
+  var clickDeny = function clickDeny() {
+    return getDenyButton() && getDenyButton().click();
+  };
+  /*
+   * Global function to click 'Cancel' button
+   */
+
+  var clickCancel = function clickCancel() {
+    return getCancelButton() && getCancelButton().click();
+  };
+
+  function fire() {
+    var Swal = this;
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _construct(Swal, args);
+  }
+
+  /**
+   * Returns an extended version of `Swal` containing `params` as defaults.
+   * Useful for reusing Swal configuration.
+   *
+   * For example:
+   *
+   * Before:
+   * const textPromptOptions = { input: 'text', showCancelButton: true }
+   * const {value: firstName} = await Swal.fire({ ...textPromptOptions, title: 'What is your first name?' })
+   * const {value: lastName} = await Swal.fire({ ...textPromptOptions, title: 'What is your last name?' })
+   *
+   * After:
+   * const TextPrompt = Swal.mixin({ input: 'text', showCancelButton: true })
+   * const {value: firstName} = await TextPrompt('What is your first name?')
+   * const {value: lastName} = await TextPrompt('What is your last name?')
+   *
+   * @param mixinParams
+   */
+  function mixin(mixinParams) {
+    var MixinSwal = /*#__PURE__*/function (_this) {
+      _inherits(MixinSwal, _this);
+
+      var _super = _createSuper(MixinSwal);
+
+      function MixinSwal() {
+        _classCallCheck(this, MixinSwal);
+
+        return _super.apply(this, arguments);
+      }
+
+      _createClass(MixinSwal, [{
+        key: "_main",
+        value: function _main(params, prevMixinParams) {
+          return _get(_getPrototypeOf(MixinSwal.prototype), "_main", this).call(this, params, _extends({}, prevMixinParams, mixinParams));
+        }
+      }]);
+
+      return MixinSwal;
+    }(this);
+
+    return MixinSwal;
+  }
+
+  /**
+   * Shows loader (spinner), this is useful with AJAX requests.
+   * By default the loader be shown instead of the "Confirm" button.
+   */
+
+  var showLoading = function showLoading(buttonToReplace) {
+    var popup = getPopup();
+
+    if (!popup) {
+      Swal.fire();
+    }
+
+    popup = getPopup();
+    var actions = getActions();
+    var loader = getLoader();
+
+    if (!buttonToReplace && isVisible(getConfirmButton())) {
+      buttonToReplace = getConfirmButton();
+    }
+
+    show(actions);
+
+    if (buttonToReplace) {
+      hide(buttonToReplace);
+      loader.setAttribute('data-button-to-replace', buttonToReplace.className);
+    }
+
+    loader.parentNode.insertBefore(loader, buttonToReplace);
+    addClass([popup, actions], swalClasses.loading);
+    show(loader);
+    popup.setAttribute('data-loading', true);
+    popup.setAttribute('aria-busy', true);
+    popup.focus();
+  };
+
+  var RESTORE_FOCUS_TIMEOUT = 100;
+
+  var globalState = {};
+
+  var focusPreviousActiveElement = function focusPreviousActiveElement() {
+    if (globalState.previousActiveElement && globalState.previousActiveElement.focus) {
+      globalState.previousActiveElement.focus();
+      globalState.previousActiveElement = null;
+    } else if (document.body) {
+      document.body.focus();
+    }
+  }; // Restore previous active (focused) element
+
+
+  var restoreActiveElement = function restoreActiveElement() {
+    return new Promise(function (resolve) {
+      var x = window.scrollX;
+      var y = window.scrollY;
+      globalState.restoreFocusTimeout = setTimeout(function () {
+        focusPreviousActiveElement();
+        resolve();
+      }, RESTORE_FOCUS_TIMEOUT); // issues/900
+
+      /* istanbul ignore if */
+
+      if (typeof x !== 'undefined' && typeof y !== 'undefined') {
+        // IE doesn't have scrollX/scrollY support
+        window.scrollTo(x, y);
+      }
+    });
+  };
+
+  /**
+   * If `timer` parameter is set, returns number of milliseconds of timer remained.
+   * Otherwise, returns undefined.
+   */
+
+  var getTimerLeft = function getTimerLeft() {
+    return globalState.timeout && globalState.timeout.getTimerLeft();
+  };
+  /**
+   * Stop timer. Returns number of milliseconds of timer remained.
+   * If `timer` parameter isn't set, returns undefined.
+   */
+
+  var stopTimer = function stopTimer() {
+    if (globalState.timeout) {
+      stopTimerProgressBar();
+      return globalState.timeout.stop();
+    }
+  };
+  /**
+   * Resume timer. Returns number of milliseconds of timer remained.
+   * If `timer` parameter isn't set, returns undefined.
+   */
+
+  var resumeTimer = function resumeTimer() {
+    if (globalState.timeout) {
+      var remaining = globalState.timeout.start();
+      animateTimerProgressBar(remaining);
+      return remaining;
+    }
+  };
+  /**
+   * Resume timer. Returns number of milliseconds of timer remained.
+   * If `timer` parameter isn't set, returns undefined.
+   */
+
+  var toggleTimer = function toggleTimer() {
+    var timer = globalState.timeout;
+    return timer && (timer.running ? stopTimer() : resumeTimer());
+  };
+  /**
+   * Increase timer. Returns number of milliseconds of an updated timer.
+   * If `timer` parameter isn't set, returns undefined.
+   */
+
+  var increaseTimer = function increaseTimer(n) {
+    if (globalState.timeout) {
+      var remaining = globalState.timeout.increase(n);
+      animateTimerProgressBar(remaining, true);
+      return remaining;
+    }
+  };
+  /**
+   * Check if timer is running. Returns true if timer is running
+   * or false if timer is paused or stopped.
+   * If `timer` parameter isn't set, returns undefined
+   */
+
+  var isTimerRunning = function isTimerRunning() {
+    return globalState.timeout && globalState.timeout.isRunning();
+  };
+
+  var bodyClickListenerAdded = false;
+  var clickHandlers = {};
+  function bindClickHandler() {
+    var attr = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'data-swal-template';
+    clickHandlers[attr] = this;
+
+    if (!bodyClickListenerAdded) {
+      document.body.addEventListener('click', bodyClickListener);
+      bodyClickListenerAdded = true;
+    }
+  }
+
+  var bodyClickListener = function bodyClickListener(event) {
+    // 1. using .parentNode instead of event.path because of better support by old browsers https://stackoverflow.com/a/39245638
+    // 2. using .parentNode instead of .parentElement because of IE11 + SVG https://stackoverflow.com/a/36270354
+    for (var el = event.target; el && el !== document; el = el.parentNode) {
+      for (var attr in clickHandlers) {
+        var template = el.getAttribute(attr);
+
+        if (template) {
+          clickHandlers[attr].fire({
+            template: template
+          });
+          return;
+        }
+      }
+    }
+  };
+
+  var defaultParams = {
+    title: '',
+    titleText: '',
+    text: '',
+    html: '',
+    footer: '',
+    icon: undefined,
+    iconColor: undefined,
+    iconHtml: undefined,
+    template: undefined,
+    toast: false,
+    animation: true,
+    showClass: {
+      popup: 'swal2-show',
+      backdrop: 'swal2-backdrop-show',
+      icon: 'swal2-icon-show'
+    },
+    hideClass: {
+      popup: 'swal2-hide',
+      backdrop: 'swal2-backdrop-hide',
+      icon: 'swal2-icon-hide'
+    },
+    customClass: {},
+    target: 'body',
+    backdrop: true,
+    heightAuto: true,
+    allowOutsideClick: true,
+    allowEscapeKey: true,
+    allowEnterKey: true,
+    stopKeydownPropagation: true,
+    keydownListenerCapture: false,
+    showConfirmButton: true,
+    showDenyButton: false,
+    showCancelButton: false,
+    preConfirm: undefined,
+    preDeny: undefined,
+    confirmButtonText: 'OK',
+    confirmButtonAriaLabel: '',
+    confirmButtonColor: undefined,
+    denyButtonText: 'No',
+    denyButtonAriaLabel: '',
+    denyButtonColor: undefined,
+    cancelButtonText: 'Cancel',
+    cancelButtonAriaLabel: '',
+    cancelButtonColor: undefined,
+    buttonsStyling: true,
+    reverseButtons: false,
+    focusConfirm: true,
+    focusDeny: false,
+    focusCancel: false,
+    showCloseButton: false,
+    closeButtonHtml: '&times;',
+    closeButtonAriaLabel: 'Close this dialog',
+    loaderHtml: '',
+    showLoaderOnConfirm: false,
+    imageUrl: undefined,
+    imageWidth: undefined,
+    imageHeight: undefined,
+    imageAlt: '',
+    timer: undefined,
+    timerProgressBar: false,
+    width: undefined,
+    padding: undefined,
+    background: undefined,
+    input: undefined,
+    inputPlaceholder: '',
+    inputLabel: '',
+    inputValue: '',
+    inputOptions: {},
+    inputAutoTrim: true,
+    inputAttributes: {},
+    inputValidator: undefined,
+    returnInputValueOnDeny: false,
+    validationMessage: undefined,
+    grow: false,
+    position: 'center',
+    progressSteps: [],
+    currentProgressStep: undefined,
+    progressStepsDistance: undefined,
+    onBeforeOpen: undefined,
+    onOpen: undefined,
+    willOpen: undefined,
+    didOpen: undefined,
+    onRender: undefined,
+    didRender: undefined,
+    onClose: undefined,
+    onAfterClose: undefined,
+    willClose: undefined,
+    didClose: undefined,
+    onDestroy: undefined,
+    didDestroy: undefined,
+    scrollbarPadding: true
+  };
+  var updatableParams = ['allowEscapeKey', 'allowOutsideClick', 'background', 'buttonsStyling', 'cancelButtonAriaLabel', 'cancelButtonColor', 'cancelButtonText', 'closeButtonAriaLabel', 'closeButtonHtml', 'confirmButtonAriaLabel', 'confirmButtonColor', 'confirmButtonText', 'currentProgressStep', 'customClass', 'denyButtonAriaLabel', 'denyButtonColor', 'denyButtonText', 'didClose', 'didDestroy', 'footer', 'hideClass', 'html', 'icon', 'iconColor', 'imageAlt', 'imageHeight', 'imageUrl', 'imageWidth', 'onAfterClose', 'onClose', 'onDestroy', 'progressSteps', 'reverseButtons', 'showCancelButton', 'showCloseButton', 'showConfirmButton', 'showDenyButton', 'text', 'title', 'titleText', 'willClose'];
+  var deprecatedParams = {
+    animation: 'showClass" and "hideClass',
+    onBeforeOpen: 'willOpen',
+    onOpen: 'didOpen',
+    onRender: 'didRender',
+    onClose: 'willClose',
+    onAfterClose: 'didClose',
+    onDestroy: 'didDestroy'
+  };
+  var toastIncompatibleParams = ['allowOutsideClick', 'allowEnterKey', 'backdrop', 'focusConfirm', 'focusDeny', 'focusCancel', 'heightAuto', 'keydownListenerCapture'];
+  /**
+   * Is valid parameter
+   * @param {String} paramName
+   */
+
+  var isValidParameter = function isValidParameter(paramName) {
+    return Object.prototype.hasOwnProperty.call(defaultParams, paramName);
+  };
+  /**
+   * Is valid parameter for Swal.update() method
+   * @param {String} paramName
+   */
+
+  var isUpdatableParameter = function isUpdatableParameter(paramName) {
+    return updatableParams.indexOf(paramName) !== -1;
+  };
+  /**
+   * Is deprecated parameter
+   * @param {String} paramName
+   */
+
+  var isDeprecatedParameter = function isDeprecatedParameter(paramName) {
+    return deprecatedParams[paramName];
+  };
+
+  var checkIfParamIsValid = function checkIfParamIsValid(param) {
+    if (!isValidParameter(param)) {
+      warn("Unknown parameter \"".concat(param, "\""));
+    }
+  };
+
+  var checkIfToastParamIsValid = function checkIfToastParamIsValid(param) {
+    if (toastIncompatibleParams.indexOf(param) !== -1) {
+      warn("The parameter \"".concat(param, "\" is incompatible with toasts"));
+    }
+  };
+
+  var checkIfParamIsDeprecated = function checkIfParamIsDeprecated(param) {
+    if (isDeprecatedParameter(param)) {
+      warnAboutDeprecation(param, isDeprecatedParameter(param));
+    }
+  };
+  /**
+   * Show relevant warnings for given params
+   *
+   * @param params
+   */
+
+
+  var showWarningsForParams = function showWarningsForParams(params) {
+    for (var param in params) {
+      checkIfParamIsValid(param);
+
+      if (params.toast) {
+        checkIfToastParamIsValid(param);
+      }
+
+      checkIfParamIsDeprecated(param);
+    }
+  };
+
+
+
+  var staticMethods = /*#__PURE__*/Object.freeze({
+    isValidParameter: isValidParameter,
+    isUpdatableParameter: isUpdatableParameter,
+    isDeprecatedParameter: isDeprecatedParameter,
+    argsToParams: argsToParams,
+    isVisible: isVisible$1,
+    clickConfirm: clickConfirm,
+    clickDeny: clickDeny,
+    clickCancel: clickCancel,
+    getContainer: getContainer,
+    getPopup: getPopup,
+    getTitle: getTitle,
+    getContent: getContent,
+    getHtmlContainer: getHtmlContainer,
+    getImage: getImage,
+    getIcon: getIcon,
+    getIcons: getIcons,
+    getInputLabel: getInputLabel,
+    getCloseButton: getCloseButton,
+    getActions: getActions,
+    getConfirmButton: getConfirmButton,
+    getDenyButton: getDenyButton,
+    getCancelButton: getCancelButton,
+    getLoader: getLoader,
+    getHeader: getHeader,
+    getFooter: getFooter,
+    getTimerProgressBar: getTimerProgressBar,
+    getFocusableElements: getFocusableElements,
+    getValidationMessage: getValidationMessage,
+    isLoading: isLoading,
+    fire: fire,
+    mixin: mixin,
+    queue: queue,
+    getQueueStep: getQueueStep,
+    insertQueueStep: insertQueueStep,
+    deleteQueueStep: deleteQueueStep,
+    showLoading: showLoading,
+    enableLoading: showLoading,
+    getTimerLeft: getTimerLeft,
+    stopTimer: stopTimer,
+    resumeTimer: resumeTimer,
+    toggleTimer: toggleTimer,
+    increaseTimer: increaseTimer,
+    isTimerRunning: isTimerRunning,
+    bindClickHandler: bindClickHandler
+  });
+
+  /**
+   * Hides loader and shows back the button which was hidden by .showLoading()
+   */
+
+  function hideLoading() {
+    // do nothing if popup is closed
+    var innerParams = privateProps.innerParams.get(this);
+
+    if (!innerParams) {
+      return;
+    }
+
+    var domCache = privateProps.domCache.get(this);
+    hide(domCache.loader);
+    var buttonToReplace = domCache.popup.getElementsByClassName(domCache.loader.getAttribute('data-button-to-replace'));
+
+    if (buttonToReplace.length) {
+      show(buttonToReplace[0], 'inline-block');
+    } else if (allButtonsAreHidden()) {
+      hide(domCache.actions);
+    }
+
+    removeClass([domCache.popup, domCache.actions], swalClasses.loading);
+    domCache.popup.removeAttribute('aria-busy');
+    domCache.popup.removeAttribute('data-loading');
+    domCache.confirmButton.disabled = false;
+    domCache.denyButton.disabled = false;
+    domCache.cancelButton.disabled = false;
+  }
+
+  function getInput$1(instance) {
+    var innerParams = privateProps.innerParams.get(instance || this);
+    var domCache = privateProps.domCache.get(instance || this);
+
+    if (!domCache) {
+      return null;
+    }
+
+    return getInput(domCache.content, innerParams.input);
+  }
+
+  var fixScrollbar = function fixScrollbar() {
+    // for queues, do not do this more than once
+    if (states.previousBodyPadding !== null) {
+      return;
+    } // if the body has overflow
+
+
+    if (document.body.scrollHeight > window.innerHeight) {
+      // add padding so the content doesn't shift after removal of scrollbar
+      states.previousBodyPadding = parseInt(window.getComputedStyle(document.body).getPropertyValue('padding-right'));
+      document.body.style.paddingRight = "".concat(states.previousBodyPadding + measureScrollbar(), "px");
+    }
+  };
+  var undoScrollbar = function undoScrollbar() {
+    if (states.previousBodyPadding !== null) {
+      document.body.style.paddingRight = "".concat(states.previousBodyPadding, "px");
+      states.previousBodyPadding = null;
+    }
+  };
+
+  /* istanbul ignore file */
+
+  var iOSfix = function iOSfix() {
+    var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream || navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
+
+    if (iOS && !hasClass(document.body, swalClasses.iosfix)) {
+      var offset = document.body.scrollTop;
+      document.body.style.top = "".concat(offset * -1, "px");
+      addClass(document.body, swalClasses.iosfix);
+      lockBodyScroll();
+      addBottomPaddingForTallPopups(); // #1948
+    }
+  };
+
+  var addBottomPaddingForTallPopups = function addBottomPaddingForTallPopups() {
+    var safari = !navigator.userAgent.match(/(CriOS|FxiOS|EdgiOS|YaBrowser|UCBrowser)/i);
+
+    if (safari) {
+      var bottomPanelHeight = 44;
+
+      if (getPopup().scrollHeight > window.innerHeight - bottomPanelHeight) {
+        getContainer().style.paddingBottom = "".concat(bottomPanelHeight, "px");
+      }
+    }
+  };
+
+  var lockBodyScroll = function lockBodyScroll() {
+    // #1246
+    var container = getContainer();
+    var preventTouchMove;
+
+    container.ontouchstart = function (e) {
+      preventTouchMove = shouldPreventTouchMove(e);
+    };
+
+    container.ontouchmove = function (e) {
+      if (preventTouchMove) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    };
+  };
+
+  var shouldPreventTouchMove = function shouldPreventTouchMove(event) {
+    var target = event.target;
+    var container = getContainer();
+
+    if (isStylys(event) || isZoom(event)) {
+      return false;
+    }
+
+    if (target === container) {
+      return true;
+    }
+
+    if (!isScrollable(container) && target.tagName !== 'INPUT' && // #1603
+    !(isScrollable(getContent()) && // #1944
+    getContent().contains(target))) {
+      return true;
+    }
+
+    return false;
+  };
+
+  var isStylys = function isStylys(event) {
+    // #1786
+    return event.touches && event.touches.length && event.touches[0].touchType === 'stylus';
+  };
+
+  var isZoom = function isZoom(event) {
+    // #1891
+    return event.touches && event.touches.length > 1;
+  };
+
+  var undoIOSfix = function undoIOSfix() {
+    if (hasClass(document.body, swalClasses.iosfix)) {
+      var offset = parseInt(document.body.style.top, 10);
+      removeClass(document.body, swalClasses.iosfix);
+      document.body.style.top = '';
+      document.body.scrollTop = offset * -1;
+    }
+  };
+
+  /* istanbul ignore file */
+
+  var isIE11 = function isIE11() {
+    return !!window.MSInputMethodContext && !!document.documentMode;
+  }; // Fix IE11 centering sweetalert2/issues/933
+
+
+  var fixVerticalPositionIE = function fixVerticalPositionIE() {
+    var container = getContainer();
+    var popup = getPopup();
+    container.style.removeProperty('align-items');
+
+    if (popup.offsetTop < 0) {
+      container.style.alignItems = 'flex-start';
+    }
+  };
+
+  var IEfix = function IEfix() {
+    if (typeof window !== 'undefined' && isIE11()) {
+      fixVerticalPositionIE();
+      window.addEventListener('resize', fixVerticalPositionIE);
+    }
+  };
+  var undoIEfix = function undoIEfix() {
+    if (typeof window !== 'undefined' && isIE11()) {
+      window.removeEventListener('resize', fixVerticalPositionIE);
+    }
+  };
+
+  // Adding aria-hidden="true" to elements outside of the active modal dialog ensures that
+  // elements not within the active modal dialog will not be surfaced if a user opens a screen
+  // reader’s list of elements (headings, form controls, landmarks, etc.) in the document.
+
+  var setAriaHidden = function setAriaHidden() {
+    var bodyChildren = toArray(document.body.children);
+    bodyChildren.forEach(function (el) {
+      if (el === getContainer() || contains(el, getContainer())) {
+        return;
+      }
+
+      if (el.hasAttribute('aria-hidden')) {
+        el.setAttribute('data-previous-aria-hidden', el.getAttribute('aria-hidden'));
+      }
+
+      el.setAttribute('aria-hidden', 'true');
+    });
+  };
+  var unsetAriaHidden = function unsetAriaHidden() {
+    var bodyChildren = toArray(document.body.children);
+    bodyChildren.forEach(function (el) {
+      if (el.hasAttribute('data-previous-aria-hidden')) {
+        el.setAttribute('aria-hidden', el.getAttribute('data-previous-aria-hidden'));
+        el.removeAttribute('data-previous-aria-hidden');
+      } else {
+        el.removeAttribute('aria-hidden');
+      }
+    });
+  };
+
+  /**
+   * This module containts `WeakMap`s for each effectively-"private  property" that a `Swal` has.
+   * For example, to set the private property "foo" of `this` to "bar", you can `privateProps.foo.set(this, 'bar')`
+   * This is the approach that Babel will probably take to implement private methods/fields
+   *   https://github.com/tc39/proposal-private-methods
+   *   https://github.com/babel/babel/pull/7555
+   * Once we have the changes from that PR in Babel, and our core class fits reasonable in *one module*
+   *   then we can use that language feature.
+   */
+  var privateMethods = {
+    swalPromiseResolve: new WeakMap()
+  };
+
+  /*
+   * Instance method to close sweetAlert
+   */
+
+  function removePopupAndResetState(instance, container, isToast$$1, didClose) {
+    if (isToast$$1) {
+      triggerDidCloseAndDispose(instance, didClose);
+    } else {
+      restoreActiveElement().then(function () {
+        return triggerDidCloseAndDispose(instance, didClose);
+      });
+      globalState.keydownTarget.removeEventListener('keydown', globalState.keydownHandler, {
+        capture: globalState.keydownListenerCapture
+      });
+      globalState.keydownHandlerAdded = false;
+    }
+
+    if (container.parentNode && !document.body.getAttribute('data-swal2-queue-step')) {
+      container.parentNode.removeChild(container);
+    }
+
+    if (isModal()) {
+      undoScrollbar();
+      undoIOSfix();
+      undoIEfix();
+      unsetAriaHidden();
+    }
+
+    removeBodyClasses();
+  }
+
+  function removeBodyClasses() {
+    removeClass([document.documentElement, document.body], [swalClasses.shown, swalClasses['height-auto'], swalClasses['no-backdrop'], swalClasses['toast-shown'], swalClasses['toast-column']]);
+  }
+
+  function close(resolveValue) {
+    var popup = getPopup();
+
+    if (!popup) {
+      return;
+    }
+
+    resolveValue = prepareResolveValue(resolveValue);
+    var innerParams = privateProps.innerParams.get(this);
+
+    if (!innerParams || hasClass(popup, innerParams.hideClass.popup)) {
+      return;
+    }
+
+    var swalPromiseResolve = privateMethods.swalPromiseResolve.get(this);
+    removeClass(popup, innerParams.showClass.popup);
+    addClass(popup, innerParams.hideClass.popup);
+    var backdrop = getContainer();
+    removeClass(backdrop, innerParams.showClass.backdrop);
+    addClass(backdrop, innerParams.hideClass.backdrop);
+    handlePopupAnimation(this, popup, innerParams); // Resolve Swal promise
+
+    swalPromiseResolve(resolveValue);
+  }
+
+  var prepareResolveValue = function prepareResolveValue(resolveValue) {
+    // When user calls Swal.close()
+    if (typeof resolveValue === 'undefined') {
+      return {
+        isConfirmed: false,
+        isDenied: false,
+        isDismissed: true
+      };
+    }
+
+    return _extends({
+      isConfirmed: false,
+      isDenied: false,
+      isDismissed: false
+    }, resolveValue);
+  };
+
+  var handlePopupAnimation = function handlePopupAnimation(instance, popup, innerParams) {
+    var container = getContainer(); // If animation is supported, animate
+
+    var animationIsSupported = animationEndEvent && hasCssAnimation(popup);
+    var onClose = innerParams.onClose,
+        onAfterClose = innerParams.onAfterClose,
+        willClose = innerParams.willClose,
+        didClose = innerParams.didClose;
+    runDidClose(popup, willClose, onClose);
+
+    if (animationIsSupported) {
+      animatePopup(instance, popup, container, didClose || onAfterClose);
+    } else {
+      // Otherwise, remove immediately
+      removePopupAndResetState(instance, container, isToast(), didClose || onAfterClose);
+    }
+  };
+
+  var runDidClose = function runDidClose(popup, willClose, onClose) {
+    if (willClose !== null && typeof willClose === 'function') {
+      willClose(popup);
+    } else if (onClose !== null && typeof onClose === 'function') {
+      onClose(popup); // @deprecated
+    }
+  };
+
+  var animatePopup = function animatePopup(instance, popup, container, didClose) {
+    globalState.swalCloseEventFinishedCallback = removePopupAndResetState.bind(null, instance, container, isToast(), didClose);
+    popup.addEventListener(animationEndEvent, function (e) {
+      if (e.target === popup) {
+        globalState.swalCloseEventFinishedCallback();
+        delete globalState.swalCloseEventFinishedCallback;
+      }
+    });
+  };
+
+  var triggerDidCloseAndDispose = function triggerDidCloseAndDispose(instance, didClose) {
+    setTimeout(function () {
+      if (typeof didClose === 'function') {
+        didClose();
+      }
+
+      instance._destroy();
+    });
+  };
+
+  function setButtonsDisabled(instance, buttons, disabled) {
+    var domCache = privateProps.domCache.get(instance);
+    buttons.forEach(function (button) {
+      domCache[button].disabled = disabled;
+    });
+  }
+
+  function setInputDisabled(input, disabled) {
+    if (!input) {
+      return false;
+    }
+
+    if (input.type === 'radio') {
+      var radiosContainer = input.parentNode.parentNode;
+      var radios = radiosContainer.querySelectorAll('input');
+
+      for (var i = 0; i < radios.length; i++) {
+        radios[i].disabled = disabled;
+      }
+    } else {
+      input.disabled = disabled;
+    }
+  }
+
+  function enableButtons() {
+    setButtonsDisabled(this, ['confirmButton', 'denyButton', 'cancelButton'], false);
+  }
+  function disableButtons() {
+    setButtonsDisabled(this, ['confirmButton', 'denyButton', 'cancelButton'], true);
+  }
+  function enableInput() {
+    return setInputDisabled(this.getInput(), false);
+  }
+  function disableInput() {
+    return setInputDisabled(this.getInput(), true);
+  }
+
+  function showValidationMessage(error) {
+    var domCache = privateProps.domCache.get(this);
+    var params = privateProps.innerParams.get(this);
+    setInnerHtml(domCache.validationMessage, error);
+    domCache.validationMessage.className = swalClasses['validation-message'];
+
+    if (params.customClass && params.customClass.validationMessage) {
+      addClass(domCache.validationMessage, params.customClass.validationMessage);
+    }
+
+    show(domCache.validationMessage);
+    var input = this.getInput();
+
+    if (input) {
+      input.setAttribute('aria-invalid', true);
+      input.setAttribute('aria-describedBy', swalClasses['validation-message']);
+      focusInput(input);
+      addClass(input, swalClasses.inputerror);
+    }
+  } // Hide block with validation message
+
+  function resetValidationMessage$1() {
+    var domCache = privateProps.domCache.get(this);
+
+    if (domCache.validationMessage) {
+      hide(domCache.validationMessage);
+    }
+
+    var input = this.getInput();
+
+    if (input) {
+      input.removeAttribute('aria-invalid');
+      input.removeAttribute('aria-describedBy');
+      removeClass(input, swalClasses.inputerror);
+    }
+  }
+
+  function getProgressSteps$1() {
+    var domCache = privateProps.domCache.get(this);
+    return domCache.progressSteps;
+  }
+
+  var Timer = /*#__PURE__*/function () {
+    function Timer(callback, delay) {
+      _classCallCheck(this, Timer);
+
+      this.callback = callback;
+      this.remaining = delay;
+      this.running = false;
+      this.start();
+    }
+
+    _createClass(Timer, [{
+      key: "start",
+      value: function start() {
+        if (!this.running) {
+          this.running = true;
+          this.started = new Date();
+          this.id = setTimeout(this.callback, this.remaining);
+        }
+
+        return this.remaining;
+      }
+    }, {
+      key: "stop",
+      value: function stop() {
+        if (this.running) {
+          this.running = false;
+          clearTimeout(this.id);
+          this.remaining -= new Date() - this.started;
+        }
+
+        return this.remaining;
+      }
+    }, {
+      key: "increase",
+      value: function increase(n) {
+        var running = this.running;
+
+        if (running) {
+          this.stop();
+        }
+
+        this.remaining += n;
+
+        if (running) {
+          this.start();
+        }
+
+        return this.remaining;
+      }
+    }, {
+      key: "getTimerLeft",
+      value: function getTimerLeft() {
+        if (this.running) {
+          this.stop();
+          this.start();
+        }
+
+        return this.remaining;
+      }
+    }, {
+      key: "isRunning",
+      value: function isRunning() {
+        return this.running;
+      }
+    }]);
+
+    return Timer;
+  }();
+
+  var defaultInputValidators = {
+    email: function email(string, validationMessage) {
+      return /^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9-]{2,24}$/.test(string) ? Promise.resolve() : Promise.resolve(validationMessage || 'Invalid email address');
+    },
+    url: function url(string, validationMessage) {
+      // taken from https://stackoverflow.com/a/3809435 with a small change from #1306 and #2013
+      return /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-z]{2,63}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/.test(string) ? Promise.resolve() : Promise.resolve(validationMessage || 'Invalid URL');
+    }
+  };
+
+  function setDefaultInputValidators(params) {
+    // Use default `inputValidator` for supported input types if not provided
+    if (!params.inputValidator) {
+      Object.keys(defaultInputValidators).forEach(function (key) {
+        if (params.input === key) {
+          params.inputValidator = defaultInputValidators[key];
+        }
+      });
+    }
+  }
+
+  function validateCustomTargetElement(params) {
+    // Determine if the custom target element is valid
+    if (!params.target || typeof params.target === 'string' && !document.querySelector(params.target) || typeof params.target !== 'string' && !params.target.appendChild) {
+      warn('Target parameter is not valid, defaulting to "body"');
+      params.target = 'body';
+    }
+  }
+  /**
+   * Set type, text and actions on popup
+   *
+   * @param params
+   * @returns {boolean}
+   */
+
+
+  function setParameters(params) {
+    setDefaultInputValidators(params); // showLoaderOnConfirm && preConfirm
+
+    if (params.showLoaderOnConfirm && !params.preConfirm) {
+      warn('showLoaderOnConfirm is set to true, but preConfirm is not defined.\n' + 'showLoaderOnConfirm should be used together with preConfirm, see usage example:\n' + 'https://sweetalert2.github.io/#ajax-request');
+    } // params.animation will be actually used in renderPopup.js
+    // but in case when params.animation is a function, we need to call that function
+    // before popup (re)initialization, so it'll be possible to check Swal.isVisible()
+    // inside the params.animation function
+
+
+    params.animation = callIfFunction(params.animation);
+    validateCustomTargetElement(params); // Replace newlines with <br> in title
+
+    if (typeof params.title === 'string') {
+      params.title = params.title.split('\n').join('<br />');
+    }
+
+    init(params);
+  }
+
+  var swalStringParams = ['swal-title', 'swal-html', 'swal-footer'];
+  var getTemplateParams = function getTemplateParams(params) {
+    var template = typeof params.template === 'string' ? document.querySelector(params.template) : params.template;
+
+    if (!template) {
+      return {};
+    }
+
+    var templateContent = template.content || template; // IE11
+
+    showWarningsForElements(templateContent);
+
+    var result = _extends(getSwalParams(templateContent), getSwalButtons(templateContent), getSwalImage(templateContent), getSwalIcon(templateContent), getSwalInput(templateContent), getSwalStringParams(templateContent, swalStringParams));
+
+    return result;
+  };
+
+  var getSwalParams = function getSwalParams(templateContent) {
+    var result = {};
+    toArray(templateContent.querySelectorAll('swal-param')).forEach(function (param) {
+      showWarningsForAttributes(param, ['name', 'value']);
+      var paramName = param.getAttribute('name');
+      var value = param.getAttribute('value');
+
+      if (typeof defaultParams[paramName] === 'boolean' && value === 'false') {
+        value = false;
+      }
+
+      if (_typeof(defaultParams[paramName]) === 'object') {
+        value = JSON.parse(value);
+      }
+
+      result[paramName] = value;
+    });
+    return result;
+  };
+
+  var getSwalButtons = function getSwalButtons(templateContent) {
+    var result = {};
+    toArray(templateContent.querySelectorAll('swal-button')).forEach(function (button) {
+      showWarningsForAttributes(button, ['type', 'color', 'aria-label']);
+      var type = button.getAttribute('type');
+      result["".concat(type, "ButtonText")] = button.innerHTML;
+      result["show".concat(capitalizeFirstLetter(type), "Button")] = true;
+
+      if (button.hasAttribute('color')) {
+        result["".concat(type, "ButtonColor")] = button.getAttribute('color');
+      }
+
+      if (button.hasAttribute('aria-label')) {
+        result["".concat(type, "ButtonAriaLabel")] = button.getAttribute('aria-label');
+      }
+    });
+    return result;
+  };
+
+  var getSwalImage = function getSwalImage(templateContent) {
+    var result = {};
+    var image = templateContent.querySelector('swal-image');
+
+    if (image) {
+      showWarningsForAttributes(image, ['src', 'width', 'height', 'alt']);
+
+      if (image.hasAttribute('src')) {
+        result.imageUrl = image.getAttribute('src');
+      }
+
+      if (image.hasAttribute('width')) {
+        result.imageWidth = image.getAttribute('width');
+      }
+
+      if (image.hasAttribute('height')) {
+        result.imageHeight = image.getAttribute('height');
+      }
+
+      if (image.hasAttribute('alt')) {
+        result.imageAlt = image.getAttribute('alt');
+      }
+    }
+
+    return result;
+  };
+
+  var getSwalIcon = function getSwalIcon(templateContent) {
+    var result = {};
+    var icon = templateContent.querySelector('swal-icon');
+
+    if (icon) {
+      showWarningsForAttributes(icon, ['type', 'color']);
+
+      if (icon.hasAttribute('type')) {
+        result.icon = icon.getAttribute('type');
+      }
+
+      if (icon.hasAttribute('color')) {
+        result.iconColor = icon.getAttribute('color');
+      }
+
+      result.iconHtml = icon.innerHTML;
+    }
+
+    return result;
+  };
+
+  var getSwalInput = function getSwalInput(templateContent) {
+    var result = {};
+    var input = templateContent.querySelector('swal-input');
+
+    if (input) {
+      showWarningsForAttributes(input, ['type', 'label', 'placeholder', 'value']);
+      result.input = input.getAttribute('type') || 'text';
+
+      if (input.hasAttribute('label')) {
+        result.inputLabel = input.getAttribute('label');
+      }
+
+      if (input.hasAttribute('placeholder')) {
+        result.inputPlaceholder = input.getAttribute('placeholder');
+      }
+
+      if (input.hasAttribute('value')) {
+        result.inputValue = input.getAttribute('value');
+      }
+    }
+
+    var inputOptions = templateContent.querySelectorAll('swal-input-option');
+
+    if (inputOptions.length) {
+      result.inputOptions = {};
+      toArray(inputOptions).forEach(function (option) {
+        showWarningsForAttributes(option, ['value']);
+        var optionValue = option.getAttribute('value');
+        var optionName = option.innerHTML;
+        result.inputOptions[optionValue] = optionName;
+      });
+    }
+
+    return result;
+  };
+
+  var getSwalStringParams = function getSwalStringParams(templateContent, paramNames) {
+    var result = {};
+
+    for (var i in paramNames) {
+      var paramName = paramNames[i];
+      var tag = templateContent.querySelector(paramName);
+
+      if (tag) {
+        showWarningsForAttributes(tag, []);
+        result[paramName.replace(/^swal-/, '')] = tag.innerHTML;
+      }
+    }
+
+    return result;
+  };
+
+  var showWarningsForElements = function showWarningsForElements(template) {
+    var allowedElements = swalStringParams.concat(['swal-param', 'swal-button', 'swal-image', 'swal-icon', 'swal-input', 'swal-input-option']);
+    toArray(template.querySelectorAll('*')).forEach(function (el) {
+      var tagName = el.tagName.toLowerCase();
+
+      if (allowedElements.indexOf(tagName) === -1) {
+        warn("Unrecognized element <".concat(tagName, ">"));
+      }
+    });
+  };
+
+  var showWarningsForAttributes = function showWarningsForAttributes(el, allowedAttributes) {
+    toArray(el.attributes).forEach(function (attribute) {
+      if (allowedAttributes.indexOf(attribute.name) === -1) {
+        warn(["Unrecognized attribute \"".concat(attribute.name, "\" on <").concat(el.tagName.toLowerCase(), ">."), "".concat(allowedAttributes.length ? "Allowed attributes are: ".concat(allowedAttributes.join(', ')) : 'To set the value, use HTML within the element.')]);
+      }
+    });
+  };
+
+  var SHOW_CLASS_TIMEOUT = 10;
+  /**
+   * Open popup, add necessary classes and styles, fix scrollbar
+   *
+   * @param params
+   */
+
+  var openPopup = function openPopup(params) {
+    var container = getContainer();
+    var popup = getPopup();
+
+    if (typeof params.willOpen === 'function') {
+      params.willOpen(popup);
+    } else if (typeof params.onBeforeOpen === 'function') {
+      params.onBeforeOpen(popup); // @deprecated
+    }
+
+    var bodyStyles = window.getComputedStyle(document.body);
+    var initialBodyOverflow = bodyStyles.overflowY;
+    addClasses$1(container, popup, params); // scrolling is 'hidden' until animation is done, after that 'auto'
+
+    setTimeout(function () {
+      setScrollingVisibility(container, popup);
+    }, SHOW_CLASS_TIMEOUT);
+
+    if (isModal()) {
+      fixScrollContainer(container, params.scrollbarPadding, initialBodyOverflow);
+      setAriaHidden();
+    }
+
+    if (!isToast() && !globalState.previousActiveElement) {
+      globalState.previousActiveElement = document.activeElement;
+    }
+
+    runDidOpen(popup, params);
+    removeClass(container, swalClasses['no-transition']);
+  };
+
+  var runDidOpen = function runDidOpen(popup, params) {
+    if (typeof params.didOpen === 'function') {
+      setTimeout(function () {
+        return params.didOpen(popup);
+      });
+    } else if (typeof params.onOpen === 'function') {
+      setTimeout(function () {
+        return params.onOpen(popup);
+      }); // @deprecated
+    }
+  };
+
+  var swalOpenAnimationFinished = function swalOpenAnimationFinished(event) {
+    var popup = getPopup();
+
+    if (event.target !== popup) {
+      return;
+    }
+
+    var container = getContainer();
+    popup.removeEventListener(animationEndEvent, swalOpenAnimationFinished);
+    container.style.overflowY = 'auto';
+  };
+
+  var setScrollingVisibility = function setScrollingVisibility(container, popup) {
+    if (animationEndEvent && hasCssAnimation(popup)) {
+      container.style.overflowY = 'hidden';
+      popup.addEventListener(animationEndEvent, swalOpenAnimationFinished);
+    } else {
+      container.style.overflowY = 'auto';
+    }
+  };
+
+  var fixScrollContainer = function fixScrollContainer(container, scrollbarPadding, initialBodyOverflow) {
+    iOSfix();
+    IEfix();
+
+    if (scrollbarPadding && initialBodyOverflow !== 'hidden') {
+      fixScrollbar();
+    } // sweetalert2/issues/1247
+
+
+    setTimeout(function () {
+      container.scrollTop = 0;
+    });
+  };
+
+  var addClasses$1 = function addClasses(container, popup, params) {
+    addClass(container, params.showClass.backdrop); // the workaround with setting/unsetting opacity is needed for #2019 and 2059
+
+    popup.style.setProperty('opacity', '0', 'important');
+    show(popup);
+    setTimeout(function () {
+      // Animate popup right after showing it
+      addClass(popup, params.showClass.popup); // and remove the opacity workaround
+
+      popup.style.removeProperty('opacity');
+    }, SHOW_CLASS_TIMEOUT); // 10ms in order to fix #2062
+
+    addClass([document.documentElement, document.body], swalClasses.shown);
+
+    if (params.heightAuto && params.backdrop && !params.toast) {
+      addClass([document.documentElement, document.body], swalClasses['height-auto']);
+    }
+  };
+
+  var handleInputOptionsAndValue = function handleInputOptionsAndValue(instance, params) {
+    if (params.input === 'select' || params.input === 'radio') {
+      handleInputOptions(instance, params);
+    } else if (['text', 'email', 'number', 'tel', 'textarea'].indexOf(params.input) !== -1 && (hasToPromiseFn(params.inputValue) || isPromise(params.inputValue))) {
+      handleInputValue(instance, params);
+    }
+  };
+  var getInputValue = function getInputValue(instance, innerParams) {
+    var input = instance.getInput();
+
+    if (!input) {
+      return null;
+    }
+
+    switch (innerParams.input) {
+      case 'checkbox':
+        return getCheckboxValue(input);
+
+      case 'radio':
+        return getRadioValue(input);
+
+      case 'file':
+        return getFileValue(input);
+
+      default:
+        return innerParams.inputAutoTrim ? input.value.trim() : input.value;
+    }
+  };
+
+  var getCheckboxValue = function getCheckboxValue(input) {
+    return input.checked ? 1 : 0;
+  };
+
+  var getRadioValue = function getRadioValue(input) {
+    return input.checked ? input.value : null;
+  };
+
+  var getFileValue = function getFileValue(input) {
+    return input.files.length ? input.getAttribute('multiple') !== null ? input.files : input.files[0] : null;
+  };
+
+  var handleInputOptions = function handleInputOptions(instance, params) {
+    var content = getContent();
+
+    var processInputOptions = function processInputOptions(inputOptions) {
+      return populateInputOptions[params.input](content, formatInputOptions(inputOptions), params);
+    };
+
+    if (hasToPromiseFn(params.inputOptions) || isPromise(params.inputOptions)) {
+      showLoading();
+      asPromise(params.inputOptions).then(function (inputOptions) {
+        instance.hideLoading();
+        processInputOptions(inputOptions);
+      });
+    } else if (_typeof(params.inputOptions) === 'object') {
+      processInputOptions(params.inputOptions);
+    } else {
+      error("Unexpected type of inputOptions! Expected object, Map or Promise, got ".concat(_typeof(params.inputOptions)));
+    }
+  };
+
+  var handleInputValue = function handleInputValue(instance, params) {
+    var input = instance.getInput();
+    hide(input);
+    asPromise(params.inputValue).then(function (inputValue) {
+      input.value = params.input === 'number' ? parseFloat(inputValue) || 0 : "".concat(inputValue);
+      show(input);
+      input.focus();
+      instance.hideLoading();
+    })["catch"](function (err) {
+      error("Error in inputValue promise: ".concat(err));
+      input.value = '';
+      show(input);
+      input.focus();
+      instance.hideLoading();
+    });
+  };
+
+  var populateInputOptions = {
+    select: function select(content, inputOptions, params) {
+      var select = getChildByClass(content, swalClasses.select);
+
+      var renderOption = function renderOption(parent, optionLabel, optionValue) {
+        var option = document.createElement('option');
+        option.value = optionValue;
+        setInnerHtml(option, optionLabel);
+        option.selected = isSelected(optionValue, params.inputValue);
+        parent.appendChild(option);
+      };
+
+      inputOptions.forEach(function (inputOption) {
+        var optionValue = inputOption[0];
+        var optionLabel = inputOption[1]; // <optgroup> spec:
+        // https://www.w3.org/TR/html401/interact/forms.html#h-17.6
+        // "...all OPTGROUP elements must be specified directly within a SELECT element (i.e., groups may not be nested)..."
+        // check whether this is a <optgroup>
+
+        if (Array.isArray(optionLabel)) {
+          // if it is an array, then it is an <optgroup>
+          var optgroup = document.createElement('optgroup');
+          optgroup.label = optionValue;
+          optgroup.disabled = false; // not configurable for now
+
+          select.appendChild(optgroup);
+          optionLabel.forEach(function (o) {
+            return renderOption(optgroup, o[1], o[0]);
+          });
+        } else {
+          // case of <option>
+          renderOption(select, optionLabel, optionValue);
+        }
+      });
+      select.focus();
+    },
+    radio: function radio(content, inputOptions, params) {
+      var radio = getChildByClass(content, swalClasses.radio);
+      inputOptions.forEach(function (inputOption) {
+        var radioValue = inputOption[0];
+        var radioLabel = inputOption[1];
+        var radioInput = document.createElement('input');
+        var radioLabelElement = document.createElement('label');
+        radioInput.type = 'radio';
+        radioInput.name = swalClasses.radio;
+        radioInput.value = radioValue;
+
+        if (isSelected(radioValue, params.inputValue)) {
+          radioInput.checked = true;
+        }
+
+        var label = document.createElement('span');
+        setInnerHtml(label, radioLabel);
+        label.className = swalClasses.label;
+        radioLabelElement.appendChild(radioInput);
+        radioLabelElement.appendChild(label);
+        radio.appendChild(radioLabelElement);
+      });
+      var radios = radio.querySelectorAll('input');
+
+      if (radios.length) {
+        radios[0].focus();
+      }
+    }
+  };
+  /**
+   * Converts `inputOptions` into an array of `[value, label]`s
+   * @param inputOptions
+   */
+
+  var formatInputOptions = function formatInputOptions(inputOptions) {
+    var result = [];
+
+    if (typeof Map !== 'undefined' && inputOptions instanceof Map) {
+      inputOptions.forEach(function (value, key) {
+        var valueFormatted = value;
+
+        if (_typeof(valueFormatted) === 'object') {
+          // case of <optgroup>
+          valueFormatted = formatInputOptions(valueFormatted);
+        }
+
+        result.push([key, valueFormatted]);
+      });
+    } else {
+      Object.keys(inputOptions).forEach(function (key) {
+        var valueFormatted = inputOptions[key];
+
+        if (_typeof(valueFormatted) === 'object') {
+          // case of <optgroup>
+          valueFormatted = formatInputOptions(valueFormatted);
+        }
+
+        result.push([key, valueFormatted]);
+      });
+    }
+
+    return result;
+  };
+
+  var isSelected = function isSelected(optionValue, inputValue) {
+    return inputValue && inputValue.toString() === optionValue.toString();
+  };
+
+  var handleConfirmButtonClick = function handleConfirmButtonClick(instance, innerParams) {
+    instance.disableButtons();
+
+    if (innerParams.input) {
+      handleConfirmOrDenyWithInput(instance, innerParams, 'confirm');
+    } else {
+      confirm(instance, innerParams, true);
+    }
+  };
+  var handleDenyButtonClick = function handleDenyButtonClick(instance, innerParams) {
+    instance.disableButtons();
+
+    if (innerParams.returnInputValueOnDeny) {
+      handleConfirmOrDenyWithInput(instance, innerParams, 'deny');
+    } else {
+      deny(instance, innerParams, false);
+    }
+  };
+  var handleCancelButtonClick = function handleCancelButtonClick(instance, dismissWith) {
+    instance.disableButtons();
+    dismissWith(DismissReason.cancel);
+  };
+
+  var handleConfirmOrDenyWithInput = function handleConfirmOrDenyWithInput(instance, innerParams, type
+  /* type is either 'confirm' or 'deny' */
+  ) {
+    var inputValue = getInputValue(instance, innerParams);
+
+    if (innerParams.inputValidator) {
+      handleInputValidator(instance, innerParams, inputValue);
+    } else if (!instance.getInput().checkValidity()) {
+      instance.enableButtons();
+      instance.showValidationMessage(innerParams.validationMessage);
+    } else if (type === 'deny') {
+      deny(instance, innerParams, inputValue);
+    } else {
+      confirm(instance, innerParams, inputValue);
+    }
+  };
+
+  var handleInputValidator = function handleInputValidator(instance, innerParams, inputValue) {
+    instance.disableInput();
+    var validationPromise = Promise.resolve().then(function () {
+      return asPromise(innerParams.inputValidator(inputValue, innerParams.validationMessage));
+    });
+    validationPromise.then(function (validationMessage) {
+      instance.enableButtons();
+      instance.enableInput();
+
+      if (validationMessage) {
+        instance.showValidationMessage(validationMessage);
+      } else {
+        confirm(instance, innerParams, inputValue);
+      }
+    });
+  };
+
+  var deny = function deny(instance, innerParams, value) {
+    if (innerParams.preDeny) {
+      var preDenyPromise = Promise.resolve().then(function () {
+        return asPromise(innerParams.preDeny(value, innerParams.validationMessage));
+      });
+      preDenyPromise.then(function (preDenyValue) {
+        if (preDenyValue === false) {
+          instance.hideLoading();
+        } else {
+          instance.closePopup({
+            isDenied: true,
+            value: typeof preDenyValue === 'undefined' ? value : preDenyValue
+          });
+        }
+      });
+    } else {
+      instance.closePopup({
+        isDenied: true,
+        value: value
+      });
+    }
+  };
+
+  var succeedWith = function succeedWith(instance, value) {
+    instance.closePopup({
+      isConfirmed: true,
+      value: value
+    });
+  };
+
+  var confirm = function confirm(instance, innerParams, value) {
+    if (innerParams.showLoaderOnConfirm) {
+      showLoading(); // TODO: make showLoading an *instance* method
+    }
+
+    if (innerParams.preConfirm) {
+      instance.resetValidationMessage();
+      var preConfirmPromise = Promise.resolve().then(function () {
+        return asPromise(innerParams.preConfirm(value, innerParams.validationMessage));
+      });
+      preConfirmPromise.then(function (preConfirmValue) {
+        if (isVisible(getValidationMessage()) || preConfirmValue === false) {
+          instance.hideLoading();
+        } else {
+          succeedWith(instance, typeof preConfirmValue === 'undefined' ? value : preConfirmValue);
+        }
+      });
+    } else {
+      succeedWith(instance, value);
+    }
+  };
+
+  var addKeydownHandler = function addKeydownHandler(instance, globalState, innerParams, dismissWith) {
+    if (globalState.keydownTarget && globalState.keydownHandlerAdded) {
+      globalState.keydownTarget.removeEventListener('keydown', globalState.keydownHandler, {
+        capture: globalState.keydownListenerCapture
+      });
+      globalState.keydownHandlerAdded = false;
+    }
+
+    if (!innerParams.toast) {
+      globalState.keydownHandler = function (e) {
+        return keydownHandler(instance, e, dismissWith);
+      };
+
+      globalState.keydownTarget = innerParams.keydownListenerCapture ? window : getPopup();
+      globalState.keydownListenerCapture = innerParams.keydownListenerCapture;
+      globalState.keydownTarget.addEventListener('keydown', globalState.keydownHandler, {
+        capture: globalState.keydownListenerCapture
+      });
+      globalState.keydownHandlerAdded = true;
+    }
+  }; // Focus handling
+
+  var setFocus = function setFocus(innerParams, index, increment) {
+    var focusableElements = getFocusableElements(); // search for visible elements and select the next possible match
+
+    if (focusableElements.length) {
+      index = index + increment; // rollover to first item
+
+      if (index === focusableElements.length) {
+        index = 0; // go to last item
+      } else if (index === -1) {
+        index = focusableElements.length - 1;
+      }
+
+      return focusableElements[index].focus();
+    } // no visible focusable elements, focus the popup
+
+
+    getPopup().focus();
+  };
+  var arrowKeysNextButton = ['ArrowRight', 'ArrowDown', 'Right', 'Down' // IE11
+  ];
+  var arrowKeysPreviousButton = ['ArrowLeft', 'ArrowUp', 'Left', 'Up' // IE11
+  ];
+  var escKeys = ['Escape', 'Esc' // IE11
+  ];
+
+  var keydownHandler = function keydownHandler(instance, e, dismissWith) {
+    var innerParams = privateProps.innerParams.get(instance);
+
+    if (innerParams.stopKeydownPropagation) {
+      e.stopPropagation();
+    } // ENTER
+
+
+    if (e.key === 'Enter') {
+      handleEnter(instance, e, innerParams); // TAB
+    } else if (e.key === 'Tab') {
+      handleTab(e, innerParams); // ARROWS - switch focus between buttons
+    } else if ([].concat(arrowKeysNextButton, arrowKeysPreviousButton).indexOf(e.key) !== -1) {
+      handleArrows(e.key); // ESC
+    } else if (escKeys.indexOf(e.key) !== -1) {
+      handleEsc(e, innerParams, dismissWith);
+    }
+  };
+
+  var handleEnter = function handleEnter(instance, e, innerParams) {
+    // #720 #721
+    if (e.isComposing) {
+      return;
+    }
+
+    if (e.target && instance.getInput() && e.target.outerHTML === instance.getInput().outerHTML) {
+      if (['textarea', 'file'].indexOf(innerParams.input) !== -1) {
+        return; // do not submit
+      }
+
+      clickConfirm();
+      e.preventDefault();
+    }
+  };
+
+  var handleTab = function handleTab(e, innerParams) {
+    var targetElement = e.target;
+    var focusableElements = getFocusableElements();
+    var btnIndex = -1;
+
+    for (var i = 0; i < focusableElements.length; i++) {
+      if (targetElement === focusableElements[i]) {
+        btnIndex = i;
+        break;
+      }
+    }
+
+    if (!e.shiftKey) {
+      // Cycle to the next button
+      setFocus(innerParams, btnIndex, 1);
+    } else {
+      // Cycle to the prev button
+      setFocus(innerParams, btnIndex, -1);
+    }
+
+    e.stopPropagation();
+    e.preventDefault();
+  };
+
+  var handleArrows = function handleArrows(key) {
+    var confirmButton = getConfirmButton();
+    var denyButton = getDenyButton();
+    var cancelButton = getCancelButton();
+
+    if (!([confirmButton, denyButton, cancelButton].indexOf(document.activeElement) !== -1)) {
+      return;
+    }
+
+    var sibling = arrowKeysNextButton.indexOf(key) !== -1 ? 'nextElementSibling' : 'previousElementSibling';
+    var buttonToFocus = document.activeElement[sibling];
+
+    if (buttonToFocus) {
+      buttonToFocus.focus();
+    }
+  };
+
+  var handleEsc = function handleEsc(e, innerParams, dismissWith) {
+    if (callIfFunction(innerParams.allowEscapeKey)) {
+      e.preventDefault();
+      dismissWith(DismissReason.esc);
+    }
+  };
+
+  var handlePopupClick = function handlePopupClick(instance, domCache, dismissWith) {
+    var innerParams = privateProps.innerParams.get(instance);
+
+    if (innerParams.toast) {
+      handleToastClick(instance, domCache, dismissWith);
+    } else {
+      // Ignore click events that had mousedown on the popup but mouseup on the container
+      // This can happen when the user drags a slider
+      handleModalMousedown(domCache); // Ignore click events that had mousedown on the container but mouseup on the popup
+
+      handleContainerMousedown(domCache);
+      handleModalClick(instance, domCache, dismissWith);
+    }
+  };
+
+  var handleToastClick = function handleToastClick(instance, domCache, dismissWith) {
+    // Closing toast by internal click
+    domCache.popup.onclick = function () {
+      var innerParams = privateProps.innerParams.get(instance);
+
+      if (innerParams.showConfirmButton || innerParams.showDenyButton || innerParams.showCancelButton || innerParams.showCloseButton || innerParams.timer || innerParams.input) {
+        return;
+      }
+
+      dismissWith(DismissReason.close);
+    };
+  };
+
+  var ignoreOutsideClick = false;
+
+  var handleModalMousedown = function handleModalMousedown(domCache) {
+    domCache.popup.onmousedown = function () {
+      domCache.container.onmouseup = function (e) {
+        domCache.container.onmouseup = undefined; // We only check if the mouseup target is the container because usually it doesn't
+        // have any other direct children aside of the popup
+
+        if (e.target === domCache.container) {
+          ignoreOutsideClick = true;
+        }
+      };
+    };
+  };
+
+  var handleContainerMousedown = function handleContainerMousedown(domCache) {
+    domCache.container.onmousedown = function () {
+      domCache.popup.onmouseup = function (e) {
+        domCache.popup.onmouseup = undefined; // We also need to check if the mouseup target is a child of the popup
+
+        if (e.target === domCache.popup || domCache.popup.contains(e.target)) {
+          ignoreOutsideClick = true;
+        }
+      };
+    };
+  };
+
+  var handleModalClick = function handleModalClick(instance, domCache, dismissWith) {
+    domCache.container.onclick = function (e) {
+      var innerParams = privateProps.innerParams.get(instance);
+
+      if (ignoreOutsideClick) {
+        ignoreOutsideClick = false;
+        return;
+      }
+
+      if (e.target === domCache.container && callIfFunction(innerParams.allowOutsideClick)) {
+        dismissWith(DismissReason.backdrop);
+      }
+    };
+  };
+
+  function _main(userParams) {
+    var mixinParams = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    showWarningsForParams(_extends({}, mixinParams, userParams));
+
+    if (globalState.currentInstance) {
+      globalState.currentInstance._destroy();
+    }
+
+    globalState.currentInstance = this;
+    var innerParams = prepareParams(userParams, mixinParams);
+    setParameters(innerParams);
+    Object.freeze(innerParams); // clear the previous timer
+
+    if (globalState.timeout) {
+      globalState.timeout.stop();
+      delete globalState.timeout;
+    } // clear the restore focus timeout
+
+
+    clearTimeout(globalState.restoreFocusTimeout);
+    var domCache = populateDomCache(this);
+    render(this, innerParams);
+    privateProps.innerParams.set(this, innerParams);
+    return swalPromise(this, domCache, innerParams);
+  }
+
+  var prepareParams = function prepareParams(userParams, mixinParams) {
+    var templateParams = getTemplateParams(userParams);
+
+    var showClass = _extends({}, defaultParams.showClass, mixinParams.showClass, templateParams.showClass, userParams.showClass);
+
+    var hideClass = _extends({}, defaultParams.hideClass, mixinParams.hideClass, templateParams.hideClass, userParams.hideClass);
+
+    var params = _extends({}, defaultParams, mixinParams, templateParams, userParams); // precedence is described in #2131
+
+
+    params.showClass = showClass;
+    params.hideClass = hideClass; // @deprecated
+
+    if (userParams.animation === false) {
+      params.showClass = {
+        popup: 'swal2-noanimation',
+        backdrop: 'swal2-noanimation'
+      };
+      params.hideClass = {};
+    }
+
+    return params;
+  };
+
+  var swalPromise = function swalPromise(instance, domCache, innerParams) {
+    return new Promise(function (resolve) {
+      // functions to handle all closings/dismissals
+      var dismissWith = function dismissWith(dismiss) {
+        instance.closePopup({
+          isDismissed: true,
+          dismiss: dismiss
+        });
+      };
+
+      privateMethods.swalPromiseResolve.set(instance, resolve);
+
+      domCache.confirmButton.onclick = function () {
+        return handleConfirmButtonClick(instance, innerParams);
+      };
+
+      domCache.denyButton.onclick = function () {
+        return handleDenyButtonClick(instance, innerParams);
+      };
+
+      domCache.cancelButton.onclick = function () {
+        return handleCancelButtonClick(instance, dismissWith);
+      };
+
+      domCache.closeButton.onclick = function () {
+        return dismissWith(DismissReason.close);
+      };
+
+      handlePopupClick(instance, domCache, dismissWith);
+      addKeydownHandler(instance, globalState, innerParams, dismissWith);
+
+      if (innerParams.toast && (innerParams.input || innerParams.footer || innerParams.showCloseButton)) {
+        addClass(document.body, swalClasses['toast-column']);
+      } else {
+        removeClass(document.body, swalClasses['toast-column']);
+      }
+
+      handleInputOptionsAndValue(instance, innerParams);
+      openPopup(innerParams);
+      setupTimer(globalState, innerParams, dismissWith);
+      initFocus(domCache, innerParams); // Scroll container to top on open (#1247, #1946)
+
+      setTimeout(function () {
+        domCache.container.scrollTop = 0;
+      });
+    });
+  };
+
+  var populateDomCache = function populateDomCache(instance) {
+    var domCache = {
+      popup: getPopup(),
+      container: getContainer(),
+      content: getContent(),
+      actions: getActions(),
+      confirmButton: getConfirmButton(),
+      denyButton: getDenyButton(),
+      cancelButton: getCancelButton(),
+      loader: getLoader(),
+      closeButton: getCloseButton(),
+      validationMessage: getValidationMessage(),
+      progressSteps: getProgressSteps()
+    };
+    privateProps.domCache.set(instance, domCache);
+    return domCache;
+  };
+
+  var setupTimer = function setupTimer(globalState$$1, innerParams, dismissWith) {
+    var timerProgressBar = getTimerProgressBar();
+    hide(timerProgressBar);
+
+    if (innerParams.timer) {
+      globalState$$1.timeout = new Timer(function () {
+        dismissWith('timer');
+        delete globalState$$1.timeout;
+      }, innerParams.timer);
+
+      if (innerParams.timerProgressBar) {
+        show(timerProgressBar);
+        setTimeout(function () {
+          if (globalState$$1.timeout && globalState$$1.timeout.running) {
+            // timer can be already stopped or unset at this point
+            animateTimerProgressBar(innerParams.timer);
+          }
+        });
+      }
+    }
+  };
+
+  var initFocus = function initFocus(domCache, innerParams) {
+    if (innerParams.toast) {
+      return;
+    }
+
+    if (!callIfFunction(innerParams.allowEnterKey)) {
+      return blurActiveElement();
+    }
+
+    if (!focusButton(domCache, innerParams)) {
+      setFocus(innerParams, -1, 1);
+    }
+  };
+
+  var focusButton = function focusButton(domCache, innerParams) {
+    if (innerParams.focusDeny && isVisible(domCache.denyButton)) {
+      domCache.denyButton.focus();
+      return true;
+    }
+
+    if (innerParams.focusCancel && isVisible(domCache.cancelButton)) {
+      domCache.cancelButton.focus();
+      return true;
+    }
+
+    if (innerParams.focusConfirm && isVisible(domCache.confirmButton)) {
+      domCache.confirmButton.focus();
+      return true;
+    }
+
+    return false;
+  };
+
+  var blurActiveElement = function blurActiveElement() {
+    if (document.activeElement && typeof document.activeElement.blur === 'function') {
+      document.activeElement.blur();
+    }
+  };
+
+  /**
+   * Updates popup parameters.
+   */
+
+  function update(params) {
+    var popup = getPopup();
+    var innerParams = privateProps.innerParams.get(this);
+
+    if (!popup || hasClass(popup, innerParams.hideClass.popup)) {
+      return warn("You're trying to update the closed or closing popup, that won't work. Use the update() method in preConfirm parameter or show a new popup.");
+    }
+
+    var validUpdatableParams = {}; // assign valid params from `params` to `defaults`
+
+    Object.keys(params).forEach(function (param) {
+      if (Swal.isUpdatableParameter(param)) {
+        validUpdatableParams[param] = params[param];
+      } else {
+        warn("Invalid parameter to update: \"".concat(param, "\". Updatable params are listed here: https://github.com/sweetalert2/sweetalert2/blob/master/src/utils/params.js\n\nIf you think this parameter should be updatable, request it here: https://github.com/sweetalert2/sweetalert2/issues/new?template=02_feature_request.md"));
+      }
+    });
+
+    var updatedParams = _extends({}, innerParams, validUpdatableParams);
+
+    render(this, updatedParams);
+    privateProps.innerParams.set(this, updatedParams);
+    Object.defineProperties(this, {
+      params: {
+        value: _extends({}, this.params, params),
+        writable: false,
+        enumerable: true
+      }
+    });
+  }
+
+  function _destroy() {
+    var domCache = privateProps.domCache.get(this);
+    var innerParams = privateProps.innerParams.get(this);
+
+    if (!innerParams) {
+      return; // This instance has already been destroyed
+    } // Check if there is another Swal closing
+
+
+    if (domCache.popup && globalState.swalCloseEventFinishedCallback) {
+      globalState.swalCloseEventFinishedCallback();
+      delete globalState.swalCloseEventFinishedCallback;
+    } // Check if there is a swal disposal defer timer
+
+
+    if (globalState.deferDisposalTimer) {
+      clearTimeout(globalState.deferDisposalTimer);
+      delete globalState.deferDisposalTimer;
+    }
+
+    runDidDestroy(innerParams);
+    disposeSwal(this);
+  }
+
+  var runDidDestroy = function runDidDestroy(innerParams) {
+    if (typeof innerParams.didDestroy === 'function') {
+      innerParams.didDestroy();
+    } else if (typeof innerParams.onDestroy === 'function') {
+      innerParams.onDestroy(); // @deprecated
+    }
+  };
+
+  var disposeSwal = function disposeSwal(instance) {
+    // Unset this.params so GC will dispose it (#1569)
+    delete instance.params; // Unset globalState props so GC will dispose globalState (#1569)
+
+    delete globalState.keydownHandler;
+    delete globalState.keydownTarget; // Unset WeakMaps so GC will be able to dispose them (#1569)
+
+    unsetWeakMaps(privateProps);
+    unsetWeakMaps(privateMethods);
+  };
+
+  var unsetWeakMaps = function unsetWeakMaps(obj) {
+    for (var i in obj) {
+      obj[i] = new WeakMap();
+    }
+  };
+
+
+
+  var instanceMethods = /*#__PURE__*/Object.freeze({
+    hideLoading: hideLoading,
+    disableLoading: hideLoading,
+    getInput: getInput$1,
+    close: close,
+    closePopup: close,
+    closeModal: close,
+    closeToast: close,
+    enableButtons: enableButtons,
+    disableButtons: disableButtons,
+    enableInput: enableInput,
+    disableInput: disableInput,
+    showValidationMessage: showValidationMessage,
+    resetValidationMessage: resetValidationMessage$1,
+    getProgressSteps: getProgressSteps$1,
+    _main: _main,
+    update: update,
+    _destroy: _destroy
+  });
+
+  var currentInstance;
+
+  var SweetAlert = /*#__PURE__*/function () {
+    function SweetAlert() {
+      _classCallCheck(this, SweetAlert);
+
+      // Prevent run in Node env
+      if (typeof window === 'undefined') {
+        return;
+      } // Check for the existence of Promise
+
+
+      if (typeof Promise === 'undefined') {
+        error('This package requires a Promise library, please include a shim to enable it in this browser (See: https://github.com/sweetalert2/sweetalert2/wiki/Migration-from-SweetAlert-to-SweetAlert2#1-ie-support)');
+      }
+
+      currentInstance = this;
+
+      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
+
+      var outerParams = Object.freeze(this.constructor.argsToParams(args));
+      Object.defineProperties(this, {
+        params: {
+          value: outerParams,
+          writable: false,
+          enumerable: true,
+          configurable: true
+        }
+      });
+
+      var promise = this._main(this.params);
+
+      privateProps.promise.set(this, promise);
+    } // `catch` cannot be the name of a module export, so we define our thenable methods here instead
+
+
+    _createClass(SweetAlert, [{
+      key: "then",
+      value: function then(onFulfilled) {
+        var promise = privateProps.promise.get(this);
+        return promise.then(onFulfilled);
+      }
+    }, {
+      key: "finally",
+      value: function _finally(onFinally) {
+        var promise = privateProps.promise.get(this);
+        return promise["finally"](onFinally);
+      }
+    }]);
+
+    return SweetAlert;
+  }(); // Assign instance methods from src/instanceMethods/*.js to prototype
+
+
+  _extends(SweetAlert.prototype, instanceMethods); // Assign static methods from src/staticMethods/*.js to constructor
+
+
+  _extends(SweetAlert, staticMethods); // Proxy to instance methods to constructor, for now, for backwards compatibility
+
+
+  Object.keys(instanceMethods).forEach(function (key) {
+    SweetAlert[key] = function () {
+      if (currentInstance) {
+        var _currentInstance;
+
+        return (_currentInstance = currentInstance)[key].apply(_currentInstance, arguments);
+      }
+    };
+  });
+  SweetAlert.DismissReason = DismissReason;
+  SweetAlert.version = '10.13.0';
+
+  var Swal = SweetAlert;
+  Swal["default"] = Swal;
+
+  return Swal;
+
+}));
+if (typeof this !== 'undefined' && this.Sweetalert2){  this.swal = this.sweetAlert = this.Swal = this.SweetAlert = this.Sweetalert2}
+
+"undefined"!=typeof document&&function(e,t){var n=e.createElement("style");if(e.getElementsByTagName("head")[0].appendChild(n),n.styleSheet)n.styleSheet.disabled||(n.styleSheet.cssText=t);else try{n.innerHTML=t}catch(e){n.innerText=t}}(document,".swal2-popup.swal2-toast{flex-direction:row;align-items:center;width:auto;padding:.625em;overflow-y:hidden;background:#fff;box-shadow:0 0 .625em #d9d9d9}.swal2-popup.swal2-toast .swal2-header{flex-direction:row;padding:0}.swal2-popup.swal2-toast .swal2-title{flex-grow:1;justify-content:flex-start;margin:0 .6em;font-size:1em}.swal2-popup.swal2-toast .swal2-footer{margin:.5em 0 0;padding:.5em 0 0;font-size:.8em}.swal2-popup.swal2-toast .swal2-close{position:static;width:.8em;height:.8em;line-height:.8}.swal2-popup.swal2-toast .swal2-content{justify-content:flex-start;padding:0;font-size:1em}.swal2-popup.swal2-toast .swal2-icon{width:2em;min-width:2em;height:2em;margin:0}.swal2-popup.swal2-toast .swal2-icon .swal2-icon-content{display:flex;align-items:center;font-size:1.8em;font-weight:700}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){.swal2-popup.swal2-toast .swal2-icon .swal2-icon-content{font-size:.25em}}.swal2-popup.swal2-toast .swal2-icon.swal2-success .swal2-success-ring{width:2em;height:2em}.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line]{top:.875em;width:1.375em}.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=left]{left:.3125em}.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=right]{right:.3125em}.swal2-popup.swal2-toast .swal2-actions{flex-basis:auto!important;width:auto;height:auto;margin:0 .3125em;padding:0}.swal2-popup.swal2-toast .swal2-styled{margin:.125em .3125em;padding:.3125em .625em;font-size:1em}.swal2-popup.swal2-toast .swal2-styled:focus{box-shadow:0 0 0 1px #fff,0 0 0 3px rgba(100,150,200,.5)}.swal2-popup.swal2-toast .swal2-success{border-color:#a5dc86}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line]{position:absolute;width:1.6em;height:3em;transform:rotate(45deg);border-radius:50%}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line][class$=left]{top:-.8em;left:-.5em;transform:rotate(-45deg);transform-origin:2em 2em;border-radius:4em 0 0 4em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line][class$=right]{top:-.25em;left:.9375em;transform-origin:0 1.5em;border-radius:0 4em 4em 0}.swal2-popup.swal2-toast .swal2-success .swal2-success-ring{width:2em;height:2em}.swal2-popup.swal2-toast .swal2-success .swal2-success-fix{top:0;left:.4375em;width:.4375em;height:2.6875em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line]{height:.3125em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line][class$=tip]{top:1.125em;left:.1875em;width:.75em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line][class$=long]{top:.9375em;right:.1875em;width:1.375em}.swal2-popup.swal2-toast .swal2-success.swal2-icon-show .swal2-success-line-tip{-webkit-animation:swal2-toast-animate-success-line-tip .75s;animation:swal2-toast-animate-success-line-tip .75s}.swal2-popup.swal2-toast .swal2-success.swal2-icon-show .swal2-success-line-long{-webkit-animation:swal2-toast-animate-success-line-long .75s;animation:swal2-toast-animate-success-line-long .75s}.swal2-popup.swal2-toast.swal2-show{-webkit-animation:swal2-toast-show .5s;animation:swal2-toast-show .5s}.swal2-popup.swal2-toast.swal2-hide{-webkit-animation:swal2-toast-hide .1s forwards;animation:swal2-toast-hide .1s forwards}.swal2-container{display:flex;position:fixed;z-index:1060;top:0;right:0;bottom:0;left:0;flex-direction:row;align-items:center;justify-content:center;padding:.625em;overflow-x:hidden;transition:background-color .1s;-webkit-overflow-scrolling:touch}.swal2-container.swal2-backdrop-show,.swal2-container.swal2-noanimation{background:rgba(0,0,0,.4)}.swal2-container.swal2-backdrop-hide{background:0 0!important}.swal2-container.swal2-top{align-items:flex-start}.swal2-container.swal2-top-left,.swal2-container.swal2-top-start{align-items:flex-start;justify-content:flex-start}.swal2-container.swal2-top-end,.swal2-container.swal2-top-right{align-items:flex-start;justify-content:flex-end}.swal2-container.swal2-center{align-items:center}.swal2-container.swal2-center-left,.swal2-container.swal2-center-start{align-items:center;justify-content:flex-start}.swal2-container.swal2-center-end,.swal2-container.swal2-center-right{align-items:center;justify-content:flex-end}.swal2-container.swal2-bottom{align-items:flex-end}.swal2-container.swal2-bottom-left,.swal2-container.swal2-bottom-start{align-items:flex-end;justify-content:flex-start}.swal2-container.swal2-bottom-end,.swal2-container.swal2-bottom-right{align-items:flex-end;justify-content:flex-end}.swal2-container.swal2-bottom-end>:first-child,.swal2-container.swal2-bottom-left>:first-child,.swal2-container.swal2-bottom-right>:first-child,.swal2-container.swal2-bottom-start>:first-child,.swal2-container.swal2-bottom>:first-child{margin-top:auto}.swal2-container.swal2-grow-fullscreen>.swal2-modal{display:flex!important;flex:1;align-self:stretch;justify-content:center}.swal2-container.swal2-grow-row>.swal2-modal{display:flex!important;flex:1;align-content:center;justify-content:center}.swal2-container.swal2-grow-column{flex:1;flex-direction:column}.swal2-container.swal2-grow-column.swal2-bottom,.swal2-container.swal2-grow-column.swal2-center,.swal2-container.swal2-grow-column.swal2-top{align-items:center}.swal2-container.swal2-grow-column.swal2-bottom-left,.swal2-container.swal2-grow-column.swal2-bottom-start,.swal2-container.swal2-grow-column.swal2-center-left,.swal2-container.swal2-grow-column.swal2-center-start,.swal2-container.swal2-grow-column.swal2-top-left,.swal2-container.swal2-grow-column.swal2-top-start{align-items:flex-start}.swal2-container.swal2-grow-column.swal2-bottom-end,.swal2-container.swal2-grow-column.swal2-bottom-right,.swal2-container.swal2-grow-column.swal2-center-end,.swal2-container.swal2-grow-column.swal2-center-right,.swal2-container.swal2-grow-column.swal2-top-end,.swal2-container.swal2-grow-column.swal2-top-right{align-items:flex-end}.swal2-container.swal2-grow-column>.swal2-modal{display:flex!important;flex:1;align-content:center;justify-content:center}.swal2-container.swal2-no-transition{transition:none!important}.swal2-container:not(.swal2-top):not(.swal2-top-start):not(.swal2-top-end):not(.swal2-top-left):not(.swal2-top-right):not(.swal2-center-start):not(.swal2-center-end):not(.swal2-center-left):not(.swal2-center-right):not(.swal2-bottom):not(.swal2-bottom-start):not(.swal2-bottom-end):not(.swal2-bottom-left):not(.swal2-bottom-right):not(.swal2-grow-fullscreen)>.swal2-modal{margin:auto}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){.swal2-container .swal2-modal{margin:0!important}}.swal2-popup{display:none;position:relative;box-sizing:border-box;flex-direction:column;justify-content:center;width:32em;max-width:100%;padding:1.25em;border:none;border-radius:5px;background:#fff;font-family:inherit;font-size:1rem}.swal2-popup:focus{outline:0}.swal2-popup.swal2-loading{overflow-y:hidden}.swal2-header{display:flex;flex-direction:column;align-items:center;padding:0 1.8em}.swal2-title{position:relative;max-width:100%;margin:0 0 .4em;padding:0;color:#595959;font-size:1.875em;font-weight:600;text-align:center;text-transform:none;word-wrap:break-word}.swal2-actions{display:flex;z-index:1;box-sizing:border-box;flex-wrap:wrap;align-items:center;justify-content:center;width:100%;margin:1.25em auto 0;padding:0 1.6em}.swal2-actions:not(.swal2-loading) .swal2-styled[disabled]{opacity:.4}.swal2-actions:not(.swal2-loading) .swal2-styled:hover{background-image:linear-gradient(rgba(0,0,0,.1),rgba(0,0,0,.1))}.swal2-actions:not(.swal2-loading) .swal2-styled:active{background-image:linear-gradient(rgba(0,0,0,.2),rgba(0,0,0,.2))}.swal2-loader{display:none;align-items:center;justify-content:center;width:2.2em;height:2.2em;margin:0 1.875em;-webkit-animation:swal2-rotate-loading 1.5s linear 0s infinite normal;animation:swal2-rotate-loading 1.5s linear 0s infinite normal;border-width:.25em;border-style:solid;border-radius:100%;border-color:#2778c4 transparent #2778c4 transparent}.swal2-styled{margin:.3125em;padding:.625em 1.1em;box-shadow:none;font-weight:500}.swal2-styled:not([disabled]){cursor:pointer}.swal2-styled.swal2-confirm{border:0;border-radius:.25em;background:initial;background-color:#2778c4;color:#fff;font-size:1.0625em}.swal2-styled.swal2-deny{border:0;border-radius:.25em;background:initial;background-color:#d14529;color:#fff;font-size:1.0625em}.swal2-styled.swal2-cancel{border:0;border-radius:.25em;background:initial;background-color:#757575;color:#fff;font-size:1.0625em}.swal2-styled:focus{outline:0;box-shadow:0 0 0 3px rgba(100,150,200,.5)}.swal2-styled::-moz-focus-inner{border:0}.swal2-footer{justify-content:center;margin:1.25em 0 0;padding:1em 0 0;border-top:1px solid #eee;color:#545454;font-size:1em}.swal2-timer-progress-bar-container{position:absolute;right:0;bottom:0;left:0;height:.25em;overflow:hidden;border-bottom-right-radius:5px;border-bottom-left-radius:5px}.swal2-timer-progress-bar{width:100%;height:.25em;background:rgba(0,0,0,.2)}.swal2-image{max-width:100%;margin:1.25em auto}.swal2-close{position:absolute;z-index:2;top:0;right:0;align-items:center;justify-content:center;width:1.2em;height:1.2em;padding:0;overflow:hidden;transition:color .1s ease-out;border:none;border-radius:5px;background:0 0;color:#ccc;font-family:serif;font-size:2.5em;line-height:1.2;cursor:pointer}.swal2-close:hover{transform:none;background:0 0;color:#f27474}.swal2-close:focus{outline:0;box-shadow:inset 0 0 0 3px rgba(100,150,200,.5)}.swal2-close::-moz-focus-inner{border:0}.swal2-content{z-index:1;justify-content:center;margin:0;padding:0 1.6em;color:#545454;font-size:1.125em;font-weight:400;line-height:normal;text-align:center;word-wrap:break-word}.swal2-checkbox,.swal2-file,.swal2-input,.swal2-radio,.swal2-select,.swal2-textarea{margin:1em auto}.swal2-file,.swal2-input,.swal2-textarea{box-sizing:border-box;width:100%;transition:border-color .3s,box-shadow .3s;border:1px solid #d9d9d9;border-radius:.1875em;background:inherit;box-shadow:inset 0 1px 1px rgba(0,0,0,.06);color:inherit;font-size:1.125em}.swal2-file.swal2-inputerror,.swal2-input.swal2-inputerror,.swal2-textarea.swal2-inputerror{border-color:#f27474!important;box-shadow:0 0 2px #f27474!important}.swal2-file:focus,.swal2-input:focus,.swal2-textarea:focus{border:1px solid #b4dbed;outline:0;box-shadow:0 0 0 3px rgba(100,150,200,.5)}.swal2-file::-moz-placeholder,.swal2-input::-moz-placeholder,.swal2-textarea::-moz-placeholder{color:#ccc}.swal2-file:-ms-input-placeholder,.swal2-input:-ms-input-placeholder,.swal2-textarea:-ms-input-placeholder{color:#ccc}.swal2-file::placeholder,.swal2-input::placeholder,.swal2-textarea::placeholder{color:#ccc}.swal2-range{margin:1em auto;background:#fff}.swal2-range input{width:80%}.swal2-range output{width:20%;color:inherit;font-weight:600;text-align:center}.swal2-range input,.swal2-range output{height:2.625em;padding:0;font-size:1.125em;line-height:2.625em}.swal2-input{height:2.625em;padding:0 .75em}.swal2-input[type=number]{max-width:10em}.swal2-file{background:inherit;font-size:1.125em}.swal2-textarea{height:6.75em;padding:.75em}.swal2-select{min-width:50%;max-width:100%;padding:.375em .625em;background:inherit;color:inherit;font-size:1.125em}.swal2-checkbox,.swal2-radio{align-items:center;justify-content:center;background:#fff;color:inherit}.swal2-checkbox label,.swal2-radio label{margin:0 .6em;font-size:1.125em}.swal2-checkbox input,.swal2-radio input{margin:0 .4em}.swal2-input-label{display:flex;justify-content:center;margin:1em auto}.swal2-validation-message{display:none;align-items:center;justify-content:center;margin:0 -2.7em;padding:.625em;overflow:hidden;background:#f0f0f0;color:#666;font-size:1em;font-weight:300}.swal2-validation-message::before{content:\"!\";display:inline-block;width:1.5em;min-width:1.5em;height:1.5em;margin:0 .625em;border-radius:50%;background-color:#f27474;color:#fff;font-weight:600;line-height:1.5em;text-align:center}.swal2-icon{position:relative;box-sizing:content-box;justify-content:center;width:5em;height:5em;margin:1.25em auto 1.875em;border:.25em solid transparent;border-radius:50%;font-family:inherit;line-height:5em;cursor:default;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.swal2-icon .swal2-icon-content{display:flex;align-items:center;font-size:3.75em}.swal2-icon.swal2-error{border-color:#f27474;color:#f27474}.swal2-icon.swal2-error .swal2-x-mark{position:relative;flex-grow:1}.swal2-icon.swal2-error [class^=swal2-x-mark-line]{display:block;position:absolute;top:2.3125em;width:2.9375em;height:.3125em;border-radius:.125em;background-color:#f27474}.swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=left]{left:1.0625em;transform:rotate(45deg)}.swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=right]{right:1em;transform:rotate(-45deg)}.swal2-icon.swal2-error.swal2-icon-show{-webkit-animation:swal2-animate-error-icon .5s;animation:swal2-animate-error-icon .5s}.swal2-icon.swal2-error.swal2-icon-show .swal2-x-mark{-webkit-animation:swal2-animate-error-x-mark .5s;animation:swal2-animate-error-x-mark .5s}.swal2-icon.swal2-warning{border-color:#facea8;color:#f8bb86}.swal2-icon.swal2-info{border-color:#9de0f6;color:#3fc3ee}.swal2-icon.swal2-question{border-color:#c9dae1;color:#87adbd}.swal2-icon.swal2-success{border-color:#a5dc86;color:#a5dc86}.swal2-icon.swal2-success [class^=swal2-success-circular-line]{position:absolute;width:3.75em;height:7.5em;transform:rotate(45deg);border-radius:50%}.swal2-icon.swal2-success [class^=swal2-success-circular-line][class$=left]{top:-.4375em;left:-2.0635em;transform:rotate(-45deg);transform-origin:3.75em 3.75em;border-radius:7.5em 0 0 7.5em}.swal2-icon.swal2-success [class^=swal2-success-circular-line][class$=right]{top:-.6875em;left:1.875em;transform:rotate(-45deg);transform-origin:0 3.75em;border-radius:0 7.5em 7.5em 0}.swal2-icon.swal2-success .swal2-success-ring{position:absolute;z-index:2;top:-.25em;left:-.25em;box-sizing:content-box;width:100%;height:100%;border:.25em solid rgba(165,220,134,.3);border-radius:50%}.swal2-icon.swal2-success .swal2-success-fix{position:absolute;z-index:1;top:.5em;left:1.625em;width:.4375em;height:5.625em;transform:rotate(-45deg)}.swal2-icon.swal2-success [class^=swal2-success-line]{display:block;position:absolute;z-index:2;height:.3125em;border-radius:.125em;background-color:#a5dc86}.swal2-icon.swal2-success [class^=swal2-success-line][class$=tip]{top:2.875em;left:.8125em;width:1.5625em;transform:rotate(45deg)}.swal2-icon.swal2-success [class^=swal2-success-line][class$=long]{top:2.375em;right:.5em;width:2.9375em;transform:rotate(-45deg)}.swal2-icon.swal2-success.swal2-icon-show .swal2-success-line-tip{-webkit-animation:swal2-animate-success-line-tip .75s;animation:swal2-animate-success-line-tip .75s}.swal2-icon.swal2-success.swal2-icon-show .swal2-success-line-long{-webkit-animation:swal2-animate-success-line-long .75s;animation:swal2-animate-success-line-long .75s}.swal2-icon.swal2-success.swal2-icon-show .swal2-success-circular-line-right{-webkit-animation:swal2-rotate-success-circular-line 4.25s ease-in;animation:swal2-rotate-success-circular-line 4.25s ease-in}.swal2-progress-steps{flex-wrap:wrap;align-items:center;max-width:100%;margin:0 0 1.25em;padding:0;background:inherit;font-weight:600}.swal2-progress-steps li{display:inline-block;position:relative}.swal2-progress-steps .swal2-progress-step{z-index:20;flex-shrink:0;width:2em;height:2em;border-radius:2em;background:#2778c4;color:#fff;line-height:2em;text-align:center}.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step{background:#2778c4}.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step~.swal2-progress-step{background:#add8e6;color:#fff}.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step~.swal2-progress-step-line{background:#add8e6}.swal2-progress-steps .swal2-progress-step-line{z-index:10;flex-shrink:0;width:2.5em;height:.4em;margin:0 -1px;background:#2778c4}[class^=swal2]{-webkit-tap-highlight-color:transparent}.swal2-show{-webkit-animation:swal2-show .3s;animation:swal2-show .3s}.swal2-hide{-webkit-animation:swal2-hide .15s forwards;animation:swal2-hide .15s forwards}.swal2-noanimation{transition:none}.swal2-scrollbar-measure{position:absolute;top:-9999px;width:50px;height:50px;overflow:scroll}.swal2-rtl .swal2-close{right:auto;left:0}.swal2-rtl .swal2-timer-progress-bar{right:0;left:auto}@supports (-ms-accelerator:true){.swal2-range input{width:100%!important}.swal2-range output{display:none}}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){.swal2-range input{width:100%!important}.swal2-range output{display:none}}@-webkit-keyframes swal2-toast-show{0%{transform:translateY(-.625em) rotateZ(2deg)}33%{transform:translateY(0) rotateZ(-2deg)}66%{transform:translateY(.3125em) rotateZ(2deg)}100%{transform:translateY(0) rotateZ(0)}}@keyframes swal2-toast-show{0%{transform:translateY(-.625em) rotateZ(2deg)}33%{transform:translateY(0) rotateZ(-2deg)}66%{transform:translateY(.3125em) rotateZ(2deg)}100%{transform:translateY(0) rotateZ(0)}}@-webkit-keyframes swal2-toast-hide{100%{transform:rotateZ(1deg);opacity:0}}@keyframes swal2-toast-hide{100%{transform:rotateZ(1deg);opacity:0}}@-webkit-keyframes swal2-toast-animate-success-line-tip{0%{top:.5625em;left:.0625em;width:0}54%{top:.125em;left:.125em;width:0}70%{top:.625em;left:-.25em;width:1.625em}84%{top:1.0625em;left:.75em;width:.5em}100%{top:1.125em;left:.1875em;width:.75em}}@keyframes swal2-toast-animate-success-line-tip{0%{top:.5625em;left:.0625em;width:0}54%{top:.125em;left:.125em;width:0}70%{top:.625em;left:-.25em;width:1.625em}84%{top:1.0625em;left:.75em;width:.5em}100%{top:1.125em;left:.1875em;width:.75em}}@-webkit-keyframes swal2-toast-animate-success-line-long{0%{top:1.625em;right:1.375em;width:0}65%{top:1.25em;right:.9375em;width:0}84%{top:.9375em;right:0;width:1.125em}100%{top:.9375em;right:.1875em;width:1.375em}}@keyframes swal2-toast-animate-success-line-long{0%{top:1.625em;right:1.375em;width:0}65%{top:1.25em;right:.9375em;width:0}84%{top:.9375em;right:0;width:1.125em}100%{top:.9375em;right:.1875em;width:1.375em}}@-webkit-keyframes swal2-show{0%{transform:scale(.7)}45%{transform:scale(1.05)}80%{transform:scale(.95)}100%{transform:scale(1)}}@keyframes swal2-show{0%{transform:scale(.7)}45%{transform:scale(1.05)}80%{transform:scale(.95)}100%{transform:scale(1)}}@-webkit-keyframes swal2-hide{0%{transform:scale(1);opacity:1}100%{transform:scale(.5);opacity:0}}@keyframes swal2-hide{0%{transform:scale(1);opacity:1}100%{transform:scale(.5);opacity:0}}@-webkit-keyframes swal2-animate-success-line-tip{0%{top:1.1875em;left:.0625em;width:0}54%{top:1.0625em;left:.125em;width:0}70%{top:2.1875em;left:-.375em;width:3.125em}84%{top:3em;left:1.3125em;width:1.0625em}100%{top:2.8125em;left:.8125em;width:1.5625em}}@keyframes swal2-animate-success-line-tip{0%{top:1.1875em;left:.0625em;width:0}54%{top:1.0625em;left:.125em;width:0}70%{top:2.1875em;left:-.375em;width:3.125em}84%{top:3em;left:1.3125em;width:1.0625em}100%{top:2.8125em;left:.8125em;width:1.5625em}}@-webkit-keyframes swal2-animate-success-line-long{0%{top:3.375em;right:2.875em;width:0}65%{top:3.375em;right:2.875em;width:0}84%{top:2.1875em;right:0;width:3.4375em}100%{top:2.375em;right:.5em;width:2.9375em}}@keyframes swal2-animate-success-line-long{0%{top:3.375em;right:2.875em;width:0}65%{top:3.375em;right:2.875em;width:0}84%{top:2.1875em;right:0;width:3.4375em}100%{top:2.375em;right:.5em;width:2.9375em}}@-webkit-keyframes swal2-rotate-success-circular-line{0%{transform:rotate(-45deg)}5%{transform:rotate(-45deg)}12%{transform:rotate(-405deg)}100%{transform:rotate(-405deg)}}@keyframes swal2-rotate-success-circular-line{0%{transform:rotate(-45deg)}5%{transform:rotate(-45deg)}12%{transform:rotate(-405deg)}100%{transform:rotate(-405deg)}}@-webkit-keyframes swal2-animate-error-x-mark{0%{margin-top:1.625em;transform:scale(.4);opacity:0}50%{margin-top:1.625em;transform:scale(.4);opacity:0}80%{margin-top:-.375em;transform:scale(1.15)}100%{margin-top:0;transform:scale(1);opacity:1}}@keyframes swal2-animate-error-x-mark{0%{margin-top:1.625em;transform:scale(.4);opacity:0}50%{margin-top:1.625em;transform:scale(.4);opacity:0}80%{margin-top:-.375em;transform:scale(1.15)}100%{margin-top:0;transform:scale(1);opacity:1}}@-webkit-keyframes swal2-animate-error-icon{0%{transform:rotateX(100deg);opacity:0}100%{transform:rotateX(0);opacity:1}}@keyframes swal2-animate-error-icon{0%{transform:rotateX(100deg);opacity:0}100%{transform:rotateX(0);opacity:1}}@-webkit-keyframes swal2-rotate-loading{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}@keyframes swal2-rotate-loading{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown){overflow:hidden}body.swal2-height-auto{height:auto!important}body.swal2-no-backdrop .swal2-container{top:auto;right:auto;bottom:auto;left:auto;max-width:calc(100% - .625em * 2);background-color:transparent!important}body.swal2-no-backdrop .swal2-container>.swal2-modal{box-shadow:0 0 10px rgba(0,0,0,.4)}body.swal2-no-backdrop .swal2-container.swal2-top{top:0;left:50%;transform:translateX(-50%)}body.swal2-no-backdrop .swal2-container.swal2-top-left,body.swal2-no-backdrop .swal2-container.swal2-top-start{top:0;left:0}body.swal2-no-backdrop .swal2-container.swal2-top-end,body.swal2-no-backdrop .swal2-container.swal2-top-right{top:0;right:0}body.swal2-no-backdrop .swal2-container.swal2-center{top:50%;left:50%;transform:translate(-50%,-50%)}body.swal2-no-backdrop .swal2-container.swal2-center-left,body.swal2-no-backdrop .swal2-container.swal2-center-start{top:50%;left:0;transform:translateY(-50%)}body.swal2-no-backdrop .swal2-container.swal2-center-end,body.swal2-no-backdrop .swal2-container.swal2-center-right{top:50%;right:0;transform:translateY(-50%)}body.swal2-no-backdrop .swal2-container.swal2-bottom{bottom:0;left:50%;transform:translateX(-50%)}body.swal2-no-backdrop .swal2-container.swal2-bottom-left,body.swal2-no-backdrop .swal2-container.swal2-bottom-start{bottom:0;left:0}body.swal2-no-backdrop .swal2-container.swal2-bottom-end,body.swal2-no-backdrop .swal2-container.swal2-bottom-right{right:0;bottom:0}@media print{body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown){overflow-y:scroll!important}body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown)>[aria-hidden=true]{display:none}body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) .swal2-container{position:static!important}}body.swal2-toast-shown .swal2-container{background-color:transparent}body.swal2-toast-shown .swal2-container.swal2-top{top:0;right:auto;bottom:auto;left:50%;transform:translateX(-50%)}body.swal2-toast-shown .swal2-container.swal2-top-end,body.swal2-toast-shown .swal2-container.swal2-top-right{top:0;right:0;bottom:auto;left:auto}body.swal2-toast-shown .swal2-container.swal2-top-left,body.swal2-toast-shown .swal2-container.swal2-top-start{top:0;right:auto;bottom:auto;left:0}body.swal2-toast-shown .swal2-container.swal2-center-left,body.swal2-toast-shown .swal2-container.swal2-center-start{top:50%;right:auto;bottom:auto;left:0;transform:translateY(-50%)}body.swal2-toast-shown .swal2-container.swal2-center{top:50%;right:auto;bottom:auto;left:50%;transform:translate(-50%,-50%)}body.swal2-toast-shown .swal2-container.swal2-center-end,body.swal2-toast-shown .swal2-container.swal2-center-right{top:50%;right:0;bottom:auto;left:auto;transform:translateY(-50%)}body.swal2-toast-shown .swal2-container.swal2-bottom-left,body.swal2-toast-shown .swal2-container.swal2-bottom-start{top:auto;right:auto;bottom:0;left:0}body.swal2-toast-shown .swal2-container.swal2-bottom{top:auto;right:auto;bottom:0;left:50%;transform:translateX(-50%)}body.swal2-toast-shown .swal2-container.swal2-bottom-end,body.swal2-toast-shown .swal2-container.swal2-bottom-right{top:auto;right:0;bottom:0;left:auto}body.swal2-toast-column .swal2-toast{flex-direction:column;align-items:stretch}body.swal2-toast-column .swal2-toast .swal2-actions{flex:1;align-self:stretch;height:2.2em;margin-top:.3125em}body.swal2-toast-column .swal2-toast .swal2-loading{justify-content:center}body.swal2-toast-column .swal2-toast .swal2-input{height:2em;margin:.3125em auto;font-size:1em}body.swal2-toast-column .swal2-toast .swal2-validation-message{font-size:1em}");
+
+/***/ }),
+/* 179 */
+/***/ (function(module, exports, __webpack_require__) {
+
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(179)
+var __vue_script__ = __webpack_require__(180)
 /* template */
-var __vue_template__ = __webpack_require__(185)
+var __vue_template__ = __webpack_require__(186)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -61792,14 +64004,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 179 */
+/* 180 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_AppBar__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_AppBar__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_AppBar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_AppBar__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_NavigationComponent__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_NavigationComponent__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_NavigationComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_NavigationComponent__);
 //
 //
@@ -61821,13 +64033,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 180 */
+/* 181 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gsap__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__user__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__user__ = __webpack_require__(2);
 //
 //
 //
@@ -61885,7 +64097,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 181 */
+/* 182 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -63289,7 +65501,7 @@ __WEBPACK_IMPORTED_MODULE_0__gsap_core_js__["x" /* gsap */].registerPlugin(CSSPl
 
 
 /***/ }),
-/* 182 */
+/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -63359,13 +65571,13 @@ if (false) {
 }
 
 /***/ }),
-/* 183 */
+/* 184 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gsap__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__user__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__user__ = __webpack_require__(2);
 //
 //
 //
@@ -63518,7 +65730,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 184 */
+/* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -63882,7 +66094,7 @@ if (false) {
 }
 
 /***/ }),
-/* 185 */
+/* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -63915,15 +66127,15 @@ if (false) {
 }
 
 /***/ }),
-/* 186 */
+/* 187 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(187)
+var __vue_script__ = __webpack_require__(188)
 /* template */
-var __vue_template__ = __webpack_require__(188)
+var __vue_template__ = __webpack_require__(189)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -63962,19 +66174,19 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 187 */
+/* 188 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_AppBar__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__user__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__user__ = __webpack_require__(2);
 
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
@@ -64227,7 +66439,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 });
 
 /***/ }),
-/* 188 */
+/* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -64530,19 +66742,19 @@ if (false) {
 }
 
 /***/ }),
-/* 189 */
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(190)
+  __webpack_require__(191)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(193)
+var __vue_script__ = __webpack_require__(194)
 /* template */
-var __vue_template__ = __webpack_require__(194)
+var __vue_template__ = __webpack_require__(195)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -64581,13 +66793,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 190 */
+/* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(191);
+var content = __webpack_require__(192);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -64607,7 +66819,7 @@ if(false) {
 }
 
 /***/ }),
-/* 191 */
+/* 192 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(8)(false);
@@ -64621,7 +66833,7 @@ exports.push([module.i, "\n.user-form-container{\r\n    display: -webkit-box;\r\
 
 
 /***/ }),
-/* 192 */
+/* 193 */
 /***/ (function(module, exports) {
 
 /**
@@ -64654,19 +66866,19 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
-/* 193 */
+/* 194 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_AppBar__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__user__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__user__ = __webpack_require__(2);
 
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
@@ -64996,7 +67208,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 });
 
 /***/ }),
-/* 194 */
+/* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -65399,15 +67611,15 @@ if (false) {
 }
 
 /***/ }),
-/* 195 */
+/* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(196)
+var __vue_script__ = __webpack_require__(197)
 /* template */
-var __vue_template__ = __webpack_require__(197)
+var __vue_template__ = __webpack_require__(198)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -65446,19 +67658,19 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 196 */
+/* 197 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_AppBar__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__user__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__user__ = __webpack_require__(2);
 
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
@@ -65717,7 +67929,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 });
 
 /***/ }),
-/* 197 */
+/* 198 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -66014,15 +68226,15 @@ if (false) {
 }
 
 /***/ }),
-/* 198 */
+/* 199 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(199)
+var __vue_script__ = __webpack_require__(200)
 /* template */
-var __vue_template__ = __webpack_require__(200)
+var __vue_template__ = __webpack_require__(201)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -66061,19 +68273,19 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 199 */
+/* 200 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_AppBar__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__user__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__user__ = __webpack_require__(2);
 
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
@@ -66329,7 +68541,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 });
 
 /***/ }),
-/* 200 */
+/* 201 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -66607,15 +68819,15 @@ if (false) {
 }
 
 /***/ }),
-/* 201 */
+/* 202 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(202)
+var __vue_script__ = __webpack_require__(203)
 /* template */
-var __vue_template__ = __webpack_require__(203)
+var __vue_template__ = __webpack_require__(204)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -66654,14 +68866,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 202 */
+/* 203 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_AppBar__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_AppBar__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_AppBar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_AppBar__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_NavigationComponent__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_NavigationComponent__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_NavigationComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_NavigationComponent__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data__ = __webpack_require__(7);
 //
@@ -66838,7 +69050,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 203 */
+/* 204 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -67070,15 +69282,15 @@ if (false) {
 }
 
 /***/ }),
-/* 204 */
+/* 205 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(205)
+var __vue_script__ = __webpack_require__(206)
 /* template */
-var __vue_template__ = __webpack_require__(206)
+var __vue_template__ = __webpack_require__(207)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -67117,18 +69329,18 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 205 */
+/* 206 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_AppBar__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__user__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__user__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__data__ = __webpack_require__(7);
 
 
@@ -67357,7 +69569,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 });
 
 /***/ }),
-/* 206 */
+/* 207 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -67538,19 +69750,19 @@ if (false) {
 }
 
 /***/ }),
-/* 207 */
+/* 208 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(208)
+  __webpack_require__(209)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(210)
+var __vue_script__ = __webpack_require__(211)
 /* template */
-var __vue_template__ = __webpack_require__(211)
+var __vue_template__ = __webpack_require__(212)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -67589,13 +69801,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 208 */
+/* 209 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(209);
+var content = __webpack_require__(210);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -67615,7 +69827,7 @@ if(false) {
 }
 
 /***/ }),
-/* 209 */
+/* 210 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(8)(false);
@@ -67629,19 +69841,19 @@ exports.push([module.i, "\n.user-form-container[data-v-ad286122]{\r\n    display
 
 
 /***/ }),
-/* 210 */
+/* 211 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_AppBar__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__user__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__user__ = __webpack_require__(2);
 
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
@@ -67785,7 +69997,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 });
 
 /***/ }),
-/* 211 */
+/* 212 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -67990,15 +70202,15 @@ if (false) {
 }
 
 /***/ }),
-/* 212 */
+/* 213 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(213)
+var __vue_script__ = __webpack_require__(214)
 /* template */
-var __vue_template__ = __webpack_require__(215)
+var __vue_template__ = __webpack_require__(216)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -68037,19 +70249,19 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 213 */
+/* 214 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_AppBar__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__user__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__user__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__fecha__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_jspdf__ = __webpack_require__(12);
 
@@ -68779,7 +70991,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 });
 
 /***/ }),
-/* 214 */
+/* 215 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -70626,7 +72838,7 @@ function unzipSync(data) {
 
 
 /***/ }),
-/* 215 */
+/* 216 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -71332,19 +73544,19 @@ if (false) {
 }
 
 /***/ }),
-/* 216 */
+/* 217 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(217)
+  __webpack_require__(218)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(219)
+var __vue_script__ = __webpack_require__(220)
 /* template */
-var __vue_template__ = __webpack_require__(220)
+var __vue_template__ = __webpack_require__(221)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -71383,13 +73595,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 217 */
+/* 218 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(218);
+var content = __webpack_require__(219);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -71409,7 +73621,7 @@ if(false) {
 }
 
 /***/ }),
-/* 218 */
+/* 219 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(8)(false);
@@ -71423,21 +73635,21 @@ exports.push([module.i, "\n.user-form-container[data-v-09de486c] {\r\n  display:
 
 
 /***/ }),
-/* 219 */
+/* 220 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_AppBar__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_AppBar_vue__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_AppBar_vue__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_AppBar_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_AppBar_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_NavigationComponent__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_NavigationComponent__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_NavigationComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_NavigationComponent__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__data__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__user__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__user__ = __webpack_require__(2);
 
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -72171,7 +74383,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 });
 
 /***/ }),
-/* 220 */
+/* 221 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -73250,19 +75462,19 @@ if (false) {
 }
 
 /***/ }),
-/* 221 */
+/* 222 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(222)
+  __webpack_require__(223)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(224)
+var __vue_script__ = __webpack_require__(225)
 /* template */
-var __vue_template__ = __webpack_require__(225)
+var __vue_template__ = __webpack_require__(226)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -73301,13 +75513,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 222 */
+/* 223 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(223);
+var content = __webpack_require__(224);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -73327,7 +75539,7 @@ if(false) {
 }
 
 /***/ }),
-/* 223 */
+/* 224 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(8)(false);
@@ -73341,18 +75553,18 @@ exports.push([module.i, "\n.products-dialog[data-v-3f178469]{\r\n  max-width: 90
 
 
 /***/ }),
-/* 224 */
+/* 225 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_AppBar__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__user__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__user__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__fecha__ = __webpack_require__(11);
 
 
@@ -73895,7 +76107,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 });
 
 /***/ }),
-/* 225 */
+/* 226 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -74832,13 +77044,13 @@ if (false) {
 }
 
 /***/ }),
-/* 226 */
+/* 227 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(227)
+var __vue_script__ = __webpack_require__(228)
 /* template */
 var __vue_template__ = __webpack_require__(231)
 /* template functional */
@@ -74879,22 +77091,22 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 227 */
+/* 228 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_AppBar__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__user__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__user__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_jspdf__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_jspdf_autotable__ = __webpack_require__(230);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_jspdf_autotable__ = __webpack_require__(154);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_jspdf_autotable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_jspdf_autotable__);
 
 
@@ -75231,7 +77443,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 });
 
 /***/ }),
-/* 228 */
+/* 229 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -75259,7 +77471,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 229 */
+/* 230 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -75548,2219 +77760,7 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 229;
-
-/***/ }),
-/* 230 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/*!
- * 
- *             jsPDF AutoTable plugin v3.5.13
- *             
- *             Copyright (c) 2020 Simon Bengtsson, https://github.com/simonbengtsson/jsPDF-AutoTable
- *             Licensed under the MIT License.
- *             http://opensource.org/licenses/mit-license
- *         
- */
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(true)
-		module.exports = factory((function webpackLoadOptionalExternalModule() { try { return __webpack_require__(12); } catch(e) {} }()));
-	else if(typeof define === 'function' && define.amd)
-		define(["jspdf"], factory);
-	else {
-		var a = typeof exports === 'object' ? factory((function webpackLoadOptionalExternalModule() { try { return require("jspdf"); } catch(e) {} }())) : factory(root["jspdf"]);
-		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
-	}
-})(typeof this !== 'undefined' ? this : window, function(__WEBPACK_EXTERNAL_MODULE__16__) {
-return /******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
-/******/ 			return installedModules[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
-/******/ 		}
-/******/ 	};
-/******/
-/******/ 	// define __esModule on exports
-/******/ 	__webpack_require__.r = function(exports) {
-/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 		}
-/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 	};
-/******/
-/******/ 	// create a fake namespace object
-/******/ 	// mode & 1: value is a module id, require it
-/******/ 	// mode & 2: merge all properties of value into the ns
-/******/ 	// mode & 4: return value when already ns object
-/******/ 	// mode & 8|1: behave like require
-/******/ 	__webpack_require__.t = function(value, mode) {
-/******/ 		if(mode & 1) value = __webpack_require__(value);
-/******/ 		if(mode & 8) return value;
-/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
-/******/ 		var ns = Object.create(null);
-/******/ 		__webpack_require__.r(ns);
-/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
-/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
-/******/ 		return ns;
-/******/ 	};
-/******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
-/******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
-/******/
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 10);
-/******/ })
-/************************************************************************/
-/******/ ([
-/* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.parseSpacing = exports.getFillStyle = exports.addTableBorder = exports.getStringWidth = void 0;
-function getStringWidth(text, styles, doc) {
-    doc.applyStyles(styles, true);
-    var textArr = Array.isArray(text) ? text : [text];
-    var widestLineWidth = textArr
-        .map(function (text) { return doc.getTextWidth(text); })
-        .reduce(function (a, b) { return Math.max(a, b); }, 0);
-    return widestLineWidth;
-}
-exports.getStringWidth = getStringWidth;
-function addTableBorder(doc, table, startPos, cursor) {
-    var lineWidth = table.settings.tableLineWidth;
-    var lineColor = table.settings.tableLineColor;
-    doc.applyStyles({ lineWidth: lineWidth, lineColor: lineColor });
-    var fillStyle = getFillStyle(lineWidth, false);
-    if (fillStyle) {
-        doc.rect(startPos.x, startPos.y, table.getWidth(doc.pageSize().width), cursor.y - startPos.y, fillStyle);
-    }
-}
-exports.addTableBorder = addTableBorder;
-function getFillStyle(lineWidth, fillColor) {
-    var drawLine = lineWidth > 0;
-    var drawBackground = fillColor || fillColor === 0;
-    if (drawLine && drawBackground) {
-        return 'DF'; // Fill then stroke
-    }
-    else if (drawLine) {
-        return 'S'; // Only stroke (transparent background)
-    }
-    else if (drawBackground) {
-        return 'F'; // Only fill, no stroke
-    }
-    else {
-        return null;
-    }
-}
-exports.getFillStyle = getFillStyle;
-function parseSpacing(value, defaultValue) {
-    var _a, _b, _c, _d;
-    value = value || defaultValue;
-    if (Array.isArray(value)) {
-        if (value.length >= 4) {
-            return {
-                top: value[0],
-                right: value[1],
-                bottom: value[2],
-                left: value[3],
-            };
-        }
-        else if (value.length === 3) {
-            return {
-                top: value[0],
-                right: value[1],
-                bottom: value[2],
-                left: value[1],
-            };
-        }
-        else if (value.length === 2) {
-            return {
-                top: value[0],
-                right: value[1],
-                bottom: value[0],
-                left: value[1],
-            };
-        }
-        else if (value.length === 1) {
-            value = value[0];
-        }
-        else {
-            value = defaultValue;
-        }
-    }
-    if (typeof value === 'object') {
-        if (typeof value.vertical === 'number') {
-            value.top = value.vertical;
-            value.bottom = value.vertical;
-        }
-        if (typeof value.horizontal === 'number') {
-            value.right = value.horizontal;
-            value.left = value.horizontal;
-        }
-        return {
-            left: (_a = value.left) !== null && _a !== void 0 ? _a : defaultValue,
-            top: (_b = value.top) !== null && _b !== void 0 ? _b : defaultValue,
-            right: (_c = value.right) !== null && _c !== void 0 ? _c : defaultValue,
-            bottom: (_d = value.bottom) !== null && _d !== void 0 ? _d : defaultValue,
-        };
-    }
-    if (typeof value !== 'number') {
-        value = defaultValue;
-    }
-    return { top: value, right: value, bottom: value, left: value };
-}
-exports.parseSpacing = parseSpacing;
-
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.getTheme = exports.defaultStyles = exports.HtmlRowInput = exports.FONT_ROW_RATIO = void 0;
-/**
- * Ratio between font size and font height. The number comes from jspdf's source code
- */
-exports.FONT_ROW_RATIO = 1.15;
-var HtmlRowInput = /** @class */ (function (_super) {
-    __extends(HtmlRowInput, _super);
-    function HtmlRowInput(element) {
-        var _this = _super.call(this) || this;
-        _this._element = element;
-        return _this;
-    }
-    return HtmlRowInput;
-}(Array));
-exports.HtmlRowInput = HtmlRowInput;
-// Base style for all themes
-function defaultStyles(scaleFactor) {
-    return {
-        font: 'helvetica',
-        fontStyle: 'normal',
-        overflow: 'linebreak',
-        fillColor: false,
-        textColor: 20,
-        halign: 'left',
-        valign: 'top',
-        fontSize: 10,
-        cellPadding: 5 / scaleFactor,
-        lineColor: 200,
-        lineWidth: 0,
-        cellWidth: 'auto',
-        minCellHeight: 0,
-        minCellWidth: 0,
-    };
-}
-exports.defaultStyles = defaultStyles;
-function getTheme(name) {
-    var themes = {
-        striped: {
-            table: { fillColor: 255, textColor: 80, fontStyle: 'normal' },
-            head: { textColor: 255, fillColor: [41, 128, 185], fontStyle: 'bold' },
-            body: {},
-            foot: { textColor: 255, fillColor: [41, 128, 185], fontStyle: 'bold' },
-            alternateRow: { fillColor: 245 },
-        },
-        grid: {
-            table: {
-                fillColor: 255,
-                textColor: 80,
-                fontStyle: 'normal',
-                lineWidth: 0.1,
-            },
-            head: {
-                textColor: 255,
-                fillColor: [26, 188, 156],
-                fontStyle: 'bold',
-                lineWidth: 0,
-            },
-            body: {},
-            foot: {
-                textColor: 255,
-                fillColor: [26, 188, 156],
-                fontStyle: 'bold',
-                lineWidth: 0,
-            },
-            alternateRow: {},
-        },
-        plain: {
-            head: { fontStyle: 'bold' },
-            foot: { fontStyle: 'bold' },
-        },
-    };
-    return themes[name];
-}
-exports.getTheme = getTheme;
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.DocHandler = void 0;
-var globalDefaults = {};
-var DocHandler = /** @class */ (function () {
-    function DocHandler(jsPDFDocument) {
-        this.jsPDFDocument = jsPDFDocument;
-        this.userStyles = {
-            // Black for versions of jspdf without getTextColor
-            textColor: jsPDFDocument.getTextColor
-                ? this.jsPDFDocument.getTextColor()
-                : 0,
-            fontSize: jsPDFDocument.internal.getFontSize(),
-            fontStyle: jsPDFDocument.internal.getFont().fontStyle,
-            font: jsPDFDocument.internal.getFont().fontName,
-        };
-    }
-    DocHandler.setDefaults = function (defaults, doc) {
-        if (doc === void 0) { doc = null; }
-        if (doc) {
-            doc.__autoTableDocumentDefaults = defaults;
-        }
-        else {
-            globalDefaults = defaults;
-        }
-    };
-    DocHandler.unifyColor = function (c) {
-        if (Array.isArray(c)) {
-            return c;
-        }
-        else if (typeof c === 'number') {
-            return [c, c, c];
-        }
-        else if (typeof c === 'string') {
-            return [c];
-        }
-        else {
-            return null;
-        }
-    };
-    DocHandler.prototype.applyStyles = function (styles, fontOnly) {
-        // Font style needs to be applied before font
-        // https://github.com/simonbengtsson/jsPDF-AutoTable/issues/632
-        var _a, _b, _c;
-        if (fontOnly === void 0) { fontOnly = false; }
-        if (styles.fontStyle)
-            this.jsPDFDocument.setFontStyle && this.jsPDFDocument.setFontStyle(styles.fontStyle);
-        var _d = this.jsPDFDocument.internal.getFont(), fontStyle = _d.fontStyle, fontName = _d.fontName;
-        if (styles.font)
-            fontName = styles.font;
-        if (styles.fontStyle) {
-            fontStyle = styles.fontStyle;
-            var availableFontStyles = this.getFontList()[fontName];
-            if (availableFontStyles && availableFontStyles.indexOf(fontStyle) === -1) {
-                // Common issue was that the default bold in headers
-                // made custom fonts not work. For example:
-                // https://github.com/simonbengtsson/jsPDF-AutoTable/issues/653
-                this.jsPDFDocument.setFontStyle && this.jsPDFDocument.setFontStyle(availableFontStyles[0]);
-                fontStyle = availableFontStyles[0];
-            }
-        }
-        this.jsPDFDocument.setFont(fontName, fontStyle);
-        if (styles.fontSize)
-            this.jsPDFDocument.setFontSize(styles.fontSize);
-        if (fontOnly) {
-            return; // Performance improvement
-        }
-        var color = DocHandler.unifyColor(styles.fillColor);
-        if (color)
-            (_a = this.jsPDFDocument).setFillColor.apply(_a, color);
-        color = DocHandler.unifyColor(styles.textColor);
-        if (color)
-            (_b = this.jsPDFDocument).setTextColor.apply(_b, color);
-        color = DocHandler.unifyColor(styles.lineColor);
-        if (color)
-            (_c = this.jsPDFDocument).setDrawColor.apply(_c, color);
-        if (typeof styles.lineWidth === 'number') {
-            this.jsPDFDocument.setLineWidth(styles.lineWidth);
-        }
-    };
-    DocHandler.prototype.splitTextToSize = function (text, size, opts) {
-        return this.jsPDFDocument.splitTextToSize(text, size, opts);
-    };
-    DocHandler.prototype.rect = function (x, y, width, height, fillStyle) {
-        return this.jsPDFDocument.rect(x, y, width, height, fillStyle);
-    };
-    DocHandler.prototype.getLastAutoTable = function () {
-        return this.jsPDFDocument.lastAutoTable || null;
-    };
-    DocHandler.prototype.getTextWidth = function (text) {
-        return this.jsPDFDocument.getTextWidth(text);
-    };
-    DocHandler.prototype.getDocument = function () {
-        return this.jsPDFDocument;
-    };
-    DocHandler.prototype.setPage = function (page) {
-        this.jsPDFDocument.setPage(page);
-    };
-    DocHandler.prototype.addPage = function () {
-        return this.jsPDFDocument.addPage();
-    };
-    DocHandler.prototype.getFontList = function () {
-        return this.jsPDFDocument.getFontList();
-    };
-    DocHandler.prototype.getGlobalOptions = function () {
-        return globalDefaults || {};
-    };
-    DocHandler.prototype.getDocumentOptions = function () {
-        return this.jsPDFDocument.__autoTableDocumentDefaults || {};
-    };
-    DocHandler.prototype.pageSize = function () {
-        var pageSize = this.jsPDFDocument.internal.pageSize;
-        // JSPDF 1.4 uses get functions instead of properties on pageSize
-        if (pageSize.width == null) {
-            pageSize = {
-                width: pageSize.getWidth(),
-                height: pageSize.getHeight(),
-            };
-        }
-        return pageSize;
-    };
-    DocHandler.prototype.scaleFactor = function () {
-        return this.jsPDFDocument.internal.scaleFactor;
-    };
-    DocHandler.prototype.pageNumber = function () {
-        var pageInfo = this.jsPDFDocument.internal.getCurrentPageInfo();
-        if (!pageInfo) {
-            // Only recent versions of jspdf has pageInfo
-            return this.jsPDFDocument.internal.getNumberOfPages();
-        }
-        return pageInfo.pageNumber;
-    };
-    return DocHandler;
-}());
-exports.DocHandler = DocHandler;
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/* eslint-disable @typescript-eslint/no-unused-vars */
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.assign = void 0;
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
-function assign(target, s, s1, s2, s3) {
-    if (target == null) {
-        throw new TypeError('Cannot convert undefined or null to object');
-    }
-    var to = Object(target);
-    for (var index = 1; index < arguments.length; index++) {
-        // eslint-disable-next-line prefer-rest-params
-        var nextSource = arguments[index];
-        if (nextSource != null) {
-            // Skip over if undefined or null
-            for (var nextKey in nextSource) {
-                // Avoid bugs when hasOwnProperty is shadowed
-                if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
-                    to[nextKey] = nextSource[nextKey];
-                }
-            }
-        }
-    }
-    return to;
-}
-exports.assign = assign;
-
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.parseHtml = void 0;
-var cssParser_1 = __webpack_require__(12);
-var config_1 = __webpack_require__(1);
-function parseHtml(doc, input, window, includeHiddenHtml, useCss) {
-    var _a, _b;
-    if (includeHiddenHtml === void 0) { includeHiddenHtml = false; }
-    if (useCss === void 0) { useCss = false; }
-    var tableElement;
-    if (typeof input === 'string') {
-        tableElement = window.document.querySelector(input);
-    }
-    else {
-        tableElement = input;
-    }
-    var supportedFonts = Object.keys(doc.getFontList());
-    var scaleFactor = doc.scaleFactor();
-    var head = [], body = [], foot = [];
-    if (!tableElement) {
-        console.error('Html table could not be found with input: ', input);
-        return { head: head, body: body, foot: foot };
-    }
-    for (var i = 0; i < tableElement.rows.length; i++) {
-        var element = tableElement.rows[i];
-        var tagName = (_b = (_a = element === null || element === void 0 ? void 0 : element.parentElement) === null || _a === void 0 ? void 0 : _a.tagName) === null || _b === void 0 ? void 0 : _b.toLowerCase();
-        var row = parseRowContent(supportedFonts, scaleFactor, window, element, includeHiddenHtml, useCss);
-        if (!row)
-            continue;
-        if (tagName === 'thead') {
-            head.push(row);
-        }
-        else if (tagName === 'tfoot') {
-            foot.push(row);
-        }
-        else {
-            // Add to body both if parent is tbody or table
-            body.push(row);
-        }
-    }
-    return { head: head, body: body, foot: foot };
-}
-exports.parseHtml = parseHtml;
-function parseRowContent(supportedFonts, scaleFactor, window, row, includeHidden, useCss) {
-    var resultRow = new config_1.HtmlRowInput(row);
-    for (var i = 0; i < row.cells.length; i++) {
-        var cell = row.cells[i];
-        var style_1 = window.getComputedStyle(cell);
-        if (includeHidden || style_1.display !== 'none') {
-            var cellStyles = void 0;
-            if (useCss) {
-                cellStyles = cssParser_1.parseCss(supportedFonts, cell, scaleFactor, style_1, window);
-            }
-            resultRow.push({
-                rowSpan: cell.rowSpan,
-                colSpan: cell.colSpan,
-                styles: cellStyles,
-                _element: cell,
-                content: parseCellContent(cell),
-            });
-        }
-    }
-    var style = window.getComputedStyle(row);
-    if (resultRow.length > 0 && (includeHidden || style.display !== 'none')) {
-        return resultRow;
-    }
-}
-function parseCellContent(orgCell) {
-    // Work on cloned node to make sure no changes are applied to html table
-    var cell = orgCell.cloneNode(true);
-    // Remove extra space and line breaks in markup to make it more similar to
-    // what would be shown in html
-    cell.innerHTML = cell.innerHTML.replace(/\n/g, '').replace(/ +/g, ' ');
-    // Preserve <br> tags as line breaks in the pdf
-    cell.innerHTML = cell.innerHTML
-        .split('<br>')
-        .map(function (part) { return part.trim(); })
-        .join('\n');
-    // innerText for ie
-    return cell.innerText || cell.textContent || '';
-}
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * Improved text function with halign and valign support
- * Inspiration from: http://stackoverflow.com/questions/28327510/align-text-right-using-jspdf/28433113#28433113
- */
-function default_1(text, x, y, styles, doc) {
-    styles = styles || {};
-    var FONT_ROW_RATIO = 1.15;
-    var k = doc.internal.scaleFactor;
-    var fontSize = doc.internal.getFontSize() / k;
-    var splitRegex = /\r\n|\r|\n/g;
-    var splitText = '';
-    var lineCount = 1;
-    if (styles.valign === 'middle' ||
-        styles.valign === 'bottom' ||
-        styles.halign === 'center' ||
-        styles.halign === 'right') {
-        splitText = typeof text === 'string' ? text.split(splitRegex) : text;
-        lineCount = splitText.length || 1;
-    }
-    // Align the top
-    y += fontSize * (2 - FONT_ROW_RATIO);
-    if (styles.valign === 'middle')
-        y -= (lineCount / 2) * fontSize * FONT_ROW_RATIO;
-    else if (styles.valign === 'bottom')
-        y -= lineCount * fontSize * FONT_ROW_RATIO;
-    if (styles.halign === 'center' || styles.halign === 'right') {
-        var alignSize = fontSize;
-        if (styles.halign === 'center')
-            alignSize *= 0.5;
-        if (splitText && lineCount >= 1) {
-            for (var iLine = 0; iLine < splitText.length; iLine++) {
-                doc.text(splitText[iLine], x - doc.getStringUnitWidth(splitText[iLine]) * alignSize, y);
-                y += fontSize * FONT_ROW_RATIO;
-            }
-            return doc;
-        }
-        x -= doc.getStringUnitWidth(text) * alignSize;
-    }
-    if (styles.halign === 'justify') {
-        doc.text(text, x, y, {
-            maxWidth: styles.maxWidth || 100,
-            align: 'justify',
-        });
-    }
-    else {
-        doc.text(text, x, y);
-    }
-    return doc;
-}
-exports.default = default_1;
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.parseInput = void 0;
-var htmlParser_1 = __webpack_require__(4);
-var polyfills_1 = __webpack_require__(3);
-var common_1 = __webpack_require__(0);
-var documentHandler_1 = __webpack_require__(2);
-var inputValidator_1 = __webpack_require__(13);
-function parseInput(d, current) {
-    var doc = new documentHandler_1.DocHandler(d);
-    var document = doc.getDocumentOptions();
-    var global = doc.getGlobalOptions();
-    inputValidator_1.default(doc, global, document, current);
-    var options = polyfills_1.assign({}, global, document, current);
-    var win;
-    if (typeof window !== 'undefined') {
-        win = window;
-    }
-    var styles = parseStyles(global, document, current);
-    var hooks = parseHooks(global, document, current);
-    var settings = parseSettings(doc, options);
-    var content = parseContent(doc, options, win);
-    return {
-        id: current.tableId,
-        content: content,
-        hooks: hooks,
-        styles: styles,
-        settings: settings,
-    };
-}
-exports.parseInput = parseInput;
-function parseStyles(gInput, dInput, cInput) {
-    var styleOptions = {
-        styles: {},
-        headStyles: {},
-        bodyStyles: {},
-        footStyles: {},
-        alternateRowStyles: {},
-        columnStyles: {},
-    };
-    var _loop_1 = function (prop) {
-        if (prop === 'columnStyles') {
-            var global_1 = gInput[prop];
-            var document_1 = dInput[prop];
-            var current = cInput[prop];
-            styleOptions.columnStyles = polyfills_1.assign({}, global_1, document_1, current);
-        }
-        else {
-            var allOptions = [gInput, dInput, cInput];
-            var styles = allOptions.map(function (opts) { return opts[prop] || {}; });
-            styleOptions[prop] = polyfills_1.assign({}, styles[0], styles[1], styles[2]);
-        }
-    };
-    for (var _i = 0, _a = Object.keys(styleOptions); _i < _a.length; _i++) {
-        var prop = _a[_i];
-        _loop_1(prop);
-    }
-    return styleOptions;
-}
-function parseHooks(global, document, current) {
-    var allOptions = [global, document, current];
-    var result = {
-        didParseCell: [],
-        willDrawCell: [],
-        didDrawCell: [],
-        didDrawPage: [],
-    };
-    for (var _i = 0, allOptions_1 = allOptions; _i < allOptions_1.length; _i++) {
-        var options = allOptions_1[_i];
-        if (options.didParseCell)
-            result.didParseCell.push(options.didParseCell);
-        if (options.willDrawCell)
-            result.willDrawCell.push(options.willDrawCell);
-        if (options.didDrawCell)
-            result.didDrawCell.push(options.didDrawCell);
-        if (options.didDrawPage)
-            result.didDrawPage.push(options.didDrawPage);
-    }
-    return result;
-}
-function parseSettings(doc, options) {
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
-    var margin = common_1.parseSpacing(options.margin, 40 / doc.scaleFactor());
-    var startY = (_a = getStartY(doc, options.startY)) !== null && _a !== void 0 ? _a : margin.top;
-    var showFoot;
-    if (options.showFoot === true) {
-        showFoot = 'everyPage';
-    }
-    else if (options.showFoot === false) {
-        showFoot = 'never';
-    }
-    else {
-        showFoot = (_b = options.showFoot) !== null && _b !== void 0 ? _b : 'everyPage';
-    }
-    var showHead;
-    if (options.showHead === true) {
-        showHead = 'everyPage';
-    }
-    else if (options.showHead === false) {
-        showHead = 'never';
-    }
-    else {
-        showHead = (_c = options.showHead) !== null && _c !== void 0 ? _c : 'everyPage';
-    }
-    var useCss = (_d = options.useCss) !== null && _d !== void 0 ? _d : false;
-    var theme = options.theme || (useCss ? 'plain' : 'striped');
-    return {
-        includeHiddenHtml: (_e = options.includeHiddenHtml) !== null && _e !== void 0 ? _e : false,
-        useCss: useCss,
-        theme: theme,
-        startY: startY,
-        margin: margin,
-        pageBreak: (_f = options.pageBreak) !== null && _f !== void 0 ? _f : 'auto',
-        rowPageBreak: (_g = options.rowPageBreak) !== null && _g !== void 0 ? _g : 'auto',
-        tableWidth: (_h = options.tableWidth) !== null && _h !== void 0 ? _h : 'auto',
-        showHead: showHead,
-        showFoot: showFoot,
-        tableLineWidth: (_j = options.tableLineWidth) !== null && _j !== void 0 ? _j : 0,
-        tableLineColor: (_k = options.tableLineColor) !== null && _k !== void 0 ? _k : 200,
-    };
-}
-function getStartY(doc, userStartY) {
-    var previous = doc.getLastAutoTable();
-    var sf = doc.scaleFactor();
-    var currentPage = doc.pageNumber();
-    var isSamePageAsPreviousTable = false;
-    if (previous && previous.startPageNumber) {
-        var endingPage = previous.startPageNumber + previous.pageNumber - 1;
-        isSamePageAsPreviousTable = endingPage === currentPage;
-    }
-    if (typeof userStartY === 'number') {
-        return userStartY;
-    }
-    else if (userStartY == null || userStartY === false) {
-        if (isSamePageAsPreviousTable && (previous === null || previous === void 0 ? void 0 : previous.finalY) != null) {
-            // Some users had issues with overlapping tables when they used multiple
-            // tables without setting startY so setting it here to a sensible default.
-            return previous.finalY + 20 / sf;
-        }
-    }
-    return null;
-}
-function parseContent(doc, options, window) {
-    var head = options.head || [];
-    var body = options.body || [];
-    var foot = options.foot || [];
-    if (options.html) {
-        var hidden = options.includeHiddenHtml;
-        if (window) {
-            var htmlContent = htmlParser_1.parseHtml(doc, options.html, window, hidden, options.useCss) || {};
-            head = htmlContent.head || head;
-            body = htmlContent.body || head;
-            foot = htmlContent.foot || head;
-        }
-        else {
-            console.error('Cannot parse html in non browser environment');
-        }
-    }
-    var columns = options.columns || parseColumns(head, body, foot);
-    return {
-        columns: columns,
-        head: head,
-        body: body,
-        foot: foot,
-    };
-}
-function parseColumns(head, body, foot) {
-    var firstRow = head[0] || body[0] || foot[0] || [];
-    var result = [];
-    Object.keys(firstRow)
-        .filter(function (key) { return key !== '_element'; })
-        .forEach(function (key) {
-        var colSpan = 1;
-        var input;
-        if (Array.isArray(firstRow)) {
-            input = firstRow[parseInt(key)];
-        }
-        else {
-            input = firstRow[key];
-        }
-        if (typeof input === 'object' && !Array.isArray(input)) {
-            colSpan = (input === null || input === void 0 ? void 0 : input.colSpan) || 1;
-        }
-        for (var i = 0; i < colSpan; i++) {
-            var id = void 0;
-            if (Array.isArray(firstRow)) {
-                id = result.length;
-            }
-            else {
-                id = key + (i > 0 ? "_" + i : '');
-            }
-            var rowResult = { dataKey: id };
-            result.push(rowResult);
-        }
-    });
-    return result;
-}
-
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.addPage = exports.drawTable = void 0;
-var config_1 = __webpack_require__(1);
-var common_1 = __webpack_require__(0);
-var models_1 = __webpack_require__(8);
-var documentHandler_1 = __webpack_require__(2);
-var polyfills_1 = __webpack_require__(3);
-var autoTableText_1 = __webpack_require__(5);
-function drawTable(jsPDFDoc, table) {
-    var settings = table.settings;
-    var startY = settings.startY;
-    var margin = settings.margin;
-    var cursor = {
-        x: margin.left,
-        y: startY,
-    };
-    var sectionsHeight = table.getHeadHeight(table.columns) + table.getFootHeight(table.columns);
-    var minTableBottomPos = startY + margin.bottom + sectionsHeight;
-    if (settings.pageBreak === 'avoid') {
-        var rows = table.allRows();
-        var tableHeight = rows.reduce(function (acc, row) { return acc + row.height; }, 0);
-        minTableBottomPos += tableHeight;
-    }
-    var doc = new documentHandler_1.DocHandler(jsPDFDoc);
-    if (settings.pageBreak === 'always' ||
-        (settings.startY != null && minTableBottomPos > doc.pageSize().height)) {
-        nextPage(doc);
-        cursor.y = margin.top;
-    }
-    var startPos = polyfills_1.assign({}, cursor);
-    table.startPageNumber = doc.pageNumber();
-    doc.applyStyles(doc.userStyles);
-    if (settings.showHead === 'firstPage' || settings.showHead === 'everyPage') {
-        table.head.forEach(function (row) { return printRow(doc, table, row, cursor); });
-    }
-    doc.applyStyles(doc.userStyles);
-    table.body.forEach(function (row, index) {
-        var isLastRow = index === table.body.length - 1;
-        printFullRow(doc, table, row, isLastRow, startPos, cursor);
-    });
-    doc.applyStyles(doc.userStyles);
-    if (settings.showFoot === 'lastPage' || settings.showFoot === 'everyPage') {
-        table.foot.forEach(function (row) { return printRow(doc, table, row, cursor); });
-    }
-    common_1.addTableBorder(doc, table, startPos, cursor);
-    table.callEndPageHooks(doc, cursor);
-    table.finalY = cursor.y;
-    jsPDFDoc.lastAutoTable = table;
-    jsPDFDoc.previousAutoTable = table; // Deprecated
-    if (jsPDFDoc.autoTable)
-        jsPDFDoc.autoTable.previous = table; // Deprecated
-    doc.applyStyles(doc.userStyles);
-}
-exports.drawTable = drawTable;
-function getRemainingLineCount(cell, remainingPageSpace, doc) {
-    var fontHeight = (cell.styles.fontSize / doc.scaleFactor()) * config_1.FONT_ROW_RATIO;
-    var vPadding = cell.padding('vertical');
-    var remainingLines = Math.floor((remainingPageSpace - vPadding) / fontHeight);
-    return Math.max(0, remainingLines);
-}
-function modifyRowToFit(row, remainingPageSpace, table, doc) {
-    var cells = {};
-    row.spansMultiplePages = true;
-    var rowHeight = 0;
-    for (var _i = 0, _a = table.columns; _i < _a.length; _i++) {
-        var column = _a[_i];
-        var cell = row.cells[column.index];
-        if (!cell)
-            continue;
-        if (!Array.isArray(cell.text)) {
-            cell.text = [cell.text];
-        }
-        var remainderCell = new models_1.Cell(cell.raw, cell.styles, cell.section);
-        remainderCell = polyfills_1.assign(remainderCell, cell);
-        remainderCell.text = [];
-        var remainingLineCount = getRemainingLineCount(cell, remainingPageSpace, doc);
-        if (cell.text.length > remainingLineCount) {
-            remainderCell.text = cell.text.splice(remainingLineCount, cell.text.length);
-        }
-        var scaleFactor = doc.scaleFactor();
-        cell.contentHeight = cell.getContentHeight(scaleFactor);
-        if (cell.contentHeight >= remainingPageSpace) {
-            cell.contentHeight = remainingPageSpace;
-            remainderCell.styles.minCellHeight -= remainingPageSpace;
-        }
-        if (cell.contentHeight > row.height) {
-            row.height = cell.contentHeight;
-        }
-        remainderCell.contentHeight = remainderCell.getContentHeight(scaleFactor);
-        if (remainderCell.contentHeight > rowHeight) {
-            rowHeight = remainderCell.contentHeight;
-        }
-        cells[column.index] = remainderCell;
-    }
-    var remainderRow = new models_1.Row(row.raw, -1, row.section, cells, true);
-    remainderRow.height = rowHeight;
-    for (var _b = 0, _c = table.columns; _b < _c.length; _b++) {
-        var column = _c[_b];
-        var remainderCell = remainderRow.cells[column.index];
-        if (remainderCell) {
-            remainderCell.height = remainderRow.height;
-        }
-        var cell = row.cells[column.index];
-        if (cell) {
-            cell.height = row.height;
-        }
-    }
-    return remainderRow;
-}
-function shouldPrintOnCurrentPage(doc, row, remainingPageSpace, table) {
-    var pageHeight = doc.pageSize().height;
-    var margin = table.settings.margin;
-    var marginHeight = margin.top + margin.bottom;
-    var maxRowHeight = pageHeight - marginHeight;
-    if (row.section === 'body') {
-        // Should also take into account that head and foot is not
-        // on every page with some settings
-        maxRowHeight -=
-            table.getHeadHeight(table.columns) + table.getFootHeight(table.columns);
-    }
-    var minRowHeight = row.getMinimumRowHeight(table.columns, doc);
-    var minRowFits = minRowHeight < remainingPageSpace;
-    if (minRowHeight > maxRowHeight) {
-        console.error("Will not be able to print row " + row.index + " correctly since it's minimum height is larger than page height");
-        return true;
-    }
-    if (!minRowFits) {
-        return false;
-    }
-    var rowHasRowSpanCell = row.hasRowSpan(table.columns);
-    var rowHigherThanPage = row.getMaxCellHeight(table.columns) > maxRowHeight;
-    if (rowHigherThanPage) {
-        if (rowHasRowSpanCell) {
-            console.error("The content of row " + row.index + " will not be drawn correctly since drawing rows with a height larger than the page height and has cells with rowspans is not supported.");
-        }
-        return true;
-    }
-    if (rowHasRowSpanCell) {
-        // Currently a new page is required whenever a rowspan row don't fit a page.
-        return false;
-    }
-    if (table.settings.rowPageBreak === 'avoid') {
-        return false;
-    }
-    // In all other cases print the row on current page
-    return true;
-}
-function printFullRow(doc, table, row, isLastRow, startPos, cursor) {
-    var remainingSpace = getRemainingPageSpace(doc, table, isLastRow, cursor);
-    if (row.canEntireRowFit(remainingSpace, table.columns)) {
-        printRow(doc, table, row, cursor);
-    }
-    else {
-        if (shouldPrintOnCurrentPage(doc, row, remainingSpace, table)) {
-            var remainderRow = modifyRowToFit(row, remainingSpace, table, doc);
-            printRow(doc, table, row, cursor);
-            addPage(doc, table, startPos, cursor);
-            printFullRow(doc, table, remainderRow, isLastRow, startPos, cursor);
-        }
-        else {
-            addPage(doc, table, startPos, cursor);
-            printFullRow(doc, table, row, isLastRow, startPos, cursor);
-        }
-    }
-}
-function printRow(doc, table, row, cursor) {
-    cursor.x = table.settings.margin.left;
-    for (var _i = 0, _a = table.columns; _i < _a.length; _i++) {
-        var column = _a[_i];
-        var cell = row.cells[column.index];
-        if (!cell) {
-            cursor.x += column.width;
-            continue;
-        }
-        doc.applyStyles(cell.styles);
-        cell.x = cursor.x;
-        cell.y = cursor.y;
-        var result = table.callCellHooks(doc, table.hooks.willDrawCell, cell, row, column, cursor);
-        if (result === false) {
-            cursor.x += column.width;
-            continue;
-        }
-        var cellStyles = cell.styles;
-        var fillStyle = common_1.getFillStyle(cellStyles.lineWidth, cellStyles.fillColor);
-        if (fillStyle) {
-            doc.rect(cell.x, cursor.y, cell.width, cell.height, fillStyle);
-        }
-        var textPos = cell.getTextPos();
-        autoTableText_1.default(cell.text, textPos.x, textPos.y, {
-            halign: cell.styles.halign,
-            valign: cell.styles.valign,
-            maxWidth: Math.ceil(cell.width - cell.padding('left') - cell.padding('right')),
-        }, doc.getDocument());
-        table.callCellHooks(doc, table.hooks.didDrawCell, cell, row, column, cursor);
-        cursor.x += column.width;
-    }
-    cursor.y += row.height;
-}
-function getRemainingPageSpace(doc, table, isLastRow, cursor) {
-    var bottomContentHeight = table.settings.margin.bottom;
-    var showFoot = table.settings.showFoot;
-    if (showFoot === 'everyPage' || (showFoot === 'lastPage' && isLastRow)) {
-        bottomContentHeight += table.getFootHeight(table.columns);
-    }
-    return doc.pageSize().height - cursor.y - bottomContentHeight;
-}
-function addPage(doc, table, startPos, cursor) {
-    doc.applyStyles(doc.userStyles);
-    if (table.settings.showFoot === 'everyPage') {
-        table.foot.forEach(function (row) { return printRow(doc, table, row, cursor); });
-    }
-    // Add user content just before adding new page ensure it will
-    // be drawn above other things on the page
-    table.callEndPageHooks(doc, cursor);
-    var margin = table.settings.margin;
-    common_1.addTableBorder(doc, table, startPos, cursor);
-    nextPage(doc);
-    table.pageNumber++;
-    table.pageCount++;
-    cursor.x = margin.left;
-    cursor.y = margin.top;
-    if (table.settings.showHead === 'everyPage') {
-        table.head.forEach(function (row) { return printRow(doc, table, row, cursor); });
-    }
-}
-exports.addPage = addPage;
-function nextPage(doc) {
-    var current = doc.pageNumber();
-    doc.setPage(current + 1);
-    var newCurrent = doc.pageNumber();
-    if (newCurrent === current) {
-        doc.addPage();
-    }
-}
-
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Column = exports.Cell = exports.Row = exports.Table = void 0;
-var config_1 = __webpack_require__(1);
-var HookData_1 = __webpack_require__(14);
-var common_1 = __webpack_require__(0);
-var Table = /** @class */ (function () {
-    function Table(input, content) {
-        this.pageNumber = 1;
-        // Deprecated, use pageNumber instead
-        // Not using getter since:
-        // https://github.com/simonbengtsson/jsPDF-AutoTable/issues/596
-        this.pageCount = 1;
-        this.id = input.id;
-        this.settings = input.settings;
-        this.styles = input.styles;
-        this.hooks = input.hooks;
-        this.columns = content.columns;
-        this.head = content.head;
-        this.body = content.body;
-        this.foot = content.foot;
-    }
-    Table.prototype.getHeadHeight = function (columns) {
-        return this.head.reduce(function (acc, row) { return acc + row.getMaxCellHeight(columns); }, 0);
-    };
-    Table.prototype.getFootHeight = function (columns) {
-        return this.foot.reduce(function (acc, row) { return acc + row.getMaxCellHeight(columns); }, 0);
-    };
-    Table.prototype.allRows = function () {
-        return this.head.concat(this.body).concat(this.foot);
-    };
-    Table.prototype.callCellHooks = function (doc, handlers, cell, row, column, cursor) {
-        for (var _i = 0, handlers_1 = handlers; _i < handlers_1.length; _i++) {
-            var handler = handlers_1[_i];
-            var data = new HookData_1.CellHookData(doc, this, cell, row, column, cursor);
-            var result = handler(data) === false;
-            // Make sure text is always string[] since user can assign string
-            cell.text = Array.isArray(cell.text) ? cell.text : [cell.text];
-            if (result) {
-                return false;
-            }
-        }
-        return true;
-    };
-    Table.prototype.callEndPageHooks = function (doc, cursor) {
-        doc.applyStyles(doc.userStyles);
-        for (var _i = 0, _a = this.hooks.didDrawPage; _i < _a.length; _i++) {
-            var handler = _a[_i];
-            handler(new HookData_1.HookData(doc, this, cursor));
-        }
-    };
-    Table.prototype.getWidth = function (pageWidth) {
-        if (typeof this.settings.tableWidth === 'number') {
-            return this.settings.tableWidth;
-        }
-        else if (this.settings.tableWidth === 'wrap') {
-            var wrappedWidth = this.columns.reduce(function (total, col) { return total + col.wrappedWidth; }, 0);
-            return wrappedWidth;
-        }
-        else {
-            var margin = this.settings.margin;
-            return pageWidth - margin.left - margin.right;
-        }
-    };
-    return Table;
-}());
-exports.Table = Table;
-var Row = /** @class */ (function () {
-    function Row(raw, index, section, cells, spansMultiplePages) {
-        if (spansMultiplePages === void 0) { spansMultiplePages = false; }
-        this.height = 0;
-        this.raw = raw;
-        if (raw instanceof config_1.HtmlRowInput) {
-            this.raw = raw._element;
-            this.element = raw._element;
-        }
-        this.index = index;
-        this.section = section;
-        this.cells = cells;
-        this.spansMultiplePages = spansMultiplePages;
-    }
-    Row.prototype.getMaxCellHeight = function (columns) {
-        var _this = this;
-        return columns.reduce(function (acc, column) { var _a; return Math.max(acc, ((_a = _this.cells[column.index]) === null || _a === void 0 ? void 0 : _a.height) || 0); }, 0);
-    };
-    Row.prototype.hasRowSpan = function (columns) {
-        var _this = this;
-        return (columns.filter(function (column) {
-            var cell = _this.cells[column.index];
-            if (!cell)
-                return false;
-            return cell.rowSpan > 1;
-        }).length > 0);
-    };
-    Row.prototype.canEntireRowFit = function (height, columns) {
-        return this.getMaxCellHeight(columns) <= height;
-    };
-    Row.prototype.getMinimumRowHeight = function (columns, doc) {
-        var _this = this;
-        return columns.reduce(function (acc, column) {
-            var cell = _this.cells[column.index];
-            if (!cell)
-                return 0;
-            var fontHeight = (cell.styles.fontSize / doc.scaleFactor()) * config_1.FONT_ROW_RATIO;
-            var vPadding = cell.padding('vertical');
-            var oneRowHeight = vPadding + fontHeight;
-            return oneRowHeight > acc ? oneRowHeight : acc;
-        }, 0);
-    };
-    return Row;
-}());
-exports.Row = Row;
-var Cell = /** @class */ (function () {
-    function Cell(raw, styles, section) {
-        var _a, _b;
-        this.contentHeight = 0;
-        this.contentWidth = 0;
-        this.wrappedWidth = 0;
-        this.minReadableWidth = 0;
-        this.minWidth = 0;
-        this.width = 0;
-        this.height = 0;
-        this.x = 0;
-        this.y = 0;
-        this.styles = styles;
-        this.section = section;
-        this.raw = raw;
-        var content = raw;
-        if (raw != null && typeof raw === 'object' && !Array.isArray(raw)) {
-            this.rowSpan = raw.rowSpan || 1;
-            this.colSpan = raw.colSpan || 1;
-            content = (_b = (_a = raw.content) !== null && _a !== void 0 ? _a : raw.title) !== null && _b !== void 0 ? _b : raw;
-            if (raw._element) {
-                this.raw = raw._element;
-            }
-        }
-        else {
-            this.rowSpan = 1;
-            this.colSpan = 1;
-        }
-        // Stringify 0 and false, but not undefined or null
-        var text = content != null ? '' + content : '';
-        var splitRegex = /\r\n|\r|\n/g;
-        this.text = text.split(splitRegex);
-    }
-    Cell.prototype.getTextPos = function () {
-        var y;
-        if (this.styles.valign === 'top') {
-            y = this.y + this.padding('top');
-        }
-        else if (this.styles.valign === 'bottom') {
-            y = this.y + this.height - this.padding('bottom');
-        }
-        else {
-            var netHeight = this.height - this.padding('vertical');
-            y = this.y + netHeight / 2 + this.padding('top');
-        }
-        var x;
-        if (this.styles.halign === 'right') {
-            x = this.x + this.width - this.padding('right');
-        }
-        else if (this.styles.halign === 'center') {
-            var netWidth = this.width - this.padding('horizontal');
-            x = this.x + netWidth / 2 + this.padding('left');
-        }
-        else {
-            x = this.x + this.padding('left');
-        }
-        return { x: x, y: y };
-    };
-    Cell.prototype.getContentHeight = function (scaleFactor) {
-        var lineCount = Array.isArray(this.text) ? this.text.length : 1;
-        var fontHeight = (this.styles.fontSize / scaleFactor) * config_1.FONT_ROW_RATIO;
-        var height = lineCount * fontHeight + this.padding('vertical');
-        return Math.max(height, this.styles.minCellHeight);
-    };
-    Cell.prototype.padding = function (name) {
-        var padding = common_1.parseSpacing(this.styles.cellPadding, 0);
-        if (name === 'vertical') {
-            return padding.top + padding.bottom;
-        }
-        else if (name === 'horizontal') {
-            return padding.left + padding.right;
-        }
-        else {
-            return padding[name];
-        }
-    };
-    return Cell;
-}());
-exports.Cell = Cell;
-var Column = /** @class */ (function () {
-    function Column(dataKey, raw, index) {
-        this.wrappedWidth = 0;
-        this.minReadableWidth = 0;
-        this.minWidth = 0;
-        this.width = 0;
-        this.dataKey = dataKey;
-        this.raw = raw;
-        this.index = index;
-    }
-    Column.prototype.getMaxCustomCellWidth = function (table) {
-        var max = 0;
-        for (var _i = 0, _a = table.allRows(); _i < _a.length; _i++) {
-            var row = _a[_i];
-            var cell = row.cells[this.index];
-            if (cell && typeof cell.styles.cellWidth === 'number') {
-                max = Math.max(max, cell.styles.cellWidth);
-            }
-        }
-        return max;
-    };
-    return Column;
-}());
-exports.Column = Column;
-
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.createTable = void 0;
-var documentHandler_1 = __webpack_require__(2);
-var models_1 = __webpack_require__(8);
-var widthCalculator_1 = __webpack_require__(15);
-var config_1 = __webpack_require__(1);
-var polyfills_1 = __webpack_require__(3);
-function createTable(jsPDFDoc, input) {
-    var doc = new documentHandler_1.DocHandler(jsPDFDoc);
-    var content = parseContent(input, doc.scaleFactor());
-    var table = new models_1.Table(input, content);
-    widthCalculator_1.calculateWidths(doc, table);
-    doc.applyStyles(doc.userStyles);
-    return table;
-}
-exports.createTable = createTable;
-function parseContent(input, sf) {
-    var content = input.content;
-    var columns = createColumns(content.columns);
-    // If no head or foot is set, try generating it with content from columns
-    if (content.head.length === 0) {
-        var sectionRow = generateSectionRow(columns, 'head');
-        if (sectionRow)
-            content.head.push(sectionRow);
-    }
-    if (content.foot.length === 0) {
-        var sectionRow = generateSectionRow(columns, 'foot');
-        if (sectionRow)
-            content.foot.push(sectionRow);
-    }
-    var theme = input.settings.theme;
-    var styles = input.styles;
-    return {
-        columns: columns,
-        head: parseSection('head', content.head, columns, styles, theme, sf),
-        body: parseSection('body', content.body, columns, styles, theme, sf),
-        foot: parseSection('foot', content.foot, columns, styles, theme, sf),
-    };
-}
-function parseSection(sectionName, sectionRows, columns, styleProps, theme, scaleFactor) {
-    var rowSpansLeftForColumn = {};
-    var result = sectionRows.map(function (rawRow, rowIndex) {
-        var skippedRowForRowSpans = 0;
-        var cells = {};
-        var colSpansAdded = 0;
-        var columnSpansLeft = 0;
-        for (var _i = 0, columns_1 = columns; _i < columns_1.length; _i++) {
-            var column = columns_1[_i];
-            if (rowSpansLeftForColumn[column.index] == null ||
-                rowSpansLeftForColumn[column.index].left === 0) {
-                if (columnSpansLeft === 0) {
-                    var rawCell = void 0;
-                    if (Array.isArray(rawRow)) {
-                        rawCell =
-                            rawRow[column.index - colSpansAdded - skippedRowForRowSpans];
-                    }
-                    else {
-                        rawCell = rawRow[column.dataKey];
-                    }
-                    var cellInputStyles = {};
-                    if (typeof rawCell === 'object' && !Array.isArray(rawCell)) {
-                        cellInputStyles = (rawCell === null || rawCell === void 0 ? void 0 : rawCell.styles) || {};
-                    }
-                    var styles = cellStyles(sectionName, column, rowIndex, theme, styleProps, scaleFactor, cellInputStyles);
-                    var cell = new models_1.Cell(rawCell, styles, sectionName);
-                    // dataKey is not used internally no more but keep for
-                    // backwards compat in hooks
-                    cells[column.dataKey] = cell;
-                    cells[column.index] = cell;
-                    columnSpansLeft = cell.colSpan - 1;
-                    rowSpansLeftForColumn[column.index] = {
-                        left: cell.rowSpan - 1,
-                        times: columnSpansLeft,
-                    };
-                }
-                else {
-                    columnSpansLeft--;
-                    colSpansAdded++;
-                }
-            }
-            else {
-                rowSpansLeftForColumn[column.index].left--;
-                columnSpansLeft = rowSpansLeftForColumn[column.index].times;
-                skippedRowForRowSpans++;
-            }
-        }
-        return new models_1.Row(rawRow, rowIndex, sectionName, cells);
-    });
-    return result;
-}
-function generateSectionRow(columns, section) {
-    var sectionRow = {};
-    columns.forEach(function (col) {
-        if (col.raw != null) {
-            var title = getSectionTitle(section, col.raw);
-            if (title != null)
-                sectionRow[col.dataKey] = title;
-        }
-    });
-    return Object.keys(sectionRow).length > 0 ? sectionRow : null;
-}
-function getSectionTitle(section, column) {
-    if (section === 'head') {
-        if (typeof column === 'object') {
-            return column.header || column.title || null;
-        }
-        else if (typeof column === 'string' || typeof column === 'number') {
-            return column;
-        }
-    }
-    else if (section === 'foot' && typeof column === 'object') {
-        return column.footer;
-    }
-    return null;
-}
-function createColumns(columns) {
-    return columns.map(function (input, index) {
-        var _a, _b;
-        var key;
-        if (typeof input === 'object') {
-            key = (_b = (_a = input.dataKey) !== null && _a !== void 0 ? _a : input.key) !== null && _b !== void 0 ? _b : index;
-        }
-        else {
-            key = index;
-        }
-        return new models_1.Column(key, input, index);
-    });
-}
-function cellStyles(sectionName, column, rowIndex, themeName, styles, scaleFactor, cellInputStyles) {
-    var theme = config_1.getTheme(themeName);
-    var sectionStyles;
-    if (sectionName === 'head') {
-        sectionStyles = styles.headStyles;
-    }
-    else if (sectionName === 'body') {
-        sectionStyles = styles.bodyStyles;
-    }
-    else if (sectionName === 'foot') {
-        sectionStyles = styles.footStyles;
-    }
-    var otherStyles = polyfills_1.assign({}, theme.table, theme[sectionName], styles.styles, sectionStyles);
-    var columnStyles = styles.columnStyles[column.dataKey] ||
-        styles.columnStyles[column.index] ||
-        {};
-    var colStyles = sectionName === 'body' ? columnStyles : {};
-    var rowStyles = sectionName === 'body' && rowIndex % 2 === 0
-        ? polyfills_1.assign({}, theme.alternateRow, styles.alternateRowStyles)
-        : {};
-    var defaultStyle = config_1.defaultStyles(scaleFactor);
-    var themeStyles = polyfills_1.assign({}, defaultStyle, otherStyles, rowStyles, colStyles);
-    return polyfills_1.assign(themeStyles, cellInputStyles);
-}
-
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.__drawTable = exports.__createTable = exports.applyPlugin = void 0;
-var applyPlugin_1 = __webpack_require__(11);
-var inputParser_1 = __webpack_require__(6);
-var tableDrawer_1 = __webpack_require__(7);
-var tableCalculator_1 = __webpack_require__(9);
-// export { applyPlugin } didn't export applyPlugin
-// to index.d.ts for some reason
-function applyPlugin(jsPDF) {
-    applyPlugin_1.default(jsPDF);
-}
-exports.applyPlugin = applyPlugin;
-function autoTable(d, options) {
-    var input = inputParser_1.parseInput(d, options);
-    var table = tableCalculator_1.createTable(d, input);
-    tableDrawer_1.drawTable(d, table);
-}
-exports.default = autoTable;
-// Experimental export
-function __createTable(d, options) {
-    var input = inputParser_1.parseInput(d, options);
-    return tableCalculator_1.createTable(d, input);
-}
-exports.__createTable = __createTable;
-function __drawTable(d, table) {
-    tableDrawer_1.drawTable(d, table);
-}
-exports.__drawTable = __drawTable;
-try {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    var jsPDF = __webpack_require__(16);
-    // Webpack imported jspdf instead of jsPDF for some reason 
-    // while it seemed to work everywhere else.
-    if (jsPDF.jsPDF)
-        jsPDF = jsPDF.jsPDF;
-    applyPlugin(jsPDF);
-}
-catch (error) {
-    // Importing jspdf in nodejs environments does not work as of jspdf
-    // 1.5.3 so we need to silence potential errors to support using for example
-    // the nodejs jspdf dist files with the exported applyPlugin
-}
-
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var htmlParser_1 = __webpack_require__(4);
-var autoTableText_1 = __webpack_require__(5);
-var documentHandler_1 = __webpack_require__(2);
-var inputParser_1 = __webpack_require__(6);
-var tableDrawer_1 = __webpack_require__(7);
-var tableCalculator_1 = __webpack_require__(9);
-function default_1(jsPDF) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    jsPDF.API.autoTable = function () {
-        var args = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            args[_i] = arguments[_i];
-        }
-        var options;
-        if (args.length === 1) {
-            options = args[0];
-        }
-        else {
-            console.error('Use of deprecated autoTable initiation');
-            options = args[2] || {};
-            options.columns = args[0];
-            options.body = args[1];
-        }
-        var input = inputParser_1.parseInput(this, options);
-        var table = tableCalculator_1.createTable(this, input);
-        tableDrawer_1.drawTable(this, table);
-        return this;
-    };
-    // Assign false to enable `doc.lastAutoTable.finalY || 40` sugar
-    jsPDF.API.lastAutoTable = false;
-    jsPDF.API.previousAutoTable = false; // deprecated in v3
-    jsPDF.API.autoTable.previous = false; // deprecated in v3
-    jsPDF.API.autoTableText = function (text, x, y, styles) {
-        autoTableText_1.default(text, x, y, styles, this);
-    };
-    jsPDF.API.autoTableSetDefaults = function (defaults) {
-        documentHandler_1.DocHandler.setDefaults(defaults, this);
-        return this;
-    };
-    jsPDF.autoTableSetDefaults = function (defaults, doc) {
-        documentHandler_1.DocHandler.setDefaults(defaults, doc);
-    };
-    jsPDF.API.autoTableHtmlToJson = function (tableElem, includeHiddenElements) {
-        if (includeHiddenElements === void 0) { includeHiddenElements = false; }
-        if (typeof window === 'undefined') {
-            console.error('Cannot run autoTableHtmlToJson in non browser environment');
-            return null;
-        }
-        var doc = new documentHandler_1.DocHandler(this);
-        var _a = htmlParser_1.parseHtml(doc, tableElem, window, includeHiddenElements, false), head = _a.head, body = _a.body;
-        var columns = head[0].map(function (c) { return c.content; });
-        return { columns: columns, rows: body, data: body };
-    };
-    /**
-     * @deprecated
-     */
-    jsPDF.API.autoTableEndPosY = function () {
-        console.error('Use of deprecated function: autoTableEndPosY. Use doc.lastAutoTable.finalY instead.');
-        var prev = this.lastAutoTable;
-        if (prev && prev.finalY) {
-            return prev.finalY;
-        }
-        else {
-            return 0;
-        }
-    };
-    /**
-     * @deprecated
-     */
-    jsPDF.API.autoTableAddPageContent = function (hook) {
-        console.error('Use of deprecated function: autoTableAddPageContent. Use jsPDF.autoTableSetDefaults({didDrawPage: () => {}}) instead.');
-        if (!jsPDF.API.autoTable.globalDefaults) {
-            jsPDF.API.autoTable.globalDefaults = {};
-        }
-        jsPDF.API.autoTable.globalDefaults.addPageContent = hook;
-        return this;
-    };
-    /**
-     * @deprecated
-     */
-    jsPDF.API.autoTableAddPage = function () {
-        console.error('Use of deprecated function: autoTableAddPage. Use doc.addPage()');
-        this.addPage();
-        return this;
-    };
-}
-exports.default = default_1;
-
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.parseCss = void 0;
-// Limitations
-// - No support for border spacing
-// - No support for transparency
-var common_1 = __webpack_require__(0);
-function parseCss(supportedFonts, element, scaleFactor, style, window) {
-    var result = {};
-    var pxScaleFactor = 96 / 72;
-    var color = parseColor(element, function (elem) {
-        return window.getComputedStyle(elem)['backgroundColor'];
-    });
-    if (color != null)
-        result.fillColor = color;
-    color = parseColor(element, function (elem) {
-        return window.getComputedStyle(elem)['color'];
-    });
-    if (color != null)
-        result.textColor = color;
-    color = parseColor(element, function (elem) {
-        return window.getComputedStyle(elem)['borderTopColor'];
-    });
-    if (color != null)
-        result.lineColor = color;
-    var padding = parsePadding(style, scaleFactor);
-    if (padding)
-        result.cellPadding = padding;
-    // style.borderWidth only works in chrome (borderTopWidth etc works in firefox and ie as well)
-    var bw = parseInt(style.borderTopWidth || '');
-    bw = bw / pxScaleFactor / scaleFactor;
-    if (bw)
-        result.lineWidth = bw;
-    var accepted = ['left', 'right', 'center', 'justify'];
-    if (accepted.indexOf(style.textAlign) !== -1) {
-        result.halign = style.textAlign;
-    }
-    accepted = ['middle', 'bottom', 'top'];
-    if (accepted.indexOf(style.verticalAlign) !== -1) {
-        result.valign = style.verticalAlign;
-    }
-    var res = parseInt(style.fontSize || '');
-    if (!isNaN(res))
-        result.fontSize = res / pxScaleFactor;
-    var fontStyle = parseFontStyle(style);
-    if (fontStyle)
-        result.fontStyle = fontStyle;
-    var font = (style.fontFamily || '').toLowerCase();
-    if (supportedFonts.indexOf(font) !== -1) {
-        result.font = font;
-    }
-    return result;
-}
-exports.parseCss = parseCss;
-function parseFontStyle(style) {
-    var res = '';
-    if (style.fontWeight === 'bold' ||
-        style.fontWeight === 'bolder' ||
-        parseInt(style.fontWeight) >= 700) {
-        res = 'bold';
-    }
-    if (style.fontStyle === 'italic' || style.fontStyle === 'oblique') {
-        res += 'italic';
-    }
-    return res;
-}
-function parseColor(element, styleGetter) {
-    var cssColor = realColor(element, styleGetter);
-    if (!cssColor)
-        return null;
-    var rgba = cssColor.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d*\.?\d*))?\)$/);
-    if (!rgba || !Array.isArray(rgba)) {
-        return null;
-    }
-    var color = [
-        parseInt(rgba[1]),
-        parseInt(rgba[2]),
-        parseInt(rgba[3]),
-    ];
-    var alpha = parseInt(rgba[4]);
-    if (alpha === 0 || isNaN(color[0]) || isNaN(color[1]) || isNaN(color[2])) {
-        return null;
-    }
-    return color;
-}
-function realColor(elem, styleGetter) {
-    var bg = styleGetter(elem);
-    if (bg === 'rgba(0, 0, 0, 0)' ||
-        bg === 'transparent' ||
-        bg === 'initial' ||
-        bg === 'inherit') {
-        if (elem.parentElement == null) {
-            return null;
-        }
-        return realColor(elem.parentElement, styleGetter);
-    }
-    else {
-        return bg;
-    }
-}
-function parsePadding(style, scaleFactor) {
-    var val = [
-        style.paddingTop,
-        style.paddingRight,
-        style.paddingBottom,
-        style.paddingLeft,
-    ];
-    var pxScaleFactor = 96 / (72 / scaleFactor);
-    var linePadding = (parseInt(style.lineHeight) - parseInt(style.fontSize)) / scaleFactor / 2;
-    var inputPadding = val.map(function (n) {
-        return parseInt(n) / pxScaleFactor;
-    });
-    var padding = common_1.parseSpacing(inputPadding, 0);
-    if (linePadding > padding.top) {
-        padding.top = linePadding;
-    }
-    if (linePadding > padding.bottom) {
-        padding.bottom = linePadding;
-    }
-    return padding;
-}
-
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-function default_1(doc, global, document, current) {
-    var _loop_1 = function (options) {
-        if (options && typeof options !== 'object') {
-            console.error('The options parameter should be of type object, is: ' + typeof options);
-        }
-        if (typeof options.extendWidth !== 'undefined') {
-            options.tableWidth = options.extendWidth ? 'auto' : 'wrap';
-            console.error('Use of deprecated option: extendWidth, use tableWidth instead.');
-        }
-        if (typeof options.margins !== 'undefined') {
-            if (typeof options.margin === 'undefined')
-                options.margin = options.margins;
-            console.error('Use of deprecated option: margins, use margin instead.');
-        }
-        if (options.startY && typeof options.startY !== 'number') {
-            console.error('Invalid value for startY option', options.startY);
-            delete options.startY;
-        }
-        if (!options.didDrawPage &&
-            (options.afterPageContent ||
-                options.beforePageContent ||
-                options.afterPageAdd)) {
-            console.error('The afterPageContent, beforePageContent and afterPageAdd hooks are deprecated. Use didDrawPage instead');
-            options.didDrawPage = function (data) {
-                doc.applyStyles(doc.userStyles);
-                if (options.beforePageContent)
-                    options.beforePageContent(data);
-                doc.applyStyles(doc.userStyles);
-                if (options.afterPageContent)
-                    options.afterPageContent(data);
-                doc.applyStyles(doc.userStyles);
-                if (options.afterPageAdd && data.pageNumber > 1) {
-                    ;
-                    data.afterPageAdd(data);
-                }
-                doc.applyStyles(doc.userStyles);
-            };
-        }
-        ;
-        [
-            'createdHeaderCell',
-            'drawHeaderRow',
-            'drawRow',
-            'drawHeaderCell',
-        ].forEach(function (name) {
-            if (options[name]) {
-                console.error("The \"" + name + "\" hook has changed in version 3.0, check the changelog for how to migrate.");
-            }
-        });
-        [
-            ['showFoot', 'showFooter'],
-            ['showHead', 'showHeader'],
-            ['didDrawPage', 'addPageContent'],
-            ['didParseCell', 'createdCell'],
-            ['headStyles', 'headerStyles'],
-        ].forEach(function (_a) {
-            var current = _a[0], deprecated = _a[1];
-            if (options[deprecated]) {
-                console.error("Use of deprecated option " + deprecated + ". Use " + current + " instead");
-                options[current] = options[deprecated];
-            }
-        });
-        [
-            ['padding', 'cellPadding'],
-            ['lineHeight', 'rowHeight'],
-            'fontSize',
-            'overflow',
-        ].forEach(function (o) {
-            var deprecatedOption = typeof o === 'string' ? o : o[0];
-            var style = typeof o === 'string' ? o : o[1];
-            if (typeof options[deprecatedOption] !== 'undefined') {
-                if (typeof options.styles[style] === 'undefined') {
-                    options.styles[style] = options[deprecatedOption];
-                }
-                console.error('Use of deprecated option: ' +
-                    deprecatedOption +
-                    ', use the style ' +
-                    style +
-                    ' instead.');
-            }
-        });
-        for (var _i = 0, _a = [
-            'styles',
-            'bodyStyles',
-            'headStyles',
-            'footStyles',
-        ]; _i < _a.length; _i++) {
-            var styleProp = _a[_i];
-            checkStyles(options[styleProp] || {});
-        }
-        var columnStyles = options['columnStyles'] || {};
-        for (var _b = 0, _c = Object.keys(columnStyles); _b < _c.length; _b++) {
-            var key = _c[_b];
-            checkStyles(columnStyles[key] || {});
-        }
-    };
-    for (var _i = 0, _a = [global, document, current]; _i < _a.length; _i++) {
-        var options = _a[_i];
-        _loop_1(options);
-    }
-}
-exports.default = default_1;
-function checkStyles(styles) {
-    if (styles.rowHeight) {
-        console.error('Use of deprecated style rowHeight. It is renamed to minCellHeight.');
-        if (!styles.minCellHeight) {
-            styles.minCellHeight = styles.rowHeight;
-        }
-    }
-    else if (styles.columnWidth) {
-        console.error('Use of deprecated style columnWidth. It is renamed to cellWidth.');
-        if (!styles.cellWidth) {
-            styles.cellWidth = styles.columnWidth;
-        }
-    }
-}
-
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.CellHookData = exports.HookData = void 0;
-var HookData = /** @class */ (function () {
-    function HookData(doc, table, cursor) {
-        this.table = table;
-        this.pageNumber = table.pageNumber;
-        this.pageCount = this.pageNumber;
-        this.settings = table.settings;
-        this.cursor = cursor;
-        this.doc = doc.getDocument();
-    }
-    return HookData;
-}());
-exports.HookData = HookData;
-var CellHookData = /** @class */ (function (_super) {
-    __extends(CellHookData, _super);
-    function CellHookData(doc, table, cell, row, column, cursor) {
-        var _this = _super.call(this, doc, table, cursor) || this;
-        _this.cell = cell;
-        _this.row = row;
-        _this.column = column;
-        _this.section = row.section;
-        return _this;
-    }
-    return CellHookData;
-}(HookData));
-exports.CellHookData = CellHookData;
-
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ellipsize = exports.resizeColumns = exports.calculateWidths = void 0;
-var common_1 = __webpack_require__(0);
-/**
- * Calculate the column widths
- */
-function calculateWidths(doc, table) {
-    calculate(doc, table);
-    var resizableColumns = [];
-    var initialTableWidth = 0;
-    table.columns.forEach(function (column) {
-        var customWidth = column.getMaxCustomCellWidth(table);
-        if (customWidth) {
-            // final column width
-            column.width = customWidth;
-        }
-        else {
-            // initial column width (will be resized)
-            column.width = column.wrappedWidth;
-            resizableColumns.push(column);
-        }
-        initialTableWidth += column.width;
-    });
-    // width difference that needs to be distributed
-    var resizeWidth = table.getWidth(doc.pageSize().width) - initialTableWidth;
-    // first resize attempt: with respect to minReadableWidth and minWidth
-    if (resizeWidth) {
-        resizeWidth = resizeColumns(resizableColumns, resizeWidth, function (column) {
-            return Math.max(column.minReadableWidth, column.minWidth);
-        });
-    }
-    // second resize attempt: ignore minReadableWidth but respect minWidth
-    if (resizeWidth) {
-        resizeWidth = resizeColumns(resizableColumns, resizeWidth, function (column) { return column.minWidth; });
-    }
-    resizeWidth = Math.abs(resizeWidth);
-    if (resizeWidth > 0.1 / doc.scaleFactor()) {
-        // Table can't get smaller due to custom-width or minWidth restrictions
-        // We can't really do much here. Up to user to for example
-        // reduce font size, increase page size or remove custom cell widths
-        // to allow more columns to be reduced in size
-        resizeWidth = resizeWidth < 1 ? resizeWidth : Math.round(resizeWidth);
-        console.error("Of the table content, " + resizeWidth + " units width could not fit page");
-    }
-    applyColSpans(table);
-    fitContent(table, doc);
-    applyRowSpans(table);
-}
-exports.calculateWidths = calculateWidths;
-function calculate(doc, table) {
-    var sf = doc.scaleFactor();
-    table.allRows().forEach(function (row) {
-        for (var _i = 0, _a = table.columns; _i < _a.length; _i++) {
-            var column = _a[_i];
-            var cell = row.cells[column.index];
-            if (!cell)
-                continue;
-            var hooks = table.hooks.didParseCell;
-            table.callCellHooks(doc, hooks, cell, row, column, null);
-            var padding = cell.padding('horizontal');
-            cell.contentWidth = common_1.getStringWidth(cell.text, cell.styles, doc) + padding;
-            var longestWordWidth = common_1.getStringWidth(cell.text.join(' ').split(/\s+/), cell.styles, doc);
-            cell.minReadableWidth = longestWordWidth + cell.padding('horizontal');
-            if (typeof cell.styles.cellWidth === 'number') {
-                cell.minWidth = cell.styles.cellWidth;
-                cell.wrappedWidth = cell.styles.cellWidth;
-            }
-            else if (cell.styles.cellWidth === 'wrap') {
-                cell.minWidth = cell.contentWidth;
-                cell.wrappedWidth = cell.contentWidth;
-            }
-            else {
-                // auto
-                var defaultMinWidth = 10 / sf;
-                cell.minWidth = cell.styles.minCellWidth || defaultMinWidth;
-                cell.wrappedWidth = cell.contentWidth;
-                if (cell.minWidth > cell.wrappedWidth) {
-                    cell.wrappedWidth = cell.minWidth;
-                }
-            }
-        }
-    });
-    table.allRows().forEach(function (row) {
-        for (var _i = 0, _a = table.columns; _i < _a.length; _i++) {
-            var column = _a[_i];
-            var cell = row.cells[column.index];
-            // For now we ignore the minWidth and wrappedWidth of colspan cells when calculating colspan widths.
-            // Could probably be improved upon however.
-            if (cell && cell.colSpan === 1) {
-                column.wrappedWidth = Math.max(column.wrappedWidth, cell.wrappedWidth);
-                column.minWidth = Math.max(column.minWidth, cell.minWidth);
-                column.minReadableWidth = Math.max(column.minReadableWidth, cell.minReadableWidth);
-            }
-            else {
-                // Respect cellWidth set in columnStyles even if there is no cells for this column
-                // or if the column only have colspan cells. Since the width of colspan cells
-                // does not affect the width of columns, setting columnStyles cellWidth enables the
-                // user to at least do it manually.
-                // Note that this is not perfect for now since for example row and table styles are
-                // not accounted for
-                var columnStyles = table.styles.columnStyles[column.dataKey] ||
-                    table.styles.columnStyles[column.index] ||
-                    {};
-                var cellWidth = columnStyles.cellWidth || columnStyles.minCellWidth;
-                if (cellWidth && typeof cellWidth === 'number') {
-                    column.minWidth = cellWidth;
-                    column.wrappedWidth = cellWidth;
-                }
-            }
-            if (cell) {
-                // Make sure all columns get at least min width even though width calculations are not based on them
-                if (cell.colSpan > 1 && !column.minWidth) {
-                    column.minWidth = cell.minWidth;
-                }
-                if (cell.colSpan > 1 && !column.wrappedWidth) {
-                    column.wrappedWidth = cell.minWidth;
-                }
-            }
-        }
-    });
-}
-/**
- * Distribute resizeWidth on passed resizable columns
- */
-function resizeColumns(columns, resizeWidth, getMinWidth) {
-    var initialResizeWidth = resizeWidth;
-    var sumWrappedWidth = columns.reduce(function (acc, column) { return acc + column.wrappedWidth; }, 0);
-    for (var i = 0; i < columns.length; i++) {
-        var column = columns[i];
-        var ratio = column.wrappedWidth / sumWrappedWidth;
-        var suggestedChange = initialResizeWidth * ratio;
-        var suggestedWidth = column.width + suggestedChange;
-        var minWidth = getMinWidth(column);
-        var newWidth = suggestedWidth < minWidth ? minWidth : suggestedWidth;
-        resizeWidth -= newWidth - column.width;
-        column.width = newWidth;
-    }
-    resizeWidth = Math.round(resizeWidth * 1e10) / 1e10;
-    // Run the resizer again if there's remaining width needs
-    // to be distributed and there're columns that can be resized
-    if (resizeWidth) {
-        var resizableColumns = columns.filter(function (column) {
-            return resizeWidth < 0
-                ? column.width > getMinWidth(column) // check if column can shrink
-                : true; // check if column can grow
-        });
-        if (resizableColumns.length) {
-            resizeWidth = resizeColumns(resizableColumns, resizeWidth, getMinWidth);
-        }
-    }
-    return resizeWidth;
-}
-exports.resizeColumns = resizeColumns;
-function applyRowSpans(table) {
-    var rowSpanCells = {};
-    var colRowSpansLeft = 1;
-    var all = table.allRows();
-    for (var rowIndex = 0; rowIndex < all.length; rowIndex++) {
-        var row = all[rowIndex];
-        for (var _i = 0, _a = table.columns; _i < _a.length; _i++) {
-            var column = _a[_i];
-            var data = rowSpanCells[column.index];
-            if (colRowSpansLeft > 1) {
-                colRowSpansLeft--;
-                delete row.cells[column.index];
-            }
-            else if (data) {
-                data.cell.height += row.height;
-                colRowSpansLeft = data.cell.colSpan;
-                delete row.cells[column.index];
-                data.left--;
-                if (data.left <= 1) {
-                    delete rowSpanCells[column.index];
-                }
-            }
-            else {
-                var cell = row.cells[column.index];
-                if (!cell) {
-                    continue;
-                }
-                cell.height = row.height;
-                if (cell.rowSpan > 1) {
-                    var remaining = all.length - rowIndex;
-                    var left = cell.rowSpan > remaining ? remaining : cell.rowSpan;
-                    rowSpanCells[column.index] = { cell: cell, left: left, row: row };
-                }
-            }
-        }
-    }
-}
-function applyColSpans(table) {
-    var all = table.allRows();
-    for (var rowIndex = 0; rowIndex < all.length; rowIndex++) {
-        var row = all[rowIndex];
-        var colSpanCell = null;
-        var combinedColSpanWidth = 0;
-        var colSpansLeft = 0;
-        for (var columnIndex = 0; columnIndex < table.columns.length; columnIndex++) {
-            var column = table.columns[columnIndex];
-            // Width and colspan
-            colSpansLeft -= 1;
-            if (colSpansLeft > 1 && table.columns[columnIndex + 1]) {
-                combinedColSpanWidth += column.width;
-                delete row.cells[column.index];
-            }
-            else if (colSpanCell) {
-                var cell = colSpanCell;
-                delete row.cells[column.index];
-                colSpanCell = null;
-                cell.width = column.width + combinedColSpanWidth;
-            }
-            else {
-                var cell = row.cells[column.index];
-                if (!cell)
-                    continue;
-                colSpansLeft = cell.colSpan;
-                combinedColSpanWidth = 0;
-                if (cell.colSpan > 1) {
-                    colSpanCell = cell;
-                    combinedColSpanWidth += column.width;
-                    continue;
-                }
-                cell.width = column.width + combinedColSpanWidth;
-            }
-        }
-    }
-}
-function fitContent(table, doc) {
-    var rowSpanHeight = { count: 0, height: 0 };
-    for (var _i = 0, _a = table.allRows(); _i < _a.length; _i++) {
-        var row = _a[_i];
-        for (var _b = 0, _c = table.columns; _b < _c.length; _b++) {
-            var column = _c[_b];
-            var cell = row.cells[column.index];
-            if (!cell)
-                continue;
-            doc.applyStyles(cell.styles, true);
-            var textSpace = cell.width - cell.padding('horizontal');
-            if (cell.styles.overflow === 'linebreak') {
-                // Add one pt to textSpace to fix rounding error
-                cell.text = doc.splitTextToSize(cell.text, textSpace + 1 / doc.scaleFactor(), { fontSize: cell.styles.fontSize });
-            }
-            else if (cell.styles.overflow === 'ellipsize') {
-                cell.text = ellipsize(cell.text, textSpace, cell.styles, doc, '...');
-            }
-            else if (cell.styles.overflow === 'hidden') {
-                cell.text = ellipsize(cell.text, textSpace, cell.styles, doc, '');
-            }
-            else if (typeof cell.styles.overflow === 'function') {
-                cell.text = cell.styles.overflow(cell.text, textSpace);
-            }
-            cell.contentHeight = cell.getContentHeight(doc.scaleFactor());
-            var realContentHeight = cell.contentHeight / cell.rowSpan;
-            if (cell.rowSpan > 1 &&
-                rowSpanHeight.count * rowSpanHeight.height <
-                    realContentHeight * cell.rowSpan) {
-                rowSpanHeight = { height: realContentHeight, count: cell.rowSpan };
-            }
-            else if (rowSpanHeight && rowSpanHeight.count > 0) {
-                if (rowSpanHeight.height > realContentHeight) {
-                    realContentHeight = rowSpanHeight.height;
-                }
-            }
-            if (realContentHeight > row.height) {
-                row.height = realContentHeight;
-            }
-        }
-        rowSpanHeight.count--;
-    }
-}
-function ellipsize(text, width, styles, doc, overflow) {
-    return text.map(function (str) { return ellipsizeStr(str, width, styles, doc, overflow); });
-}
-exports.ellipsize = ellipsize;
-function ellipsizeStr(text, width, styles, doc, overflow) {
-    var precision = 10000 * doc.scaleFactor();
-    width = Math.ceil(width * precision) / precision;
-    if (width >= common_1.getStringWidth(text, styles, doc)) {
-        return text;
-    }
-    while (width < common_1.getStringWidth(text + overflow, styles, doc)) {
-        if (text.length <= 1) {
-            break;
-        }
-        text = text.substring(0, text.length - 1);
-    }
-    return text.trim() + overflow;
-}
-
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports) {
-
-if(typeof __WEBPACK_EXTERNAL_MODULE__16__ === 'undefined') {var e = new Error("Cannot find module 'undefined'"); e.code = 'MODULE_NOT_FOUND'; throw e;}
-module.exports = __WEBPACK_EXTERNAL_MODULE__16__;
-
-/***/ })
-/******/ ]);
-});
+webpackContext.id = 230;
 
 /***/ }),
 /* 231 */
@@ -78025,16 +78025,16 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_AppBar__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__user__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__user__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__fecha__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_jspdf__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_jspdf_autotable__ = __webpack_require__(230);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_jspdf_autotable__ = __webpack_require__(154);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_jspdf_autotable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_jspdf_autotable__);
 
 
@@ -78322,7 +78322,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     },
     data: function data() {
         return {
-            fecha: __WEBPACK_IMPORTED_MODULE_4__fecha__["a" /* default */]
+            fecha: __WEBPACK_IMPORTED_MODULE_4__fecha__["a" /* default */],
+            lista: []
         };
     },
 
@@ -78383,9 +78384,36 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
             return generatePDF;
         }(),
-        emitirBalance: function emitirBalance() {
-            $('#Modal2').modal('show');
-        }
+        emitirBalance: function () {
+            var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
+                var response;
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+                    while (1) {
+                        switch (_context2.prev = _context2.next) {
+                            case 0:
+                                _context2.next = 2;
+                                return axios.get('api/emitirRBVbyFecha?api=' + __WEBPACK_IMPORTED_MODULE_3__user__["a" /* default */].getData().token);
+
+                            case 2:
+                                response = _context2.sent;
+
+
+                                $('#Modal2').modal('show');
+
+                            case 4:
+                            case 'end':
+                                return _context2.stop();
+                        }
+                    }
+                }, _callee2, this);
+            }));
+
+            function emitirBalance() {
+                return _ref2.apply(this, arguments);
+            }
+
+            return emitirBalance;
+        }()
     }
 });
 
@@ -78994,15 +79022,15 @@ exports.push([module.i, "\n.details-dialog[data-v-b2edbff6]{\r\n  max-width: 70v
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppBar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_AppBar__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_NavigationComponent__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Multiselect__ = __webpack_require__(239);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Multiselect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_Multiselect__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__user__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__user__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__fecha__ = __webpack_require__(11);
 
 
@@ -81501,7 +81529,7 @@ module.exports = __webpack_require__(260);
 
 
 var utils = __webpack_require__(6);
-var bind = __webpack_require__(154);
+var bind = __webpack_require__(155);
 var Axios = __webpack_require__(262);
 var defaults = __webpack_require__(13);
 
@@ -81536,9 +81564,9 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(158);
+axios.Cancel = __webpack_require__(159);
 axios.CancelToken = __webpack_require__(276);
-axios.isCancel = __webpack_require__(157);
+axios.isCancel = __webpack_require__(158);
 
 // Expose all/spread
 axios.all = function all(promises) {
@@ -81691,7 +81719,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 "use strict";
 
 
-var createError = __webpack_require__(156);
+var createError = __webpack_require__(157);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -82126,7 +82154,7 @@ module.exports = InterceptorManager;
 
 var utils = __webpack_require__(6);
 var transformData = __webpack_require__(273);
-var isCancel = __webpack_require__(157);
+var isCancel = __webpack_require__(158);
 var defaults = __webpack_require__(13);
 var isAbsoluteURL = __webpack_require__(274);
 var combineURLs = __webpack_require__(275);
@@ -82286,7 +82314,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 "use strict";
 
 
-var Cancel = __webpack_require__(158);
+var Cancel = __webpack_require__(159);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -82382,7 +82410,7 @@ module.exports = function spread(callback) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 
 
@@ -82438,7 +82466,7 @@ var service = new Services();
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
 (function (global, factory) {
-   true ? factory(exports, __webpack_require__(159), __webpack_require__(280)) :
+   true ? factory(exports, __webpack_require__(160), __webpack_require__(280)) :
   typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.bootstrap = {}, global.jQuery, global.Popper));
 }(this, (function (exports, $, Popper) { 'use strict';

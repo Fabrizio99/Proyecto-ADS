@@ -280,7 +280,8 @@ export default {
     },
     data(){
         return{
-            fecha : fechaActual
+            fecha : fechaActual,
+            lista : []
         }
     },
     methods:{
@@ -319,7 +320,9 @@ export default {
             });
             doc.save('ReporteInventario.pdf');
         },
-        emitirBalance(){
+        async emitirBalance(){
+            const response = await axios.get('api/emitirRBVbyFecha?api='+usuario.getData().token);
+
             $('#Modal2').modal('show');
         }
     }
