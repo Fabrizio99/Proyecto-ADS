@@ -208,7 +208,7 @@
                             <input type="number" name="" id="" class="form-control" v-model="cantidadProductoSeleccionado" min="1" :max="productoSeleccionado.stock">
                           </td>
                           <td class = "option text-center">
-                            <input type="text" name="" id="" class="form-control" :value="productoSeleccionado.precio*cantidadProductoSeleccionado" disabled>
+                            <input type="text" name="" id="" class="form-control" :value="(productoSeleccionado.precio*cantidadProductoSeleccionado)<=0?0:Number(productoSeleccionado.precio*cantidadProductoSeleccionado).toFixed(2)" disabled>
                           </td>
                         </tr>
                       </tbody>
@@ -216,7 +216,8 @@
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-primary btnguarda-registro" @click="modalAddProduct">Agregar</button>
+                <!--<button type="button" class="btn btn-primary btnguarda-registro" @click="modalAddProduct">Agregar</button>-->
+                <button type="button" class="btn btn-primary btnguarda-registro" @click="validateQuantity">Agregar</button>
               </div>
             </div>
           </div>
@@ -340,7 +341,14 @@ export default {
               alert('Error: '+response.data.msj);
           }
         }else{
-          alert('Error: Datos incompletos para Emitir Nota de Venta Final');
+          alert('Error: Verificar campos');
+        }
+      },
+      validateQuantity(){
+        if(this.cantidadProductoSeleccionado<=0 || this.cantidadProductoSeleccionado>this.productoSeleccionado.stock){
+          alert('Error: Seleccione una cantidad válida');
+        }else{
+          $('#confirmModal').modal('show');
         }
       },
       saveProduct(){

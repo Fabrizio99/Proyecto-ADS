@@ -570,7 +570,7 @@ export default {
         },*/
 
     async getNotasVenta() {
-      this.Inputcodigo = "";
+      this.inputcodenventa = "";
       let response = await axios.get(
         "api/listaNotaV?token=" + usuario.getData().token
       );

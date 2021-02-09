@@ -95,7 +95,7 @@ export default {
                     alert('Error: '+response.data.msj);
                 }
             }else{
-                alert('Error: Complete los campos faltantes o incorrectos');
+                alert('Error: Verificar campos');
             }
         },
         async createProduct(){
@@ -116,7 +116,7 @@ export default {
                     alert('Error: '+response.data.msj);
                 }
             }else{
-                alert('Error: Complete los campos faltantes o incorrectos');
+                alert('Error: Verificar campos');
             }
         },
         

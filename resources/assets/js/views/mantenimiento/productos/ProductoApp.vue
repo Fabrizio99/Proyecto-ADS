@@ -164,6 +164,8 @@ export default {
               this.listaProductos = [];
               alert('Error: '+response.data.msj);
             }
+          }else{
+            alert('Mensaje: Verificar campos');
           }
         }
     },
