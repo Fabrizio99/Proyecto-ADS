@@ -66965,6 +66965,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
 
 
 
@@ -67068,7 +67070,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                     telefono: this.user.telefono,
                                     rol: this.user.rol,
                                     numDoc: this.user.documento,
-                                    contrasenia: this.user.clave,
+                                    clave: this.user.clave,
                                     token: __WEBPACK_IMPORTED_MODULE_4__user__["a" /* default */].getData().token
                                 };
                                 _context2.next = 4;
@@ -67203,6 +67205,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             this.user.direccion = _usuario.direccion;
             this.user.telefono = _usuario.telefono;
             this.user.rol = _usuario.id_rol;
+            this.user.clave = _usuario.clave;
         }
     }
 });
@@ -67480,83 +67483,69 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "form-row" }, [
-                      _c(
-                        "div",
-                        {
-                          class:
-                            "form-group col-" +
-                            (_vm.accion == "editar" ? "12" : "6")
-                        },
-                        [
-                          _c(
-                            "label",
-                            { attrs: { for: "exampleInputPassword1" } },
-                            [_vm._v("Dirección")]
-                          ),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.user.direccion,
-                                expression: "user.direccion"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: { type: "text" },
-                            domProps: { value: _vm.user.direccion },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  _vm.user,
-                                  "direccion",
-                                  $event.target.value
-                                )
-                              }
+                      _c("div", { staticClass: "form-group col-6" }, [
+                        _c(
+                          "label",
+                          { attrs: { for: "exampleInputPassword1" } },
+                          [_vm._v("Dirección")]
+                        ),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.user.direccion,
+                              expression: "user.direccion"
                             }
-                          })
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _vm.accion != "editar"
-                        ? _c("div", { staticClass: "form-group col-6" }, [
-                            _c(
-                              "label",
-                              { attrs: { for: "exampleInputPassword1" } },
-                              [_vm._v("Clave")]
-                            ),
-                            _vm._v(" "),
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.user.clave,
-                                  expression: "user.clave"
-                                }
-                              ],
-                              staticClass: "form-control",
-                              attrs: { type: "password" },
-                              domProps: { value: _vm.user.clave },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.user,
-                                    "clave",
-                                    $event.target.value
-                                  )
-                                }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "text" },
+                          domProps: { value: _vm.user.direccion },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
                               }
-                            })
-                          ])
-                        : _vm._e()
+                              _vm.$set(
+                                _vm.user,
+                                "direccion",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group col-6" }, [
+                        _c(
+                          "label",
+                          { attrs: { for: "exampleInputPassword1" } },
+                          [_vm._v("Clave")]
+                        ),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.user.clave,
+                              expression: "user.clave"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "password" },
+                          domProps: { value: _vm.user.clave },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.user, "clave", $event.target.value)
+                            }
+                          }
+                        })
+                      ])
                     ])
                   ])
                 ])
@@ -79055,7 +79044,11 @@ var render = function() {
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(boleta.NombreCliente))]),
                         _vm._v(" "),
-                        _c("td", [_vm._v("s/." + _vm._s(boleta.Monto))]),
+                        _c("td", [
+                          _vm._v(
+                            "s/." + _vm._s(Number(boleta.Monto).toFixed(2))
+                          )
+                        ]),
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(boleta.TipodePago))])
                       ])

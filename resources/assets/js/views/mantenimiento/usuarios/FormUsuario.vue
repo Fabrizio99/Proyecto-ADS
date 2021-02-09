@@ -47,11 +47,13 @@
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div :class="'form-group col-'+(accion=='editar'?'12':'6')">
+                                <!--<div :class="'form-group col-'+(accion=='editar'?'12':'6')">-->
+                                <div class="form-group col-6">
                                     <label for="exampleInputPassword1">Dirección</label>
                                     <input type="text" class="form-control" v-model="user.direccion">
                                 </div>
-                                <div class="form-group col-6" v-if="accion != 'editar'">
+                                <!--<div class="form-group col-6" v-if="accion != 'editar'">-->
+                                <div class="form-group col-6">
                                     <label for="exampleInputPassword1">Clave</label>
                                     <input type="password" class="form-control" v-model="user.clave">
                                 </div>
@@ -142,7 +144,7 @@ export default {
                     telefono : this.user.telefono,
                     rol : this.user.rol,
                     numDoc : this.user.documento,
-                    contrasenia : this.user.clave,
+                    clave : this.user.clave,
                     token : usuario.getData().token
                 }
                 let response = await axios.post('api/modificarUsuario',body);
@@ -206,6 +208,7 @@ export default {
             this.user.direccion = usuario.direccion;
             this.user.telefono  = usuario.telefono;
             this.user.rol = usuario.id_rol;
+            this.user.clave = usuario.clave;
         }
     }
 }

@@ -215,7 +215,7 @@
                           <td scope="row">{{index+1}}</td>
                           <td>{{boleta.Codigo}}</td>
                           <td>{{boleta.NombreCliente}}</td>
-                          <td>s/.{{boleta.Monto}}</td>
+                          <td>s/.{{Number(boleta.Monto).toFixed(2)}}</td>
                           <td>{{boleta.TipodePago}}</td>
                         </tr>                                         
                       </tbody>
