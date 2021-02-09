@@ -70,11 +70,11 @@ class gProductosController extends Controller
 
     function updateP (Request $req){
         $isValidate = isNullEmpty($req->idP)?:
-        isNullEmpty($req->nombre , 'nombreP', 'El campo nombre no puede ser vacio.') ?:
-        isNullEmpty($req->marka  , 'marca'  , 'El campo marca  no puede ser vacio.') ?: 
-        isNullEmpty($req->precio , 'precio' , 'El campo precio  no puede ser vacio.') ?:
-        isNullEmpty($req->id_categoria , 'id_categoria' , 'El campo categoria  no puede ser vacio.') ?:  
-        isNullEmpty($req->stock  , 'stock'  , 'El campo stock no puede ser vacio.');
+        isNullEmpty($req->nombre , 'nombreP', 'Verificar campo vacio.') ?:
+        isNullEmpty($req->marka  , 'marca'  , 'Verificar campo vacio.') ?: 
+        isNullEmpty($req->precio , 'precio' , 'Verificar campo vacio.') ?:
+        isNullEmpty($req->id_categoria , 'id_categoria' , 'Verificar campo vacio.') ?:  
+        isNullEmpty($req->stock  , 'stock'  , 'Verificar campo vacio.');
         
 
         if($isValidate){
@@ -96,11 +96,11 @@ class gProductosController extends Controller
     }
 
     function registrarP (Request $req){
-        $isValidate = isNullEmpty($req->nombre , 'nombreP', 'El campo nombre no puede ser vacio.') ?:
-                      isNullEmpty($req->marka  , 'marca'  , 'El campo marca de la boleta no puede ser vacio.') ?: 
-                      isNullEmpty($req->precio , 'precio' , 'El campo precio de la boleta no puede ser vacio.') ?: 
-                      isNullEmpty($req->id_categoria , 'id_categoria' , 'El campo categoria de la boleta no puede ser vacio.') ?: 
-                      isNullEmpty($req->stock  , 'stock'  , 'El campo stock no puede ser vacio.');
+        $isValidate = isNullEmpty($req->nombre , 'nombreP', 'Verificar campo vacio. ') ?:
+                      isNullEmpty($req->marka  , 'marca'  , 'Verificar campo vacio. ') ?: 
+                      isNullEmpty($req->precio , 'precio' , 'Verificar campo vacio. ') ?: 
+                      isNullEmpty($req->id_categoria , 'id_categoria' , 'Verificar campo vacio. ') ?: 
+                      isNullEmpty($req->stock  , 'stock'  , 'Verificar campo vacio. ');
                       
         
         if($isValidate){

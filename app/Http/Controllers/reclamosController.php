@@ -25,7 +25,7 @@ class reclamosController extends Controller
         }
     
         return mySQLConsulta(
-            "SELECT b.codigo_boleta AS CODIGOB,
+            "SELECT b.idB_boleta AS CODIGOB,
                     b.idB_boleta,
                     nv.nombre_cliente,
                     d.nombre,
@@ -85,10 +85,10 @@ class reclamosController extends Controller
     
     function postRegistrar(Request $req){
 
-        $isValidate = isNullEmpty($req->descripcion, 'descripcion', 'El campo descripcion no puede ser vacio.') ?:
-                      isNullEmpty($req->id_boleta  , 'id_boleta'  , 'El campo numero de boleta de la boleta no puede ser vacio.') ?: 
-                      isNullEmpty($req->fecha      , 'fecha'      , 'El campo fecha de la boleta no puede ser vacio.') ?: 
-                      isNullEmpty($req->solucion   , 'solucion'   , 'El campo solucion no puede ser vacio.'   );
+        $isValidate = isNullEmpty($req->descripcion, 'descripcion', 'Verificar campo vacio. ') ?:
+                      isNullEmpty($req->id_boleta  , 'id_boleta'  , 'Verificar campo vacio. ') ?: 
+                      isNullEmpty($req->fecha      , 'fecha'      , 'Verificar campo vacio. ') ?: 
+                      isNullEmpty($req->solucion   , 'solucion'   , 'Verificar campo vacio. ');
         
         if ($isValidate){
             return  $isValidate;

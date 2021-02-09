@@ -13,7 +13,7 @@ class emitirReporteVdController extends Controller
 
     return mySQLConsulta(
       "SELECT b.idB_boleta AS N,
-              b.codigo_boleta AS Codigo,
+              b.idB_boleta AS Codigo,
               nv.nombre_cliente AS NombreCliente,
               b.monto AS Monto,
               t.tipo AS TipodePago
@@ -32,7 +32,7 @@ class emitirReporteVdController extends Controller
          
       return mySQLConsulta(
           "SELECT b.idB_boleta AS N,
-                  b.codigo_boleta AS Codigo,
+                  b.idB_boleta AS Codigo,
                   nv.nombre_cliente AS NombreCliente,
                   b.monto AS Monto,
                   t.tipo AS TipodePago
