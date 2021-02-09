@@ -541,9 +541,10 @@ export default {
             alert("Error: No se encuentra la nota de venta");
           }
         } else {
-          this.listanotaventas = [];
           alert("Error: " + response.data.msj);
         }
+      }else{
+        alert('Mensaje: Verificar campos')
       }
     },
 

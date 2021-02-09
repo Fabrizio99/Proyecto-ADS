@@ -98,7 +98,7 @@ export default {
         if (typeof response.data == "string") {
           alert("Error: " + response.data);
         }else if (response.data.status == "0") {
-          alert("Mensaje: Anulado correctamente");
+          alert("Mensaje: Entregado correctamente");
           this.$router.push({name : 'formBolProd'});
         } else {
           alert("Error: " + response.data.msj);

@@ -69515,7 +69515,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   break;
                 }
 
-                alert('Complete todos los campos');
+                alert('Verifique campos');
                 return _context2.abrupt('return');
 
               case 4:
@@ -69672,7 +69672,7 @@ var render = function() {
                           _vm._v(_vm._s(index + 1))
                         ]),
                         _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(boleta.id_boletaventa))]),
+                        _c("td", [_vm._v(_vm._s(boleta.codigo_boleta))]),
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(boleta.nombre_cliente))]),
                         _vm._v(" "),
@@ -69969,7 +69969,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 if (typeof response.data == "string") {
                   alert("Error: " + response.data);
                 } else if (response.data.status == "0") {
-                  alert("Mensaje: Anulado correctamente");
+                  alert("Mensaje: Entregado correctamente");
                   this.$router.push({ name: 'formBolProd' });
                 } else {
                   alert("Error: " + response.data.msj);
@@ -70889,7 +70889,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             switch (_context4.prev = _context4.next) {
               case 0:
                 if (!(this.inputcodenventa.trim() != "")) {
-                  _context4.next = 7;
+                  _context4.next = 9;
                   break;
                 }
 
@@ -70907,11 +70907,15 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                     alert("Error: No se encuentra la nota de venta");
                   }
                 } else {
-                  this.listanotaventas = [];
                   alert("Error: " + response.data.msj);
                 }
+                _context4.next = 10;
+                break;
 
-              case 7:
+              case 9:
+                alert('Mensaje: Verificar campos');
+
+              case 10:
               case "end":
                 return _context4.stop();
             }
