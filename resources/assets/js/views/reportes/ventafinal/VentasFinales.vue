@@ -105,13 +105,11 @@
                                                                                     <th scope="col">Monto</th>
                                                                                     </tr>
                                                                                 </thead>
-                                                                                <tbody>     
-                                                                                    <tbody>     
+                                                                                <tbody>      
                                                                                     <tr v-for="boleta in listaYape" :key="boleta.Codigo">
                                                                                     <td>{{boleta.Codigo}}</td>
                                                                                     <td>s/.{{Number(boleta.Monto).toFixed(2)}}</td>
                                                                                     </tr>
-                                                                                </tbody>
                                                                                 </tbody>
                                                                             </table>
                                                                         </div>
@@ -254,40 +252,29 @@ export default {
         totalEfectivo(){
             if(this.listaEfectivo.length == 0)  return 0;
             let monto = 0;
-            this.listaEfectivo.forEach(e=>monto+=Number(e.Monto).toFixed(2));
-            return monto;
+            this.listaEfectivo.forEach(e=>monto+=Number(e.Monto));
+            return Number(monto).toFixed(2);
         },
         totalYape(){
             if(this.listaYape.length == 0)  return 0;
             let monto = 0;
-            this.listaYape.forEach(e=>monto+=Number(e.Monto).toFixed(2));
-            return monto;
+            this.listaYape.forEach(e=>monto+=Number(e.Monto));
+            return Number(monto).toFixed(2);
         },
         totalTodo(){
             if(this.listaTotal.length == 0)  return 0;
             let monto = 0;
-            this.listaTotal.forEach(e=>monto+=Number(e.Monto).toFixed(2));
-            return monto;
+            this.listaTotal.forEach(e=>monto+=Number(e.Monto));
+            return Number(monto).toFixed(2);
         }
     },
     methods:{
         async generatePDF(){
-            /*let response = await axios.get('api/getEmitirRI?token='+usuario.getData().token);
-            let {data} = response.data;
-            data = Array.isArray(data)?data:[data];
-            console.log(data);
-            let rows = data.map((p,i)=>[i+1,p.id_producto,p.nombre,`S/.${Number(p.precio).toFixed(2)}`,p.stock,p.estado]);
-            const doc = new jsPDF()
-            doc.setFontSize(12);
-            doc.text("DULCEKAT", 90, 9);
-            doc.text("REPORTE DE INVENTARIO", 80, 18);
-            doc.autoTable({
-                startY : 30,
-                head: [['N°','Código', 'Nombre', 'Precio','Cantidad','Estado']],
-                body: rows,
-            })
-            doc.save('ReporteInventario.pdf');*/
-            console.log('llego acaaaaaaaaaaaaa');
+            const response = await axios.get('api/emitirRBVbyFecha?token='+usuario.getData().token);
+            const lista = Array.isArray(response.data.data)?response.data.data:[response.data.data];
+            const listaEfectivo = lista.filter(a=>a.TipodePago == 'EFECTIVO');
+            const listaYape = lista.filter(a=>a.TipodePago == 'YAPE');
+            
             const doc = new jsPDF();
             doc.setFontSize(12);
             doc.text("DULCEKAT", 90, 9);
@@ -296,15 +283,16 @@ export default {
             doc.autoTable({
                 startY : 40,
                 head   : [['Código', 'Monto']],
-                body   : [['1','15.00'],['2','15.00'],['3','15.00']],
-            })
+                body   : [[],[],[]],
+            });
+
             doc.text("PAGOS EN EFECTIVO", 80, );
             doc.autoTable({
                 startY : 90,
                 head   : [['Código', 'Monto']],
                 body   : [['4','15.00'],['5','15.00'],['3','15.00']],
             });
-            doc.save('ReporteInventario.pdf');
+            doc.save('ReporteVentas.pdf');
         },
         async emitirBalance(){
             const response = await axios.get('api/emitirRBVbyFecha?token='+usuario.getData().token+'&fecha='+(this.fecha || ''));

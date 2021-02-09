@@ -78269,8 +78269,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
-//
-//
 
 
 
@@ -78298,51 +78296,47 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             if (this.listaEfectivo.length == 0) return 0;
             var monto = 0;
             this.listaEfectivo.forEach(function (e) {
-                return monto += Number(e.Monto).toFixed(2);
+                return monto += Number(e.Monto);
             });
-            return monto;
+            return Number(monto).toFixed(2);
         },
         totalYape: function totalYape() {
             if (this.listaYape.length == 0) return 0;
             var monto = 0;
             this.listaYape.forEach(function (e) {
-                return monto += Number(e.Monto).toFixed(2);
+                return monto += Number(e.Monto);
             });
-            return monto;
+            return Number(monto).toFixed(2);
         },
         totalTodo: function totalTodo() {
             if (this.listaTotal.length == 0) return 0;
             var monto = 0;
             this.listaTotal.forEach(function (e) {
-                return monto += Number(e.Monto).toFixed(2);
+                return monto += Number(e.Monto);
             });
-            return monto;
+            return Number(monto).toFixed(2);
         }
     },
     methods: {
         generatePDF: function () {
             var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
-                var doc;
+                var response, lista, listaEfectivo, listaYape, doc;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
-                                /*let response = await axios.get('api/getEmitirRI?token='+usuario.getData().token);
-                                let {data} = response.data;
-                                data = Array.isArray(data)?data:[data];
-                                console.log(data);
-                                let rows = data.map((p,i)=>[i+1,p.id_producto,p.nombre,`S/.${Number(p.precio).toFixed(2)}`,p.stock,p.estado]);
-                                const doc = new jsPDF()
-                                doc.setFontSize(12);
-                                doc.text("DULCEKAT", 90, 9);
-                                doc.text("REPORTE DE INVENTARIO", 80, 18);
-                                doc.autoTable({
-                                    startY : 30,
-                                    head: [['N°','Código', 'Nombre', 'Precio','Cantidad','Estado']],
-                                    body: rows,
-                                })
-                                doc.save('ReporteInventario.pdf');*/
-                                console.log('llego acaaaaaaaaaaaaa');
+                                _context.next = 2;
+                                return axios.get('api/emitirRBVbyFecha?token=' + __WEBPACK_IMPORTED_MODULE_3__user__["a" /* default */].getData().token);
+
+                            case 2:
+                                response = _context.sent;
+                                lista = Array.isArray(response.data.data) ? response.data.data : [response.data.data];
+                                listaEfectivo = lista.filter(function (a) {
+                                    return a.TipodePago == 'EFECTIVO';
+                                });
+                                listaYape = lista.filter(function (a) {
+                                    return a.TipodePago == 'YAPE';
+                                });
                                 doc = new __WEBPACK_IMPORTED_MODULE_5_jspdf__["default"]();
 
                                 doc.setFontSize(12);
@@ -78352,17 +78346,18 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 doc.autoTable({
                                     startY: 40,
                                     head: [['Código', 'Monto']],
-                                    body: [['1', '15.00'], ['2', '15.00'], ['3', '15.00']]
+                                    body: [[], [], []]
                                 });
+
                                 doc.text("PAGOS EN EFECTIVO", 80);
                                 doc.autoTable({
                                     startY: 90,
                                     head: [['Código', 'Monto']],
                                     body: [['4', '15.00'], ['5', '15.00'], ['3', '15.00']]
                                 });
-                                doc.save('ReporteInventario.pdf');
+                                doc.save('ReporteVentas.pdf');
 
-                            case 10:
+                            case 15:
                             case 'end':
                                 return _context.stop();
                         }
@@ -78735,56 +78730,48 @@ var render = function() {
                                                           [
                                                             _vm._m(4),
                                                             _vm._v(" "),
-                                                            _c("tbody", [
-                                                              _c(
-                                                                "tbody",
-                                                                _vm._l(
-                                                                  _vm.listaYape,
-                                                                  function(
-                                                                    boleta
-                                                                  ) {
-                                                                    return _c(
-                                                                      "tr",
-                                                                      {
-                                                                        key:
-                                                                          boleta.Codigo
-                                                                      },
-                                                                      [
-                                                                        _c(
-                                                                          "td",
-                                                                          [
-                                                                            _vm._v(
-                                                                              _vm._s(
-                                                                                boleta.Codigo
+                                                            _c(
+                                                              "tbody",
+                                                              _vm._l(
+                                                                _vm.listaYape,
+                                                                function(
+                                                                  boleta
+                                                                ) {
+                                                                  return _c(
+                                                                    "tr",
+                                                                    {
+                                                                      key:
+                                                                        boleta.Codigo
+                                                                    },
+                                                                    [
+                                                                      _c("td", [
+                                                                        _vm._v(
+                                                                          _vm._s(
+                                                                            boleta.Codigo
+                                                                          )
+                                                                        )
+                                                                      ]),
+                                                                      _vm._v(
+                                                                        " "
+                                                                      ),
+                                                                      _c("td", [
+                                                                        _vm._v(
+                                                                          "s/." +
+                                                                            _vm._s(
+                                                                              Number(
+                                                                                boleta.Monto
+                                                                              ).toFixed(
+                                                                                2
                                                                               )
                                                                             )
-                                                                          ]
-                                                                        ),
-                                                                        _vm._v(
-                                                                          " "
-                                                                        ),
-                                                                        _c(
-                                                                          "td",
-                                                                          [
-                                                                            _vm._v(
-                                                                              "s/." +
-                                                                                _vm._s(
-                                                                                  Number(
-                                                                                    boleta.Monto
-                                                                                  ).toFixed(
-                                                                                    2
-                                                                                  )
-                                                                                )
-                                                                            )
-                                                                          ]
                                                                         )
-                                                                      ]
-                                                                    )
-                                                                  }
-                                                                ),
-                                                                0
-                                                              )
-                                                            ])
+                                                                      ])
+                                                                    ]
+                                                                  )
+                                                                }
+                                                              ),
+                                                              0
+                                                            )
                                                           ]
                                                         )
                                                       ]
