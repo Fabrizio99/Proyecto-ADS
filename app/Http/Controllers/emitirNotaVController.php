@@ -50,6 +50,7 @@ class emitirNotaVController extends Controller
                       isNullEmpty($req->numDoc    , 'numeroD'   , 'Verificar campo vacio.') ?: 
                       isNullEmpty($req->direccion , 'direccion' , 'Verificar campo vacio.') ?: 
                       isNullEmpty($req->celular   , 'celular'   , 'Verificar campo vacio.') ?: 
+                      isNullEmpty($req->monto     , 'monto'     , 'Verificar campo vacio.') ?: 
                       isNullEmpty($req->fecha     , 'fecha'     , 'Verificar campo vacio.');
         
          if($isValidate){
@@ -101,11 +102,18 @@ class emitirNotaVController extends Controller
               );
         }
 
+        $nv = mySQLConsulta(
+            "SELECT id_boletaventa
+               FROM notadeventas
+              ORDER BY 1 DESC
+              LIMIT 1"
+        );
+
         return JSON_ENCODE(
             (object) [
                      'status' => $_SESSION["STATUS_SUCCES"],
-                     'msj'    => 'EXITO AL REGISTRAR.'
-                   ]
+                     'msj'    => 'EXITO AL REGISTRAR.'.$nv->id_boletaventa
+                     ]
              );
     }
 
