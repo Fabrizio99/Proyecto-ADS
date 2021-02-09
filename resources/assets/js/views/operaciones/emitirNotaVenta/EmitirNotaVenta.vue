@@ -341,7 +341,7 @@ export default {
               alert('Error: '+response.data.msj);
           }
         }else{
-          alert('Error: Datos incompletos para Emitir Nota de Venta Final');
+          alert('Error: Verificar campos');
         }
       },
       validateQuantity(){

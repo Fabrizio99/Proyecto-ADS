@@ -75946,7 +75946,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 break;
 
               case 8:
-                alert('Error: Datos incompletos para Emitir Nota de Venta Final');
+                alert('Error: Verificar campos');
 
               case 9:
               case 'end':
