@@ -65,6 +65,9 @@ const routes = [
         name: 'crearproductos',
         component: require('../js/views/mantenimiento/productos/formCrearProducto.vue'),
         props: true,
+        meta : {
+            module : 'producto'
+        }
     },
     {
         path: '/form-modificar-productos',

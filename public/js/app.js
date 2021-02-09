@@ -37891,7 +37891,10 @@ var routes = [{
     path: '/formulario-productos/:accion',
     name: 'crearproductos',
     component: __webpack_require__(198),
-    props: true
+    props: true,
+    meta: {
+        module: 'producto'
+    }
 }, {
     path: '/form-modificar-productos',
     name: 'modificarproductos',
