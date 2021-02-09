@@ -140,7 +140,7 @@ function registrarPago(Request $req){
     if($req->tipopago == $TIPO_EFECTIVO){
         mySQLInsert(
             "INSERT INTO boleta (TIPOPAGO_id_tipopago, NOTADEVENTAS_id_boletaventa, fecha, monto) 
-                  VALUES ('{$req->tipopago}','{$req->notaIdBv}',DATE_FORMAT(NOW(), '%Y-%m-%d') ,'{$req->montorecibido}')",'SE REGISTRO EL PAGO POR EFECTIVO');
+                  VALUES ('{$req->tipopago}','{$req->notaIdBv}',DATE_FORMAT(NOW(), '%Y-%m-%d') ,'{$req->montoPagar}')",'SE REGISTRO EL PAGO POR EFECTIVO');
     } else {
 
         $validacion = isNullEmpty($req->telefonoYape,'telefonoYape','El telefonoYape no puede estar vacio');
@@ -150,7 +150,7 @@ function registrarPago(Request $req){
     
         mySQLInsert(
             "INSERT INTO boleta (TIPOPAGO_id_tipopago, NOTADEVENTAS_id_boletaventa, fecha, telefono_yape, monto) 
-                  VALUES ('{$req->tipopago}','{$req->notaIdBv}', DATE_FORMAT(NOW(), '%Y-%m-%d'),'{$req->telefonoYape}', '{$req->montorecibido}')",'SE REGISTRO EL PAGO POR YAPE');
+                  VALUES ('{$req->tipopago}','{$req->notaIdBv}', DATE_FORMAT(NOW(), '%Y-%m-%d'),'{$req->telefonoYape}', '{$req->montoPagar}')",'SE REGISTRO EL PAGO POR YAPE');
     }  
 
 
