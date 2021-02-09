@@ -43,7 +43,7 @@ class emitirReporteVdController extends Controller
               AND b.NOTADEVENTAS_id_boletaventa = nv.id_boletaventa
               AND (CASE WHEN '{$req->fecha}' IS NOT NULL AND  '{$req->fecha}' <> ''
                         THEN b.fecha = DATE_FORMAT('{$req->fecha}', '%Y-%m-%d')
-                        ELSE b.fecha = DATE(NOW())
+                        ELSE b.fecha = DATE_FORMAT(NOW(), '%Y-%m-%d')
                         END)"
       );                  
     }
