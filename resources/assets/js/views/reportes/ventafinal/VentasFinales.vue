@@ -19,7 +19,7 @@
                                         <input type="date" class="form-control" id="exampleInputPassword1" v-model="fecha">
                                     </div>
                                     <div class="form-group col-6 mt-2">
-                                        <input type="button" class="btn btn-primary btn-block mt-4 btnbuscar" value="FILTRAR" />
+                                        <input type="button" class="btn btn-primary btn-block mt-4 btnbuscar" value="FILTRAR" @click="emitirBalance"/>
                                     </div>
                                 </div>
                             </div>
@@ -31,7 +31,7 @@
                                 <div class="form-row justify-content-center">
                                     <div class="form-group col-12">
                                         <label for="exampleInputPassword1">Emitir Balance de caja</label>
-                                         <input type="button" class="btn btn-primary btn-block btnbuscar" value="EMITIR" @click="emitirBalance"/>
+                                         <input type="button" class="btn btn-primary btn-block btnbuscar" value="EMITIR"/>
                                     </div>
 
                                     <div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -242,19 +242,17 @@
                           <th scope="col">N°</th>
                           <th scope="col">Código</th>
                           <th scope="col">Nombre del Cliente</th>
-                          <th scope="col">Productos</th>
                           <th scope="col">Monto</th>
                           <th scope="col">Tipo de Pago</th>
                         </tr>
                       </thead>
                       <tbody>     
-                        <tr>
-                          <td scope="row">1</td>
-                          <td>BV-001</td>
-                          <td>Alvaro De La Cruz Quispe</td>
-                          <td>Harina, Chocolate</td>
-                          <td>s/. 15.0</td>
-                          <td>Yape</td>
+                        <tr v-for="(boleta,index) in listaTotal" :key="boleta.Codigo">
+                          <td scope="row">{{index+1}}</td>
+                          <td>{{boleta.Codigo}}</td>
+                          <td>{{boleta.NombreCliente}}</td>
+                          <td>s/.{{boleta.Monto}}</td>
+                          <td>{{boleta.TipodePago}}</td>
                         </tr>                                         
                       </tbody>
                     </table>
@@ -281,7 +279,9 @@ export default {
     data(){
         return{
             fecha : fechaActual,
-            lista : []
+            listaYape : [],
+            listaEfectivo : [],
+            listaTotal : []
         }
     },
     methods:{
@@ -321,10 +321,22 @@ export default {
             doc.save('ReporteInventario.pdf');
         },
         async emitirBalance(){
-            const response = await axios.get('api/emitirRBVbyFecha?api='+usuario.getData().token);
-
-            $('#Modal2').modal('show');
-        }
+            const response = await axios.get('api/emitirRBVbyFecha?token='+usuario.getData().token+'&fecha='+(this.fecha || ''));
+            if(typeof response.data == 'string'){
+                alert('Mensaje: '+response.data);
+            }else if(response.data.status == "0"){
+                const lista = Array.isArray(response.data.data)?response.data.data:[response.data.data];
+                this.listaEfectivo = lista.filter(a=>a.TipodePago == 'EFECTIVO');
+                this.listaYape = lista.filter(a=>a.TipodePago == 'YAPE');
+                this.listaTotal = lista;
+            }else{
+                alert('Error: '+response.data.msj);
+            } 
+            //$('#Modal2').modal('show');
+        },
+    },
+    mounted(){
+        this.emitirBalance();
     }
 }
 </script>

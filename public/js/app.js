@@ -78305,8 +78305,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
-//
-//
 
 
 
@@ -78323,7 +78321,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     data: function data() {
         return {
             fecha: __WEBPACK_IMPORTED_MODULE_4__fecha__["a" /* default */],
-            lista: []
+            listaYape: [],
+            listaEfectivo: [],
+            listaTotal: []
         };
     },
 
@@ -78386,19 +78386,33 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         }(),
         emitirBalance: function () {
             var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
-                var response;
+                var response, lista;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
                     while (1) {
                         switch (_context2.prev = _context2.next) {
                             case 0:
                                 _context2.next = 2;
-                                return axios.get('api/emitirRBVbyFecha?api=' + __WEBPACK_IMPORTED_MODULE_3__user__["a" /* default */].getData().token);
+                                return axios.get('api/emitirRBVbyFecha?token=' + __WEBPACK_IMPORTED_MODULE_3__user__["a" /* default */].getData().token + '&fecha=' + (this.fecha || ''));
 
                             case 2:
                                 response = _context2.sent;
 
+                                if (typeof response.data == 'string') {
+                                    alert('Mensaje: ' + response.data);
+                                } else if (response.data.status == "0") {
+                                    lista = Array.isArray(response.data.data) ? response.data.data : [response.data.data];
 
-                                $('#Modal2').modal('show');
+                                    this.listaEfectivo = lista.filter(function (a) {
+                                        return a.TipodePago == 'EFECTIVO';
+                                    });
+                                    this.listaYape = lista.filter(function (a) {
+                                        return a.TipodePago == 'YAPE';
+                                    });
+                                    this.listaTotal = lista;
+                                } else {
+                                    alert('Error: ' + response.data.msj);
+                                }
+                                //$('#Modal2').modal('show');
 
                             case 4:
                             case 'end':
@@ -78414,6 +78428,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
             return emitirBalance;
         }()
+    },
+    mounted: function mounted() {
+        this.emitirBalance();
     }
 });
 
@@ -78486,7 +78503,14 @@ var render = function() {
                           })
                         ]),
                         _vm._v(" "),
-                        _vm._m(1)
+                        _c("div", { staticClass: "form-group col-6 mt-2" }, [
+                          _c("input", {
+                            staticClass:
+                              "btn btn-primary btn-block mt-4 btnbuscar",
+                            attrs: { type: "button", value: "FILTRAR" },
+                            on: { click: _vm.emitirBalance }
+                          })
+                        ])
                       ])
                     ])
                   ])
@@ -78499,20 +78523,7 @@ var render = function() {
                         "div",
                         { staticClass: "form-row justify-content-center" },
                         [
-                          _c("div", { staticClass: "form-group col-12" }, [
-                            _c(
-                              "label",
-                              { attrs: { for: "exampleInputPassword1" } },
-                              [_vm._v("Emitir Balance de caja")]
-                            ),
-                            _vm._v(" "),
-                            _c("input", {
-                              staticClass:
-                                "btn btn-primary btn-block btnbuscar",
-                              attrs: { type: "button", value: "EMITIR" },
-                              on: { click: _vm.emitirBalance }
-                            })
-                          ]),
+                          _vm._m(1),
                           _vm._v(" "),
                           _c(
                             "div",
@@ -78562,7 +78573,31 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(4)
+              _c("div", { staticClass: "mx-4 mt-4" }, [
+                _c("table", { staticClass: "table" }, [
+                  _vm._m(4),
+                  _vm._v(" "),
+                  _c(
+                    "tbody",
+                    _vm._l(_vm.listaTotal, function(boleta, index) {
+                      return _c("tr", { key: boleta.Codigo }, [
+                        _c("td", { attrs: { scope: "row" } }, [
+                          _vm._v(_vm._s(index + 1))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(boleta.Codigo))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(boleta.NombreCliente))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v("s/." + _vm._s(boleta.Monto))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(boleta.TipodePago))])
+                      ])
+                    }),
+                    0
+                  )
+                ])
+              ])
             ]
           )
         ],
@@ -78587,10 +78622,14 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group col-6 mt-2" }, [
+    return _c("div", { staticClass: "form-group col-12" }, [
+      _c("label", { attrs: { for: "exampleInputPassword1" } }, [
+        _vm._v("Emitir Balance de caja")
+      ]),
+      _vm._v(" "),
       _c("input", {
-        staticClass: "btn btn-primary btn-block mt-4 btnbuscar",
-        attrs: { type: "button", value: "FILTRAR" }
+        staticClass: "btn btn-primary btn-block btnbuscar",
+        attrs: { type: "button", value: "EMITIR" }
       })
     ])
   },
@@ -78877,41 +78916,17 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mx-4 mt-4" }, [
-      _c("table", { staticClass: "table" }, [
-        _c("thead", [
-          _c("tr", [
-            _c("th", { attrs: { scope: "col" } }, [_vm._v("N°")]),
-            _vm._v(" "),
-            _c("th", { attrs: { scope: "col" } }, [_vm._v("Código")]),
-            _vm._v(" "),
-            _c("th", { attrs: { scope: "col" } }, [
-              _vm._v("Nombre del Cliente")
-            ]),
-            _vm._v(" "),
-            _c("th", { attrs: { scope: "col" } }, [_vm._v("Productos")]),
-            _vm._v(" "),
-            _c("th", { attrs: { scope: "col" } }, [_vm._v("Monto")]),
-            _vm._v(" "),
-            _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipo de Pago")])
-          ])
-        ]),
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("N°")]),
         _vm._v(" "),
-        _c("tbody", [
-          _c("tr", [
-            _c("td", { attrs: { scope: "row" } }, [_vm._v("1")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("BV-001")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("Alvaro De La Cruz Quispe")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("Harina, Chocolate")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("s/. 15.0")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("Yape")])
-          ])
-        ])
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Código")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre del Cliente")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Monto")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipo de Pago")])
       ])
     ])
   }
