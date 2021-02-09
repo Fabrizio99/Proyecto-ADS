@@ -22,7 +22,6 @@ class emitirReporteVdController extends Controller
               tipopago AS t
         WHERE t.id_tipopago = b.TIPOPAGO_id_tipopago
           AND b.NOTADEVENTAS_id_boletaventa = nv.id_boletaventa
-          AND b.nota
           ");
 
     }
@@ -31,15 +30,6 @@ class emitirReporteVdController extends Controller
     // cumple para btn emitir boleta de venta 
     function emitirRBVbyFecha (Request $req){
          
-         
-      $validacionI = isNullEmpty($req->fecha,'','emisor')?:
-      isNullEmpty($req->receptor,'','receptor')?:
-      isNullEmpty($req->mensaje,'','FALTA incidencia');
-
-      if($validacionI){
-        return $validacionI;
-      }
-
       return mySQLConsulta(
           "SELECT b.idB_boleta AS N,
                   b.codigo_boleta AS Codigo,
@@ -53,7 +43,7 @@ class emitirReporteVdController extends Controller
               AND b.NOTADEVENTAS_id_boletaventa = nv.id_boletaventa
               AND (CASE WHEN '{$req->fecha}' IS NOT NULL AND  '{$req->fecha}' <> ''
                         THEN b.fecha = DATE_FORMAT('{$req->fecha}', '%Y-%m-%d')
-                        ELSE b.fecha = DATE(NOW())
+                        ELSE b.fecha = DATE_FORMAT(NOW(), '%Y-%m-%d')
                         END)"
       );                  
     }
