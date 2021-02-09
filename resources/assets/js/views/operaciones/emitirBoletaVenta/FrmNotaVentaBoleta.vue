@@ -411,7 +411,7 @@ export default {
       doc.text("DULCEKAT", 4, ++row);
       doc.text("Plaza Villa Sur, puesto A-29", 2.3, ++row);
       doc.setFontSize(10);
-      doc.text("Boleta de Venta BV-"+boleta, 3.3, ++row);
+      doc.text("Boleta de Venta N°"+boleta, 3.3, ++row);
       doc.text("",1,++row);
       doc.text("Fecha y hora : "+this.fecha,1,++row);
       doc.text('Pago: '+tipoPago,1,++row);
@@ -541,9 +541,10 @@ export default {
             alert("Error: No se encuentra la nota de venta");
           }
         } else {
-          this.listanotaventas = [];
           alert("Error: " + response.data.msj);
         }
+      }else{
+        alert('Mensaje: Verificar campos')
       }
     },
 

@@ -62,7 +62,7 @@
                       <tbody>
                         <tr v-for="(boleta,index) in listaBoletas" :key="boleta.id_boletaventa">
                           <td scope="row">{{index+1}}</td>
-                          <td>{{boleta.id_boletaventa}}</td>
+                          <td>{{boleta.codigo_boleta}}</td>
                           <td>{{boleta.nombre_cliente}}</td>
                           <td>{{boleta.fecha}}</td>
                           <!--<td>{{boleta.estado}}</td>-->
@@ -124,7 +124,7 @@ export default {
         //validar campos busqueda
         const inputs = Object.keys(this.busqueda);
         if(inputs.some(i=>!this.busqueda[i])){
-          alert('Complete todos los campos');
+          alert('Verifique campos');
           return;
         }
         const fields = [
