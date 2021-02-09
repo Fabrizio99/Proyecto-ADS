@@ -226,7 +226,7 @@ class gestionarUsuarioController extends Controller
                     rol_id_rol    = '{$req->rol}',
                     usuario       = '{$req->numDoc}',
                     num_documento = '{$req->numDoc}',
-                    contrasenia   = '{$req->clave}'
+                    contrasenia   = '{$req->clave}',
                     documentos_id_documentos = '{$req->tipoDoc}'
             WHERE num_documento   = '{$req->numDoc}'"
         );      
