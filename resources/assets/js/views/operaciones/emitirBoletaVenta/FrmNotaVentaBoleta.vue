@@ -464,7 +464,7 @@ export default {
           this.pdf('Yape',idBoleta.data.N);
           $("#yapeModal").modal("hide");
           alert('Mensaje: '+response.data.msj);
-          this.getNotasVenta();
+          this.getNotasVenta(true);
           this.tipoPago = undefined;
           this.telefono = '';
         }else{
@@ -477,7 +477,9 @@ export default {
         alert("Error: Ingrese el monto recibido");
       } else if (isNaN(this.monto)) {
         alert("Error: Ingrese un monto válido");
-      } else {
+      } else if(this.notaSeleccionada.MontoTotal>this.monto){
+        alert('Mensaje: El monto recibido no debe ser menor al monto a pagar');
+      }else {
         const body = {
           montoPagar   : this.notaSeleccionada.MontoTotal,
           notaIdBv     : this.notaSeleccionada.Codigo,
@@ -495,7 +497,7 @@ export default {
           this.pdf('Efectivo',idBoleta.data.N);
           $("#efectivoModal").modal("hide");
           alert('Mensaje: '+response.data.msj);
-          this.getNotasVenta();
+          this.getNotasVenta(true);
           this.tipoPago = undefined;
           this.monto = '';
         }else{
@@ -583,7 +585,8 @@ export default {
              this.$router.push({name:"formDetalleNV"});
         },*/
 
-    async getNotasVenta() {
+    async getNotasVenta(empyList) {
+      if(empyList)  this.listanotaventas = [];
       this.inputcodenventa = "";
       let response = await axios.get(
         "api/listaNotaV?token=" + usuario.getData().token

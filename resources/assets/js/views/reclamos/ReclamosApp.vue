@@ -248,7 +248,7 @@
                         </tr>
                       </thead>
                       <tbody v-for="(p,i) in verBoleta.Productos" :key="i">
-                        <tr v-for="(p,i) in verBoleta.Productos" :key="i">
+                        <tr>
                           <td space="row">{{p.producto}}</td>
                           <td>S/{{Number(p.precio).toFixed(2)}}</td>
                           <td>{{p.cantidad}}</td>

@@ -302,6 +302,7 @@ export default {
       confirmDelete(){
         this.listaProductos = this.listaProductos.filter(p=>p.id_producto!=this.productoEliminar);
         this.productoEliminar = undefined;
+        alert('Mensaje: Se ha eliminado el producto seleccionado');
       },
       isUncomplete(){
         let campos = Object.keys(this.cliente);
