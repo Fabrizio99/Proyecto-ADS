@@ -61,14 +61,14 @@ class emitirNotaVController extends Controller
          return JSON_ENCODE(
          (object) [
                    'status' => $_SESSION["STATUS_CONTROL"],
-                   'msj'    => 'Debe tener 8 caracteres sí es un DNI.'
+                   'msj'    => 'Verificar campo vacio.'
                  ] 
             ); 
         } else if (strlen($req->numDoc) != 12 && $req->tipoDoc == $TIPO_PASAPORTE ) { // CARNET DE PASAPORTE
           return JSON_ENCODE(
           (object) [
                    'status' => $_SESSION["STATUS_CONTROL"],
-                   'msj'    => 'Debe tener  12 caracteres sí es un PASAPORTE..'
+                   'msj'    => 'Verificar campo vacio.'
                  ]
            );
         }
@@ -79,7 +79,7 @@ class emitirNotaVController extends Controller
             return JSON_ENCODE(
                 (object) [
                          'status' => $_SESSION["STATUS_CONTROL"],
-                         'msj'    => 'Debe tener al menos 1 producto seleccionado.'
+                         'msj'    => 'Verificar campo vacio.'
                        ]
                  );
         }  
@@ -154,14 +154,14 @@ class emitirNotaVController extends Controller
             return JSON_ENCODE(
                 (object) [
                         'status' => $_SESSION["STATUS_CONTROL"],
-                        'msj'    => 'Debe tener 8 caracteres sí es un DNI.'
+                        'msj'    => 'Verificar campo vacio.'
                         ] 
                     ); 
         } else if (strlen($req->numDoc) != 12 && $req->tipoDoc == $TIPO_PASAPORTE ) { // CARNET DE PASAPORTE
             return JSON_ENCODE(
                 (object) [
                         'status' => $_SESSION["STATUS_CONTROL"],
-                        'msj'    => 'Debe tener  12 caracteres sí es un PASAPORTE..'
+                        'msj'    => 'Verificar campo vacio.'
                         ]
                 );
         }
@@ -172,7 +172,7 @@ class emitirNotaVController extends Controller
             return JSON_ENCODE(
                 (object) [
                         'status' => $_SESSION["STATUS_CONTROL"],
-                        'msj'    => 'Debe tener al menos 1 producto seleccionado.'
+                        'msj'    => 'Verificar campo vacio.'
                     ]
                 );
         }  
