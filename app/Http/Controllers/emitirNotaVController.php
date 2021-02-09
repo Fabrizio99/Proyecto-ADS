@@ -112,7 +112,7 @@ class emitirNotaVController extends Controller
         return JSON_ENCODE(
             (object) [
                      'status' => $_SESSION["STATUS_SUCCES"],
-                     'msj'    => 'EXITO AL REGISTRAR.'.$nv->id_boletaventa
+                     'msj'    => 'EXITO AL REGISTRAR.'.$nv
                      ]
              );
     }
