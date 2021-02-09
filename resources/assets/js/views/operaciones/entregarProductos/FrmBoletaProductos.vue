@@ -13,26 +13,39 @@
                     <div class="card col bg-light">
                         <div class="card-body">
                             <div class="form-row">
-                                <div class="form-group col-3">
+                                <div class="form-group col-9">
                                     <label for="exampleInputPassword1">Código</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1" disabled>
+                                    <input type="text" class="form-control" id="exampleInputPassword1" v-model="busqueda.codigo">
                                 </div>
-                                <div class="form-group col-3">
+                                <!--<div class="form-group col-3">
                                     <label for="exampleInputPassword1">Fecha Inicio</label>
-                                    <input type="date" class="form-control" id="exampleInputPassword1">
+                                    <input type="date" class="form-control" id="exampleInputPassword1" v-model="busqueda.fechaInicio">
                                 </div>
                                 <div class="form-group col-3">
                                     <label for="exampleInputPassword1">Fecha Final</label>
-                                    <input type="date" class="form-control" id="exampleInputPassword1">
-                                </div>
-                                <div class="form-group col-3 mt-2">
-                                    <input type="button" class="btn btn-primary btn-block mt-4 btnbuscar" value="BUSCAR" @click="Buscar"/>
+                                    <input type="date" class="form-control" id="exampleInputPassword1" v-model="busqueda.fechaFin">
+                                </div>-->
+                                <div class="form-group col-3 mt-2 row">
+                                  <div class="col-10">
+                                    <input
+                                      type="button"
+                                      class="btn btn-primary btn-block mt-4 btnbuscar"
+                                      value="BUSCAR"
+                                      @click="searchBoleta"
+                                    />
+                                  </div>
+                                  <div class="col-2">
+                                    <input
+                                      type="button"
+                                      class="btn btn-danger btn-block mt-4 btnbuscar"
+                                      value="X"
+                                      @click="clearSearch"
+                                    />
+                                  </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    
                 </div>
                 <div class="mx-4 mt-4">
                     <table class="table">
@@ -42,151 +55,25 @@
                           <th scope="col">Código</th>
                           <th scope="col">Nombre del Cliente</th>
                           <th scope="col">Fecha de Emisión</th>
-                          <th scope="col">Estado</th>
+                          <!--<th scope="col">Estado</th>-->
                           <th scope="col">VER</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td scope="row">1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                          <td>@mdo</td>
+                        <tr v-for="(boleta,index) in listaBoletas" :key="boleta.id_boletaventa">
+                          <td scope="row">{{index+1}}</td>
+                          <td>{{boleta.id_boletaventa}}</td>
+                          <td>{{boleta.nombre_cliente}}</td>
+                          <td>{{boleta.fecha}}</td>
+                          <!--<td>{{boleta.estado}}</td>-->
                           <td class = "option text-center">
                             <div class="dropdown">
-                              <div class="btn btn-danger"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-eye fa-lg" @click="VerDetalle"></i>
+                              <div class="btn btn-danger" @click="openBoleta(boleta)">
+                                <i class="fas fa-eye fa-lg"></i>
                               </div>
                           </div>
                           </td>
-                        </tr>     
-                        <tr>
-                          <td scope="row">1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                          <td>@mdo</td>
-                          <td class = "option text-center">
-                            <div class="dropdown">
-                              <div class="btn btn-danger"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-eye fa-lg"  @click="VerDetalle"></i>
-                              </div>
-                          </div>
-                          </td>
-                        </tr>    
-                        <tr>
-                          <td scope="row">1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                          <td>@mdo</td>
-                          <td class = "option text-center">
-                            <div class="dropdown">
-                              <div class="btn btn-danger"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-eye fa-lg"  @click="VerDetalle"></i>
-                              </div>
-                          </div>
-                          </td>
-                        </tr>    
-                        <tr>
-                          <td scope="row">1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                          <td>@mdo</td>
-                          <td class = "option text-center">
-                            <div class="dropdown">
-                              <div class="btn btn-danger"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-eye fa-lg"  @click="VerDetalle"></i>
-                              </div>
-                          </div>
-                          </td>
-                        </tr>    
-                        <tr>
-                          <td scope="row">1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                          <td>@mdo</td>
-                          <td class = "option text-center">
-                            <div class="dropdown">
-                              <div class="btn btn-danger"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-eye fa-lg"  @click="VerDetalle"></i>
-                              </div>
-                          </div>
-                          </td>
-                        </tr>    
-                        <tr>
-                          <td scope="row">1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                          <td>@mdo</td>
-                          <td class = "option text-center">
-                            <div class="dropdown">
-                              <div class="btn btn-danger"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-eye fa-lg"  @click="VerDetalle"></i>
-                              </div>
-                          </div>
-                          </td>
-                        </tr>    
-                        <tr>
-                          <td scope="row">1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                          <td>@mdo</td>
-                          <td class = "option text-center">
-                            <div class="dropdown">
-                              <div class="btn btn-danger"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-eye fa-lg"  @click="VerDetalle"></i>
-                              </div>
-                          </div>
-                          </td>
-                        </tr>    
-                        <tr>
-                          <td scope="row">1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                          <td>@mdo</td>
-                          <td class = "option text-center">
-                            <div class="dropdown">
-                              <div class="btn btn-danger"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-eye fa-lg"  @click="VerDetalle"></i>
-                              </div>
-                          </div>
-                          </td>
-                        </tr>    
-                        <tr>
-                          <td scope="row">1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                          <td>@mdo</td>
-                          <td class = "option text-center">
-                            <div class="dropdown">
-                              <div class="btn btn-danger"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-eye fa-lg"  @click="VerDetalle"></i>
-                              </div>
-                          </div>
-                          </td>
-                        </tr>    
-                        <tr>
-                          <td scope="row">1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                          <td>@mdo</td>
-                          <td class = "option text-center">
-                            <div class="dropdown">
-                              <div class="btn btn-danger"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-eye fa-lg"  @click="VerDetalle"></i>
-                              </div>
-                          </div>
-                          </td>
-                        </tr>                                         
+                        </tr>                                          
                       </tbody>
                     </table>
                 </div>
@@ -198,9 +85,9 @@
 
 <script>
 import Appbar from '../../../components/AppBar'
-import AppBar from '../../../components/AppBar.vue';
 import Navigation from '../../../components/NavigationComponent';
-
+import usuario from "../../../user";
+import data from '../../../data';
 
 export default {
     components : {
@@ -209,22 +96,61 @@ export default {
     },
     data(){
         return {
-            
-            listaBoletas: [],
-            
+          busqueda     : {
+            codigo      : '',
+          },
+          listaBoletas : [],
         }
     },
     methods:{
-       Buscar(){ this.$swal({
-        icon: 'error',
-        title: 'Error',
-        text: 'No hay resultados',
-        });},
-
-        VerDetalle(){
-             this.$router.push({name:"formProductos"});
-        },
+      openBoleta(boleta){
+        boleta.productos = JSON.parse(boleta.productos);
+        data.setSelectedBV(boleta);
+        this.$router.push({ name: "formProductos" });
+      },
+      async getBoletaList(){
+        const response = await axios.get('api/listaB?token='+usuario.getData().token);
+        console.log('respt ',response);
+        if(typeof response.data == 'string'){
+          alert('Mensaje: '+response.data);
+        }else if(response.data.status == "0"){
+          const {data} = response.data;
+          this.listaBoletas = Array.isArray(data)?data:[data];
+        }else{
+            alert('Error: '+response.data.msj);
+        }
+      },
+      async searchBoleta(){
+        //validar campos busqueda
+        const inputs = Object.keys(this.busqueda);
+        if(inputs.some(i=>!this.busqueda[i])){
+          alert('Complete todos los campos');
+          return;
+        }
+        const fields = [
+          `cod_boleta=${this.busqueda.codigo}`,
+          `token=${usuario.getData().token}`
+        ];
+        const url = 'api/buscarBoletaF?'+fields.join('&');
+        const response = await axios.get(url);
+        console.log('respt bus ',response);
+        if(typeof response.data == 'string'){
+          alert('Mensaje: '+response.data);
+        }else if(response.data.status == "0"){
+          const {data} = response.data;
+          this.listaBoletas = Array.isArray(data)?data:[data];
+        }else{
+            alert('Error: '+response.data.msj);
+        }
+      },
+      clearSearch(){
+        const inputs = Object.keys(this.busqueda);
+        inputs.forEach(i => this.busqueda[i] = '');
+        this.getBoletaList();
+      }
+    },
+    mounted(){
+      this.getBoletaList();
     }
-
 }
 </script>

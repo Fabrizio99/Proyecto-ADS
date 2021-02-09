@@ -65,6 +65,9 @@ const routes = [
         name: 'crearproductos',
         component: require('../js/views/mantenimiento/productos/formCrearProducto.vue'),
         props: true,
+        meta : {
+            module : 'producto'
+        }
     },
     {
         path: '/form-modificar-productos',
@@ -117,7 +120,7 @@ const routes = [
     {
         path: '/formulario-inventario',
         name: 'inventario',
-        component: require('../js/views/reportes/InventariosApp.vue'),
+        component: require('../js/views/reportes/inventario/InventariosApp.vue'),
         meta : {
             module : 'inventario'
         }

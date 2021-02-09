@@ -55,7 +55,7 @@ Route::post('registrarPago'    , 'emitirBvController@registrarPago'     )->middl
 
 //emitirReporteVentaDiarias
 Route::get('listaBoletaE'      ,'emitirReporteVdController@listaBoletaE')->middleware('validateAuth');
-Route::get('emitirRBVbyFecha'  ,'emitirReporteVdController@emitirRBVbyFechaa')->middleware('validateAuth');
+Route::get('emitirRBVbyFecha'  ,'emitirReporteVdController@emitirRBVbyFecha')->middleware('validateAuth');
 Route::post('guardarIncidencia','emitirReporteVdController@guardarIncidencia')->middleware('validateAuth');
 
 ///Otra ruta 
