@@ -25,6 +25,7 @@ class gestionarUsuarioController extends Controller
                     u.estado,
                     u.codigo,
                     u.direccion,
+                    u.contrasenia AS clave, 
                     r.id_rol,
                     r.nombre AS Cargo
             FROM usuarios AS u,
@@ -70,6 +71,7 @@ class gestionarUsuarioController extends Controller
                     u.estado,
                     u.codigo,
                     u.direccion,
+                    u.contrasenia AS clave,
                     r.id_rol,
                     r.nombre AS Cargo 
                FROM usuarios u , rol r
@@ -179,6 +181,7 @@ class gestionarUsuarioController extends Controller
                             isNullEmpty($req->direccion  , 'direccion'  , 'Verificar campo vacio. ') ?:
                             isNullEmpty($req->telefono   , 'telefono'   , 'Verificar campo vacio. ') ?:
                             isNullEmpty($req->rol        , 'rol'        , 'Verificar campo vacio. ') ?:
+                            isNullEmpty($req->clave      , 'clave'      , 'Verificar campo vacio. ') ?:
                             isNullEmpty($req->numDoc     , 'numDoc'     , 'Verificar campo vacio. ') ?: 
                             isNullEmpty($req->tipoDoc    , 'tipoDoc'    , 'Verificar campo vacio. ');
                             
@@ -223,6 +226,7 @@ class gestionarUsuarioController extends Controller
                     rol_id_rol    = '{$req->rol}',
                     usuario       = '{$req->numDoc}',
                     num_documento = '{$req->numDoc}',
+                    contrasenia   = '{$req->clave}',
                     documentos_id_documentos = '{$req->tipoDoc}'
             WHERE num_documento   = '{$req->numDoc}'"
         );      
