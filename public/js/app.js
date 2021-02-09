@@ -7261,6 +7261,2218 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
 /* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
+/*!
+ * 
+ *             jsPDF AutoTable plugin v3.5.13
+ *             
+ *             Copyright (c) 2020 Simon Bengtsson, https://github.com/simonbengtsson/jsPDF-AutoTable
+ *             Licensed under the MIT License.
+ *             http://opensource.org/licenses/mit-license
+ *         
+ */
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(true)
+		module.exports = factory((function webpackLoadOptionalExternalModule() { try { return __webpack_require__(12); } catch(e) {} }()));
+	else if(typeof define === 'function' && define.amd)
+		define(["jspdf"], factory);
+	else {
+		var a = typeof exports === 'object' ? factory((function webpackLoadOptionalExternalModule() { try { return require("jspdf"); } catch(e) {} }())) : factory(root["jspdf"]);
+		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
+	}
+})(typeof this !== 'undefined' ? this : window, function(__WEBPACK_EXTERNAL_MODULE__16__) {
+return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 10);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.parseSpacing = exports.getFillStyle = exports.addTableBorder = exports.getStringWidth = void 0;
+function getStringWidth(text, styles, doc) {
+    doc.applyStyles(styles, true);
+    var textArr = Array.isArray(text) ? text : [text];
+    var widestLineWidth = textArr
+        .map(function (text) { return doc.getTextWidth(text); })
+        .reduce(function (a, b) { return Math.max(a, b); }, 0);
+    return widestLineWidth;
+}
+exports.getStringWidth = getStringWidth;
+function addTableBorder(doc, table, startPos, cursor) {
+    var lineWidth = table.settings.tableLineWidth;
+    var lineColor = table.settings.tableLineColor;
+    doc.applyStyles({ lineWidth: lineWidth, lineColor: lineColor });
+    var fillStyle = getFillStyle(lineWidth, false);
+    if (fillStyle) {
+        doc.rect(startPos.x, startPos.y, table.getWidth(doc.pageSize().width), cursor.y - startPos.y, fillStyle);
+    }
+}
+exports.addTableBorder = addTableBorder;
+function getFillStyle(lineWidth, fillColor) {
+    var drawLine = lineWidth > 0;
+    var drawBackground = fillColor || fillColor === 0;
+    if (drawLine && drawBackground) {
+        return 'DF'; // Fill then stroke
+    }
+    else if (drawLine) {
+        return 'S'; // Only stroke (transparent background)
+    }
+    else if (drawBackground) {
+        return 'F'; // Only fill, no stroke
+    }
+    else {
+        return null;
+    }
+}
+exports.getFillStyle = getFillStyle;
+function parseSpacing(value, defaultValue) {
+    var _a, _b, _c, _d;
+    value = value || defaultValue;
+    if (Array.isArray(value)) {
+        if (value.length >= 4) {
+            return {
+                top: value[0],
+                right: value[1],
+                bottom: value[2],
+                left: value[3],
+            };
+        }
+        else if (value.length === 3) {
+            return {
+                top: value[0],
+                right: value[1],
+                bottom: value[2],
+                left: value[1],
+            };
+        }
+        else if (value.length === 2) {
+            return {
+                top: value[0],
+                right: value[1],
+                bottom: value[0],
+                left: value[1],
+            };
+        }
+        else if (value.length === 1) {
+            value = value[0];
+        }
+        else {
+            value = defaultValue;
+        }
+    }
+    if (typeof value === 'object') {
+        if (typeof value.vertical === 'number') {
+            value.top = value.vertical;
+            value.bottom = value.vertical;
+        }
+        if (typeof value.horizontal === 'number') {
+            value.right = value.horizontal;
+            value.left = value.horizontal;
+        }
+        return {
+            left: (_a = value.left) !== null && _a !== void 0 ? _a : defaultValue,
+            top: (_b = value.top) !== null && _b !== void 0 ? _b : defaultValue,
+            right: (_c = value.right) !== null && _c !== void 0 ? _c : defaultValue,
+            bottom: (_d = value.bottom) !== null && _d !== void 0 ? _d : defaultValue,
+        };
+    }
+    if (typeof value !== 'number') {
+        value = defaultValue;
+    }
+    return { top: value, right: value, bottom: value, left: value };
+}
+exports.parseSpacing = parseSpacing;
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getTheme = exports.defaultStyles = exports.HtmlRowInput = exports.FONT_ROW_RATIO = void 0;
+/**
+ * Ratio between font size and font height. The number comes from jspdf's source code
+ */
+exports.FONT_ROW_RATIO = 1.15;
+var HtmlRowInput = /** @class */ (function (_super) {
+    __extends(HtmlRowInput, _super);
+    function HtmlRowInput(element) {
+        var _this = _super.call(this) || this;
+        _this._element = element;
+        return _this;
+    }
+    return HtmlRowInput;
+}(Array));
+exports.HtmlRowInput = HtmlRowInput;
+// Base style for all themes
+function defaultStyles(scaleFactor) {
+    return {
+        font: 'helvetica',
+        fontStyle: 'normal',
+        overflow: 'linebreak',
+        fillColor: false,
+        textColor: 20,
+        halign: 'left',
+        valign: 'top',
+        fontSize: 10,
+        cellPadding: 5 / scaleFactor,
+        lineColor: 200,
+        lineWidth: 0,
+        cellWidth: 'auto',
+        minCellHeight: 0,
+        minCellWidth: 0,
+    };
+}
+exports.defaultStyles = defaultStyles;
+function getTheme(name) {
+    var themes = {
+        striped: {
+            table: { fillColor: 255, textColor: 80, fontStyle: 'normal' },
+            head: { textColor: 255, fillColor: [41, 128, 185], fontStyle: 'bold' },
+            body: {},
+            foot: { textColor: 255, fillColor: [41, 128, 185], fontStyle: 'bold' },
+            alternateRow: { fillColor: 245 },
+        },
+        grid: {
+            table: {
+                fillColor: 255,
+                textColor: 80,
+                fontStyle: 'normal',
+                lineWidth: 0.1,
+            },
+            head: {
+                textColor: 255,
+                fillColor: [26, 188, 156],
+                fontStyle: 'bold',
+                lineWidth: 0,
+            },
+            body: {},
+            foot: {
+                textColor: 255,
+                fillColor: [26, 188, 156],
+                fontStyle: 'bold',
+                lineWidth: 0,
+            },
+            alternateRow: {},
+        },
+        plain: {
+            head: { fontStyle: 'bold' },
+            foot: { fontStyle: 'bold' },
+        },
+    };
+    return themes[name];
+}
+exports.getTheme = getTheme;
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DocHandler = void 0;
+var globalDefaults = {};
+var DocHandler = /** @class */ (function () {
+    function DocHandler(jsPDFDocument) {
+        this.jsPDFDocument = jsPDFDocument;
+        this.userStyles = {
+            // Black for versions of jspdf without getTextColor
+            textColor: jsPDFDocument.getTextColor
+                ? this.jsPDFDocument.getTextColor()
+                : 0,
+            fontSize: jsPDFDocument.internal.getFontSize(),
+            fontStyle: jsPDFDocument.internal.getFont().fontStyle,
+            font: jsPDFDocument.internal.getFont().fontName,
+        };
+    }
+    DocHandler.setDefaults = function (defaults, doc) {
+        if (doc === void 0) { doc = null; }
+        if (doc) {
+            doc.__autoTableDocumentDefaults = defaults;
+        }
+        else {
+            globalDefaults = defaults;
+        }
+    };
+    DocHandler.unifyColor = function (c) {
+        if (Array.isArray(c)) {
+            return c;
+        }
+        else if (typeof c === 'number') {
+            return [c, c, c];
+        }
+        else if (typeof c === 'string') {
+            return [c];
+        }
+        else {
+            return null;
+        }
+    };
+    DocHandler.prototype.applyStyles = function (styles, fontOnly) {
+        // Font style needs to be applied before font
+        // https://github.com/simonbengtsson/jsPDF-AutoTable/issues/632
+        var _a, _b, _c;
+        if (fontOnly === void 0) { fontOnly = false; }
+        if (styles.fontStyle)
+            this.jsPDFDocument.setFontStyle && this.jsPDFDocument.setFontStyle(styles.fontStyle);
+        var _d = this.jsPDFDocument.internal.getFont(), fontStyle = _d.fontStyle, fontName = _d.fontName;
+        if (styles.font)
+            fontName = styles.font;
+        if (styles.fontStyle) {
+            fontStyle = styles.fontStyle;
+            var availableFontStyles = this.getFontList()[fontName];
+            if (availableFontStyles && availableFontStyles.indexOf(fontStyle) === -1) {
+                // Common issue was that the default bold in headers
+                // made custom fonts not work. For example:
+                // https://github.com/simonbengtsson/jsPDF-AutoTable/issues/653
+                this.jsPDFDocument.setFontStyle && this.jsPDFDocument.setFontStyle(availableFontStyles[0]);
+                fontStyle = availableFontStyles[0];
+            }
+        }
+        this.jsPDFDocument.setFont(fontName, fontStyle);
+        if (styles.fontSize)
+            this.jsPDFDocument.setFontSize(styles.fontSize);
+        if (fontOnly) {
+            return; // Performance improvement
+        }
+        var color = DocHandler.unifyColor(styles.fillColor);
+        if (color)
+            (_a = this.jsPDFDocument).setFillColor.apply(_a, color);
+        color = DocHandler.unifyColor(styles.textColor);
+        if (color)
+            (_b = this.jsPDFDocument).setTextColor.apply(_b, color);
+        color = DocHandler.unifyColor(styles.lineColor);
+        if (color)
+            (_c = this.jsPDFDocument).setDrawColor.apply(_c, color);
+        if (typeof styles.lineWidth === 'number') {
+            this.jsPDFDocument.setLineWidth(styles.lineWidth);
+        }
+    };
+    DocHandler.prototype.splitTextToSize = function (text, size, opts) {
+        return this.jsPDFDocument.splitTextToSize(text, size, opts);
+    };
+    DocHandler.prototype.rect = function (x, y, width, height, fillStyle) {
+        return this.jsPDFDocument.rect(x, y, width, height, fillStyle);
+    };
+    DocHandler.prototype.getLastAutoTable = function () {
+        return this.jsPDFDocument.lastAutoTable || null;
+    };
+    DocHandler.prototype.getTextWidth = function (text) {
+        return this.jsPDFDocument.getTextWidth(text);
+    };
+    DocHandler.prototype.getDocument = function () {
+        return this.jsPDFDocument;
+    };
+    DocHandler.prototype.setPage = function (page) {
+        this.jsPDFDocument.setPage(page);
+    };
+    DocHandler.prototype.addPage = function () {
+        return this.jsPDFDocument.addPage();
+    };
+    DocHandler.prototype.getFontList = function () {
+        return this.jsPDFDocument.getFontList();
+    };
+    DocHandler.prototype.getGlobalOptions = function () {
+        return globalDefaults || {};
+    };
+    DocHandler.prototype.getDocumentOptions = function () {
+        return this.jsPDFDocument.__autoTableDocumentDefaults || {};
+    };
+    DocHandler.prototype.pageSize = function () {
+        var pageSize = this.jsPDFDocument.internal.pageSize;
+        // JSPDF 1.4 uses get functions instead of properties on pageSize
+        if (pageSize.width == null) {
+            pageSize = {
+                width: pageSize.getWidth(),
+                height: pageSize.getHeight(),
+            };
+        }
+        return pageSize;
+    };
+    DocHandler.prototype.scaleFactor = function () {
+        return this.jsPDFDocument.internal.scaleFactor;
+    };
+    DocHandler.prototype.pageNumber = function () {
+        var pageInfo = this.jsPDFDocument.internal.getCurrentPageInfo();
+        if (!pageInfo) {
+            // Only recent versions of jspdf has pageInfo
+            return this.jsPDFDocument.internal.getNumberOfPages();
+        }
+        return pageInfo.pageNumber;
+    };
+    return DocHandler;
+}());
+exports.DocHandler = DocHandler;
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/* eslint-disable @typescript-eslint/no-unused-vars */
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.assign = void 0;
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
+function assign(target, s, s1, s2, s3) {
+    if (target == null) {
+        throw new TypeError('Cannot convert undefined or null to object');
+    }
+    var to = Object(target);
+    for (var index = 1; index < arguments.length; index++) {
+        // eslint-disable-next-line prefer-rest-params
+        var nextSource = arguments[index];
+        if (nextSource != null) {
+            // Skip over if undefined or null
+            for (var nextKey in nextSource) {
+                // Avoid bugs when hasOwnProperty is shadowed
+                if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
+                    to[nextKey] = nextSource[nextKey];
+                }
+            }
+        }
+    }
+    return to;
+}
+exports.assign = assign;
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.parseHtml = void 0;
+var cssParser_1 = __webpack_require__(12);
+var config_1 = __webpack_require__(1);
+function parseHtml(doc, input, window, includeHiddenHtml, useCss) {
+    var _a, _b;
+    if (includeHiddenHtml === void 0) { includeHiddenHtml = false; }
+    if (useCss === void 0) { useCss = false; }
+    var tableElement;
+    if (typeof input === 'string') {
+        tableElement = window.document.querySelector(input);
+    }
+    else {
+        tableElement = input;
+    }
+    var supportedFonts = Object.keys(doc.getFontList());
+    var scaleFactor = doc.scaleFactor();
+    var head = [], body = [], foot = [];
+    if (!tableElement) {
+        console.error('Html table could not be found with input: ', input);
+        return { head: head, body: body, foot: foot };
+    }
+    for (var i = 0; i < tableElement.rows.length; i++) {
+        var element = tableElement.rows[i];
+        var tagName = (_b = (_a = element === null || element === void 0 ? void 0 : element.parentElement) === null || _a === void 0 ? void 0 : _a.tagName) === null || _b === void 0 ? void 0 : _b.toLowerCase();
+        var row = parseRowContent(supportedFonts, scaleFactor, window, element, includeHiddenHtml, useCss);
+        if (!row)
+            continue;
+        if (tagName === 'thead') {
+            head.push(row);
+        }
+        else if (tagName === 'tfoot') {
+            foot.push(row);
+        }
+        else {
+            // Add to body both if parent is tbody or table
+            body.push(row);
+        }
+    }
+    return { head: head, body: body, foot: foot };
+}
+exports.parseHtml = parseHtml;
+function parseRowContent(supportedFonts, scaleFactor, window, row, includeHidden, useCss) {
+    var resultRow = new config_1.HtmlRowInput(row);
+    for (var i = 0; i < row.cells.length; i++) {
+        var cell = row.cells[i];
+        var style_1 = window.getComputedStyle(cell);
+        if (includeHidden || style_1.display !== 'none') {
+            var cellStyles = void 0;
+            if (useCss) {
+                cellStyles = cssParser_1.parseCss(supportedFonts, cell, scaleFactor, style_1, window);
+            }
+            resultRow.push({
+                rowSpan: cell.rowSpan,
+                colSpan: cell.colSpan,
+                styles: cellStyles,
+                _element: cell,
+                content: parseCellContent(cell),
+            });
+        }
+    }
+    var style = window.getComputedStyle(row);
+    if (resultRow.length > 0 && (includeHidden || style.display !== 'none')) {
+        return resultRow;
+    }
+}
+function parseCellContent(orgCell) {
+    // Work on cloned node to make sure no changes are applied to html table
+    var cell = orgCell.cloneNode(true);
+    // Remove extra space and line breaks in markup to make it more similar to
+    // what would be shown in html
+    cell.innerHTML = cell.innerHTML.replace(/\n/g, '').replace(/ +/g, ' ');
+    // Preserve <br> tags as line breaks in the pdf
+    cell.innerHTML = cell.innerHTML
+        .split('<br>')
+        .map(function (part) { return part.trim(); })
+        .join('\n');
+    // innerText for ie
+    return cell.innerText || cell.textContent || '';
+}
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Improved text function with halign and valign support
+ * Inspiration from: http://stackoverflow.com/questions/28327510/align-text-right-using-jspdf/28433113#28433113
+ */
+function default_1(text, x, y, styles, doc) {
+    styles = styles || {};
+    var FONT_ROW_RATIO = 1.15;
+    var k = doc.internal.scaleFactor;
+    var fontSize = doc.internal.getFontSize() / k;
+    var splitRegex = /\r\n|\r|\n/g;
+    var splitText = '';
+    var lineCount = 1;
+    if (styles.valign === 'middle' ||
+        styles.valign === 'bottom' ||
+        styles.halign === 'center' ||
+        styles.halign === 'right') {
+        splitText = typeof text === 'string' ? text.split(splitRegex) : text;
+        lineCount = splitText.length || 1;
+    }
+    // Align the top
+    y += fontSize * (2 - FONT_ROW_RATIO);
+    if (styles.valign === 'middle')
+        y -= (lineCount / 2) * fontSize * FONT_ROW_RATIO;
+    else if (styles.valign === 'bottom')
+        y -= lineCount * fontSize * FONT_ROW_RATIO;
+    if (styles.halign === 'center' || styles.halign === 'right') {
+        var alignSize = fontSize;
+        if (styles.halign === 'center')
+            alignSize *= 0.5;
+        if (splitText && lineCount >= 1) {
+            for (var iLine = 0; iLine < splitText.length; iLine++) {
+                doc.text(splitText[iLine], x - doc.getStringUnitWidth(splitText[iLine]) * alignSize, y);
+                y += fontSize * FONT_ROW_RATIO;
+            }
+            return doc;
+        }
+        x -= doc.getStringUnitWidth(text) * alignSize;
+    }
+    if (styles.halign === 'justify') {
+        doc.text(text, x, y, {
+            maxWidth: styles.maxWidth || 100,
+            align: 'justify',
+        });
+    }
+    else {
+        doc.text(text, x, y);
+    }
+    return doc;
+}
+exports.default = default_1;
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.parseInput = void 0;
+var htmlParser_1 = __webpack_require__(4);
+var polyfills_1 = __webpack_require__(3);
+var common_1 = __webpack_require__(0);
+var documentHandler_1 = __webpack_require__(2);
+var inputValidator_1 = __webpack_require__(13);
+function parseInput(d, current) {
+    var doc = new documentHandler_1.DocHandler(d);
+    var document = doc.getDocumentOptions();
+    var global = doc.getGlobalOptions();
+    inputValidator_1.default(doc, global, document, current);
+    var options = polyfills_1.assign({}, global, document, current);
+    var win;
+    if (typeof window !== 'undefined') {
+        win = window;
+    }
+    var styles = parseStyles(global, document, current);
+    var hooks = parseHooks(global, document, current);
+    var settings = parseSettings(doc, options);
+    var content = parseContent(doc, options, win);
+    return {
+        id: current.tableId,
+        content: content,
+        hooks: hooks,
+        styles: styles,
+        settings: settings,
+    };
+}
+exports.parseInput = parseInput;
+function parseStyles(gInput, dInput, cInput) {
+    var styleOptions = {
+        styles: {},
+        headStyles: {},
+        bodyStyles: {},
+        footStyles: {},
+        alternateRowStyles: {},
+        columnStyles: {},
+    };
+    var _loop_1 = function (prop) {
+        if (prop === 'columnStyles') {
+            var global_1 = gInput[prop];
+            var document_1 = dInput[prop];
+            var current = cInput[prop];
+            styleOptions.columnStyles = polyfills_1.assign({}, global_1, document_1, current);
+        }
+        else {
+            var allOptions = [gInput, dInput, cInput];
+            var styles = allOptions.map(function (opts) { return opts[prop] || {}; });
+            styleOptions[prop] = polyfills_1.assign({}, styles[0], styles[1], styles[2]);
+        }
+    };
+    for (var _i = 0, _a = Object.keys(styleOptions); _i < _a.length; _i++) {
+        var prop = _a[_i];
+        _loop_1(prop);
+    }
+    return styleOptions;
+}
+function parseHooks(global, document, current) {
+    var allOptions = [global, document, current];
+    var result = {
+        didParseCell: [],
+        willDrawCell: [],
+        didDrawCell: [],
+        didDrawPage: [],
+    };
+    for (var _i = 0, allOptions_1 = allOptions; _i < allOptions_1.length; _i++) {
+        var options = allOptions_1[_i];
+        if (options.didParseCell)
+            result.didParseCell.push(options.didParseCell);
+        if (options.willDrawCell)
+            result.willDrawCell.push(options.willDrawCell);
+        if (options.didDrawCell)
+            result.didDrawCell.push(options.didDrawCell);
+        if (options.didDrawPage)
+            result.didDrawPage.push(options.didDrawPage);
+    }
+    return result;
+}
+function parseSettings(doc, options) {
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
+    var margin = common_1.parseSpacing(options.margin, 40 / doc.scaleFactor());
+    var startY = (_a = getStartY(doc, options.startY)) !== null && _a !== void 0 ? _a : margin.top;
+    var showFoot;
+    if (options.showFoot === true) {
+        showFoot = 'everyPage';
+    }
+    else if (options.showFoot === false) {
+        showFoot = 'never';
+    }
+    else {
+        showFoot = (_b = options.showFoot) !== null && _b !== void 0 ? _b : 'everyPage';
+    }
+    var showHead;
+    if (options.showHead === true) {
+        showHead = 'everyPage';
+    }
+    else if (options.showHead === false) {
+        showHead = 'never';
+    }
+    else {
+        showHead = (_c = options.showHead) !== null && _c !== void 0 ? _c : 'everyPage';
+    }
+    var useCss = (_d = options.useCss) !== null && _d !== void 0 ? _d : false;
+    var theme = options.theme || (useCss ? 'plain' : 'striped');
+    return {
+        includeHiddenHtml: (_e = options.includeHiddenHtml) !== null && _e !== void 0 ? _e : false,
+        useCss: useCss,
+        theme: theme,
+        startY: startY,
+        margin: margin,
+        pageBreak: (_f = options.pageBreak) !== null && _f !== void 0 ? _f : 'auto',
+        rowPageBreak: (_g = options.rowPageBreak) !== null && _g !== void 0 ? _g : 'auto',
+        tableWidth: (_h = options.tableWidth) !== null && _h !== void 0 ? _h : 'auto',
+        showHead: showHead,
+        showFoot: showFoot,
+        tableLineWidth: (_j = options.tableLineWidth) !== null && _j !== void 0 ? _j : 0,
+        tableLineColor: (_k = options.tableLineColor) !== null && _k !== void 0 ? _k : 200,
+    };
+}
+function getStartY(doc, userStartY) {
+    var previous = doc.getLastAutoTable();
+    var sf = doc.scaleFactor();
+    var currentPage = doc.pageNumber();
+    var isSamePageAsPreviousTable = false;
+    if (previous && previous.startPageNumber) {
+        var endingPage = previous.startPageNumber + previous.pageNumber - 1;
+        isSamePageAsPreviousTable = endingPage === currentPage;
+    }
+    if (typeof userStartY === 'number') {
+        return userStartY;
+    }
+    else if (userStartY == null || userStartY === false) {
+        if (isSamePageAsPreviousTable && (previous === null || previous === void 0 ? void 0 : previous.finalY) != null) {
+            // Some users had issues with overlapping tables when they used multiple
+            // tables without setting startY so setting it here to a sensible default.
+            return previous.finalY + 20 / sf;
+        }
+    }
+    return null;
+}
+function parseContent(doc, options, window) {
+    var head = options.head || [];
+    var body = options.body || [];
+    var foot = options.foot || [];
+    if (options.html) {
+        var hidden = options.includeHiddenHtml;
+        if (window) {
+            var htmlContent = htmlParser_1.parseHtml(doc, options.html, window, hidden, options.useCss) || {};
+            head = htmlContent.head || head;
+            body = htmlContent.body || head;
+            foot = htmlContent.foot || head;
+        }
+        else {
+            console.error('Cannot parse html in non browser environment');
+        }
+    }
+    var columns = options.columns || parseColumns(head, body, foot);
+    return {
+        columns: columns,
+        head: head,
+        body: body,
+        foot: foot,
+    };
+}
+function parseColumns(head, body, foot) {
+    var firstRow = head[0] || body[0] || foot[0] || [];
+    var result = [];
+    Object.keys(firstRow)
+        .filter(function (key) { return key !== '_element'; })
+        .forEach(function (key) {
+        var colSpan = 1;
+        var input;
+        if (Array.isArray(firstRow)) {
+            input = firstRow[parseInt(key)];
+        }
+        else {
+            input = firstRow[key];
+        }
+        if (typeof input === 'object' && !Array.isArray(input)) {
+            colSpan = (input === null || input === void 0 ? void 0 : input.colSpan) || 1;
+        }
+        for (var i = 0; i < colSpan; i++) {
+            var id = void 0;
+            if (Array.isArray(firstRow)) {
+                id = result.length;
+            }
+            else {
+                id = key + (i > 0 ? "_" + i : '');
+            }
+            var rowResult = { dataKey: id };
+            result.push(rowResult);
+        }
+    });
+    return result;
+}
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addPage = exports.drawTable = void 0;
+var config_1 = __webpack_require__(1);
+var common_1 = __webpack_require__(0);
+var models_1 = __webpack_require__(8);
+var documentHandler_1 = __webpack_require__(2);
+var polyfills_1 = __webpack_require__(3);
+var autoTableText_1 = __webpack_require__(5);
+function drawTable(jsPDFDoc, table) {
+    var settings = table.settings;
+    var startY = settings.startY;
+    var margin = settings.margin;
+    var cursor = {
+        x: margin.left,
+        y: startY,
+    };
+    var sectionsHeight = table.getHeadHeight(table.columns) + table.getFootHeight(table.columns);
+    var minTableBottomPos = startY + margin.bottom + sectionsHeight;
+    if (settings.pageBreak === 'avoid') {
+        var rows = table.allRows();
+        var tableHeight = rows.reduce(function (acc, row) { return acc + row.height; }, 0);
+        minTableBottomPos += tableHeight;
+    }
+    var doc = new documentHandler_1.DocHandler(jsPDFDoc);
+    if (settings.pageBreak === 'always' ||
+        (settings.startY != null && minTableBottomPos > doc.pageSize().height)) {
+        nextPage(doc);
+        cursor.y = margin.top;
+    }
+    var startPos = polyfills_1.assign({}, cursor);
+    table.startPageNumber = doc.pageNumber();
+    doc.applyStyles(doc.userStyles);
+    if (settings.showHead === 'firstPage' || settings.showHead === 'everyPage') {
+        table.head.forEach(function (row) { return printRow(doc, table, row, cursor); });
+    }
+    doc.applyStyles(doc.userStyles);
+    table.body.forEach(function (row, index) {
+        var isLastRow = index === table.body.length - 1;
+        printFullRow(doc, table, row, isLastRow, startPos, cursor);
+    });
+    doc.applyStyles(doc.userStyles);
+    if (settings.showFoot === 'lastPage' || settings.showFoot === 'everyPage') {
+        table.foot.forEach(function (row) { return printRow(doc, table, row, cursor); });
+    }
+    common_1.addTableBorder(doc, table, startPos, cursor);
+    table.callEndPageHooks(doc, cursor);
+    table.finalY = cursor.y;
+    jsPDFDoc.lastAutoTable = table;
+    jsPDFDoc.previousAutoTable = table; // Deprecated
+    if (jsPDFDoc.autoTable)
+        jsPDFDoc.autoTable.previous = table; // Deprecated
+    doc.applyStyles(doc.userStyles);
+}
+exports.drawTable = drawTable;
+function getRemainingLineCount(cell, remainingPageSpace, doc) {
+    var fontHeight = (cell.styles.fontSize / doc.scaleFactor()) * config_1.FONT_ROW_RATIO;
+    var vPadding = cell.padding('vertical');
+    var remainingLines = Math.floor((remainingPageSpace - vPadding) / fontHeight);
+    return Math.max(0, remainingLines);
+}
+function modifyRowToFit(row, remainingPageSpace, table, doc) {
+    var cells = {};
+    row.spansMultiplePages = true;
+    var rowHeight = 0;
+    for (var _i = 0, _a = table.columns; _i < _a.length; _i++) {
+        var column = _a[_i];
+        var cell = row.cells[column.index];
+        if (!cell)
+            continue;
+        if (!Array.isArray(cell.text)) {
+            cell.text = [cell.text];
+        }
+        var remainderCell = new models_1.Cell(cell.raw, cell.styles, cell.section);
+        remainderCell = polyfills_1.assign(remainderCell, cell);
+        remainderCell.text = [];
+        var remainingLineCount = getRemainingLineCount(cell, remainingPageSpace, doc);
+        if (cell.text.length > remainingLineCount) {
+            remainderCell.text = cell.text.splice(remainingLineCount, cell.text.length);
+        }
+        var scaleFactor = doc.scaleFactor();
+        cell.contentHeight = cell.getContentHeight(scaleFactor);
+        if (cell.contentHeight >= remainingPageSpace) {
+            cell.contentHeight = remainingPageSpace;
+            remainderCell.styles.minCellHeight -= remainingPageSpace;
+        }
+        if (cell.contentHeight > row.height) {
+            row.height = cell.contentHeight;
+        }
+        remainderCell.contentHeight = remainderCell.getContentHeight(scaleFactor);
+        if (remainderCell.contentHeight > rowHeight) {
+            rowHeight = remainderCell.contentHeight;
+        }
+        cells[column.index] = remainderCell;
+    }
+    var remainderRow = new models_1.Row(row.raw, -1, row.section, cells, true);
+    remainderRow.height = rowHeight;
+    for (var _b = 0, _c = table.columns; _b < _c.length; _b++) {
+        var column = _c[_b];
+        var remainderCell = remainderRow.cells[column.index];
+        if (remainderCell) {
+            remainderCell.height = remainderRow.height;
+        }
+        var cell = row.cells[column.index];
+        if (cell) {
+            cell.height = row.height;
+        }
+    }
+    return remainderRow;
+}
+function shouldPrintOnCurrentPage(doc, row, remainingPageSpace, table) {
+    var pageHeight = doc.pageSize().height;
+    var margin = table.settings.margin;
+    var marginHeight = margin.top + margin.bottom;
+    var maxRowHeight = pageHeight - marginHeight;
+    if (row.section === 'body') {
+        // Should also take into account that head and foot is not
+        // on every page with some settings
+        maxRowHeight -=
+            table.getHeadHeight(table.columns) + table.getFootHeight(table.columns);
+    }
+    var minRowHeight = row.getMinimumRowHeight(table.columns, doc);
+    var minRowFits = minRowHeight < remainingPageSpace;
+    if (minRowHeight > maxRowHeight) {
+        console.error("Will not be able to print row " + row.index + " correctly since it's minimum height is larger than page height");
+        return true;
+    }
+    if (!minRowFits) {
+        return false;
+    }
+    var rowHasRowSpanCell = row.hasRowSpan(table.columns);
+    var rowHigherThanPage = row.getMaxCellHeight(table.columns) > maxRowHeight;
+    if (rowHigherThanPage) {
+        if (rowHasRowSpanCell) {
+            console.error("The content of row " + row.index + " will not be drawn correctly since drawing rows with a height larger than the page height and has cells with rowspans is not supported.");
+        }
+        return true;
+    }
+    if (rowHasRowSpanCell) {
+        // Currently a new page is required whenever a rowspan row don't fit a page.
+        return false;
+    }
+    if (table.settings.rowPageBreak === 'avoid') {
+        return false;
+    }
+    // In all other cases print the row on current page
+    return true;
+}
+function printFullRow(doc, table, row, isLastRow, startPos, cursor) {
+    var remainingSpace = getRemainingPageSpace(doc, table, isLastRow, cursor);
+    if (row.canEntireRowFit(remainingSpace, table.columns)) {
+        printRow(doc, table, row, cursor);
+    }
+    else {
+        if (shouldPrintOnCurrentPage(doc, row, remainingSpace, table)) {
+            var remainderRow = modifyRowToFit(row, remainingSpace, table, doc);
+            printRow(doc, table, row, cursor);
+            addPage(doc, table, startPos, cursor);
+            printFullRow(doc, table, remainderRow, isLastRow, startPos, cursor);
+        }
+        else {
+            addPage(doc, table, startPos, cursor);
+            printFullRow(doc, table, row, isLastRow, startPos, cursor);
+        }
+    }
+}
+function printRow(doc, table, row, cursor) {
+    cursor.x = table.settings.margin.left;
+    for (var _i = 0, _a = table.columns; _i < _a.length; _i++) {
+        var column = _a[_i];
+        var cell = row.cells[column.index];
+        if (!cell) {
+            cursor.x += column.width;
+            continue;
+        }
+        doc.applyStyles(cell.styles);
+        cell.x = cursor.x;
+        cell.y = cursor.y;
+        var result = table.callCellHooks(doc, table.hooks.willDrawCell, cell, row, column, cursor);
+        if (result === false) {
+            cursor.x += column.width;
+            continue;
+        }
+        var cellStyles = cell.styles;
+        var fillStyle = common_1.getFillStyle(cellStyles.lineWidth, cellStyles.fillColor);
+        if (fillStyle) {
+            doc.rect(cell.x, cursor.y, cell.width, cell.height, fillStyle);
+        }
+        var textPos = cell.getTextPos();
+        autoTableText_1.default(cell.text, textPos.x, textPos.y, {
+            halign: cell.styles.halign,
+            valign: cell.styles.valign,
+            maxWidth: Math.ceil(cell.width - cell.padding('left') - cell.padding('right')),
+        }, doc.getDocument());
+        table.callCellHooks(doc, table.hooks.didDrawCell, cell, row, column, cursor);
+        cursor.x += column.width;
+    }
+    cursor.y += row.height;
+}
+function getRemainingPageSpace(doc, table, isLastRow, cursor) {
+    var bottomContentHeight = table.settings.margin.bottom;
+    var showFoot = table.settings.showFoot;
+    if (showFoot === 'everyPage' || (showFoot === 'lastPage' && isLastRow)) {
+        bottomContentHeight += table.getFootHeight(table.columns);
+    }
+    return doc.pageSize().height - cursor.y - bottomContentHeight;
+}
+function addPage(doc, table, startPos, cursor) {
+    doc.applyStyles(doc.userStyles);
+    if (table.settings.showFoot === 'everyPage') {
+        table.foot.forEach(function (row) { return printRow(doc, table, row, cursor); });
+    }
+    // Add user content just before adding new page ensure it will
+    // be drawn above other things on the page
+    table.callEndPageHooks(doc, cursor);
+    var margin = table.settings.margin;
+    common_1.addTableBorder(doc, table, startPos, cursor);
+    nextPage(doc);
+    table.pageNumber++;
+    table.pageCount++;
+    cursor.x = margin.left;
+    cursor.y = margin.top;
+    if (table.settings.showHead === 'everyPage') {
+        table.head.forEach(function (row) { return printRow(doc, table, row, cursor); });
+    }
+}
+exports.addPage = addPage;
+function nextPage(doc) {
+    var current = doc.pageNumber();
+    doc.setPage(current + 1);
+    var newCurrent = doc.pageNumber();
+    if (newCurrent === current) {
+        doc.addPage();
+    }
+}
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Column = exports.Cell = exports.Row = exports.Table = void 0;
+var config_1 = __webpack_require__(1);
+var HookData_1 = __webpack_require__(14);
+var common_1 = __webpack_require__(0);
+var Table = /** @class */ (function () {
+    function Table(input, content) {
+        this.pageNumber = 1;
+        // Deprecated, use pageNumber instead
+        // Not using getter since:
+        // https://github.com/simonbengtsson/jsPDF-AutoTable/issues/596
+        this.pageCount = 1;
+        this.id = input.id;
+        this.settings = input.settings;
+        this.styles = input.styles;
+        this.hooks = input.hooks;
+        this.columns = content.columns;
+        this.head = content.head;
+        this.body = content.body;
+        this.foot = content.foot;
+    }
+    Table.prototype.getHeadHeight = function (columns) {
+        return this.head.reduce(function (acc, row) { return acc + row.getMaxCellHeight(columns); }, 0);
+    };
+    Table.prototype.getFootHeight = function (columns) {
+        return this.foot.reduce(function (acc, row) { return acc + row.getMaxCellHeight(columns); }, 0);
+    };
+    Table.prototype.allRows = function () {
+        return this.head.concat(this.body).concat(this.foot);
+    };
+    Table.prototype.callCellHooks = function (doc, handlers, cell, row, column, cursor) {
+        for (var _i = 0, handlers_1 = handlers; _i < handlers_1.length; _i++) {
+            var handler = handlers_1[_i];
+            var data = new HookData_1.CellHookData(doc, this, cell, row, column, cursor);
+            var result = handler(data) === false;
+            // Make sure text is always string[] since user can assign string
+            cell.text = Array.isArray(cell.text) ? cell.text : [cell.text];
+            if (result) {
+                return false;
+            }
+        }
+        return true;
+    };
+    Table.prototype.callEndPageHooks = function (doc, cursor) {
+        doc.applyStyles(doc.userStyles);
+        for (var _i = 0, _a = this.hooks.didDrawPage; _i < _a.length; _i++) {
+            var handler = _a[_i];
+            handler(new HookData_1.HookData(doc, this, cursor));
+        }
+    };
+    Table.prototype.getWidth = function (pageWidth) {
+        if (typeof this.settings.tableWidth === 'number') {
+            return this.settings.tableWidth;
+        }
+        else if (this.settings.tableWidth === 'wrap') {
+            var wrappedWidth = this.columns.reduce(function (total, col) { return total + col.wrappedWidth; }, 0);
+            return wrappedWidth;
+        }
+        else {
+            var margin = this.settings.margin;
+            return pageWidth - margin.left - margin.right;
+        }
+    };
+    return Table;
+}());
+exports.Table = Table;
+var Row = /** @class */ (function () {
+    function Row(raw, index, section, cells, spansMultiplePages) {
+        if (spansMultiplePages === void 0) { spansMultiplePages = false; }
+        this.height = 0;
+        this.raw = raw;
+        if (raw instanceof config_1.HtmlRowInput) {
+            this.raw = raw._element;
+            this.element = raw._element;
+        }
+        this.index = index;
+        this.section = section;
+        this.cells = cells;
+        this.spansMultiplePages = spansMultiplePages;
+    }
+    Row.prototype.getMaxCellHeight = function (columns) {
+        var _this = this;
+        return columns.reduce(function (acc, column) { var _a; return Math.max(acc, ((_a = _this.cells[column.index]) === null || _a === void 0 ? void 0 : _a.height) || 0); }, 0);
+    };
+    Row.prototype.hasRowSpan = function (columns) {
+        var _this = this;
+        return (columns.filter(function (column) {
+            var cell = _this.cells[column.index];
+            if (!cell)
+                return false;
+            return cell.rowSpan > 1;
+        }).length > 0);
+    };
+    Row.prototype.canEntireRowFit = function (height, columns) {
+        return this.getMaxCellHeight(columns) <= height;
+    };
+    Row.prototype.getMinimumRowHeight = function (columns, doc) {
+        var _this = this;
+        return columns.reduce(function (acc, column) {
+            var cell = _this.cells[column.index];
+            if (!cell)
+                return 0;
+            var fontHeight = (cell.styles.fontSize / doc.scaleFactor()) * config_1.FONT_ROW_RATIO;
+            var vPadding = cell.padding('vertical');
+            var oneRowHeight = vPadding + fontHeight;
+            return oneRowHeight > acc ? oneRowHeight : acc;
+        }, 0);
+    };
+    return Row;
+}());
+exports.Row = Row;
+var Cell = /** @class */ (function () {
+    function Cell(raw, styles, section) {
+        var _a, _b;
+        this.contentHeight = 0;
+        this.contentWidth = 0;
+        this.wrappedWidth = 0;
+        this.minReadableWidth = 0;
+        this.minWidth = 0;
+        this.width = 0;
+        this.height = 0;
+        this.x = 0;
+        this.y = 0;
+        this.styles = styles;
+        this.section = section;
+        this.raw = raw;
+        var content = raw;
+        if (raw != null && typeof raw === 'object' && !Array.isArray(raw)) {
+            this.rowSpan = raw.rowSpan || 1;
+            this.colSpan = raw.colSpan || 1;
+            content = (_b = (_a = raw.content) !== null && _a !== void 0 ? _a : raw.title) !== null && _b !== void 0 ? _b : raw;
+            if (raw._element) {
+                this.raw = raw._element;
+            }
+        }
+        else {
+            this.rowSpan = 1;
+            this.colSpan = 1;
+        }
+        // Stringify 0 and false, but not undefined or null
+        var text = content != null ? '' + content : '';
+        var splitRegex = /\r\n|\r|\n/g;
+        this.text = text.split(splitRegex);
+    }
+    Cell.prototype.getTextPos = function () {
+        var y;
+        if (this.styles.valign === 'top') {
+            y = this.y + this.padding('top');
+        }
+        else if (this.styles.valign === 'bottom') {
+            y = this.y + this.height - this.padding('bottom');
+        }
+        else {
+            var netHeight = this.height - this.padding('vertical');
+            y = this.y + netHeight / 2 + this.padding('top');
+        }
+        var x;
+        if (this.styles.halign === 'right') {
+            x = this.x + this.width - this.padding('right');
+        }
+        else if (this.styles.halign === 'center') {
+            var netWidth = this.width - this.padding('horizontal');
+            x = this.x + netWidth / 2 + this.padding('left');
+        }
+        else {
+            x = this.x + this.padding('left');
+        }
+        return { x: x, y: y };
+    };
+    Cell.prototype.getContentHeight = function (scaleFactor) {
+        var lineCount = Array.isArray(this.text) ? this.text.length : 1;
+        var fontHeight = (this.styles.fontSize / scaleFactor) * config_1.FONT_ROW_RATIO;
+        var height = lineCount * fontHeight + this.padding('vertical');
+        return Math.max(height, this.styles.minCellHeight);
+    };
+    Cell.prototype.padding = function (name) {
+        var padding = common_1.parseSpacing(this.styles.cellPadding, 0);
+        if (name === 'vertical') {
+            return padding.top + padding.bottom;
+        }
+        else if (name === 'horizontal') {
+            return padding.left + padding.right;
+        }
+        else {
+            return padding[name];
+        }
+    };
+    return Cell;
+}());
+exports.Cell = Cell;
+var Column = /** @class */ (function () {
+    function Column(dataKey, raw, index) {
+        this.wrappedWidth = 0;
+        this.minReadableWidth = 0;
+        this.minWidth = 0;
+        this.width = 0;
+        this.dataKey = dataKey;
+        this.raw = raw;
+        this.index = index;
+    }
+    Column.prototype.getMaxCustomCellWidth = function (table) {
+        var max = 0;
+        for (var _i = 0, _a = table.allRows(); _i < _a.length; _i++) {
+            var row = _a[_i];
+            var cell = row.cells[this.index];
+            if (cell && typeof cell.styles.cellWidth === 'number') {
+                max = Math.max(max, cell.styles.cellWidth);
+            }
+        }
+        return max;
+    };
+    return Column;
+}());
+exports.Column = Column;
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.createTable = void 0;
+var documentHandler_1 = __webpack_require__(2);
+var models_1 = __webpack_require__(8);
+var widthCalculator_1 = __webpack_require__(15);
+var config_1 = __webpack_require__(1);
+var polyfills_1 = __webpack_require__(3);
+function createTable(jsPDFDoc, input) {
+    var doc = new documentHandler_1.DocHandler(jsPDFDoc);
+    var content = parseContent(input, doc.scaleFactor());
+    var table = new models_1.Table(input, content);
+    widthCalculator_1.calculateWidths(doc, table);
+    doc.applyStyles(doc.userStyles);
+    return table;
+}
+exports.createTable = createTable;
+function parseContent(input, sf) {
+    var content = input.content;
+    var columns = createColumns(content.columns);
+    // If no head or foot is set, try generating it with content from columns
+    if (content.head.length === 0) {
+        var sectionRow = generateSectionRow(columns, 'head');
+        if (sectionRow)
+            content.head.push(sectionRow);
+    }
+    if (content.foot.length === 0) {
+        var sectionRow = generateSectionRow(columns, 'foot');
+        if (sectionRow)
+            content.foot.push(sectionRow);
+    }
+    var theme = input.settings.theme;
+    var styles = input.styles;
+    return {
+        columns: columns,
+        head: parseSection('head', content.head, columns, styles, theme, sf),
+        body: parseSection('body', content.body, columns, styles, theme, sf),
+        foot: parseSection('foot', content.foot, columns, styles, theme, sf),
+    };
+}
+function parseSection(sectionName, sectionRows, columns, styleProps, theme, scaleFactor) {
+    var rowSpansLeftForColumn = {};
+    var result = sectionRows.map(function (rawRow, rowIndex) {
+        var skippedRowForRowSpans = 0;
+        var cells = {};
+        var colSpansAdded = 0;
+        var columnSpansLeft = 0;
+        for (var _i = 0, columns_1 = columns; _i < columns_1.length; _i++) {
+            var column = columns_1[_i];
+            if (rowSpansLeftForColumn[column.index] == null ||
+                rowSpansLeftForColumn[column.index].left === 0) {
+                if (columnSpansLeft === 0) {
+                    var rawCell = void 0;
+                    if (Array.isArray(rawRow)) {
+                        rawCell =
+                            rawRow[column.index - colSpansAdded - skippedRowForRowSpans];
+                    }
+                    else {
+                        rawCell = rawRow[column.dataKey];
+                    }
+                    var cellInputStyles = {};
+                    if (typeof rawCell === 'object' && !Array.isArray(rawCell)) {
+                        cellInputStyles = (rawCell === null || rawCell === void 0 ? void 0 : rawCell.styles) || {};
+                    }
+                    var styles = cellStyles(sectionName, column, rowIndex, theme, styleProps, scaleFactor, cellInputStyles);
+                    var cell = new models_1.Cell(rawCell, styles, sectionName);
+                    // dataKey is not used internally no more but keep for
+                    // backwards compat in hooks
+                    cells[column.dataKey] = cell;
+                    cells[column.index] = cell;
+                    columnSpansLeft = cell.colSpan - 1;
+                    rowSpansLeftForColumn[column.index] = {
+                        left: cell.rowSpan - 1,
+                        times: columnSpansLeft,
+                    };
+                }
+                else {
+                    columnSpansLeft--;
+                    colSpansAdded++;
+                }
+            }
+            else {
+                rowSpansLeftForColumn[column.index].left--;
+                columnSpansLeft = rowSpansLeftForColumn[column.index].times;
+                skippedRowForRowSpans++;
+            }
+        }
+        return new models_1.Row(rawRow, rowIndex, sectionName, cells);
+    });
+    return result;
+}
+function generateSectionRow(columns, section) {
+    var sectionRow = {};
+    columns.forEach(function (col) {
+        if (col.raw != null) {
+            var title = getSectionTitle(section, col.raw);
+            if (title != null)
+                sectionRow[col.dataKey] = title;
+        }
+    });
+    return Object.keys(sectionRow).length > 0 ? sectionRow : null;
+}
+function getSectionTitle(section, column) {
+    if (section === 'head') {
+        if (typeof column === 'object') {
+            return column.header || column.title || null;
+        }
+        else if (typeof column === 'string' || typeof column === 'number') {
+            return column;
+        }
+    }
+    else if (section === 'foot' && typeof column === 'object') {
+        return column.footer;
+    }
+    return null;
+}
+function createColumns(columns) {
+    return columns.map(function (input, index) {
+        var _a, _b;
+        var key;
+        if (typeof input === 'object') {
+            key = (_b = (_a = input.dataKey) !== null && _a !== void 0 ? _a : input.key) !== null && _b !== void 0 ? _b : index;
+        }
+        else {
+            key = index;
+        }
+        return new models_1.Column(key, input, index);
+    });
+}
+function cellStyles(sectionName, column, rowIndex, themeName, styles, scaleFactor, cellInputStyles) {
+    var theme = config_1.getTheme(themeName);
+    var sectionStyles;
+    if (sectionName === 'head') {
+        sectionStyles = styles.headStyles;
+    }
+    else if (sectionName === 'body') {
+        sectionStyles = styles.bodyStyles;
+    }
+    else if (sectionName === 'foot') {
+        sectionStyles = styles.footStyles;
+    }
+    var otherStyles = polyfills_1.assign({}, theme.table, theme[sectionName], styles.styles, sectionStyles);
+    var columnStyles = styles.columnStyles[column.dataKey] ||
+        styles.columnStyles[column.index] ||
+        {};
+    var colStyles = sectionName === 'body' ? columnStyles : {};
+    var rowStyles = sectionName === 'body' && rowIndex % 2 === 0
+        ? polyfills_1.assign({}, theme.alternateRow, styles.alternateRowStyles)
+        : {};
+    var defaultStyle = config_1.defaultStyles(scaleFactor);
+    var themeStyles = polyfills_1.assign({}, defaultStyle, otherStyles, rowStyles, colStyles);
+    return polyfills_1.assign(themeStyles, cellInputStyles);
+}
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.__drawTable = exports.__createTable = exports.applyPlugin = void 0;
+var applyPlugin_1 = __webpack_require__(11);
+var inputParser_1 = __webpack_require__(6);
+var tableDrawer_1 = __webpack_require__(7);
+var tableCalculator_1 = __webpack_require__(9);
+// export { applyPlugin } didn't export applyPlugin
+// to index.d.ts for some reason
+function applyPlugin(jsPDF) {
+    applyPlugin_1.default(jsPDF);
+}
+exports.applyPlugin = applyPlugin;
+function autoTable(d, options) {
+    var input = inputParser_1.parseInput(d, options);
+    var table = tableCalculator_1.createTable(d, input);
+    tableDrawer_1.drawTable(d, table);
+}
+exports.default = autoTable;
+// Experimental export
+function __createTable(d, options) {
+    var input = inputParser_1.parseInput(d, options);
+    return tableCalculator_1.createTable(d, input);
+}
+exports.__createTable = __createTable;
+function __drawTable(d, table) {
+    tableDrawer_1.drawTable(d, table);
+}
+exports.__drawTable = __drawTable;
+try {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    var jsPDF = __webpack_require__(16);
+    // Webpack imported jspdf instead of jsPDF for some reason 
+    // while it seemed to work everywhere else.
+    if (jsPDF.jsPDF)
+        jsPDF = jsPDF.jsPDF;
+    applyPlugin(jsPDF);
+}
+catch (error) {
+    // Importing jspdf in nodejs environments does not work as of jspdf
+    // 1.5.3 so we need to silence potential errors to support using for example
+    // the nodejs jspdf dist files with the exported applyPlugin
+}
+
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var htmlParser_1 = __webpack_require__(4);
+var autoTableText_1 = __webpack_require__(5);
+var documentHandler_1 = __webpack_require__(2);
+var inputParser_1 = __webpack_require__(6);
+var tableDrawer_1 = __webpack_require__(7);
+var tableCalculator_1 = __webpack_require__(9);
+function default_1(jsPDF) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    jsPDF.API.autoTable = function () {
+        var args = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            args[_i] = arguments[_i];
+        }
+        var options;
+        if (args.length === 1) {
+            options = args[0];
+        }
+        else {
+            console.error('Use of deprecated autoTable initiation');
+            options = args[2] || {};
+            options.columns = args[0];
+            options.body = args[1];
+        }
+        var input = inputParser_1.parseInput(this, options);
+        var table = tableCalculator_1.createTable(this, input);
+        tableDrawer_1.drawTable(this, table);
+        return this;
+    };
+    // Assign false to enable `doc.lastAutoTable.finalY || 40` sugar
+    jsPDF.API.lastAutoTable = false;
+    jsPDF.API.previousAutoTable = false; // deprecated in v3
+    jsPDF.API.autoTable.previous = false; // deprecated in v3
+    jsPDF.API.autoTableText = function (text, x, y, styles) {
+        autoTableText_1.default(text, x, y, styles, this);
+    };
+    jsPDF.API.autoTableSetDefaults = function (defaults) {
+        documentHandler_1.DocHandler.setDefaults(defaults, this);
+        return this;
+    };
+    jsPDF.autoTableSetDefaults = function (defaults, doc) {
+        documentHandler_1.DocHandler.setDefaults(defaults, doc);
+    };
+    jsPDF.API.autoTableHtmlToJson = function (tableElem, includeHiddenElements) {
+        if (includeHiddenElements === void 0) { includeHiddenElements = false; }
+        if (typeof window === 'undefined') {
+            console.error('Cannot run autoTableHtmlToJson in non browser environment');
+            return null;
+        }
+        var doc = new documentHandler_1.DocHandler(this);
+        var _a = htmlParser_1.parseHtml(doc, tableElem, window, includeHiddenElements, false), head = _a.head, body = _a.body;
+        var columns = head[0].map(function (c) { return c.content; });
+        return { columns: columns, rows: body, data: body };
+    };
+    /**
+     * @deprecated
+     */
+    jsPDF.API.autoTableEndPosY = function () {
+        console.error('Use of deprecated function: autoTableEndPosY. Use doc.lastAutoTable.finalY instead.');
+        var prev = this.lastAutoTable;
+        if (prev && prev.finalY) {
+            return prev.finalY;
+        }
+        else {
+            return 0;
+        }
+    };
+    /**
+     * @deprecated
+     */
+    jsPDF.API.autoTableAddPageContent = function (hook) {
+        console.error('Use of deprecated function: autoTableAddPageContent. Use jsPDF.autoTableSetDefaults({didDrawPage: () => {}}) instead.');
+        if (!jsPDF.API.autoTable.globalDefaults) {
+            jsPDF.API.autoTable.globalDefaults = {};
+        }
+        jsPDF.API.autoTable.globalDefaults.addPageContent = hook;
+        return this;
+    };
+    /**
+     * @deprecated
+     */
+    jsPDF.API.autoTableAddPage = function () {
+        console.error('Use of deprecated function: autoTableAddPage. Use doc.addPage()');
+        this.addPage();
+        return this;
+    };
+}
+exports.default = default_1;
+
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.parseCss = void 0;
+// Limitations
+// - No support for border spacing
+// - No support for transparency
+var common_1 = __webpack_require__(0);
+function parseCss(supportedFonts, element, scaleFactor, style, window) {
+    var result = {};
+    var pxScaleFactor = 96 / 72;
+    var color = parseColor(element, function (elem) {
+        return window.getComputedStyle(elem)['backgroundColor'];
+    });
+    if (color != null)
+        result.fillColor = color;
+    color = parseColor(element, function (elem) {
+        return window.getComputedStyle(elem)['color'];
+    });
+    if (color != null)
+        result.textColor = color;
+    color = parseColor(element, function (elem) {
+        return window.getComputedStyle(elem)['borderTopColor'];
+    });
+    if (color != null)
+        result.lineColor = color;
+    var padding = parsePadding(style, scaleFactor);
+    if (padding)
+        result.cellPadding = padding;
+    // style.borderWidth only works in chrome (borderTopWidth etc works in firefox and ie as well)
+    var bw = parseInt(style.borderTopWidth || '');
+    bw = bw / pxScaleFactor / scaleFactor;
+    if (bw)
+        result.lineWidth = bw;
+    var accepted = ['left', 'right', 'center', 'justify'];
+    if (accepted.indexOf(style.textAlign) !== -1) {
+        result.halign = style.textAlign;
+    }
+    accepted = ['middle', 'bottom', 'top'];
+    if (accepted.indexOf(style.verticalAlign) !== -1) {
+        result.valign = style.verticalAlign;
+    }
+    var res = parseInt(style.fontSize || '');
+    if (!isNaN(res))
+        result.fontSize = res / pxScaleFactor;
+    var fontStyle = parseFontStyle(style);
+    if (fontStyle)
+        result.fontStyle = fontStyle;
+    var font = (style.fontFamily || '').toLowerCase();
+    if (supportedFonts.indexOf(font) !== -1) {
+        result.font = font;
+    }
+    return result;
+}
+exports.parseCss = parseCss;
+function parseFontStyle(style) {
+    var res = '';
+    if (style.fontWeight === 'bold' ||
+        style.fontWeight === 'bolder' ||
+        parseInt(style.fontWeight) >= 700) {
+        res = 'bold';
+    }
+    if (style.fontStyle === 'italic' || style.fontStyle === 'oblique') {
+        res += 'italic';
+    }
+    return res;
+}
+function parseColor(element, styleGetter) {
+    var cssColor = realColor(element, styleGetter);
+    if (!cssColor)
+        return null;
+    var rgba = cssColor.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d*\.?\d*))?\)$/);
+    if (!rgba || !Array.isArray(rgba)) {
+        return null;
+    }
+    var color = [
+        parseInt(rgba[1]),
+        parseInt(rgba[2]),
+        parseInt(rgba[3]),
+    ];
+    var alpha = parseInt(rgba[4]);
+    if (alpha === 0 || isNaN(color[0]) || isNaN(color[1]) || isNaN(color[2])) {
+        return null;
+    }
+    return color;
+}
+function realColor(elem, styleGetter) {
+    var bg = styleGetter(elem);
+    if (bg === 'rgba(0, 0, 0, 0)' ||
+        bg === 'transparent' ||
+        bg === 'initial' ||
+        bg === 'inherit') {
+        if (elem.parentElement == null) {
+            return null;
+        }
+        return realColor(elem.parentElement, styleGetter);
+    }
+    else {
+        return bg;
+    }
+}
+function parsePadding(style, scaleFactor) {
+    var val = [
+        style.paddingTop,
+        style.paddingRight,
+        style.paddingBottom,
+        style.paddingLeft,
+    ];
+    var pxScaleFactor = 96 / (72 / scaleFactor);
+    var linePadding = (parseInt(style.lineHeight) - parseInt(style.fontSize)) / scaleFactor / 2;
+    var inputPadding = val.map(function (n) {
+        return parseInt(n) / pxScaleFactor;
+    });
+    var padding = common_1.parseSpacing(inputPadding, 0);
+    if (linePadding > padding.top) {
+        padding.top = linePadding;
+    }
+    if (linePadding > padding.bottom) {
+        padding.bottom = linePadding;
+    }
+    return padding;
+}
+
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+function default_1(doc, global, document, current) {
+    var _loop_1 = function (options) {
+        if (options && typeof options !== 'object') {
+            console.error('The options parameter should be of type object, is: ' + typeof options);
+        }
+        if (typeof options.extendWidth !== 'undefined') {
+            options.tableWidth = options.extendWidth ? 'auto' : 'wrap';
+            console.error('Use of deprecated option: extendWidth, use tableWidth instead.');
+        }
+        if (typeof options.margins !== 'undefined') {
+            if (typeof options.margin === 'undefined')
+                options.margin = options.margins;
+            console.error('Use of deprecated option: margins, use margin instead.');
+        }
+        if (options.startY && typeof options.startY !== 'number') {
+            console.error('Invalid value for startY option', options.startY);
+            delete options.startY;
+        }
+        if (!options.didDrawPage &&
+            (options.afterPageContent ||
+                options.beforePageContent ||
+                options.afterPageAdd)) {
+            console.error('The afterPageContent, beforePageContent and afterPageAdd hooks are deprecated. Use didDrawPage instead');
+            options.didDrawPage = function (data) {
+                doc.applyStyles(doc.userStyles);
+                if (options.beforePageContent)
+                    options.beforePageContent(data);
+                doc.applyStyles(doc.userStyles);
+                if (options.afterPageContent)
+                    options.afterPageContent(data);
+                doc.applyStyles(doc.userStyles);
+                if (options.afterPageAdd && data.pageNumber > 1) {
+                    ;
+                    data.afterPageAdd(data);
+                }
+                doc.applyStyles(doc.userStyles);
+            };
+        }
+        ;
+        [
+            'createdHeaderCell',
+            'drawHeaderRow',
+            'drawRow',
+            'drawHeaderCell',
+        ].forEach(function (name) {
+            if (options[name]) {
+                console.error("The \"" + name + "\" hook has changed in version 3.0, check the changelog for how to migrate.");
+            }
+        });
+        [
+            ['showFoot', 'showFooter'],
+            ['showHead', 'showHeader'],
+            ['didDrawPage', 'addPageContent'],
+            ['didParseCell', 'createdCell'],
+            ['headStyles', 'headerStyles'],
+        ].forEach(function (_a) {
+            var current = _a[0], deprecated = _a[1];
+            if (options[deprecated]) {
+                console.error("Use of deprecated option " + deprecated + ". Use " + current + " instead");
+                options[current] = options[deprecated];
+            }
+        });
+        [
+            ['padding', 'cellPadding'],
+            ['lineHeight', 'rowHeight'],
+            'fontSize',
+            'overflow',
+        ].forEach(function (o) {
+            var deprecatedOption = typeof o === 'string' ? o : o[0];
+            var style = typeof o === 'string' ? o : o[1];
+            if (typeof options[deprecatedOption] !== 'undefined') {
+                if (typeof options.styles[style] === 'undefined') {
+                    options.styles[style] = options[deprecatedOption];
+                }
+                console.error('Use of deprecated option: ' +
+                    deprecatedOption +
+                    ', use the style ' +
+                    style +
+                    ' instead.');
+            }
+        });
+        for (var _i = 0, _a = [
+            'styles',
+            'bodyStyles',
+            'headStyles',
+            'footStyles',
+        ]; _i < _a.length; _i++) {
+            var styleProp = _a[_i];
+            checkStyles(options[styleProp] || {});
+        }
+        var columnStyles = options['columnStyles'] || {};
+        for (var _b = 0, _c = Object.keys(columnStyles); _b < _c.length; _b++) {
+            var key = _c[_b];
+            checkStyles(columnStyles[key] || {});
+        }
+    };
+    for (var _i = 0, _a = [global, document, current]; _i < _a.length; _i++) {
+        var options = _a[_i];
+        _loop_1(options);
+    }
+}
+exports.default = default_1;
+function checkStyles(styles) {
+    if (styles.rowHeight) {
+        console.error('Use of deprecated style rowHeight. It is renamed to minCellHeight.');
+        if (!styles.minCellHeight) {
+            styles.minCellHeight = styles.rowHeight;
+        }
+    }
+    else if (styles.columnWidth) {
+        console.error('Use of deprecated style columnWidth. It is renamed to cellWidth.');
+        if (!styles.cellWidth) {
+            styles.cellWidth = styles.columnWidth;
+        }
+    }
+}
+
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CellHookData = exports.HookData = void 0;
+var HookData = /** @class */ (function () {
+    function HookData(doc, table, cursor) {
+        this.table = table;
+        this.pageNumber = table.pageNumber;
+        this.pageCount = this.pageNumber;
+        this.settings = table.settings;
+        this.cursor = cursor;
+        this.doc = doc.getDocument();
+    }
+    return HookData;
+}());
+exports.HookData = HookData;
+var CellHookData = /** @class */ (function (_super) {
+    __extends(CellHookData, _super);
+    function CellHookData(doc, table, cell, row, column, cursor) {
+        var _this = _super.call(this, doc, table, cursor) || this;
+        _this.cell = cell;
+        _this.row = row;
+        _this.column = column;
+        _this.section = row.section;
+        return _this;
+    }
+    return CellHookData;
+}(HookData));
+exports.CellHookData = CellHookData;
+
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ellipsize = exports.resizeColumns = exports.calculateWidths = void 0;
+var common_1 = __webpack_require__(0);
+/**
+ * Calculate the column widths
+ */
+function calculateWidths(doc, table) {
+    calculate(doc, table);
+    var resizableColumns = [];
+    var initialTableWidth = 0;
+    table.columns.forEach(function (column) {
+        var customWidth = column.getMaxCustomCellWidth(table);
+        if (customWidth) {
+            // final column width
+            column.width = customWidth;
+        }
+        else {
+            // initial column width (will be resized)
+            column.width = column.wrappedWidth;
+            resizableColumns.push(column);
+        }
+        initialTableWidth += column.width;
+    });
+    // width difference that needs to be distributed
+    var resizeWidth = table.getWidth(doc.pageSize().width) - initialTableWidth;
+    // first resize attempt: with respect to minReadableWidth and minWidth
+    if (resizeWidth) {
+        resizeWidth = resizeColumns(resizableColumns, resizeWidth, function (column) {
+            return Math.max(column.minReadableWidth, column.minWidth);
+        });
+    }
+    // second resize attempt: ignore minReadableWidth but respect minWidth
+    if (resizeWidth) {
+        resizeWidth = resizeColumns(resizableColumns, resizeWidth, function (column) { return column.minWidth; });
+    }
+    resizeWidth = Math.abs(resizeWidth);
+    if (resizeWidth > 0.1 / doc.scaleFactor()) {
+        // Table can't get smaller due to custom-width or minWidth restrictions
+        // We can't really do much here. Up to user to for example
+        // reduce font size, increase page size or remove custom cell widths
+        // to allow more columns to be reduced in size
+        resizeWidth = resizeWidth < 1 ? resizeWidth : Math.round(resizeWidth);
+        console.error("Of the table content, " + resizeWidth + " units width could not fit page");
+    }
+    applyColSpans(table);
+    fitContent(table, doc);
+    applyRowSpans(table);
+}
+exports.calculateWidths = calculateWidths;
+function calculate(doc, table) {
+    var sf = doc.scaleFactor();
+    table.allRows().forEach(function (row) {
+        for (var _i = 0, _a = table.columns; _i < _a.length; _i++) {
+            var column = _a[_i];
+            var cell = row.cells[column.index];
+            if (!cell)
+                continue;
+            var hooks = table.hooks.didParseCell;
+            table.callCellHooks(doc, hooks, cell, row, column, null);
+            var padding = cell.padding('horizontal');
+            cell.contentWidth = common_1.getStringWidth(cell.text, cell.styles, doc) + padding;
+            var longestWordWidth = common_1.getStringWidth(cell.text.join(' ').split(/\s+/), cell.styles, doc);
+            cell.minReadableWidth = longestWordWidth + cell.padding('horizontal');
+            if (typeof cell.styles.cellWidth === 'number') {
+                cell.minWidth = cell.styles.cellWidth;
+                cell.wrappedWidth = cell.styles.cellWidth;
+            }
+            else if (cell.styles.cellWidth === 'wrap') {
+                cell.minWidth = cell.contentWidth;
+                cell.wrappedWidth = cell.contentWidth;
+            }
+            else {
+                // auto
+                var defaultMinWidth = 10 / sf;
+                cell.minWidth = cell.styles.minCellWidth || defaultMinWidth;
+                cell.wrappedWidth = cell.contentWidth;
+                if (cell.minWidth > cell.wrappedWidth) {
+                    cell.wrappedWidth = cell.minWidth;
+                }
+            }
+        }
+    });
+    table.allRows().forEach(function (row) {
+        for (var _i = 0, _a = table.columns; _i < _a.length; _i++) {
+            var column = _a[_i];
+            var cell = row.cells[column.index];
+            // For now we ignore the minWidth and wrappedWidth of colspan cells when calculating colspan widths.
+            // Could probably be improved upon however.
+            if (cell && cell.colSpan === 1) {
+                column.wrappedWidth = Math.max(column.wrappedWidth, cell.wrappedWidth);
+                column.minWidth = Math.max(column.minWidth, cell.minWidth);
+                column.minReadableWidth = Math.max(column.minReadableWidth, cell.minReadableWidth);
+            }
+            else {
+                // Respect cellWidth set in columnStyles even if there is no cells for this column
+                // or if the column only have colspan cells. Since the width of colspan cells
+                // does not affect the width of columns, setting columnStyles cellWidth enables the
+                // user to at least do it manually.
+                // Note that this is not perfect for now since for example row and table styles are
+                // not accounted for
+                var columnStyles = table.styles.columnStyles[column.dataKey] ||
+                    table.styles.columnStyles[column.index] ||
+                    {};
+                var cellWidth = columnStyles.cellWidth || columnStyles.minCellWidth;
+                if (cellWidth && typeof cellWidth === 'number') {
+                    column.minWidth = cellWidth;
+                    column.wrappedWidth = cellWidth;
+                }
+            }
+            if (cell) {
+                // Make sure all columns get at least min width even though width calculations are not based on them
+                if (cell.colSpan > 1 && !column.minWidth) {
+                    column.minWidth = cell.minWidth;
+                }
+                if (cell.colSpan > 1 && !column.wrappedWidth) {
+                    column.wrappedWidth = cell.minWidth;
+                }
+            }
+        }
+    });
+}
+/**
+ * Distribute resizeWidth on passed resizable columns
+ */
+function resizeColumns(columns, resizeWidth, getMinWidth) {
+    var initialResizeWidth = resizeWidth;
+    var sumWrappedWidth = columns.reduce(function (acc, column) { return acc + column.wrappedWidth; }, 0);
+    for (var i = 0; i < columns.length; i++) {
+        var column = columns[i];
+        var ratio = column.wrappedWidth / sumWrappedWidth;
+        var suggestedChange = initialResizeWidth * ratio;
+        var suggestedWidth = column.width + suggestedChange;
+        var minWidth = getMinWidth(column);
+        var newWidth = suggestedWidth < minWidth ? minWidth : suggestedWidth;
+        resizeWidth -= newWidth - column.width;
+        column.width = newWidth;
+    }
+    resizeWidth = Math.round(resizeWidth * 1e10) / 1e10;
+    // Run the resizer again if there's remaining width needs
+    // to be distributed and there're columns that can be resized
+    if (resizeWidth) {
+        var resizableColumns = columns.filter(function (column) {
+            return resizeWidth < 0
+                ? column.width > getMinWidth(column) // check if column can shrink
+                : true; // check if column can grow
+        });
+        if (resizableColumns.length) {
+            resizeWidth = resizeColumns(resizableColumns, resizeWidth, getMinWidth);
+        }
+    }
+    return resizeWidth;
+}
+exports.resizeColumns = resizeColumns;
+function applyRowSpans(table) {
+    var rowSpanCells = {};
+    var colRowSpansLeft = 1;
+    var all = table.allRows();
+    for (var rowIndex = 0; rowIndex < all.length; rowIndex++) {
+        var row = all[rowIndex];
+        for (var _i = 0, _a = table.columns; _i < _a.length; _i++) {
+            var column = _a[_i];
+            var data = rowSpanCells[column.index];
+            if (colRowSpansLeft > 1) {
+                colRowSpansLeft--;
+                delete row.cells[column.index];
+            }
+            else if (data) {
+                data.cell.height += row.height;
+                colRowSpansLeft = data.cell.colSpan;
+                delete row.cells[column.index];
+                data.left--;
+                if (data.left <= 1) {
+                    delete rowSpanCells[column.index];
+                }
+            }
+            else {
+                var cell = row.cells[column.index];
+                if (!cell) {
+                    continue;
+                }
+                cell.height = row.height;
+                if (cell.rowSpan > 1) {
+                    var remaining = all.length - rowIndex;
+                    var left = cell.rowSpan > remaining ? remaining : cell.rowSpan;
+                    rowSpanCells[column.index] = { cell: cell, left: left, row: row };
+                }
+            }
+        }
+    }
+}
+function applyColSpans(table) {
+    var all = table.allRows();
+    for (var rowIndex = 0; rowIndex < all.length; rowIndex++) {
+        var row = all[rowIndex];
+        var colSpanCell = null;
+        var combinedColSpanWidth = 0;
+        var colSpansLeft = 0;
+        for (var columnIndex = 0; columnIndex < table.columns.length; columnIndex++) {
+            var column = table.columns[columnIndex];
+            // Width and colspan
+            colSpansLeft -= 1;
+            if (colSpansLeft > 1 && table.columns[columnIndex + 1]) {
+                combinedColSpanWidth += column.width;
+                delete row.cells[column.index];
+            }
+            else if (colSpanCell) {
+                var cell = colSpanCell;
+                delete row.cells[column.index];
+                colSpanCell = null;
+                cell.width = column.width + combinedColSpanWidth;
+            }
+            else {
+                var cell = row.cells[column.index];
+                if (!cell)
+                    continue;
+                colSpansLeft = cell.colSpan;
+                combinedColSpanWidth = 0;
+                if (cell.colSpan > 1) {
+                    colSpanCell = cell;
+                    combinedColSpanWidth += column.width;
+                    continue;
+                }
+                cell.width = column.width + combinedColSpanWidth;
+            }
+        }
+    }
+}
+function fitContent(table, doc) {
+    var rowSpanHeight = { count: 0, height: 0 };
+    for (var _i = 0, _a = table.allRows(); _i < _a.length; _i++) {
+        var row = _a[_i];
+        for (var _b = 0, _c = table.columns; _b < _c.length; _b++) {
+            var column = _c[_b];
+            var cell = row.cells[column.index];
+            if (!cell)
+                continue;
+            doc.applyStyles(cell.styles, true);
+            var textSpace = cell.width - cell.padding('horizontal');
+            if (cell.styles.overflow === 'linebreak') {
+                // Add one pt to textSpace to fix rounding error
+                cell.text = doc.splitTextToSize(cell.text, textSpace + 1 / doc.scaleFactor(), { fontSize: cell.styles.fontSize });
+            }
+            else if (cell.styles.overflow === 'ellipsize') {
+                cell.text = ellipsize(cell.text, textSpace, cell.styles, doc, '...');
+            }
+            else if (cell.styles.overflow === 'hidden') {
+                cell.text = ellipsize(cell.text, textSpace, cell.styles, doc, '');
+            }
+            else if (typeof cell.styles.overflow === 'function') {
+                cell.text = cell.styles.overflow(cell.text, textSpace);
+            }
+            cell.contentHeight = cell.getContentHeight(doc.scaleFactor());
+            var realContentHeight = cell.contentHeight / cell.rowSpan;
+            if (cell.rowSpan > 1 &&
+                rowSpanHeight.count * rowSpanHeight.height <
+                    realContentHeight * cell.rowSpan) {
+                rowSpanHeight = { height: realContentHeight, count: cell.rowSpan };
+            }
+            else if (rowSpanHeight && rowSpanHeight.count > 0) {
+                if (rowSpanHeight.height > realContentHeight) {
+                    realContentHeight = rowSpanHeight.height;
+                }
+            }
+            if (realContentHeight > row.height) {
+                row.height = realContentHeight;
+            }
+        }
+        rowSpanHeight.count--;
+    }
+}
+function ellipsize(text, width, styles, doc, overflow) {
+    return text.map(function (str) { return ellipsizeStr(str, width, styles, doc, overflow); });
+}
+exports.ellipsize = ellipsize;
+function ellipsizeStr(text, width, styles, doc, overflow) {
+    var precision = 10000 * doc.scaleFactor();
+    width = Math.ceil(width * precision) / precision;
+    if (width >= common_1.getStringWidth(text, styles, doc)) {
+        return text;
+    }
+    while (width < common_1.getStringWidth(text + overflow, styles, doc)) {
+        if (text.length <= 1) {
+            break;
+        }
+        text = text.substring(0, text.length - 1);
+    }
+    return text.trim() + overflow;
+}
+
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports) {
+
+if(typeof __WEBPACK_EXTERNAL_MODULE__16__ === 'undefined') {var e = new Error("Cannot find module 'undefined'"); e.code = 'MODULE_NOT_FOUND'; throw e;}
+module.exports = __WEBPACK_EXTERNAL_MODULE__16__;
+
+/***/ })
+/******/ ]);
+});
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
@@ -7355,10 +9567,10 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -7548,7 +9760,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 if (false) {
@@ -7559,7 +9771,7 @@ if (false) {
 
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7622,14 +9834,14 @@ var VueSweetalert2 = (function () {
 //# sourceMappingURL=index.js.map
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export gsap */
 /* unused harmony export default */
 /* unused harmony export TweenMax */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__gsap_core_js__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__gsap_core_js__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__CSSPlugin_js__ = __webpack_require__(182);
 /* unused harmony reexport CSSPlugin */
 /* unused harmony reexport TweenLite */
@@ -7661,7 +9873,7 @@ TweenMaxWithCSS = gsapWithCSS.core.Tween;
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11565,7 +13777,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -11652,7 +13864,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -11857,7 +14069,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -12029,7 +14241,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -12099,7 +14311,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -12286,7 +14498,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -12357,7 +14569,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -12477,7 +14689,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -12547,7 +14759,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -12664,7 +14876,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -12821,7 +15033,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -12924,7 +15136,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -12991,7 +15203,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -13125,7 +15337,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -13269,7 +15481,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -13407,7 +15619,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -13588,7 +15800,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -13753,7 +15965,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -13866,7 +16078,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -14053,7 +16265,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -14131,7 +16343,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -14244,7 +16456,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -14313,7 +16525,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -14407,7 +16619,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -14502,7 +16714,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -14594,7 +16806,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -14700,7 +16912,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -14820,7 +17032,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -14904,7 +17116,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -14984,7 +17196,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -15068,7 +17280,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -15152,7 +17364,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -15232,7 +17444,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -15316,7 +17528,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -15400,7 +17612,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -15484,7 +17696,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -15568,7 +17780,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -15690,7 +17902,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -15810,7 +18022,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -15932,7 +18144,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -16054,7 +18266,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -16148,7 +18360,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -16227,7 +18439,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -16353,7 +18565,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -16490,7 +18702,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -16564,7 +18776,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -16636,7 +18848,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -16756,7 +18968,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -16841,7 +19053,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -16930,7 +19142,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -17023,7 +19235,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -17134,7 +19346,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -17245,7 +19457,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -17335,7 +19547,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -17475,7 +19687,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -17615,7 +19827,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -17752,7 +19964,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -17862,7 +20074,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 76 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -18042,7 +20254,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 77 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -18212,7 +20424,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -18346,7 +20558,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 79 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -18454,7 +20666,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -18546,7 +20758,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 81 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -18701,7 +20913,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 82 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -18823,7 +21035,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 83 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -18903,7 +21115,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 84 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -19067,7 +21279,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 85 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -19159,7 +21371,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 86 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -19267,7 +21479,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 87 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -19365,7 +21577,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 88 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -19483,7 +21695,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 89 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -19622,7 +21834,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 90 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -19713,7 +21925,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 91 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -19847,7 +22059,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 92 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -19947,7 +22159,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 93 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -20098,7 +22310,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 94 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -20179,7 +22391,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 95 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -20318,7 +22530,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 96 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -20427,7 +22639,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 97 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -20561,7 +22773,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 98 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -20636,7 +22848,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 99 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -20738,7 +22950,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 100 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -20834,7 +23046,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 101 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -20949,7 +23161,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 102 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -21167,7 +23379,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 103 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -21258,7 +23470,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 104 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -21350,7 +23562,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 105 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -21421,7 +23633,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 106 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -21528,7 +23740,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 107 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -21605,7 +23817,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 108 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -21741,7 +23953,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 109 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -21861,7 +24073,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 110 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -21979,7 +24191,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 111 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -22055,7 +24267,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 112 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -22154,7 +24366,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 113 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -22291,7 +24503,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 114 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -22446,7 +24658,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 115 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -22524,7 +24736,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 116 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -22597,7 +24809,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 117 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -22688,7 +24900,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 118 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -22910,7 +25122,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 119 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -23007,7 +25219,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 120 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -23080,7 +25292,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 121 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -23164,7 +25376,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 122 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -23324,7 +25536,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 123 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -23510,7 +25722,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 124 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -23591,7 +25803,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 125 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -23725,7 +25937,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 126 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -23857,7 +26069,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 127 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -23956,7 +26168,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 128 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -24040,7 +26252,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 129 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -24110,7 +26322,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 130 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -24255,7 +26467,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 131 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -24357,7 +26569,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 132 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -24441,7 +26653,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 133 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -24573,7 +26785,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 134 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -24653,7 +26865,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 135 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -24760,7 +26972,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 136 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -24833,7 +27045,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 137 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -24974,7 +27186,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 138 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -25096,7 +27308,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 139 */
+/* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -25201,7 +27413,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 140 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -25270,7 +27482,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 141 */
+/* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -25339,7 +27551,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 142 */
+/* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -25465,7 +27677,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 143 */
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -25644,7 +27856,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 144 */
+/* 145 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -25742,7 +27954,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 145 */
+/* 146 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -25809,7 +28021,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 146 */
+/* 147 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -25878,7 +28090,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 147 */
+/* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -25973,7 +28185,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 148 */
+/* 149 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -26060,7 +28272,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 149 */
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -26129,7 +28341,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 150 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -26265,7 +28477,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 151 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -26382,7 +28594,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 152 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -26498,7 +28710,7 @@ var Power0 = _easeMap.Power0,
 
 
 /***/ }),
-/* 153 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -26611,2218 +28823,6 @@ var Power0 = _easeMap.Power0,
 
 })));
 
-
-/***/ }),
-/* 154 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/*!
- * 
- *             jsPDF AutoTable plugin v3.5.13
- *             
- *             Copyright (c) 2020 Simon Bengtsson, https://github.com/simonbengtsson/jsPDF-AutoTable
- *             Licensed under the MIT License.
- *             http://opensource.org/licenses/mit-license
- *         
- */
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(true)
-		module.exports = factory((function webpackLoadOptionalExternalModule() { try { return __webpack_require__(12); } catch(e) {} }()));
-	else if(typeof define === 'function' && define.amd)
-		define(["jspdf"], factory);
-	else {
-		var a = typeof exports === 'object' ? factory((function webpackLoadOptionalExternalModule() { try { return require("jspdf"); } catch(e) {} }())) : factory(root["jspdf"]);
-		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
-	}
-})(typeof this !== 'undefined' ? this : window, function(__WEBPACK_EXTERNAL_MODULE__16__) {
-return /******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
-/******/ 			return installedModules[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
-/******/ 		}
-/******/ 	};
-/******/
-/******/ 	// define __esModule on exports
-/******/ 	__webpack_require__.r = function(exports) {
-/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 		}
-/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 	};
-/******/
-/******/ 	// create a fake namespace object
-/******/ 	// mode & 1: value is a module id, require it
-/******/ 	// mode & 2: merge all properties of value into the ns
-/******/ 	// mode & 4: return value when already ns object
-/******/ 	// mode & 8|1: behave like require
-/******/ 	__webpack_require__.t = function(value, mode) {
-/******/ 		if(mode & 1) value = __webpack_require__(value);
-/******/ 		if(mode & 8) return value;
-/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
-/******/ 		var ns = Object.create(null);
-/******/ 		__webpack_require__.r(ns);
-/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
-/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
-/******/ 		return ns;
-/******/ 	};
-/******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
-/******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
-/******/
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 10);
-/******/ })
-/************************************************************************/
-/******/ ([
-/* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.parseSpacing = exports.getFillStyle = exports.addTableBorder = exports.getStringWidth = void 0;
-function getStringWidth(text, styles, doc) {
-    doc.applyStyles(styles, true);
-    var textArr = Array.isArray(text) ? text : [text];
-    var widestLineWidth = textArr
-        .map(function (text) { return doc.getTextWidth(text); })
-        .reduce(function (a, b) { return Math.max(a, b); }, 0);
-    return widestLineWidth;
-}
-exports.getStringWidth = getStringWidth;
-function addTableBorder(doc, table, startPos, cursor) {
-    var lineWidth = table.settings.tableLineWidth;
-    var lineColor = table.settings.tableLineColor;
-    doc.applyStyles({ lineWidth: lineWidth, lineColor: lineColor });
-    var fillStyle = getFillStyle(lineWidth, false);
-    if (fillStyle) {
-        doc.rect(startPos.x, startPos.y, table.getWidth(doc.pageSize().width), cursor.y - startPos.y, fillStyle);
-    }
-}
-exports.addTableBorder = addTableBorder;
-function getFillStyle(lineWidth, fillColor) {
-    var drawLine = lineWidth > 0;
-    var drawBackground = fillColor || fillColor === 0;
-    if (drawLine && drawBackground) {
-        return 'DF'; // Fill then stroke
-    }
-    else if (drawLine) {
-        return 'S'; // Only stroke (transparent background)
-    }
-    else if (drawBackground) {
-        return 'F'; // Only fill, no stroke
-    }
-    else {
-        return null;
-    }
-}
-exports.getFillStyle = getFillStyle;
-function parseSpacing(value, defaultValue) {
-    var _a, _b, _c, _d;
-    value = value || defaultValue;
-    if (Array.isArray(value)) {
-        if (value.length >= 4) {
-            return {
-                top: value[0],
-                right: value[1],
-                bottom: value[2],
-                left: value[3],
-            };
-        }
-        else if (value.length === 3) {
-            return {
-                top: value[0],
-                right: value[1],
-                bottom: value[2],
-                left: value[1],
-            };
-        }
-        else if (value.length === 2) {
-            return {
-                top: value[0],
-                right: value[1],
-                bottom: value[0],
-                left: value[1],
-            };
-        }
-        else if (value.length === 1) {
-            value = value[0];
-        }
-        else {
-            value = defaultValue;
-        }
-    }
-    if (typeof value === 'object') {
-        if (typeof value.vertical === 'number') {
-            value.top = value.vertical;
-            value.bottom = value.vertical;
-        }
-        if (typeof value.horizontal === 'number') {
-            value.right = value.horizontal;
-            value.left = value.horizontal;
-        }
-        return {
-            left: (_a = value.left) !== null && _a !== void 0 ? _a : defaultValue,
-            top: (_b = value.top) !== null && _b !== void 0 ? _b : defaultValue,
-            right: (_c = value.right) !== null && _c !== void 0 ? _c : defaultValue,
-            bottom: (_d = value.bottom) !== null && _d !== void 0 ? _d : defaultValue,
-        };
-    }
-    if (typeof value !== 'number') {
-        value = defaultValue;
-    }
-    return { top: value, right: value, bottom: value, left: value };
-}
-exports.parseSpacing = parseSpacing;
-
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.getTheme = exports.defaultStyles = exports.HtmlRowInput = exports.FONT_ROW_RATIO = void 0;
-/**
- * Ratio between font size and font height. The number comes from jspdf's source code
- */
-exports.FONT_ROW_RATIO = 1.15;
-var HtmlRowInput = /** @class */ (function (_super) {
-    __extends(HtmlRowInput, _super);
-    function HtmlRowInput(element) {
-        var _this = _super.call(this) || this;
-        _this._element = element;
-        return _this;
-    }
-    return HtmlRowInput;
-}(Array));
-exports.HtmlRowInput = HtmlRowInput;
-// Base style for all themes
-function defaultStyles(scaleFactor) {
-    return {
-        font: 'helvetica',
-        fontStyle: 'normal',
-        overflow: 'linebreak',
-        fillColor: false,
-        textColor: 20,
-        halign: 'left',
-        valign: 'top',
-        fontSize: 10,
-        cellPadding: 5 / scaleFactor,
-        lineColor: 200,
-        lineWidth: 0,
-        cellWidth: 'auto',
-        minCellHeight: 0,
-        minCellWidth: 0,
-    };
-}
-exports.defaultStyles = defaultStyles;
-function getTheme(name) {
-    var themes = {
-        striped: {
-            table: { fillColor: 255, textColor: 80, fontStyle: 'normal' },
-            head: { textColor: 255, fillColor: [41, 128, 185], fontStyle: 'bold' },
-            body: {},
-            foot: { textColor: 255, fillColor: [41, 128, 185], fontStyle: 'bold' },
-            alternateRow: { fillColor: 245 },
-        },
-        grid: {
-            table: {
-                fillColor: 255,
-                textColor: 80,
-                fontStyle: 'normal',
-                lineWidth: 0.1,
-            },
-            head: {
-                textColor: 255,
-                fillColor: [26, 188, 156],
-                fontStyle: 'bold',
-                lineWidth: 0,
-            },
-            body: {},
-            foot: {
-                textColor: 255,
-                fillColor: [26, 188, 156],
-                fontStyle: 'bold',
-                lineWidth: 0,
-            },
-            alternateRow: {},
-        },
-        plain: {
-            head: { fontStyle: 'bold' },
-            foot: { fontStyle: 'bold' },
-        },
-    };
-    return themes[name];
-}
-exports.getTheme = getTheme;
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.DocHandler = void 0;
-var globalDefaults = {};
-var DocHandler = /** @class */ (function () {
-    function DocHandler(jsPDFDocument) {
-        this.jsPDFDocument = jsPDFDocument;
-        this.userStyles = {
-            // Black for versions of jspdf without getTextColor
-            textColor: jsPDFDocument.getTextColor
-                ? this.jsPDFDocument.getTextColor()
-                : 0,
-            fontSize: jsPDFDocument.internal.getFontSize(),
-            fontStyle: jsPDFDocument.internal.getFont().fontStyle,
-            font: jsPDFDocument.internal.getFont().fontName,
-        };
-    }
-    DocHandler.setDefaults = function (defaults, doc) {
-        if (doc === void 0) { doc = null; }
-        if (doc) {
-            doc.__autoTableDocumentDefaults = defaults;
-        }
-        else {
-            globalDefaults = defaults;
-        }
-    };
-    DocHandler.unifyColor = function (c) {
-        if (Array.isArray(c)) {
-            return c;
-        }
-        else if (typeof c === 'number') {
-            return [c, c, c];
-        }
-        else if (typeof c === 'string') {
-            return [c];
-        }
-        else {
-            return null;
-        }
-    };
-    DocHandler.prototype.applyStyles = function (styles, fontOnly) {
-        // Font style needs to be applied before font
-        // https://github.com/simonbengtsson/jsPDF-AutoTable/issues/632
-        var _a, _b, _c;
-        if (fontOnly === void 0) { fontOnly = false; }
-        if (styles.fontStyle)
-            this.jsPDFDocument.setFontStyle && this.jsPDFDocument.setFontStyle(styles.fontStyle);
-        var _d = this.jsPDFDocument.internal.getFont(), fontStyle = _d.fontStyle, fontName = _d.fontName;
-        if (styles.font)
-            fontName = styles.font;
-        if (styles.fontStyle) {
-            fontStyle = styles.fontStyle;
-            var availableFontStyles = this.getFontList()[fontName];
-            if (availableFontStyles && availableFontStyles.indexOf(fontStyle) === -1) {
-                // Common issue was that the default bold in headers
-                // made custom fonts not work. For example:
-                // https://github.com/simonbengtsson/jsPDF-AutoTable/issues/653
-                this.jsPDFDocument.setFontStyle && this.jsPDFDocument.setFontStyle(availableFontStyles[0]);
-                fontStyle = availableFontStyles[0];
-            }
-        }
-        this.jsPDFDocument.setFont(fontName, fontStyle);
-        if (styles.fontSize)
-            this.jsPDFDocument.setFontSize(styles.fontSize);
-        if (fontOnly) {
-            return; // Performance improvement
-        }
-        var color = DocHandler.unifyColor(styles.fillColor);
-        if (color)
-            (_a = this.jsPDFDocument).setFillColor.apply(_a, color);
-        color = DocHandler.unifyColor(styles.textColor);
-        if (color)
-            (_b = this.jsPDFDocument).setTextColor.apply(_b, color);
-        color = DocHandler.unifyColor(styles.lineColor);
-        if (color)
-            (_c = this.jsPDFDocument).setDrawColor.apply(_c, color);
-        if (typeof styles.lineWidth === 'number') {
-            this.jsPDFDocument.setLineWidth(styles.lineWidth);
-        }
-    };
-    DocHandler.prototype.splitTextToSize = function (text, size, opts) {
-        return this.jsPDFDocument.splitTextToSize(text, size, opts);
-    };
-    DocHandler.prototype.rect = function (x, y, width, height, fillStyle) {
-        return this.jsPDFDocument.rect(x, y, width, height, fillStyle);
-    };
-    DocHandler.prototype.getLastAutoTable = function () {
-        return this.jsPDFDocument.lastAutoTable || null;
-    };
-    DocHandler.prototype.getTextWidth = function (text) {
-        return this.jsPDFDocument.getTextWidth(text);
-    };
-    DocHandler.prototype.getDocument = function () {
-        return this.jsPDFDocument;
-    };
-    DocHandler.prototype.setPage = function (page) {
-        this.jsPDFDocument.setPage(page);
-    };
-    DocHandler.prototype.addPage = function () {
-        return this.jsPDFDocument.addPage();
-    };
-    DocHandler.prototype.getFontList = function () {
-        return this.jsPDFDocument.getFontList();
-    };
-    DocHandler.prototype.getGlobalOptions = function () {
-        return globalDefaults || {};
-    };
-    DocHandler.prototype.getDocumentOptions = function () {
-        return this.jsPDFDocument.__autoTableDocumentDefaults || {};
-    };
-    DocHandler.prototype.pageSize = function () {
-        var pageSize = this.jsPDFDocument.internal.pageSize;
-        // JSPDF 1.4 uses get functions instead of properties on pageSize
-        if (pageSize.width == null) {
-            pageSize = {
-                width: pageSize.getWidth(),
-                height: pageSize.getHeight(),
-            };
-        }
-        return pageSize;
-    };
-    DocHandler.prototype.scaleFactor = function () {
-        return this.jsPDFDocument.internal.scaleFactor;
-    };
-    DocHandler.prototype.pageNumber = function () {
-        var pageInfo = this.jsPDFDocument.internal.getCurrentPageInfo();
-        if (!pageInfo) {
-            // Only recent versions of jspdf has pageInfo
-            return this.jsPDFDocument.internal.getNumberOfPages();
-        }
-        return pageInfo.pageNumber;
-    };
-    return DocHandler;
-}());
-exports.DocHandler = DocHandler;
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/* eslint-disable @typescript-eslint/no-unused-vars */
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.assign = void 0;
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
-function assign(target, s, s1, s2, s3) {
-    if (target == null) {
-        throw new TypeError('Cannot convert undefined or null to object');
-    }
-    var to = Object(target);
-    for (var index = 1; index < arguments.length; index++) {
-        // eslint-disable-next-line prefer-rest-params
-        var nextSource = arguments[index];
-        if (nextSource != null) {
-            // Skip over if undefined or null
-            for (var nextKey in nextSource) {
-                // Avoid bugs when hasOwnProperty is shadowed
-                if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
-                    to[nextKey] = nextSource[nextKey];
-                }
-            }
-        }
-    }
-    return to;
-}
-exports.assign = assign;
-
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.parseHtml = void 0;
-var cssParser_1 = __webpack_require__(12);
-var config_1 = __webpack_require__(1);
-function parseHtml(doc, input, window, includeHiddenHtml, useCss) {
-    var _a, _b;
-    if (includeHiddenHtml === void 0) { includeHiddenHtml = false; }
-    if (useCss === void 0) { useCss = false; }
-    var tableElement;
-    if (typeof input === 'string') {
-        tableElement = window.document.querySelector(input);
-    }
-    else {
-        tableElement = input;
-    }
-    var supportedFonts = Object.keys(doc.getFontList());
-    var scaleFactor = doc.scaleFactor();
-    var head = [], body = [], foot = [];
-    if (!tableElement) {
-        console.error('Html table could not be found with input: ', input);
-        return { head: head, body: body, foot: foot };
-    }
-    for (var i = 0; i < tableElement.rows.length; i++) {
-        var element = tableElement.rows[i];
-        var tagName = (_b = (_a = element === null || element === void 0 ? void 0 : element.parentElement) === null || _a === void 0 ? void 0 : _a.tagName) === null || _b === void 0 ? void 0 : _b.toLowerCase();
-        var row = parseRowContent(supportedFonts, scaleFactor, window, element, includeHiddenHtml, useCss);
-        if (!row)
-            continue;
-        if (tagName === 'thead') {
-            head.push(row);
-        }
-        else if (tagName === 'tfoot') {
-            foot.push(row);
-        }
-        else {
-            // Add to body both if parent is tbody or table
-            body.push(row);
-        }
-    }
-    return { head: head, body: body, foot: foot };
-}
-exports.parseHtml = parseHtml;
-function parseRowContent(supportedFonts, scaleFactor, window, row, includeHidden, useCss) {
-    var resultRow = new config_1.HtmlRowInput(row);
-    for (var i = 0; i < row.cells.length; i++) {
-        var cell = row.cells[i];
-        var style_1 = window.getComputedStyle(cell);
-        if (includeHidden || style_1.display !== 'none') {
-            var cellStyles = void 0;
-            if (useCss) {
-                cellStyles = cssParser_1.parseCss(supportedFonts, cell, scaleFactor, style_1, window);
-            }
-            resultRow.push({
-                rowSpan: cell.rowSpan,
-                colSpan: cell.colSpan,
-                styles: cellStyles,
-                _element: cell,
-                content: parseCellContent(cell),
-            });
-        }
-    }
-    var style = window.getComputedStyle(row);
-    if (resultRow.length > 0 && (includeHidden || style.display !== 'none')) {
-        return resultRow;
-    }
-}
-function parseCellContent(orgCell) {
-    // Work on cloned node to make sure no changes are applied to html table
-    var cell = orgCell.cloneNode(true);
-    // Remove extra space and line breaks in markup to make it more similar to
-    // what would be shown in html
-    cell.innerHTML = cell.innerHTML.replace(/\n/g, '').replace(/ +/g, ' ');
-    // Preserve <br> tags as line breaks in the pdf
-    cell.innerHTML = cell.innerHTML
-        .split('<br>')
-        .map(function (part) { return part.trim(); })
-        .join('\n');
-    // innerText for ie
-    return cell.innerText || cell.textContent || '';
-}
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * Improved text function with halign and valign support
- * Inspiration from: http://stackoverflow.com/questions/28327510/align-text-right-using-jspdf/28433113#28433113
- */
-function default_1(text, x, y, styles, doc) {
-    styles = styles || {};
-    var FONT_ROW_RATIO = 1.15;
-    var k = doc.internal.scaleFactor;
-    var fontSize = doc.internal.getFontSize() / k;
-    var splitRegex = /\r\n|\r|\n/g;
-    var splitText = '';
-    var lineCount = 1;
-    if (styles.valign === 'middle' ||
-        styles.valign === 'bottom' ||
-        styles.halign === 'center' ||
-        styles.halign === 'right') {
-        splitText = typeof text === 'string' ? text.split(splitRegex) : text;
-        lineCount = splitText.length || 1;
-    }
-    // Align the top
-    y += fontSize * (2 - FONT_ROW_RATIO);
-    if (styles.valign === 'middle')
-        y -= (lineCount / 2) * fontSize * FONT_ROW_RATIO;
-    else if (styles.valign === 'bottom')
-        y -= lineCount * fontSize * FONT_ROW_RATIO;
-    if (styles.halign === 'center' || styles.halign === 'right') {
-        var alignSize = fontSize;
-        if (styles.halign === 'center')
-            alignSize *= 0.5;
-        if (splitText && lineCount >= 1) {
-            for (var iLine = 0; iLine < splitText.length; iLine++) {
-                doc.text(splitText[iLine], x - doc.getStringUnitWidth(splitText[iLine]) * alignSize, y);
-                y += fontSize * FONT_ROW_RATIO;
-            }
-            return doc;
-        }
-        x -= doc.getStringUnitWidth(text) * alignSize;
-    }
-    if (styles.halign === 'justify') {
-        doc.text(text, x, y, {
-            maxWidth: styles.maxWidth || 100,
-            align: 'justify',
-        });
-    }
-    else {
-        doc.text(text, x, y);
-    }
-    return doc;
-}
-exports.default = default_1;
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.parseInput = void 0;
-var htmlParser_1 = __webpack_require__(4);
-var polyfills_1 = __webpack_require__(3);
-var common_1 = __webpack_require__(0);
-var documentHandler_1 = __webpack_require__(2);
-var inputValidator_1 = __webpack_require__(13);
-function parseInput(d, current) {
-    var doc = new documentHandler_1.DocHandler(d);
-    var document = doc.getDocumentOptions();
-    var global = doc.getGlobalOptions();
-    inputValidator_1.default(doc, global, document, current);
-    var options = polyfills_1.assign({}, global, document, current);
-    var win;
-    if (typeof window !== 'undefined') {
-        win = window;
-    }
-    var styles = parseStyles(global, document, current);
-    var hooks = parseHooks(global, document, current);
-    var settings = parseSettings(doc, options);
-    var content = parseContent(doc, options, win);
-    return {
-        id: current.tableId,
-        content: content,
-        hooks: hooks,
-        styles: styles,
-        settings: settings,
-    };
-}
-exports.parseInput = parseInput;
-function parseStyles(gInput, dInput, cInput) {
-    var styleOptions = {
-        styles: {},
-        headStyles: {},
-        bodyStyles: {},
-        footStyles: {},
-        alternateRowStyles: {},
-        columnStyles: {},
-    };
-    var _loop_1 = function (prop) {
-        if (prop === 'columnStyles') {
-            var global_1 = gInput[prop];
-            var document_1 = dInput[prop];
-            var current = cInput[prop];
-            styleOptions.columnStyles = polyfills_1.assign({}, global_1, document_1, current);
-        }
-        else {
-            var allOptions = [gInput, dInput, cInput];
-            var styles = allOptions.map(function (opts) { return opts[prop] || {}; });
-            styleOptions[prop] = polyfills_1.assign({}, styles[0], styles[1], styles[2]);
-        }
-    };
-    for (var _i = 0, _a = Object.keys(styleOptions); _i < _a.length; _i++) {
-        var prop = _a[_i];
-        _loop_1(prop);
-    }
-    return styleOptions;
-}
-function parseHooks(global, document, current) {
-    var allOptions = [global, document, current];
-    var result = {
-        didParseCell: [],
-        willDrawCell: [],
-        didDrawCell: [],
-        didDrawPage: [],
-    };
-    for (var _i = 0, allOptions_1 = allOptions; _i < allOptions_1.length; _i++) {
-        var options = allOptions_1[_i];
-        if (options.didParseCell)
-            result.didParseCell.push(options.didParseCell);
-        if (options.willDrawCell)
-            result.willDrawCell.push(options.willDrawCell);
-        if (options.didDrawCell)
-            result.didDrawCell.push(options.didDrawCell);
-        if (options.didDrawPage)
-            result.didDrawPage.push(options.didDrawPage);
-    }
-    return result;
-}
-function parseSettings(doc, options) {
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
-    var margin = common_1.parseSpacing(options.margin, 40 / doc.scaleFactor());
-    var startY = (_a = getStartY(doc, options.startY)) !== null && _a !== void 0 ? _a : margin.top;
-    var showFoot;
-    if (options.showFoot === true) {
-        showFoot = 'everyPage';
-    }
-    else if (options.showFoot === false) {
-        showFoot = 'never';
-    }
-    else {
-        showFoot = (_b = options.showFoot) !== null && _b !== void 0 ? _b : 'everyPage';
-    }
-    var showHead;
-    if (options.showHead === true) {
-        showHead = 'everyPage';
-    }
-    else if (options.showHead === false) {
-        showHead = 'never';
-    }
-    else {
-        showHead = (_c = options.showHead) !== null && _c !== void 0 ? _c : 'everyPage';
-    }
-    var useCss = (_d = options.useCss) !== null && _d !== void 0 ? _d : false;
-    var theme = options.theme || (useCss ? 'plain' : 'striped');
-    return {
-        includeHiddenHtml: (_e = options.includeHiddenHtml) !== null && _e !== void 0 ? _e : false,
-        useCss: useCss,
-        theme: theme,
-        startY: startY,
-        margin: margin,
-        pageBreak: (_f = options.pageBreak) !== null && _f !== void 0 ? _f : 'auto',
-        rowPageBreak: (_g = options.rowPageBreak) !== null && _g !== void 0 ? _g : 'auto',
-        tableWidth: (_h = options.tableWidth) !== null && _h !== void 0 ? _h : 'auto',
-        showHead: showHead,
-        showFoot: showFoot,
-        tableLineWidth: (_j = options.tableLineWidth) !== null && _j !== void 0 ? _j : 0,
-        tableLineColor: (_k = options.tableLineColor) !== null && _k !== void 0 ? _k : 200,
-    };
-}
-function getStartY(doc, userStartY) {
-    var previous = doc.getLastAutoTable();
-    var sf = doc.scaleFactor();
-    var currentPage = doc.pageNumber();
-    var isSamePageAsPreviousTable = false;
-    if (previous && previous.startPageNumber) {
-        var endingPage = previous.startPageNumber + previous.pageNumber - 1;
-        isSamePageAsPreviousTable = endingPage === currentPage;
-    }
-    if (typeof userStartY === 'number') {
-        return userStartY;
-    }
-    else if (userStartY == null || userStartY === false) {
-        if (isSamePageAsPreviousTable && (previous === null || previous === void 0 ? void 0 : previous.finalY) != null) {
-            // Some users had issues with overlapping tables when they used multiple
-            // tables without setting startY so setting it here to a sensible default.
-            return previous.finalY + 20 / sf;
-        }
-    }
-    return null;
-}
-function parseContent(doc, options, window) {
-    var head = options.head || [];
-    var body = options.body || [];
-    var foot = options.foot || [];
-    if (options.html) {
-        var hidden = options.includeHiddenHtml;
-        if (window) {
-            var htmlContent = htmlParser_1.parseHtml(doc, options.html, window, hidden, options.useCss) || {};
-            head = htmlContent.head || head;
-            body = htmlContent.body || head;
-            foot = htmlContent.foot || head;
-        }
-        else {
-            console.error('Cannot parse html in non browser environment');
-        }
-    }
-    var columns = options.columns || parseColumns(head, body, foot);
-    return {
-        columns: columns,
-        head: head,
-        body: body,
-        foot: foot,
-    };
-}
-function parseColumns(head, body, foot) {
-    var firstRow = head[0] || body[0] || foot[0] || [];
-    var result = [];
-    Object.keys(firstRow)
-        .filter(function (key) { return key !== '_element'; })
-        .forEach(function (key) {
-        var colSpan = 1;
-        var input;
-        if (Array.isArray(firstRow)) {
-            input = firstRow[parseInt(key)];
-        }
-        else {
-            input = firstRow[key];
-        }
-        if (typeof input === 'object' && !Array.isArray(input)) {
-            colSpan = (input === null || input === void 0 ? void 0 : input.colSpan) || 1;
-        }
-        for (var i = 0; i < colSpan; i++) {
-            var id = void 0;
-            if (Array.isArray(firstRow)) {
-                id = result.length;
-            }
-            else {
-                id = key + (i > 0 ? "_" + i : '');
-            }
-            var rowResult = { dataKey: id };
-            result.push(rowResult);
-        }
-    });
-    return result;
-}
-
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.addPage = exports.drawTable = void 0;
-var config_1 = __webpack_require__(1);
-var common_1 = __webpack_require__(0);
-var models_1 = __webpack_require__(8);
-var documentHandler_1 = __webpack_require__(2);
-var polyfills_1 = __webpack_require__(3);
-var autoTableText_1 = __webpack_require__(5);
-function drawTable(jsPDFDoc, table) {
-    var settings = table.settings;
-    var startY = settings.startY;
-    var margin = settings.margin;
-    var cursor = {
-        x: margin.left,
-        y: startY,
-    };
-    var sectionsHeight = table.getHeadHeight(table.columns) + table.getFootHeight(table.columns);
-    var minTableBottomPos = startY + margin.bottom + sectionsHeight;
-    if (settings.pageBreak === 'avoid') {
-        var rows = table.allRows();
-        var tableHeight = rows.reduce(function (acc, row) { return acc + row.height; }, 0);
-        minTableBottomPos += tableHeight;
-    }
-    var doc = new documentHandler_1.DocHandler(jsPDFDoc);
-    if (settings.pageBreak === 'always' ||
-        (settings.startY != null && minTableBottomPos > doc.pageSize().height)) {
-        nextPage(doc);
-        cursor.y = margin.top;
-    }
-    var startPos = polyfills_1.assign({}, cursor);
-    table.startPageNumber = doc.pageNumber();
-    doc.applyStyles(doc.userStyles);
-    if (settings.showHead === 'firstPage' || settings.showHead === 'everyPage') {
-        table.head.forEach(function (row) { return printRow(doc, table, row, cursor); });
-    }
-    doc.applyStyles(doc.userStyles);
-    table.body.forEach(function (row, index) {
-        var isLastRow = index === table.body.length - 1;
-        printFullRow(doc, table, row, isLastRow, startPos, cursor);
-    });
-    doc.applyStyles(doc.userStyles);
-    if (settings.showFoot === 'lastPage' || settings.showFoot === 'everyPage') {
-        table.foot.forEach(function (row) { return printRow(doc, table, row, cursor); });
-    }
-    common_1.addTableBorder(doc, table, startPos, cursor);
-    table.callEndPageHooks(doc, cursor);
-    table.finalY = cursor.y;
-    jsPDFDoc.lastAutoTable = table;
-    jsPDFDoc.previousAutoTable = table; // Deprecated
-    if (jsPDFDoc.autoTable)
-        jsPDFDoc.autoTable.previous = table; // Deprecated
-    doc.applyStyles(doc.userStyles);
-}
-exports.drawTable = drawTable;
-function getRemainingLineCount(cell, remainingPageSpace, doc) {
-    var fontHeight = (cell.styles.fontSize / doc.scaleFactor()) * config_1.FONT_ROW_RATIO;
-    var vPadding = cell.padding('vertical');
-    var remainingLines = Math.floor((remainingPageSpace - vPadding) / fontHeight);
-    return Math.max(0, remainingLines);
-}
-function modifyRowToFit(row, remainingPageSpace, table, doc) {
-    var cells = {};
-    row.spansMultiplePages = true;
-    var rowHeight = 0;
-    for (var _i = 0, _a = table.columns; _i < _a.length; _i++) {
-        var column = _a[_i];
-        var cell = row.cells[column.index];
-        if (!cell)
-            continue;
-        if (!Array.isArray(cell.text)) {
-            cell.text = [cell.text];
-        }
-        var remainderCell = new models_1.Cell(cell.raw, cell.styles, cell.section);
-        remainderCell = polyfills_1.assign(remainderCell, cell);
-        remainderCell.text = [];
-        var remainingLineCount = getRemainingLineCount(cell, remainingPageSpace, doc);
-        if (cell.text.length > remainingLineCount) {
-            remainderCell.text = cell.text.splice(remainingLineCount, cell.text.length);
-        }
-        var scaleFactor = doc.scaleFactor();
-        cell.contentHeight = cell.getContentHeight(scaleFactor);
-        if (cell.contentHeight >= remainingPageSpace) {
-            cell.contentHeight = remainingPageSpace;
-            remainderCell.styles.minCellHeight -= remainingPageSpace;
-        }
-        if (cell.contentHeight > row.height) {
-            row.height = cell.contentHeight;
-        }
-        remainderCell.contentHeight = remainderCell.getContentHeight(scaleFactor);
-        if (remainderCell.contentHeight > rowHeight) {
-            rowHeight = remainderCell.contentHeight;
-        }
-        cells[column.index] = remainderCell;
-    }
-    var remainderRow = new models_1.Row(row.raw, -1, row.section, cells, true);
-    remainderRow.height = rowHeight;
-    for (var _b = 0, _c = table.columns; _b < _c.length; _b++) {
-        var column = _c[_b];
-        var remainderCell = remainderRow.cells[column.index];
-        if (remainderCell) {
-            remainderCell.height = remainderRow.height;
-        }
-        var cell = row.cells[column.index];
-        if (cell) {
-            cell.height = row.height;
-        }
-    }
-    return remainderRow;
-}
-function shouldPrintOnCurrentPage(doc, row, remainingPageSpace, table) {
-    var pageHeight = doc.pageSize().height;
-    var margin = table.settings.margin;
-    var marginHeight = margin.top + margin.bottom;
-    var maxRowHeight = pageHeight - marginHeight;
-    if (row.section === 'body') {
-        // Should also take into account that head and foot is not
-        // on every page with some settings
-        maxRowHeight -=
-            table.getHeadHeight(table.columns) + table.getFootHeight(table.columns);
-    }
-    var minRowHeight = row.getMinimumRowHeight(table.columns, doc);
-    var minRowFits = minRowHeight < remainingPageSpace;
-    if (minRowHeight > maxRowHeight) {
-        console.error("Will not be able to print row " + row.index + " correctly since it's minimum height is larger than page height");
-        return true;
-    }
-    if (!minRowFits) {
-        return false;
-    }
-    var rowHasRowSpanCell = row.hasRowSpan(table.columns);
-    var rowHigherThanPage = row.getMaxCellHeight(table.columns) > maxRowHeight;
-    if (rowHigherThanPage) {
-        if (rowHasRowSpanCell) {
-            console.error("The content of row " + row.index + " will not be drawn correctly since drawing rows with a height larger than the page height and has cells with rowspans is not supported.");
-        }
-        return true;
-    }
-    if (rowHasRowSpanCell) {
-        // Currently a new page is required whenever a rowspan row don't fit a page.
-        return false;
-    }
-    if (table.settings.rowPageBreak === 'avoid') {
-        return false;
-    }
-    // In all other cases print the row on current page
-    return true;
-}
-function printFullRow(doc, table, row, isLastRow, startPos, cursor) {
-    var remainingSpace = getRemainingPageSpace(doc, table, isLastRow, cursor);
-    if (row.canEntireRowFit(remainingSpace, table.columns)) {
-        printRow(doc, table, row, cursor);
-    }
-    else {
-        if (shouldPrintOnCurrentPage(doc, row, remainingSpace, table)) {
-            var remainderRow = modifyRowToFit(row, remainingSpace, table, doc);
-            printRow(doc, table, row, cursor);
-            addPage(doc, table, startPos, cursor);
-            printFullRow(doc, table, remainderRow, isLastRow, startPos, cursor);
-        }
-        else {
-            addPage(doc, table, startPos, cursor);
-            printFullRow(doc, table, row, isLastRow, startPos, cursor);
-        }
-    }
-}
-function printRow(doc, table, row, cursor) {
-    cursor.x = table.settings.margin.left;
-    for (var _i = 0, _a = table.columns; _i < _a.length; _i++) {
-        var column = _a[_i];
-        var cell = row.cells[column.index];
-        if (!cell) {
-            cursor.x += column.width;
-            continue;
-        }
-        doc.applyStyles(cell.styles);
-        cell.x = cursor.x;
-        cell.y = cursor.y;
-        var result = table.callCellHooks(doc, table.hooks.willDrawCell, cell, row, column, cursor);
-        if (result === false) {
-            cursor.x += column.width;
-            continue;
-        }
-        var cellStyles = cell.styles;
-        var fillStyle = common_1.getFillStyle(cellStyles.lineWidth, cellStyles.fillColor);
-        if (fillStyle) {
-            doc.rect(cell.x, cursor.y, cell.width, cell.height, fillStyle);
-        }
-        var textPos = cell.getTextPos();
-        autoTableText_1.default(cell.text, textPos.x, textPos.y, {
-            halign: cell.styles.halign,
-            valign: cell.styles.valign,
-            maxWidth: Math.ceil(cell.width - cell.padding('left') - cell.padding('right')),
-        }, doc.getDocument());
-        table.callCellHooks(doc, table.hooks.didDrawCell, cell, row, column, cursor);
-        cursor.x += column.width;
-    }
-    cursor.y += row.height;
-}
-function getRemainingPageSpace(doc, table, isLastRow, cursor) {
-    var bottomContentHeight = table.settings.margin.bottom;
-    var showFoot = table.settings.showFoot;
-    if (showFoot === 'everyPage' || (showFoot === 'lastPage' && isLastRow)) {
-        bottomContentHeight += table.getFootHeight(table.columns);
-    }
-    return doc.pageSize().height - cursor.y - bottomContentHeight;
-}
-function addPage(doc, table, startPos, cursor) {
-    doc.applyStyles(doc.userStyles);
-    if (table.settings.showFoot === 'everyPage') {
-        table.foot.forEach(function (row) { return printRow(doc, table, row, cursor); });
-    }
-    // Add user content just before adding new page ensure it will
-    // be drawn above other things on the page
-    table.callEndPageHooks(doc, cursor);
-    var margin = table.settings.margin;
-    common_1.addTableBorder(doc, table, startPos, cursor);
-    nextPage(doc);
-    table.pageNumber++;
-    table.pageCount++;
-    cursor.x = margin.left;
-    cursor.y = margin.top;
-    if (table.settings.showHead === 'everyPage') {
-        table.head.forEach(function (row) { return printRow(doc, table, row, cursor); });
-    }
-}
-exports.addPage = addPage;
-function nextPage(doc) {
-    var current = doc.pageNumber();
-    doc.setPage(current + 1);
-    var newCurrent = doc.pageNumber();
-    if (newCurrent === current) {
-        doc.addPage();
-    }
-}
-
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Column = exports.Cell = exports.Row = exports.Table = void 0;
-var config_1 = __webpack_require__(1);
-var HookData_1 = __webpack_require__(14);
-var common_1 = __webpack_require__(0);
-var Table = /** @class */ (function () {
-    function Table(input, content) {
-        this.pageNumber = 1;
-        // Deprecated, use pageNumber instead
-        // Not using getter since:
-        // https://github.com/simonbengtsson/jsPDF-AutoTable/issues/596
-        this.pageCount = 1;
-        this.id = input.id;
-        this.settings = input.settings;
-        this.styles = input.styles;
-        this.hooks = input.hooks;
-        this.columns = content.columns;
-        this.head = content.head;
-        this.body = content.body;
-        this.foot = content.foot;
-    }
-    Table.prototype.getHeadHeight = function (columns) {
-        return this.head.reduce(function (acc, row) { return acc + row.getMaxCellHeight(columns); }, 0);
-    };
-    Table.prototype.getFootHeight = function (columns) {
-        return this.foot.reduce(function (acc, row) { return acc + row.getMaxCellHeight(columns); }, 0);
-    };
-    Table.prototype.allRows = function () {
-        return this.head.concat(this.body).concat(this.foot);
-    };
-    Table.prototype.callCellHooks = function (doc, handlers, cell, row, column, cursor) {
-        for (var _i = 0, handlers_1 = handlers; _i < handlers_1.length; _i++) {
-            var handler = handlers_1[_i];
-            var data = new HookData_1.CellHookData(doc, this, cell, row, column, cursor);
-            var result = handler(data) === false;
-            // Make sure text is always string[] since user can assign string
-            cell.text = Array.isArray(cell.text) ? cell.text : [cell.text];
-            if (result) {
-                return false;
-            }
-        }
-        return true;
-    };
-    Table.prototype.callEndPageHooks = function (doc, cursor) {
-        doc.applyStyles(doc.userStyles);
-        for (var _i = 0, _a = this.hooks.didDrawPage; _i < _a.length; _i++) {
-            var handler = _a[_i];
-            handler(new HookData_1.HookData(doc, this, cursor));
-        }
-    };
-    Table.prototype.getWidth = function (pageWidth) {
-        if (typeof this.settings.tableWidth === 'number') {
-            return this.settings.tableWidth;
-        }
-        else if (this.settings.tableWidth === 'wrap') {
-            var wrappedWidth = this.columns.reduce(function (total, col) { return total + col.wrappedWidth; }, 0);
-            return wrappedWidth;
-        }
-        else {
-            var margin = this.settings.margin;
-            return pageWidth - margin.left - margin.right;
-        }
-    };
-    return Table;
-}());
-exports.Table = Table;
-var Row = /** @class */ (function () {
-    function Row(raw, index, section, cells, spansMultiplePages) {
-        if (spansMultiplePages === void 0) { spansMultiplePages = false; }
-        this.height = 0;
-        this.raw = raw;
-        if (raw instanceof config_1.HtmlRowInput) {
-            this.raw = raw._element;
-            this.element = raw._element;
-        }
-        this.index = index;
-        this.section = section;
-        this.cells = cells;
-        this.spansMultiplePages = spansMultiplePages;
-    }
-    Row.prototype.getMaxCellHeight = function (columns) {
-        var _this = this;
-        return columns.reduce(function (acc, column) { var _a; return Math.max(acc, ((_a = _this.cells[column.index]) === null || _a === void 0 ? void 0 : _a.height) || 0); }, 0);
-    };
-    Row.prototype.hasRowSpan = function (columns) {
-        var _this = this;
-        return (columns.filter(function (column) {
-            var cell = _this.cells[column.index];
-            if (!cell)
-                return false;
-            return cell.rowSpan > 1;
-        }).length > 0);
-    };
-    Row.prototype.canEntireRowFit = function (height, columns) {
-        return this.getMaxCellHeight(columns) <= height;
-    };
-    Row.prototype.getMinimumRowHeight = function (columns, doc) {
-        var _this = this;
-        return columns.reduce(function (acc, column) {
-            var cell = _this.cells[column.index];
-            if (!cell)
-                return 0;
-            var fontHeight = (cell.styles.fontSize / doc.scaleFactor()) * config_1.FONT_ROW_RATIO;
-            var vPadding = cell.padding('vertical');
-            var oneRowHeight = vPadding + fontHeight;
-            return oneRowHeight > acc ? oneRowHeight : acc;
-        }, 0);
-    };
-    return Row;
-}());
-exports.Row = Row;
-var Cell = /** @class */ (function () {
-    function Cell(raw, styles, section) {
-        var _a, _b;
-        this.contentHeight = 0;
-        this.contentWidth = 0;
-        this.wrappedWidth = 0;
-        this.minReadableWidth = 0;
-        this.minWidth = 0;
-        this.width = 0;
-        this.height = 0;
-        this.x = 0;
-        this.y = 0;
-        this.styles = styles;
-        this.section = section;
-        this.raw = raw;
-        var content = raw;
-        if (raw != null && typeof raw === 'object' && !Array.isArray(raw)) {
-            this.rowSpan = raw.rowSpan || 1;
-            this.colSpan = raw.colSpan || 1;
-            content = (_b = (_a = raw.content) !== null && _a !== void 0 ? _a : raw.title) !== null && _b !== void 0 ? _b : raw;
-            if (raw._element) {
-                this.raw = raw._element;
-            }
-        }
-        else {
-            this.rowSpan = 1;
-            this.colSpan = 1;
-        }
-        // Stringify 0 and false, but not undefined or null
-        var text = content != null ? '' + content : '';
-        var splitRegex = /\r\n|\r|\n/g;
-        this.text = text.split(splitRegex);
-    }
-    Cell.prototype.getTextPos = function () {
-        var y;
-        if (this.styles.valign === 'top') {
-            y = this.y + this.padding('top');
-        }
-        else if (this.styles.valign === 'bottom') {
-            y = this.y + this.height - this.padding('bottom');
-        }
-        else {
-            var netHeight = this.height - this.padding('vertical');
-            y = this.y + netHeight / 2 + this.padding('top');
-        }
-        var x;
-        if (this.styles.halign === 'right') {
-            x = this.x + this.width - this.padding('right');
-        }
-        else if (this.styles.halign === 'center') {
-            var netWidth = this.width - this.padding('horizontal');
-            x = this.x + netWidth / 2 + this.padding('left');
-        }
-        else {
-            x = this.x + this.padding('left');
-        }
-        return { x: x, y: y };
-    };
-    Cell.prototype.getContentHeight = function (scaleFactor) {
-        var lineCount = Array.isArray(this.text) ? this.text.length : 1;
-        var fontHeight = (this.styles.fontSize / scaleFactor) * config_1.FONT_ROW_RATIO;
-        var height = lineCount * fontHeight + this.padding('vertical');
-        return Math.max(height, this.styles.minCellHeight);
-    };
-    Cell.prototype.padding = function (name) {
-        var padding = common_1.parseSpacing(this.styles.cellPadding, 0);
-        if (name === 'vertical') {
-            return padding.top + padding.bottom;
-        }
-        else if (name === 'horizontal') {
-            return padding.left + padding.right;
-        }
-        else {
-            return padding[name];
-        }
-    };
-    return Cell;
-}());
-exports.Cell = Cell;
-var Column = /** @class */ (function () {
-    function Column(dataKey, raw, index) {
-        this.wrappedWidth = 0;
-        this.minReadableWidth = 0;
-        this.minWidth = 0;
-        this.width = 0;
-        this.dataKey = dataKey;
-        this.raw = raw;
-        this.index = index;
-    }
-    Column.prototype.getMaxCustomCellWidth = function (table) {
-        var max = 0;
-        for (var _i = 0, _a = table.allRows(); _i < _a.length; _i++) {
-            var row = _a[_i];
-            var cell = row.cells[this.index];
-            if (cell && typeof cell.styles.cellWidth === 'number') {
-                max = Math.max(max, cell.styles.cellWidth);
-            }
-        }
-        return max;
-    };
-    return Column;
-}());
-exports.Column = Column;
-
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.createTable = void 0;
-var documentHandler_1 = __webpack_require__(2);
-var models_1 = __webpack_require__(8);
-var widthCalculator_1 = __webpack_require__(15);
-var config_1 = __webpack_require__(1);
-var polyfills_1 = __webpack_require__(3);
-function createTable(jsPDFDoc, input) {
-    var doc = new documentHandler_1.DocHandler(jsPDFDoc);
-    var content = parseContent(input, doc.scaleFactor());
-    var table = new models_1.Table(input, content);
-    widthCalculator_1.calculateWidths(doc, table);
-    doc.applyStyles(doc.userStyles);
-    return table;
-}
-exports.createTable = createTable;
-function parseContent(input, sf) {
-    var content = input.content;
-    var columns = createColumns(content.columns);
-    // If no head or foot is set, try generating it with content from columns
-    if (content.head.length === 0) {
-        var sectionRow = generateSectionRow(columns, 'head');
-        if (sectionRow)
-            content.head.push(sectionRow);
-    }
-    if (content.foot.length === 0) {
-        var sectionRow = generateSectionRow(columns, 'foot');
-        if (sectionRow)
-            content.foot.push(sectionRow);
-    }
-    var theme = input.settings.theme;
-    var styles = input.styles;
-    return {
-        columns: columns,
-        head: parseSection('head', content.head, columns, styles, theme, sf),
-        body: parseSection('body', content.body, columns, styles, theme, sf),
-        foot: parseSection('foot', content.foot, columns, styles, theme, sf),
-    };
-}
-function parseSection(sectionName, sectionRows, columns, styleProps, theme, scaleFactor) {
-    var rowSpansLeftForColumn = {};
-    var result = sectionRows.map(function (rawRow, rowIndex) {
-        var skippedRowForRowSpans = 0;
-        var cells = {};
-        var colSpansAdded = 0;
-        var columnSpansLeft = 0;
-        for (var _i = 0, columns_1 = columns; _i < columns_1.length; _i++) {
-            var column = columns_1[_i];
-            if (rowSpansLeftForColumn[column.index] == null ||
-                rowSpansLeftForColumn[column.index].left === 0) {
-                if (columnSpansLeft === 0) {
-                    var rawCell = void 0;
-                    if (Array.isArray(rawRow)) {
-                        rawCell =
-                            rawRow[column.index - colSpansAdded - skippedRowForRowSpans];
-                    }
-                    else {
-                        rawCell = rawRow[column.dataKey];
-                    }
-                    var cellInputStyles = {};
-                    if (typeof rawCell === 'object' && !Array.isArray(rawCell)) {
-                        cellInputStyles = (rawCell === null || rawCell === void 0 ? void 0 : rawCell.styles) || {};
-                    }
-                    var styles = cellStyles(sectionName, column, rowIndex, theme, styleProps, scaleFactor, cellInputStyles);
-                    var cell = new models_1.Cell(rawCell, styles, sectionName);
-                    // dataKey is not used internally no more but keep for
-                    // backwards compat in hooks
-                    cells[column.dataKey] = cell;
-                    cells[column.index] = cell;
-                    columnSpansLeft = cell.colSpan - 1;
-                    rowSpansLeftForColumn[column.index] = {
-                        left: cell.rowSpan - 1,
-                        times: columnSpansLeft,
-                    };
-                }
-                else {
-                    columnSpansLeft--;
-                    colSpansAdded++;
-                }
-            }
-            else {
-                rowSpansLeftForColumn[column.index].left--;
-                columnSpansLeft = rowSpansLeftForColumn[column.index].times;
-                skippedRowForRowSpans++;
-            }
-        }
-        return new models_1.Row(rawRow, rowIndex, sectionName, cells);
-    });
-    return result;
-}
-function generateSectionRow(columns, section) {
-    var sectionRow = {};
-    columns.forEach(function (col) {
-        if (col.raw != null) {
-            var title = getSectionTitle(section, col.raw);
-            if (title != null)
-                sectionRow[col.dataKey] = title;
-        }
-    });
-    return Object.keys(sectionRow).length > 0 ? sectionRow : null;
-}
-function getSectionTitle(section, column) {
-    if (section === 'head') {
-        if (typeof column === 'object') {
-            return column.header || column.title || null;
-        }
-        else if (typeof column === 'string' || typeof column === 'number') {
-            return column;
-        }
-    }
-    else if (section === 'foot' && typeof column === 'object') {
-        return column.footer;
-    }
-    return null;
-}
-function createColumns(columns) {
-    return columns.map(function (input, index) {
-        var _a, _b;
-        var key;
-        if (typeof input === 'object') {
-            key = (_b = (_a = input.dataKey) !== null && _a !== void 0 ? _a : input.key) !== null && _b !== void 0 ? _b : index;
-        }
-        else {
-            key = index;
-        }
-        return new models_1.Column(key, input, index);
-    });
-}
-function cellStyles(sectionName, column, rowIndex, themeName, styles, scaleFactor, cellInputStyles) {
-    var theme = config_1.getTheme(themeName);
-    var sectionStyles;
-    if (sectionName === 'head') {
-        sectionStyles = styles.headStyles;
-    }
-    else if (sectionName === 'body') {
-        sectionStyles = styles.bodyStyles;
-    }
-    else if (sectionName === 'foot') {
-        sectionStyles = styles.footStyles;
-    }
-    var otherStyles = polyfills_1.assign({}, theme.table, theme[sectionName], styles.styles, sectionStyles);
-    var columnStyles = styles.columnStyles[column.dataKey] ||
-        styles.columnStyles[column.index] ||
-        {};
-    var colStyles = sectionName === 'body' ? columnStyles : {};
-    var rowStyles = sectionName === 'body' && rowIndex % 2 === 0
-        ? polyfills_1.assign({}, theme.alternateRow, styles.alternateRowStyles)
-        : {};
-    var defaultStyle = config_1.defaultStyles(scaleFactor);
-    var themeStyles = polyfills_1.assign({}, defaultStyle, otherStyles, rowStyles, colStyles);
-    return polyfills_1.assign(themeStyles, cellInputStyles);
-}
-
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.__drawTable = exports.__createTable = exports.applyPlugin = void 0;
-var applyPlugin_1 = __webpack_require__(11);
-var inputParser_1 = __webpack_require__(6);
-var tableDrawer_1 = __webpack_require__(7);
-var tableCalculator_1 = __webpack_require__(9);
-// export { applyPlugin } didn't export applyPlugin
-// to index.d.ts for some reason
-function applyPlugin(jsPDF) {
-    applyPlugin_1.default(jsPDF);
-}
-exports.applyPlugin = applyPlugin;
-function autoTable(d, options) {
-    var input = inputParser_1.parseInput(d, options);
-    var table = tableCalculator_1.createTable(d, input);
-    tableDrawer_1.drawTable(d, table);
-}
-exports.default = autoTable;
-// Experimental export
-function __createTable(d, options) {
-    var input = inputParser_1.parseInput(d, options);
-    return tableCalculator_1.createTable(d, input);
-}
-exports.__createTable = __createTable;
-function __drawTable(d, table) {
-    tableDrawer_1.drawTable(d, table);
-}
-exports.__drawTable = __drawTable;
-try {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    var jsPDF = __webpack_require__(16);
-    // Webpack imported jspdf instead of jsPDF for some reason 
-    // while it seemed to work everywhere else.
-    if (jsPDF.jsPDF)
-        jsPDF = jsPDF.jsPDF;
-    applyPlugin(jsPDF);
-}
-catch (error) {
-    // Importing jspdf in nodejs environments does not work as of jspdf
-    // 1.5.3 so we need to silence potential errors to support using for example
-    // the nodejs jspdf dist files with the exported applyPlugin
-}
-
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var htmlParser_1 = __webpack_require__(4);
-var autoTableText_1 = __webpack_require__(5);
-var documentHandler_1 = __webpack_require__(2);
-var inputParser_1 = __webpack_require__(6);
-var tableDrawer_1 = __webpack_require__(7);
-var tableCalculator_1 = __webpack_require__(9);
-function default_1(jsPDF) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    jsPDF.API.autoTable = function () {
-        var args = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            args[_i] = arguments[_i];
-        }
-        var options;
-        if (args.length === 1) {
-            options = args[0];
-        }
-        else {
-            console.error('Use of deprecated autoTable initiation');
-            options = args[2] || {};
-            options.columns = args[0];
-            options.body = args[1];
-        }
-        var input = inputParser_1.parseInput(this, options);
-        var table = tableCalculator_1.createTable(this, input);
-        tableDrawer_1.drawTable(this, table);
-        return this;
-    };
-    // Assign false to enable `doc.lastAutoTable.finalY || 40` sugar
-    jsPDF.API.lastAutoTable = false;
-    jsPDF.API.previousAutoTable = false; // deprecated in v3
-    jsPDF.API.autoTable.previous = false; // deprecated in v3
-    jsPDF.API.autoTableText = function (text, x, y, styles) {
-        autoTableText_1.default(text, x, y, styles, this);
-    };
-    jsPDF.API.autoTableSetDefaults = function (defaults) {
-        documentHandler_1.DocHandler.setDefaults(defaults, this);
-        return this;
-    };
-    jsPDF.autoTableSetDefaults = function (defaults, doc) {
-        documentHandler_1.DocHandler.setDefaults(defaults, doc);
-    };
-    jsPDF.API.autoTableHtmlToJson = function (tableElem, includeHiddenElements) {
-        if (includeHiddenElements === void 0) { includeHiddenElements = false; }
-        if (typeof window === 'undefined') {
-            console.error('Cannot run autoTableHtmlToJson in non browser environment');
-            return null;
-        }
-        var doc = new documentHandler_1.DocHandler(this);
-        var _a = htmlParser_1.parseHtml(doc, tableElem, window, includeHiddenElements, false), head = _a.head, body = _a.body;
-        var columns = head[0].map(function (c) { return c.content; });
-        return { columns: columns, rows: body, data: body };
-    };
-    /**
-     * @deprecated
-     */
-    jsPDF.API.autoTableEndPosY = function () {
-        console.error('Use of deprecated function: autoTableEndPosY. Use doc.lastAutoTable.finalY instead.');
-        var prev = this.lastAutoTable;
-        if (prev && prev.finalY) {
-            return prev.finalY;
-        }
-        else {
-            return 0;
-        }
-    };
-    /**
-     * @deprecated
-     */
-    jsPDF.API.autoTableAddPageContent = function (hook) {
-        console.error('Use of deprecated function: autoTableAddPageContent. Use jsPDF.autoTableSetDefaults({didDrawPage: () => {}}) instead.');
-        if (!jsPDF.API.autoTable.globalDefaults) {
-            jsPDF.API.autoTable.globalDefaults = {};
-        }
-        jsPDF.API.autoTable.globalDefaults.addPageContent = hook;
-        return this;
-    };
-    /**
-     * @deprecated
-     */
-    jsPDF.API.autoTableAddPage = function () {
-        console.error('Use of deprecated function: autoTableAddPage. Use doc.addPage()');
-        this.addPage();
-        return this;
-    };
-}
-exports.default = default_1;
-
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.parseCss = void 0;
-// Limitations
-// - No support for border spacing
-// - No support for transparency
-var common_1 = __webpack_require__(0);
-function parseCss(supportedFonts, element, scaleFactor, style, window) {
-    var result = {};
-    var pxScaleFactor = 96 / 72;
-    var color = parseColor(element, function (elem) {
-        return window.getComputedStyle(elem)['backgroundColor'];
-    });
-    if (color != null)
-        result.fillColor = color;
-    color = parseColor(element, function (elem) {
-        return window.getComputedStyle(elem)['color'];
-    });
-    if (color != null)
-        result.textColor = color;
-    color = parseColor(element, function (elem) {
-        return window.getComputedStyle(elem)['borderTopColor'];
-    });
-    if (color != null)
-        result.lineColor = color;
-    var padding = parsePadding(style, scaleFactor);
-    if (padding)
-        result.cellPadding = padding;
-    // style.borderWidth only works in chrome (borderTopWidth etc works in firefox and ie as well)
-    var bw = parseInt(style.borderTopWidth || '');
-    bw = bw / pxScaleFactor / scaleFactor;
-    if (bw)
-        result.lineWidth = bw;
-    var accepted = ['left', 'right', 'center', 'justify'];
-    if (accepted.indexOf(style.textAlign) !== -1) {
-        result.halign = style.textAlign;
-    }
-    accepted = ['middle', 'bottom', 'top'];
-    if (accepted.indexOf(style.verticalAlign) !== -1) {
-        result.valign = style.verticalAlign;
-    }
-    var res = parseInt(style.fontSize || '');
-    if (!isNaN(res))
-        result.fontSize = res / pxScaleFactor;
-    var fontStyle = parseFontStyle(style);
-    if (fontStyle)
-        result.fontStyle = fontStyle;
-    var font = (style.fontFamily || '').toLowerCase();
-    if (supportedFonts.indexOf(font) !== -1) {
-        result.font = font;
-    }
-    return result;
-}
-exports.parseCss = parseCss;
-function parseFontStyle(style) {
-    var res = '';
-    if (style.fontWeight === 'bold' ||
-        style.fontWeight === 'bolder' ||
-        parseInt(style.fontWeight) >= 700) {
-        res = 'bold';
-    }
-    if (style.fontStyle === 'italic' || style.fontStyle === 'oblique') {
-        res += 'italic';
-    }
-    return res;
-}
-function parseColor(element, styleGetter) {
-    var cssColor = realColor(element, styleGetter);
-    if (!cssColor)
-        return null;
-    var rgba = cssColor.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d*\.?\d*))?\)$/);
-    if (!rgba || !Array.isArray(rgba)) {
-        return null;
-    }
-    var color = [
-        parseInt(rgba[1]),
-        parseInt(rgba[2]),
-        parseInt(rgba[3]),
-    ];
-    var alpha = parseInt(rgba[4]);
-    if (alpha === 0 || isNaN(color[0]) || isNaN(color[1]) || isNaN(color[2])) {
-        return null;
-    }
-    return color;
-}
-function realColor(elem, styleGetter) {
-    var bg = styleGetter(elem);
-    if (bg === 'rgba(0, 0, 0, 0)' ||
-        bg === 'transparent' ||
-        bg === 'initial' ||
-        bg === 'inherit') {
-        if (elem.parentElement == null) {
-            return null;
-        }
-        return realColor(elem.parentElement, styleGetter);
-    }
-    else {
-        return bg;
-    }
-}
-function parsePadding(style, scaleFactor) {
-    var val = [
-        style.paddingTop,
-        style.paddingRight,
-        style.paddingBottom,
-        style.paddingLeft,
-    ];
-    var pxScaleFactor = 96 / (72 / scaleFactor);
-    var linePadding = (parseInt(style.lineHeight) - parseInt(style.fontSize)) / scaleFactor / 2;
-    var inputPadding = val.map(function (n) {
-        return parseInt(n) / pxScaleFactor;
-    });
-    var padding = common_1.parseSpacing(inputPadding, 0);
-    if (linePadding > padding.top) {
-        padding.top = linePadding;
-    }
-    if (linePadding > padding.bottom) {
-        padding.bottom = linePadding;
-    }
-    return padding;
-}
-
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-function default_1(doc, global, document, current) {
-    var _loop_1 = function (options) {
-        if (options && typeof options !== 'object') {
-            console.error('The options parameter should be of type object, is: ' + typeof options);
-        }
-        if (typeof options.extendWidth !== 'undefined') {
-            options.tableWidth = options.extendWidth ? 'auto' : 'wrap';
-            console.error('Use of deprecated option: extendWidth, use tableWidth instead.');
-        }
-        if (typeof options.margins !== 'undefined') {
-            if (typeof options.margin === 'undefined')
-                options.margin = options.margins;
-            console.error('Use of deprecated option: margins, use margin instead.');
-        }
-        if (options.startY && typeof options.startY !== 'number') {
-            console.error('Invalid value for startY option', options.startY);
-            delete options.startY;
-        }
-        if (!options.didDrawPage &&
-            (options.afterPageContent ||
-                options.beforePageContent ||
-                options.afterPageAdd)) {
-            console.error('The afterPageContent, beforePageContent and afterPageAdd hooks are deprecated. Use didDrawPage instead');
-            options.didDrawPage = function (data) {
-                doc.applyStyles(doc.userStyles);
-                if (options.beforePageContent)
-                    options.beforePageContent(data);
-                doc.applyStyles(doc.userStyles);
-                if (options.afterPageContent)
-                    options.afterPageContent(data);
-                doc.applyStyles(doc.userStyles);
-                if (options.afterPageAdd && data.pageNumber > 1) {
-                    ;
-                    data.afterPageAdd(data);
-                }
-                doc.applyStyles(doc.userStyles);
-            };
-        }
-        ;
-        [
-            'createdHeaderCell',
-            'drawHeaderRow',
-            'drawRow',
-            'drawHeaderCell',
-        ].forEach(function (name) {
-            if (options[name]) {
-                console.error("The \"" + name + "\" hook has changed in version 3.0, check the changelog for how to migrate.");
-            }
-        });
-        [
-            ['showFoot', 'showFooter'],
-            ['showHead', 'showHeader'],
-            ['didDrawPage', 'addPageContent'],
-            ['didParseCell', 'createdCell'],
-            ['headStyles', 'headerStyles'],
-        ].forEach(function (_a) {
-            var current = _a[0], deprecated = _a[1];
-            if (options[deprecated]) {
-                console.error("Use of deprecated option " + deprecated + ". Use " + current + " instead");
-                options[current] = options[deprecated];
-            }
-        });
-        [
-            ['padding', 'cellPadding'],
-            ['lineHeight', 'rowHeight'],
-            'fontSize',
-            'overflow',
-        ].forEach(function (o) {
-            var deprecatedOption = typeof o === 'string' ? o : o[0];
-            var style = typeof o === 'string' ? o : o[1];
-            if (typeof options[deprecatedOption] !== 'undefined') {
-                if (typeof options.styles[style] === 'undefined') {
-                    options.styles[style] = options[deprecatedOption];
-                }
-                console.error('Use of deprecated option: ' +
-                    deprecatedOption +
-                    ', use the style ' +
-                    style +
-                    ' instead.');
-            }
-        });
-        for (var _i = 0, _a = [
-            'styles',
-            'bodyStyles',
-            'headStyles',
-            'footStyles',
-        ]; _i < _a.length; _i++) {
-            var styleProp = _a[_i];
-            checkStyles(options[styleProp] || {});
-        }
-        var columnStyles = options['columnStyles'] || {};
-        for (var _b = 0, _c = Object.keys(columnStyles); _b < _c.length; _b++) {
-            var key = _c[_b];
-            checkStyles(columnStyles[key] || {});
-        }
-    };
-    for (var _i = 0, _a = [global, document, current]; _i < _a.length; _i++) {
-        var options = _a[_i];
-        _loop_1(options);
-    }
-}
-exports.default = default_1;
-function checkStyles(styles) {
-    if (styles.rowHeight) {
-        console.error('Use of deprecated style rowHeight. It is renamed to minCellHeight.');
-        if (!styles.minCellHeight) {
-            styles.minCellHeight = styles.rowHeight;
-        }
-    }
-    else if (styles.columnWidth) {
-        console.error('Use of deprecated style columnWidth. It is renamed to cellWidth.');
-        if (!styles.cellWidth) {
-            styles.cellWidth = styles.columnWidth;
-        }
-    }
-}
-
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.CellHookData = exports.HookData = void 0;
-var HookData = /** @class */ (function () {
-    function HookData(doc, table, cursor) {
-        this.table = table;
-        this.pageNumber = table.pageNumber;
-        this.pageCount = this.pageNumber;
-        this.settings = table.settings;
-        this.cursor = cursor;
-        this.doc = doc.getDocument();
-    }
-    return HookData;
-}());
-exports.HookData = HookData;
-var CellHookData = /** @class */ (function (_super) {
-    __extends(CellHookData, _super);
-    function CellHookData(doc, table, cell, row, column, cursor) {
-        var _this = _super.call(this, doc, table, cursor) || this;
-        _this.cell = cell;
-        _this.row = row;
-        _this.column = column;
-        _this.section = row.section;
-        return _this;
-    }
-    return CellHookData;
-}(HookData));
-exports.CellHookData = CellHookData;
-
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ellipsize = exports.resizeColumns = exports.calculateWidths = void 0;
-var common_1 = __webpack_require__(0);
-/**
- * Calculate the column widths
- */
-function calculateWidths(doc, table) {
-    calculate(doc, table);
-    var resizableColumns = [];
-    var initialTableWidth = 0;
-    table.columns.forEach(function (column) {
-        var customWidth = column.getMaxCustomCellWidth(table);
-        if (customWidth) {
-            // final column width
-            column.width = customWidth;
-        }
-        else {
-            // initial column width (will be resized)
-            column.width = column.wrappedWidth;
-            resizableColumns.push(column);
-        }
-        initialTableWidth += column.width;
-    });
-    // width difference that needs to be distributed
-    var resizeWidth = table.getWidth(doc.pageSize().width) - initialTableWidth;
-    // first resize attempt: with respect to minReadableWidth and minWidth
-    if (resizeWidth) {
-        resizeWidth = resizeColumns(resizableColumns, resizeWidth, function (column) {
-            return Math.max(column.minReadableWidth, column.minWidth);
-        });
-    }
-    // second resize attempt: ignore minReadableWidth but respect minWidth
-    if (resizeWidth) {
-        resizeWidth = resizeColumns(resizableColumns, resizeWidth, function (column) { return column.minWidth; });
-    }
-    resizeWidth = Math.abs(resizeWidth);
-    if (resizeWidth > 0.1 / doc.scaleFactor()) {
-        // Table can't get smaller due to custom-width or minWidth restrictions
-        // We can't really do much here. Up to user to for example
-        // reduce font size, increase page size or remove custom cell widths
-        // to allow more columns to be reduced in size
-        resizeWidth = resizeWidth < 1 ? resizeWidth : Math.round(resizeWidth);
-        console.error("Of the table content, " + resizeWidth + " units width could not fit page");
-    }
-    applyColSpans(table);
-    fitContent(table, doc);
-    applyRowSpans(table);
-}
-exports.calculateWidths = calculateWidths;
-function calculate(doc, table) {
-    var sf = doc.scaleFactor();
-    table.allRows().forEach(function (row) {
-        for (var _i = 0, _a = table.columns; _i < _a.length; _i++) {
-            var column = _a[_i];
-            var cell = row.cells[column.index];
-            if (!cell)
-                continue;
-            var hooks = table.hooks.didParseCell;
-            table.callCellHooks(doc, hooks, cell, row, column, null);
-            var padding = cell.padding('horizontal');
-            cell.contentWidth = common_1.getStringWidth(cell.text, cell.styles, doc) + padding;
-            var longestWordWidth = common_1.getStringWidth(cell.text.join(' ').split(/\s+/), cell.styles, doc);
-            cell.minReadableWidth = longestWordWidth + cell.padding('horizontal');
-            if (typeof cell.styles.cellWidth === 'number') {
-                cell.minWidth = cell.styles.cellWidth;
-                cell.wrappedWidth = cell.styles.cellWidth;
-            }
-            else if (cell.styles.cellWidth === 'wrap') {
-                cell.minWidth = cell.contentWidth;
-                cell.wrappedWidth = cell.contentWidth;
-            }
-            else {
-                // auto
-                var defaultMinWidth = 10 / sf;
-                cell.minWidth = cell.styles.minCellWidth || defaultMinWidth;
-                cell.wrappedWidth = cell.contentWidth;
-                if (cell.minWidth > cell.wrappedWidth) {
-                    cell.wrappedWidth = cell.minWidth;
-                }
-            }
-        }
-    });
-    table.allRows().forEach(function (row) {
-        for (var _i = 0, _a = table.columns; _i < _a.length; _i++) {
-            var column = _a[_i];
-            var cell = row.cells[column.index];
-            // For now we ignore the minWidth and wrappedWidth of colspan cells when calculating colspan widths.
-            // Could probably be improved upon however.
-            if (cell && cell.colSpan === 1) {
-                column.wrappedWidth = Math.max(column.wrappedWidth, cell.wrappedWidth);
-                column.minWidth = Math.max(column.minWidth, cell.minWidth);
-                column.minReadableWidth = Math.max(column.minReadableWidth, cell.minReadableWidth);
-            }
-            else {
-                // Respect cellWidth set in columnStyles even if there is no cells for this column
-                // or if the column only have colspan cells. Since the width of colspan cells
-                // does not affect the width of columns, setting columnStyles cellWidth enables the
-                // user to at least do it manually.
-                // Note that this is not perfect for now since for example row and table styles are
-                // not accounted for
-                var columnStyles = table.styles.columnStyles[column.dataKey] ||
-                    table.styles.columnStyles[column.index] ||
-                    {};
-                var cellWidth = columnStyles.cellWidth || columnStyles.minCellWidth;
-                if (cellWidth && typeof cellWidth === 'number') {
-                    column.minWidth = cellWidth;
-                    column.wrappedWidth = cellWidth;
-                }
-            }
-            if (cell) {
-                // Make sure all columns get at least min width even though width calculations are not based on them
-                if (cell.colSpan > 1 && !column.minWidth) {
-                    column.minWidth = cell.minWidth;
-                }
-                if (cell.colSpan > 1 && !column.wrappedWidth) {
-                    column.wrappedWidth = cell.minWidth;
-                }
-            }
-        }
-    });
-}
-/**
- * Distribute resizeWidth on passed resizable columns
- */
-function resizeColumns(columns, resizeWidth, getMinWidth) {
-    var initialResizeWidth = resizeWidth;
-    var sumWrappedWidth = columns.reduce(function (acc, column) { return acc + column.wrappedWidth; }, 0);
-    for (var i = 0; i < columns.length; i++) {
-        var column = columns[i];
-        var ratio = column.wrappedWidth / sumWrappedWidth;
-        var suggestedChange = initialResizeWidth * ratio;
-        var suggestedWidth = column.width + suggestedChange;
-        var minWidth = getMinWidth(column);
-        var newWidth = suggestedWidth < minWidth ? minWidth : suggestedWidth;
-        resizeWidth -= newWidth - column.width;
-        column.width = newWidth;
-    }
-    resizeWidth = Math.round(resizeWidth * 1e10) / 1e10;
-    // Run the resizer again if there's remaining width needs
-    // to be distributed and there're columns that can be resized
-    if (resizeWidth) {
-        var resizableColumns = columns.filter(function (column) {
-            return resizeWidth < 0
-                ? column.width > getMinWidth(column) // check if column can shrink
-                : true; // check if column can grow
-        });
-        if (resizableColumns.length) {
-            resizeWidth = resizeColumns(resizableColumns, resizeWidth, getMinWidth);
-        }
-    }
-    return resizeWidth;
-}
-exports.resizeColumns = resizeColumns;
-function applyRowSpans(table) {
-    var rowSpanCells = {};
-    var colRowSpansLeft = 1;
-    var all = table.allRows();
-    for (var rowIndex = 0; rowIndex < all.length; rowIndex++) {
-        var row = all[rowIndex];
-        for (var _i = 0, _a = table.columns; _i < _a.length; _i++) {
-            var column = _a[_i];
-            var data = rowSpanCells[column.index];
-            if (colRowSpansLeft > 1) {
-                colRowSpansLeft--;
-                delete row.cells[column.index];
-            }
-            else if (data) {
-                data.cell.height += row.height;
-                colRowSpansLeft = data.cell.colSpan;
-                delete row.cells[column.index];
-                data.left--;
-                if (data.left <= 1) {
-                    delete rowSpanCells[column.index];
-                }
-            }
-            else {
-                var cell = row.cells[column.index];
-                if (!cell) {
-                    continue;
-                }
-                cell.height = row.height;
-                if (cell.rowSpan > 1) {
-                    var remaining = all.length - rowIndex;
-                    var left = cell.rowSpan > remaining ? remaining : cell.rowSpan;
-                    rowSpanCells[column.index] = { cell: cell, left: left, row: row };
-                }
-            }
-        }
-    }
-}
-function applyColSpans(table) {
-    var all = table.allRows();
-    for (var rowIndex = 0; rowIndex < all.length; rowIndex++) {
-        var row = all[rowIndex];
-        var colSpanCell = null;
-        var combinedColSpanWidth = 0;
-        var colSpansLeft = 0;
-        for (var columnIndex = 0; columnIndex < table.columns.length; columnIndex++) {
-            var column = table.columns[columnIndex];
-            // Width and colspan
-            colSpansLeft -= 1;
-            if (colSpansLeft > 1 && table.columns[columnIndex + 1]) {
-                combinedColSpanWidth += column.width;
-                delete row.cells[column.index];
-            }
-            else if (colSpanCell) {
-                var cell = colSpanCell;
-                delete row.cells[column.index];
-                colSpanCell = null;
-                cell.width = column.width + combinedColSpanWidth;
-            }
-            else {
-                var cell = row.cells[column.index];
-                if (!cell)
-                    continue;
-                colSpansLeft = cell.colSpan;
-                combinedColSpanWidth = 0;
-                if (cell.colSpan > 1) {
-                    colSpanCell = cell;
-                    combinedColSpanWidth += column.width;
-                    continue;
-                }
-                cell.width = column.width + combinedColSpanWidth;
-            }
-        }
-    }
-}
-function fitContent(table, doc) {
-    var rowSpanHeight = { count: 0, height: 0 };
-    for (var _i = 0, _a = table.allRows(); _i < _a.length; _i++) {
-        var row = _a[_i];
-        for (var _b = 0, _c = table.columns; _b < _c.length; _b++) {
-            var column = _c[_b];
-            var cell = row.cells[column.index];
-            if (!cell)
-                continue;
-            doc.applyStyles(cell.styles, true);
-            var textSpace = cell.width - cell.padding('horizontal');
-            if (cell.styles.overflow === 'linebreak') {
-                // Add one pt to textSpace to fix rounding error
-                cell.text = doc.splitTextToSize(cell.text, textSpace + 1 / doc.scaleFactor(), { fontSize: cell.styles.fontSize });
-            }
-            else if (cell.styles.overflow === 'ellipsize') {
-                cell.text = ellipsize(cell.text, textSpace, cell.styles, doc, '...');
-            }
-            else if (cell.styles.overflow === 'hidden') {
-                cell.text = ellipsize(cell.text, textSpace, cell.styles, doc, '');
-            }
-            else if (typeof cell.styles.overflow === 'function') {
-                cell.text = cell.styles.overflow(cell.text, textSpace);
-            }
-            cell.contentHeight = cell.getContentHeight(doc.scaleFactor());
-            var realContentHeight = cell.contentHeight / cell.rowSpan;
-            if (cell.rowSpan > 1 &&
-                rowSpanHeight.count * rowSpanHeight.height <
-                    realContentHeight * cell.rowSpan) {
-                rowSpanHeight = { height: realContentHeight, count: cell.rowSpan };
-            }
-            else if (rowSpanHeight && rowSpanHeight.count > 0) {
-                if (rowSpanHeight.height > realContentHeight) {
-                    realContentHeight = rowSpanHeight.height;
-                }
-            }
-            if (realContentHeight > row.height) {
-                row.height = realContentHeight;
-            }
-        }
-        rowSpanHeight.count--;
-    }
-}
-function ellipsize(text, width, styles, doc, overflow) {
-    return text.map(function (str) { return ellipsizeStr(str, width, styles, doc, overflow); });
-}
-exports.ellipsize = ellipsize;
-function ellipsizeStr(text, width, styles, doc, overflow) {
-    var precision = 10000 * doc.scaleFactor();
-    width = Math.ceil(width * precision) / precision;
-    if (width >= common_1.getStringWidth(text, styles, doc)) {
-        return text;
-    }
-    while (width < common_1.getStringWidth(text + overflow, styles, doc)) {
-        if (text.length <= 1) {
-            break;
-        }
-        text = text.substring(0, text.length - 1);
-    }
-    return text.trim() + overflow;
-}
-
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports) {
-
-if(typeof __WEBPACK_EXTERNAL_MODULE__16__ === 'undefined') {var e = new Error("Cannot find module 'undefined'"); e.code = 'MODULE_NOT_FOUND'; throw e;}
-module.exports = __WEBPACK_EXTERNAL_MODULE__16__;
-
-/***/ })
-/******/ ]);
-});
 
 /***/ }),
 /* 155 */
@@ -39988,7 +39988,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__routes_js__ = __webpack_require__(163);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppComponent__ = __webpack_require__(252);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AppComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_AppComponent__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_sweetalert2__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_sweetalert2__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_sweetalert2_dist_sweetalert2_min_css__ = __webpack_require__(255);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_sweetalert2_dist_sweetalert2_min_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_sweetalert2_dist_sweetalert2_min_css__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_axios__ = __webpack_require__(259);
@@ -40015,7 +40015,7 @@ window.fecha = __WEBPACK_IMPORTED_MODULE_6__fecha__["a" /* default */];
 var moment = __webpack_require__(0);
 window.moment = moment;
 
-window.Vue = __webpack_require__(15);
+window.Vue = __webpack_require__(16);
 Vue.use(__WEBPACK_IMPORTED_MODULE_2_vue_sweetalert2__["default"]);
 
 if (Array.prototype.includes == undefined) {
@@ -40034,14 +40034,14 @@ var app = new Vue({
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(167);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_LoginComponent__ = __webpack_require__(168);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_LoginComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_LoginComponent__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_LogoutComponent__ = __webpack_require__(173);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_LogoutComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_LogoutComponent__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vue_sweetalert2__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vue_sweetalert2__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__user__ = __webpack_require__(2);
 
 
@@ -52440,7 +52440,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10), __webpack_require__(14)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10), __webpack_require__(15)))
 
 /***/ }),
 /* 167 */
@@ -64038,7 +64038,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gsap__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gsap__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__user__ = __webpack_require__(2);
 //
 //
@@ -64106,7 +64106,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* unused harmony export _getBBox */
 /* unused harmony export _createElement */
 /* unused harmony export checkPrefix */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__gsap_core_js__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__gsap_core_js__ = __webpack_require__(19);
 /*!
  * CSSPlugin 3.6.0
  * https://greensock.com
@@ -65576,7 +65576,7 @@ if (false) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gsap__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gsap__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__user__ = __webpack_require__(2);
 //
 //
@@ -70263,6 +70263,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__user__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__fecha__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_jspdf__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_jspdf_autotable__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_jspdf_autotable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_jspdf_autotable__);
 
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
@@ -70632,6 +70634,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     "app-bar": __WEBPACK_IMPORTED_MODULE_1__components_AppBar___default.a,
@@ -70681,14 +70684,28 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         doc.text('Nro. Teléfono: ' + this.telefono, 1, ++row);
       }
       doc.text("Cliente :      " + this.notaSeleccionada.Cliente, 1, ++row);
-      doc.text("Producto            | P.U. | Cantidad | Total", 1, ++row);
-      var productos = JSON.parse(this.notaSeleccionada.Productos);
-      productos.forEach(function (p) {
-        doc.text(p.producto.padEnd(20) + '| ' + p.precio + ' | S/. ' + p.cantidad + ' | S/.' + p.PrecioTotal, 1, ++row);
+      /*doc.text("Producto            | P.U. | Cantidad | Total",1,++row);
+      let productos = JSON.parse(this.notaSeleccionada.Productos);
+      productos.forEach(p => {
+        doc.text(p.producto.padEnd(20)+'| '+p.precio+' | S/. '+p.cantidad+' | S/.'+p.PrecioTotal,1,++row);
       });
-      doc.text('Total: S/.' + Number(this.notaSeleccionada.MontoTotal).toFixed(2), 1, ++row);
-      doc.text('Monto recibido: ' + (!this.monto ? Number(this.notaSeleccionada.MontoTotal).toFixed(2) : Number(this.monto).toFixed(2)), 1, ++row);
-      doc.text('Vuelto: S/.' + Number((!this.monto ? Number(this.notaSeleccionada.MontoTotal).toFixed(2) : Number(this.monto).toFixed(2)) - Number(this.notaSeleccionada.MontoTotal).toFixed(2)).toFixed(2), 1, ++row);
+      doc.text('Total: S/.'+Number(this.notaSeleccionada.MontoTotal).toFixed(2),1,++row);
+      doc.text('Monto recibido: '+(!this.monto?Number(this.notaSeleccionada.MontoTotal).toFixed(2):Number(this.monto).toFixed(2)),1,++row);
+      doc.text('Vuelto: S/.'+Number((!this.monto?Number(this.notaSeleccionada.MontoTotal).toFixed(2):Number(this.monto).toFixed(2)) - Number(this.notaSeleccionada.MontoTotal).toFixed(2)).toFixed(2),1,++row);*/
+      var productos = JSON.parse(this.notaSeleccionada.Productos);
+      var finalY = ++row;
+      doc.autoTable({
+        theme: 'plain',
+        startY: finalY,
+        head: [['Producto', 'P. U.', 'Cantidad', 'Total']],
+        body: productos.map(function (p) {
+          return [p.producto, Number(p.precio).toFixed(2), p.cantidad, Number(p.PrecioTotal).toFixed(2)];
+        })
+      });
+      finalY = doc.lastAutoTable.finalY;
+      doc.text('Total: S/.' + Number(this.notaSeleccionada.MontoTotal).toFixed(2), 1, ++finalY);
+      doc.text('Monto recibido: ' + (!this.monto ? Number(this.notaSeleccionada.MontoTotal).toFixed(2) : Number(this.monto).toFixed(2)), 1, ++finalY);
+      doc.text('Vuelto: S/.' + Number((!this.monto ? Number(this.notaSeleccionada.MontoTotal).toFixed(2) : Number(this.monto).toFixed(2)) - Number(this.notaSeleccionada.MontoTotal).toFixed(2)).toFixed(2), 1, ++finalY);
       doc.save("boleta.pdf");
     },
     saveYape: function () {
@@ -77123,7 +77140,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_moment__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__user__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_jspdf__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_jspdf_autotable__ = __webpack_require__(154);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_jspdf_autotable__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_jspdf_autotable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_jspdf_autotable__);
 
 
@@ -77492,276 +77509,276 @@ module.exports = function(module) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./af": 19,
-	"./af.js": 19,
-	"./ar": 20,
-	"./ar-dz": 21,
-	"./ar-dz.js": 21,
-	"./ar-kw": 22,
-	"./ar-kw.js": 22,
-	"./ar-ly": 23,
-	"./ar-ly.js": 23,
-	"./ar-ma": 24,
-	"./ar-ma.js": 24,
-	"./ar-sa": 25,
-	"./ar-sa.js": 25,
-	"./ar-tn": 26,
-	"./ar-tn.js": 26,
-	"./ar.js": 20,
-	"./az": 27,
-	"./az.js": 27,
-	"./be": 28,
-	"./be.js": 28,
-	"./bg": 29,
-	"./bg.js": 29,
-	"./bm": 30,
-	"./bm.js": 30,
-	"./bn": 31,
-	"./bn-bd": 32,
-	"./bn-bd.js": 32,
-	"./bn.js": 31,
-	"./bo": 33,
-	"./bo.js": 33,
-	"./br": 34,
-	"./br.js": 34,
-	"./bs": 35,
-	"./bs.js": 35,
-	"./ca": 36,
-	"./ca.js": 36,
-	"./cs": 37,
-	"./cs.js": 37,
-	"./cv": 38,
-	"./cv.js": 38,
-	"./cy": 39,
-	"./cy.js": 39,
-	"./da": 40,
-	"./da.js": 40,
-	"./de": 41,
-	"./de-at": 42,
-	"./de-at.js": 42,
-	"./de-ch": 43,
-	"./de-ch.js": 43,
-	"./de.js": 41,
-	"./dv": 44,
-	"./dv.js": 44,
-	"./el": 45,
-	"./el.js": 45,
-	"./en-au": 46,
-	"./en-au.js": 46,
-	"./en-ca": 47,
-	"./en-ca.js": 47,
-	"./en-gb": 48,
-	"./en-gb.js": 48,
-	"./en-ie": 49,
-	"./en-ie.js": 49,
-	"./en-il": 50,
-	"./en-il.js": 50,
-	"./en-in": 51,
-	"./en-in.js": 51,
-	"./en-nz": 52,
-	"./en-nz.js": 52,
-	"./en-sg": 53,
-	"./en-sg.js": 53,
-	"./eo": 54,
-	"./eo.js": 54,
-	"./es": 55,
-	"./es-do": 56,
-	"./es-do.js": 56,
-	"./es-mx": 57,
-	"./es-mx.js": 57,
-	"./es-us": 58,
-	"./es-us.js": 58,
-	"./es.js": 55,
-	"./et": 59,
-	"./et.js": 59,
-	"./eu": 60,
-	"./eu.js": 60,
-	"./fa": 61,
-	"./fa.js": 61,
-	"./fi": 62,
-	"./fi.js": 62,
-	"./fil": 63,
-	"./fil.js": 63,
-	"./fo": 64,
-	"./fo.js": 64,
-	"./fr": 65,
-	"./fr-ca": 66,
-	"./fr-ca.js": 66,
-	"./fr-ch": 67,
-	"./fr-ch.js": 67,
-	"./fr.js": 65,
-	"./fy": 68,
-	"./fy.js": 68,
-	"./ga": 69,
-	"./ga.js": 69,
-	"./gd": 70,
-	"./gd.js": 70,
-	"./gl": 71,
-	"./gl.js": 71,
-	"./gom-deva": 72,
-	"./gom-deva.js": 72,
-	"./gom-latn": 73,
-	"./gom-latn.js": 73,
-	"./gu": 74,
-	"./gu.js": 74,
-	"./he": 75,
-	"./he.js": 75,
-	"./hi": 76,
-	"./hi.js": 76,
-	"./hr": 77,
-	"./hr.js": 77,
-	"./hu": 78,
-	"./hu.js": 78,
-	"./hy-am": 79,
-	"./hy-am.js": 79,
-	"./id": 80,
-	"./id.js": 80,
-	"./is": 81,
-	"./is.js": 81,
-	"./it": 82,
-	"./it-ch": 83,
-	"./it-ch.js": 83,
-	"./it.js": 82,
-	"./ja": 84,
-	"./ja.js": 84,
-	"./jv": 85,
-	"./jv.js": 85,
-	"./ka": 86,
-	"./ka.js": 86,
-	"./kk": 87,
-	"./kk.js": 87,
-	"./km": 88,
-	"./km.js": 88,
-	"./kn": 89,
-	"./kn.js": 89,
-	"./ko": 90,
-	"./ko.js": 90,
-	"./ku": 91,
-	"./ku.js": 91,
-	"./ky": 92,
-	"./ky.js": 92,
-	"./lb": 93,
-	"./lb.js": 93,
-	"./lo": 94,
-	"./lo.js": 94,
-	"./lt": 95,
-	"./lt.js": 95,
-	"./lv": 96,
-	"./lv.js": 96,
-	"./me": 97,
-	"./me.js": 97,
-	"./mi": 98,
-	"./mi.js": 98,
-	"./mk": 99,
-	"./mk.js": 99,
-	"./ml": 100,
-	"./ml.js": 100,
-	"./mn": 101,
-	"./mn.js": 101,
-	"./mr": 102,
-	"./mr.js": 102,
-	"./ms": 103,
-	"./ms-my": 104,
-	"./ms-my.js": 104,
-	"./ms.js": 103,
-	"./mt": 105,
-	"./mt.js": 105,
-	"./my": 106,
-	"./my.js": 106,
-	"./nb": 107,
-	"./nb.js": 107,
-	"./ne": 108,
-	"./ne.js": 108,
-	"./nl": 109,
-	"./nl-be": 110,
-	"./nl-be.js": 110,
-	"./nl.js": 109,
-	"./nn": 111,
-	"./nn.js": 111,
-	"./oc-lnc": 112,
-	"./oc-lnc.js": 112,
-	"./pa-in": 113,
-	"./pa-in.js": 113,
-	"./pl": 114,
-	"./pl.js": 114,
-	"./pt": 115,
-	"./pt-br": 116,
-	"./pt-br.js": 116,
-	"./pt.js": 115,
-	"./ro": 117,
-	"./ro.js": 117,
-	"./ru": 118,
-	"./ru.js": 118,
-	"./sd": 119,
-	"./sd.js": 119,
-	"./se": 120,
-	"./se.js": 120,
-	"./si": 121,
-	"./si.js": 121,
-	"./sk": 122,
-	"./sk.js": 122,
-	"./sl": 123,
-	"./sl.js": 123,
-	"./sq": 124,
-	"./sq.js": 124,
-	"./sr": 125,
-	"./sr-cyrl": 126,
-	"./sr-cyrl.js": 126,
-	"./sr.js": 125,
-	"./ss": 127,
-	"./ss.js": 127,
-	"./sv": 128,
-	"./sv.js": 128,
-	"./sw": 129,
-	"./sw.js": 129,
-	"./ta": 130,
-	"./ta.js": 130,
-	"./te": 131,
-	"./te.js": 131,
-	"./tet": 132,
-	"./tet.js": 132,
-	"./tg": 133,
-	"./tg.js": 133,
-	"./th": 134,
-	"./th.js": 134,
-	"./tk": 135,
-	"./tk.js": 135,
-	"./tl-ph": 136,
-	"./tl-ph.js": 136,
-	"./tlh": 137,
-	"./tlh.js": 137,
-	"./tr": 138,
-	"./tr.js": 138,
-	"./tzl": 139,
-	"./tzl.js": 139,
-	"./tzm": 140,
-	"./tzm-latn": 141,
-	"./tzm-latn.js": 141,
-	"./tzm.js": 140,
-	"./ug-cn": 142,
-	"./ug-cn.js": 142,
-	"./uk": 143,
-	"./uk.js": 143,
-	"./ur": 144,
-	"./ur.js": 144,
-	"./uz": 145,
-	"./uz-latn": 146,
-	"./uz-latn.js": 146,
-	"./uz.js": 145,
-	"./vi": 147,
-	"./vi.js": 147,
-	"./x-pseudo": 148,
-	"./x-pseudo.js": 148,
-	"./yo": 149,
-	"./yo.js": 149,
-	"./zh-cn": 150,
-	"./zh-cn.js": 150,
-	"./zh-hk": 151,
-	"./zh-hk.js": 151,
-	"./zh-mo": 152,
-	"./zh-mo.js": 152,
-	"./zh-tw": 153,
-	"./zh-tw.js": 153
+	"./af": 20,
+	"./af.js": 20,
+	"./ar": 21,
+	"./ar-dz": 22,
+	"./ar-dz.js": 22,
+	"./ar-kw": 23,
+	"./ar-kw.js": 23,
+	"./ar-ly": 24,
+	"./ar-ly.js": 24,
+	"./ar-ma": 25,
+	"./ar-ma.js": 25,
+	"./ar-sa": 26,
+	"./ar-sa.js": 26,
+	"./ar-tn": 27,
+	"./ar-tn.js": 27,
+	"./ar.js": 21,
+	"./az": 28,
+	"./az.js": 28,
+	"./be": 29,
+	"./be.js": 29,
+	"./bg": 30,
+	"./bg.js": 30,
+	"./bm": 31,
+	"./bm.js": 31,
+	"./bn": 32,
+	"./bn-bd": 33,
+	"./bn-bd.js": 33,
+	"./bn.js": 32,
+	"./bo": 34,
+	"./bo.js": 34,
+	"./br": 35,
+	"./br.js": 35,
+	"./bs": 36,
+	"./bs.js": 36,
+	"./ca": 37,
+	"./ca.js": 37,
+	"./cs": 38,
+	"./cs.js": 38,
+	"./cv": 39,
+	"./cv.js": 39,
+	"./cy": 40,
+	"./cy.js": 40,
+	"./da": 41,
+	"./da.js": 41,
+	"./de": 42,
+	"./de-at": 43,
+	"./de-at.js": 43,
+	"./de-ch": 44,
+	"./de-ch.js": 44,
+	"./de.js": 42,
+	"./dv": 45,
+	"./dv.js": 45,
+	"./el": 46,
+	"./el.js": 46,
+	"./en-au": 47,
+	"./en-au.js": 47,
+	"./en-ca": 48,
+	"./en-ca.js": 48,
+	"./en-gb": 49,
+	"./en-gb.js": 49,
+	"./en-ie": 50,
+	"./en-ie.js": 50,
+	"./en-il": 51,
+	"./en-il.js": 51,
+	"./en-in": 52,
+	"./en-in.js": 52,
+	"./en-nz": 53,
+	"./en-nz.js": 53,
+	"./en-sg": 54,
+	"./en-sg.js": 54,
+	"./eo": 55,
+	"./eo.js": 55,
+	"./es": 56,
+	"./es-do": 57,
+	"./es-do.js": 57,
+	"./es-mx": 58,
+	"./es-mx.js": 58,
+	"./es-us": 59,
+	"./es-us.js": 59,
+	"./es.js": 56,
+	"./et": 60,
+	"./et.js": 60,
+	"./eu": 61,
+	"./eu.js": 61,
+	"./fa": 62,
+	"./fa.js": 62,
+	"./fi": 63,
+	"./fi.js": 63,
+	"./fil": 64,
+	"./fil.js": 64,
+	"./fo": 65,
+	"./fo.js": 65,
+	"./fr": 66,
+	"./fr-ca": 67,
+	"./fr-ca.js": 67,
+	"./fr-ch": 68,
+	"./fr-ch.js": 68,
+	"./fr.js": 66,
+	"./fy": 69,
+	"./fy.js": 69,
+	"./ga": 70,
+	"./ga.js": 70,
+	"./gd": 71,
+	"./gd.js": 71,
+	"./gl": 72,
+	"./gl.js": 72,
+	"./gom-deva": 73,
+	"./gom-deva.js": 73,
+	"./gom-latn": 74,
+	"./gom-latn.js": 74,
+	"./gu": 75,
+	"./gu.js": 75,
+	"./he": 76,
+	"./he.js": 76,
+	"./hi": 77,
+	"./hi.js": 77,
+	"./hr": 78,
+	"./hr.js": 78,
+	"./hu": 79,
+	"./hu.js": 79,
+	"./hy-am": 80,
+	"./hy-am.js": 80,
+	"./id": 81,
+	"./id.js": 81,
+	"./is": 82,
+	"./is.js": 82,
+	"./it": 83,
+	"./it-ch": 84,
+	"./it-ch.js": 84,
+	"./it.js": 83,
+	"./ja": 85,
+	"./ja.js": 85,
+	"./jv": 86,
+	"./jv.js": 86,
+	"./ka": 87,
+	"./ka.js": 87,
+	"./kk": 88,
+	"./kk.js": 88,
+	"./km": 89,
+	"./km.js": 89,
+	"./kn": 90,
+	"./kn.js": 90,
+	"./ko": 91,
+	"./ko.js": 91,
+	"./ku": 92,
+	"./ku.js": 92,
+	"./ky": 93,
+	"./ky.js": 93,
+	"./lb": 94,
+	"./lb.js": 94,
+	"./lo": 95,
+	"./lo.js": 95,
+	"./lt": 96,
+	"./lt.js": 96,
+	"./lv": 97,
+	"./lv.js": 97,
+	"./me": 98,
+	"./me.js": 98,
+	"./mi": 99,
+	"./mi.js": 99,
+	"./mk": 100,
+	"./mk.js": 100,
+	"./ml": 101,
+	"./ml.js": 101,
+	"./mn": 102,
+	"./mn.js": 102,
+	"./mr": 103,
+	"./mr.js": 103,
+	"./ms": 104,
+	"./ms-my": 105,
+	"./ms-my.js": 105,
+	"./ms.js": 104,
+	"./mt": 106,
+	"./mt.js": 106,
+	"./my": 107,
+	"./my.js": 107,
+	"./nb": 108,
+	"./nb.js": 108,
+	"./ne": 109,
+	"./ne.js": 109,
+	"./nl": 110,
+	"./nl-be": 111,
+	"./nl-be.js": 111,
+	"./nl.js": 110,
+	"./nn": 112,
+	"./nn.js": 112,
+	"./oc-lnc": 113,
+	"./oc-lnc.js": 113,
+	"./pa-in": 114,
+	"./pa-in.js": 114,
+	"./pl": 115,
+	"./pl.js": 115,
+	"./pt": 116,
+	"./pt-br": 117,
+	"./pt-br.js": 117,
+	"./pt.js": 116,
+	"./ro": 118,
+	"./ro.js": 118,
+	"./ru": 119,
+	"./ru.js": 119,
+	"./sd": 120,
+	"./sd.js": 120,
+	"./se": 121,
+	"./se.js": 121,
+	"./si": 122,
+	"./si.js": 122,
+	"./sk": 123,
+	"./sk.js": 123,
+	"./sl": 124,
+	"./sl.js": 124,
+	"./sq": 125,
+	"./sq.js": 125,
+	"./sr": 126,
+	"./sr-cyrl": 127,
+	"./sr-cyrl.js": 127,
+	"./sr.js": 126,
+	"./ss": 128,
+	"./ss.js": 128,
+	"./sv": 129,
+	"./sv.js": 129,
+	"./sw": 130,
+	"./sw.js": 130,
+	"./ta": 131,
+	"./ta.js": 131,
+	"./te": 132,
+	"./te.js": 132,
+	"./tet": 133,
+	"./tet.js": 133,
+	"./tg": 134,
+	"./tg.js": 134,
+	"./th": 135,
+	"./th.js": 135,
+	"./tk": 136,
+	"./tk.js": 136,
+	"./tl-ph": 137,
+	"./tl-ph.js": 137,
+	"./tlh": 138,
+	"./tlh.js": 138,
+	"./tr": 139,
+	"./tr.js": 139,
+	"./tzl": 140,
+	"./tzl.js": 140,
+	"./tzm": 141,
+	"./tzm-latn": 142,
+	"./tzm-latn.js": 142,
+	"./tzm.js": 141,
+	"./ug-cn": 143,
+	"./ug-cn.js": 143,
+	"./uk": 144,
+	"./uk.js": 144,
+	"./ur": 145,
+	"./ur.js": 145,
+	"./uz": 146,
+	"./uz-latn": 147,
+	"./uz-latn.js": 147,
+	"./uz.js": 146,
+	"./vi": 148,
+	"./vi.js": 148,
+	"./x-pseudo": 149,
+	"./x-pseudo.js": 149,
+	"./yo": 150,
+	"./yo.js": 150,
+	"./zh-cn": 151,
+	"./zh-cn.js": 151,
+	"./zh-hk": 152,
+	"./zh-hk.js": 152,
+	"./zh-mo": 153,
+	"./zh-mo.js": 153,
+	"./zh-tw": 154,
+	"./zh-tw.js": 154
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -78051,7 +78068,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__user__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__fecha__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_jspdf__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_jspdf_autotable__ = __webpack_require__(154);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_jspdf_autotable__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_jspdf_autotable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_jspdf_autotable__);
 
 
@@ -81836,7 +81853,7 @@ module.exports = __webpack_require__(260);
 var utils = __webpack_require__(6);
 var bind = __webpack_require__(155);
 var Axios = __webpack_require__(262);
-var defaults = __webpack_require__(13);
+var defaults = __webpack_require__(14);
 
 /**
  * Create an instance of Axios
@@ -81919,7 +81936,7 @@ function isSlowBuffer (obj) {
 "use strict";
 
 
-var defaults = __webpack_require__(13);
+var defaults = __webpack_require__(14);
 var utils = __webpack_require__(6);
 var InterceptorManager = __webpack_require__(271);
 var dispatchRequest = __webpack_require__(272);
@@ -82460,7 +82477,7 @@ module.exports = InterceptorManager;
 var utils = __webpack_require__(6);
 var transformData = __webpack_require__(273);
 var isCancel = __webpack_require__(158);
-var defaults = __webpack_require__(13);
+var defaults = __webpack_require__(14);
 var isAbsoluteURL = __webpack_require__(274);
 var combineURLs = __webpack_require__(275);
 

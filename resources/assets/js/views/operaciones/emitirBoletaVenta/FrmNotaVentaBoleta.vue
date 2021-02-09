@@ -362,6 +362,7 @@ import data from "../../../data";
 import usuario from "../../../user";
 import fechaActual from '../../../fecha';
 import { jsPDF } from "jspdf";
+import 'jspdf-autotable';
 
 export default {
   components: {
@@ -419,14 +420,26 @@ export default {
         doc.text('Nro. Teléfono: '+this.telefono,1,++row);
       }
       doc.text("Cliente :      "+this.notaSeleccionada.Cliente,1,++row);
-      doc.text("Producto            | P.U. | Cantidad | Total",1,++row);
+      /*doc.text("Producto            | P.U. | Cantidad | Total",1,++row);
       let productos = JSON.parse(this.notaSeleccionada.Productos);
       productos.forEach(p => {
         doc.text(p.producto.padEnd(20)+'| '+p.precio+' | S/. '+p.cantidad+' | S/.'+p.PrecioTotal,1,++row);
       });
       doc.text('Total: S/.'+Number(this.notaSeleccionada.MontoTotal).toFixed(2),1,++row);
       doc.text('Monto recibido: '+(!this.monto?Number(this.notaSeleccionada.MontoTotal).toFixed(2):Number(this.monto).toFixed(2)),1,++row);
-      doc.text('Vuelto: S/.'+Number((!this.monto?Number(this.notaSeleccionada.MontoTotal).toFixed(2):Number(this.monto).toFixed(2)) - Number(this.notaSeleccionada.MontoTotal).toFixed(2)).toFixed(2),1,++row);
+      doc.text('Vuelto: S/.'+Number((!this.monto?Number(this.notaSeleccionada.MontoTotal).toFixed(2):Number(this.monto).toFixed(2)) - Number(this.notaSeleccionada.MontoTotal).toFixed(2)).toFixed(2),1,++row);*/
+      let productos = JSON.parse(this.notaSeleccionada.Productos);
+      let finalY = ++row;
+      doc.autoTable({
+          theme: 'plain',
+          startY: finalY,
+          head: [['Producto', 'P. U.','Cantidad','Total']],
+          body: productos.map(p=>[p.producto,Number(p.precio).toFixed(2),p.cantidad,Number(p.PrecioTotal).toFixed(2)])
+      });
+      finalY = doc.lastAutoTable.finalY;
+      doc.text('Total: S/.'+Number(this.notaSeleccionada.MontoTotal).toFixed(2),1,++finalY);
+      doc.text('Monto recibido: '+(!this.monto?Number(this.notaSeleccionada.MontoTotal).toFixed(2):Number(this.monto).toFixed(2)),1,++finalY);
+      doc.text('Vuelto: S/.'+Number((!this.monto?Number(this.notaSeleccionada.MontoTotal).toFixed(2):Number(this.monto).toFixed(2)) - Number(this.notaSeleccionada.MontoTotal).toFixed(2)).toFixed(2),1,++finalY);
       doc.save("boleta.pdf",);
     },
     async saveYape(){
