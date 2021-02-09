@@ -109,6 +109,8 @@ class emitirNotaVController extends Controller
               LIMIT 1"
         );
 
+        $nv = json_decode($nv);
+
         return JSON_ENCODE(
             (object) [
                      'status' => $_SESSION["STATUS_SUCCES"],
