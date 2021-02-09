@@ -78293,7 +78293,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
     computed: {
         totalEfectivo: function totalEfectivo() {
-            if (this.listaEfectivo.length == 0) return 0;
+            if (this.listaEfectivo.length == 0) return Number(0).toFixed(2);
             var monto = 0;
             this.listaEfectivo.forEach(function (e) {
                 return monto += Number(e.Monto);
@@ -78301,7 +78301,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             return Number(monto).toFixed(2);
         },
         totalYape: function totalYape() {
-            if (this.listaYape.length == 0) return 0;
+            if (this.listaYape.length == 0) return Number(0).toFixed(2);
             var monto = 0;
             this.listaYape.forEach(function (e) {
                 return monto += Number(e.Monto);
@@ -78309,7 +78309,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             return Number(monto).toFixed(2);
         },
         totalTodo: function totalTodo() {
-            if (this.listaTotal.length == 0) return 0;
+            if (this.listaTotal.length == 0) return Number(0).toFixed(2);
             var monto = 0;
             this.listaTotal.forEach(function (e) {
                 return monto += Number(e.Monto);
@@ -78318,9 +78318,17 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         }
     },
     methods: {
+        getTotal: function getTotal(list) {
+            if (list.length == 0) return Number(0).toFixed(2);
+            var monto = 0;
+            list.forEach(function (e) {
+                return monto += Number(e.Monto);
+            });
+            return Number(monto).toFixed(2);
+        },
         generatePDF: function () {
             var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
-                var response, lista, listaEfectivo, listaYape, doc;
+                var response, lista, listaEfectivo, listaYape, doc, finalY;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
                     while (1) {
                         switch (_context.prev = _context.next) {
@@ -78339,25 +78347,47 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 });
                                 doc = new __WEBPACK_IMPORTED_MODULE_5_jspdf__["default"]();
 
-                                doc.setFontSize(12);
-                                doc.text("DULCEKAT", 90, 9);
-                                doc.text("REPORTE DE VENTAS", 80, 18);
-                                doc.text("PAGOS EN EFECTIVO", 80, 27);
-                                doc.autoTable({
-                                    startY: 40,
-                                    head: [['Código', 'Monto']],
-                                    body: [[], [], []]
-                                });
 
-                                doc.text("PAGOS EN EFECTIVO", 80);
+                                doc.text("DULCEKAT", 90, 34);
+                                doc.text("REPORTE DE VENTAS", 80, 46);
+                                doc.setFontSize(12);
+                                doc.text("PAGOS EN EFECTIVO", 15, 65);
+                                finalY = 70;
+
                                 doc.autoTable({
-                                    startY: 90,
+                                    startY: finalY,
                                     head: [['Código', 'Monto']],
-                                    body: [['4', '15.00'], ['5', '15.00'], ['3', '15.00']]
+                                    body: listaEfectivo.map(function (e) {
+                                        return [e.Codigo, 'S/.' + Number(e.Monto).toFixed(2)];
+                                    })
                                 });
+                                finalY = doc.lastAutoTable.finalY + 4;
+                                doc.text('CANTIDAD: ' + listaEfectivo.length + '   TOTAL: S/.' + this.getTotal(listaEfectivo), 15, finalY);
+
+                                doc.text('PAGOS EN YAPE', 14, finalY + 15);
+                                doc.autoTable({
+                                    startY: finalY + 20,
+                                    head: [['Código', 'Monto']],
+                                    body: listaYape.map(function (e) {
+                                        return [e.Codigo, 'S/.' + Number(e.Monto).toFixed(2)];
+                                    })
+                                });
+                                finalY = doc.lastAutoTable.finalY + 4;
+                                doc.text('CANTIDAD: ' + listaYape.length + '   TOTAL: S/.' + this.getTotal(listaYape), 15, finalY);
+
+                                doc.text('PAGOS TOTALES', 14, finalY + 15);
+                                doc.autoTable({
+                                    startY: finalY + 20,
+                                    head: [['Código', 'Monto']],
+                                    body: lista.map(function (e) {
+                                        return [e.Codigo, 'S/.' + Number(e.Monto).toFixed(2)];
+                                    })
+                                });
+                                finalY = doc.lastAutoTable.finalY + 4;
+                                doc.text('CANTIDAD: ' + lista.length + '   TOTAL: S/.' + this.getTotal(lista), 15, finalY);
                                 doc.save('ReporteVentas.pdf');
 
-                            case 15:
+                            case 24:
                             case 'end':
                                 return _context.stop();
                         }

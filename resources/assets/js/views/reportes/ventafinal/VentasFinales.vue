@@ -250,48 +250,70 @@ export default {
     },
     computed : {
         totalEfectivo(){
-            if(this.listaEfectivo.length == 0)  return 0;
+            if(this.listaEfectivo.length == 0)  return Number(0).toFixed(2);
             let monto = 0;
             this.listaEfectivo.forEach(e=>monto+=Number(e.Monto));
             return Number(monto).toFixed(2);
         },
         totalYape(){
-            if(this.listaYape.length == 0)  return 0;
+            if(this.listaYape.length == 0)  return Number(0).toFixed(2);
             let monto = 0;
             this.listaYape.forEach(e=>monto+=Number(e.Monto));
             return Number(monto).toFixed(2);
         },
         totalTodo(){
-            if(this.listaTotal.length == 0)  return 0;
+            if(this.listaTotal.length == 0)  return Number(0).toFixed(2);
             let monto = 0;
             this.listaTotal.forEach(e=>monto+=Number(e.Monto));
             return Number(monto).toFixed(2);
         }
     },
     methods:{
+        getTotal(list){
+            if(list.length == 0)  return Number(0).toFixed(2);
+            let monto = 0;
+            list.forEach(e=>monto+=Number(e.Monto));
+            return Number(monto).toFixed(2);
+        },
         async generatePDF(){
             const response = await axios.get('api/emitirRBVbyFecha?token='+usuario.getData().token);
             const lista = Array.isArray(response.data.data)?response.data.data:[response.data.data];
             const listaEfectivo = lista.filter(a=>a.TipodePago == 'EFECTIVO');
             const listaYape = lista.filter(a=>a.TipodePago == 'YAPE');
             
-            const doc = new jsPDF();
-            doc.setFontSize(12);
-            doc.text("DULCEKAT", 90, 9);
-            doc.text("REPORTE DE VENTAS", 80, 18);
-            doc.text("PAGOS EN EFECTIVO", 80, 27);
-            doc.autoTable({
-                startY : 40,
-                head   : [['Código', 'Monto']],
-                body   : [[],[],[]],
-            });
 
-            doc.text("PAGOS EN EFECTIVO", 80, );
+            const doc = new jsPDF();
+
+            doc.text("DULCEKAT", 90, 34);
+            doc.text("REPORTE DE VENTAS", 80, 46);
+            doc.setFontSize(12);
+            doc.text("PAGOS EN EFECTIVO", 15, 65);
+            let finalY = 70;
             doc.autoTable({
-                startY : 90,
-                head   : [['Código', 'Monto']],
-                body   : [['4','15.00'],['5','15.00'],['3','15.00']],
+                startY: finalY,
+                head: [['Código', 'Monto']],
+                body: listaEfectivo.map(e=>[e.Codigo,'S/.'+Number(e.Monto).toFixed(2)]),
             });
+            finalY = doc.lastAutoTable.finalY+4
+            doc.text('CANTIDAD: '+listaEfectivo.length+'   TOTAL: S/.'+this.getTotal((listaEfectivo)),15,finalY);
+
+            doc.text('PAGOS EN YAPE', 14, finalY + 15)
+            doc.autoTable({
+                startY: finalY + 20,
+                head: [['Código', 'Monto']],
+                body: listaYape.map(e=>[e.Codigo,'S/.'+Number(e.Monto).toFixed(2)]),
+            });
+            finalY = doc.lastAutoTable.finalY+4;
+            doc.text('CANTIDAD: '+listaYape.length+'   TOTAL: S/.'+this.getTotal((listaYape)),15,finalY);
+
+            doc.text('PAGOS TOTALES', 14, finalY + 15)
+            doc.autoTable({
+                startY: finalY + 20,
+                head: [['Código', 'Monto']],
+                body: lista.map(e=>[e.Codigo,'S/.'+Number(e.Monto).toFixed(2)]),
+            });
+            finalY = doc.lastAutoTable.finalY+4;
+            doc.text('CANTIDAD: '+lista.length+'   TOTAL: S/.'+this.getTotal((lista)),15,finalY);
             doc.save('ReporteVentas.pdf');
         },
         async emitirBalance(){
