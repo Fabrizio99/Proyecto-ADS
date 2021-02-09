@@ -31,7 +31,7 @@
                                 <div class="form-row justify-content-center">
                                     <div class="form-group col-12">
                                         <label for="exampleInputPassword1">Emitir Balance de caja</label>
-                                         <input type="button" class="btn btn-primary btn-block btnbuscar" value="EMITIR"/>
+                                         <input type="button" class="btn btn-primary btn-block btnbuscar" value="EMITIR" @click="openModal"/>
                                     </div>
 
                                     <div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -59,22 +59,10 @@
                                                                                     </tr>
                                                                                 </thead>
                                                                                 <tbody>     
-                                                                                    <tr>
-                                                                                    <td>BV-001</td>
-                                                                                    <td>s/. 15.0</td>
-                                                                                    </tr> 
-                                                                                    <tr>
-                                                                                    <td>BV-001</td>
-                                                                                    <td>s/. 15.0</td>
-                                                                                    </tr> 
-                                                                                    <tr>
-                                                                                    <td>BV-001</td>
-                                                                                    <td>s/. 15.0</td>
-                                                                                    </tr> 
-                                                                                    <tr>
-                                                                                    <td>BV-001</td>
-                                                                                    <td>s/. 15.0</td>
-                                                                                    </tr> 
+                                                                                    <tr v-for="boleta in listaEfectivo" :key="boleta.Codigo">
+                                                                                    <td>{{boleta.Codigo}}</td>
+                                                                                    <td>s/.{{Number(boleta.Monto).toFixed(2)}}</td>
+                                                                                    </tr>
                                                                                 </tbody>
                                                                             </table>
                                                                         </div>
@@ -94,8 +82,8 @@
                                                                                 </thead>
                                                                                 <tbody>     
                                                                                     <tr>
-                                                                                    <td>4</td>
-                                                                                    <td>s/. 40.0</td>
+                                                                                    <td>{{listaEfectivo.length}}</td>
+                                                                                    <td>s/.{{totalEfectivo}}</td>
                                                                                     </tr> 
                                                                                 </tbody>
                                                                             </table>
@@ -118,22 +106,12 @@
                                                                                     </tr>
                                                                                 </thead>
                                                                                 <tbody>     
-                                                                                    <tr>
-                                                                                    <td>BV-001</td>
-                                                                                    <td>s/. 15.0</td>
-                                                                                    </tr> 
-                                                                                    <tr>
-                                                                                    <td>BV-001</td>
-                                                                                    <td>s/. 15.0</td>
-                                                                                    </tr> 
-                                                                                    <tr>
-                                                                                    <td>BV-001</td>
-                                                                                    <td>s/. 15.0</td>
-                                                                                    </tr> 
-                                                                                    <tr>
-                                                                                    <td>BV-001</td>
-                                                                                    <td>s/. 15.0</td>
-                                                                                    </tr> 
+                                                                                    <tbody>     
+                                                                                    <tr v-for="boleta in listaYape" :key="boleta.Codigo">
+                                                                                    <td>{{boleta.Codigo}}</td>
+                                                                                    <td>s/.{{Number(boleta.Monto).toFixed(2)}}</td>
+                                                                                    </tr>
+                                                                                </tbody>
                                                                                 </tbody>
                                                                             </table>
                                                                         </div>
@@ -153,8 +131,8 @@
                                                                                 </thead>
                                                                                 <tbody>     
                                                                                     <tr>
-                                                                                    <td>4</td>
-                                                                                    <td>s/. 40.0</td>
+                                                                                    <td>{{listaYape.length}}</td>
+                                                                                    <td>s/.{{totalYape}}</td>
                                                                                     </tr> 
                                                                                 </tbody>
                                                                             </table>
@@ -177,22 +155,10 @@
                                                                                     </tr>
                                                                                 </thead>
                                                                                 <tbody>     
-                                                                                    <tr>
-                                                                                    <td>BV-001</td>
-                                                                                    <td>s/. 15.0</td>
-                                                                                    </tr> 
-                                                                                    <tr>
-                                                                                    <td>BV-001</td>
-                                                                                    <td>s/. 15.0</td>
-                                                                                    </tr> 
-                                                                                    <tr>
-                                                                                    <td>BV-001</td>
-                                                                                    <td>s/. 15.0</td>
-                                                                                    </tr> 
-                                                                                    <tr>
-                                                                                    <td>BV-001</td>
-                                                                                    <td>s/. 15.0</td>
-                                                                                    </tr> 
+                                                                                    <tr v-for="boleta in listaTotal" :key="boleta.Codigo">
+                                                                                    <td>{{boleta.Codigo}}</td>
+                                                                                    <td>s/.{{Number(boleta.Monto).toFixed(2)}}</td>
+                                                                                    </tr>
                                                                                 </tbody>
                                                                             </table>
                                                                         </div>
@@ -212,8 +178,8 @@
                                                                                 </thead>
                                                                                 <tbody>     
                                                                                     <tr>
-                                                                                    <td>4</td>
-                                                                                    <td>s/. 40.0</td>
+                                                                                    <td>{{listaTotal.length}}</td>
+                                                                                    <td>s/.{{totalTodo}}</td>
                                                                                     </tr> 
                                                                                 </tbody>
                                                                             </table>
@@ -284,6 +250,26 @@ export default {
             listaTotal : []
         }
     },
+    computed : {
+        totalEfectivo(){
+            if(this.listaEfectivo.length == 0)  return 0;
+            let monto = 0;
+            this.listaEfectivo.forEach(e=>monto+=Number(e.Monto).toFixed(2));
+            return monto;
+        },
+        totalYape(){
+            if(this.listaYape.length == 0)  return 0;
+            let monto = 0;
+            this.listaYape.forEach(e=>monto+=Number(e.Monto).toFixed(2));
+            return monto;
+        },
+        totalTodo(){
+            if(this.listaTotal.length == 0)  return 0;
+            let monto = 0;
+            this.listaTotal.forEach(e=>monto+=Number(e.Monto).toFixed(2));
+            return monto;
+        }
+    },
     methods:{
         async generatePDF(){
             /*let response = await axios.get('api/getEmitirRI?token='+usuario.getData().token);
@@ -330,10 +316,21 @@ export default {
                 this.listaYape = lista.filter(a=>a.TipodePago == 'YAPE');
                 this.listaTotal = lista;
             }else{
+                if(response.data.msj == 'Sin resultados.'){
+                    this.listaEfectivo = [];
+                    this.listaYape = [];
+                    this.listaTotal = [];
+                }
                 alert('Error: '+response.data.msj);
             } 
-            //$('#Modal2').modal('show');
         },
+        openModal(){
+            if(this.fecha != fechaActual){
+                alert('Mensaje: Solo se genera reporte de la fecha actual');
+                return;
+            }
+            $('#Modal2').modal('show');
+        }
     },
     mounted(){
         this.emitirBalance();

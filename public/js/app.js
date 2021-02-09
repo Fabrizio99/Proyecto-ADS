@@ -78271,40 +78271,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -78327,6 +78293,32 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         };
     },
 
+    computed: {
+        totalEfectivo: function totalEfectivo() {
+            if (this.listaEfectivo.length == 0) return 0;
+            var monto = 0;
+            this.listaEfectivo.forEach(function (e) {
+                return monto += Number(e.Monto).toFixed(2);
+            });
+            return monto;
+        },
+        totalYape: function totalYape() {
+            if (this.listaYape.length == 0) return 0;
+            var monto = 0;
+            this.listaYape.forEach(function (e) {
+                return monto += Number(e.Monto).toFixed(2);
+            });
+            return monto;
+        },
+        totalTodo: function totalTodo() {
+            if (this.listaTotal.length == 0) return 0;
+            var monto = 0;
+            this.listaTotal.forEach(function (e) {
+                return monto += Number(e.Monto).toFixed(2);
+            });
+            return monto;
+        }
+    },
     methods: {
         generatePDF: function () {
             var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
@@ -78410,9 +78402,13 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                     });
                                     this.listaTotal = lista;
                                 } else {
+                                    if (response.data.msj == 'Sin resultados.') {
+                                        this.listaEfectivo = [];
+                                        this.listaYape = [];
+                                        this.listaTotal = [];
+                                    }
                                     alert('Error: ' + response.data.msj);
                                 }
-                                //$('#Modal2').modal('show');
 
                             case 4:
                             case 'end':
@@ -78427,7 +78423,14 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             }
 
             return emitirBalance;
-        }()
+        }(),
+        openModal: function openModal() {
+            if (this.fecha != __WEBPACK_IMPORTED_MODULE_4__fecha__["a" /* default */]) {
+                alert('Mensaje: Solo se genera reporte de la fecha actual');
+                return;
+            }
+            $('#Modal2').modal('show');
+        }
     },
     mounted: function mounted() {
         this.emitirBalance();
@@ -78523,7 +78526,20 @@ var render = function() {
                         "div",
                         { staticClass: "form-row justify-content-center" },
                         [
-                          _vm._m(1),
+                          _c("div", { staticClass: "form-group col-12" }, [
+                            _c(
+                              "label",
+                              { attrs: { for: "exampleInputPassword1" } },
+                              [_vm._v("Emitir Balance de caja")]
+                            ),
+                            _vm._v(" "),
+                            _c("input", {
+                              staticClass:
+                                "btn btn-primary btn-block btnbuscar",
+                              attrs: { type: "button", value: "EMITIR" },
+                              on: { click: _vm.openModal }
+                            })
+                          ]),
                           _vm._v(" "),
                           _c(
                             "div",
@@ -78546,9 +78562,442 @@ var render = function() {
                                 },
                                 [
                                   _c("div", { staticClass: "modal-content" }, [
-                                    _vm._m(2),
+                                    _vm._m(1),
                                     _vm._v(" "),
-                                    _vm._m(3),
+                                    _c("div", { staticClass: "modal-body" }, [
+                                      _c("div", { staticClass: "row" }, [
+                                        _c("div", { staticClass: "col-4" }, [
+                                          _c("div", { staticClass: "card" }, [
+                                            _c(
+                                              "div",
+                                              { staticClass: "card-body" },
+                                              [
+                                                _c(
+                                                  "h4",
+                                                  { staticClass: "card-title" },
+                                                  [_vm._v("Pagos en Efectivo")]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "div",
+                                                  { staticClass: "row" },
+                                                  [
+                                                    _c(
+                                                      "div",
+                                                      { staticClass: "col-12" },
+                                                      [
+                                                        _c(
+                                                          "table",
+                                                          {
+                                                            staticClass: "table"
+                                                          },
+                                                          [
+                                                            _vm._m(2),
+                                                            _vm._v(" "),
+                                                            _c(
+                                                              "tbody",
+                                                              _vm._l(
+                                                                _vm.listaEfectivo,
+                                                                function(
+                                                                  boleta
+                                                                ) {
+                                                                  return _c(
+                                                                    "tr",
+                                                                    {
+                                                                      key:
+                                                                        boleta.Codigo
+                                                                    },
+                                                                    [
+                                                                      _c("td", [
+                                                                        _vm._v(
+                                                                          _vm._s(
+                                                                            boleta.Codigo
+                                                                          )
+                                                                        )
+                                                                      ]),
+                                                                      _vm._v(
+                                                                        " "
+                                                                      ),
+                                                                      _c("td", [
+                                                                        _vm._v(
+                                                                          "s/." +
+                                                                            _vm._s(
+                                                                              Number(
+                                                                                boleta.Monto
+                                                                              ).toFixed(
+                                                                                2
+                                                                              )
+                                                                            )
+                                                                        )
+                                                                      ])
+                                                                    ]
+                                                                  )
+                                                                }
+                                                              ),
+                                                              0
+                                                            )
+                                                          ]
+                                                        )
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "card mt-2" },
+                                            [
+                                              _c(
+                                                "div",
+                                                { staticClass: "card-body" },
+                                                [
+                                                  _c(
+                                                    "div",
+                                                    { staticClass: "row" },
+                                                    [
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass: "col-12"
+                                                        },
+                                                        [
+                                                          _c(
+                                                            "table",
+                                                            {
+                                                              staticClass:
+                                                                "table"
+                                                            },
+                                                            [
+                                                              _vm._m(3),
+                                                              _vm._v(" "),
+                                                              _c("tbody", [
+                                                                _c("tr", [
+                                                                  _c("td", [
+                                                                    _vm._v(
+                                                                      _vm._s(
+                                                                        _vm
+                                                                          .listaEfectivo
+                                                                          .length
+                                                                      )
+                                                                    )
+                                                                  ]),
+                                                                  _vm._v(" "),
+                                                                  _c("td", [
+                                                                    _vm._v(
+                                                                      "s/." +
+                                                                        _vm._s(
+                                                                          _vm.totalEfectivo
+                                                                        )
+                                                                    )
+                                                                  ])
+                                                                ])
+                                                              ])
+                                                            ]
+                                                          )
+                                                        ]
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "col-4" }, [
+                                          _c("div", { staticClass: "card" }, [
+                                            _c(
+                                              "div",
+                                              { staticClass: "card-body" },
+                                              [
+                                                _c(
+                                                  "h4",
+                                                  { staticClass: "card-title" },
+                                                  [_vm._v("Pagos por Yape")]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "div",
+                                                  { staticClass: "row" },
+                                                  [
+                                                    _c(
+                                                      "div",
+                                                      { staticClass: "col-12" },
+                                                      [
+                                                        _c(
+                                                          "table",
+                                                          {
+                                                            staticClass: "table"
+                                                          },
+                                                          [
+                                                            _vm._m(4),
+                                                            _vm._v(" "),
+                                                            _c("tbody", [
+                                                              _c(
+                                                                "tbody",
+                                                                _vm._l(
+                                                                  _vm.listaYape,
+                                                                  function(
+                                                                    boleta
+                                                                  ) {
+                                                                    return _c(
+                                                                      "tr",
+                                                                      {
+                                                                        key:
+                                                                          boleta.Codigo
+                                                                      },
+                                                                      [
+                                                                        _c(
+                                                                          "td",
+                                                                          [
+                                                                            _vm._v(
+                                                                              _vm._s(
+                                                                                boleta.Codigo
+                                                                              )
+                                                                            )
+                                                                          ]
+                                                                        ),
+                                                                        _vm._v(
+                                                                          " "
+                                                                        ),
+                                                                        _c(
+                                                                          "td",
+                                                                          [
+                                                                            _vm._v(
+                                                                              "s/." +
+                                                                                _vm._s(
+                                                                                  Number(
+                                                                                    boleta.Monto
+                                                                                  ).toFixed(
+                                                                                    2
+                                                                                  )
+                                                                                )
+                                                                            )
+                                                                          ]
+                                                                        )
+                                                                      ]
+                                                                    )
+                                                                  }
+                                                                ),
+                                                                0
+                                                              )
+                                                            ])
+                                                          ]
+                                                        )
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "card mt-2" },
+                                            [
+                                              _c(
+                                                "div",
+                                                { staticClass: "card-body" },
+                                                [
+                                                  _c(
+                                                    "div",
+                                                    { staticClass: "row" },
+                                                    [
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass: "col-12"
+                                                        },
+                                                        [
+                                                          _c(
+                                                            "table",
+                                                            {
+                                                              staticClass:
+                                                                "table"
+                                                            },
+                                                            [
+                                                              _vm._m(5),
+                                                              _vm._v(" "),
+                                                              _c("tbody", [
+                                                                _c("tr", [
+                                                                  _c("td", [
+                                                                    _vm._v(
+                                                                      _vm._s(
+                                                                        _vm
+                                                                          .listaYape
+                                                                          .length
+                                                                      )
+                                                                    )
+                                                                  ]),
+                                                                  _vm._v(" "),
+                                                                  _c("td", [
+                                                                    _vm._v(
+                                                                      "s/." +
+                                                                        _vm._s(
+                                                                          _vm.totalYape
+                                                                        )
+                                                                    )
+                                                                  ])
+                                                                ])
+                                                              ])
+                                                            ]
+                                                          )
+                                                        ]
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "col-4" }, [
+                                          _c("div", { staticClass: "card" }, [
+                                            _c(
+                                              "div",
+                                              { staticClass: "card-body" },
+                                              [
+                                                _c(
+                                                  "h4",
+                                                  { staticClass: "card-title" },
+                                                  [_vm._v("Pagos Totales")]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "div",
+                                                  { staticClass: "row" },
+                                                  [
+                                                    _c(
+                                                      "div",
+                                                      { staticClass: "col-12" },
+                                                      [
+                                                        _c(
+                                                          "table",
+                                                          {
+                                                            staticClass: "table"
+                                                          },
+                                                          [
+                                                            _vm._m(6),
+                                                            _vm._v(" "),
+                                                            _c(
+                                                              "tbody",
+                                                              _vm._l(
+                                                                _vm.listaTotal,
+                                                                function(
+                                                                  boleta
+                                                                ) {
+                                                                  return _c(
+                                                                    "tr",
+                                                                    {
+                                                                      key:
+                                                                        boleta.Codigo
+                                                                    },
+                                                                    [
+                                                                      _c("td", [
+                                                                        _vm._v(
+                                                                          _vm._s(
+                                                                            boleta.Codigo
+                                                                          )
+                                                                        )
+                                                                      ]),
+                                                                      _vm._v(
+                                                                        " "
+                                                                      ),
+                                                                      _c("td", [
+                                                                        _vm._v(
+                                                                          "s/." +
+                                                                            _vm._s(
+                                                                              Number(
+                                                                                boleta.Monto
+                                                                              ).toFixed(
+                                                                                2
+                                                                              )
+                                                                            )
+                                                                        )
+                                                                      ])
+                                                                    ]
+                                                                  )
+                                                                }
+                                                              ),
+                                                              0
+                                                            )
+                                                          ]
+                                                        )
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "card mt-2" },
+                                            [
+                                              _c(
+                                                "div",
+                                                { staticClass: "card-body" },
+                                                [
+                                                  _c(
+                                                    "div",
+                                                    { staticClass: "row" },
+                                                    [
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass: "col-12"
+                                                        },
+                                                        [
+                                                          _c(
+                                                            "table",
+                                                            {
+                                                              staticClass:
+                                                                "table"
+                                                            },
+                                                            [
+                                                              _vm._m(7),
+                                                              _vm._v(" "),
+                                                              _c("tbody", [
+                                                                _c("tr", [
+                                                                  _c("td", [
+                                                                    _vm._v(
+                                                                      _vm._s(
+                                                                        _vm
+                                                                          .listaTotal
+                                                                          .length
+                                                                      )
+                                                                    )
+                                                                  ]),
+                                                                  _vm._v(" "),
+                                                                  _c("td", [
+                                                                    _vm._v(
+                                                                      "s/." +
+                                                                        _vm._s(
+                                                                          _vm.totalTodo
+                                                                        )
+                                                                    )
+                                                                  ])
+                                                                ])
+                                                              ])
+                                                            ]
+                                                          )
+                                                        ]
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ])
+                                      ])
+                                    ]),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "modal-footer" }, [
                                       _c(
@@ -78575,7 +79024,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "mx-4 mt-4" }, [
                 _c("table", { staticClass: "table" }, [
-                  _vm._m(4),
+                  _vm._m(8),
                   _vm._v(" "),
                   _c(
                     "tbody",
@@ -78622,21 +79071,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group col-12" }, [
-      _c("label", { attrs: { for: "exampleInputPassword1" } }, [
-        _vm._v("Emitir Balance de caja")
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "btn btn-primary btn-block btnbuscar",
-        attrs: { type: "button", value: "EMITIR" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-header" }, [
       _c(
         "h5",
@@ -78662,253 +79096,71 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-body" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-4" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-body" }, [
-              _c("h4", { staticClass: "card-title" }, [
-                _vm._v("Pagos en Efectivo")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-12" }, [
-                  _c("table", { staticClass: "table" }, [
-                    _c("thead", [
-                      _c("tr", [
-                        _c("th", { attrs: { scope: "col" } }, [
-                          _vm._v("Código")
-                        ]),
-                        _vm._v(" "),
-                        _c("th", { attrs: { scope: "col" } }, [_vm._v("Monto")])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("tbody", [
-                      _c("tr", [
-                        _c("td", [_vm._v("BV-001")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("s/. 15.0")])
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c("td", [_vm._v("BV-001")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("s/. 15.0")])
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c("td", [_vm._v("BV-001")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("s/. 15.0")])
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c("td", [_vm._v("BV-001")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("s/. 15.0")])
-                      ])
-                    ])
-                  ])
-                ])
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card mt-2" }, [
-            _c("div", { staticClass: "card-body" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-12" }, [
-                  _c("table", { staticClass: "table" }, [
-                    _c("thead", [
-                      _c("tr", [
-                        _c("th", { attrs: { scope: "col" } }, [
-                          _vm._v("Cantidad")
-                        ]),
-                        _vm._v(" "),
-                        _c("th", { attrs: { scope: "col" } }, [
-                          _vm._v("Monto Total")
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("tbody", [
-                      _c("tr", [
-                        _c("td", [_vm._v("4")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("s/. 40.0")])
-                      ])
-                    ])
-                  ])
-                ])
-              ])
-            ])
-          ])
-        ]),
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Código")]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-4" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-body" }, [
-              _c("h4", { staticClass: "card-title" }, [
-                _vm._v("Pagos por Yape")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-12" }, [
-                  _c("table", { staticClass: "table" }, [
-                    _c("thead", [
-                      _c("tr", [
-                        _c("th", { attrs: { scope: "col" } }, [
-                          _vm._v("Código")
-                        ]),
-                        _vm._v(" "),
-                        _c("th", { attrs: { scope: "col" } }, [_vm._v("Monto")])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("tbody", [
-                      _c("tr", [
-                        _c("td", [_vm._v("BV-001")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("s/. 15.0")])
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c("td", [_vm._v("BV-001")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("s/. 15.0")])
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c("td", [_vm._v("BV-001")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("s/. 15.0")])
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c("td", [_vm._v("BV-001")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("s/. 15.0")])
-                      ])
-                    ])
-                  ])
-                ])
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card mt-2" }, [
-            _c("div", { staticClass: "card-body" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-12" }, [
-                  _c("table", { staticClass: "table" }, [
-                    _c("thead", [
-                      _c("tr", [
-                        _c("th", { attrs: { scope: "col" } }, [
-                          _vm._v("Cantidad")
-                        ]),
-                        _vm._v(" "),
-                        _c("th", { attrs: { scope: "col" } }, [
-                          _vm._v("Monto Total")
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("tbody", [
-                      _c("tr", [
-                        _c("td", [_vm._v("4")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("s/. 40.0")])
-                      ])
-                    ])
-                  ])
-                ])
-              ])
-            ])
-          ])
-        ]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Monto")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Cantidad")]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-4" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-body" }, [
-              _c("h4", { staticClass: "card-title" }, [
-                _vm._v("Pagos Totales")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-12" }, [
-                  _c("table", { staticClass: "table" }, [
-                    _c("thead", [
-                      _c("tr", [
-                        _c("th", { attrs: { scope: "col" } }, [
-                          _vm._v("Código")
-                        ]),
-                        _vm._v(" "),
-                        _c("th", { attrs: { scope: "col" } }, [_vm._v("Monto")])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("tbody", [
-                      _c("tr", [
-                        _c("td", [_vm._v("BV-001")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("s/. 15.0")])
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c("td", [_vm._v("BV-001")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("s/. 15.0")])
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c("td", [_vm._v("BV-001")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("s/. 15.0")])
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c("td", [_vm._v("BV-001")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("s/. 15.0")])
-                      ])
-                    ])
-                  ])
-                ])
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card mt-2" }, [
-            _c("div", { staticClass: "card-body" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-12" }, [
-                  _c("table", { staticClass: "table" }, [
-                    _c("thead", [
-                      _c("tr", [
-                        _c("th", { attrs: { scope: "col" } }, [
-                          _vm._v("Cantidad")
-                        ]),
-                        _vm._v(" "),
-                        _c("th", { attrs: { scope: "col" } }, [
-                          _vm._v("Monto Total")
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("tbody", [
-                      _c("tr", [
-                        _c("td", [_vm._v("4")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("s/. 40.0")])
-                      ])
-                    ])
-                  ])
-                ])
-              ])
-            ])
-          ])
-        ])
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Monto Total")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Código")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Monto")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Cantidad")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Monto Total")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Código")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Monto")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Cantidad")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Monto Total")])
       ])
     ])
   },
