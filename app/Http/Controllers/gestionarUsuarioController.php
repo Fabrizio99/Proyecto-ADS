@@ -107,7 +107,7 @@ class gestionarUsuarioController extends Controller
                 return JSON_ENCODE(
                     (object) [
                         'status' => $_SESSION["STATUS_CONTROL"], //status del back
-                        'msj'    => 'La contraseña debe tener minimo 5 caracteres.' //
+                        'msj'    => 'Verificar campo vacio.' //
                     ]
                 ); 
         }
@@ -117,7 +117,7 @@ class gestionarUsuarioController extends Controller
             return JSON_ENCODE(
                 (object) [
                     'status' => $_SESSION["STATUS_CONTROL"], //status del back
-                    'msj'    => 'El telefono debe tener 9 caracteres' //
+                    'msj'    => 'Verificar campo vacio.' //
                 ]
             ); 
         }
@@ -127,14 +127,14 @@ class gestionarUsuarioController extends Controller
             return JSON_ENCODE(
                 (object) [
                     'status' => $_SESSION["STATUS_CONTROL"],
-                    'msj'    => 'El numero de DNI debe tener  8 caracteres '
+                    'msj'    => 'Verificar campo vacio.'
                 ]
             ); 
         }else if ($req->tipoDoc == $TIPO_PASAPORTE && strlen($req->numDoc) <> 12) { // CARNET DE PASAPORTE
             return JSON_ENCODE(
                 (object) [
                     'status' => $_SESSION["STATUS_CONTROL"],
-                    'msj'    => 'el pasaporte debe tener minimo 16 caracteres '
+                    'msj'    => 'Verificar campo vacio.'
                 ]
             );
         }
@@ -195,7 +195,7 @@ class gestionarUsuarioController extends Controller
             return JSON_ENCODE(
                 (object) [
                     'status' => $_SESSION["STATUS_CONTROL"], //status del back
-                    'msj'    => 'El telefono debe tener  9 caracteres.' //
+                    'msj'    => 'Verificar campo vacio.' //
                 ]
             ); 
         }
@@ -205,14 +205,14 @@ class gestionarUsuarioController extends Controller
             return JSON_ENCODE(
                 (object) [
                     'status' => $_SESSION["STATUS_CONTROL"],
-                    'msj'    => 'El numero de DNI debe tener  8 caracteres '
+                    'msj'    => 'Verificar campo vacio.'
                 ]
             ); 
         }else if ($req->tipoDoc == $TIPO_PASAPORTE && strlen($req->numDoc) <> 12) { // CARNET DE PASAPORTE
             return JSON_ENCODE(
                 (object) [
                     'status' => $_SESSION["STATUS_CONTROL"],
-                    'msj'    => 'el pasaporte debe tener minimo 16 caracteres '
+                    'msj'    => 'Verificar campo vacio.'
                 ]
             );
         }
