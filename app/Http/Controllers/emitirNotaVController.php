@@ -45,12 +45,12 @@ class emitirNotaVController extends Controller
         $TIPO_DNI = 1;
         $TIPO_PASAPORTE = 2;
 
-        $isValidate = isNullEmpty($req->nombre    , 'nombreP'   , 'El campo nombre no puede ser vacio.') ?:
-                      isNullEmpty($req->tipoDoc   , 'tipoD'     , 'El campo tipo de documento no puede ser vacio.') ?: 
-                      isNullEmpty($req->numDoc    , 'numeroD'   , 'El campo numero de documento no puede ser vacio.') ?: 
-                      isNullEmpty($req->direccion , 'direccion' , 'El campo direccion no puede ser vacio.') ?: 
-                      isNullEmpty($req->celular   , 'celular'   , 'El campo celulaar no puede ser vacio.') ?: 
-                      isNullEmpty($req->fecha     , 'fecha'     , 'El campo celulaar no puede ser vacio.');
+        $isValidate = isNullEmpty($req->nombre    , 'nombreP'   , 'Verificar campo vacio.') ?:
+                      isNullEmpty($req->tipoDoc   , 'tipoD'     , 'Verificar campo vacio.') ?: 
+                      isNullEmpty($req->numDoc    , 'numeroD'   , 'Verificar campo vacio.') ?: 
+                      isNullEmpty($req->direccion , 'direccion' , 'Verificar campo vacio.') ?: 
+                      isNullEmpty($req->celular   , 'celular'   , 'Verificar campo vacio.') ?: 
+                      isNullEmpty($req->fecha     , 'fecha'     , 'Verificar campo vacio.');
         
          if($isValidate){
            return $isValidate;
@@ -110,7 +110,7 @@ class emitirNotaVController extends Controller
     }
 
     function eliminarNV(Request $req) {
-        $validacion = isNullEmpty($req->notaIdBv,'','El notaIdBv no puede estar vacio') ;
+        $validacion = isNullEmpty($req->notaIdBv,'','Verificar campo vacio.') ;
 
         if($validacion){
             return $validacion;
@@ -129,11 +129,11 @@ class emitirNotaVController extends Controller
         $TIPO_DNI = 1;
         $TIPO_PASAPORTE = 2;
         
-        $validacion = isNullEmpty($req->nombre    , 'nombreP'  , 'El campo nombre no puede ser vacio.') ?:
-                      isNullEmpty($req->tipoDoc   , 'tipoD'    , 'El campo tipo de documento no puede ser vacio.') ?: 
-                      isNullEmpty($req->numDoc    , 'numeroD'  , 'El campo numero de documento no puede ser vacio.') ?: 
-                      isNullEmpty($req->direccion , 'direccion', 'El campo direccion no puede ser vacio.')?: 
-                      isNullEmpty($req->celular   , 'celular'  , 'El campo celulaar no puede ser vacio.');
+        $validacion = isNullEmpty($req->nombre    , 'nombreP'  , 'Verificar campo vacio.') ?:
+                      isNullEmpty($req->tipoDoc   , 'tipoD'    , 'Verificar campo vacio.') ?: 
+                      isNullEmpty($req->numDoc    , 'numeroD'  , 'Verificar campo vacio.') ?: 
+                      isNullEmpty($req->direccion , 'direccion', 'Verificar campo vacio.')?: 
+                      isNullEmpty($req->celular   , 'celular'  , 'Verificar campo vacio.');
 
         if($validacion){
             return $validacion;

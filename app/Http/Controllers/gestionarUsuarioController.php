@@ -49,7 +49,7 @@ class gestionarUsuarioController extends Controller
     //-----Buscar Usuario------
     function getBuscarUsuario (Request $req){
 
-        $isValidate = isNullEmpty($req->cmpbusqueda,'cmpbusqueda','el campo buscador no puede estar vacio');
+        $isValidate = isNullEmpty($req->cmpbusqueda,'cmpbusqueda','Verificar campo vacio.');
 
         if($isValidate){
             return $isValidate;
@@ -87,14 +87,14 @@ class gestionarUsuarioController extends Controller
         $TIPO_DNI = 1;
         $TIPO_PASAPORTE = 2;
         
-        $ValidacionCampos = isNullEmpty($req->nombres    ,'nombres'    ,'El campo nombres no puede estar vacio') ?:
-                            isNullEmpty($req->apellidos  ,'apellidos'  ,'El campo apellidos no puede estar vacio') ?: 
-                            isNullEmpty($req->direccion  ,'direccion'  ,'El campo dirección no puede estar vacio') ?:  
-                            isNullEmpty($req->telefono   ,'telefono'   ,'El campo telefono no puede estar vacio') ?:
-                            isNullEmpty($req->rol        ,'rol'        ,'El campo cargo no puede estar vacio') ?:
-                            isNullEmpty($req->tipoDoc    ,'tipoDoc'    ,'El campo tipoDocumento no puede estar vacio') ?:
-                            isNullEmpty($req->numDoc     ,'numDoc'     ,'El campo numero DNI no puede estar vacio') ?: 
-                            isNullEmpty($req->contrasenia,'contrasenia','El campo contrasenia no puede estar vacio');
+        $ValidacionCampos = isNullEmpty($req->nombres    ,'nombres'    ,'Verificar campo vacio.') ?:
+                            isNullEmpty($req->apellidos  ,'apellidos'  ,'Verificar campo vacio.') ?: 
+                            isNullEmpty($req->direccion  ,'direccion'  ,'Verificar campo vacio.') ?:  
+                            isNullEmpty($req->telefono   ,'telefono'   ,'Verificar campo vacio.') ?:
+                            isNullEmpty($req->rol        ,'rol'        ,'Verificar campo vacio.') ?:
+                            isNullEmpty($req->tipoDoc    ,'tipoDoc'    ,'Verificar campo vacio.') ?:
+                            isNullEmpty($req->numDoc     ,'numDoc'     ,'Verificar campo vacio.') ?: 
+                            isNullEmpty($req->contrasenia,'contrasenia','Verificar campo vacio.');
 
         if($ValidacionCampos){
             return $ValidacionCampos;
@@ -161,7 +161,7 @@ class gestionarUsuarioController extends Controller
     //---Eliminar Usuario
     function deleteUsuario (Request $req){
 
-        $ValidacionCampos = isNullEmpty($req->numDoc,'numDoc','El campo numero documento no puede estar vacio');
+        $ValidacionCampos = isNullEmpty($req->numDoc,'numDoc','Verificar campo vacio.');
         
         if($ValidacionCampos){
             return $ValidacionCampos;
@@ -174,13 +174,13 @@ class gestionarUsuarioController extends Controller
     function modificarUsuario (Request $req){
         $TIPO_DNI = 1;
         $TIPO_PASAPORTE = 2;
-        $ValidacionCampos = isNullEmpty($req->nombres    , 'nombres'    , 'Digite correctamente el nombre')?: 
-                            isNullEmpty($req->apellidos  , 'apellidos'  , 'Digite correctamente el apellido') ?: 
-                            isNullEmpty($req->direccion  , 'direccion'  , 'Digite correctamente direccion') ?:
-                            isNullEmpty($req->telefono   , 'telefono'   , 'Digite correctamente el telefono') ?:
-                            isNullEmpty($req->rol        , 'rol'        , 'Digite correctamente el rol') ?:
-                            isNullEmpty($req->numDoc     , 'numDoc'     , 'Digite correctamente el documento') ?: 
-                            isNullEmpty($req->tipoDoc    , 'tipoDoc'    , 'Digite correctamente el tipo documento');
+        $ValidacionCampos = isNullEmpty($req->nombres    , 'nombres'    , 'Verificar campo vacio. ')?: 
+                            isNullEmpty($req->apellidos  , 'apellidos'  , 'Verificar campo vacio. ') ?: 
+                            isNullEmpty($req->direccion  , 'direccion'  , 'Verificar campo vacio. ') ?:
+                            isNullEmpty($req->telefono   , 'telefono'   , 'Verificar campo vacio. ') ?:
+                            isNullEmpty($req->rol        , 'rol'        , 'Verificar campo vacio. ') ?:
+                            isNullEmpty($req->numDoc     , 'numDoc'     , 'Verificar campo vacio. ') ?: 
+                            isNullEmpty($req->tipoDoc    , 'tipoDoc'    , 'Verificar campo vacio. ');
                             
         // validaciones de campos            
         if($ValidacionCampos){
