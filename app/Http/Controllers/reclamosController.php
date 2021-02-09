@@ -55,8 +55,8 @@ class reclamosController extends Controller
                     ) AS Productos,
                     nv.monto AS MontoTotal
                 FROM boleta b,
-                    documentos d,
-                    notadeventas nv
+                     documentos d,
+                     notadeventas nv
                 WHERE (CASE WHEN '{$req->codBoleta}' IS NOT NULL AND '{$req->codBoleta}' <> ''
                                         THEN b.NOTADEVENTAS_id_boletaventa = '{$req->codBoleta}' AND b.NOTADEVENTAS_id_boletaventa = nv.id_boletaventa
                                         ELSE 1 = 1
@@ -85,10 +85,10 @@ class reclamosController extends Controller
     
     function postRegistrar(Request $req){
 
-        $isValidate = isNullEmpty($req->descripcion, 'descripcion', 'Verificar campo vacio. ') ?:
-                      isNullEmpty($req->id_boleta  , 'id_boleta'  , 'Verificar campo vacio. ') ?: 
-                      isNullEmpty($req->fecha      , 'fecha'      , 'Verificar campo vacio. ') ?: 
-                      isNullEmpty($req->solucion   , 'solucion'   , 'Verificar campo vacio. ');
+        $isValidate = isNullEmpty($req->descripcion, 'descripcion', 'Verificar campos. ') ?:
+                      isNullEmpty($req->id_boleta  , 'id_boleta'  , 'Verificar campos. ') ?: 
+                      isNullEmpty($req->fecha      , 'fecha'      , 'Verificar campos. ') ?: 
+                      isNullEmpty($req->solucion   , 'solucion'   , 'Verificar campos. ');
         
         if ($isValidate){
             return  $isValidate;
