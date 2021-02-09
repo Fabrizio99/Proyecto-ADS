@@ -75824,6 +75824,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
 
 
 
@@ -75951,6 +75952,13 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
       return saveNotaVenta;
     }(),
+    validateQuantity: function validateQuantity() {
+      if (this.cantidadProductoSeleccionado <= 0 || this.cantidadProductoSeleccionado > this.productoSeleccionado.stock) {
+        alert('Error: Seleccione una cantidad válida');
+      } else {
+        $('#confirmModal').modal('show');
+      }
+    },
     saveProduct: function saveProduct() {
       if (this.cantidadProductoSeleccionado <= 0 || this.cantidadProductoSeleccionado > this.productoSeleccionado.stock) {
         alert('Error: Seleccione una cantidad válida');
@@ -76680,7 +76688,13 @@ var render = function() {
                                 domProps: {
                                   value:
                                     _vm.productoSeleccionado.precio *
-                                    _vm.cantidadProductoSeleccionado
+                                      _vm.cantidadProductoSeleccionado <=
+                                    0
+                                      ? 0
+                                      : Number(
+                                          _vm.productoSeleccionado.precio *
+                                            _vm.cantidadProductoSeleccionado
+                                        ).toFixed(2)
                                 }
                               })
                             ])
@@ -76697,7 +76711,7 @@ var render = function() {
                   {
                     staticClass: "btn btn-primary btnguarda-registro",
                     attrs: { type: "button" },
-                    on: { click: _vm.modalAddProduct }
+                    on: { click: _vm.validateQuantity }
                   },
                   [_vm._v("Agregar")]
                 )
