@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 //initialController
-Route::get('getLogin'     , 'initialController@getLogin');
+Route::get('getLogin'         , 'initialController@getLogin');
 Route::get('cmbRol'           , 'initialController@cmbRol')->middleware('validateAuth');
 Route::post('registrarUsuario', 'initialController@registrarUsuario')->middleware('validateAuth');
 
@@ -15,7 +15,6 @@ Route::post('postRegistrar', 'reclamosController@postRegistrar')->middleware('va
 Route::get('getEmitirRI'         , 'reporteInvController@getEmitirRI'   )->middleware('validateAuth');
 Route::get('totalProdCosto'      , 'reporteInvController@totalProdCosto')->middleware('validateAuth');
 Route::get('estadisticaProductos', 'reporteInvController@estadisticaProductos')->middleware('validateAuth');
-
 
 //gestionarUsuarioController-Listo para Probar (Font)
 Route::get('listaUsuario'     , 'gestionarUsuarioController@listaUsuario'    )->middleware('validateAuth');
@@ -56,5 +55,3 @@ Route::post('registrarPago'    , 'emitirBvController@registrarPago'     )->middl
 Route::get('listaBoletaE'      ,'emitirReporteVdController@listaBoletaE')->middleware('validateAuth');
 Route::get('emitirRBVbyFecha'  ,'emitirReporteVdController@emitirRBVbyFecha')->middleware('validateAuth');
 Route::post('guardarIncidencia','emitirReporteVdController@guardarIncidencia')->middleware('validateAuth');
-
-///Otra ruta 
