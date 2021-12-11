@@ -1,5 +1,5 @@
-# Proyecto ADS
-Proyecto para el curso de ADS, hecha con Laravel y Vue.js, usando autenticación JWT.
+# Proyecto Arquitectura
+Proyecto para el curso de Arquitectura de Software, hecha con Laravel y Vue.js, usando autenticación JWT.
 
 # ¿Cómo subir?
 ```git
