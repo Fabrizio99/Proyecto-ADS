@@ -40056,158 +40056,158 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
 
 var originalPush = __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */].prototype.push;
 __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */].prototype.push = function push(location) {
-    return originalPush.call(this, location).catch(function (err) {
-        return err;
-    });
+  return originalPush.call(this, location).catch(function (err) {
+    return err;
+  });
 };
 
 var routes = [{
-    path: '/',
-    name: 'inicio',
-    redirect: { name: 'main' }
+  path: "/",
+  name: "inicio",
+  redirect: { name: "main" }
 }, {
-    path: '/login',
-    name: 'login',
-    component: __WEBPACK_IMPORTED_MODULE_2__components_LoginComponent___default.a
+  path: "/login",
+  name: "login",
+  component: __WEBPACK_IMPORTED_MODULE_2__components_LoginComponent___default.a
 }, {
-    path: '/logout',
-    name: 'logout',
-    component: __WEBPACK_IMPORTED_MODULE_3__components_LogoutComponent___default.a
+  path: "/logout",
+  name: "logout",
+  component: __WEBPACK_IMPORTED_MODULE_3__components_LogoutComponent___default.a
 }, {
-    path: '/inicio',
-    name: 'main',
-    component: __webpack_require__(179)
+  path: "/inicio",
+  name: "main",
+  component: __webpack_require__(179)
 }, {
-    path: '/usuarios',
-    name: 'user',
-    component: __webpack_require__(187),
-    meta: {
-        module: 'usuario'
-    }
+  path: "/usuarios",
+  name: "user",
+  component: __webpack_require__(187),
+  meta: {
+    module: "usuario"
+  }
 }, {
-    path: '/formulario-usuario/:accion',
-    name: 'formUser',
-    component: __webpack_require__(190),
-    props: true,
-    meta: {
-        module: 'usuario'
-    }
+  path: "/formulario-usuario/:accion",
+  name: "formUser",
+  component: __webpack_require__(190),
+  props: true,
+  meta: {
+    module: "usuario"
+  }
 }, {
-    path: '/gestion-productos',
-    name: 'gproductos',
-    component: __webpack_require__(196),
-    meta: {
-        module: 'producto'
-    }
+  path: "/gestion-productos",
+  name: "gproductos",
+  component: __webpack_require__(196),
+  meta: {
+    module: "producto"
+  }
 }, {
-    path: '/formulario-productos/:accion',
-    name: 'crearproductos',
-    component: __webpack_require__(199),
-    props: true,
-    meta: {
-        module: 'producto'
-    }
+  path: "/formulario-productos/:accion",
+  name: "crearproductos",
+  component: __webpack_require__(199),
+  props: true,
+  meta: {
+    module: "producto"
+  }
 }, {
-    path: '/form-modificar-productos',
-    name: 'modificarproductos',
-    component: __webpack_require__(202),
-    meta: {
-        module: 'producto'
-    }
+  path: "/form-modificar-productos",
+  name: "modificarproductos",
+  component: __webpack_require__(202),
+  meta: {
+    module: "producto"
+  }
 }, {
-    path: '/formulario-boletas-productos',
-    name: 'formBolProd',
-    component: __webpack_require__(205),
-    meta: {
-        module: 'entregar producto'
-    }
+  path: "/formulario-boletas-productos",
+  name: "formBolProd",
+  component: __webpack_require__(205),
+  meta: {
+    module: "entregar producto"
+  }
 }, {
-    path: '/formulario-lista-productos',
-    name: 'formProductos',
-    component: __webpack_require__(208),
-    meta: {
-        module: 'entregar producto'
-    }
+  path: "/formulario-lista-productos",
+  name: "formProductos",
+  component: __webpack_require__(208),
+  meta: {
+    module: "entregar producto"
+  }
 }, {
-    path: '/formulario-notaVenta-boletas',
-    name: 'formNVB',
-    component: __webpack_require__(213),
-    meta: {
-        module: 'emitir boleta de venta'
-    }
+  path: "/formulario-notaVenta-boletas",
+  name: "formNVB",
+  component: __webpack_require__(213),
+  meta: {
+    module: "emitir boleta de venta"
+  }
 }, {
-    path: '/formulario-detalle-notaVenta',
-    name: 'formDetalleNV',
-    component: __webpack_require__(217),
-    meta: {
-        module: 'emitir nota de venta'
-    }
+  path: "/formulario-detalle-notaVenta",
+  name: "formDetalleNV",
+  component: __webpack_require__(217),
+  meta: {
+    module: "emitir nota de venta"
+  }
 }, {
-    path: '/nota-venta',
-    name: 'notaVenta',
-    component: __webpack_require__(222),
-    meta: {
-        module: 'emitir nota de venta'
-    }
+  path: "/nota-venta",
+  name: "notaVenta",
+  component: __webpack_require__(222),
+  meta: {
+    module: "emitir nota de venta"
+  }
 }, {
-    path: '/formulario-inventario',
-    name: 'inventario',
-    component: __webpack_require__(227),
-    meta: {
-        module: 'inventario'
-    }
+  path: "/formulario-inventario",
+  name: "inventario",
+  component: __webpack_require__(227),
+  meta: {
+    module: "inventario"
+  }
 }, {
-    path: '/formulario-ventafinal',
-    name: 'VF',
-    component: __webpack_require__(232),
-    meta: {
-        module: 'venta finales del dia'
-    }
+  path: "/formulario-ventafinal",
+  name: "VF",
+  component: __webpack_require__(232),
+  meta: {
+    module: "venta finales del dia"
+  }
 }, {
-    path: '/reclamos',
-    name: 'reclamos',
-    component: __webpack_require__(235),
-    meta: {
-        module: 'registrar reclamo'
-    }
+  path: "/reclamos",
+  name: "reclamos",
+  component: __webpack_require__(235),
+  meta: {
+    module: "registrar reclamo"
+  }
 }, {
-    path: '/error',
-    name: 'error',
-    component: __webpack_require__(246)
+  path: "/error",
+  name: "error",
+  component: __webpack_require__(246)
 }, {
-    path: '*',
-    name: '404',
-    component: __webpack_require__(249)
+  path: "*",
+  name: "404",
+  component: __webpack_require__(249)
 }];
 
 var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
-    routes: routes
+  routes: routes
 });
 
 router.beforeEach(function (to, from, next) {
-    //next();
-    if (!__WEBPACK_IMPORTED_MODULE_5__user__["a" /* default */].getData()) {
-        if (to.name != 'login') {
-            next({ name: 'login' });
-        } else {
-            next();
-        }
+  //next();
+  if (!__WEBPACK_IMPORTED_MODULE_5__user__["a" /* default */].getData()) {
+    if (to.name != "login") {
+      next({ name: "login" });
     } else {
-        if (to.name == 'login') {
-            next(false);
-        } else if (to.name == 'main' || to.name == 'error' || to.name == 'inicio') {
-            next();
-        } else {
-            var _usuario$getData = __WEBPACK_IMPORTED_MODULE_5__user__["a" /* default */].getData(),
-                permisos = _usuario$getData.permisos;
-
-            if (permisos && permisos.includes(to.meta.module)) {
-                next();
-            } else {
-                next({ name: 'error' });
-            }
-        }
+      next();
     }
+  } else {
+    if (to.name == "login") {
+      next(false);
+    } else if (to.name == "main" || to.name == "error" || to.name == "inicio") {
+      next();
+    } else {
+      var _usuario$getData = __WEBPACK_IMPORTED_MODULE_5__user__["a" /* default */].getData(),
+          permisos = _usuario$getData.permisos;
+
+      if (permisos && permisos.includes(to.meta.module)) {
+        next();
+      } else {
+        next({ name: "error" });
+      }
+    }
+  }
 });
 
 /* harmony default export */ __webpack_exports__["a"] = (router);

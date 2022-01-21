@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <div class="container-fluid">
         <div class="row align-items-center justify-content-center login-container">
             <div class="col-lg-4 col-sm-8 align-middle">

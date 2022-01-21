@@ -7,13 +7,13 @@ include '../app/helper/constanst.php';
         // echo '\nSQL ::: '.$sql.'\n' ;
 
         try {
-            $conexion = mysqli_connect ($_SESSION["SERVIDOR"] , $_SESSION["ROOT"], $_SESSION["PASSWORD"])
+            $mysqli = new mysqli($_SESSION["SERVIDOR"] , $_SESSION["ROOT"], $_SESSION["PASSWORD"], $_SESSION["DATA_BASE"])
                 or die ("No se puede conectar con el servidor");
         
-            mysqli_select_db ($conexion, $_SESSION["DATA_BASE"])
-                or die ("No se puede seleccionar la base de datos");
+            // mysqli_select_db($conexion, $_SESSION["DATA_BASE"])
+            //     or die ("No se puede seleccionar la base de datos");
             
-            $consulta = mysqli_query ( $conexion,$sql);
+            $consulta = $mysqli->query($sql);
             
             //
             if(!isNullEmpty($consulta,'resConsulta')){
@@ -61,7 +61,7 @@ include '../app/helper/constanst.php';
    function mySQLInsert($sql, $msj = null) {      
         // Conectar con el servidor de base de datos
         try {
-            $conexion = mysqli_connect ($_SESSION["SERVIDOR"], $_SESSION["ROOT"], $_SESSION["PASSWORD"])
+            $conexion = new mysqli($_SESSION["SERVIDOR"], $_SESSION["ROOT"], $_SESSION["PASSWORD"])
             or die ("No se puede conectar con el servidor");
         
             mysqli_select_db ($conexion, $_SESSION["DATA_BASE"]);
@@ -101,7 +101,7 @@ include '../app/helper/constanst.php';
 
     function validateConsuta($sql){
         try {
-            $conexion = mysqli_connect ($_SESSION["SERVIDOR"] , $_SESSION["ROOT"], $_SESSION["PASSWORD"])
+            $conexion = new mysqli($_SESSION["SERVIDOR"] , $_SESSION["ROOT"], $_SESSION["PASSWORD"])
                 or die ("No se puede conectar con el servidor");
         
             mysqli_select_db ($conexion, $_SESSION["DATA_BASE"])
@@ -129,7 +129,7 @@ include '../app/helper/constanst.php';
   
     function mySQLProcedure($sql, $msj = null){
         try {
-            $conexion = mysqli_connect ($_SESSION["SERVIDOR"] , $_SESSION["ROOT"], $_SESSION["PASSWORD"])
+            $conexion = new mysqli($_SESSION["SERVIDOR"] , $_SESSION["ROOT"], $_SESSION["PASSWORD"])
                 or die ("No se puede conectar con el servidor");
         
             mysqli_select_db ($conexion, $_SESSION["DATA_BASE"])
@@ -154,7 +154,7 @@ include '../app/helper/constanst.php';
     function mySQLDelete($sql, $msj = null) {      
         // Conectar con el servidor de base de datos
         try {
-            $conexion = mysqli_connect ($_SESSION["SERVIDOR"], $_SESSION["ROOT"], $_SESSION["PASSWORD"])
+            $conexion = new mysqli($_SESSION["SERVIDOR"], $_SESSION["ROOT"], $_SESSION["PASSWORD"])
             or die ("No se puede conectar con el servidor");
         
             mysqli_select_db ($conexion, $_SESSION["DATA_BASE"]);
@@ -181,7 +181,7 @@ include '../app/helper/constanst.php';
     function mySQLUpDate($sql, $msj = null) {      
         // Conectar con el servidor de base de datos
         try {
-            $conexion = mysqli_connect ($_SESSION["SERVIDOR"], $_SESSION["ROOT"], $_SESSION["PASSWORD"])
+            $conexion = new mysqli($_SESSION["SERVIDOR"], $_SESSION["ROOT"], $_SESSION["PASSWORD"])
             or die ("No se puede conectar con el servidor");
         
             mysqli_select_db ($conexion, $_SESSION["DATA_BASE"]);
